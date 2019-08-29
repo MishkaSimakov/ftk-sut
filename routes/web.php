@@ -14,3 +14,43 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::get('/article', 'ArticleController@index')->name('article.index');
+
+Route::get('/article/publish', 'ArticleController@notPublished')->name('article.notPublished')->middleware('admin');
+Route::put('/article/{article}/publish', 'ArticleController@publish')->name('article.publish')->middleware('admin');
+Route::delete('/article/{article}', 'ArticleController@destroy')->name('article.destroy')->middleware('admin');
+
+Route::resource('article', 'ArticleController')->middleware('auth')->only([
+    'create', 'store'
+]);
+
+
+Route::resource('rating', 'RatingController')->middleware('admin')->only([
+    'create', 'store', 'show'
+]);
+
+Route::resource('rating', 'RatingController')->only([
+    'show', 'index'
+]);
+
+
+
+
+Route::resource('user', 'UserController')->only([
+    'index', 'show'
+]);
+
+Route::resource('achievements', 'AchievementController')->only([
+   'index'
+]);
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/admin', 'Admin\AdminController@index')->name('admin.index')->middleware('admin');
