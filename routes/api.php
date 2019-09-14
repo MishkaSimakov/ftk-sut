@@ -20,4 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/rating/chart', 'Api\RatingController@chart')->name('api.rating.chart');
 Route::get('/home/statistic', 'Api\RatingController@userStatistic')->name('api.home.statistic');
 
+Route::post('/article/points', 'Api\ArticleController@points')->name('api.article.points');
+
 Route::post('/admin/register_link', 'Api\AdminController@register_link')->name('api.admin.register_link');

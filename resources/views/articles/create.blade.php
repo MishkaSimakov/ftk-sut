@@ -29,7 +29,8 @@
 
                 <div class="col-md-7">
                   <textarea name="body" id="body" class="form-control" required>
-                    <p>This is some sample content.</p>
+                    <p>Напишите здесь что-нибудь интересное. Но знайте:</p>
+                    <h4>Все статьи сначала проверяются администрацией и только потом выкладываются в общий доступ</h4>
                   </textarea>
                 </div>
               </div>

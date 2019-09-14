@@ -2,7 +2,7 @@
 
 <h1 class="text-center m-2">{{ $rating->name }}</h1>
 
-<div id="rating_chart" style="max-width: 95%"></div>
+<div id="rating_chart" style="max-width: 97%"></div>
 
 <script>
  
@@ -25,8 +25,6 @@
 
 
     function drawChart(data) {
-        console.log(data);
-
         var chartData = new google.visualization.DataTable();
 
         chartData.addColumn('string', 'Имя');
@@ -53,44 +51,80 @@
 
         chartData.addRows(data);
 
-        var options = {
-            vAxis: {
-              title: '',
-            },
-            tooltip: {
-                trigger: 'none',
-            },
-            legend: {
-                maxLines: 2,
-                position: 'right',
-                alignment: 'start'
-            },
-            height: data.length * 25,
-            bars: 'horizontal',
-            bar: {
-                groupWidth: '60%'
-            },
-            isStacked: true,
-            colors: ['#9999ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
-            chartArea: {left: 250, bottom: 0, top: 0, width:"50%"},
-            hAxis: {
-                gridlines: {
-                    color: 'transparent'
-                }
-            },
-            backgroundColor: 'transparent',
-            annotations: {
-                alwaysOutside: true,
-                
-                textStyle: {
-                    fontSize: 15,
-                    bold: true,
-                    fontName: 'Nunito, sans-serif',
-                    color: '#212529'
-                },
-            },
+        if ($(window).width() < 1000) {
+            console.log($(window).width());
 
-        };
+            var options = {
+                vAxis: {
+                  title: '',
+                },
+                tooltip: {
+                    trigger: 'none',
+                },
+                height: data.length * 25,
+                bars: 'horizontal',
+                bar: {
+                    groupWidth: '60%'
+                },
+                isStacked: true,
+                colors: ['#9999ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
+                chartArea: {left: 250, bottom: 0, top: 0, width:"100%"},
+                hAxis: {
+                    gridlines: {
+                        color: 'transparent'
+                    }
+                },
+                backgroundColor: 'transparent',
+                annotations: {
+                    alwaysOutside: true,
+                    
+                    textStyle: {
+                        fontSize: 15,
+                        bold: true,
+                        fontName: 'Nunito, sans-serif',
+                        color: '#212529'
+                    },
+                }
+            };
+        } else {
+            var options = {
+                vAxis: {
+                  title: '',
+                },
+                tooltip: {
+                    trigger: 'none',
+                },
+                legend: {
+                    maxLines: 2,
+                    position: 'right',
+                    alignment: 'start'
+                },
+                height: data.length * 25,
+                bars: 'horizontal',
+                bar: {
+                    groupWidth: '60%'
+                },
+                isStacked: true,
+                colors: ['#9999ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
+                chartArea: {left: 250, bottom: 0, top: 0, width:"50%"},
+                hAxis: {
+                    gridlines: {
+                        color: 'transparent'
+                    }
+                },
+                backgroundColor: 'transparent',
+                annotations: {
+                    alwaysOutside: true,
+                    
+                    textStyle: {
+                        fontSize: 15,
+                        bold: true,
+                        fontName: 'Nunito, sans-serif',
+                        color: '#212529'
+                    },
+                }
+            };
+        }
 
         var chart = new google.visualization.BarChart(document.getElementById('rating_chart'));
 

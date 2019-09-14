@@ -48,6 +48,13 @@ Route::resource('achievements', 'AchievementController')->only([
 ]);
 
 
+Route::get('/schedule', 'ScheduleController@index')->name('schedule.index');
+
+Route::resource('schedule', 'ScheduleController')->middleware('admin')->only([
+	'create', 'store'
+]);
+
+
 
 Auth::routes();
 

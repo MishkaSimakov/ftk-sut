@@ -19,44 +19,7 @@ class Rating extends Model
         $name = 'Рейтинг за ';
 
         if ($this->isMonthly) {
-            switch ($this->date->month) {
-                case(1):
-                    $name .= 'Январь';
-                break;
-                case(2):
-                    $name .= 'Февраль';
-                break;
-                case(3):
-                    $name .= 'Март';
-                break;
-                case(4):
-                    $name .= 'Арпель';
-                break;
-                case(5):
-                    $name .= 'Май';
-                break;
-                case(6):
-                    $name .= 'Июнь';
-                break;
-                case(7):
-                    $name .= 'Июль';
-                break;
-                case(8):
-                    $name .= 'Август';
-                break;
-                case(9):
-                    $name .= 'Сентябрь';
-                break;
-                case(10):
-                    $name .= 'Октябрь';
-                break;
-                case(11):
-                    $name .= 'Ноябрь';
-                break;
-                case(12):
-                    $name .= 'Декабрь';
-                break;
-            }
+            $name .= getRussianMonth($this->date);
 
             $name .= ' ' . $this->date->year;
         } else {

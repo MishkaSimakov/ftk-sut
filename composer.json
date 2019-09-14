@@ -21,7 +21,7 @@
     },
     "autoload": {
         "files": [
-            "app/Helpers/GetUserAchievement.php"
+            "app/Helpers/Helpers.php"
         ],
         "classmap": [
             "database/seeds",

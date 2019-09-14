@@ -11,10 +11,10 @@ class ArticleController extends Controller
     //
 
     public function index(Request $request) {
-        if ($request->filter = 'newest') {
-    	   $articles = Article::where('isPublished', true)->get()->sortBy('created_at');
+        if ($request->filter == 'newest') {
+    	   $articles = Article::where('isPublished', true)->latest()->get();
         } else {
-            $articles = Article::where('isPublished', true)->get()->sortBy('created_at');
+            $articles = Article::where('isPublished', true)->orderBy('points', 'desc')->get();
         }
 
         $notPublishedCount = Article::where('isPublished', false)->orWhere('isPublished', null)->get()->count();
@@ -32,6 +32,7 @@ class ArticleController extends Controller
         $article->title = $request->title;
         $article->body = $request->body;
         $article->user_id = Auth::user()->id;
+        $article->points = 0;
 
         $article->save();
 
