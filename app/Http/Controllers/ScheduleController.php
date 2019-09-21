@@ -28,6 +28,8 @@ class ScheduleController extends Controller
 
     	$schedule->title = $request->title;
 
+        $schedule->people_count = 0;
+
     	$schedule->date_start = new Carbon(str_replace('T', ' ', $request->date_start));
         $schedule->date_end = new Carbon(str_replace('T', ' ', $request->date_end));
 

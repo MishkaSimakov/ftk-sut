@@ -21,15 +21,17 @@
     </div>
 @endif
 
-<div>
-    <h2 class="text-center">
-        Статистика
-    </h2>
+@if (!$user->isTeacher)
+    <div>
+        <h2 class="text-center">
+            Статистика
+        </h2>
 
-    <div class="container">
-        <div id="user_statistic_chart" class="w-100"></div>
+        <div class="container">
+            <div id="user_statistic_chart" class="w-100"></div>
+        </div>
     </div>
-</div>
+@endif
 
 <script>
     google.charts.load('current', {packages: ['corechart', 'line']});

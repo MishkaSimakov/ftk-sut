@@ -17,6 +17,7 @@ class CreateRatingsTable extends Migration
             $table->increments('id');
             $table->date('date');
             $table->boolean('isMonthly');
+            $table->boolean('isTeachers');
             $table->timestamps();
         });
     }

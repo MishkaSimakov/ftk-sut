@@ -14,9 +14,13 @@ use function view;
 
 class RatingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $ratings = Rating::all();
+        if ($request->type == 'teachers') {
+            $ratings = Rating::where('isTeachers', true)->get();
+        } else {
+            $ratings = Rating::where('isTeachers', false)->get();
+        }
 
         return view('rating.index', compact('ratings'));
     }
@@ -39,6 +43,7 @@ class RatingController extends Controller
         $rating = Rating::make();
 
         $rating->isMonthly = boolval($request->type);
+        $rating->isTeachers = false;
 
         if ($request->type) {
             $date = new Carbon($request->month);

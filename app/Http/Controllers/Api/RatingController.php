@@ -17,7 +17,19 @@ class RatingController extends Controller
  
         $chartData = [];
 
-        foreach ($points as $point) {
+        if ($request->type == 'teachers') {
+            foreach ($points as $point) {
+                array_push($chartData, [
+                    'us|' . $point->user->id . '|' . $point->user->name,
+                    
+                    $point->points,
+                    'stroke-width: 1; stroke-color: black;',
+
+                    $point->points,
+                ]);
+            }
+        } else {    
+            foreach ($points as $point) {
 
             array_push($chartData, [
                 'us|' . $point->user->id . '|' . $point->user->name,
@@ -42,6 +54,7 @@ class RatingController extends Controller
 
                 $point->points,
             ]);
+            }
         }
 
         return json_encode($chartData);

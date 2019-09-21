@@ -23,3 +23,7 @@ Route::get('/home/statistic', 'Api\RatingController@userStatistic')->name('api.h
 Route::post('/article/points', 'Api\ArticleController@points')->name('api.article.points');
 
 Route::post('/admin/register_link', 'Api\AdminController@register_link')->name('api.admin.register_link');
+
+Route::post('/schedule/add_people', 'Api\ScheduleController@add_people')->name('api.schedule.add_people');
+
+Route::post('/admin/achievements', 'Api\AdminController@achievements')->name('api.admin.add_achievement');

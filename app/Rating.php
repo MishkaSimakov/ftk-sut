@@ -16,7 +16,11 @@ class Rating extends Model
 
     public function getNameAttribute()
     {
-        $name = 'Рейтинг за ';
+        if ($this->isTeachers) {
+            $name = 'Рейтинг преподавателей за ';
+        } else {
+            $name = 'Рейтинг за ';
+        }
 
         if ($this->isMonthly) {
             $name .= getRussianMonth($this->date);

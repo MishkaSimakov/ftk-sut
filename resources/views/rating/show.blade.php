@@ -4,141 +4,226 @@
 
 <div id="rating_chart" style="max-width: 97%"></div>
 
-<script>
- 
-    google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(loadChart);
+@if($rating->isTeachers)
+    <script>
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(loadChart);
 
-    function loadChart() {
-        $.ajax({
-            url: "{{ route('api.rating.chart') }}",
-            method: "GET",
-            dataType: 'json',
-            data: {
-                date: '{{ $rating->date->format('Y-m-d') }}',
-            },
-            success: function (data) {
-                drawChart(data)
-            }
-        })
-    }
-
-
-    function drawChart(data) {
-        var chartData = new google.visualization.DataTable();
-
-        chartData.addColumn('string', 'Имя');
-
-        chartData.addColumn('number', 'Посещение занятий');
-        chartData.addColumn({'type': 'string', 'role': 'style'}, '');
-
-        chartData.addColumn('number', 'Игры, конкурсы в клубе');
-        chartData.addColumn({'type': 'string', 'role': 'style'}, '');
-
-        chartData.addColumn('number', 'Газета, группа ВК');
-        chartData.addColumn({'type': 'string', 'role': 'style'}, '');
-
-        chartData.addColumn('number', 'Походы и экскурсии');
-        chartData.addColumn({'type': 'string', 'role': 'style'}, '');
-
-        chartData.addColumn('number', 'Городские соревнования, выставки, конкурсы');
-        chartData.addColumn({'type': 'string', 'role': 'style'}, '');
-
-        chartData.addColumn('number', 'Областные, всероссийские, международные соревнования');
-        chartData.addColumn({'type': 'string', 'role': 'style'}, '');
-
-        chartData.addColumn({'type': 'number', 'role': 'annotation'}, '');
-
-        chartData.addRows(data);
-
-        if ($(window).width() < 1000) {
-            console.log($(window).width());
-
-            var options = {
-                vAxis: {
-                  title: '',
+        function loadChart() {
+            $.ajax({
+                url: "{{ route('api.rating.chart') }}",
+                method: "GET",
+                dataType: 'json',
+                data: {
+                    date: '{{ $rating->date->format('Y-m-d') }}',
+                    type: 'teachers'
                 },
-                tooltip: {
-                    trigger: 'none',
-                },
-                height: data.length * 25,
-                bars: 'horizontal',
-                bar: {
-                    groupWidth: '60%'
-                },
-                isStacked: true,
-                colors: ['#9999ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
-                chartArea: {left: 250, bottom: 0, top: 0, width:"100%"},
-                hAxis: {
-                    gridlines: {
-                        color: 'transparent'
-                    }
-                },
-                backgroundColor: 'transparent',
-                annotations: {
-                    alwaysOutside: true,
-                    
-                    textStyle: {
-                        fontSize: 15,
-                        bold: true,
-                        fontName: 'Nunito, sans-serif',
-                        color: '#212529'
-                    },
+                success: function (data) {
+                    drawChart(data)
                 }
-            };
-        } else {
-            var options = {
-                vAxis: {
-                  title: '',
-                },
-                tooltip: {
-                    trigger: 'none',
-                },
-                legend: {
-                    maxLines: 2,
-                    position: 'right',
-                    alignment: 'start'
-                },
-                height: data.length * 25,
-                bars: 'horizontal',
-                bar: {
-                    groupWidth: '60%'
-                },
-                isStacked: true,
-                colors: ['#9999ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
-                chartArea: {left: 250, bottom: 0, top: 0, width:"50%"},
-                hAxis: {
-                    gridlines: {
-                        color: 'transparent'
-                    }
-                },
-                backgroundColor: 'transparent',
-                annotations: {
-                    alwaysOutside: true,
-                    
-                    textStyle: {
-                        fontSize: 15,
-                        bold: true,
-                        fontName: 'Nunito, sans-serif',
-                        color: '#212529'
-                    },
-                }
-            };
+            });
         }
 
-        var chart = new google.visualization.BarChart(document.getElementById('rating_chart'));
 
-        chart.draw(chartData, options);
+        function drawChart(data) {
+            console.log(data.length * 25);
 
-        $(document).ready(function () {
-            $('text:contains("us|")').each(function() {
-                var user_id = $(this).html().split('|')[1];
-                var username = $(this).html().split('|')[2];
+            var chartData = new google.visualization.DataTable();
 
-                $(this).html('<a style="color: #3490dc !important;" href="http://localhost:8000/user/' + user_id + '">' + username + '</a>');
+            chartData.addColumn('string', 'Имя');
+
+            chartData.addColumn('number', 'Очки');
+            chartData.addColumn({'type': 'string', 'role': 'style'}, '');
+
+            chartData.addColumn({'type': 'number', 'role': 'annotation'}, '');
+
+            chartData.addRows(data);
+
+            var options = {
+                vAxis: {
+                  title: '',
+                },
+                tooltip: {
+                    trigger: 'none',
+                },
+                legend: {position: 'none'},
+                height: data.length * 50,
+
+                bars: 'horizontal',
+                bar: {
+                    groupWidth: '60%'
+                },
+                chartArea: {left: 250, width:"50%"},
+                
+                backgroundColor: 'transparent',
+                annotations: {
+                    alwaysOutside: true,
+                    
+                    textStyle: {
+                        fontSize: 15,
+                        bold: true,
+                        fontName: 'Nunito, sans-serif',
+                        color: '#212529'
+                    },
+                },
+                hAxis: {
+                    textPosition: 'none',
+                    gridlines: {
+                        color: 'transparent'
+                    }
+                },
+            };
+            
+            var chart = new google.visualization.BarChart(document.getElementById('rating_chart'));
+
+            chart.draw(chartData, options);
+
+            $(document).ready(function () {
+                $('text:contains("us|")').each(function() {
+                    var user_id = $(this).html().split('|')[1];
+                    var username = $(this).html().split('|')[2];
+
+                    $(this).html('<a style="color: #3490dc !important;" href="{{ Request::root() }}/user/' + user_id + '">' + username + '</a>');
+                });
             });
-        });
-    }
-</script>
+        }
+    </script>
+@else
+    <script>
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(loadChart);
+
+        function loadChart() {
+            $.ajax({
+                url: "{{ route('api.rating.chart') }}",
+                method: "GET",
+                dataType: 'json',
+                data: {
+                    date: '{{ $rating->date->format('Y-m-d') }}',
+                },
+                success: function (data) {
+                    drawChart(data)
+                }
+            })
+        }
+
+
+        function drawChart(data) {
+            var chartData = new google.visualization.DataTable();
+
+            chartData.addColumn('string', 'Имя');
+
+            chartData.addColumn('number', 'Посещение занятий');
+            chartData.addColumn({'type': 'string', 'role': 'style'}, '');
+
+            chartData.addColumn('number', 'Игры, конкурсы в клубе');
+            chartData.addColumn({'type': 'string', 'role': 'style'}, '');
+
+            chartData.addColumn('number', 'Газета, группа ВК');
+            chartData.addColumn({'type': 'string', 'role': 'style'}, '');
+
+            chartData.addColumn('number', 'Походы и экскурсии');
+            chartData.addColumn({'type': 'string', 'role': 'style'}, '');
+
+            chartData.addColumn('number', 'Городские соревнования, выставки, конкурсы');
+            chartData.addColumn({'type': 'string', 'role': 'style'}, '');
+
+            chartData.addColumn('number', 'Областные, всероссийские, международные соревнования');
+            chartData.addColumn({'type': 'string', 'role': 'style'}, '');
+
+            chartData.addColumn({'type': 'number', 'role': 'annotation'}, '');
+
+            chartData.addRows(data);
+
+            if ($(window).width() < 1000) {
+                console.log($(window).width());
+
+                var options = {
+                    vAxis: {
+                      title: '',
+                    },
+                    tooltip: {
+                        trigger: 'none',
+                    },
+                    height: data.length * 25,
+                    bars: 'horizontal',
+                    bar: {
+                        groupWidth: '60%'
+                    },
+                    isStacked: true,
+                    colors: ['#9999ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
+                    chartArea: {left: 250, bottom: 0, top: 0, width:"100%"},
+                    hAxis: {
+                        gridlines: {
+                            color: 'transparent'
+                        }
+                    },
+                    backgroundColor: 'transparent',
+                    annotations: {
+                        alwaysOutside: true,
+                        
+                        textStyle: {
+                            fontSize: 15,
+                            bold: true,
+                            fontName: 'Nunito, sans-serif',
+                            color: '#212529'
+                        },
+                    }
+                };
+            } else {
+                var options = {
+                    vAxis: {
+                      title: '',
+                    },
+                    tooltip: {
+                        trigger: 'none',
+                    },
+                    legend: {
+                        maxLines: 2,
+                        position: 'right',
+                        alignment: 'start'
+                    },
+                    height: data.length * 25,
+                    bars: 'horizontal',
+                    bar: {
+                        groupWidth: '60%'
+                    },
+                    isStacked: true,
+                    colors: ['#9999ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
+                    chartArea: {left: 250, bottom: 0, top: 0, width:"50%"},
+                    hAxis: {
+                        gridlines: {
+                            color: 'transparent'
+                        }
+                    },
+                    backgroundColor: 'transparent',
+                    annotations: {
+                        alwaysOutside: true,
+                        
+                        textStyle: {
+                            fontSize: 15,
+                            bold: true,
+                            fontName: 'Nunito, sans-serif',
+                            color: '#212529'
+                        },
+                    }
+                };
+            }
+
+            var chart = new google.visualization.BarChart(document.getElementById('rating_chart'));
+
+            chart.draw(chartData, options);
+
+            $(document).ready(function () {
+                $('text:contains("us|")').each(function() {
+                    var user_id = $(this).html().split('|')[1];
+                    var username = $(this).html().split('|')[2];
+
+                    $(this).html('<a style="color: #3490dc !important;" href="{{ Request::root() }}/user/' + user_id + '">' + username + '</a>');
+                });
+            });
+        }
+    </script>
+@endif
 
 @include('partials.footer')
