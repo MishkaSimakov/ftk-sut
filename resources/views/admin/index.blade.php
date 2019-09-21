@@ -59,7 +59,7 @@
 										<div class="container px-5">
 											@foreach($teacher->notGettedAchievements as $achievement)
 												<div class="{{ $teacher->id }}_achievement_{{ $achievement->id }} card m-3 d-inline-block" style="width: 18rem">
-										
+
 													<img class="card-img-top" src="{{ $achievement->image_url }}" alt="Изображение от достижения">
 
 													<div class="card-body">
@@ -96,26 +96,28 @@
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 			<div class="card">
-				<div class="card-header">Получение ссылки для регистрации</div>
+				<div class="card-header">Просмотр людей</div>
 
 				<div class="card-body">
-					<div class="form-group row">
-						<label for="name" class="col-md-4 col-form-label text-md-right">Фамилия и имя</label>
+					@foreach($schedules as $schedule)
+					    <ul class="" style="">
+					        <li class="">
+						        <h5 class="card-title spoiler_link text-primary" style="cursor: pointer" data-schedule="{{ $schedule->id }}">
+						        	{{ $schedule->title }}
 
-						<div class="col-md-6">
-							<input id="name" type="text" class="form-control" name="name" required>
-						</div>
-					</div>
+						        	<small>({{ $schedule->date_start->day }} {{ getRussianMonth($schedule->date_start, true) }} {{ $schedule->date_start->format('H:i') }} - {{ $schedule->date_end->format('H:i') }})</small>
+						        </h5>
 
-					<div class="form-group row mb-0">
-						<div class="col-md-8 offset-md-4">
-							<button class="btn btn-primary" id="load_button">
-								Загрузить
-							</button>
-
-							<span class="ml-3" href="" id="register_link"></span>
-						</div>
-					</div>
+                                <ol class="spoiler_body_{{ $schedule->id }}" style="display: none">
+                                    @foreach($schedule->user_schedules as $user_schedule)
+                                        <li>
+                                            <p class="ml-2"><a href="{{ $user_schedule->user->url }}">{{ $user_schedule->user->name }}</a></p>
+                                        </li>
+                                    @endforeach
+                                </ol>
+					        </li>
+					    </ul>
+					@endforeach
 				</div>
 			</div>
 		</div>
@@ -124,6 +126,16 @@
 
 <script>
 	$(document).ready(function () {
+        $('.spoiler_link').each(function () {
+            $(this).click(function () {
+                if ($('.spoiler_body_' + $(this).attr('data-schedule')).css('display') == 'none') {
+                    $('.spoiler_body_' + $(this).attr('data-schedule')).show('normal');
+                } else {
+                    $('.spoiler_body_' + $(this).attr('data-schedule')).hide('normal');
+                }
+            });
+        });
+
 		$('.add_achievement_link').each(function() {
 			$(this).click(function() {
 				$('#modal_' + $(this).attr('data-teacher')).modal('show');
