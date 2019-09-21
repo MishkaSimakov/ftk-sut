@@ -9,7 +9,7 @@ class Article extends Model
 {
     //
 
-    protected $fillable = ['isPublished'];
+    protected $fillable = ['isPublished', 'title', 'body'];
 
     public function getPublishAttribute() {
     	return route('article.publish', compact('this'));

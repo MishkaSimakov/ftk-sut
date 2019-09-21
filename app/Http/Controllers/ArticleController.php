@@ -57,4 +57,16 @@ class ArticleController extends Controller
 
         return redirect()->back();
     }
+
+    public function edit(Article $article)
+    {
+        return view('articles.edit', compact('article'));
+    }
+
+    public function update(Request $request, Article $article) {
+        $article->update(['title' => $request->title]);
+        $article->update(['body' => $request->body]);
+
+        return redirect(route('article.index'));
+    }
 }

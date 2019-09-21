@@ -44,7 +44,7 @@
 @foreach($articles as $article)
 	<div class="card m-2">
 		<div class="card-header">
-			<h1 class="d-inline-block m-0 p-0">{{ $article->title }}</h1>
+            <h1 class="d-inline-block m-0 p-0">{{ $article->title }}<a href="{{ route('article.edit', compact('article')) }}"><span class="fa-xs ml-2 fas fa-cog"></span></a></h1>
       <h4 class=" m-2 d-inline-block float-right"><a href="{{ $article->user->url }}">{{ $article->user->name }}</a></h4>
 		</div>
 
@@ -64,7 +64,7 @@
           </span>
 
           <span class="point_count{{ $article->id }}">{{ $article->points }}</span>
-        </h3>     
+        </h3>
       </div>
     @endauth
    </div>
@@ -75,7 +75,7 @@
   <script type="text/javascript">
     function like(article) {
       $('.point_count' + article).html(Number($('.point_count' + article).html()) + 1);
-            
+
       $('#like_' + article).html('<a id="link" onclick="unlike(' + article +')"><i style="cursor: pointer;" class="text-primary fas fa-heart"></i></a>');
 
       $.ajax({
