@@ -44,8 +44,19 @@
 @foreach($articles as $article)
 	<div class="card m-2">
 		<div class="card-header">
-            <h1 class="d-inline-block m-0 p-0">{{ $article->title }}<a href="{{ route('article.edit', compact('article')) }}"><span class="fa-xs ml-2 fas fa-cog"></span></a></h1>
-      <h4 class=" m-2 d-inline-block float-right"><a href="{{ $article->user->url }}">{{ $article->user->name }}</a></h4>
+            <h1 class="d-inline-block m-0 p-0">
+                {{ $article->title }}
+
+                @auth
+                    @if (Auth::user()->id == $article->user_id)
+                        <a href="{{ route('article.edit', compact('article')) }}">
+                            <span class="fa-xs ml-2 fas fa-cog"></span>
+                        </a>
+                    @endif
+                @endauth
+            </h1>
+
+        <h4 class=" m-2 d-inline-block float-right"><a href="{{ $article->user->url }}">{{ $article->user->name }}</a></h4>
 		</div>
 
 		<div class="card-body">
