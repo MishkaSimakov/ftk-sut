@@ -19,8 +19,9 @@ class CreateAchievementsTable extends Migration
 
             $table->boolean('isTeacher')->nullable();
             $table->integer('points')->nullable();
-            
+
             $table->text('body');
+            $table->string('category');
             $table->text('image_url');
             $table->text('code');
             $table->timestamps();
