@@ -66,8 +66,7 @@ class ArticleController extends Controller
     }
 
     public function update(Request $request, Article $article) {
-        $article->update(['title' => $request->title]);
-        $article->update(['body' => $request->body]);
+        $article->update(['title' => $request->title], ['body' => $request->body]);
 
         return redirect(route('article.index'));
     }
