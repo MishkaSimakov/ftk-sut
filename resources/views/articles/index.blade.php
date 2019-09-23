@@ -48,7 +48,7 @@
                 {{ $article->title }}
 
                 @auth
-                    @if (Auth::user()->id == $article->user_id)
+                    @if (Auth::user()->can('update', $article))
                         <a href="{{ route('article.edit', compact('article')) }}">
                             <span class="fa-xs ml-2 fas fa-cog"></span>
                         </a>
