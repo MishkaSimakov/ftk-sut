@@ -27,7 +27,7 @@ Route::put('/article/{article}/publish', 'ArticleController@publish')->name('art
 Route::delete('/article/{article}', 'ArticleController@destroy')->name('article.destroy')->middleware('admin');
 
 Route::resource('article', 'ArticleController')->middleware('auth')->only([
-    'create', 'store', 'edit', 'update'
+    'create', 'store', 'edit', 'update', 'destroy'
 ]);
 
 

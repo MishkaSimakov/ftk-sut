@@ -44,13 +44,23 @@
 @foreach($articles as $article)
 	<div class="card m-2">
 		<div class="card-header">
-            <h1 class="d-inline-block m-0 p-0">
-                {{ $article->title }}
+            <h1 class="d-inline-block m-0 p-0" title="{{ $article->title }}">
+                {{ str_limit($article->title, 45, '...') }}
 
                 @can('update', $article)
-                    <a href="{{ route('article.edit', compact('article')) }}">
+                    <a style="text-decoration: none" href="{{ route('article.edit', compact('article')) }}">
                         <span class="fa-xs ml-2 fas fa-cog"></span>
                     </a>
+                @endcan
+                @can('delete', $article)
+                    <a class="text-primary" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
+                        <span class="fa-xs ml-2 fas fa-trash"></span>
+                    </a>
+
+                    <form method="POST" action="{{ route('article.destroy', compact('article')) }}" id="delete-form">
+                        @csrf
+                        @method("DELETE")
+                    </form>
                 @endcan
             </h1>
 
