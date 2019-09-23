@@ -47,13 +47,11 @@
             <h1 class="d-inline-block m-0 p-0">
                 {{ $article->title }}
 
-                @auth
-                    @if (Auth::user()->can('update', $article))
-                        <a href="{{ route('article.edit', compact('article')) }}">
-                            <span class="fa-xs ml-2 fas fa-cog"></span>
-                        </a>
-                    @endif
-                @endauth
+                @can('update', $article)
+                    <a href="{{ route('article.edit', compact('article')) }}">
+                        <span class="fa-xs ml-2 fas fa-cog"></span>
+                    </a>
+                @endcan
             </h1>
 
         <h4 class=" m-2 d-inline-block float-right"><a href="{{ $article->user->url }}">{{ $article->user->name }}</a></h4>
