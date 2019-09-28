@@ -144,7 +144,6 @@ class RatingController extends Controller
 
         foreach ($points as $point) {
             foreach ($achievements->where('category', 'monthly_rating') as $achievement) {
-
                 if (!GetUserAchievement($point->user, $achievement)) {
                     if (compare($achievement->condition, $point->points)) {
                         getAchievement($point, $achievement);
