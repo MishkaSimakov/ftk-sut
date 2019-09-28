@@ -16,11 +16,7 @@ class RatingController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->type == 'teachers') {
-            $ratings = Rating::where('isTeachers', true)->get();
-        } else {
-            $ratings = Rating::where('isTeachers', false)->get();
-        }
+        $ratings = Rating::all();
 
         return view('rating.index', compact('ratings'));
     }
@@ -43,7 +39,6 @@ class RatingController extends Controller
         $rating = Rating::make();
 
         $rating->isMonthly = boolval($request->type);
-        $rating->isTeachers = false;
 
         if ($request->type) {
             $date = new Carbon($request->month);
@@ -147,78 +142,20 @@ class RatingController extends Controller
         //getting achievements
         $achievements = Achievement::all();
 
-        $functions = '
-            use App\UserAchievement;
-
-            if (!function_exists("getAchievement")) {
-                function getAchievement() {
-                    global $point;
-                    global $achievement;
-
-                    if (GetUserAchievement($point->user, $achievement)) {
-                        GetUserAchievement($point->user, $achievement)->update(["completed" => true]);
-                    } else {
-                        $user_achievement = UserAchievement::make();
-
-                        $user_achievement->user_id = $point->user->id;
-                        $user_achievement->achievement_id = $achievement->id;
-                        $user_achievement->completed = true;
-
-                        $user_achievement->save();
-                    }
-                }
-            }
-
-            if (!function_exists("setAchievementProgress")) {
-                function setAchievementProgress($progress) {
-                    global $point;
-                    global $achievement;
-
-                    if (GetUserAchievement($point->user, $achievement)) {
-                        GetUserAchievement($point->user, $achievement)->update(["progress", $progress]);
-                    } else {
-                        $user_achievement = UserAchievement::make();
-
-                        $user_achievement->user_id = $point->user->id;
-                        $user_achievement->achievement_id = $achievement->id;
-                        $user_achievement->progress = $progress;
-
-                        $user_achievement->save();
-                    }
-                }
-            }
-
-            if (!function_exists("incrementAchievementProgress")) {
-                function incrementAchievementProgress($increment) {
-                    global $point;
-                    global $achievement;
-
-                    if (GetUserAchievement($point->user, $achievement)) {
-                        GetUserAchievement($point->user, $achievement)->increment("progress", $increment);
-                    } else {
-                        $user_achievement = UserAchievement::make();
-
-                        $user_achievement->user_id = $point->user->id;
-                        $user_achievement->achievement_id = $achievement->id;
-                        $user_achievement->progress = $increment;
-
-                        $user_achievement->save();
-                    }
-                }
-            }
-        ';
-
         foreach ($points as $point) {
-            $GLOBALS['point'] = $point;
-
-            foreach ($achievements as $achievement) {
-                $GLOBALS['achievement'] = $achievement;
+            foreach ($achievements->where('category', 'monthly_rating') as $achievement) {
 
                 if (!GetUserAchievement($point->user, $achievement)) {
-                    eval($functions . ' ' . $achievement->code);
-                } else {
-                    if (!GetUserAchievement($point->user, $achievement)->completed) {
-                        eval($functions . ' ' . $achievement->code);
+                    if (compare($achievement->condition, $point->points)) {
+                        getAchievement($point, $achievement);
+                    } else {
+                        setAchievementProgress($point->points, $point, $achievement);
+                    }
+                } elseif (!GetUserAchievement($point->user, $achievement)->completed) {
+                    if (compare($achievement->condition, $point->points)) {
+                        getAchievement($point, $achievement);
+                    } else {
+                        setAchievementProgress($point->points, $point, $achievement);
                     }
                 }
             }

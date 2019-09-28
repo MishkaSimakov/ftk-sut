@@ -26,9 +26,5 @@ class AdminController extends Controller
         $user_achievement->completed = true;
 
         $user_achievement->save();
-
-        User::where('id', $request->teacher_id)->first()->incrementPoints = Achievement::where('id', $request->achievement_id)->first()->points;
-
-        return 'all ok!';
     }
 }

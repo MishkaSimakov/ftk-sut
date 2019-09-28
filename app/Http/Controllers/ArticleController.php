@@ -71,7 +71,7 @@ class ArticleController extends Controller
             'body' => 'required|string',
         ]);
 
-        $article->update(['title' => $validatedData['title']], ['body' => $validatedData['body']]);
+        $article->update($validatedData);
 
         return redirect(route('article.index'));
     }

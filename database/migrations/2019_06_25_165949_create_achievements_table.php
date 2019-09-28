@@ -15,15 +15,15 @@ class CreateAchievementsTable extends Migration
     {
         Schema::create('achievements', function (Blueprint $table) {
             $table->increments('id');
+
             $table->string('title');
+            $table->text('body');
+            $table->text('image_url');
 
             $table->boolean('isTeacher')->nullable();
-            $table->integer('points')->nullable();
 
-            $table->text('body');
             $table->string('category');
-            $table->text('image_url');
-            $table->text('code');
+            $table->text('condition');
             $table->timestamps();
         });
     }

@@ -16,30 +16,30 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $achievements = [
-            'rating' => [
+            'monthly_rating' => [
                 [
                     'title' => 'Ну это уже много',
                     'body' => 'Набрать 10000 очков в ежемесячном рейтинге',
-                    'code' => 'if ($point->points > 10000) { getAchievement(); }'
+                    'condition' => '>=|10000'
                 ],
                 [
                     'title' => 'В следующий раз повезёт',
                     'body' => 'Набрать меньше 250 очков в ежемесячном рейтинге',
-                    'code' => 'if ($point->points < 250) { getAchievement(); }'
+                    'condition' => '<|250'
                 ]
             ],
             'period' => [
                 [
                     'title' => 'Отважный новичок',
                     'body' => 'Попасть в 2 рейтинга',
-                    'code' => 'incrementAchievementProgress(1); if (GetUserAchievement($point->user, $achievement)->progress >= 2) { getAchievement(); }'
+                    'condition' => '>=|2'
                 ]
             ]
         ];
 
 
         factory(User::class, 1)->create([
-            'isAdmin' => true,
+            'is_admin' => true,
             'password' => Hash::make('123456'),
             'email' => 'msimakov661@gmail.com'
         ]);
@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
                 factory(Achievement::class, 1)->create([
                     'title' => $achievement['title'],
                     'body' => $achievement['body'],
-                    'code' => $achievement['code'],
+                    'condition' => $achievement['condition'],
                     'category' => $key
                 ]);
             }

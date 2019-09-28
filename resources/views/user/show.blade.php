@@ -21,7 +21,7 @@
     </div>
 @endif
 
-@if (!$user->isTeacher)
+@if (!$user->is_teacher)
     <div>
         <h2 class="text-center">
             Статистика

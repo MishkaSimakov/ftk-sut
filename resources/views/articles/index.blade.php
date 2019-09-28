@@ -5,7 +5,7 @@
     <a class="nav-link" href="{{ route('article.index') }}?filter=best">Лучшее</a>
     <a class="nav-link" href="{{ route('article.index') }}?filter=newest">Новейшее</a>
     @auth
-    	@if (Auth::user()->isAdmin)
+    	@if (Auth::user()->is_admin)
 		    <a class="nav-link" href="{{ route('article.notPublished') }}">
 		      Требуют проверки
 		      <span class="badge badge-pill bg-light align-text-bottom">{{ $notPublishedCount }}</span>
@@ -48,7 +48,7 @@
                 {{ str_limit($article->title, 45, '...') }}
 
                 @can('update', $article)
-                    <a style="text-decoration: none" href="{{ route('article.edit', compact('article')) }}">
+                    <a class="text-decoration-none" href="{{ route('article.edit', compact('article')) }}">
                         <span class="fa-xs ml-2 fas fa-cog"></span>
                     </a>
                 @endcan
