@@ -31,8 +31,8 @@ Route::resource('article', 'ArticleController')->middleware('auth')->only([
 ]);
 
 
-Route::resource('rating', 'RatingController')->middleware('admin')->only([
-    'create', 'store', 'show'
+Route::resource('rating', 'RatingController')->middleware(['auth','admin'])->only([
+    'create', 'store'
 ]);
 
 Route::resource('rating', 'RatingController')->only([

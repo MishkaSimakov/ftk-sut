@@ -35,18 +35,11 @@ class RatingController extends Controller
     {
         $rows = Excel::toCollection(new RatingsImport, request()->file('file'));
 
-
         $rating = Rating::make();
 
         $rating->isMonthly = boolval($request->type);
 
-        if ($request->type) {
-            $date = new Carbon($request->month);
-        } else {
-            $date = new Carbon($request->year);
-        }
-
-        $rating->date = $date;
+        $rating->date = $request->type ? Carbon::createFromDate(null, $request->month) : Carbon::createFromDate($request->year);
 
         $rating->save();
 
