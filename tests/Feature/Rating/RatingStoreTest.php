@@ -39,7 +39,7 @@ class RatingStoreTest extends TestCase
         $this->post('/rating',[
             'type' => 1,
             'file' => new UploadedFile(base_path('tests/Stubs/') . '/rating.xls', 'rating.xls'),
-            'month' => 5
+            'month' => '2019-09'
         ])->assertStatus(302);
 
         $this->assertDatabaseHas('ratings', []);

@@ -39,7 +39,11 @@ class RatingController extends Controller
 
         $rating->isMonthly = boolval($request->type);
 
-        $rating->date = $request->type ? Carbon::createFromDate(null, $request->month) : Carbon::createFromDate($request->year);
+        $rating->date = new Carbon($request->date);
+
+        if (Rating::whereDate('date', $rating->date)->exists()) {
+            return redirect()->back()->with('date', 'рейтинг с такой датой уже существует!');
+        }
 
         $rating->save();
 
@@ -127,7 +131,7 @@ class RatingController extends Controller
         $index = 1;
 
         foreach ($points as $point) {
-            $point->increment('place', $index);
+            $point->update(['place' => $index]);
 
             $index++;
         }
@@ -137,18 +141,16 @@ class RatingController extends Controller
 
         foreach ($points as $point) {
             foreach ($achievements->where('category', 'monthly_rating') as $achievement) {
-                if (!GetUserAchievement($point->user, $achievement)) {
-                    if (compare($achievement->condition, $point->points)) {
-                        getAchievement($point, $achievement);
-                    } else {
-                        setAchievementProgress($point->points, $point, $achievement);
+                if (GetUserAchievement($point->user, $achievement)) {
+                    if (GetUserAchievement($point->user, $achievement)->completed) {
+                        continue;
                     }
-                } elseif (!GetUserAchievement($point->user, $achievement)->completed) {
-                    if (compare($achievement->condition, $point->points)) {
-                        getAchievement($point, $achievement);
-                    } else {
-                        setAchievementProgress($point->points, $point, $achievement);
-                    }
+                }
+
+                if (compare($achievement->condition, $point->points)) {
+                    getAchievement($point, $achievement);
+                } else {
+                    setAchievementProgress($point->points, $point, $achievement);
                 }
             }
         }

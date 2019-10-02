@@ -72,7 +72,11 @@
 
 
         var options = {
+            vAxis: {
+                direction: -1,
+            },
             hAxis: {
+                direction: -1,
                 gridlines: {
                     count: 4
                 },
