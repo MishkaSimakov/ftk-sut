@@ -4,7 +4,7 @@ use App\Achievement;
 use App\Point;
 use App\User;
 use Illuminate\Database\Seeder;
-use App\Student;
+use App\Article;
 
 class DatabaseSeeder extends Seeder
 {
@@ -54,5 +54,7 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+        factory(Article::class, 100)->create();
     }
 }

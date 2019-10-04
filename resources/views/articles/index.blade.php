@@ -89,6 +89,10 @@
    </div>
 @endforeach
 
+@if ($articles->count() > 0)
+    {{ $articles->links() }}
+@endif
+
 
 @auth
   <script type="text/javascript">

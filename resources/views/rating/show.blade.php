@@ -159,35 +159,52 @@
             <div class="modal-body">
                 <div class="container">
                     <form method="GET" action="{{ route('rating.show', compact('rating')) }}">
+                        <fieldset class="form-group" style="overflow: auto; overflow-x: hidden;">
+                            <div class="row">
+                                <legend class="col-form-label col-sm-2 pt-0">Показать только</legend>
+                                <div class="col-sm-10">
+                                    @foreach($rating->points->sortBy('user.name') as $point)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="user" id="user" value="{{ $point->user->id }}">
+                                            <label class="form-check-label" for="user">
+                                                {{ $point->user->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </fieldset>
 
+{{--                        <p>--}}
+{{--                            показать очки только за--}}
+{{--                            <a href="{{ route('rating.show', compact('rating')) }}?only=lesson">--}}
+{{--                                Посещение занятий--}}
+{{--                            </a>--}}
+{{--                            /--}}
+{{--                            <a href="{{ route('rating.show', compact('rating')) }}?only=games">--}}
+{{--                                Игры, конкурсы в клубе--}}
+{{--                            </a>--}}
+{{--                            /--}}
+{{--                            <a href="{{ route('rating.show', compact('rating')) }}?only=press">--}}
+{{--                                Газета, группа ВК--}}
+{{--                            </a>--}}
+{{--                            /--}}
+{{--                            <a href="{{ route('rating.show', compact('rating')) }}?only=travel">--}}
+{{--                                Походы и экскурсии--}}
+{{--                            </a>--}}
+{{--                            /--}}
+{{--                            <a href="{{ route('rating.show', compact('rating')) }}?only=local_competition">--}}
+{{--                                Городские соревнования, выставки, конкурсы--}}
+{{--                            </a>--}}
+{{--                            /--}}
+{{--                            <a href="{{ route('rating.show', compact('rating')) }}?only=global_competition">--}}
+{{--                                Областные, всероссийские,--}}
+{{--                                международные соревнования--}}
+{{--                            </a>--}}
+{{--                        </p>--}}
+
+                        <input type="submit" value="Отправить">
                     </form>
-                    <p>
-                        показать очки только за
-                        <a href="{{ route('rating.show', compact('rating')) }}?only=lesson">
-                            Посещение занятий
-                        </a>
-                        /
-                        <a href="{{ route('rating.show', compact('rating')) }}?only=games">
-                            Игры, конкурсы в клубе
-                        </a>
-                        /
-                        <a href="{{ route('rating.show', compact('rating')) }}?only=press">
-                            Газета, группа ВК
-                        </a>
-                        /
-                        <a href="{{ route('rating.show', compact('rating')) }}?only=travel">
-                            Походы и экскурсии
-                        </a>
-                        /
-                        <a href="{{ route('rating.show', compact('rating')) }}?only=local_competition">
-                            Городские соревнования, выставки, конкурсы
-                        </a>
-                        /
-                        <a href="{{ route('rating.show', compact('rating')) }}?only=global_competition">
-                            Областные, всероссийские,
-                            международные соревнования
-                        </a>
-                    </p>
                 </div>
             </div>
         </div>
