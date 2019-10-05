@@ -21,7 +21,7 @@
     </div>
 @endif
 
-@if (!$user->isTeacher)
+@if (!$user->is_teacher)
     <div>
         <h2 class="text-center">
             Статистика
@@ -72,7 +72,11 @@
 
 
         var options = {
+            vAxis: {
+                direction: -1,
+            },
             hAxis: {
+                direction: -1,
                 gridlines: {
                     count: 4
                 },

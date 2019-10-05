@@ -4,7 +4,7 @@ use App\Achievement;
 use App\Point;
 use App\User;
 use Illuminate\Database\Seeder;
-use App\Student;
+use App\Article;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,42 +15,46 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $achievements = [
+            'monthly_rating' => [
+                [
+                    'title' => 'Ну это уже много',
+                    'body' => 'Набрать 10000 очков в ежемесячном рейтинге',
+                    'condition' => '>=|10000'
+                ],
+                [
+                    'title' => 'В следующий раз повезёт',
+                    'body' => 'Набрать меньше 250 очков в ежемесячном рейтинге',
+                    'condition' => '<|250'
+                ]
+            ],
+            'period' => [
+                [
+                    'title' => 'Отважный новичок',
+                    'body' => 'Попасть в 2 рейтинга',
+                    'condition' => '>=|2'
+                ]
+            ]
+        ];
+
+
         factory(User::class, 1)->create([
-            'isAdmin' => true,
+            'is_admin' => true,
             'password' => Hash::make('123456'),
             'email' => 'msimakov661@gmail.com'
         ]);
 
-        factory(Achievement::class, 1)->create([
-            'title' => 'Ну это уже много',
-            'body' => 'Набрать 10000 очков в ежемесячном рейтинге',
-            'code' => '
-            if ($point->points > 10000) {
-                getAchievement();
+        foreach ($achievements as $key => $achievement_category) {
+            foreach ($achievement_category as $achievement) {
+                factory(Achievement::class, 1)->create([
+                    'title' => $achievement['title'],
+                    'body' => $achievement['body'],
+                    'condition' => $achievement['condition'],
+                    'category' => $key
+                ]);
             }
-            '
-        ]);
+        }
 
-        factory(Achievement::class, 1)->create([
-            'title' => 'В следующий раз повезёт',
-            'body' => 'Набрать меньше 250 очков в ежемесячном рейтинге',
-            'code' => '
-            if ($point->points < 250) {
-                getAchievement();
-            }
-            '
-        ]);
-
-        factory(Achievement::class, 1)->create([
-            'title' => 'Отважный новичок',
-            'body' => 'Попасть в 2 рейтинга',
-            'code' => '
-            incrementAchievementProgress(1);
-
-            if (GetUserAchievement($point->user, $achievement)->progress >= 2) {
-                getAchievement();
-            }
-            '
-        ]);
+        factory(Article::class, 100)->create();
     }
 }

@@ -11,11 +11,17 @@ class ArticleController extends Controller
     //
 
     public function index(Request $request) {
-        if ($request->filter == 'newest') {
-    	   $articles = Article::where('isPublished', true)->latest()->get();
+        if (Article::exists()) {
+            if ($request->filter == 'newest') {
+                $articles = Article::where('isPublished', true)->latest();
+            } else {
+                $articles = Article::where('isPublished', true)->orderBy('points', 'desc');
+            }
         } else {
-            $articles = Article::where('isPublished', true)->orderBy('points', 'desc')->get();
+            $articles = Article::all();
         }
+
+        $articles = $articles->paginate(20);
 
         $notPublishedCount = Article::where('isPublished', false)->orWhere('isPublished', null)->get()->count();
 
@@ -60,12 +66,18 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        return view('articles.edit', compact('article'));
+        if (Auth::user()->id == $article->user_id) {
+            return view('articles.edit', compact('article'));
+        }
     }
 
     public function update(Request $request, Article $article) {
-        $article->update(['title' => $request->title]);
-        $article->update(['body' => $request->body]);
+        $validatedData = $request->validate([
+            'title' => 'required|max:100|string',
+            'body' => 'required|string',
+        ]);
+
+        $article->update($validatedData);
 
         return redirect(route('article.index'));
     }

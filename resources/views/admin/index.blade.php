@@ -72,10 +72,6 @@
 
 														<a href="#" onclick="event.preventDefault(); addAchievement({{ $achievement->id }}, {{ $teacher->id }})" class="btn btn-primary">
 															Добавить
-
-															<span class="badge badge-light ml-2">
-																{{ $achievement->points }}
-															</span>
 														</a>
 													</div>
 												</div>
