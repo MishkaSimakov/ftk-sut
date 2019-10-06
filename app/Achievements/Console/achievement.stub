@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Achievements\Types;
+
+use App\Achievements\AchievementType;
+
+
+class {{CLASS}} extends AchievementType
+{
+    public $description = '';
+    public $icon = '';
+
+    public function qualifier($point)
+    {
+        //
+    }
+}

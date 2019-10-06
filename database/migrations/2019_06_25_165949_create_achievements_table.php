@@ -16,14 +16,10 @@ class CreateAchievementsTable extends Migration
         Schema::create('achievements', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('title');
-            $table->text('body');
-            $table->text('image_url');
+            $table->string('name');
+            $table->text('description');
+            $table->text('icon');
 
-            $table->boolean('isTeacher')->nullable();
-
-            $table->string('category');
-            $table->text('condition');
             $table->timestamps();
         });
     }

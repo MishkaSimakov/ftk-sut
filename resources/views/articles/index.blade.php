@@ -89,8 +89,10 @@
    </div>
 @endforeach
 
-@if ($articles->count() > 0)
-    {{ $articles->links() }}
+@if ($articles->count())
+    <div class="text-center d-inline-block w-100">
+        {{ $articles->appends(['filter' => request()->get('filter')])->links() }}
+    </div>
 @endif
 
 

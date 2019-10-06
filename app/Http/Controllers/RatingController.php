@@ -60,8 +60,6 @@ class RatingController extends Controller
                 continue;
             }
 
-            $point = Point::make();
-
             $name = $row[0];
 
             if (!User::where('name', $name)->exists()) {
@@ -75,66 +73,15 @@ class RatingController extends Controller
                 $user = User::where('name', $name)->first();
             }
 
-            $point->user_id = $user->id;
-            $point->rating_id = $rating->id;
-
-            if (is_null($row[2])) {
-                $point->points_lessons = 0;
-            } else {
-                $point->points_lessons = $row[2];
-            }
-
-            if (is_null($row[3])) {
-                $point->points_games = 0;
-            } else {
-                $point->points_games = $row[3];
-            }
-
-            if (is_null($row[4])) {
-                $point->points_press = 0;
-            } else {
-                $point->points_press = $row[4];
-            }
-
-            if (is_null($row[5])) {
-                $point->points_travels = 0;
-            } else {
-                $point->points_travels = $row[5];
-            }
-
-            if (is_null($row[6])) {
-                $point->points_local_competition = 0;
-            } else {
-                $point->points_local_competition = $row[6];
-            }
-
-            if (is_null($row[7])) {
-                $point->points_global_competition = 0;
-            } else {
-                $point->points_global_competition = $row[7];
-            }
-
-            $point->points = $point->points_global_competition +
-                             $point->points_local_competition +
-                             $point->points_travels +
-                             $point->points_press +
-                             $point->points_games +
-                             $point->points_lessons;
-
-            $point->place = 0;
-
-            $point->save();
+            $user->award($rating, 'lessons', $row[2]);
+            $user->award($rating, 'games', $row[3]);
+            $user->award($rating, 'press', $row[4]);
+            $user->award($rating, 'travels', $row[5]);
+            $user->award($rating, 'local_competitions', $row[6]);
+            $user->award($rating, 'global_competitions', $row[7]);
         }
 
         $points = $rating->points->sortByDesc('points');
-
-        $index = 1;
-
-        foreach ($points as $point) {
-            $point->update(['place' => $index]);
-
-            $index++;
-        }
 
         //getting achievements
         $achievements = Achievement::all();

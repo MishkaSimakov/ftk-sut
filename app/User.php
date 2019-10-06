@@ -35,6 +35,29 @@ class User extends Authenticatable
         return $this->hasMany(Point::class);
     }
 
+    public function achievements()
+    {
+        return $this->belongsToMany(Achievement::class, 'user_achievements');
+    }
+
+    public function award(Rating $rating, $category, $amount) {
+        $point = Point::make();
+
+        $point->rating_id = $rating->id;
+        $point->user_id = $this->id;
+        $point->category_id = Category::where('name', $category)->first()->id;
+        $point->amount = $amount;
+
+        $point->save();
+
+        \App\Achievements\UserEarnedPoints::dispatch($point);
+    }
+
+    public function totalPoints(Rating $rating)
+    {
+
+    }
+
     public function getRegisterLinkAttribute() {
         return route('register') . '?user_id=' . $this->id . '&register_code=' . $this->register_code;
     }

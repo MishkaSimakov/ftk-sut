@@ -11,17 +11,13 @@ class ArticleController extends Controller
     //
 
     public function index(Request $request) {
-        if (Article::exists()) {
-            if ($request->filter == 'newest') {
-                $articles = Article::where('isPublished', true)->latest();
-            } else {
-                $articles = Article::where('isPublished', true)->orderBy('points', 'desc');
-            }
+        if ($request->filter == 'newest') {
+            $articles = Article::where('isPublished', true)->latest();
         } else {
-            $articles = Article::all();
+            $articles = Article::where('isPublished', true)->orderBy('points', 'desc');
         }
 
-        $articles = $articles->paginate(20);
+        $articles = $articles->paginate(10);
 
         $notPublishedCount = Article::where('isPublished', false)->orWhere('isPublished', null)->get()->count();
 

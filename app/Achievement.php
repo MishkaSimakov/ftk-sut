@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Achievement extends Model
 {
-    //
+    protected $guarded = [];
 
     public function getIsGettedAttribute() {
     	if (Auth::user()) {
@@ -19,5 +20,14 @@ class Achievement extends Model
     	}
 
     	return true;
+    }
+
+    public function awardTo(User $user)
+    {
+        $this->users()->attach($user);
+    }
+
+    public function users() {
+        return $this->belongsToMany(User::class, 'user_achievements');
     }
 }

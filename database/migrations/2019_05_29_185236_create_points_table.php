@@ -19,16 +19,9 @@ class CreatePointsTable extends Migration
             $table->integer('user_id');
             $table->integer('rating_id');
 
-            $table->integer('points');
+            $table->integer('amount');
 
-            $table->integer('points_travels');
-            $table->integer('points_local_competition');
-            $table->integer('points_global_competition');
-            $table->integer('points_games');
-            $table->integer('points_lessons');
-            $table->integer('points_press');
-
-            $table->integer('place');
+            $table->unsignedInteger('category_id');
 
             $table->timestamps();
         });
