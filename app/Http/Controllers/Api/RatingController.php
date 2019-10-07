@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Category;
 use App\Rating;
 use App\User;
 use Illuminate\Http\Request;
@@ -13,48 +14,30 @@ class RatingController extends Controller
 {
     public function chart(Request $request)
     {
-        $points = Rating::where('date', $request->date)->first()->points->sortByDesc('points');
- 
+        $points = Rating::where('date', $request->date)->first()->points->take(5)->sortByDesc('points');
+        $categories = Category::all();
+
         $chartData = [];
 
-        if ($request->type == 'teachers') {
-            foreach ($points as $point) {
-                array_push($chartData, [
-                    'us|' . $point->user->id . '|' . $point->user->name,
-                    
-                    $point->points,
-                    'stroke-width: 1; stroke-color: black;',
-
-                    $point->points,
-                ]);
-            }
-        } else {    
-            foreach ($points as $point) {
-
+        foreach ($points as $point) {
             array_push($chartData, [
                 'us|' . $point->user->id . '|' . $point->user->name,
-                
-                $point->points_lessons,
+
+                $point->user->getAmount($point->rating, 'lessons'),
+                'stroke-width: 1; stroke-color: black;',
+                $point->user->getAmount($point->rating, 'games'),
+                'stroke-width: 1; stroke-color: black;',
+                $point->user->getAmount($point->rating, 'press'),
+                'stroke-width: 1; stroke-color: black;',
+                $point->user->getAmount($point->rating, 'travels'),
+                'stroke-width: 1; stroke-color: black;',
+                $point->user->getAmount($point->rating, 'local_competitions'),
+                'stroke-width: 1; stroke-color: black;',
+                $point->user->getAmount($point->rating, 'global_competitions'),
                 'stroke-width: 1; stroke-color: black;',
 
-                $point->points_games,
-                'stroke-width: 1; stroke-color: black;',
-
-                $point->points_press,
-                'stroke-width: 1; stroke-color: black;',
-
-                $point->points_travels,
-                'stroke-width: 1; stroke-color: black;',
-
-                $point->points_local_competition,
-                'stroke-width: 1; stroke-color: black;',
-
-                $point->points_global_competition,
-                'stroke-width: 1; stroke-color: black;',
-
-                $point->points,
+                $point->user->totalPoints($point->rating),
             ]);
-            }
         }
 
         return json_encode($chartData);
@@ -63,7 +46,7 @@ class RatingController extends Controller
     public function userStatistic(Request $request)
     {
         $points = User::where('id', $request->user)->first()->points;
- 
+
         $chartData = [];
 
         foreach ($points as $point) {

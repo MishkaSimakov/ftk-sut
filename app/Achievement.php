@@ -12,11 +12,7 @@ class Achievement extends Model
 
     public function getIsGettedAttribute() {
     	if (Auth::user()) {
-  			if (UserAchievement::where([['achievement_id', $this->id], ['user_id', Auth::user()->id]])->exists()) {
-                return UserAchievement::where([['achievement_id', $this->id], ['user_id', Auth::user()->id]])->first()->completed;
-            }
-
-            return false;
+  			return UserAchievement::where([['achievement_id', $this->id], ['user_id', Auth::user()->id]])->exists();
     	}
 
     	return true;

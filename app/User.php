@@ -46,16 +46,29 @@ class User extends Authenticatable
         $point->rating_id = $rating->id;
         $point->user_id = $this->id;
         $point->category_id = Category::where('name', $category)->first()->id;
-        $point->amount = $amount;
+        $point->amount = is_null($amount) ? 0 : $amount;
 
         $point->save();
 
         \App\Achievements\UserEarnedPoints::dispatch($point);
     }
 
+    public function getAmount(Rating $rating, $category)
+    {
+        return $this->points()->get()->filter(function ($point) use ($rating, $category) {
+            return ($point->rating_id == $rating->id && $point->category_id == Category::where('name', $category)->first()->id);
+        })->map->amount->first();
+    }
+
     public function totalPoints(Rating $rating)
     {
+        $sum = 0;
 
+        foreach (Category::all() as $category) {
+            $sum += intval($this->getAmount($rating, $category->name));
+        }
+
+        return $sum;
     }
 
     public function getRegisterLinkAttribute() {

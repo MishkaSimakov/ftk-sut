@@ -9,8 +9,8 @@
         <img class="card-img-top" src="{{ $achievement->icon }}" alt="Изображение от достижения">
 
         <div class="card-body">
-          <h5 class="card-title">{{ $achievement->title }}</h5>
-          <p class="card-text">{{ $achievement->body }}</p>
+          <h5 class="card-title">{{ $achievement->name }}</h5>
+          <p class="card-text">{{ $achievement->description }}</p>
         </div>
       @else
         <div style="opacity: 0.5">
@@ -21,8 +21,8 @@
           </div>
 
           <div class="card-body">
-            <h5 class="card-title">{{ $achievement->title }}</h5>
-            <p class="card-text">{{ $achievement->body }}</p>
+            <h5 class="card-title">{{ $achievement->name }}</h5>
+            <p class="card-text">{{ $achievement->description }}</p>
           </div>
         </div>
       @endif

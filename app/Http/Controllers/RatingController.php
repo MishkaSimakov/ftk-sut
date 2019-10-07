@@ -37,7 +37,7 @@ class RatingController extends Controller
 
         $rating = Rating::make();
 
-        $rating->isMonthly = boolval($request->type);
+        $rating->type = $request->type ? 'monthly' : 'yearly';
 
         $rating->date = new Carbon($request->date);
 

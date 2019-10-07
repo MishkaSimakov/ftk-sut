@@ -51,8 +51,6 @@
         chartData.addRows(data);
 
         if ($(window).width() < 1000) {
-            console.log($(window).width());
-
             var options = {
                 fontSize: 19,
                 vAxis: {
@@ -127,7 +125,7 @@
             };
         }
 
-        var chart = new google.visualization.BarChart(document.getElementById('rating_chart'));
+        let chart = new google.visualization.BarChart(document.getElementById('rating_chart'));
 
         chart.draw(chartData, options);
 

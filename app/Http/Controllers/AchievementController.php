@@ -13,15 +13,7 @@ class AchievementController extends Controller
 {
     public function index(Request $request)
     {
-        if (Auth::user()) {
-            if (Auth::user()->is_teacher) {
-                $achievements = Achievement::where('isTeacher', true)->get();
-            } else {
-                $achievements = Achievement::whereNull('isTeacher')->get();
-            }
-        } else {
-            $achievements = Achievement::whereNull('isTeacher')->get();
-        }
+        $achievements = Achievement::all();
 
         return view('achievements.index', compact('achievements'));
     }
