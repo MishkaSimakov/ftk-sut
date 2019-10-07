@@ -50,80 +50,49 @@
 
         chartData.addRows(data);
 
+        //chart options
+        let options = {
+            fontSize: 19,
+            vAxis: {
+                title: '',
+                direction: -1,
+            },
+            tooltip: {
+                trigger: 'none',
+            },
+            height: data.length * 25,
+            bars: 'horizontal',
+            bar: {
+                groupWidth: '60%'
+            },
+            isStacked: true,
+            colors: ['#9999ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
+            hAxis: {
+                gridlines: {
+                    color: 'transparent'
+                },
+            },
+            backgroundColor: 'transparent',
+            annotations: {
+                alwaysOutside: true,
+
+                textStyle: {
+                    fontSize: 15,
+                    bold: true,
+                    fontName: 'Nunito, sans-serif',
+                    color: '#212529'
+                },
+            }
+        };
+
         if ($(window).width() < 1000) {
-            var options = {
-                fontSize: 19,
-                vAxis: {
-                    title: '',
-                    direction: -1,
-                },
-                tooltip: {
-                    trigger: 'none',
-                },
-                height: data.length * 25,
-                bars: 'horizontal',
-                bar: {
-                    groupWidth: '60%'
-                },
-                isStacked: true,
-                colors: ['#9999ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
-                chartArea: {left: 300, bottom: 0, top: 0, width:"100%"},
-                hAxis: {
-                    gridlines: {
-                        color: 'transparent'
-                    }
-                },
-                backgroundColor: 'transparent',
-                annotations: {
-                    alwaysOutside: true,
-
-                    textStyle: {
-                        fontSize: 15,
-                        bold: true,
-                        fontName: 'Nunito, sans-serif',
-                        color: '#212529'
-                    },
-                }
-            };
+            options.chartArea = {left: 300, bottom: 0, top: 0, width:"100%"};
         } else {
-            var options = {
-                fontSize: 19,
-                vAxis: {
-                    title: '',
-                    direction: -1,
-                },
-                tooltip: {
-                    trigger: 'none',
-                },
-                legend: {
-                    maxLines: 2,
-                    position: 'right',
-                    alignment: 'start'
-                },
-                height: data.length * 25,
-                bars: 'horizontal',
-                bar: {
-                    groupWidth: '60%'
-                },
-                isStacked: true,
-                colors: ['#9999ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
-                chartArea: {left: 300, bottom: 0, top: 0, width:"50%"},
-                hAxis: {
-                    gridlines: {
-                        color: 'transparent'
-                    },
-                },
-                backgroundColor: 'transparent',
-                annotations: {
-                    alwaysOutside: true,
-
-                    textStyle: {
-                        fontSize: 15,
-                        bold: true,
-                        fontName: 'Nunito, sans-serif',
-                        color: '#212529'
-                    },
-                }
+            options.chartArea = {left: 300, bottom: 0, top: 0, width: "50%"};
+            options.legend = {
+                maxLines: 2,
+                position: 'right',
+                alignment: 'start'
             };
         }
 
