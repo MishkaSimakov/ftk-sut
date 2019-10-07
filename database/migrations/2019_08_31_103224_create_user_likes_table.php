@@ -14,10 +14,10 @@ class CreateUserLikesTable extends Migration
     public function up()
     {
         Schema::create('user_likes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->primary(['user_id', 'article_id']);
+
             $table->integer('user_id');
             $table->integer('article_id');
-            $table->timestamps();
         });
     }
 

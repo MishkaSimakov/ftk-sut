@@ -18,7 +18,6 @@ class CreateUserAchievementsTable extends Migration
 
             $table->integer('user_id');
             $table->integer('achievement_id');
-            $table->timestamps();
         });
     }
 

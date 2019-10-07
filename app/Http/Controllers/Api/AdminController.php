@@ -19,12 +19,6 @@ class AdminController extends Controller
     }
 
     public function achievements (Request $request) {
-        $user_achievement = UserAchievement::make();
-
-        $user_achievement->user_id = $request->teacher_id;
-        $user_achievement->achievement_id = $request->achievement_id;
-        $user_achievement->completed = true;
-
-        $user_achievement->save();
+        Achievement::where('id', $request->achievement_id)->first()->users()->attach($request->teacher_id);
     }
 }

@@ -14,29 +14,31 @@ class RatingController extends Controller
 {
     public function chart(Request $request)
     {
-        $points = Rating::where('date', $request->date)->first()->points->take(5)->sortByDesc('points');
+        $rating = Rating::where('date', $request->date)->first();
+        $users = $rating->uniqueUsers();
+
         $categories = Category::all();
 
         $chartData = [];
 
-        foreach ($points as $point) {
+        foreach ($users as $user) {
             array_push($chartData, [
-                'us|' . $point->user->id . '|' . $point->user->name,
+                'us|' . $user->id . '|' . $user->name,
 
-                $point->user->getAmount($point->rating, 'lessons'),
+                $user->getAmount($rating, 'lessons'),
                 'stroke-width: 1; stroke-color: black;',
-                $point->user->getAmount($point->rating, 'games'),
+                $user->getAmount($rating, 'games'),
                 'stroke-width: 1; stroke-color: black;',
-                $point->user->getAmount($point->rating, 'press'),
+                $user->getAmount($rating, 'press'),
                 'stroke-width: 1; stroke-color: black;',
-                $point->user->getAmount($point->rating, 'travels'),
+                $user->getAmount($rating, 'travels'),
                 'stroke-width: 1; stroke-color: black;',
-                $point->user->getAmount($point->rating, 'local_competitions'),
+                $user->getAmount($rating, 'local_competitions'),
                 'stroke-width: 1; stroke-color: black;',
-                $point->user->getAmount($point->rating, 'global_competitions'),
+                $user->getAmount($rating, 'global_competitions'),
                 'stroke-width: 1; stroke-color: black;',
 
-                $point->user->totalPoints($point->rating),
+                $user->totalPoints($rating),
             ]);
         }
 

@@ -105,9 +105,9 @@
 						        </h5>
 
                                 <ol class="spoiler_body_{{ $schedule->id }}" style="display: none">
-                                    @foreach($schedule->user_schedules as $user_schedule)
+                                    @foreach($schedule->users as $user)
                                         <li>
-                                            <p class="ml-2"><a href="{{ $user_schedule->user->url }}">{{ $user_schedule->user->name }}</a></p>
+                                            <p class="ml-2"><a href="{{ $user->url }}">{{ $user->name }}</a></p>
                                         </li>
                                     @endforeach
                                 </ol>

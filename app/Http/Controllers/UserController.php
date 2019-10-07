@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Achievement;
 use App\UserAchievement;
+use Illuminate\Support\Facades\Auth;
 use function compact;
 
 class UserController extends Controller
@@ -17,17 +18,7 @@ class UserController extends Controller
     }
 
     public function show(User $user) {
-        $GLOBALS['user'] = $user;
-
-    	$achievements = Achievement::all()->filter(function ($achievement) {
-    		global $user;
-
-    		if (UserAchievement::where([['achievement_id', $achievement->id], ['user_id', $user->id]])->exists()) {
-                return UserAchievement::where([['achievement_id', $achievement->id], ['user_id', $user->id]])->first()->completed;
-            }
-
-            return false;
-    	});
+        $achievements = $user->achievements;
 
     	return view('user.show', compact('user', 'achievements'));
     }

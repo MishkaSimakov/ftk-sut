@@ -14,12 +14,10 @@ class CreateUserSchedulesTable extends Migration
     public function up()
     {
         Schema::create('user_schedules', function (Blueprint $table) {
-            $table->increments('id');
+            $table->primary(['user_id', 'schedule_id']);
 
             $table->integer('user_id');
             $table->integer('schedule_id');
-
-            $table->timestamps();
         });
     }
 

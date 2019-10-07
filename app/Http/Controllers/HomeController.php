@@ -26,13 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $achievements = Achievement::all()->filter(function ($achievement) {
-            if (UserAchievement::where([['achievement_id', $achievement->id], ['user_id', Auth::user()->id]])->exists()) {
-                return UserAchievement::where([['achievement_id', $achievement->id], ['user_id', Auth::user()->id]])->first()->completed;
-            }
-
-            return false;
-        });
+        $achievements = Auth::user()->achievements;
 
         return view('home', compact('achievements'));
     }

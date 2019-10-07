@@ -14,21 +14,16 @@ class Rating extends Model
         return $this->hasMany(Point::class);
     }
 
+    public function uniqueUsers()
+    {
+        return $this->belongsToMany(User::class, 'points')->get()->unique('name');
+    }
+
     public function getNameAttribute()
     {
-        if ($this->isTeachers) {
-            $name = 'Рейтинг преподавателей за ';
-        } else {
-            $name = 'Рейтинг за ';
-        }
+        $name = 'Рейтинг за ';
 
-        if ($this->isMonthly) {
-            $name .= getRussianMonth($this->date);
-
-            $name .= ' ' . $this->date->year;
-        } else {
-            $name .= ' ' . $this->date->year . ' год'; 
-        }
+        $name .= $this->type == 'monthly' ? getRussianMonth($this->date) . ' ' . $this->date->year : ' ' . $this->date->year . ' год';
 
         return $name;
     }

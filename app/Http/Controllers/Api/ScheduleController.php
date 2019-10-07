@@ -15,12 +15,7 @@ class ScheduleController extends Controller
     	if (!UserSchedule::where([['user_id', $request->user_id], ['schedule_id', $request->schedule_id]])->exists()) {
     		$schedule->increment('people_count');
 
-            $user_schedule = UserSchedule::make();
-
-            $user_schedule->user_id = $request->user_id;
-            $user_schedule->schedule_id = $request->schedule_id;
-
-            $user_schedule->save();
+            $schedule->users()->attach($request->user_id);
     	}
 
     	return $schedule->people_count;

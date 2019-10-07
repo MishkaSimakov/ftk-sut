@@ -9,10 +9,15 @@ class Article extends Model
 {
     //
 
-    protected $fillable = ['isPublished', 'title', 'body'];
+    protected $guarded = [];
 
     public function getPublishAttribute() {
     	return route('article.publish', compact('this'));
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_likes');
     }
 
     public function getDeleteAttribute() {

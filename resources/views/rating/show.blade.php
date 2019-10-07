@@ -54,7 +54,8 @@
             var options = {
                 fontSize: 19,
                 vAxis: {
-                  title: '',
+                    title: '',
+                    direction: -1,
                 },
                 tooltip: {
                     trigger: 'none',
@@ -89,6 +90,7 @@
                 fontSize: 19,
                 vAxis: {
                     title: '',
+                    direction: -1,
                 },
                 tooltip: {
                     trigger: 'none',
