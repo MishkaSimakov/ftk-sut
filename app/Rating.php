@@ -14,6 +14,11 @@ class Rating extends Model
         return $this->hasMany(Point::class);
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'points');
+    }
+
     public function uniqueUsers()
     {
         return $this->belongsToMany(User::class, 'points')->get()->unique('name');

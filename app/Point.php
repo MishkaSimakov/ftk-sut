@@ -17,10 +17,6 @@ class Point extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function award($category, $amount) {
-        $category = Category::where('');
-    }
-
     public function rating() {
         return $this->belongsTo(Rating::class);
     }

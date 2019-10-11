@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Imports\RatingsImport;
 use App\Point;
 use App\Rating;
@@ -41,23 +42,17 @@ class RatingController extends Controller
 
         $rating->date = new Carbon($request->date);
 
+        $categories = Category::categories();
+
         if (Rating::whereDate('date', $rating->date)->exists()) {
             return redirect()->back()->with('date', 'рейтинг с такой датой уже существует!');
         }
 
         $rating->save();
 
-        $flag = true;
-
-        foreach ($rows[0] as $row) {
+        foreach ($rows[0]->slice(1) as $row) {
             if (is_null($row[0]) && is_null($row[2])) {
                 break;
-            }
-
-            if ($flag == true) {
-                $flag = false;
-
-                continue;
             }
 
             $name = $row[0];
@@ -73,33 +68,12 @@ class RatingController extends Controller
                 $user = User::where('name', $name)->first();
             }
 
-            $user->award($rating, 'lessons', $row[2]);
-            $user->award($rating, 'games', $row[3]);
-            $user->award($rating, 'press', $row[4]);
-            $user->award($rating, 'travels', $row[5]);
-            $user->award($rating, 'local_competitions', $row[6]);
-            $user->award($rating, 'global_competitions', $row[7]);
-        }
-
-        $points = $rating->points->sortByDesc('points');
-
-        //getting achievements
-        $achievements = Achievement::all();
-
-        foreach ($points as $point) {
-            foreach ($achievements->where('category', 'monthly_rating') as $achievement) {
-                if (GetUserAchievement($point->user, $achievement)) {
-                    if (GetUserAchievement($point->user, $achievement)->completed) {
-                        continue;
-                    }
-                }
-
-                if (compare($achievement->condition, $point->points)) {
-                    getAchievement($point, $achievement);
-                } else {
-                    setAchievementProgress($point->points, $point, $achievement);
-                }
-            }
+            $user->award($rating, $categories->get('lessons'), $row[2]);
+            $user->award($rating, $categories->get('games'), $row[3]);
+            $user->award($rating, $categories->get('press'), $row[4]);
+            $user->award($rating, $categories->get('travels'), $row[5]);
+            $user->award($rating, $categories->get('local_competitions'), $row[6]);
+            $user->award($rating, $categories->get('global_competitions'), $row[7]);
         }
 
         return redirect(route('rating.show', $rating));

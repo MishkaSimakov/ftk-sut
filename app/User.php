@@ -40,17 +40,15 @@ class User extends Authenticatable
         return $this->belongsToMany(Achievement::class, 'user_achievements');
     }
 
-    public function award(Rating $rating, $category, $amount) {
-        $point = Point::make();
+    public function award(Rating $rating, Category $category, $amount) {
+        $point = Point::insertGetId([
+            'rating_id' => $rating->id,
+            'user_id' => $this->id,
+            'category_id' => $category->id,
+            'amount' => is_null($amount) ? 0 : $amount,
+        ]);
 
-        $point->rating_id = $rating->id;
-        $point->user_id = $this->id;
-        $point->category_id = Category::where('name', $category)->first()->id;
-        $point->amount = is_null($amount) ? 0 : $amount;
-
-        $point->save();
-
-        \App\Achievements\UserEarnedPoints::dispatch($point);
+        \App\Achievements\UserEarnedPoints::dispatch(Point::where('id', $point)->first());
     }
 
     public function getAmount(Rating $rating, $category)
@@ -79,11 +77,11 @@ class User extends Authenticatable
         return route('user.show', compact('this'));
     }
 
-    public function getNotGettedAchievementsAttribute() {
-        $achievements = Achievement::where('isTeacher', true)->get()->filter(function($achievement) {
-            return !UserAchievement::where([['user_id', $this->id], ['achievement_id', $achievement->id]])->exists();
-        });
-
-        return $achievements;
-    }
+//    public function getNotGettedAchievementsAttribute() {
+//        $achievements = Achievement::where('isTeacher', true)->get()->filter(function($achievement) {
+//            return !UserAchievement::where([['user_id', $this->id], ['achievement_id', $achievement->id]])->exists();
+//        });
+//
+//        return $achievements;
+//    }
 }
