@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'msimakov661@gmail.com'
         ]);
 
-        $this->run(CategorySeeder::class);
+        $this->call(CategorySeeder::class);
     }
 }
