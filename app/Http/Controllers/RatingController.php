@@ -8,6 +8,7 @@ use App\Point;
 use App\Rating;
 use App\User;
 use Carbon\Carbon;
+use DebugBar\DebugBar;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use function view;
@@ -33,7 +34,7 @@ class RatingController extends Controller
 
     public function store(Request $request)
     {
-        $rows = Excel::import(new RatingsImport, request()->file('file'));
+        $rows = Excel::toCollection(new RatingsImport, request()->file('file'));
 
         $rating = Rating::make();
 
@@ -41,16 +42,22 @@ class RatingController extends Controller
 
         $rating->date = new Carbon($request->date);
 
+//        if (Rating::whereDate('date', $rating->date)->exists()) {
+//            return redirect()->back()->with('date', 'рейтинг с такой датой уже существует!');
+//        }
+
+        $rating->save();
+
         $categories = Category::categories();
 
-        if (Rating::whereDate('date', $rating->date)->exists()) {
-            return redirect()->back()->with('date', 'рейтинг с такой датой уже существует!');
-        }
+
+        $debugbar = new DebugBar();
+        $debugbar->addMessage("foobar");
+
 
         $ratingRows = $rows[0]->slice(1)->filter(function ($row) {
             return !is_null($row[0]);
         });
-        dd($ratingRows->first());
 
         foreach ($ratingRows as $row) {
             $name = $row[0];

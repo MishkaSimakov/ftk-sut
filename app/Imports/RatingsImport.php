@@ -3,16 +3,13 @@
 namespace App\Imports;
 
 use App\Point;
+use App\User;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class RatingsImport implements ToModel
 {
     public function model(array $row)
     {
-        if (!is_null($row[0])) {
-            return null;
-        }
-
         return new Point([
             'user_name' => $row[0],
 

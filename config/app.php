@@ -162,6 +162,7 @@ return [
 
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Achievements\AchievementsServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -212,6 +213,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
