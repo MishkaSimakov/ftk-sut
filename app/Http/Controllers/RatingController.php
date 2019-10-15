@@ -7,7 +7,6 @@ use App\Imports\RatingsImport;
 use App\Point;
 use App\Rating;
 use App\User;
-use App\Achievement;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -34,7 +33,7 @@ class RatingController extends Controller
 
     public function store(Request $request)
     {
-        $rows = Excel::toCollection(new RatingsImport, request()->file('file'));
+        $rows = Excel::import(new RatingsImport, request()->file('file'));
 
         $rating = Rating::make();
 
@@ -48,13 +47,12 @@ class RatingController extends Controller
             return redirect()->back()->with('date', 'рейтинг с такой датой уже существует!');
         }
 
-        $rating->save();
+        $ratingRows = $rows[0]->slice(1)->filter(function ($row) {
+            return !is_null($row[0]);
+        });
+        dd($ratingRows->first());
 
-        foreach ($rows[0]->slice(1) as $row) {
-            if (is_null($row[0]) && is_null($row[2])) {
-                break;
-            }
-
+        foreach ($ratingRows as $row) {
             $name = $row[0];
 
             if (!User::where('name', $name)->exists()) {

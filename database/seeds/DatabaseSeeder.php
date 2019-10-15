@@ -18,11 +18,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'msimakov661@gmail.com'
         ]);
 
-        factory(\App\Category::class)->create(['name' => 'lessons', 'title' => 'посещение занятий']);
-        factory(\App\Category::class)->create(['name' => 'games', 'title' => 'игры в клубе']);
-        factory(\App\Category::class)->create(['name' => 'travels', 'title' => 'походы и экскурсии']);
-        factory(\App\Category::class)->create(['name' => 'press', 'title' => 'газета и группа ВКонтанкте']);
-        factory(\App\Category::class)->create(['name' => 'local_competitions', 'title' => 'Городские соревнования']);
-        factory(\App\Category::class)->create(['name' => 'global_competitions', 'title' => 'Всероссийские, международные соревнования']);
+        $this->run(CategorySeeder::class);
     }
 }
