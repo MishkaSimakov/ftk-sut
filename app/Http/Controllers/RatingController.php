@@ -51,10 +51,6 @@ class RatingController extends Controller
         $categories = Category::categories();
 
 
-        $debugbar = new DebugBar();
-        $debugbar->addMessage("foobar");
-
-
         $ratingRows = $rows[0]->slice(1)->filter(function ($row) {
             return !is_null($row[0]);
         });
@@ -62,17 +58,15 @@ class RatingController extends Controller
         foreach ($ratingRows as $row) {
             $name = $row[0];
 
-            if (!User::where('name', $name)->exists()) {
-                $user = User::make();
+            $user = User::firstOrNew(['name' => $name]);
 
-                $user->name = $name;
+            if (!$user->exists) {
                 $user->register_code = rand(10000, 99999);
-
                 $user->save();
-            } else {
-                $user = User::where('name', $name)->first();
             }
 
+            //TODO: сделать типа того$points = $this->resolveRatingPoints($row, $categories);
+            
             $user->award($rating, $categories->get('lessons'), $row[2]);
             $user->award($rating, $categories->get('games'), $row[3]);
             $user->award($rating, $categories->get('press'), $row[4]);
@@ -82,5 +76,19 @@ class RatingController extends Controller
         }
 
         return redirect(route('rating.show', $rating));
+    }
+
+    protected function resolveRatingPoints($row, $categories)
+    {
+        $points = [
+            $categories->get('lessons') => $row[2],
+            $categories->get('games') => $row[3],
+            $categories->get('press') => $row[4],
+            $categories->get('travels') => $row[5],
+            $categories->get('local_competitions') => $row[6],
+            $categories->get('global_competitions') => $row[7],
+        ];
+
+        return array_filter($points);
     }
 }

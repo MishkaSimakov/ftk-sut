@@ -12,12 +12,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 1)->create([
+        factory(User::class)->create([
             'is_admin' => true,
             'password' => \Illuminate\Support\Facades\Hash::make('123456'),
             'email' => 'msimakov661@gmail.com'
         ]);
 
-        $this->run(CategorySeeder::class);
+        factory(User::class, 1)->create([
+            'email' => 'admin@site.com',
+            'is_admin' => true,
+        ]);
+
+
+            $this->call(CategorySeeder::class);
     }
 }
