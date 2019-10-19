@@ -30,6 +30,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (User $user) {
+            $user->register_code = rand(10000, 99999);
+        });
+    }
+
     public function points()
     {
         return $this->hasMany(Point::class);
@@ -67,12 +77,4 @@ class User extends Authenticatable
     public function getUrlAttribute() {
         return route('user.show', compact('this'));
     }
-
-//    public function getNotGettedAchievementsAttribute() {
-//        $achievements = Achievement::where('isTeacher', true)->get()->filter(function($achievement) {
-//            return !UserAchievement::where([['user_id', $this->id], ['achievement_id', $achievement->id]])->exists();
-//        });
-//
-//        return $achievements;
-//    }
 }

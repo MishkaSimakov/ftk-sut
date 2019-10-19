@@ -56,13 +56,7 @@ class RatingController extends Controller
         $ratingRows = $this->resolveRatingPoints($rows);
 
         foreach ($ratingRows as $key => $row) {
-            $user = User::firstOrNew(['name' => $key]);
-
-            if (!$user->exists) {
-                $user->register_code = rand(10000, 99999);
-
-                $user->save();
-            }
+            $user = User::firstOrCreate(['name' => $key]);
 
             foreach ($row as $category => $point) {
                 $user->award($rating, $categories->get($category), $point);
