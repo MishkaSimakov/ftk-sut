@@ -36,62 +36,6 @@
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 			<div class="card">
-				<div class="card-header">Рейтинг преподователей (только для Паши!!!)</div>
-
-				<div class="card-body">
-					@foreach($teachers as $teacher)
-						<div class="form-group row">
-							<a href="#" onclick="event.preventDefault();" data-teacher="{{ $teacher->id }}" class="add_achievement_link text-md-right">{{ $teacher->name }}</a>
-						</div>
-
-						<div class="modal bd-example-modal-lg fade" id="modal_{{ $teacher->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog modal-lg" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title">Добавление достижений для {{ $teacher->name }}</h4>
-
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-
-									<div class="modal-body">
-										<div class="container px-5">
-											@foreach($teacher->notGettedAchievements as $achievement)
-												<div class="{{ $teacher->id }}_achievement_{{ $achievement->id }} card m-3 d-inline-block" style="width: 18rem">
-
-													<img class="card-img-top" src="{{ $achievement->image_url }}" alt="Изображение от достижения">
-
-													<div class="card-body">
-														<h5 class="card-title">
-															{{ $achievement->title }}
-														</h5>
-														<p class="card-text">
-															{{ $achievement->body }}
-														</p>
-
-														<a href="#" onclick="event.preventDefault(); addAchievement({{ $achievement->id }}, {{ $teacher->id }})" class="btn btn-primary">
-															Добавить
-														</a>
-													</div>
-												</div>
-										  	@endforeach
-									  	</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					@endforeach
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="container mt-3">
-	<div class="row justify-content-center">
-		<div class="col-md-8">
-			<div class="card">
 				<div class="card-header">Просмотр людей</div>
 
 				<div class="card-body">
@@ -132,12 +76,6 @@
             });
         });
 
-		$('.add_achievement_link').each(function() {
-			$(this).click(function() {
-				$('#modal_' + $(this).attr('data-teacher')).modal('show');
-			});
-		});
-
 		$("#load_button").click(function() {
 			$.ajax({
 				url: "{{ route('api.admin.register_link') }}",
@@ -155,20 +93,6 @@
 			});
 		});
 	});
-
-	function addAchievement(achievement_id, teacher_id) {
-		$.ajax({
-			url: "{{ route('api.admin.add_achievement') }}",
-			method: "POST",
-			dataType: 'json',
-			data: {
-				teacher_id: teacher_id,
-				achievement_id: achievement_id,
-			}
-		});
-
-		$('.' + teacher_id + '_achievement_' + achievement_id).remove();
-	}
 </script>
 
 @include('partials.footer')

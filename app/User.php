@@ -41,32 +41,23 @@ class User extends Authenticatable
     }
 
     public function award(Rating $rating, Category $category, $amount) {
-        $point = Point::insertGetId([
-            'rating_id' => $rating->id,
-            'user_id' => $this->id,
-            'category_id' => $category->id,
-            'amount' => is_null($amount) ? 0 : $amount,
-        ]);
+        $point = Point::make();
 
-        \App\Achievements\UserEarnedPoints::dispatch(Point::where('id', $point)->first());
+        $point->rating_id = $rating->id;
+        $point->user_id = $this->id;
+        $point->category_id = $category->id;
+        $point->amount = $amount;
+
+        $point->save();
+
+        \App\Achievements\UserEarnedPoints::dispatch($point);
     }
 
-    public function getAmount(Rating $rating, $category)
+    public function getAmount(Rating $rating, Category $category)
     {
-        return $this->points()->get()->filter(function ($point) use ($rating, $category) {
-            return ($point->rating_id == $rating->id && $point->category_id == Category::where('name', $category)->first()->id);
-        })->map->amount->first();
-    }
+        $point = $this->points()->where([['rating_id', $rating->id], ['category_id', $category->id]])->first();
 
-    public function totalPoints(Rating $rating)
-    {
-        $sum = 0;
-
-        foreach (Category::all() as $category) {
-            $sum += intval($this->getAmount($rating, $category->name));
-        }
-
-        return $sum;
+        return $point ? $point->amount : 0;
     }
 
     public function getRegisterLinkAttribute() {

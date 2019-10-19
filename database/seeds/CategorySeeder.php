@@ -23,19 +23,19 @@ class CategorySeeder extends Seeder
         return [
             [
                 'name' => 'lessons',
-                'title' => 'посещение занятий'
+                'title' => 'Посещение занятий'
             ],
             [
                 'name' => 'games',
-                'title' => 'игры в клубе'
+                'title' => 'Игры в клубе'
             ],
             [
                 'name' => 'travels',
-                'title' => 'походы и экскурсии'
+                'title' => 'Походы и экскурсии'
             ],
             [
                 'name' => 'press',
-                'title' => 'газета и группа ВКонтанкте'
+                'title' => 'Газета и группа ВКонтанкте'
             ],
             [
                 'name' => 'local_competitions',

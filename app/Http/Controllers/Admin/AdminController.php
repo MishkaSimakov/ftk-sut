@@ -13,11 +13,10 @@ use Carbon\Carbon;
 
 class AdminController extends Controller
 {
-    public function index() {
-    	$teachers = User::where('is_teacher', true)->get();
+    public function index()
+    {
+        $schedules = Schedule::whereDate('date_start', '>=', Carbon::now()->subWeek(1))->get();
 
-    	$schedules = Schedule::whereDate('date_start', '>=', Carbon::now()->subWeek(1))->get();
-
-    	return view('admin.index', compact('teachers', 'schedules'));
+        return view('admin.index', compact('schedules'));
     }
 }

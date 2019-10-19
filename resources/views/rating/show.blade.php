@@ -1,6 +1,6 @@
 @include('partials.header')
 
-<h1 class="text-center m-2">{{ $rating->name }}<i title="фильтр" id="filter" style="font-size: 1.5rem; cursor: pointer" class="float-right text-primary ml-2 fa-xs fas fa-filter"></i></h1>
+<h1 class="text-center m-2">{{ $rating->name }}</h1>
 
 <div id="rating_chart" style="max-width: 97%"></div>
 
@@ -28,23 +28,10 @@
 
         chartData.addColumn('string', 'Имя');
 
-        chartData.addColumn('number', 'Посещение занятий');
-        chartData.addColumn({'type': 'string', 'role': 'style'}, '');
-
-        chartData.addColumn('number', 'Игры, конкурсы в клубе');
-        chartData.addColumn({'type': 'string', 'role': 'style'}, '');
-
-        chartData.addColumn('number', 'Газета, группа ВК');
-        chartData.addColumn({'type': 'string', 'role': 'style'}, '');
-
-        chartData.addColumn('number', 'Походы и экскурсии');
-        chartData.addColumn({'type': 'string', 'role': 'style'}, '');
-
-        chartData.addColumn('number', 'Городские соревнования, выставки, конкурсы');
-        chartData.addColumn({'type': 'string', 'role': 'style'}, '');
-
-        chartData.addColumn('number', 'Областные, всероссийские, международные соревнования');
-        chartData.addColumn({'type': 'string', 'role': 'style'}, '');
+        @foreach ($categories as $category)
+            chartData.addColumn('number', '{{ $category->title }}');
+            chartData.addColumn({'type': 'string', 'role': 'style'}, '');
+        @endforeach
 
         chartData.addColumn({'type': 'number', 'role': 'annotation'}, '');
 
@@ -86,9 +73,9 @@
         };
 
         if ($(window).width() < 1000) {
-            options.chartArea = {left: 300, bottom: 0, top: 0, width:"100%"};
+            options.chartArea = {left: 300, bottom: 25, top: 0, width:"100%"};
         } else {
-            options.chartArea = {left: 300, bottom: 0, top: 0, width: "50%"};
+            options.chartArea = {left: 300, bottom: 25, top: 0, width: "50%"};
             options.legend = {
                 maxLines: 2,
                 position: 'right',
@@ -115,34 +102,34 @@
     });
 </script>
 
-<div class="modal fade" id="modal_filter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Фильтры</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+{{--<div class="modal fade" id="modal_filter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">--}}
+{{--    <div class="modal-dialog" role="document">--}}
+{{--        <div class="modal-content">--}}
+{{--            <div class="modal-header">--}}
+{{--                <h4 class="modal-title">Фильтры</h4>--}}
+{{--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                    <span aria-hidden="true">&times;</span>--}}
+{{--                </button>--}}
+{{--            </div>--}}
 
-            <div class="modal-body">
-                <div class="container">
-                    <form method="GET" action="{{ route('rating.show', compact('rating')) }}">
-                        <fieldset class="form-group" style="overflow: auto; overflow-x: hidden;">
-                            <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">Показать только</legend>
-                                <div class="col-sm-10">
-                                    @foreach($rating->points->sortBy('user.name') as $point)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="user" id="user" value="{{ $point->user->id }}">
-                                            <label class="form-check-label" for="user">
-                                                {{ $point->user->name }}
-                                            </label>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </fieldset>
+{{--            <div class="modal-body">--}}
+{{--                <div class="container">--}}
+{{--                    <form method="GET" action="{{ route('rating.show', compact('rating')) }}">--}}
+{{--                        <fieldset class="form-group" style="overflow: auto; overflow-x: hidden;">--}}
+{{--                            <div class="row">--}}
+{{--                                <legend class="col-form-label col-sm-2 pt-0">Показать только</legend>--}}
+{{--                                <div class="col-sm-10">--}}
+{{--                                    @foreach($rating->points->sortBy('user.name') as $point)--}}
+{{--                                        <div class="form-check">--}}
+{{--                                            <input class="form-check-input" type="checkbox" name="user" id="user" value="{{ $point->user->id }}">--}}
+{{--                                            <label class="form-check-label" for="user">--}}
+{{--                                                {{ $point->user->name }}--}}
+{{--                                            </label>--}}
+{{--                                        </div>--}}
+{{--                                    @endforeach--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </fieldset>--}}
 
 {{--                        <p>--}}
 {{--                            показать очки только за--}}
@@ -172,12 +159,12 @@
 {{--                            </a>--}}
 {{--                        </p>--}}
 
-                        <input type="submit" value="Отправить">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{{--                        <input type="submit" value="Отправить">--}}
+{{--                    </form>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 
 @include('partials.footer')

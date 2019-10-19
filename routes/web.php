@@ -21,11 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::view('/html/main', 'html.main');
-Route::view('/html/news', 'html.news');
-
-
 Route::get('/article', 'ArticleController@index')->name('article.index');
 
 Route::get('/article/publish', 'ArticleController@notPublished')->name('article.notPublished')->middleware('admin');

@@ -17,47 +17,20 @@ class RatingController extends Controller
         $rating = Rating::where('date', $request->date)->first();
         $users = $rating->uniqueUsers();
 
-        $categories = Category::all();
+        $categories = Category::categories();
 
         $chartData = [];
 
         foreach ($users as $user) {
-            array_push($chartData, [
-                'us|' . $user->id . '|' . $user->name,
+            $userPoints = ['us|' . $user->id . '|' . $user->name];
 
-                $user->getAmount($rating, 'lessons'),
-                'stroke-width: 1; stroke-color: black;',
-                $user->getAmount($rating, 'games'),
-                'stroke-width: 1; stroke-color: black;',
-                $user->getAmount($rating, 'press'),
-                'stroke-width: 1; stroke-color: black;',
-                $user->getAmount($rating, 'travels'),
-                'stroke-width: 1; stroke-color: black;',
-                $user->getAmount($rating, 'local_competitions'),
-                'stroke-width: 1; stroke-color: black;',
-                $user->getAmount($rating, 'global_competitions'),
-                'stroke-width: 1; stroke-color: black;',
-
-                $user->totalPoints($rating),
-            ]);
-        }
-
-        return json_encode($chartData);
-    }
-
-    public function userStatistic(Request $request)
-    {
-        $points = User::where('id', $request->user)->first()->points;
-
-        $chartData = [];
-
-        foreach ($points as $point) {
-            if ($point->rating->isMonthly) {
-                array_push($chartData, [
-                    intval($point->rating->date->format('U')),
-                    $point->place
-                ]);
+            foreach ($categories as $category) {
+                array_push($userPoints, $user->getAmount($rating, $category), 'stroke-width: 1; stroke-color: black;');
             }
+
+            array_push($userPoints, array_sum($userPoints));
+
+            array_push($chartData, $userPoints);
         }
 
         return json_encode($chartData);

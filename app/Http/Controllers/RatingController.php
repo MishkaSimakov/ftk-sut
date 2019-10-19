@@ -25,7 +25,9 @@ class RatingController extends Controller
 
     public function show(Rating $rating)
     {
-        return view('rating.show', compact('rating'));
+        $categories = Category::all();
+
+        return view('rating.show', compact(['rating', 'categories']));
     }
 
     public function create()
@@ -43,9 +45,9 @@ class RatingController extends Controller
 
         $rating->date = new Carbon($request->date);
 
-//        if (Rating::whereDate('date', $rating->date)->exists()) {
-//            return redirect()->back()->with('date', 'рейтинг с такой датой уже существует!');
-//        }
+        if (Rating::whereDate('date', $rating->date)->exists()) {
+            return redirect()->back()->with('date', 'рейтинг с такой датой уже существует!');
+        }
 
         $rating->save();
 
@@ -67,7 +69,9 @@ class RatingController extends Controller
             }
         }
 
-        return redirect(route('rating.show', $rating));
+        $categories = Category::all();
+
+        return redirect(route('rating.show', compact(['rating', 'categories'])));
     }
 
     protected function resolveRatingPoints($rows): array
