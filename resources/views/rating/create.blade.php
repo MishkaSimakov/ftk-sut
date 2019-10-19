@@ -16,7 +16,7 @@
                             <label for="file" class="col-md-4 col-form-label text-md-right">Рейтинг</label>
 
                             <div class="col-md-6">
-                                <input id="file" type="file" class=".form-control-file" accept=".xls" name="file" required>
+                                <input id="file" type="file" class="form-control-file" accept=".xls" name="file" required>
                             </div>
                         </div>
 
@@ -31,20 +31,17 @@
                             </div>
                         </div>
 
-
-                        <div class="form-group row" style="display: none;" id="type-year">
-                            <label for="year" class="col-md-4 col-form-label text-md-right">Дата</label>
-
-                            <div class="col-md-6">
-                                <input id="year" type="number" value="{{ Carbon\Carbon::now()->format('Y') }}" class="form-control" name="year" required>
-                            </div>
-                        </div>
-
                         <div class="form-group row" id="type-month">
-                            <label for="month" class="col-md-4 col-form-label text-md-right">Дата</label>
+                            <label for="date" class="col-md-4 col-form-label text-md-right">Дата</label>
 
                             <div class="col-md-6">
-                                <input id="month" type="month" value="{{ Carbon\Carbon::now()->format('Y-m') }}" class="form-control" name="month" required>
+                                <input id="date" type="month" value="{{ Carbon\Carbon::now()->format('Y-m') }}" class="form-control {{ $errors->has('date') ? 'is-invalid' : '' }}" name="date" required>
+
+                                @if (session('date'))
+                                    <div class="invalid-feedback d-block">
+                                        {{ session('date') }}
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
@@ -67,8 +64,13 @@
     $(document).on('input', '#type', function () {
         var val = $(this).val();
 
-        $('#type-year').toggle('');
-        $('#type-month').toggle('');
+        if (val == 1) {
+            $('#date').attr('type', 'month');
+            $('#date').val("{{ Carbon\Carbon::now()->format('Y-m') }}");
+        } else {
+            $('#date').attr('type', 'number');
+            $('#date').val("{{ Carbon\Carbon::now()->format('Y') }}");
+        }
     });
 </script>
 

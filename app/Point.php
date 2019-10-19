@@ -17,6 +17,7 @@ class Point extends Model
         'points_games',
         'points_lessons',
         'points_press',
+        'place'
     ];
 
     protected $dates = ['created_at', 'updated_at', 'date'];

@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::view('/html/main', 'html.main');
 Route::view('/html/news', 'html.news');
 
@@ -26,12 +27,12 @@ Route::put('/article/{article}/publish', 'ArticleController@publish')->name('art
 Route::delete('/article/{article}', 'ArticleController@destroy')->name('article.destroy')->middleware('admin');
 
 Route::resource('article', 'ArticleController')->middleware('auth')->only([
-    'create', 'store'
+    'create', 'store', 'edit', 'update', 'destroy'
 ]);
 
 
-Route::resource('rating', 'RatingController')->middleware('admin')->only([
-    'create', 'store', 'show'
+Route::resource('rating', 'RatingController')->middleware(['auth','admin'])->only([
+    'create', 'store'
 ]);
 
 Route::resource('rating', 'RatingController')->only([

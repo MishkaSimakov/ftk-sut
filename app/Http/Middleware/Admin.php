@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Auth;
 use function redirect;
 
@@ -17,12 +19,10 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()) {
-            if (Auth::user()->isAdmin) {
-                return $next($request);
-            }
+        if (Auth::user()->is_admin) {
+            return $next($request);
         }
 
-        return redirect()->back()->with('error', 'Вы не имеете доступа');
+        throw new AuthorizationException();
     }
 }

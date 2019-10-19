@@ -14,7 +14,7 @@ use Carbon\Carbon;
 class AdminController extends Controller
 {
     public function index() {
-    	$teachers = User::where('isTeacher', true)->get();
+    	$teachers = User::where('is_teacher', true)->get();
 
     	$schedules = Schedule::whereDate('date_start', '>=', Carbon::now()->subWeek(1))->get();
 

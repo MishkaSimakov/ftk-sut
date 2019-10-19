@@ -67,7 +67,7 @@
             </li>
 
             @auth
-              @if(Auth::user()->isAdmin)
+              @if(Auth::user()->is_admin)
                 <li class="nav-item">
                     <a title="Разделяй и властвуй" id="navbar" class="nav-link" href="{{ route('admin.index') }}" role="button">
                         Панель администратора

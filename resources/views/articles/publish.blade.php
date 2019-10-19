@@ -5,7 +5,7 @@
     <a class="nav-link" href="{{ route('article.index') }}?filter=best">Лучшее</a>
     <a class="nav-link" href="{{ route('article.index') }}?filter=newest">Новейшее</a>
     @auth
-    	@if (Auth::user()->isAdmin)
+    	@if (Auth::user()->is_admin)
 		    <a class="nav-link" href="{{ route('article.notPublished') }}">
 		      Требуют проверки
 		      <span class="badge badge-pill bg-light align-text-bottom">{{ $notPublishedCount }}</span>
@@ -54,7 +54,7 @@
 
   <form id="publish-form" action="{{ $article->publish }}" method="POST" class="d-none">
     @method('PUT')
-    @csrf 
+    @csrf
   </form>
 
   <form id="delete-form" action="{{ $article->delete }}" method="POST" class="d-none">
