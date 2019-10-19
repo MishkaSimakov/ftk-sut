@@ -46,7 +46,7 @@ class RatingController extends Controller
         $rating->date = new Carbon($request->date);
 
         if (Rating::whereDate('date', $rating->date)->exists()) {
-            return redirect()->back()->with('date', 'рейтинг с такой датой уже существует!');
+            return redirect()->back()->with('date', 'СЂРµР№С‚РёРЅРі СЃ С‚Р°РєРѕР№ РґР°С‚РѕР№ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!');
         }
 
         $rating->save();
@@ -84,12 +84,12 @@ class RatingController extends Controller
 
         foreach ($ratingRows as $row) {
             $points = Arr::add($points, $row[0], array_filter([
-                    'lessons' => $row[2],
-                    'games' => $row[3],
-                    'press' => $row[4],
-                    'travels' => $row[5],
-                    'local_competitions' => $row[6],
-                    'global_competitions' => $row[7]
+                'lessons' => $row[2],
+                'games' => $row[3],
+                'press' => $row[4],
+                'travels' => $row[5],
+                'local_competitions' => $row[6],
+                'global_competitions' => $row[7]
             ]));
         }
 
