@@ -32,37 +32,39 @@
 	</div>
 </div>
 
-<div class="container mt-3">
-	<div class="row justify-content-center">
-		<div class="col-md-8">
-			<div class="card">
-				<div class="card-header">Просмотр людей</div>
+@if (!$schedules->isEmpty())
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Просмотр людей</div>
 
-				<div class="card-body">
-					@foreach($schedules as $schedule)
-					    <ul class="" style="">
-					        <li class="">
-						        <h5 class="card-title spoiler_link text-primary" style="cursor: pointer" data-schedule="{{ $schedule->id }}">
-						        	{{ $schedule->title }}
+                    <div class="card-body">
+                        @foreach($schedules as $schedule)
+                            <ul class="" style="">
+                                <li class="">
+                                    <h5 class="card-title spoiler_link text-primary" style="cursor: pointer" data-schedule="{{ $schedule->id }}">
+                                        {{ $schedule->title }}
 
-						        	<small>({{ $schedule->date_start->day }} {{ getRussianMonth($schedule->date_start, true) }} {{ $schedule->date_start->format('H:i') }} - {{ $schedule->date_end->format('H:i') }})</small>
-						        </h5>
+                                        <small>({{ $schedule->date_start->day }} {{ getRussianMonth($schedule->date_start, true) }} {{ $schedule->date_start->format('H:i') }} - {{ $schedule->date_end->format('H:i') }})</small>
+                                    </h5>
 
-                                <ol class="spoiler_body_{{ $schedule->id }}" style="display: none">
-                                    @foreach($schedule->users as $user)
-                                        <li>
-                                            <p class="ml-2"><a href="{{ $user->url }}">{{ $user->name }}</a></p>
-                                        </li>
-                                    @endforeach
-                                </ol>
-					        </li>
-					    </ul>
-					@endforeach
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+                                    <ol class="spoiler_body_{{ $schedule->id }}" style="display: none">
+                                        @foreach($schedule->users as $user)
+                                            <li>
+                                                <p class="ml-2"><a href="{{ $user->url }}">{{ $user->name }}</a></p>
+                                            </li>
+                                        @endforeach
+                                    </ol>
+                                </li>
+                            </ul>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 
 <script>
 	$(document).ready(function () {

@@ -23,16 +23,16 @@ Route::get('/', function () {
 
 Route::get('/article', 'ArticleController@index')->name('article.index');
 
-Route::get('/article/publish', 'ArticleController@notPublished')->name('article.notPublished')->middleware('admin');
-Route::put('/article/{article}/publish', 'ArticleController@publish')->name('article.publish')->middleware('admin');
-Route::delete('/article/{article}', 'ArticleController@destroy')->name('article.destroy')->middleware('admin');
+Route::get('/article/publish', 'ArticleController@notPublished')->name('article.notPublished')->middleware(['auth', 'admin']);
+Route::put('/article/{article}/publish', 'ArticleController@publish')->name('article.publish')->middleware(['auth', 'admin']);
+Route::delete('/article/{article}', 'ArticleController@destroy')->name('article.destroy')->middleware(['auth', 'admin']);
 
 Route::resource('article', 'ArticleController')->middleware('auth')->only([
     'create', 'store', 'edit', 'update', 'destroy'
 ]);
 
 
-Route::resource('rating', 'RatingController')->middleware(['auth','admin'])->only([
+Route::resource('rating', 'RatingController')->middleware(['auth', 'admin'])->only([
     'create', 'store'
 ]);
 
@@ -43,9 +43,7 @@ Route::resource('rating', 'RatingController')->only([
 
 
 
-Route::resource('user', 'UserController')->only([
-    'index', 'show'
-]);
+Route::get('/user/{user}', 'UserController@show')->name('user.show');
 
 Route::resource('achievements', 'AchievementController')->only([
    'index'
@@ -54,7 +52,7 @@ Route::resource('achievements', 'AchievementController')->only([
 
 Route::get('/schedule', 'ScheduleController@index')->name('schedule.index');
 
-Route::resource('schedule', 'ScheduleController')->middleware('admin')->only([
+Route::resource('schedule', 'ScheduleController')->middleware(['auth', 'admin'])->only([
 	'create', 'store'
 ]);
 
@@ -62,6 +60,6 @@ Route::resource('schedule', 'ScheduleController')->middleware('admin')->only([
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 
-Route::get('/admin', 'Admin\AdminController@index')->name('admin.index')->middleware('admin');
+Route::get('/admin', 'Admin\AdminController@index')->name('admin.index')->middleware(['auth', 'admin']);

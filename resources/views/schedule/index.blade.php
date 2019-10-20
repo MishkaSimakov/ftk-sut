@@ -2,11 +2,9 @@
 
 <h1 class="text-center m-2">В клубе на этой неделе</h1>
 
-@auth
-  @if (Auth::user()->is_admin)
+@admin
     <h2 class="ml-2"><a href="{{ route('schedule.create') }}"><i class="fas fa-plus mr-1"></i>Добавить событие</a></h2>
-  @endif
-@endauth
+@endadmin
 
 @foreach($lastSchedules as $schedule)
     <div class="card m-3 d-inline-block" style="width: 18rem">

@@ -66,15 +66,13 @@
                 </a>
             </li>
 
-            @auth
-              @if(Auth::user()->is_admin)
+            @admin
                 <li class="nav-item">
                     <a title="Разделяй и властвуй" id="navbar" class="nav-link" href="{{ route('admin.index') }}" role="button">
                         Панель администратора
                     </a>
                 </li>
-              @endif
-            @endauth
+            @endadmin
         </ul>
 
         <!-- Right Side Of Navbar -->

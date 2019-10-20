@@ -17,9 +17,4 @@ class AdminController extends Controller
 
         return json_encode($link);
     }
-
-    public function achievements(Request $request)
-    {
-        Achievement::where('id', $request->achievement_id)->first()->users()->attach($request->teacher_id);
-    }
 }

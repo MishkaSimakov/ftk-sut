@@ -4,14 +4,13 @@
   <nav class="nav nav-underline">
     <a class="nav-link" href="{{ route('article.index') }}?filter=best">Лучшее</a>
     <a class="nav-link" href="{{ route('article.index') }}?filter=newest">Новейшее</a>
-    @auth
-    	@if (Auth::user()->is_admin)
-		    <a class="nav-link" href="{{ route('article.notPublished') }}">
-		      Требуют проверки
-		      <span class="badge badge-pill bg-light align-text-bottom">{{ $notPublishedCount }}</span>
-		    </a>
-	    @endif
-    @endauth
+
+      @admin
+        <a class="nav-link" href="{{ route('article.notPublished') }}">
+          Требуют проверки
+          <span class="badge badge-pill bg-light align-text-bottom">{{ $notPublishedCount }}</span>
+        </a>
+      @endadmin
   </nav>
 </div>
 

@@ -4,12 +4,14 @@ namespace App\Achievements;
 
 use App\Achievements\Console\GenerateAchievementCommand;
 use App\Achievements\Types\Get1000PointsInMonthRating;
+use App\Achievements\Types\GetLessThen250PointsInMonthRating;
 use Illuminate\Support\ServiceProvider;
 
 class AchievementsServiceProvider extends ServiceProvider
 {
     protected $achievements = [
         Get1000PointsInMonthRating::class,
+        GetLessThen250PointsInMonthRating::class
     ];
     /**
      * Bootstrap services.
