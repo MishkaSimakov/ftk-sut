@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Achievements;
+namespace App\Achievements\Events;
 
 use App\Point;
 use Illuminate\Queue\SerializesModels;
@@ -19,7 +19,7 @@ class UserEarnedPoints
      * @return void
      * @var $point
      */
-    public function __construct($point)
+    public function __construct(Point $point)
     {
         $this->point = $point;
     }

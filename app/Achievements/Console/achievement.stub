@@ -11,7 +11,7 @@ class {{CLASS}} extends AchievementType
     public $description = '';
     public $icon = '';
 
-    public function qualifier($point)
+    public function qualifier($variable)
     {
         //
     }

@@ -40,6 +40,8 @@ class RatingStoreTest extends TestCase
 
     public function test_it_upload_rating_if_all_data_ok()
     {
+        $this->withoutExceptionHandling();
+
         $user = factory(User::class)->create([
             'is_admin' => true
         ]);
@@ -94,7 +96,7 @@ class RatingStoreTest extends TestCase
         dd($achievements->first());
     }
 
-    protected function expectedStudent(): User
+    protected function expectedStudent()
     {
         return User::where('name', 'Селюченко Иван')->firstOrFail();
     }

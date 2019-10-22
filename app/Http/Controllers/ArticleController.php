@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Achievements\Events\UserWriteArticle;
 use Illuminate\Http\Request;
 use App\Article;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,8 @@ class ArticleController extends Controller
     public function publish(Article $article)
     {
         $article->update(['isPublished' => true]);
+
+        UserWriteArticle::dispatch($article);
 
         return redirect()->back();
     }

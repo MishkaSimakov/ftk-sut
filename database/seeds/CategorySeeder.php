@@ -13,12 +13,12 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        foreach ($this->categores() as $category) {
+        foreach ($this->categories() as $category) {
             factory(Category::class)->create($category);
         }
     }
 
-    protected function categores(): array
+    protected function categories(): array
     {
         return [
             [

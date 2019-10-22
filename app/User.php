@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Achievements\Events\UserEarnedPoints;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -40,6 +41,11 @@ class User extends Authenticatable
         });
     }
 
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
     public function points()
     {
         return $this->hasMany(Point::class);
@@ -60,7 +66,7 @@ class User extends Authenticatable
 
         $point->save();
 
-        \App\Achievements\UserEarnedPoints::dispatch($point);
+        UserEarnedPoints::dispatch($point);
     }
 
     public function getAmount(Rating $rating, Category $category)
