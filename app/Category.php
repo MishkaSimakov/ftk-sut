@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * //TODO: Переименовать в PointCategory
+ */
 class Category extends Model
 {
     static public function categories() {

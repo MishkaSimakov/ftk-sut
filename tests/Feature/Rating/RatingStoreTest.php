@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Rating;
 
+use App\Point;
+use App\Rating;
 use App\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
@@ -38,7 +40,67 @@ class RatingStoreTest extends TestCase
 
     public function test_it_upload_rating_if_all_data_ok()
     {
-        $this->withoutExceptionHandling();
+        $user = factory(User::class)->create([
+            'is_admin' => true
+        ]);
+        $this->actingAs($user);
+
+        $this->assertCount(0, Rating::all());
+        $this->assertCount(0, Point::all());
+        $this->assertEquals(1, $adminUserCount = User::count());
+
+
+        $this->post('/rating',[
+            'type' => 1,
+            'file' => new UploadedFile(base_path('tests/Stubs/') . '/rating.xls', 'rating.xls'),
+            'month' => '2019-09'
+        ])->assertStatus(302);
+
+        $this->assertCount(1, Rating::all());
+        $this->assertTrue(Point::count() > 0);
+        $this->assertEquals(User::count(), 63 + $adminUserCount);
+    }
+
+    public function test_it_awards_points_to_students()
+    {
+        $expectedPoints = [
+            'lessons' => 2500,
+            'games' => 2320,
+            'travels' => 6520,
+        ];
+
+        $this->postRating();
+
+        $student = $this->expectedStudent();
+        $points = $student->points->keyBy(function (Point $point) {
+            return $point->category->name; //TODO: в slug
+        });
+
+        $this->assertCount(3, $points);
+
+        foreach ($expectedPoints as $slug => $amount) {
+            $this->assertEquals($amount, $points[$slug]->amount);
+        }
+    }
+
+    public function test_it_award_achievements_to_student()
+    {
+        $this->postRating();
+
+        $student = $this->expectedStudent();
+
+        $this->assertCount(1, $achievements = $student->achievements);
+
+        dd($achievements->first());
+    }
+
+    protected function expectedStudent(): User
+    {
+        return User::where('name', 'Селюченко Иван')->firstOrFail();
+    }
+
+    protected function postRating()
+    {
         $user = factory(User::class)->create([
             'is_admin' => true
         ]);
@@ -48,6 +110,6 @@ class RatingStoreTest extends TestCase
             'type' => 1,
             'file' => new UploadedFile(base_path('tests/Stubs/') . '/rating.xls', 'rating.xls'),
             'month' => '2019-09'
-        ])->assertStatus(302);
+        ]);
     }
 }

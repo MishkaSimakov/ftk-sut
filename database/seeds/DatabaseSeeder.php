@@ -12,8 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class)->create([
+        $admin = factory(User::class)->create([
             'is_admin' => true,
+            'email' => 'msimakov661@gmail.com',
         ]);
 
         $this->call(CategorySeeder::class);

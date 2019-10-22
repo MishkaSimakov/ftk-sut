@@ -22,7 +22,7 @@ class CategorySeeder extends Seeder
     {
         return [
             [
-                'name' => 'lessons',
+                'name' => 'lessons', //TODO: переделать в code|slug  eloquent-sluggable | Str::slug  при сохранении модели
                 'title' => 'Посещение занятий'
             ],
             [
@@ -43,7 +43,7 @@ class CategorySeeder extends Seeder
             ],
             [
                 'name' => 'global_competitions',
-                'title' => 'Всероссийские, международные соревнования'
+                'title' => 'Всероссийские, международные соревнования',
             ],
         ];
     }

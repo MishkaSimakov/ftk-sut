@@ -14,7 +14,7 @@
 use \Illuminate\Support\Facades\Route;
 use \Illuminate\Support\Facades\Event;
 
-Event::listen(\App\Achievements\UserEarnedPoints::class, \App\Achievements\AwardAchievements::class);
+
 
 
 Route::get('/', function () {

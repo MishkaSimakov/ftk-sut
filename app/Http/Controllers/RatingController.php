@@ -46,7 +46,7 @@ class RatingController extends Controller
         $rating->date = new Carbon($request->date);
 
         if (Rating::whereDate('date', $rating->date)->exists()) {
-            return redirect()->back()->with('date', 'СЂРµР№С‚РёРЅРі СЃ С‚Р°РєРѕР№ РґР°С‚РѕР№ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!');
+            return redirect()->back()->with('date', 'Рейтинг с такой датой уже существует.');
         }
 
         $rating->save();

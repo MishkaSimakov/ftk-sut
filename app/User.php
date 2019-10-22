@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
+/**
+ * @property-read \Illuminate\Support\Collection|\App\Point[] $points
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -36,7 +36,7 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(function (User $user) {
-            $user->register_code = rand(10000, 99999);
+            $user->register_code = $user->register_code ?: rand(10000, 99999);
         });
     }
 
