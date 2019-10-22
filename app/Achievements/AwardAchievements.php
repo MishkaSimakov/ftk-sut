@@ -24,6 +24,8 @@ class AwardAchievements
      */
     public function handle(UserEarnedPoints $event)
     {
+        //TODO: make different achievement types for different tasks
+
         $event->point->user->achievements()->sync(
             app('achievements')->filter->qualifier($event->point)->map->modelKey()
         );
