@@ -17,6 +17,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'msimakov661@gmail.com',
         ]);
 
+        $admin = factory(User::class)->create([
+            'is_admin' => true,
+            'email' => 'admin@site.com',
+        ]);
+
         $this->call(CategorySeeder::class);
     }
 }
