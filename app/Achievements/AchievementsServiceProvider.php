@@ -44,13 +44,11 @@ class AchievementsServiceProvider extends ServiceProvider
             $array = [];
 
             foreach ($this->achievements as $key => $achievementCategory) {
-                $achievements = [];
-
-                foreach ($achievementCategory as $achievement) {
-                    array_push($achievements, new $achievement);
-                }
-
-                $array = Arr::add($array, $key, $achievements);
+                $array = Arr::add($array, $key,
+                    collect($achievementCategory)->map(function ($achievement) {
+                        return new $achievement;
+                    })
+                );
             }
 
             return $array;

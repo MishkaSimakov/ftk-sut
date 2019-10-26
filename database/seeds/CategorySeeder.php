@@ -13,38 +13,20 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        foreach ($this->categories() as $category) {
-            factory(Category::class)->create($category);
+        foreach ($this->categories() as $category => $slug) {
+            factory(Category::class)->create(['title' => $category, 'name' => $slug]);
         }
     }
 
     protected function categories(): array
     {
         return [
-            [
-                'name' => 'lessons', //TODO: переделать в code|slug  eloquent-sluggable | Str::slug  при сохранении модели
-                'title' => 'Посещение занятий'
-            ],
-            [
-                'name' => 'games',
-                'title' => 'Игры в клубе'
-            ],
-            [
-                'name' => 'travels',
-                'title' => 'Походы и экскурсии'
-            ],
-            [
-                'name' => 'press',
-                'title' => 'Газета и группа ВКонтанкте'
-            ],
-            [
-                'name' => 'local_competitions',
-                'title' => 'Городские соревнования'
-            ],
-            [
-                'name' => 'global_competitions',
-                'title' => 'Всероссийские, международные соревнования',
-            ],
+            'Посещение занятий' => 'lessons',
+            'Игры в клубе' => 'games',
+            'Походы и экскурсии' => 'travels',
+            'Газета и группа ВКонтанкте' => 'press',
+            'Городские соревнования' => 'local_competitions',
+            'Всероссийские, международные соревнования' => 'global_competitions',
         ];
     }
 }
