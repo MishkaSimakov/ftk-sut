@@ -2,11 +2,14 @@
 
 namespace Tests\Feature\Rating;
 
+use App\Category;
 use App\Point;
 use App\Rating;
 use App\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Stevebauman\Translation\Facades\Translation;
 use Tests\TestCase;
 
 class RatingStoreTest extends TestCase
@@ -92,8 +95,6 @@ class RatingStoreTest extends TestCase
         $student = $this->expectedStudent();
 
         $this->assertCount(1, $achievements = $student->achievements);
-
-        dd($achievements->first());
     }
 
     protected function expectedStudent()
