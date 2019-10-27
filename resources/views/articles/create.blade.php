@@ -1,7 +1,7 @@
 @extends('partials.footer')
 
 @include('partials.header')
-  
+
   <h1 class="text-center m-2">Создать статью</h1>
 
   <div class="container">
@@ -11,7 +11,7 @@
           <div class="card-header">Создание статьи</div>
 
           <div class="card-body">
-            <form method="POST" action="{{ route('article.store') }}">
+            <form id="form" method="POST" action="{{ route('article.store') }}">
               @csrf
 
               <div class="form-group row">
@@ -22,16 +22,14 @@
                 </div>
               </div>
 
-          
+
 
               <div class="form-group row">
-                <label for="body" class="col-md-4 col-form-label text-md-right">Статья</label>
+                <label for="editor" class="col-md-4 col-form-label text-md-right">Статья</label>
 
                 <div class="col-md-7">
-                  <textarea name="body" id="body" class="form-control" required>
-                    <p>Напишите здесь что-нибудь интересное. Но знайте:</p>
-                    <h4>Все статьи сначала проверяются администрацией и только потом выкладываются в общий доступ</h4>
-                  </textarea>
+                    <textarea class="form-control" id="editor" name="body">
+                    </textarea>
                 </div>
               </div>
 
@@ -53,13 +51,19 @@
 @include('partials.footer')
 
 @section('script')
-  <script>
-      ClassicEditor
-          .create(document.querySelector('#body'), {
-              language: 'ru'
-          })
-          .catch( error => {
-          console.error( error );
-      });
-  </script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#editor').summernote({
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['picture', 'link']]
+                ],
+            });
+        });
+    </script>
 @endsection

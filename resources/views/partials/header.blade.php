@@ -13,9 +13,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-  <script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
-  <script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/translations/ru.js"></script>
-
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
   <script src="{{ asset('js/app.js') }}"></script>
@@ -25,6 +22,7 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
   {{-- Icons --}}
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- Styles -->

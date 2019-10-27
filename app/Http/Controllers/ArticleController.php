@@ -6,6 +6,8 @@ use App\Achievements\Events\UserWriteArticle;
 use Illuminate\Http\Request;
 use App\Article;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class ArticleController extends Controller
 {
@@ -31,6 +33,34 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
+        $dom = new \DOMDocument();
+        $dom->loadHtml($request->body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $image) {
+            $src = $image->getAttribute('src');
+
+            if(preg_match('/data:image/', $src)){
+
+                // get the mimetype
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                $mimetype = $groups['mime'];
+
+                // Generating a random filename
+                $filename = uniqid();
+                $filepath = storage_path('images') . $filename . "." . $mimetype;
+
+                Image::make($src)
+                    ->resize(100, 100)
+                    ->encode($mimetype, 50)
+                    ->save($filepath);
+
+                $new_src = asset($filepath);
+                $image->setAttribute('src', $new_src);
+            }
+        }
+
         $article = Article::make();
 
         $article->title = $request->title;
