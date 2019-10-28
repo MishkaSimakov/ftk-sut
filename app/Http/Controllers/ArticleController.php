@@ -33,6 +33,7 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $dom = new \DOMDocument();
         $dom->loadHtml($request->body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
@@ -49,7 +50,7 @@ class ArticleController extends Controller
 
                 // Generating a random filename
                 $filename = uniqid();
-                $filepath = storage_path('images') . $filename . "." . $mimetype;
+                $filepath = storage_path('images') . "/" . $filename . "." . $mimetype;
 
                 Image::make($src)
                     ->resize(100, 100)
