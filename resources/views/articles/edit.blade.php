@@ -11,7 +11,7 @@
                 <div class="card-header">Редактирование статьи</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('article.update', compact('article')) }}">
+                    <form id="form" enctype="multipart/form-data" method="POST" action="{{ route('article.update', compact('article')) }}">
                         @csrf
                         @method("PUT")
 
@@ -26,12 +26,21 @@
 
 
                         <div class="form-group row">
-                            <label for="body" class="col-md-4 col-form-label text-md-right">Статья</label>
+                            <label for="editor" class="col-md-4 col-form-label text-md-right">Статья</label>
+
+                            <div class="col-md-7 mb-5">
+                                <input type="hidden" name="body" id="body">
+                              <div id="editor" class="form-control">
+                                  {{ $article->body }}
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="photos" class="col-md-4 col-form-label text-md-right">Фотографии</label>
 
                             <div class="col-md-7">
-                              <textarea name="body" id="body" class="form-control" required>
-                                  {{ $article->body }}
-                              </textarea>
+                                <div class="dropzone" id="dropzone">
                             </div>
                         </div>
 
@@ -53,13 +62,23 @@
 @include('partials.footer')
 
 @section('script')
+    {{--  text editor  --}}
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+
     <script>
-        ClassicEditor
-            .create(document.querySelector('#body'), {
-                language: 'ru'
-            })
-            .catch( error => {
-                console.error( error );
-            });
+        var quill = new Quill('#editor', {
+            theme: 'snow',
+        });
+
+        $('#form').submit(function() { // onsubmit do this first
+            $('#body').val($('.ql-editor').html())
+        });
+
+        $("#dropzone").dropzone({ url: "{{ route('api.image.upload', compact('article')) }}" });
+
+        $('#form').submit(function () {
+            $('#body').val($('.ql-editor').html())
+        })
     </script>
 @endsection

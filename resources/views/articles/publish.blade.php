@@ -1,55 +1,32 @@
 @include('partials.header')
 
-<div class="nav-scroller bg-white shadow-sm">
-  <nav class="nav nav-underline">
-    <a class="nav-link" href="{{ route('article.index') }}?filter=best">Лучшее</a>
-    <a class="nav-link" href="{{ route('article.index') }}?filter=newest">Новейшее</a>
-
-      @admin
-        <a class="nav-link" href="{{ route('article.notPublished') }}">
-          Требуют проверки
-          <span class="badge badge-pill bg-light align-text-bottom">{{ $notPublishedCount }}</span>
-        </a>
-      @endadmin
-  </nav>
-</div>
+@include('partials.articles.header')
 
 <h1 class="text-center m-2">Требуют проверки</h1>
-
-<style>
-  td {
-    border: 2px solid lightgrey !important;
-    border-collapse: collapse;
-  }
-
-  blockquote {
-    border-left: 5px solid rgb(204, 204, 204);
-    box-sizing: border-box;
-    color: rgb(33, 37, 41);
-    font-style: italic;
-    margin-top: 12.96px;
-    overflow-wrap: break-word;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    padding-left: 21.6px;
-    text-align: left;
-  }
-</style>
 
 @foreach($articles as $article)
 	<div class="card m-2">
 		<div class="card-header">
 			<h1>{{ $article->title }}</h1>
 		</div>
+
 		<div class="card-body">
 	    	<p>{!! $article->body !!}</p>
+
+            @foreach($article->getMedia() as $photo)
+                <div class="col-md-1 m-2 p-0 d-inline-block">
+                    <img class="mw-100 mh-100 rounded" src="{{ $photo->path }}" style="cursor: pointer" data-lity data-lity-target="{{ $photo->path }}">
+                </div>
+            @endforeach
 		</div>
 
-    <div class="card-footer">
-      <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form').submit();" class="btn btn-primary">Опубликовать</a>
-      <a href="{{ $article->delete }}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();" class="btn btn-danger">Удалить</a>
-    </div>
+        <div class="card-footer">
+          <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form').submit();" class="btn btn-primary">Опубликовать</a>
+          <a href="{{ $article->delete }}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();" class="btn btn-danger">Удалить</a>
+        </div>
 	</div>
+
+
 
   <form id="publish-form" action="{{ $article->publish }}" method="POST" class="d-none">
     @method('PUT')

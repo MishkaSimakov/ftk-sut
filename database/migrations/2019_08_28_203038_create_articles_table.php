@@ -15,11 +15,12 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->text('body');
+            $table->string('title')->nullable();
+            $table->text('body')->nullable();
             $table->integer('user_id');
-            $table->integer('points');
-            $table->boolean('isPublished')->nullable();
+            $table->integer('points')->nullable();
+            $table->boolean('is_published')->nullable();
+            $table->boolean('is_blank')->nullable();
             $table->timestamps();
         });
     }

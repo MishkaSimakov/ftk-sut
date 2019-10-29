@@ -14,53 +14,47 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         if ($request->filter == 'newest') {
-            $articles = Article::where('isPublished', true)->latest();
+            $articles = Article::where('is_published', true)->latest();
         } else {
-            $articles = Article::where('isPublished', true)->orderBy('points', 'desc');
+            $articles = Article::where('is_published', true)->orderBy('points', 'desc');
         }
 
         $articles = $articles->paginate(10);
 
-        $notPublishedCount = Article::where('isPublished', false)->orWhere('isPublished', null)->get()->count();
+        $notPublishedCount = Article::notPublished()->count();
 
         return view('articles.index', compact('articles', 'notPublishedCount'));
     }
 
+    public function show(Article $article)
+    {
+        $notPublishedCount = Article::notPublished()->count();
+
+        return view('articles.show', compact('article', 'notPublishedCount'));
+    }
+
     public function create()
     {
-        return view('articles.create');
+        Article::where('is_blank', true)->delete();
+
+        $article = Article::make();
+
+        $article->is_blank = true;
+        $article->user_id = Auth::user()->id;
+        $article->points = 0;
+
+        $article->save();
+
+        return redirect(route('article.edit', compact('article')));
     }
 
     public function store(Request $request)
     {
-        dd($request->all());
-        $dom = new \DOMDocument();
-        $dom->loadHtml($request->body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-        $images = $dom->getElementsByTagName('img');
-
-        foreach ($images as $image) {
-            $src = $image->getAttribute('src');
-
-            if(preg_match('/data:image/', $src)){
-
-                // get the mimetype
-                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
-                $mimetype = $groups['mime'];
-
-                // Generating a random filename
-                $filename = uniqid();
-                $filepath = storage_path('images') . "/" . $filename . "." . $mimetype;
-
-                Image::make($src)
-                    ->resize(100, 100)
-                    ->encode($mimetype, 50)
-                    ->save($filepath);
-
-                $new_src = asset($filepath);
-                $image->setAttribute('src', $new_src);
-            }
-        }
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'photos' => 'mimes:jpeg,bmp,png'
+        ]);
 
         $article = Article::make();
 
@@ -76,7 +70,8 @@ class ArticleController extends Controller
 
     public function notPublished()
     {
-        $articles = Article::where('isPublished', false)->orWhere('isPublished', null)->get();
+        $articles = Article::notPublished();
+
         $notPublishedCount = $articles->count();
 
         return view('articles.publish', compact('articles', 'notPublishedCount'));
@@ -84,7 +79,7 @@ class ArticleController extends Controller
 
     public function publish(Article $article)
     {
-        $article->update(['isPublished' => true]);
+        $article->update(['is_published' => true]);
 
         UserWriteArticle::dispatch($article);
 
@@ -113,6 +108,7 @@ class ArticleController extends Controller
         ]);
 
         $article->update($validatedData);
+        $article->update(['is_blank' => false]);
 
         return redirect(route('article.index'));
     }

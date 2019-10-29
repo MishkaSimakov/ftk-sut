@@ -2,13 +2,26 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 
 class ImageController extends Controller
 {
-    public function upload(Request $request)
+    public function upload(Article $article, Request $request)
     {
-        dd($request->all());
+        foreach ($request->allFiles() as $photo) {
+            /** @var UploadedFile $photo */
+
+            $filename = $photo->getClientOriginalName();
+            $name = str_replace("." . $photo->getClientOriginalExtension(), "", $filename);
+
+            $article->addMedia($photo->path())
+                ->usingFileName($filename)
+                ->usingName($name)
+                ->toMediaCollection();
+        }
     }
 }

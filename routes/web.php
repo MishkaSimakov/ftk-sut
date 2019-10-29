@@ -21,14 +21,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/article', 'ArticleController@index')->name('article.index');
-
 Route::get('/article/publish', 'ArticleController@notPublished')->name('article.notPublished')->middleware(['auth', 'admin']);
 Route::put('/article/{article}/publish', 'ArticleController@publish')->name('article.publish')->middleware(['auth', 'admin']);
 Route::delete('/article/{article}', 'ArticleController@destroy')->name('article.destroy')->middleware(['auth', 'admin']);
 
 Route::resource('article', 'ArticleController')->middleware('auth')->only([
     'create', 'store', 'edit', 'update', 'destroy'
+]);
+
+Route::resource('article', 'ArticleController')->only([
+    'index', 'show'
 ]);
 
 

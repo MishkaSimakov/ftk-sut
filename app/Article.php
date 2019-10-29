@@ -4,9 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Article extends Model
+class Article extends Model implements HasMedia
 {
+    use HasMediaTrait;
+
     //
 
     protected $guarded = [];
@@ -30,5 +34,9 @@ class Article extends Model
 
     public function getIsLikedAttribute() {
         return UserLike::where([['article_id', $this->id], ['user_id', Auth::user()->id]])->exists();
+    }
+
+    static function notPublished() {
+        return Article::where('is_blank', false)->where('is_published', false)->orWhere('is_published', null)->get();
     }
 }
