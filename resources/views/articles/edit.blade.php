@@ -40,7 +40,7 @@
                             <label for="photos" class="col-md-4 col-form-label text-md-right">Фотографии</label>
 
                             <div class="col-md-7">
-                                <div class="dropzone" id="dropzone">
+                                <div class="dropzone" id="dropzone"></div>
                             </div>
                         </div>
 
@@ -71,14 +71,19 @@
             theme: 'snow',
         });
 
-        $('#form').submit(function() { // onsubmit do this first
-            $('#body').val($('.ql-editor').html())
-        });
-
-        $("#dropzone").dropzone({ url: "{{ route('api.image.upload', compact('article')) }}" });
-
         $('#form').submit(function () {
             $('#body').val($('.ql-editor').html())
         })
+
+        $('#dropzone').dropzone({
+            url: "{{ route('api.image.upload', compact('article')) }}",
+            maxFiles: 15,
+            acceptedFiles: 'image/*',
+
+            //translations
+            dictFileTooBig: "Файл слишком большой!",
+            dictInvalidFileType: "Данный тип файла не поддерживается!",
+            dictDefaultMessage: "<p>Перенесите фалйы сюда или нажмите, чтобы выбрать из папки</p>"
+        });
     </script>
 @endsection

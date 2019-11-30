@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Console\Commands\Reset;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
