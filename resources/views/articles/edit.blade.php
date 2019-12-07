@@ -30,9 +30,10 @@
 
                             <div class="col-md-7 mb-5">
                                 <input type="hidden" name="body" id="body">
-                              <div id="editor" class="form-control">
-                                  {{ $article->body }}
-                              </div>
+
+                                <div id="editor" class="form-control">
+                                    {{ $article->body }}
+                                </div>
                             </div>
                         </div>
 
@@ -61,7 +62,7 @@
 
 @endsection
 
-@section('script')
+@push('script')
     {{--  text editor  --}}
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
@@ -86,4 +87,4 @@
             dictDefaultMessage: "<p>Перенесите фалйы сюда или нажмите, чтобы выбрать из папки</p>"
         });
     </script>
-@endsection
+@endpush

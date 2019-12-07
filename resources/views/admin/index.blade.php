@@ -67,36 +67,37 @@
         </div>
     </div>
 @endif
+@endsection
 
-<script>
-	$(document).ready(function () {
-        $('.spoiler_link').each(function () {
-            $(this).click(function () {
-                if ($('.spoiler_body_' + $(this).attr('data-schedule')).css('display') == 'none') {
-                    $('.spoiler_body_' + $(this).attr('data-schedule')).show('normal');
-                } else {
-                    $('.spoiler_body_' + $(this).attr('data-schedule')).hide('normal');
-                }
+@push('script')
+    <script>
+        $(document).ready(function () {
+            $('.spoiler_link').each(function () {
+                $(this).click(function () {
+                    if ($('.spoiler_body_' + $(this).attr('data-schedule')).css('display') == 'none') {
+                        $('.spoiler_body_' + $(this).attr('data-schedule')).show('normal');
+                    } else {
+                        $('.spoiler_body_' + $(this).attr('data-schedule')).hide('normal');
+                    }
+                });
+            });
+
+            $("#load_button").click(function() {
+                $.ajax({
+                    url: "{{ route('api.admin.register_link') }}",
+                    method: "POST",
+                    dataType: 'json',
+                    data: {
+                        name: $('#name').val(),
+                    },
+                    success: function (data) {
+                        console.log(data);
+
+                        $('#register_link').html('<a href="' + data + '">ссылка</a> скопирована!');
+                        navigator.clipboard.writeText(data);
+                    }
+                });
             });
         });
-
-		$("#load_button").click(function() {
-			$.ajax({
-				url: "{{ route('api.admin.register_link') }}",
-				method: "POST",
-				dataType: 'json',
-				data: {
-					name: $('#name').val(),
-				},
-				success: function (data) {
-					console.log(data);
-
-					$('#register_link').html('<a href="' + data + '">ссылка</a> скопирована!');
-					navigator.clipboard.writeText(data);
-				}
-			});
-		});
-	});
-</script>
-
-@endsection
+    </script>
+@endpush

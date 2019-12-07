@@ -2,8 +2,6 @@
 
 @section('content')
 
-@include('partials.articles.header')
-
 <h1 class="text-center m-2">Требуют проверки</h1>
 
 @foreach($articles as $article)

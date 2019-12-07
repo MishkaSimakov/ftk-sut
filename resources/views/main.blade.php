@@ -1,37 +1,6 @@
 @extends('layouts.page')
 
 @section('content')
-{{--    <div id="myCarousel" class="carousel slide" data-ride="carousel">--}}
-{{--        <ol class="carousel-indicators">--}}
-{{--            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>--}}
-{{--            <li data-target="#myCarousel" data-slide-to="1" class=""></li>--}}
-{{--            <li data-target="#myCarousel" data-slide-to="2" class=""></li>--}}
-{{--        </ol>--}}
-
-{{--        <div class="carousel-inner">--}}
-{{--            --}}{{--            @foreach($advertisements as $advertisement)--}}
-{{--            --}}{{--                <div class="col-lg-4">--}}
-{{--            --}}{{--                    @component('components.cards.advertisement', compact('advertisement'))@endcomponent--}}
-{{--            --}}{{--                </div>--}}
-{{--            --}}{{--            @endforeach--}}
-{{--        </div>--}}
-
-{{--        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">--}}
-{{--            <span class="carousel-control-prev-icon" aria-hidden="true"></span>--}}
-{{--            <span class="sr-only">Назад</span>--}}
-{{--        </a>--}}
-{{--        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">--}}
-{{--            <span class="carousel-control-next-icon" aria-hidden="true"></span>--}}
-{{--            <span class="sr-only">Вперёд</span>--}}
-{{--        </a>--}}
-{{--    </div>--}}
-
-
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-
-
     @component('components.sections.section', ['header' => 'Наши преподаватели'])
         @component('components.card-lists.teachers', ['teachers' => $teachers])@endcomponent
     @endcomponent

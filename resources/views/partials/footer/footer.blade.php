@@ -1,4 +1,3 @@
-<!-- FOOTER -->
 <footer class="footer">
     <nav class="footer__wrapper">
         <div class="footer__contacts contacts">
