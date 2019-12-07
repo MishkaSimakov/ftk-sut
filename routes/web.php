@@ -44,6 +44,7 @@ Route::resource('rating', 'RatingController')->only([
 
 
 Route::get('/user/{user}', 'UserController@show')->name('user.show');
+Route::get('/teacher/{teacher}', 'TeacherController@show')->name('teacher.show');
 
 Route::resource('achievements', 'AchievementController')->only([
    'index'

@@ -14,4 +14,9 @@ class Teacher extends Model
             $this->middle_name,
         ]);
     }
+
+    public function getUrlAttribute()
+    {
+        return route('teacher.show', compact('this'));
+    }
 }
