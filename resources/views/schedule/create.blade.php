@@ -1,4 +1,6 @@
-@include('partials.header')
+@extends('layouts.page')
+
+@section('content')
 
 <h1 class="text-center m-2">Создать событие</h1>
 
@@ -50,4 +52,4 @@
     </div>
 </div>
 
-@include('partials.footer')
+@endsection

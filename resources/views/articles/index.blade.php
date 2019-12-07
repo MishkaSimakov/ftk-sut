@@ -1,4 +1,6 @@
-@include('partials.header')
+@extends('layouts.page')
+
+@section('content')
 
 @include('partials.articles.header')
 
@@ -105,4 +107,4 @@
   </script>
 @endauth
 
-@include('partials.footer')
+@endsection

@@ -40,7 +40,7 @@ class AchievementsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('achievements', function() {
+        $this->app->singleton('achievements', function() { //TODO: this is not working
             $array = [];
 
             foreach ($this->achievements as $key => $achievementCategory) {

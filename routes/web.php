@@ -17,7 +17,7 @@ use \Illuminate\Support\Facades\Event;
 
 
 
-Route::get('/', 'MainController@index');
+Route::get('/', 'MainController@index')->name('main');
 
 Route::get('/article/publish', 'ArticleController@notPublished')->name('article.notPublished')->middleware(['auth', 'admin']);
 Route::put('/article/{article}/publish', 'ArticleController@publish')->name('article.publish')->middleware(['auth', 'admin']);

@@ -1,4 +1,6 @@
-@include('partials.header')
+@extends('layouts.page')
+
+@section('content')
 
 @include('partials.articles.header')
 
@@ -90,4 +92,4 @@
     @endsection
 @endauth
 
-@include('partials.footer')
+@endsection

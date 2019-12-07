@@ -1,0 +1,115 @@
+.logo {
+    font-size: 20px;
+    text-transform: uppercase;
+    transition: color .4s;
+    color: #fff;
+    &:hover, &:focus {
+        color: #00bfff !important;
+    }
+    &:active {
+        color: #1e90ff !important;
+    }
+}
+
+.site-navigation__toggler {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    border: 0 !important;
+    transition: color .4s;
+    cursor: pointer;
+    &__button {
+        position: relative;
+        width: 35px !important;
+        height: 3px !important;
+        background-color: #fff;
+        border-radius: 3px;
+        transition: .4s;
+        &::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            display: block;
+            width: 35px;
+            height: 3px;
+            background-color: #fff;
+            border-radius: 3px;
+            transition: .4s;
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            display: block;
+            width: 35px;
+            height: 3px;
+            background-color: #fff;
+            border-radius: 3px;
+            transition: .4s;
+        }
+        &:focus {
+            background-color: #00bfff;
+            &::before, &::after {
+                background-color: #00bfff;
+            }
+        }
+    }
+    &:hover {
+        .site-navigation__toggler__button {
+            background-color: #00bfff;
+            &::before, &::after {
+                background-color: #00bfff;
+            }
+        }
+    }
+    &--close {
+        .site-navigation__toggler__button {
+            background: none;
+            transition: .4s;
+            &:focus {
+                &::before, &::after {
+                    background-color: #ff0000;
+                }
+            }
+        }
+
+        .site-navigation__toggler__button::before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        .site-navigation__toggler__button::after {
+            bottom: 0;
+            transform: rotate(-45deg);
+        }
+        &:hover {
+            .site-navigation__toggler__button {
+                background: none;
+                &::before, &::after {
+                    background-color: #ff0000;
+                }
+            }
+        }
+    }
+}
+
+.page-navigation__link {
+    transition: color .4s;
+    &:hover, &:focus {
+        color: rgba(0, 191, 255, .75) !important;
+    }
+    &:active {
+        color: rgba(30, 144, 255, 0.75) !important;
+    }
+}
+
+.user-navigation__link {
+    transition: color .4s;
+    &:hover, &:focus {
+        color: rgba(0, 191, 255, .75) !important;
+    }
+    &:active {
+        color: rgba(30, 144, 255, 0.75) !important;
+    }
+}

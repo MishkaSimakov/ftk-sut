@@ -1,4 +1,6 @@
-@include('partials.header')
+@extends('layouts.page')
+
+@section('content')
 
 <h1 class="text-center m-2">Панель администратора</h1>
 
@@ -97,4 +99,4 @@
 	});
 </script>
 
-@include('partials.footer')
+@endsection

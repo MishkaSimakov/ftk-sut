@@ -1,29 +1,30 @@
 @extends('layouts.page')
+
 @section('content')
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-            <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-        </ol>
+{{--    <div id="myCarousel" class="carousel slide" data-ride="carousel">--}}
+{{--        <ol class="carousel-indicators">--}}
+{{--            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>--}}
+{{--            <li data-target="#myCarousel" data-slide-to="1" class=""></li>--}}
+{{--            <li data-target="#myCarousel" data-slide-to="2" class=""></li>--}}
+{{--        </ol>--}}
 
-        <div class="carousel-inner">
-            {{--            @foreach($advertisements as $advertisement)--}}
-            {{--                <div class="col-lg-4">--}}
-            {{--                    @component('components.cards.advertisement', compact('advertisement'))@endcomponent--}}
-            {{--                </div>--}}
-            {{--            @endforeach--}}
-        </div>
+{{--        <div class="carousel-inner">--}}
+{{--            --}}{{--            @foreach($advertisements as $advertisement)--}}
+{{--            --}}{{--                <div class="col-lg-4">--}}
+{{--            --}}{{--                    @component('components.cards.advertisement', compact('advertisement'))@endcomponent--}}
+{{--            --}}{{--                </div>--}}
+{{--            --}}{{--            @endforeach--}}
+{{--        </div>--}}
 
-        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Назад</span>
-        </a>
-        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Вперёд</span>
-        </a>
-    </div>
+{{--        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">--}}
+{{--            <span class="carousel-control-prev-icon" aria-hidden="true"></span>--}}
+{{--            <span class="sr-only">Назад</span>--}}
+{{--        </a>--}}
+{{--        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">--}}
+{{--            <span class="carousel-control-next-icon" aria-hidden="true"></span>--}}
+{{--            <span class="sr-only">Вперёд</span>--}}
+{{--        </a>--}}
+{{--    </div>--}}
 
 
     <!-- Marketing messaging and featurettes
@@ -95,19 +96,9 @@
             </ul>
         </div>
     </section>
-
-    <section class="contacts">
-        <div class="container">
-            <h2>Как же нас найти?</h2>
-            <p><i class="fas fa-envelope mr-2"></i>msimakov661@gmail.com</p>
-            <p><i class="fab fa-vk mr-2"></i><a href="https://vk.com/ftksut">https://vk.com/ftksut</a></p>
-            <p><i class="fas fa-phone mr-2"></i>+7(989) 709-14-84</p>
-            <p><i class="fas fa-map-marker-alt mr-2"></i>пр. Курчатова, 47</p>
-        </div>
-    </section>
 @endsection
 
-@push('scripts')
+@push('script')
     <script type="text/javascript">
         $('.slide-image').each(function () {
             $(this).height($(window).height() - $('.header-nav').height());

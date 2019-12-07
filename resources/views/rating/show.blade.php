@@ -1,101 +1,103 @@
-@include('partials.header')
+@extends('layouts.page')
 
-<h1 class="text-center m-2">{{ $rating->name }}</h1>
+@section('content')
+    <h1 class="text-center m-2">{{ $rating->name }}</h1>
 
-<div id="rating_chart" style="max-width: 97%"></div>
+    <div id="rating_chart" style="max-width: 97%"></div>
+@endsection
 
-<script>
-    google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(loadChart);
+@push('script')
+    <script>
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(loadChart);
 
-    function loadChart() {
-        $.ajax({
-            url: "{{ route('api.rating.chart') }}",
-            method: "GET",
-            dataType: 'json',
-            data: {
-                date: '{{ $rating->date->format('Y-m-d') }}',
-            },
-            success: function (data) {
-                drawChart(data)
-            }
-        })
-    }
-
-
-    function drawChart(data) {
-        var chartData = new google.visualization.DataTable();
-
-        chartData.addColumn('string', 'Имя');
-
-        @foreach ($categories as $category)
-            chartData.addColumn('number', '{{ $category->title }}');
-            chartData.addColumn({'type': 'string', 'role': 'style'}, '');
-        @endforeach
-
-        chartData.addColumn({'type': 'number', 'role': 'annotation'}, '');
-
-        chartData.addRows(data);
-
-        //chart options
-        let options = {
-            fontSize: 19,
-            vAxis: {
-                title: '',
-                direction: -1,
-            },
-            tooltip: {
-                trigger: 'none',
-            },
-            height: data.length * 25,
-            bars: 'horizontal',
-            bar: {
-                groupWidth: '60%'
-            },
-            isStacked: true,
-            colors: ['#9999ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
-            hAxis: {
-                gridlines: {
-                    color: 'transparent'
+        function loadChart() {
+            $.ajax({
+                url: "{{ route('api.rating.chart') }}",
+                method: "GET",
+                dataType: 'json',
+                data: {
+                    date: '{{ $rating->date->format('Y-m-d') }}',
                 },
-            },
-            backgroundColor: 'transparent',
-            annotations: {
-                alwaysOutside: true,
-
-                textStyle: {
-                    fontSize: 15,
-                    bold: true,
-                    fontName: 'Nunito, sans-serif',
-                    color: '#212529'
-                },
-            }
-        };
-
-        if ($(window).width() < 1000) {
-            options.chartArea = {left: 300, bottom: 25, top: 0, width:"100%"};
-        } else {
-            options.chartArea = {left: 300, bottom: 25, top: 0, width: "50%"};
-            options.legend = {
-                maxLines: 2,
-                position: 'right',
-                alignment: 'start'
-            };
+                success: function (data) {
+                    drawChart(data)
+                }
+            })
         }
 
-        let chart = new google.visualization.BarChart(document.getElementById('rating_chart'));
 
-        chart.draw(chartData, options);
+        function drawChart(data) {
+            var chartData = new google.visualization.DataTable();
 
-        $(document).ready(function () {
-            $('text:contains("us|")').each(function() {
-                var user_id = $(this).html().split('|')[1];
-                var username = $(this).html().split('|')[2];
+            chartData.addColumn('string', 'Имя');
 
-                $(this).html('<a style="color: #3490dc !important;" href="{{ Request::root() }}/user/' + user_id + '">' + username + '</a>');
+            @foreach ($categories as $category)
+            chartData.addColumn('number', '{{ $category->title }}');
+            chartData.addColumn({'type': 'string', 'role': 'style'}, '');
+            @endforeach
+
+            chartData.addColumn({'type': 'number', 'role': 'annotation'}, '');
+
+            chartData.addRows(data);
+
+            //chart options
+            let options = {
+                fontSize: 19,
+                vAxis: {
+                    title: '',
+                    direction: -1,
+                },
+                tooltip: {
+                    trigger: 'none',
+                },
+                height: data.length * 25,
+                bars: 'horizontal',
+                bar: {
+                    groupWidth: '60%'
+                },
+                isStacked: true,
+                colors: ['#9999ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
+                hAxis: {
+                    gridlines: {
+                        color: 'transparent'
+                    },
+                },
+                backgroundColor: 'transparent',
+                annotations: {
+                    alwaysOutside: true,
+
+                    textStyle: {
+                        fontSize: 15,
+                        bold: true,
+                        fontName: 'Nunito, sans-serif',
+                        color: '#212529'
+                    },
+                }
+            };
+
+            if ($(window).width() < 1000) {
+                options.chartArea = {left: 300, bottom: 25, top: 0, width:"100%"};
+            } else {
+                options.chartArea = {left: 300, bottom: 25, top: 0, width: "50%"};
+                options.legend = {
+                    maxLines: 2,
+                    position: 'right',
+                    alignment: 'start'
+                };
+            }
+
+            let chart = new google.visualization.BarChart(document.getElementById('rating_chart'));
+
+            chart.draw(chartData, options);
+
+            $(document).ready(function () {
+                $('text:contains("us|")').each(function() {
+                    var user_id = $(this).html().split('|')[1];
+                    var username = $(this).html().split('|')[2];
+
+                    $(this).html('<a style="color: #3490dc !important;" href="{{ Request::root() }}/user/' + user_id + '">' + username + '</a>');
+                });
             });
-        });
-    }
-</script>
-
-@include('partials.footer')
+        }
+    </script>
+@endpush

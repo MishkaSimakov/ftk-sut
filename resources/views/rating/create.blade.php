@@ -1,4 +1,6 @@
-@include('partials.header')
+@extends('layouts.page')
+
+@section('content')
 
 <h1 class="text-center m-2">Загрузить рейтинг</h1>
 
@@ -60,18 +62,22 @@
     </div>
 </div>
 
-<script>
-    $(document).on('input', '#type', function () {
-        var val = $(this).val();
 
-        if (val == 1) {
-            $('#date').attr('type', 'month');
-            $('#date').val("{{ Carbon\Carbon::now()->format('Y-m') }}");
-        } else {
-            $('#date').attr('type', 'number');
-            $('#date').val("{{ Carbon\Carbon::now()->format('Y') }}");
-        }
-    });
-</script>
 
-@include('partials.footer')
+@endsection
+
+@push('script')
+    <script>
+        $(document).on('input', '#type', function () {
+            var val = $(this).val();
+
+            if (val == 1) {
+                $('#date').attr('type', 'month');
+                $('#date').val("{{ Carbon\Carbon::now()->format('Y-m') }}");
+            } else {
+                $('#date').attr('type', 'number');
+                $('#date').val("{{ Carbon\Carbon::now()->format('Y') }}");
+            }
+        });
+    </script>
+@endpush

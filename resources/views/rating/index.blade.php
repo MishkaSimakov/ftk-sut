@@ -1,13 +1,15 @@
-@include('partials.header')
+@extends('layouts.page')
 
-<h1 class="text-center m-2">Рейтинг</h1>
+@section('content')
 
-@admin
-    <h2 class="ml-2"><a href="{{ route('rating.create') }}"><i class="fas fa-plus mr-1"></i>Добавить рейтинг</a></h2>
-@endadmin
+    <h1 class="text-center m-2">Рейтинг</h1>
 
-@foreach($ratings as $rating)
-    <h2 class="ml-2"><a href="{{ $rating->url }}">{{ $rating->name }}</a></h2>
-@endforeach
+    @admin
+        <h2 class="ml-2"><a href="{{ route('rating.create') }}"><i class="fas fa-plus mr-1"></i>Добавить рейтинг</a></h2>
+    @endadmin
 
-@include('partials.footer')
+    @foreach($ratings as $rating)
+        <h2 class="ml-2"><a href="{{ $rating->url }}">{{ $rating->name }}</a></h2>
+    @endforeach
+
+@endsection

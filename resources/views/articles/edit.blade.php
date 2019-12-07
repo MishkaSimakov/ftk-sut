@@ -1,6 +1,6 @@
-@extends('partials.footer')
+@extends('layouts.page')
 
-@include('partials.header')
+@section('content')
 
 <h1 class="text-center m-2">Редактировать статью</h1>
 
@@ -59,7 +59,7 @@
 </div>
 
 
-@include('partials.footer')
+@endsection
 
 @section('script')
     {{--  text editor  --}}

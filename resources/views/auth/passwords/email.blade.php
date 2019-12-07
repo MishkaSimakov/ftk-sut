@@ -1,4 +1,6 @@
-@include('partials.header')
+@extends('layouts.page')
+
+@section('content')
 
 <div class="container">
     <div class="row justify-content-center">
@@ -44,4 +46,4 @@
     </div>
 </div>
 
-@include('partials.footer')
+@endsection

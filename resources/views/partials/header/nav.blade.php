@@ -1,81 +1,57 @@
-<nav class="header-nav navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            ФТК CЮТ
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="main-navigation navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="logo navbar-brand" href="{{ route('main') }}">ФТК СЮТ </a>
+    <div class="site-navigation__toggler navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Меню">
+        <button class="site-navigation__toggler__button" type="button"></button>
+    </div>
+    <div class="site-navigation collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="page-navigation navbar-nav mr-auto">
+            <li class="page-navigation__item nav-item"><a class="page-navigation__link nav-link" href="{{ route('rating.index') }}">Рейтинг</a></li>
+            <li class="page-navigation__item nav-item"><a class="page-navigation__link nav-link" href="{{ route('achievements.index') }}">Достижения</a></li>
+            <li class="page-navigation__item nav-item"><a class="page-navigation__link nav-link" href="{{ route('article.index') }}">Статьи</a></li>
+            <li class="page-navigation__item nav-item"><a class="page-navigation__link nav-link" href="{{ route('schedule.index') }}">Расписание</a></li>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="{{ route('rating.index') }}" role="button">
-                        Рейтинг
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="{{ route('achievements.index') }}" role="button">
-                        Достижения
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="{{ route('article.index') }}" role="button">
-                        Статьи
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a id="navbar" class="nav-link" href="{{ route('schedule.index') }}" role="button">
-                        Расписание
-                    </a>
-                </li>
+            @admin
+                <li class="page-navigation__item nav-item"><a class="page-navigation__link nav-link" href="{{ route('admin.index') }}">Панель администратора</a></li>
+            @endadmin
+        </ul>
+        <ul class="user-navigation navbar-nav">
+            @guest
+                <li class="user-navigation__item nav-item"><a class="user-navigation__link nav-link" href="{{ route('login') }}">Вход</a></li>
 
-                @admin
-                <li class="nav-item">
-                    <a title="Разделяй и властвуй" id="navbar" class="nav-link" href="{{ route('admin.index') }}" role="button">
-                        Панель администратора
-                    </a>
-                </li>
-                @endadmin
-            </ul>
+                @if (Route::has('register'))
+                    <li class="user-navigation__item nav-item"><a class="user-navigation__link nav-link" href="{{ route('register') }}">Регистрация</a></li>
+                @endif
+            @else
+                {{--                <li class="nav-item dropdown">--}}
+                {{--                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
+                {{--                        {{ Auth::user()->name }} <span class="caret"></span>--}}
+                {{--                    </a>--}}
 
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
-                @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Вход</a>
-                    </li>
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Регистрация</a>
-                        </li>
-                    @endif
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
+                {{--                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
+                {{--                        <a class="dropdown-item" href="{{ route('logout') }}"--}}
+                {{--                           onclick="event.preventDefault();--}}
+                {{--                                                     document.getElementById('logout-form').submit();">--}}
+                {{--                            Выйти--}}
+                {{--                        </a>--}}
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                Выйти
-                            </a>
+                {{--                        <a class="dropdown-item" href="{{ route('home') }}">--}}
+                {{--                            Личный кабинет--}}
+                {{--                        </a>--}}
 
-                            <a class="dropdown-item" href="{{ route('home') }}">
-                                Личный кабинет
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                @endguest
-            </ul>
-        </div>
+                {{--                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                {{--                            @csrf--}}
+                {{--                        </form>--}}
+                {{--                    </div>--}}
+                {{--                </li>--}}
+            @endguest
+        </ul>
     </div>
 </nav>
+
+<script>
+    const menuButton = document.querySelector('.site-navigation__toggler');
+
+    menuButton.addEventListener('click', function () {
+        menuButton.classList.toggle('site-navigation__toggler--close');
+    });
+</script>

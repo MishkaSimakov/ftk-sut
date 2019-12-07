@@ -1,4 +1,6 @@
-@include('partials.header')
+@extends('layouts.page')
+
+@section('content')
 
 @include('partials.articles.header')
 
@@ -39,4 +41,4 @@
   </form>
 @endforeach
 
-@include('partials.footer')
+@endsection

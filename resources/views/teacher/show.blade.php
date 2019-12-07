@@ -1,4 +1,6 @@
-@include('partials.header')
+@extends('layouts.page')
+
+@section('content')
 
 <h1 class="text-center m-2">{{ $user->name }}</h1>
 
@@ -21,4 +23,4 @@
     </div>
 @endif
 
-@include('partials.footer')
+@endsection

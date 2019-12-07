@@ -7,12 +7,15 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
 @import 'basic';
 @import 'blocks/teacher/teacher';
 @import 'blocks/section/section';
 @import 'blocks/footer/footer';
 @import 'blocks/copyright/copyright';
 @import 'blocks/contacts/contacts';
+@import 'blocks/header/header';
 
 //@import "blocks/mainHeader";
 //@import "blocks/main";

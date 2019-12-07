@@ -1,4 +1,6 @@
-@include('partials.header')
+@extends('layouts.page')
+
+@section('content')
 
 <h1 class="text-center m-2">В клубе на этой неделе</h1>
 
@@ -55,4 +57,4 @@
       }
     </script>
   @endauth
-@include('partials.footer')
+@endsection
