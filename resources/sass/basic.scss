@@ -1,0 +1,40 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", "Arial", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #000;
+    background-color: #eee;
+    cursor: default;
+}
+
+a:hover, a:focus, a:active {
+    color: #000;
+    text-decoration: none;
+}
+
+p, h1, h2, h3, h4, h5, h6, span {
+    margin: 0 ;
+    padding: 0;
+}
+
+button {
+    padding: 0 !important;
+    border: 0 !important;
+    cursor: pointer;
+}
+
+:focus {
+    outline: none !important;
+}
+
+.visually-hidden {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}

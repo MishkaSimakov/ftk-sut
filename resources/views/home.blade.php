@@ -1,17 +1,17 @@
-@include('partials.header')
+@extends('layouts.page')
 
-<h1 class="text-center m-2">Домик</h1>
+@section('content')
+    <h1 class="text-center m-2">Домик</h1>
 
-@if ($achievements->count())
-    <div>
-        <div class="text-center">
-            <h2>Достижения</h2>
+    @if ($achievements->count())
+        <div>
+            <div class="text-center">
+                <h2>Достижения</h2>
 
-            @foreach($achievements as $achievement)
-                @component('components.cards.teacher', compact('teacher'))@endcomponent
-            @endforeach
+                @foreach($achievements as $achievement)
+                    @component('components.cards.teacher', compact('teacher'))@endcomponent
+                @endforeach
+            </div>
         </div>
-    </div>
-@endif
-
-@include('partials.footer')
+    @endif
+@endsection

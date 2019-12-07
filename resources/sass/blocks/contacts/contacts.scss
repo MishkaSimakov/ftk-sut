@@ -1,0 +1,90 @@
+.contacts {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    height: auto;
+    margin-bottom: 30px;
+    &__link--main {
+        margin-bottom: 10px;
+        font-size: 36px;
+        text-transform: uppercase;
+        transition: color .4s;
+        color: #fff;
+        &:hover, &:focus {
+            color: #00bfff !important;
+        }
+        &:active {
+            color: #1e90ff !important;
+        }
+    }
+    &__link--vk {
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        &__block {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+            font-size: 30px;
+            color: #fff;
+            background-color: #3b5999;
+            transition: .4s;
+        }
+        &__title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 120px;
+            height: 60px;
+            transition: color .4s;
+        }
+
+        &:hover, &:focus {
+            .contacts__link--vk__block {
+                background: darken(#3b5999, 5%);
+            }
+            .contacts__link--vk__title {
+                color: #00bfff;
+            }
+        }
+        &:active {
+            .contacts__link--vk__block {
+                background: darken(#3b5999, 10%);
+            }
+            .contacts__link--vk__title {
+                color: #1e90ff;
+            }
+        }
+    }
+    &__telephone {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 10px;
+        color: #fff;
+    }
+    &__address {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: column;
+        color: #fff;
+        &--map {
+            color: #00ced1;
+            transition: color .4s;
+            &:hover, &:focus {
+                color: #00bfff !important;
+            }
+            &:active {
+                color: #1e90ff !important;
+            }
+        }
+    }
+}

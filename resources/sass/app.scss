@@ -1,14 +1,19 @@
 
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import 'basic';
+@import 'blocks/teacher/teacher';
+@import 'blocks/section/section';
+@import 'blocks/footer/footer';
+@import 'blocks/copyright/copyright';
+@import 'blocks/contacts/contacts';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
+//@import "blocks/mainHeader";
+//@import "blocks/main";
+//@import "blocks/mainFooter";

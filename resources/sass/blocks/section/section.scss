@@ -1,0 +1,19 @@
+.section {
+    //flex-grow: 4;
+    //display: flex;
+    //justify-content: space-between;
+    //align-items: flex-start;
+    //flex-wrap: wrap;
+    //max-width: 100vw;
+    margin: 10px;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    background-color: #fff;
+    border-radius: 10px;
+    &__header {
+        text-align: center;
+        vertical-align: center;
+        min-height: 100px;
+        margin-bottom: 10px;
+    }
+}
