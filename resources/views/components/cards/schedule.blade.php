@@ -7,9 +7,11 @@
         </p>
 
         @auth
-            <a href="#" onclick="event.preventDefault(); addPeople({{ $schedule->id }})" class="btn btn-primary">
-                Я пойду <span id="people_count_{{ $schedule->id }}" class="badge badge-light ml-2">{{ $schedule->people_count }}</span>
-            </a>
+            @if(now() < $schedule->date_start)
+                <a href="#" onclick="event.preventDefault(); addPeople({{ $schedule->id }})" class="btn btn-primary">
+                    Я пойду <span id="people_count_{{ $schedule->id }}" class="badge badge-light ml-2">{{ $schedule->people_count }}</span>
+                </a>
+            @endif
         @endauth
     </div>
 </div>
