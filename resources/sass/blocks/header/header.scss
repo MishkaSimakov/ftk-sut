@@ -16,6 +16,7 @@
     justify-content: center;
     align-items: center;
     height: 25px;
+    padding: 0 !important;
     border: 0 !important;
     transition: color .4s;
     cursor: pointer;
@@ -23,8 +24,10 @@
         position: relative;
         width: 35px !important;
         height: 3px !important;
+        padding: 0 !important;
         background-color: #fff;
         border-radius: 3px;
+        border: 0 !important;
         transition: .4s;
         &::before {
             content: "";
