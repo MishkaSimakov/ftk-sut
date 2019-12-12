@@ -1,6 +1,6 @@
 
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap&subset=cyrillic');
 
 // Variables
 @import 'variables';
@@ -11,11 +11,12 @@
 
 @import 'basic';
 @import 'blocks/teacher/teacher';
-@import 'blocks/section/section';
+@import 'blocks/section/teachers';
 @import 'blocks/footer/footer';
 @import 'blocks/copyright/copyright';
 @import 'blocks/contacts/contacts';
 @import 'blocks/header/header';
+@import "blocks/main/main";
 
 //@import "blocks/mainHeader";
 //@import "blocks/main";

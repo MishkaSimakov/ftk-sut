@@ -15,11 +15,24 @@ html {
 }
 
 body {
-    margin-bottom: 679px;
+    margin-bottom: 689px;
 }
 
-a:hover, a:focus, a:active {
+section {
+    margin: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+a:hover, a:focus {
+    color: #00bfff !important;
     text-decoration: none;
+}
+
+a:active {
+    color: #1e90ff !important;
 }
 
 p, h1, h2, h3, h4, h5, h6, span {
@@ -46,6 +59,6 @@ button {
 
 @media screen and (min-width: 576px) {
     body {
-        margin-bottom: 392px;
+        margin-bottom: 402px;
     }
 }

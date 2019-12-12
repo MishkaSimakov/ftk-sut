@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto&display=swap);/*!
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap&subset=cyrillic);/*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
@@ -11663,13 +11663,25 @@ html {
 }
 
 body {
-  margin-bottom: 679px;
+  margin-bottom: 689px;
+}
+
+section {
+  margin: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 a:hover,
-a:focus,
-a:active {
+a:focus {
+  color: #00bfff !important;
   text-decoration: none;
+}
+
+a:active {
+  color: #1e90ff !important;
 }
 
 p,
@@ -11703,11 +11715,14 @@ button {
 
 @media screen and (min-width: 576px) {
   body {
-    margin-bottom: 392px;
+    margin-bottom: 402px;
   }
 }
 
 .teacher {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -11736,7 +11751,9 @@ button {
 }
 
 .teacher__name {
+  max-width: 350px;
   margin-bottom: 20px !important;
+  color: #000;
   font-size: 24px;
   font-weight: 500;
   text-align: center;
@@ -11748,24 +11765,38 @@ button {
   color: #807f7f;
 }
 
-.section {
+.teachers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   margin: 10px;
   padding-top: 30px;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
   background-color: #fff;
   border-radius: 10px;
 }
 
-.section__header {
+.teachers__header {
   text-align: center;
   vertical-align: center;
   min-height: 100px;
+  width: 100%;
   margin-bottom: 10px;
 }
 
 .footer {
   position: absolute;
   bottom: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -11832,15 +11863,6 @@ button {
   color: #fff;
   -webkit-transition: color .4s;
   transition: color .4s;
-}
-
-.footer__navigation__link:hover,
-.footer__navigation__link:focus {
-  color: #00bfff !important;
-}
-
-.footer__navigation__link:active {
-  color: #1e90ff !important;
 }
 
 @media screen and (min-width: 576px) {
@@ -12071,15 +12093,6 @@ button {
   -webkit-transition: color .4s;
   transition: color .4s;
   color: #fff;
-}
-
-.logo:hover,
-.logo:focus {
-  color: #00bfff !important;
-}
-
-.logo:active {
-  color: #1e90ff !important;
 }
 
 .site-navigation__toggler {

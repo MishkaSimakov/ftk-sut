@@ -17,10 +17,6 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
     {{-- Icons --}}
     <script src="https://kit.fontawesome.com/799166843b.js" crossorigin="anonymous"></script>
 
@@ -42,7 +38,7 @@
 <div id="app">
     @include('partials.header.header')
 
-    <main class="main mb-2">
+    <main class="main-container">
         @yield('content')
     </main>
 

@@ -1,7 +1,7 @@
 @extends('layouts.page')
 
 @section('content')
-    @component('components.sections.section', ['header' => 'Наши преподаватели'])
+    @component('components.sections.teachers', ['header' => 'Наши преподаватели'])
         @component('components.card-lists.teachers', ['teachers' => $teachers])@endcomponent
     @endcomponent
 

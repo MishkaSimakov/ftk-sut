@@ -3,12 +3,6 @@
     text-transform: uppercase;
     transition: color .4s;
     color: #fff;
-    &:hover, &:focus {
-        color: #00bfff !important;
-    }
-    &:active {
-        color: #1e90ff !important;
-    }
 }
 
 .site-navigation__toggler {
