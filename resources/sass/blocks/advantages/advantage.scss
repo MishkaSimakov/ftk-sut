@@ -1,0 +1,22 @@
+.advantage-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.advantage-list__item {
+    margin-bottom: 40px;
+}
+.advantage-list__item:nth-child(2n) .advantage__wrapper {
+    flex-direction: row-reverse;
+}
+
+.advantage__image-wrapper {
+    max-height: 450px;
+}
+
+.advantage__image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
