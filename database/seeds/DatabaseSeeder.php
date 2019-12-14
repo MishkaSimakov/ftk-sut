@@ -1,5 +1,6 @@
 <?php
 
+use App\Achievement;
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(AchievementSeeder::class);
+
         $admin = factory(User::class)->create([
             'is_admin' => true,
             'email' => 'msimakov661@gmail.com',
