@@ -14,7 +14,7 @@ class ScheduleController extends Controller
     	$schedule = Schedule::all();
 
     	$lastSchedules = Schedule::whereDate('date_start', '>=', Carbon::now()->subWeek(1))->get();
-        $oldSchedules = Schedule::whereDate('date_start', '<', Carbon::now()->subWeek(1))->get();
+        $oldSchedules = Schedule::whereDate('date_start', '<', Carbon::now())->get();
 
     	return view('schedule.index', compact(['oldSchedules', 'lastSchedules']));
     }

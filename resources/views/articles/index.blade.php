@@ -34,7 +34,7 @@
             </div>
 
             <div class="card-body">
-                <p>{!! $article->body !!}</p>
+                <p>{{ str_limit($article->body, 500, '...') }}</p>
 
                 @if($article->hasMedia())
                     <p class="text-muted m-0">+{{ count($article->getMedia()) }} фото</p>
