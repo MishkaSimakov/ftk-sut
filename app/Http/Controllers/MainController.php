@@ -11,9 +11,8 @@ class MainController extends Controller
     public function index()
     {
         $teachers = Teacher::all();
-        $advertisements = Advertisement::all();
         $advantages = config('advantages');
 
-        return view('main', compact('teachers', 'advertisements', 'advantages'));
+        return view('main', compact('teachers', 'advantages'));
     }
 }
