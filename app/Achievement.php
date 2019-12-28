@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class Achievement extends Model
 {
@@ -12,7 +11,10 @@ class Achievement extends Model
 
     public function getIsGettedAttribute() {
     	if (Auth::user()) {
-  			return UserAchievement::where([['achievement_id', $this->id], ['user_id', Auth::user()->id]])->exists();
+  			return StudentAchievement::where([
+  			    ['achievement_id', $this->id],
+                ['student_id', optional(Auth::user()->student)->id]
+            ])->exists();
     	}
 
     	return true;

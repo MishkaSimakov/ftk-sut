@@ -14,14 +14,14 @@ class Rating extends Model
         return $this->hasMany(Point::class);
     }
 
-    public function users()
+    public function students()
     {
-        return $this->belongsToMany(User::class, 'points');
+        return $this->belongsToMany(Student::class, 'points');
     }
 
-    public function uniqueUsers()
+    public function uniqueStudents()
     {
-        return $this->belongsToMany(User::class, 'points')->get()->unique('name');
+        return $this->belongsToMany(Student::class, 'points')->get()->unique('name');
     }
 
     public function getNameAttribute()

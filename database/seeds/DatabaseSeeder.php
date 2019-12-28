@@ -12,8 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AchievementSeeder::class);
-
         $admin = factory(User::class)->create([
             'is_admin' => true,
             'email' => 'msimakov661@gmail.com',
@@ -24,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@site.com',
         ]);
 
+        $this->call(AchievementSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(TeacherSeeder::class);
         $this->call(ArticleSeeder::class);

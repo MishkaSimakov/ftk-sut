@@ -4,7 +4,7 @@
 
 <h1 class="text-center m-2">{{ $user->name }}</h1>
 
-@if ($achievements->count())
+@if ($achievements)
     @component('components.sections.section', ['header' => 'Достижения'])
         @component('components.card-lists.achievements', ['achievements' => $achievements])@endcomponent
     @endcomponent

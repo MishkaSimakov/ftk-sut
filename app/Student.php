@@ -17,6 +17,13 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getAmount(Rating $rating, Category $category)
+    {
+        $point = $this->points()->where([['rating_id', $rating->id], ['category_id', $category->id]])->first();
+
+        return $point ? $point->amount : 0;
+    }
+
     public function award(Rating $rating, Category $category, $amount) {
         $point = Point::make();
 

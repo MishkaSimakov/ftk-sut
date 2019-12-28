@@ -25,7 +25,7 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(User::class, 'admin', function () {
+$factory->state(User::class, 'admin', function () {
     return [
         'is_admin' => true,
     ];

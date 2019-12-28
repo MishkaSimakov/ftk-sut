@@ -15,22 +15,22 @@ class RatingController extends Controller
     public function chart(Request $request)
     {
         $rating = Rating::where('date', $request->date)->first();
-        $users = $rating->uniqueUsers();
+        $students = $rating->uniqueStudents();
 
         $categories = Category::categories();
 
         $chartData = [];
 
-        foreach ($users as $user) {
-            $userPoints = ['us|' . $user->id . '|' . $user->name];
+        foreach ($students as $student) {
+            $studentPoints = ['us|' . $student->id . '|' . $student->name];
 
             foreach ($categories as $category) {
-                array_push($userPoints, $user->getAmount($rating, $category), 'stroke-width: 1; stroke-color: black;');
+                array_push($studentPoints, $student->getAmount($rating, $category), 'stroke-width: 1; stroke-color: black;');
             }
 
-            array_push($userPoints, array_sum($userPoints));
+            array_push($studentPoints, array_sum($studentPoints));
 
-            array_push($chartData, $userPoints);
+            array_push($chartData, $studentPoints);
         }
 
         return json_encode($chartData);

@@ -52,15 +52,6 @@ class User extends Authenticatable
         return $this->hasMany(Article::class);
     }
 
-
-
-    public function getAmount(Rating $rating, Category $category)
-    {
-        $point = $this->points()->where([['rating_id', $rating->id], ['category_id', $category->id]])->first();
-
-        return $point ? $point->amount : 0;
-    }
-
     public function getRegisterLinkAttribute() {
         return route('register') . '?user_id=' . $this->id . '&register_code=' . $this->register_code;
     }
