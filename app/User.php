@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Achievements\Events\UserEarnedPoints;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -41,33 +42,17 @@ class User extends Authenticatable
         });
     }
 
+    public function student(): HasOne
+    {
+        return $this->hasOne(Student::class);
+    }
+
     public function articles()
     {
         return $this->hasMany(Article::class);
     }
 
-    public function points()
-    {
-        return $this->hasMany(Point::class);
-    }
 
-    public function achievements()
-    {
-        return $this->belongsToMany(Achievement::class, 'user_achievements');
-    }
-
-    public function award(Rating $rating, Category $category, $amount) {
-        $point = Point::make();
-
-        $point->rating_id = $rating->id;
-        $point->user_id = $this->id;
-        $point->category_id = $category->id;
-        $point->amount = $amount;
-
-        $point->save();
-
-        UserEarnedPoints::dispatch($point);
-    }
 
     public function getAmount(Rating $rating, Category $category)
     {

@@ -95,9 +95,9 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        if (Auth::user()->id == $article->user_id) {
-            return view('articles.edit', compact('article'));
-        }
+        $this->authorize('update', $article);
+
+        return view('articles.edit', compact('article'));
     }
 
     public function update(Request $request, Article $article)

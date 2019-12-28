@@ -2,14 +2,11 @@
 
 namespace Tests\Feature\Rating;
 
-use App\Category;
 use App\Point;
 use App\Rating;
+use App\Student;
 use App\User;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Stevebauman\Translation\Facades\Translation;
 use Tests\TestCase;
 
 class RatingStoreTest extends TestCase
@@ -63,7 +60,7 @@ class RatingStoreTest extends TestCase
 
         $this->assertCount(1, Rating::all());
         $this->assertTrue(Point::count() > 0);
-        $this->assertEquals(User::count(), 63 + $adminUserCount);
+        $this->assertEquals(Student::count(), 63);
     }
 
     public function test_it_awards_points_to_students()
@@ -99,7 +96,7 @@ class RatingStoreTest extends TestCase
 
     protected function expectedStudent()
     {
-        return User::where('name', 'Селюченко Иван')->firstOrFail();
+        return Student::where('name', 'Селюченко Иван')->firstOrFail();
     }
 
     protected function postRating()

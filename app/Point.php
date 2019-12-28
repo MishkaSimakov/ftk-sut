@@ -13,9 +13,9 @@ class Point extends Model
 
     protected $dates = ['created_at', 'updated_at', 'date'];
 
-    public function user()
+    public function student()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Student::class);
     }
 
     /**

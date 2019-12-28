@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Imports\RatingsImport;
-use App\Point;
 use App\Rating;
-use App\User;
+use App\Student;
 use Carbon\Carbon;
-use DebugBar\DebugBar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Maatwebsite\Excel\Facades\Excel;
@@ -56,10 +54,10 @@ class RatingController extends Controller
         $ratingRows = $this->resolveRatingPoints($rows);
 
         foreach ($ratingRows as $key => $row) {
-            $user = User::firstOrCreate(['name' => $key]);
+            $student = Student::firstOrCreate(['name' => $key]);
 
             foreach ($row as $category => $point) {
-                $user->award($rating, $categories->get($category), $point);
+                $student->award($rating, $categories->get($category), $point);
             }
         }
 
