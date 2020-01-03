@@ -32,16 +32,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function (User $user) {
-            $user->register_code = $user->register_code ?: rand(10000, 99999);
-        });
-    }
-
     public function student(): HasOne
     {
         return $this->hasOne(Student::class);

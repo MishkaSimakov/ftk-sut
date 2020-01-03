@@ -52,9 +52,9 @@
                                     </h5>
 
                                     <ol class="spoiler_body_{{ $schedule->id }}" style="display: none">
-                                        @foreach($schedule->users as $user)
+                                        @foreach($schedule->students as $student)
                                             <li>
-                                                <p class="ml-2"><a href="{{ $user->url }}">{{ $user->name }}</a></p>
+                                                <p class="ml-2"><a href="{{ optional($student->user)->url }}">{{ $student->name }}</a></p>
                                             </li>
                                         @endforeach
                                     </ol>

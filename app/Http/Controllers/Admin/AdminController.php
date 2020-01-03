@@ -8,7 +8,7 @@ use App\User;
 use App\Achievement;
 use function view;
 use App\Schedule;
-use App\UserSchedule;
+use App\StudentSchedule;
 use Carbon\Carbon;
 
 class AdminController extends Controller

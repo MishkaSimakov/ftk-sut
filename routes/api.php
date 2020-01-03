@@ -24,6 +24,6 @@ Route::post('/article/points', 'Api\ArticleController@points')->name('api.articl
 
 Route::post('/admin/register_link', 'Api\AdminController@register_link')->name('api.admin.register_link');
 
-Route::post('/schedule/add_people', 'Api\ScheduleController@add_people')->name('api.schedule.add_people');
+Route::post('/schedule/add_student', 'Api\ScheduleController@add_student')->name('api.schedule.add_student');
 
 Route::post('article/{article}/image', 'Api\ImageController@upload')->name('api.image.upload');

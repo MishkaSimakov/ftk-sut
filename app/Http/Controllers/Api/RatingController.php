@@ -22,7 +22,7 @@ class RatingController extends Controller
         $chartData = [];
 
         foreach ($students as $student) {
-            $studentPoints = ['us|' . $student->id . '|' . $student->name];
+            $studentPoints = ['us|' . optional($student->user)->id . '|' . $student->name];
 
             foreach ($categories as $category) {
                 array_push($studentPoints, $student->getAmount($rating, $category), 'stroke-width: 1; stroke-color: black;');

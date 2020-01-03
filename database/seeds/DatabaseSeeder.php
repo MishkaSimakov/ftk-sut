@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $admin = factory(User::class)->create([
             'is_admin' => true,
             'email' => 'msimakov661@gmail.com',
+            'name' => 'Симаков Михаил'
         ]);
 
         $admin = factory(User::class)->create([

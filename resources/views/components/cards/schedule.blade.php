@@ -8,8 +8,12 @@
 
         @auth
             @if(now() < $schedule->date_start)
-                <a href="#" onclick="event.preventDefault(); addPeople({{ $schedule->id }})" class="btn btn-primary">
-                    Я пойду <span id="people_count_{{ $schedule->id }}" class="badge badge-light ml-2">{{ $schedule->people_count }}</span>
+                <a href="#"
+                   @if(optional(Auth::user())->student)
+                    onclick="event.preventDefault(); addStudent({{ $schedule->id }})"
+                   @endif
+                   class="btn btn-primary">
+                    Я пойду <span id="student_count_{{ $schedule->id }}" class="badge badge-light ml-2">{{ $schedule->student_count }}</span>
                 </a>
             @endif
         @endauth

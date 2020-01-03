@@ -5,12 +5,33 @@ namespace App;
 use App\Achievements\Events\UserEarnedPoints;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Hash;
 
 class Student extends Model
 {
     protected $fillable = [
         'name',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function (Student $student) {
+            if (!User::where('name', $student->name)->exists()) {
+                $user = User::make();
+
+                $user->password = Hash::make(str_random(8));
+                $user->name = $student->name;
+
+                $user->save();
+
+                $student->user_id = $user->id;
+            } else {
+                $student->user_id = User::where('name', $student->name)->first()->id;
+            }
+        });
+    }
 
     public function user(): BelongsTo
     {

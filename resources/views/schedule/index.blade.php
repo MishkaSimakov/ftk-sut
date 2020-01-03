@@ -21,22 +21,24 @@
 @endsection
 
 @auth
-    @push('script')
-        <script type="text/javascript">
-            function addPeople(schedule_id) {
-                $.ajax({
-                    url: "{{ route('api.schedule.add_people') }}",
-                    method: "POST",
-                    dataType: 'json',
-                    data: {
-                        user_id: '{{ Auth::user()->id }}',
-                        schedule_id: schedule_id
-                    },
-                    success: function (data) {
-                        $('#people_count_' + schedule_id).html(Number(data));
-                    }
-                });
-            }
-        </script>
-    @endpush
+    @if(Auth::user()->student)
+        @push('script')
+            <script type="text/javascript">
+                function addStudent(schedule_id) {
+                    $.ajax({
+                        url: "{{ route('api.schedule.add_student') }}",
+                        method: "POST",
+                        dataType: 'json',
+                        data: {
+                            student_id: '{{ Auth::user()->student->id }}',
+                            schedule_id: schedule_id
+                        },
+                        success: function (data) {
+                            $('#student_count_' + schedule_id).html(Number(data));
+                        }
+                    });
+                }
+            </script>
+        @endpush
+    @endif
 @endauth

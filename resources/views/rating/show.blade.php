@@ -91,11 +91,18 @@
             chart.draw(chartData, options);
 
             $(document).ready(function () {
+                window.current_user_id = {{ optional(\Illuminate\Support\Facades\Auth::user())->id }}
+
                 $('text:contains("us|")').each(function() {
                     var user_id = $(this).html().split('|')[1];
-                    var username = $(this).html().split('|')[2];
+                    var student_name = $(this).html().split('|')[2];
 
-                    $(this).html('<a style="color: #3490dc !important;" href="{{ Request::root() }}/user/' + user_id + '">' + username + '</a>');
+                    if (window.current_user_id == user_id) {
+                        $(this).html('<a style="font-weight: bold !important; color: #3490dc !important;" href="{{ env('APP_URL') }}/user/' + user_id + '">' + student_name + '</a>');
+                    } else {
+                        $(this).html('<a style="color: #3490dc !important;" href="{{ env('APP_URL') }}/user/' + user_id + '">' + student_name + '</a>');
+                    }
+
                 });
             });
         }
