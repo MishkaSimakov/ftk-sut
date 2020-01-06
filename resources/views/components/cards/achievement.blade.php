@@ -1,4 +1,4 @@
-<div class="card m-3 d-inline-block" style="width: 18rem;">
+<div class="card m-3 d-inline-block">
     @if($achievement->isGetted)
         <img class="card-img-top" src="{{ $achievement->icon }}" alt="Изображение от достижения">
 

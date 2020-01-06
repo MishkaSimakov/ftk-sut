@@ -11,7 +11,7 @@
         <div class="card m-2">
             <div class="card-header">
                 <h1 class="d-inline-block m-0 p-0" title="{{ $article->title }}">
-                    <a href="{{ route('article.show', compact('article')) }}">{{ str_limit($article->title, 45, '...') }}</a>
+                    <a href="{{ $article->url }}">{{ str_limit($article->title, 45, '...') }}</a>
 
                     @can('update', $article)
                         <a class="text-decoration-none" href="{{ route('article.edit', compact('article')) }}">
@@ -41,27 +41,31 @@
                 @endif
             </div>
 
-        @auth
-          <div class="card-footer p-0">
+          <div class="card-footer p-1">
             <h3 class="mt-2 ml-2">
               <span id="like_{{ $article->id }}">
-                @if ($article->isLiked)
-                  <a id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="text-primary fas fa-heart"></i></a>
-                @else
-                  <a id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="text-primary far fa-heart"></i></a>
-                @endif
+                  @auth
+                    @if ($article->isLiked)
+                      <a id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="text-primary fas fa-heart"></i></a>
+                    @else
+                      <a id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="text-primary far fa-heart"></i></a>
+                    @endif
+                  @else
+                      <i class="text-primary fas fa-heart"></i>
+                  @endauth
               </span>
 
               <span class="point_count{{ $article->id }}">{{ $article->points }}</span>
             </h3>
           </div>
-        @endauth
        </div>
     @endforeach
 
     @if ($articles->count())
-        <div class="text-center d-inline-block w-100">
-            {{ $articles->appends(['filter' => request()->get('filter')])->links() }}
+        <div class="d-flex">
+            <div class="mx-auto">
+                {{ $articles->appends(['filter' => request()->get('filter')])->links() }}
+            </div>
         </div>
     @endif
 @endsection

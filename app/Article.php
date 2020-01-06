@@ -39,4 +39,9 @@ class Article extends Model implements HasMedia
     static function notPublished() {
         return Article::where('is_blank', false)->where('is_published', false)->orWhere('is_published', null)->get();
     }
+
+    public function getUrlAttribute()
+    {
+        return route('article.show', compact('this'));
+    }
 }

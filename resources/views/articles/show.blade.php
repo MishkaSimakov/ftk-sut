@@ -24,7 +24,7 @@
     </h1>
 
     @component('components.sections.section', ['header' => ''])
-        <div class="mb-5">
+        <div class="mb-2">
             {!! $article->body !!}
         </div>
 
@@ -40,19 +40,21 @@
             </div>
         @endif
 
-        @auth
-            <h3 class="mt-2 ml-2">
-                <span id="like_{{ $article->id }}">
+        <h3 class="m-0">
+            <span id="like_{{ $article->id }}">
+                @auth
                     @if ($article->isLiked)
                         <a id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="text-primary fas fa-heart"></i></a>
                     @else
                         <a id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="text-primary far fa-heart"></i></a>
                     @endif
-                </span>
+                @else
+                    <i class="text-primary fas fa-heart"></i>
+                @endauth
+            </span>
 
-                <span class="point_count{{ $article->id }}">{{ $article->points }}</span>
-            </h3>
-        @endauth
+            <span class="point_count{{ $article->id }}">{{ $article->points }}</span>
+        </h3>
     @endcomponent
 @endsection
 

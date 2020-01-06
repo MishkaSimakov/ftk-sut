@@ -13,7 +13,7 @@ class ScheduleController extends Controller
     public function index() {
     	$schedule = Schedule::all();
 
-    	$lastSchedules = Schedule::whereDate('date_start', '>=', Carbon::now()->subWeek(1))->get();
+    	$lastSchedules = Schedule::whereDate('date_start', '>=', Carbon::now())->get();
         $oldSchedules = Schedule::whereDate('date_start', '<', Carbon::now())->get();
 
     	return view('schedule.index', compact(['oldSchedules', 'lastSchedules']));

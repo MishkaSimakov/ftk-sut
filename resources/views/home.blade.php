@@ -8,4 +8,8 @@
             @component('components.card-lists.achievements', ['achievements' => $achievements])@endcomponent
         @endcomponent
     @endif
+
+    @component('components.sections.section', ['header' => 'Аккаунт'])
+
+    @endcomponent
 @endsection
