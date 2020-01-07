@@ -2,12 +2,10 @@
 
 @section('content')
 
-<h1 class="text-center m-2">Редактировать статью</h1>
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-11">
-            <div class="card">
+            <div class="card mt-2">
                 <div class="card-header">Редактирование статьи</div>
 
                 <div class="card-body">

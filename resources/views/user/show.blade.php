@@ -4,12 +4,10 @@
 
 <h1 class="text-center m-2">{{ $user->name }}</h1>
 
-@if ($user->student)
-    @if (!$achievements->isEmpty())
-        @component('components.sections.section', ['header' => 'Достижения'])
-            @component('components.card-lists.achievements', ['achievements' => $achievements])@endcomponent
-        @endcomponent
-    @endif
+@if ($achievements ?? false)
+    @component('components.sections.section', ['header' => 'Достижения'])
+        @component('components.card-lists.achievements', ['achievements' => $achievements])@endcomponent
+    @endcomponent
 @endif
 
 @if (!$articles->isEmpty())

@@ -2,13 +2,11 @@
 
 @section('content')
 
-<h1 class="text-center m-2">Загрузить рейтинг</h1>
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header"></div>
+            <div class="card mt-2">
+                <div class="card-header">Загрузить рейтинг</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('rating.store') }}" enctype="multipart/form-data">

@@ -11,7 +11,11 @@ use Illuminate\Support\Str;
 class Student extends Model
 {
     protected $fillable = [
-        'name',
+        'name', 'birthday'
+    ];
+
+    protected $dates = [
+        'birthday'
     ];
 
     protected static function boot()

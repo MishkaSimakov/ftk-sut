@@ -53,6 +53,10 @@
                             Личный кабинет
                         </a>
 
+                        <a class="user-navigation__link dropdown-item" href="{{ route('settings') }}">
+                            Натройки аккаунта
+                        </a>
+
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>

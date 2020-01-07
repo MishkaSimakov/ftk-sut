@@ -65,6 +65,7 @@ Auth::routes([
     'reset' => false,
     'confirm' => false,
     'verify' => false,
+    'settings' => true
 ]);
 
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');

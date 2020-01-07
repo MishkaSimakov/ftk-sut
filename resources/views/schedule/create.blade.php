@@ -2,13 +2,13 @@
 
 @section('content')
 
-<h1 class="text-center m-2">Создать событие</h1>
+<h1 class="text-center m-2"></h1>
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header"></div>
+            <div class="card mt-2">
+                <div class="card-header">Создать событие</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('schedule.store') }}">
