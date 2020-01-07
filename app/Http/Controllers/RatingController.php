@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\PointCategory;
 use App\Imports\RatingsImport;
 use App\Rating;
 use App\Student;
@@ -23,7 +23,7 @@ class RatingController extends Controller
 
     public function show(Rating $rating)
     {
-        $categories = Category::all();
+        $categories = PointCategory::all();
 
         return view('rating.show', compact(['rating', 'categories']));
     }
@@ -49,7 +49,7 @@ class RatingController extends Controller
 
         $rating->save();
 
-        $categories = Category::categories();
+        $categories = PointCategory::categories();
 
         $ratingRows = $this->resolveRatingPoints($rows);
 
@@ -61,7 +61,7 @@ class RatingController extends Controller
             }
         }
 
-        $categories = Category::all();
+        $categories = PointCategory::all();
 
         return redirect(route('rating.show', compact(['rating', 'categories'])));
     }

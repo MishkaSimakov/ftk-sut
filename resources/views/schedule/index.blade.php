@@ -8,6 +8,7 @@
     @endadmin
 
     <div class="container">
+{{--        TODO: сделать оформление (чтобы кнопка пойти была всегда внизу, и в строке было по 4 блока) --}}
         @component('components.card-lists.schedules', ['schedules' => $lastSchedules])@endcomponent
     </div>
 

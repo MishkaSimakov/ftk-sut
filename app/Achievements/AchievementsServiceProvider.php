@@ -3,8 +3,8 @@
 namespace App\Achievements;
 
 use App\Achievements\Console\GenerateAchievementCommand;
-use App\Achievements\Types\Get1000PointsInMonthRating;
-use App\Achievements\Types\GetLessThen250PointsInMonthRating;
+use App\Achievements\Types\GetMoreThen1000PointsInRating;
+use App\Achievements\Types\GetLessThen250PointsInRating;
 use App\Achievements\Types\Write10Articles;
 use App\Achievements\Types\WriteFirstArticle;
 use Illuminate\Support\Arr;
@@ -14,8 +14,8 @@ class AchievementsServiceProvider extends ServiceProvider
 {
     protected $achievements = [
         'points' => [
-            Get1000PointsInMonthRating::class,
-            GetLessThen250PointsInMonthRating::class,
+            GetMoreThen1000PointsInRating::class,
+            GetLessThen250PointsInRating::class,
         ],
         'articles' => [
             WriteFirstArticle::class,
@@ -40,7 +40,7 @@ class AchievementsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('achievements', function() { //TODO: this is not working
+        $this->app->singleton('achievements', function() {
             $array = [];
 
             foreach ($this->achievements as $key => $achievementCategory) {

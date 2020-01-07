@@ -25,7 +25,8 @@ class AwardArticleAchievements
      */
     public function handle($event)
     {
-        $event->article->user->achievements()->sync(
+        //TODO: ошибка при публикации неопубликованных статей
+        $event->article->user->student->achievements()->sync(
             collect(app('achievements')['articles'])->filter->qualifier($event->article)->map->modelKey()
         );
     }

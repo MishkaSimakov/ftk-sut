@@ -4,13 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * //TODO: Переименовать в PointCategory
- */
-class Category extends Model
+class PointCategory extends Model
 {
     static public function categories() {
-        $categories = Category::all();
+        $categories = PointCategory::all();
 
         $names = collect([]);
 

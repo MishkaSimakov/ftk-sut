@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Category;
+use App\PointCategory;
 use App\Rating;
 use App\User;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class RatingController extends Controller
         $rating = Rating::where('date', $request->date)->first();
         $students = $rating->uniqueStudents();
 
-        $categories = Category::categories();
+        $categories = PointCategory::categories();
 
         $chartData = [];
 

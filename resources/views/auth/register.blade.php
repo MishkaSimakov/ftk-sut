@@ -1,5 +1,7 @@
 @extends('layouts.page')
 
+{{-- TODO: сделать регистрацию в 2 этапа: 1. пользователь вводит свою имя, фамилию и пароль (который ему выдадут в клубе) (возможно сделать лишь ввод пароля и при генерации пароля делать его уникальным, чтобы по паролю можно было однозначно понять что это за пользователь); 2. Если пароль правильный, пользователь может изменить email, дату рождения, дату поступления в клуб, пароль и т.д. --}}
+
 @section('content')
 
 <div class="container">
@@ -11,9 +13,6 @@
                 <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
-
-                            <input name="register_code" type="hidden" value="{{ Request::get('register_code') }}">
-                            <input type="hidden" name="user_id" value="{{ Request::get('user_id') }}">
 
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">Адрес электронной почты</label>

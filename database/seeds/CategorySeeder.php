@@ -1,7 +1,7 @@
 <?php
 
 use App\User;
-use App\Category;
+use App\PointCategory;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
     public function run()
     {
         foreach ($this->categories() as $category => $slug) {
-            factory(Category::class)->create(['title' => $category, 'name' => $slug]);
+            factory(PointCategory::class)->create(['title' => $category, 'name' => $slug]);
         }
     }
 

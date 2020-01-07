@@ -7,9 +7,9 @@ use App\Achievements\AchievementType;
 
 class Write10Articles extends AchievementType
 {
-    public $name = 'Super article writer!';
-    public $description = 'Write 10 articles';
-    public $icon = 'https://www.jing.fm/clipimg/detail/107-1070395_relevant-images-by-achievement-png-achievement-free-icon.png';
+    public $name = 'Умелый писатель';
+    public $description = 'Написать 10 статей.';
+    public $icon = 'https://i.pinimg.com/originals/c7/80/5e/c7805ee9aa1a16baaa33a7b1be2f220e.png';
 
     public function qualifier($article)
     {

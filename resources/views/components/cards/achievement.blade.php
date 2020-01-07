@@ -1,23 +1,14 @@
-<div class="card m-3 d-inline-block">
-    @if($achievement->isGetted)
-        <img class="card-img-top" src="{{ $achievement->icon }}" alt="Изображение от достижения">
+<div class="achievement card {{ !$achievement->isGetted ? 'achievement__locked' : '' }}">
+    <div class="achievement__image_card">
+        <img class="achievement__image card-img-top" src="{{ $achievement->icon }}" alt="Изображение от достижения">
 
-        <div class="card-body">
-            <h5 class="card-title">{{ $achievement->name }}</h5>
-            <p class="card-text">{{ $achievement->description }}</p>
-        </div>
-    @else
-        <div style="opacity: 0.5">
-            <div style="position: relative; text-align: center; color: white">
-                <img class="card-img-top"  src="{{ $achievement->icon }}" alt="Изображение от достижения">
+        @if (!$achievement->isGetted)
+            <div class="achievement__locked_icon"><i class="fas fa-lock fa-7x"></i></div>
+        @endif
+    </div>
 
-                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><i class="fas fa-lock fa-7x"></i></div>
-            </div>
-
-            <div class="card-body">
-                <h5 class="card-title">{{ $achievement->name }}</h5>
-                <p class="card-text">{{ $achievement->description }}</p>
-            </div>
-        </div>
-    @endif
+    <div class="card-body">
+        <h5 class="card-title">{{ $achievement->name }}</h5>
+        <p class="card-text">{{ $achievement->description }}</p>
+    </div>
 </div>

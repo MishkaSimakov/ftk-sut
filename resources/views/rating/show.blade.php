@@ -91,6 +91,7 @@
             chart.draw(chartData, options);
 
             $(document).ready(function () {
+                //TODO: исправить это недразумение
                 window.current_user_id = {{ optional(\Illuminate\Support\Facades\Auth::user())->id }}
 
                 $('text:contains("us|")').each(function() {

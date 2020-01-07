@@ -1,0 +1,30 @@
+.achievement {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+
+    &__image {
+        //TODO: сделать чёткие размеры у избражения
+    }
+
+    &__image_card {
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+
+    &__locked {
+        opacity: 0.5;
+
+        .achievement__locked_icon { //TODO: как-то это нехорошо
+            display: block !important;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
