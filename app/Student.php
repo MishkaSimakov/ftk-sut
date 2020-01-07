@@ -6,6 +6,7 @@ use App\Achievements\Events\UserEarnedPoints;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class Student extends Model
 {
@@ -21,7 +22,7 @@ class Student extends Model
             if (!User::where('name', $student->name)->exists()) {
                 $user = User::make();
 
-                $user->password = Hash::make(str_random(8));
+                $user->password = Hash::make(Str::limit(8));
                 $user->name = $student->name;
 
                 $user->save();

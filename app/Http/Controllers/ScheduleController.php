@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Schedule;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class ScheduleController extends Controller
 {

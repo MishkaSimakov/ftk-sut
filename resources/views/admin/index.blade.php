@@ -53,23 +53,6 @@
                     }
                 });
             });
-
-            $("#load_button").click(function() {
-                $.ajax({
-                    url: "{{ route('api.admin.register_link') }}",
-                    method: "POST",
-                    dataType: 'json',
-                    data: {
-                        name: $('#name').val(),
-                    },
-                    success: function (data) {
-                        console.log(data);
-
-                        $('#register_link').html('<a href="' + data + '">ссылка</a> скопирована!');
-                        navigator.clipboard.writeText(data);
-                    }
-                });
-            });
         });
     </script>
 @endpush

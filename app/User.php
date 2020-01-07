@@ -42,11 +42,7 @@ class User extends Authenticatable
         return $this->hasMany(Article::class);
     }
 
-    public function getRegisterLinkAttribute() {
-        return route('register') . '?user_id=' . $this->id . '&register_code=' . $this->register_code;
-    }
-
     public function getUrlAttribute() {
-        return route('user.show', compact('this'));
+        return route('user.show', $this);
     }
 }

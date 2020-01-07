@@ -17,6 +17,6 @@ class Teacher extends Model
 
     public function getUrlAttribute()
     {
-        return route('teacher.show', compact('this'));
+        return route('teacher.show', $this);
     }
 }

@@ -35,6 +35,6 @@ class Rating extends Model
 
     public function getUrlAttribute()
     {
-        return route('rating.show', compact('this'));
+        return route('rating.show', $this);
     }
 }

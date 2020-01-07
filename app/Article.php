@@ -42,6 +42,6 @@ class Article extends Model implements HasMedia
 
     public function getUrlAttribute()
     {
-        return route('article.show', compact('this'));
+        return route('article.show', $this);
     }
 }

@@ -11,7 +11,7 @@
         <div class="card m-2">
             <div class="card-header">
                 <h1 class="d-inline-block m-0 p-0" title="{{ $article->title }}">
-                    <a href="{{ $article->url }}">{{ str_limit($article->title, 45, '...') }}</a>
+                    <a href="{{ $article->url }}">{{ \Illuminate\Support\Str::limit($article->title, 45, '...') }}</a>
 
                     @can('update', $article)
                         <a class="text-decoration-none" href="{{ route('article.edit', compact('article')) }}">
@@ -34,7 +34,7 @@
             </div>
 
             <div class="card-body">
-                <p>{{ str_limit($article->body, 500, '...') }}</p>
+                <p>{{ \Illuminate\Support\Str::limit($article->body, 500, '...') }}</p>
 
                 @if($article->hasMedia())
                     <p class="text-muted m-0">+{{ count($article->getMedia()) }} фото</p>

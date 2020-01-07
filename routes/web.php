@@ -13,6 +13,7 @@
 
 use \Illuminate\Support\Facades\Route;
 use \Illuminate\Support\Facades\Event;
+use \Illuminate\Support\Facades\Auth;
 
 
 
@@ -59,7 +60,12 @@ Route::resource('schedule', 'ScheduleController')->middleware(['auth', 'admin'])
 
 
 
-Auth::routes();
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'confirm' => false,
+    'verify' => false,
+]);
 
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 

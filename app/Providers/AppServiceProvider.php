@@ -17,7 +17,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        Blade::if('admin', function () {
+            if (Auth::user()) {
+                return Auth::user()->is_admin;
+            }
+        });
     }
 
     /**
@@ -27,10 +31,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Blade::if('admin', function () {
-            if (Auth::user()) {
-                return Auth::user()->is_admin;
-            }
-        });
+
     }
 }
