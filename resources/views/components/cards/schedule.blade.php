@@ -9,7 +9,7 @@
     </div>
 
     @auth
-        @if(now() < $schedule->date_start)
+        @if(now()->lt($schedule->date_start))
             <div class="card-footer">
                 <a href="#" onclick='{{ optional(Auth::user())->student ? "event.preventDefault(); addStudent($schedule->id)" : '' }}' class="btn btn-primary">
                     Я пойду <span id="student_count_{{ $schedule->id }}" class="badge badge-light ml-2">{{ $schedule->student_count }}</span>

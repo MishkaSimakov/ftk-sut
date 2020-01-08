@@ -26,7 +26,8 @@ class Student extends Model
             if (!User::where('name', $student->name)->exists()) {
                 $user = User::make();
 
-                $user->password = Hash::make(Str::limit(8));
+                $user->password = Hash::make(Str::random(8));
+                $user->login = Str::random(8);
                 $user->name = $student->name;
 
                 $user->save();

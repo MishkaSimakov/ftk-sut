@@ -30,7 +30,7 @@
                                 <input type="hidden" name="body" id="body">
 
                                 <div id="editor" class="form-control">
-                                    {{ $article->body }}
+                                    {!! $article->body !!}
                                 </div>
                             </div>
                         </div>

@@ -14,10 +14,10 @@
                             @method("PUT")
 
                             <div class="form-group row">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">Адрес электронной почты</label>
+                                <label for="login" class="col-sm-4 col-form-label text-md-right">Логин</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" autofocus>
+                                    <input id="login" type="text" class="form-control" name="login" value="{{ Auth::user()->login }}" autofocus>
                                 </div>
                             </div>
 
@@ -79,6 +79,5 @@
             </div>
         </div>
     </div>
-{{--    TODO: сделать настройку аккаунта: пароль, email, дата рождения и поступления в клуб --}}
 
 @endsection

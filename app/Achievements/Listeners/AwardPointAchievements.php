@@ -26,7 +26,8 @@ class AwardPointAchievements
     public function handle($event)
     {
         $event->point->student->achievements()->sync(
-            collect(app('achievements')['points'])->filter->qualifier($event->point)->map->modelKey()
+            collect(app('achievements')['points'])->filter->qualifier($event->point)->map->modelKey(),
+            false
         );
     }
 }

@@ -15,25 +15,25 @@
 
             @foreach($article->getMedia() as $photo)
                 <div class="col-md-1 m-2 p-0 d-inline-block">
-                    <img class="mw-100 mh-100 rounded" src="{{ $photo->path }}" style="cursor: pointer" data-lity data-lity-target="{{ $photo->path }}">
+                    <img class="mw-100 mh-100 rounded" src="{{ $photo->getPath() }}" style="cursor: pointer" data-lity data-lity-target="{{ $photo->getPath() }}">
                 </div>
             @endforeach
 		</div>
 
         <div class="card-footer">
-          <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form').submit();" class="btn btn-primary">Опубликовать</a>
-          <a href="{{ $article->delete }}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();" class="btn btn-danger">Удалить</a>
+          <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form-{{ $article->id }}').submit();" class="btn btn-primary">Опубликовать</a>
+          <a href="{{ $article->delete }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $article->id }}').submit();" class="btn btn-danger">Удалить</a>
         </div>
 	</div>
 
 
 
-  <form id="publish-form" action="{{ $article->publish }}" method="POST" class="d-none">
+  <form id="publish-form-{{ $article->id }}" action="{{ $article->publishUrl }}" method="POST" class="d-none">
     @method('PUT')
     @csrf
   </form>
 
-  <form id="delete-form" action="{{ $article->delete }}" method="POST" class="d-none">
+  <form id="delete-form-{{ $article->id }}" action="{{ $article->deleteUrl }}" method="POST" class="d-none">
     @method('DELETE')
     @csrf
   </form>

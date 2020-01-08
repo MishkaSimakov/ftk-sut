@@ -19,10 +19,10 @@ class AccountController extends Controller
     public function saveSettings(Request $request)
     {
         $validatedData = $request->validate([
-            'email' => [
+            'login' => [
                 'required',
                 'string',
-                'email',
+                'min: 5',
                 'max:255',
                 Rule::unique('users')->ignore(Auth::user()->id)
             ],
@@ -36,7 +36,7 @@ class AccountController extends Controller
         }
 
         Auth::user()->update([
-           'email' => $validatedData['email'],
+           'login' => $validatedData['login'],
         ]);
 
         return redirect()->back();

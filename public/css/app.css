@@ -12255,9 +12255,6 @@ button {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   margin-bottom: 30px;
 }
 
@@ -12265,6 +12262,10 @@ button {
   position: relative;
   text-align: center;
   color: white;
+}
+
+.achievement__locked_icon {
+  display: none;
 }
 
 .achievement__locked {

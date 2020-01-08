@@ -81,6 +81,8 @@ class ArticleController extends Controller
     {
         $article->update(['is_published' => true]);
 
+        dd($article);
+
         UserWriteArticle::dispatch($article);
 
         return redirect()->back();
@@ -108,7 +110,10 @@ class ArticleController extends Controller
         ]);
 
         $article->update($validatedData);
-        $article->update(['is_blank' => false]);
+        $article->update([
+            'is_blank' => false,
+            'is_published' => false
+        ]);
 
         return redirect(route('article.index'));
     }

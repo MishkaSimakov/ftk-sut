@@ -26,11 +26,7 @@ class Rating extends Model
 
     public function getNameAttribute()
     {
-        $name = 'Рейтинг за ';
-
-        $name .= $this->type == 'monthly' ? getRussianMonth($this->date) . ' ' . $this->date->year : ' ' . $this->date->year . ' год';
-
-        return $name;
+        return $this->date->locale('ru')->isoFormat($this->type == 'monthly' ? 'Рейтинг за MMMM YYYY' : 'Рейтинг за YYYY год');;
     }
 
     public function getUrlAttribute()

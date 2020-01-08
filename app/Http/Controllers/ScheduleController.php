@@ -14,8 +14,8 @@ class ScheduleController extends Controller
     public function index() {
     	$schedule = Schedule::all();
 
-    	$lastSchedules = Schedule::whereDate('date_start', '>=', Carbon::now())->get();
-        $oldSchedules = Schedule::whereDate('date_start', '<', Carbon::now())->get();
+    	$lastSchedules = Schedule::whereDate('date_start', '>', Carbon::now())->get();
+        $oldSchedules = Schedule::whereDate('date_start', '<=', Carbon::now())->get();
 
     	return view('schedule.index', compact(['oldSchedules', 'lastSchedules']));
     }
@@ -29,7 +29,7 @@ class ScheduleController extends Controller
 
     	$schedule->title = $request->title;
 
-        $schedule->people_count = 0;
+        $schedule->student_count = 0;
 
     	$schedule->date_start = new Carbon(str_replace('T', ' ', $request->date_start));
         $schedule->date_end = new Carbon(str_replace('T', ' ', $request->date_end));

@@ -41,17 +41,11 @@ class AchievementsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('achievements', function() {
-            $array = [];
-
-            foreach ($this->achievements as $key => $achievementCategory) {
-                $array = Arr::add($array, $key,
-                    collect($achievementCategory)->map(function ($achievement) {
-                        return new $achievement;
-                    })
-                );
-            }
-
-            return $array;
+            return collect($this->achievements)->transform(function ($item, $key) {
+                return collect($item)->transform(function ($item) {
+                    return new $item;
+                });
+            });
         });
 
         $this->commands(GenerateAchievementCommand::class);

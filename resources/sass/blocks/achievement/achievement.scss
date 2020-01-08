@@ -3,12 +3,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
+    //align-items: center;
     margin-bottom: 30px;
-
-    &__image {
-        //TODO: сделать чёткие размеры у избражения
-    }
 
     &__image_card {
         position: relative;
@@ -16,10 +12,14 @@
         color: white;
     }
 
+    &__locked_icon {
+        display: none;
+    }
+
     &__locked {
         opacity: 0.5;
 
-        .achievement__locked_icon { //TODO: как-то это нехорошо
+        .achievement__locked_icon {
             display: block !important;
             position: absolute;
             top: 50%;
@@ -28,3 +28,8 @@
         }
     }
 }
+ .achievement__locked {
+     achievement__locked_icon {
+
+     }
+ }

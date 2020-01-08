@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -15,8 +16,8 @@ class Article extends Model implements HasMedia
 
     protected $guarded = [];
 
-    public function getPublishAttribute() {
-    	return route('article.publish', compact('this'));
+    public function getPublishUrlAttribute() {
+    	return route('article.publish', $this);
     }
 
     public function users()
@@ -24,12 +25,13 @@ class Article extends Model implements HasMedia
         return $this->belongsToMany(User::class, 'user_likes');
     }
 
-    public function getDeleteAttribute() {
-    	return route('article.destroy', compact('this'));
+    public function getDeleteUrlAttribute() {
+    	return route('article.destroy', $this);
     }
 
-    public function getUserAttribute() {
-    	return User::where('id', $this->user_id)->first();
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function getIsLikedAttribute() {
