@@ -13,12 +13,9 @@ class ScheduleController extends Controller
     //
 
     public function index() {
-    	$schedule = Schedule::all();
-
     	$schedules = Schedule::whereDate('date_start', '>', Carbon::now())->get()->sortByDesc('date_start');
-//        $oldSchedules = Schedule::whereDate('date_start', '<=', Carbon::now())->get();
 
-    	return view('schedule.index', compact(['schedules']));
+    	return view('schedule.index', compact('schedules'));
     }
 
     public function create() {

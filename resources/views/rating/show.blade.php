@@ -91,8 +91,6 @@
             chart.draw(chartData, options);
 
             $(document).ready(function () {
-                //TODO: исправить это недразумение
-
                 $('text:contains("us|")').each(function() {
                     var user_id = $(this).html().split('|')[1];
                     var student_name = $(this).html().split('|')[2];

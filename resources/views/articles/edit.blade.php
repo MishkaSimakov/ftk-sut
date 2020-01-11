@@ -29,7 +29,7 @@
                             <div class="col-md-7 mb-5">
                                 <input type="hidden" name="body" id="body">
 
-                                <div id="editor" class="form-control">
+                                <div id="editor">
                                     {!! $article->body !!}
                                 </div>
                             </div>

@@ -15,7 +15,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $schedules = Schedule::whereDate('date_start', '>=', Carbon::now()->subWeek(1))->get();
+        $schedules = Schedule::whereDate('date_start', '>', Carbon::now())->get()->sortByDesc('date_start');
 
         return view('admin.index', compact('schedules'));
     }

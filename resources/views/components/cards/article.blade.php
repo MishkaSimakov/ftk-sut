@@ -1,15 +1,15 @@
 <div class="card m-2">
     <div class="card-header">
-        <h1 class="d-inline-block m-0 p-0" title="{{ $article->title }}">
-            <a href="{{ $article->url }}">{{ \Illuminate\Support\Str::limit($article->title, 45, '...') }}</a>
+        <h1 class="d-inline-block m-0 p-0">
+            <a title="{{ $article->title }}" href="{{ $article->url }}">{{ \Illuminate\Support\Str::limit($article->title, 45, '...') }}</a>
 
             @can('update', $article)
-                <a class="text-decoration-none" href="{{ route('article.edit', compact('article')) }}">
+                <a title="Редактировать" class="text-decoration-none" href="{{ route('article.edit', compact('article')) }}">
                     <span class="fa-xs ml-2 fas fa-cog"></span>
                 </a>
             @endcan
             @can('delete', $article)
-                <a class="text-primary" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
+                <a title="Удалить" class="text-primary" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
                     <span class="fa-xs ml-2 fas fa-trash"></span>
                 </a>
 

@@ -12296,3 +12296,24 @@ button {
   margin-bottom: 30px;
 }
 
+.schedule__image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.schedule__image {
+  width: 100%;
+}
+
+@media (min-width: 576px) {
+  .schedule__image {
+    position: absolute;
+    width: auto;
+    max-height: 100%;
+  }
+}
+
+main {
+  min-height: 80vh;
+}
+

@@ -4,4 +4,22 @@
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 30px;
+
+    &__image-wrapper {
+        position: relative;
+        overflow: hidden;
+    }
+
+    &__image {
+        width: 100%;
+    }
+
+    @media (min-width: 576px) {
+        &__image {
+            position: absolute;
+            width: auto;
+
+            max-height: 100%;
+        }
+    }
 }

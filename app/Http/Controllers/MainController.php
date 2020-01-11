@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Advertisement;
+use App\Article;
 use App\Teacher;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class MainController extends Controller
     {
         $teachers = Teacher::all();
         $advantages = config('advantages');
+        $articles = Article::get()->sortByDesc('points')->take(3);
 
-        return view('main', compact('teachers', 'advantages'));
+        return view('main', compact('teachers', 'advantages', 'articles'));
     }
 }
