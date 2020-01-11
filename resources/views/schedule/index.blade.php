@@ -8,16 +8,10 @@
     @endadmin
 
     <div class="container">
-        @component('components.card-lists.schedules', ['schedules' => $lastSchedules])@endcomponent
+        @component('components.card-lists.schedules', ['schedules' => $schedules])@endcomponent
     </div>
 
-    @if (!$oldSchedules->isEmpty())
-        <h2 class="m-2 text-center">Архив</h2>
-    @endif
-
-    <div class="container">
-        @component('components.card-lists.schedules', ['schedules' => $oldSchedules])@endcomponent
-    </div>
+{{--    TODO: сделать отдельный view для архивных событий (все события) --}}
 @endsection
 
 @auth

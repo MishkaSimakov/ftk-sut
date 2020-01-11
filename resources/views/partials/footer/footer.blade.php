@@ -8,7 +8,7 @@
             </a>
             <div class="contacts__telephone">
                 <span class="contacts__telephone--title">Контактный телефон:</span>
-                <span class="contacts__telephone--number">+7 (989) 709-14-84</span>
+                <span class="contacts__telephone--number">+7 (8639) 24-28-21</span>
             </div>
             <div class="contacts__address">
                 <span class="contacts__address--title">Адрес:</span>

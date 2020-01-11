@@ -56,7 +56,7 @@
                     groupWidth: '60%'
                 },
                 isStacked: true,
-                colors: ['#9999ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
+                colors: ['#ff0000', '#ffff00', '#000080', '#ff00ff', '#993366', '#ffffcc', '#ccffff', '#00ff00', '#ff8080'],
                 hAxis: {
                     gridlines: {
                         color: 'transparent'

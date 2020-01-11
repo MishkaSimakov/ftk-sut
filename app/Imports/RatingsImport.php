@@ -13,12 +13,16 @@ class RatingsImport implements ToModel
         return new Point([
             'user_name' => $row[0],
 
-            'points_lessons' => $row[2],
-            'points_games' => $row[3],
-            'points_press' => $row[4],
-            'points_travels' => $row[5],
-            'points_local_competition' => $row[6],
-            'points_global_competition' => $row[7],
+            'games' => $row[3],
+            'press' => $row[4],
+            'travels' => $row[5],
+            'local_competitions' => $row[6],
+            'global_competitions' => $row[7],
+
+            'robotics_lessons' => $row[8],
+            'electronics_lessons' => $row[9],
+            'creation_lessons' => $row[10],
+            'intelligence_lessons' => $row[11],
         ]);
     }
 }

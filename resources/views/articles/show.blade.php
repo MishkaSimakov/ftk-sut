@@ -32,11 +32,9 @@
             <h2 class="ml-2">Галерея:</h2>
 
             <div class="container">
-{{--                TODO: изображения не отображаются (с lity всё хорошо) --}}
-
                 @foreach($article->getMedia() as $photo)
                     <div class="col-md-2 m-2 p-0 d-inline-block">
-                        <img class="mw-100 mh-100 rounded" src="{{ $photo->path }}" style="cursor: pointer" data-lity data-lity-target="{{ $photo->path }}">
+                        <img class="mw-100 mh-100 rounded" src="/image/{{ $photo->getUrl() }}" style="cursor: pointer" data-lity data-lity-target="/image/{{ $photo->getUrl() }}">
                     </div>
                 @endforeach
             </div>

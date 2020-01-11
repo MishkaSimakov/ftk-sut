@@ -75,7 +75,7 @@
         })
 
         $('#dropzone').dropzone({
-            url: "{{ route('api.image.upload', compact('article')) }}",
+            url: "{{ route('api.article.upload_image', compact('article')) }}",
             maxFiles: 15,
             acceptedFiles: 'image/*',
 

@@ -57,6 +57,10 @@ class RatingController extends Controller
             $student = Student::firstOrCreate(['name' => $key]);
 
             foreach ($row as $category => $point) {
+                if (is_null($categories->get($category))) {
+                    dd($category);
+                }
+
                 $student->award($rating, $categories->get($category), $point);
             }
         }
@@ -76,12 +80,16 @@ class RatingController extends Controller
 
         foreach ($ratingRows as $row) {
             $points = Arr::add($points, $row[0], array_filter([
-                'lessons' => $row[2],
                 'games' => $row[3],
                 'press' => $row[4],
                 'travels' => $row[5],
                 'local_competitions' => $row[6],
-                'global_competitions' => $row[7]
+                'global_competitions' => $row[7],
+
+                'robotics_lessons' => $row[8],
+                'electronics_lessons' => $row[9],
+                'creation_lessons' => $row[10],
+                'intelligence_lessons' => $row[11],
             ]));
         }
 

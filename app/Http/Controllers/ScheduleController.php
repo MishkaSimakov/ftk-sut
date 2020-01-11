@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Schedule;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ScheduleController extends Controller
@@ -14,10 +15,10 @@ class ScheduleController extends Controller
     public function index() {
     	$schedule = Schedule::all();
 
-    	$lastSchedules = Schedule::whereDate('date_start', '>', Carbon::now())->get();
-        $oldSchedules = Schedule::whereDate('date_start', '<=', Carbon::now())->get();
+    	$schedules = Schedule::whereDate('date_start', '>', Carbon::now())->get()->sortByDesc('date_start');
+//        $oldSchedules = Schedule::whereDate('date_start', '<=', Carbon::now())->get();
 
-    	return view('schedule.index', compact(['oldSchedules', 'lastSchedules']));
+    	return view('schedule.index', compact(['schedules']));
     }
 
     public function create() {
@@ -35,6 +36,17 @@ class ScheduleController extends Controller
         $schedule->date_end = new Carbon(str_replace('T', ' ', $request->date_end));
 
     	$schedule->save();
+
+
+        $image = $request->file;
+
+        $filename = $image->getClientOriginalName();
+        $name = str_replace("." . $image->getClientOriginalExtension(), "", $filename);
+
+        $schedule->addMedia($image->path())
+            ->usingFileName($filename)
+            ->usingName($name)
+            ->toMediaCollection();
 
     	return redirect(route('schedule.index'));
     }

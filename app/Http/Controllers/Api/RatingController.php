@@ -7,6 +7,7 @@ use App\Rating;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
 use function MongoDB\BSON\toJSON;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +33,10 @@ class RatingController extends Controller
 
             array_push($chartData, $studentPoints);
         }
+
+        $chartData = array_values(Arr::sort($chartData, function ($student) {
+            return $student[19];
+        }));
 
         return json_encode($chartData);
     }

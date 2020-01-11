@@ -21,10 +21,14 @@ class CategorySeeder extends Seeder
     protected function categories(): array
     {
         return [
-            'Посещение занятий' => 'lessons',
+            'Робототехника - занятия' => 'robotics_lessons',
+            'Электроника - занятия' => 'electronics_lessons',
+            'Мастерская творчества - занятия' => 'creation_lessons',
+            'Интеллект - занятия' => 'intelligence_lessons',
+
             'Игры в клубе' => 'games',
-            'Походы и экскурсии' => 'travels',
             'Газета и группа ВКонтанкте' => 'press',
+            'Походы и экскурсии' => 'travels',
             'Городские соревнования' => 'local_competitions',
             'Всероссийские, международные соревнования' => 'global_competitions',
         ];

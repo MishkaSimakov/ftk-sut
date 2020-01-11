@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Article;
+use App\Schedule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\UploadedFile;
@@ -10,7 +11,7 @@ use Illuminate\Support\Str;
 
 class ImageController extends Controller
 {
-    public function upload(Article $article, Request $request)
+    public function uploadArticleImage(Article $article, Request $request)
     {
         foreach ($request->allFiles() as $photo) {
             /** @var UploadedFile $photo */

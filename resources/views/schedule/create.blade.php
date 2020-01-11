@@ -11,7 +11,7 @@
                 <div class="card-header">Создать событие</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('schedule.store') }}">
+                    <form method="POST" action="{{ route('schedule.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -35,6 +35,14 @@
 
                             <div class="col-md-6">
                                 <input id="date_end" type="datetime-local" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}T{{ Carbon\Carbon::now()->format('H:i') }}" class="form-control" name="date_end" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="file" class="col-md-4 col-form-label text-md-right">Изображение</label>
+
+                            <div class="col-md-6">
+                                <input id="file" type="file" class="form-control-file" accept="image/*" name="file" required>
                             </div>
                         </div>
 

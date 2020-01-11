@@ -25,6 +25,12 @@ class TeacherSeeder extends Seeder
                 'middle_name' => 'Дмитриевич',
                 'job_title' => 'Преподователь по робототехнике',
             ],
+            [
+                'last_name' => 'Маркин',
+                'first_name' => 'Игорь',
+                'middle_name' => 'Вячеславович',
+                'job_title' => 'Преподователь по web-программированию',
+            ]
         ]);
 
         $teachers->each(function ($teacher) {

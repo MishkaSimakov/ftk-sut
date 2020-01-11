@@ -81,8 +81,6 @@ class ArticleController extends Controller
     {
         $article->update(['is_published' => true]);
 
-        dd($article);
-
         UserWriteArticle::dispatch($article);
 
         return redirect()->back();
