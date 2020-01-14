@@ -1,7 +1,7 @@
 @extends('layouts.page')
 
 @section('content')
-    <h1 class="text-center m-2">Домик</h1>
+    <h1 class="text-center m-2">{{ Auth::user()->name }}</h1>
 
     @if ($achievements)
         @component('components.sections.section', ['header' => 'Достижения'])

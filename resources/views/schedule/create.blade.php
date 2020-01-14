@@ -15,10 +15,18 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="title" class="col-md-4 col-form-label text-md-right">Описание</label>
+                            <label for="title" class="col-md-4 col-form-label text-md-right">Название</label>
 
                             <div class="col-md-6">
                                 <input id="title" type="text" class="form-control" name="title" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="subtitle" class="col-md-4 col-form-label text-md-right">Дополнительно</label>
+
+                            <div class="col-md-6">
+                                <input id="subtitle" type="text" class="form-control" name="subtitle">
                             </div>
                         </div>
 

@@ -7,7 +7,9 @@
         <h2 class="ml-2"><a href="{{ route('article.create') }}"><i class="fas fa-plus mr-1"></i>Написать статью</a></h2>
     @endauth
 
-    @component('components.card-lists.articles', ['articles' => $articles])@endcomponent
+    <div class="container">
+        @component('components.card-lists.articles', ['articles' => $articles])@endcomponent
+    </div>
 
     <div class="d-flex">
         <div class="mx-auto">

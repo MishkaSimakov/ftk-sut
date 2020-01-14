@@ -26,6 +26,7 @@ class ScheduleController extends Controller
     	$schedule = Schedule::make();
 
     	$schedule->title = $request->title;
+    	$schedule->subtitle = $request->subtitle;
 
         $schedule->student_count = 0;
 

@@ -30,7 +30,7 @@ class CategorySeeder extends Seeder
             'Газета и группа ВКонтанкте' => 'press',
             'Походы и экскурсии' => 'travels',
             'Городские соревнования' => 'local_competitions',
-            'Всероссийские, международные соревнования' => 'global_competitions',
+            'Областные, всероссийские, международные соревнования' => 'global_competitions',
         ];
     }
 }

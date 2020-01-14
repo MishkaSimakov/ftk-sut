@@ -32,8 +32,8 @@
             chartData.addColumn('string', 'Имя');
 
             @foreach ($categories as $category)
-            chartData.addColumn('number', '{{ $category->title }}');
-            chartData.addColumn({'type': 'string', 'role': 'style'}, '');
+                chartData.addColumn('number', '{{ $category->title }}');
+                chartData.addColumn({'type': 'string', 'role': 'style'}, '');
             @endforeach
 
             chartData.addColumn({'type': 'number', 'role': 'annotation'}, '');
@@ -91,11 +91,11 @@
             chart.draw(chartData, options);
 
             $(document).ready(function () {
-                $('text:contains("us|")').each(function() {
+                $($('text:contains("us|")').get().reverse()).each(function(index) {
                     var user_id = $(this).html().split('|')[1];
                     var student_name = $(this).html().split('|')[2];
 
-                    $(this).html('<a style="color: #3490dc !important;" href="{{ env('APP_URL') }}/user/' + user_id + '">' + student_name + '</a>');
+                    $(this).html('<a style="color: #3490dc !important;" href="{{ env('APP_URL') }}/user/' + user_id + '">' + student_name + '</a> ' + (index + 1));
                 });
             });
         }
