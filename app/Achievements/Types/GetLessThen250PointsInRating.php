@@ -13,6 +13,7 @@ class GetLessThen250PointsInRating extends AchievementType
 
     public function qualifier($point)
     {
+//        TODO: это криво работает ($point->amount это очки лишь за одну категорию)
         return $point->amount < 250;
     }
 }
