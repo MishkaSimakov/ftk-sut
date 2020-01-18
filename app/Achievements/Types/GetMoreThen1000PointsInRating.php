@@ -14,6 +14,8 @@ class GetMoreThen1000PointsInRating extends AchievementType
 
     public function qualifier($point)
     {
-        return $point->amount > 1000;
+        $points = $point->student->points->where('rating_id', $point->rating_id);
+
+        return $points->sum('amount') > 1000;
     }
 }
