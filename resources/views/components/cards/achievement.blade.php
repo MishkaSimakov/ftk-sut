@@ -9,6 +9,10 @@
         <h5 class="card-title">{{ $achievement->name }}</h5>
         <p class="card-text">{{ $achievement->description }}</p>
 
-        <p class="card-text text-muted">Это достижение есть у {{ round($achievement->students->count() / \App\Student::all()->count() * 100) }}% пользователей</p>
+        @if( $studentsCount = $achievement->students->count())
+            <p class="card-text text-muted">Это достижение есть у
+                {{ round( $studentsCount / \App\Student::all()->count() * 100) }}%
+            пользователей</p>
+        @endif
     </div>
 </div>

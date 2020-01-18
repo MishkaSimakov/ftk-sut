@@ -16,17 +16,12 @@ class Rating extends Model
 
     public function students()
     {
-        return $this->belongsToMany(Student::class, 'points');
-    }
-
-    public function uniqueStudents()
-    {
-        return $this->belongsToMany(Student::class, 'points')->get()->unique('name');
+        return $this->belongsToMany(Student::class, 'points')->distinct();
     }
 
     public function getNameAttribute()
     {
-        return $this->date->locale('ru')->isoFormat($this->type == 'monthly' ? 'Рейтинг за MMMM YYYY' : 'Рейтинг за YYYY год');;
+        return $this->date->locale('ru')->isoFormat($this->type == 'monthly' ? 'Рейтинг за MMMM YYYY' : 'Рейтинг за YYYY год');
     }
 
     public function getUrlAttribute()

@@ -16,7 +16,7 @@ class RatingController extends Controller
     public function chart(Request $request)
     {
         $rating = Rating::where('date', $request->date)->first();
-        $students = $rating->uniqueStudents();
+        $students = $rating->students()->with(['user', 'points'])->get();
 
         $categories = PointCategory::categories();
 

@@ -71,3 +71,4 @@ Auth::routes([
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.index')->middleware(['auth', 'admin']);
+Route::view('/settings', 'settings')->name('settings');

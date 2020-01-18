@@ -46,7 +46,7 @@ class Student extends Model
 
     public function getAmount(Rating $rating, PointCategory $category)
     {
-        $point = $this->points()->where([['rating_id', $rating->id], ['category_id', $category->id]])->first();
+        $point = $this->points->where('rating_id', $rating->id)->where('category_id', $category->id)->first();
 
         return $point ? $point->amount : 0;
     }
