@@ -25,7 +25,7 @@ class Achievement extends Model
         $this->users()->attach($user);
     }
 
-    public function users() {
-        return $this->belongsToMany(User::class, 'user_achievements');
+    public function students() {
+        return $this->belongsToMany(Student::class, 'student_achievements');
     }
 }

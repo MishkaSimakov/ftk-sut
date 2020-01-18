@@ -66,7 +66,7 @@ class Student extends Model
 
     public function achievements()
     {
-        return $this->belongsToMany(Achievement::class, 'student_achievement');
+        return $this->belongsToMany(Achievement::class, 'student_achievements');
     }
 
     public function points()

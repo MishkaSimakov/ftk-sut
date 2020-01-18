@@ -12,6 +12,7 @@ use Illuminate\Support\ServiceProvider;
 
 class AchievementsServiceProvider extends ServiceProvider
 {
+
     protected $achievements = [
         'points' => [
             GetMoreThen1000PointsInRating::class,
