@@ -98,9 +98,11 @@ class RatingStoreTest extends TestCase
 
     public function test_it_awards_get_more_then_1000_points_()
     {
+        $this->postRating();
 
         $achivement = Achievement::where('name', 'Начинающий новичок')->first();
-        dd($achivement->students->count());
+
+        $this->assertCount(121, $achivement->students);
     }
 
     protected function expectedStudent()
