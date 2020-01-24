@@ -14,13 +14,13 @@ class DatabaseSeeder extends Seeder
     {
         $admin = factory(User::class)->create([
             'is_admin' => true,
-            'login' => 'admin',
-            'name' => 'Симаков Михаил'
+            'name' => 'Симаков Михаил',
+            'email' => 'msimakov661@gmail.com'
         ]);
 
         $admin = factory(User::class)->create([
             'is_admin' => true,
-            'login' => 'super_admin',
+            'email' => 'admin@site.com'
         ]);
 
         $this->call(AchievementSeeder::class);

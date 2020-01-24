@@ -14,10 +14,10 @@
                             @method("PUT")
 
                             <div class="form-group row">
-                                <label for="login" class="col-sm-4 col-form-label text-md-right">Логин</label>
+                                <label for="email" class="col-sm-4 col-form-label text-md-right">Email</label>
 
                                 <div class="col-md-6">
-                                    <input id="login" type="text" class="form-control" name="login" value="{{ Auth::user()->login }}" autofocus>
+                                    <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" autofocus>
                                 </div>
                             </div>
 

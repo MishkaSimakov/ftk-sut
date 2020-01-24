@@ -28,12 +28,12 @@
 
 
 
-  <form id="publish-form-{{ $article->id }}" action="{{ $article->publishUrl }}" method="POST" class="d-none">
+  <form id="publish-form-{{ $article->id }}" action="{{ route('article.publish', compact('article')) }}" method="POST" class="d-none">
     @method('PUT')
     @csrf
   </form>
 
-  <form id="delete-form-{{ $article->id }}" action="{{ $article->deleteUrl }}" method="POST" class="d-none">
+  <form id="delete-form-{{ $article->id }}" action="{{ route('article.destroy', compact('article')) }}" method="POST" class="d-none">
     @method('DELETE')
     @csrf
   </form>

@@ -90,7 +90,7 @@ class ArticleController extends Controller
     {
         $article->delete();
 
-        return redirect()->back();
+        return redirect(route('article.index'));
     }
 
     public function edit(Article $article)

@@ -11,19 +11,17 @@ use Illuminate\Validation\Rule;
 
 class AccountController extends Controller
 {
-    public function showSettingsForm()
+    public function show()
     {
         return view('auth.settings');
     }
 
-    public function saveSettings(Request $request)
+    public function save(Request $request)
     {
         $validatedData = $request->validate([
-            'login' => [
+            'email' => [
                 'required',
-                'string',
-                'min: 5',
-                'max:255',
+                'email',
                 Rule::unique('users')->ignore(Auth::user()->id)
             ],
             'birthday' => 'date'
@@ -36,7 +34,7 @@ class AccountController extends Controller
         }
 
         Auth::user()->update([
-           'login' => $validatedData['login'],
+           'email' => $validatedData['email'],
         ]);
 
         return redirect()->back();

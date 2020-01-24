@@ -48,10 +48,8 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $user = User::where('id', $data['user_id'])->first();
-
         $settings = [
-            'register_code' => 'required|digits:5|in:' . $user->register_code,
+            'register_code' => 'required|exists:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ];
@@ -67,7 +65,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::where('id', $data['user_id'])->first();
+        $user = User::where('register_code', $data['register_code'])->first();
 
         $user->update(['email' => $data['email']]);
         $user->update(['password' => Hash::make($data['password'])]);

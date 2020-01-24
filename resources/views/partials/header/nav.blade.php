@@ -35,6 +35,7 @@
         </ul>
         <ul class="user-navigation navbar-nav">
             @guest
+                <li class="user-navigation__item nav-item"><a class="user-navigation__link nav-link" href="{{ route('register') }}">Регистрация</a></li>
                 <li class="user-navigation__item nav-item"><a class="user-navigation__link nav-link" href="{{ route('login') }}">Вход</a></li>
             @else
                 <li class="user-navigation__item nav-item dropdown">
@@ -53,7 +54,7 @@
                             Личный кабинет
                         </a>
 
-                        <a class="user-navigation__link dropdown-item" href="{{ route('settings') }}">
+                        <a class="user-navigation__link dropdown-item" href="{{ route('settings.show') }}">
                             Натройки аккаунта
                         </a>
 

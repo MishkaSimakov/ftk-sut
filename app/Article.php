@@ -16,17 +16,9 @@ class Article extends Model implements HasMedia
 
     protected $guarded = [];
 
-    public function getPublishUrlAttribute() {
-    	return route('article.publish', $this);
-    }
-
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_likes');
-    }
-
-    public function getDeleteUrlAttribute() {
-    	return route('article.destroy', $this);
     }
 
     public function user(): BelongsTo

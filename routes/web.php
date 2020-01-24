@@ -61,14 +61,16 @@ Route::resource('schedule', 'ScheduleController')->middleware(['auth', 'admin'])
 
 
 Auth::routes([
-    'register' => false,
+    'register' => true,
     'reset' => false,
     'confirm' => false,
     'verify' => false,
-    'settings' => true
 ]);
 
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.index')->middleware(['auth', 'admin']);
-Route::view('/settings', 'settings')->name('settings');
+Route::get('/settings', 'Auth\AccountController@show')->name('settings.show');
+Route::put('/settings/update', 'Auth\AccountController@save')->name('settings.update');
+Route::put('/settings/password', 'Auth\AccountController@changePassword')->name('settings.changePassword');
+Route::view('/register/help', 'auth.help')->name('register.help');
