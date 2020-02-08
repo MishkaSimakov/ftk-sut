@@ -68,6 +68,11 @@ class Student extends Model
         return $this->belongsToMany(Achievement::class, 'student_achievements');
     }
 
+    public function clubs()
+    {
+        return $this->belongsToMany(Club::class, 'student_clubs');
+    }
+
     public function points()
     {
         return $this->hasMany(Point::class);

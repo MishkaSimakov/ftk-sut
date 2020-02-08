@@ -30,7 +30,6 @@
     <div class="footer__copyright copyright">
         <p class="copyright__title"><span class="copyright__letter">©</span> {{ now()->year }}</p>
         <ul class="copyright__authors">
-            <li class="copyright__author"><a href="https://vk.com/devdimaorg" class="copyright__author__link">Дмитрий Буглак</a></li>
             <li class="copyright__author"><a href="https://vk.com/simakovkin" class="copyright__author__link">Михаил Симаков</a></li>
         </ul>
     </div>

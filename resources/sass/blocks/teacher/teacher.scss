@@ -6,7 +6,10 @@
     flex-direction: column;
     height: auto;
     margin-bottom: 30px;
+
+
     &__photo {
+        object-fit: cover;
         width: 140px;
         height: 140px;
         margin-bottom: 20px;

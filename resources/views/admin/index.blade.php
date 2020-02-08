@@ -34,6 +34,44 @@
                         </div>
                     </div>
                 @endif
+
+                <div class="card mt-3">
+                    <div class="card-header">Получение регистрационного кода</div>
+
+                    <div class="card-body">
+                        <form id="form" method="POST" action="">
+                            @csrf
+
+                            <div class="form-group row">
+                                <label for="user" class="col-md-4 col-form-label text-md-right">Имя пользователя</label>
+
+                                <div class="col-md-7">
+                                    <input oninput="get_code(this)" list="users" id="user" type="text" class="form-control" name="user" required>
+                                </div>
+
+                                <datalist id="users">
+                                    @foreach($students as $student)
+                                        <option>{{ $student->user->name}}</option>
+                                    @endforeach
+                                </datalist>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="user" class="col-md-4 col-form-label text-md-right">Регистрационный код</label>
+
+                                <div class="col-md-7 py-2">
+                                    <span id="register_code">...</span>
+                                </div>
+
+                                <datalist id="users">
+                                    @foreach($students as $student)
+                                        <option>{{ $student->user->name}}</option>
+                                    @endforeach
+                                </datalist>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -48,8 +86,22 @@
                     $('.spoiler_body_' + $(this).attr('data-schedule')).toggle('normal');
                 });
             });
-
-
         });
+
+        function get_code(input) {
+            console.log($(input).val())
+
+            $.ajax({
+                url: "{{ route('api.admin.get_code') }}",
+                method: "POST",
+                dataType: 'json',
+                data: {
+                    name: $(input).val(),
+                },
+                success: function (register_code) {
+                    $('#register_code').html(register_code)
+                }
+            })
+        }
     </script>
 @endpush

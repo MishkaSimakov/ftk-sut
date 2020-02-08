@@ -9,7 +9,7 @@
                     <div class="card-header">Настроить аккаунт</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('settings.update') }}">
+                        <form id="form" method="POST" action="{{ route('settings.update') }}">
                             @csrf
                             @method("PUT")
 
@@ -31,6 +31,18 @@
                                 </div>
                             @endif
 
+                            <div class="form-group row">
+                                <label for="editor" class="col-md-4 col-form-label text-md-right">О себе</label>
+
+                                <div class="col-md-7 mb-5">
+                                    <input type="hidden" name="description" id="description">
+
+                                    <div id="editor">
+                                        {!! Auth::user()->description !!}
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
@@ -46,7 +58,7 @@
                     <div class="card-header">Изменить пароль</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('settings.changePassword') }}">
+                        <form method="POST" action="{{ route('settings.update') }}">
                             @csrf
                             @method("PUT")
 
@@ -54,7 +66,7 @@
                                 <label for="password" class="col-sm-4 col-form-label text-md-right">Пароль</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" autofocus>
+                                    <input type="password" id="password" class="form-control" name="password" autofocus>
                                 </div>
                             </div>
 
@@ -81,3 +93,19 @@
     </div>
 
 @endsection
+
+@push('script')
+    {{--  text editor  --}}
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow',
+        });
+
+        $('#form').submit(function () {
+            $('#description').val($('.ql-editor').html())
+        })
+    </script>
+@endpush

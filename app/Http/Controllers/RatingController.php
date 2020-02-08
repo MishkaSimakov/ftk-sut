@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRating;
 use App\PointCategory;
 use App\Imports\RatingsImport;
 use App\Rating;
@@ -33,22 +34,17 @@ class RatingController extends Controller
         return view('rating.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreRating $request)
     {
         $rows = Excel::toCollection(new RatingsImport, request()->file('file'));
 
         $rating = Rating::make();
 
         $rating->type = $request->type ? 'monthly' : 'yearly';
-
-        $rating->date = new Carbon($request->date);
-
-        if (Rating::whereDate('date', $rating->date)->exists()) {
-//            TODO: сделать вместо этого валидацию
-            return redirect()->back()->with('date', 'Рейтинг с такой датой уже существует.');
-        }
+        $rating->date = Carbon::parse($request->date);
 
         $rating->save();
+
 
         $categories = PointCategory::categories();
 
@@ -58,10 +54,6 @@ class RatingController extends Controller
             $student = Student::firstOrCreate(['name' => $key]);
 
             foreach ($row as $category => $point) {
-                if (is_null($categories->get($category))) {
-                    dd($category);
-                }
-
                 $student->award($rating, $categories->get($category), $point);
             }
         }

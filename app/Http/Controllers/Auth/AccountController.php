@@ -11,44 +11,43 @@ use Illuminate\Validation\Rule;
 
 class AccountController extends Controller
 {
-    public function show()
+    public function settings()
     {
-        return view('auth.settings');
+        return view('user.settings');
     }
 
-    public function save(Request $request)
+    public function update(Request $request)
     {
-        $validatedData = $request->validate([
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('users')->ignore(Auth::user()->id)
-            ],
-            'birthday' => 'date'
-        ]);
+        if ($request->password) {
+            $validatedData = $request->validate([
+                'password' => 'required|string|min:6|confirmed',
+            ]);
 
-        if (Auth::user()->student) {
-            Auth::user()->student->update([
-                'birthday' => Carbon::parse($validatedData['birthday']),
+            Auth::user()->update([
+                'password' => Hash::make($validatedData['password'])
+            ]);
+        } else {
+            $validatedData = $request->validate([
+                'email' => [
+                    'required',
+                    'email',
+                    Rule::unique('users')->ignore(Auth::user()->id)
+                ],
+                'birthday' => 'date',
+                'description' => 'string|max:500',
+            ]);
+
+            if (Auth::user()->student) {
+                Auth::user()->student->update([
+                    'birthday' => Carbon::parse($validatedData['birthday']),
+                ]);
+            }
+
+            Auth::user()->update([
+                'email' => $validatedData['email'],
+                'description' => $validatedData['description'],
             ]);
         }
-
-        Auth::user()->update([
-           'email' => $validatedData['email'],
-        ]);
-
-        return redirect()->back();
-    }
-
-    public function changePassword(Request $request)
-    {
-        $validatedData = $request->validate([
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-
-        Auth::user()->update([
-            'password' => Hash::make($validatedData['password'])
-        ]);
 
         return redirect()->back();
     }

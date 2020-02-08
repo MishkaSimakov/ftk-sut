@@ -25,3 +25,6 @@ Route::post('/article/points', 'Api\ArticleController@points')->name('api.articl
 Route::post('/schedule/add_student', 'Api\ScheduleController@add_student')->name('api.schedule.add_student');
 
 Route::post('article/{article}/image', 'Api\ImageController@uploadArticleImage')->name('api.article.upload_image');
+
+
+Route::post('/admin/code', 'Api\AdminController@code')->name('api.admin.get_code');

@@ -11,10 +11,10 @@ use function MongoDB\BSON\toJSON;
 
 class AdminController extends Controller
 {
-    public function register_link(Request $request)
+    public function code(Request $request)
     {
-        $link = User::where('name', $request->name)->first()->registerLink;
+        $code = optional(User::where('name', $request->name)->first())->register_code;
 
-        return json_encode($link);
+        return json_encode($code);
     }
 }

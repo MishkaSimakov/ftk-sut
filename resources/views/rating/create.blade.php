@@ -37,10 +37,10 @@
                             <div class="col-md-6">
                                 <input id="date" type="month" value="{{ Carbon\Carbon::now()->format('Y-m') }}" class="form-control {{ $errors->has('date') ? 'is-invalid' : '' }}" name="date" required>
 
-                                @if (session('date'))
-                                    <div class="invalid-feedback d-block">
-                                        {{ session('date') }}
-                                    </div>
+                                @if ($errors->has('date'))
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('date') }}</strong>
+                                        </span>
                                 @endif
                             </div>
                         </div>

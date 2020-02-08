@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -16,7 +17,8 @@ class AdminController extends Controller
     public function index()
     {
         $schedules = Schedule::whereDate('date_start', '>', Carbon::now())->get()->sortByDesc('date_start');
+        $students = Student::with('user')->get();
 
-        return view('admin.index', compact('schedules'));
+        return view('admin.index', compact(['schedules', 'students']));
     }
 }

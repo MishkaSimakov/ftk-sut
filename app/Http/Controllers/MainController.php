@@ -13,8 +13,7 @@ class MainController extends Controller
     {
         $teachers = Teacher::all();
         $advantages = config('advantages');
-        $articles = Article::get()->sortByDesc('points')->take(3);
 
-        return view('main', compact('teachers', 'advantages', 'articles'));
+        return view('main', compact('teachers', 'advantages'));
     }
 }

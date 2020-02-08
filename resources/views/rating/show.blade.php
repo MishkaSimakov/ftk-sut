@@ -95,7 +95,8 @@
                     var user_id = $(this).html().split('|')[1];
                     var student_name = $(this).html().split('|')[2];
 
-                    $(this).html('<a style="color: #3490dc !important;" href="{{ env('APP_URL') }}/user/' + user_id + '">' + student_name + '</a> ' + (index + 1));
+                    $(this).html((index + 1) + ' <a style="width: 100% !important; color: #3490dc !important;" href="{{ env('APP_URL') }}/user/' + user_id + '">' + student_name + '</a>');
+                    $(this).attr('text-anchor', 'start').attr('x', '5%')
                 });
             });
         }

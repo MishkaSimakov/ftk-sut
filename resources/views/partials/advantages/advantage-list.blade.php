@@ -6,6 +6,7 @@
                     <h2>{{ $advantage['header'] }}</h2>
                     <p class="lead">{{ $advantage['body'] }}</p>
                 </div>
+
                 <div class="col-md-5 advantage__image-wrapper">
                     <img class="rounded advantage__image"
                          alt="{{ $advantage['header'] }}"

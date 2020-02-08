@@ -9,11 +9,11 @@
                 </a>
             @endcan
             @can('delete', $article)
-                <a title="Удалить" class="text-primary" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
+                <a title="Удалить" class="text-primary" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $article->id }}').submit();">
                     <span class="fa-xs ml-2 fas fa-trash"></span>
                 </a>
 
-                <form method="POST" action="{{ route('article.destroy', compact('article')) }}" id="delete-form">
+                <form method="POST" action="{{ route('article.destroy', compact('article')) }}" id="delete-form-{{ $article->id }}">
                     @csrf
                     @method("DELETE")
                 </form>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="card-body">
-        <p>{!! \Illuminate\Support\Str::limit($article->body, 500, '...') !!}</p>
+        <p>{!! \Illuminate\Support\Str::limit($article->body, 750, '...') !!}</p>
 
         @if($article->hasMedia())
             <p class="text-muted m-0">+{{ count($article->getMedia()) }} фото</p>
@@ -51,7 +51,7 @@
 </div>
 
 
-{{--<div class="shadow rounded-lg p-3">--}}
+{{--<div class="shadow rounded-lg p-3 mt-3 m-2">--}}
 {{--    <div class="">--}}
 {{--        <h1 class="d-inline-block m-0 p-0">--}}
 {{--            <a title="{{ $article->title }}" href="{{ $article->url }}">{{ \Illuminate\Support\Str::limit($article->title, 45, '...') }}</a>--}}

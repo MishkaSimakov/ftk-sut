@@ -4,7 +4,7 @@
     <h1 class="text-center m-2">В клубе на этой неделе</h1>
 
     @admin
-        <h2 class="ml-2"><a href="{{ route('schedule.create') }}"><i class="fas fa-plus mr-1"></i>Добавить событие</a></h2>
+        <h2 class="ml-2 mb-2"><a href="{{ route('schedule.create') }}"><i class="fas fa-plus mr-1"></i>Добавить событие</a></h2>
     @endadmin
 
     <div class="container">
