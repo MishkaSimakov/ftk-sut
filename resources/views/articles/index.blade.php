@@ -24,7 +24,7 @@
             function like(article) {
                 $('.point_count' + article).html(Number($('.point_count' + article).html()) + 1);
 
-                $('#like_' + article).html('<a id="link" onclick="unlike(' + article +')"><i style="cursor: pointer;" class="text-primary fas fa-heart"></i></a>');
+                $('#like_' + article).html('<a style="color: rgb(255, 51, 71) !important;" id="link" onclick="unlike(' + article + ')"><i style="cursor: pointer;" class="fas fa-heart"></i></a>');
 
                 $.ajax({
                     url: "{{ route('api.article.points') }}",
@@ -41,7 +41,7 @@
             function unlike(article) {
                 $('.point_count' + article).html(Number($('.point_count' + article).html()) - 1);
 
-                $('#like_' + article).html('<a id="link" onclick="like(' + article + ')"><i style="cursor: pointer;" class="text-primary far fa-heart"></i></a>');
+                $('#like_' + article).html('<a style="color: rgb(130, 138, 153) !important;" id="link" onclick="like(' + article + ')"><i style="cursor: pointer;" class="far fa-heart"></i></a>');
 
                 $.ajax({
                     url: "{{ route('api.article.points') }}",

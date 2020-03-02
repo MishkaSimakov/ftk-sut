@@ -2,10 +2,10 @@
 
 namespace App\Achievements\Events;
 
-use App\Point;
+use App\Rating;
+use App\Student;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class UserEarnedPoints
 {
@@ -16,11 +16,12 @@ class UserEarnedPoints
     /**
      * Create a new event instance.
      *
-     * @return void
-     * @var $point
+     * @param Rating $rating
+     * @param Student $student
      */
-    public function __construct(Point $point)
+    public function __construct(Rating $rating, Student $student)
     {
-        $this->point = $point;
+        $this->rating = $rating;
+        $this->student = $student;
     }
 }

@@ -3,7 +3,21 @@
 @section('content')
     <h1 class="text-center m-2">{{ $rating->name }}</h1>
 
-    <div id="rating_chart" style="max-width: 97%"></div>
+    <div style="display: block;" id="rating_chart"></div>
+
+    <div style="display: flex;" id="loader" class="mt-5 justify-content-center">
+        <div class="text-gray-600 spinner-border" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only"></span>
+        </div>
+
+        <span class="text-gray-600 ml-3 my-auto h3">
+            <strong>Загрузка...</strong><br>
+        </span>
+    </div>
+
+    <div class="d-none" id="names">
+
+    </div>
 @endsection
 
 @push('script')
@@ -20,13 +34,27 @@
                     date: '{{ $rating->date->format('Y-m-d') }}',
                 },
                 success: function (data) {
-                    drawChart(data)
+                    var chart_data = [];
+                    var user_data = [];
+
+                    data.forEach(function(value) {
+                        chart_data.push(value.slice(0, 20));
+                        user_data.push(value.slice(20));
+                    });
+
+                    add_users(user_data)
+                    drawChart(chart_data)
                 }
             })
         }
 
+        function add_users(user_data) {
+            user_data.forEach(function (user) {
+                $('#names').append('<span data-id=' + user[0][0] + ' data-link=' + user[0][2] + '>' + user[0][1] + '</span>')
+            })
+        }
 
-        function drawChart(data) {
+        function drawChart(chart_data) {
             var chartData = new google.visualization.DataTable();
 
             chartData.addColumn('string', 'Имя');
@@ -38,7 +66,7 @@
 
             chartData.addColumn({'type': 'number', 'role': 'annotation'}, '');
 
-            chartData.addRows(data);
+            chartData.addRows(chart_data);
 
             //chart options
             let options = {
@@ -50,7 +78,7 @@
                 tooltip: {
                     trigger: 'none',
                 },
-                height: data.length * 25,
+                height: chart_data.length * 25,
                 bars: 'horizontal',
                 bar: {
                     groupWidth: '60%'
@@ -76,7 +104,9 @@
             };
 
             if ($(window).width() < 1000) {
-                options.chartArea = {left: 300, bottom: 25, top: 0, width:"100%"};
+                options.chartArea = {left: 100, bottom: 25, top: 0, width:"100%"};
+                options.height = chart_data.length * 85;
+                options.bar = {groupWidth: '50%'};
             } else {
                 options.chartArea = {left: 300, bottom: 25, top: 0, width: "50%"};
                 options.legend = {
@@ -88,14 +118,24 @@
 
             let chart = new google.visualization.BarChart(document.getElementById('rating_chart'));
 
+            $('#loader').hide("slow");
+
             chart.draw(chartData, options);
 
             $(document).ready(function () {
                 $($('text:contains("us|")').get().reverse()).each(function(index) {
                     var user_id = $(this).html().split('|')[1];
-                    var student_name = $(this).html().split('|')[2];
 
-                    $(this).html((index + 1) + ' <a style="width: 100% !important; color: #3490dc !important;" href="{{ env('APP_URL') }}/user/' + user_id + '">' + student_name + '</a>');
+                    var user = $('span[data-id=' + user_id + ']')
+
+                    if ($(window).width() < 1000) {
+                        var short_name = user.html().split(' ')[0] + ' ' + user.html().split(' ')[1].substr(0, 1) + '.'
+
+                        $(this).html('<a href=' + user.attr('data-link') + '>' + short_name + '</a>');
+                    } else {
+                        $(this).html((index + 1) + ' <a href=' + user.attr('data-link') + '>' + user.html() + '</a>');
+                    }
+
                     $(this).attr('text-anchor', 'start').attr('x', '5%')
                 });
             });

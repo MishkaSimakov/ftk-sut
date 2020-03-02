@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Achievements\Events\UserEarnedPoints;
 use App\Http\Requests\StoreRating;
 use App\PointCategory;
 use App\Imports\RatingsImport;
@@ -17,7 +18,7 @@ class RatingController extends Controller
 {
     public function index(Request $request)
     {
-        $ratings = Rating::all();
+        $ratings = Rating::all()->sortByDesc('date');
 
         return view('rating.index', compact('ratings'));
     }
@@ -49,18 +50,28 @@ class RatingController extends Controller
         $categories = PointCategory::categories();
 
         $ratingRows = $this->resolveRatingPoints($rows);
+        $existsStudents = Student::whereIn('name', array_keys($ratingRows))->get()->keyBy('name'); //TODO: переделать логику на уникальные имена
 
         foreach ($ratingRows as $key => $row) {
             $student = Student::firstOrCreate(['name' => $key]);
+//            $student = $existsStudents->get($key);
+//
+//            if (!$student) {
+//                $student = new Student();
+//
+//            }
 
             foreach ($row as $category => $point) {
                 $student->award($rating, $categories->get($category), $point);
             }
+
+            UserEarnedPoints::dispatch($rating, $student);
         }
 
         $categories = PointCategory::all();
 
         return redirect(route('rating.show', compact(['rating', 'categories'])));
+//        return '123';
     }
 
     protected function resolveRatingPoints($rows): array

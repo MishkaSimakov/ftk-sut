@@ -54,7 +54,13 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ];
 
-        return Validator::make($data, $settings);
+        $messages = [
+            'register_code.exists' => 'Что-то не так с регистрационным кодом!',
+            'email.unique'  => 'Кто-то уже зарегистрировался с таким email!',
+        ];
+
+
+        return Validator::make($data, $settings, $messages);
     }
 
     /**

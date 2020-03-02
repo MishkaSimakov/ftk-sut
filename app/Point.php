@@ -25,4 +25,14 @@ class Point extends Model
     {
         return $this->belongsTo(PointCategory::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function rating(): BelongsTo
+    {
+        return $this->belongsTo(Rating::class);
+    }
+
+
 }

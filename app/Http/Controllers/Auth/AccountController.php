@@ -33,7 +33,7 @@ class AccountController extends Controller
                     'email',
                     Rule::unique('users')->ignore(Auth::user()->id)
                 ],
-                'birthday' => 'date',
+                'birthday' => 'nullable|date',
                 'description' => 'string|max:500',
             ]);
 

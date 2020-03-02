@@ -25,9 +25,11 @@ class AwardPointAchievements
      */
     public function handle($event)
     {
-        $event->point->student->achievements()->sync(
-            collect(app('achievements')['points'])->filter->qualifier($event->point)->map->modelKey(),
+        $event->student->load('points');
+
+        $event->student->achievements()->sync(
+            collect(app('achievements')['points'])->filter->qualifier($event->rating, $event->student)->map->modelKey(),
             false
-        );
+        ); //TODO: сделать в будущем, чтобы подавалось rating и student для ачивок с очками по категории
     }
 }

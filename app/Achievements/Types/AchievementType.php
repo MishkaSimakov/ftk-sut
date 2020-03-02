@@ -19,8 +19,6 @@ abstract class AchievementType
         ]);
     }
 
-    abstract function qualifier($point);
-
     public function modelKey()
     {
         return $this->model->getKey();

@@ -3,11 +3,15 @@
 namespace App;
 
 use App\Achievements\Events\UserEarnedPoints;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+/**
+ * @mixin Builder
+ */
 class Student extends Model
 {
     protected $fillable = [
@@ -59,8 +63,6 @@ class Student extends Model
         $point->amount = $amount;
 
         $point->save();
-
-        UserEarnedPoints::dispatch($point);
     }
 
     public function achievements()

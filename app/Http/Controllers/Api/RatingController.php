@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
+use function GuzzleHttp\Psr7\str;
 use function MongoDB\BSON\toJSON;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,13 +24,16 @@ class RatingController extends Controller
         $chartData = [];
 
         foreach ($students as $student) {
-            $studentPoints = ['us|' . optional($student->user)->id . '|' . $student->name];
+            $studentPoints = ['us|' . optional($student->user)->id];
+//            $studentPoints = ['us|' . optional($student->user)->id . '|' . $student->name];
 
             foreach ($categories as $category) {
                 array_push($studentPoints, $student->getAmount($rating, $category), 'stroke-width: 1; stroke-color: black;');
             }
 
             array_push($studentPoints, array_sum($studentPoints));
+
+            array_push($studentPoints, [optional($student->user)->id, $student->name, optional($student->user)->url]);
 
             array_push($chartData, $studentPoints);
         }

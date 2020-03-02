@@ -10,8 +10,12 @@
         @auth
             @if(now()->lt($schedule->date_start) && Auth::user()->student)
                 <div>
-                    <a href="#" onclick='{{ optional(Auth::user())->student ? "event.preventDefault(); addStudent($schedule->id)" : '' }}' class="btn btn-primary">
+                    <a href="#" onclick='event.preventDefault(); addStudent({{ $schedule->id }})' class="btn btn-primary">
                         Я пойду <span id="student_count_{{ $schedule->id }}" class="badge badge-light ml-2">{{ $schedule->student_count }}</span>
+                    </a>
+
+                    <a href="#" onclick='event.preventDefault(); removeStudent({{ $schedule->id }})' class="btn btn-danger">
+                        Передумал, не пойду <span id="student_count_{{ $schedule->id }}" class="badge badge-light ml-2">{{ $schedule->student_count }}</span>
                     </a>
                 </div>
             @endif

@@ -8,7 +8,7 @@
             </a>
             <div class="contacts__telephone">
                 <span class="contacts__telephone--title">Контактный телефон:</span>
-                <span class="contacts__telephone--number">+7 (8639) 24-28-21</span>
+                <a href="tel:+78639242821"><span class="contacts__telephone--number">+7 (8639) 24-28-21</span></a>
             </div>
             <div class="contacts__address">
                 <span class="contacts__address--title">Адрес:</span>
@@ -19,11 +19,10 @@
         </div>
 
         <ul class="footer__navigation">
-            <li class="footer__navigation__item"><a href="#" class="footer__navigation__link">Рейтинг</a></li>
-            <li class="footer__navigation__item"><a href="#" class="footer__navigation__link">Достижения</a></li>
-            <li class="footer__navigation__item"><a href="#" class="footer__navigation__link">Статьи</a></li>
-            <li class="footer__navigation__item"><a href="#" class="footer__navigation__link">Расписание</a></li>
-            <li class="footer__navigation__item"><a href="#" class="footer__navigation__link">Панель администратора</a></li>
+            <li class="footer__navigation__item"><a href="{{ route('rating.index') }}" class="footer__navigation__link">Рейтинг</a></li>
+            <li class="footer__navigation__item"><a href="{{ route('achievements.index') }}" class="footer__navigation__link">Достижения</a></li>
+            <li class="footer__navigation__item"><a href="{{ route('article.index', ['filter' => 'best']) }}" class="footer__navigation__link">Статьи</a></li>
+            <li class="footer__navigation__item"><a href="{{ route('schedule.index') }}" class="footer__navigation__link">Расписание</a></li>
         </ul>
     </nav>
 
