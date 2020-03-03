@@ -21,6 +21,8 @@ class ArticleController extends Controller
             $article->increment('points');
 
             $article->users()->attach($request->user_id);
+        } else {
+            return json_encode('error');
         }
 
         return $article->points;

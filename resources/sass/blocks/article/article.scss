@@ -1,0 +1,41 @@
+.article {
+    &__like_link {
+        color: rgb(130, 138, 153) !important;
+
+        opacity: 0.7 !important;
+        transition: opacity 100ms ease-in-out;
+        transition-property: opacity;
+        transition-duration: 100ms;
+        transition-timing-function: ease-in-out;
+        transition-delay: 0s;
+    }
+
+    &__unlike_link {
+        color: rgb(255, 51, 71) !important;
+    }
+
+    &__like_link:hover {
+        color: rgb(130, 138, 153) !important;
+        opacity: 1 !important;
+    }
+
+    &__unlike_link:hover {
+        color: rgb(255, 51, 71) !important;
+    }
+
+    &__liked > &__like_link {
+        display: none !important;
+    }
+
+    &__unliked > &__unlike_link {
+        display: none !important;
+    }
+
+    &__liked > &__like_counter {
+        color: rgb(255, 51, 71) !important;
+    }
+
+    &__unliked > &__like_counter {
+        color: rgb(130, 138, 153) !important;
+    }
+}

@@ -46,19 +46,20 @@
 
     <div class="card-footer p-1">
         <h3 class="my-auto ml-2">
-              <span id="like_{{ $article->id }}">
-                  @auth
-                      @if ($article->isLiked)
-                          <a style="color: rgb(255, 51, 71) !important;" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
-                      @else
-                          <a style="color: rgb(130, 138, 153) !important;" id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="far fa-heart"></i></a>
-                      @endif
-                  @else
-                      <i style="color: rgb(130, 138, 153) !important;" class="fas fa-heart"></i>
-                  @endauth
-              </span>
+            @auth
+                <span class="{{ $article->is_liked ? 'article__liked' : 'article__unliked' }}" id="like_{{ $article->id }}">
+                    <a class="article__unlike_link" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
+                    <a class="article__like_link" id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="far fa-heart"></i></a>
 
-            <span style="color: rgb(130, 138, 153) !important;" class="point_count{{ $article->id }}">{{ $article->points }}</span>
+                    <span class="article__like_counter point_count{{ $article->id }}">{{ $article->points }}</span>
+                </span>
+            @else
+                <span class="article__liked" id="like_{{ $article->id }}">
+                    <i class="article__unlike_link fas fa-heart"></i>
+
+                    <span class="article__like_counter">{{ $article->points }}</span>
+                </span>
+            @endauth
         </h3>
     </div>
 </div>

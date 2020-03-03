@@ -22,9 +22,11 @@
     @push('script')
         <script type="text/javascript">
             function like(article) {
-                $('.point_count' + article).html(Number($('.point_count' + article).html()) + 1);
+                var counter = $('.point_count' + article)
 
-                $('#like_' + article).html('<a style="color: rgb(255, 51, 71) !important;" id="link" onclick="unlike(' + article + ')"><i style="cursor: pointer;" class="fas fa-heart"></i></a>');
+                counter.html(Number(counter.html()) + 1);
+
+                $('#like_' + article).attr('class', 'article__liked')
 
                 $.ajax({
                     url: "{{ route('api.article.points') }}",
@@ -34,14 +36,22 @@
                         user_id: '{{ Auth::user()->id }}',
                         article_id: article,
                         type: 'like'
+                    },
+                    success: function (data) {
+                        if (data === 'error') {
+                            alert('О нет! Что-то не так!')
+                            window.location.reload()
+                        }
                     }
                 });
             }
 
             function unlike(article) {
-                $('.point_count' + article).html(Number($('.point_count' + article).html()) - 1);
+                var counter = $('.point_count' + article)
 
-                $('#like_' + article).html('<a style="color: rgb(130, 138, 153) !important;" id="link" onclick="like(' + article + ')"><i style="cursor: pointer;" class="far fa-heart"></i></a>');
+                counter.html(Number(counter.html()) - 1);
+
+                $('#like_' + article).attr('class', 'article__unliked')
 
                 $.ajax({
                     url: "{{ route('api.article.points') }}",
@@ -51,6 +61,12 @@
                         user_id: '{{ Auth::user()->id }}',
                         article_id: article,
                         type: 'unlike'
+                    },
+                    success: function (data) {
+                        if (data === 'error') {
+                            alert('О нет! Что-то не так!')
+                            window.location.reload()
+                        }
                     }
                 });
             }

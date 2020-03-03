@@ -23,48 +23,54 @@
         </div>
     </h1>
 
-    @component('components.sections.section', ['header' => ''])
-        <div class="mb-2">
-            {!! $article->body !!}
-        </div>
-
-        @if($article->hasMedia())
-            <h2 class="ml-2">Галерея:</h2>
-
-            <div class="container">
-                @foreach($article->getMedia() as $photo)
-                    <div class="col-md-2 m-2 p-0 d-inline-block">
-                        <img class="mw-100 mh-100 rounded" src="/image/{{ $photo->getUrl() }}" style="cursor: pointer" data-lity data-lity-target="/image/{{ $photo->getUrl() }}">
-                    </div>
-                @endforeach
+    <section class="section pb-1">
+        <div class="container">
+            <div class="mb-2">
+                {!! $article->body !!}
             </div>
-        @endif
 
-        <h3 class="m-0">
-            <span id="like_{{ $article->id }}">
+            @if($article->hasMedia())
+                <hr>
+                <div class="container">
+                    @foreach($article->getMedia() as $photo)
+                        <div class="col-md-2 m-2 p-0 d-inline-block">
+                            <img class="mw-100 mh-100 rounded" src="/image/{{ $photo->getUrl() }}" style="cursor: pointer" data-lity data-lity-target="/image/{{ $photo->getUrl() }}">
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+            <hr>
+
+            <h3 class="my-auto">
                 @auth
-                    @if ($article->isLiked)
-                        <a style="color: rgb(255, 51, 71) !important;" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
-                    @else
-                        <a style="color: rgb(130, 138, 153) !important;" id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="far fa-heart"></i></a>
-                    @endif
-                @else
-                    <i style="color: rgb(130, 138, 153) !important;" class="fas fa-heart"></i>
-                @endauth
-            </span>
+                    <span class="{{ $article->is_liked ? 'article__liked' : 'article__unliked' }}" id="like_{{ $article->id }}">
+                        <a class="article__unlike_link" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
+                        <a class="article__like_link" id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="far fa-heart"></i></a>
 
-            <span style="color: rgb(130, 138, 153) !important;" class="point_count{{ $article->id }}">{{ $article->points }}</span>
-        </h3>
-    @endcomponent
+                        <span class="article__like_counter point_count{{ $article->id }}">{{ $article->points }}</span>
+                    </span>
+                @else
+                    <span class="article__liked" id="like_{{ $article->id }}">
+                        <i class="article__unlike_link fas fa-heart"></i>
+
+                        <span class="article__like_counter">{{ $article->points }}</span>
+                    </span>
+                @endauth
+            </h3>
+        </div>
+    </section>
 @endsection
 
 @push('script')
     @auth
         <script type="text/javascript">
             function like(article) {
-                $('.point_count' + article).html(Number($('.point_count' + article).html()) + 1);
+                var counter = $('.point_count' + article);
 
-                $('#like_' + article).html('<a style="color: rgb(255, 51, 71) !important;" id="link" onclick="unlike(' + article +')"><i style="cursor: pointer;" class="fas fa-heart"></i></a>');
+                counter.html(Number(counter.html()) + 1);
+
+                $('#like_' + article).attr('class', 'article__liked');
 
                 $.ajax({
                     url: "{{ route('api.article.points') }}",
@@ -74,14 +80,22 @@
                         user_id: '{{ Auth::user()->id }}',
                         article_id: article,
                         type: 'like'
+                    },
+                    success: function (data) {
+                        if (data === 'error') {
+                            alert('О нет! Что-то не так!');
+                            window.location.reload()
+                        }
                     }
                 });
             }
 
             function unlike(article) {
-                $('.point_count' + article).html(Number($('.point_count' + article).html()) - 1);
+                var counter = $('.point_count' + article);
 
-                $('#like_' + article).html('<a style="color: rgb(130, 138, 153) !important;" id="link" onclick="like(' + article + ')"><i style="cursor: pointer;" class="far fa-heart"></i></a>');
+                counter.html(Number(counter.html()) - 1);
+
+                $('#like_' + article).attr('class', 'article__unliked');
 
                 $.ajax({
                     url: "{{ route('api.article.points') }}",
@@ -91,6 +105,12 @@
                         user_id: '{{ Auth::user()->id }}',
                         article_id: article,
                         type: 'unlike'
+                    },
+                    success: function (data) {
+                        if (data === 'error') {
+                            alert('О нет! Что-то не так!');
+                            window.location.reload()
+                        }
                     }
                 });
             }
