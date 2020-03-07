@@ -2,9 +2,13 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @mixin Builder
+ */
 class Teacher extends Model
 {
     public function getFullNameAttribute()

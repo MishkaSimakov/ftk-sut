@@ -5,8 +5,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-11">
-            <div class="card mt-2">
-                <div class="card-header">Редактирование статьи</div>
+            <div class="card shadow mt-2">
+                <div class="card-header">
+                    <h4 class="font-weight-bold text-primary">Статья</h4>
+                </div>
 
                 <div class="card-body">
                     <form id="form" enctype="multipart/form-data" method="POST" action="{{ route('article.update', compact('article')) }}">
@@ -43,6 +45,22 @@
                             </div>
                         </div>
 
+                        @admin
+                            <div class="form-group row">
+                                <label for="author" class="col-md-4 col-form-label text-md-right">Автор</label>
+
+                                <div class="col-md-7">
+                                    <input list="users" id="user" type="text" class="form-control" name="author" value="{{ Auth::user()->name }}">
+                                </div>
+
+                                <datalist id="users">
+                                    @foreach($names as $name)
+                                        <option>{{ $name }}</option>
+                                    @endforeach
+                                </datalist>
+                            </div>
+                        @endadmin
+
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -74,15 +92,19 @@
             $('#body').val($('.ql-editor').html())
         })
 
-        $('#dropzone').dropzone({
+        var dz = $('#dropzone').dropzone({
             url: "{{ route('api.article.upload_image', compact('article')) }}",
             maxFiles: 15,
             acceptedFiles: 'image/*',
+
+            // addRemoveLinks: true,
 
             //translations
             dictFileTooBig: "Файл слишком большой!",
             dictInvalidFileType: "Данный тип файла не поддерживается!",
             dictDefaultMessage: "<p>Перенесите фалйы сюда или нажмите, чтобы выбрать из папки</p>"
         });
+
+        dz.on('removedfile')
     </script>
 @endpush

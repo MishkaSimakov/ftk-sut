@@ -25,4 +25,9 @@ class ImageController extends Controller
                 ->toMediaCollection();
         }
     }
+
+    public function deleteArticleImage(Article $article, Request $request)
+    {
+        dd($article);
+    }
 }

@@ -15,9 +15,9 @@
         </span>
     </div>
 
-    <div class="d-none" id="names">
+    <div class="d-none" id="names"></div>
 
-    </div>
+{{--    <canvas id="rating_chart">Где-то здесь должен быть график</canvas>--}}
 @endsection
 
 @push('script')
@@ -142,3 +142,92 @@
         }
     </script>
 @endpush
+
+{{--@push('script')--}}
+{{--    <script>--}}
+{{--        $.ajax({--}}
+{{--            url: "{{ route('api.rating.chart') }}",--}}
+{{--            method: "GET",--}}
+{{--            dataType: 'json',--}}
+{{--            data: {--}}
+{{--                date: '{{ $rating->date->format('Y-m-d') }}',--}}
+{{--            },--}}
+{{--            success: function (data) {--}}
+{{--                $('#rating_chart').attr('height', (data[0].length * 5).toString() + "px")--}}
+
+{{--                drawChart(data)--}}
+{{--            }--}}
+{{--        });--}}
+
+{{--        function getRandomColor() {--}}
+{{--            var letters = '0123456789ABCDEF';--}}
+{{--            var color = '#';--}}
+{{--            for (var i = 0; i < 6; i++) {--}}
+{{--                color += letters[Math.floor(Math.random() * 16)];--}}
+{{--            }--}}
+{{--            return color;--}}
+{{--        }--}}
+
+{{--        function drawChart(data) {--}}
+{{--            var ctx = document.getElementById('rating_chart').getContext('2d');--}}
+
+{{--            var datasets = [];--}}
+
+{{--            $.each(data[1], function (key, values) {--}}
+{{--                datasets.push({--}}
+{{--                    barPercentage: 0.5,--}}
+{{--                    barThickness: 6,--}}
+{{--                    maxBarThickness: 8,--}}
+{{--                    minBarLength: 2,--}}
+
+{{--                    label: key,--}}
+{{--                    backgroundColor: getRandomColor(),--}}
+{{--                    data: values,--}}
+{{--                })--}}
+{{--            });--}}
+
+{{--            var chart = new Chart(ctx, {--}}
+{{--                type: 'horizontalBar',--}}
+{{--                data: {--}}
+{{--                    labels: data[0],--}}
+{{--                    datasets: datasets--}}
+{{--                },--}}
+{{--                options: {--}}
+{{--                    scales: {--}}
+{{--                        yAxes: [{--}}
+{{--                            stacked: true,--}}
+{{--                            gridLines: {--}}
+{{--                                display:false--}}
+{{--                            }--}}
+{{--                        }],--}}
+{{--                        xAxes: [{--}}
+{{--                            gridLines: {--}}
+{{--                                display:false--}}
+{{--                            }--}}
+{{--                        }]--}}
+{{--                    },--}}
+{{--                    legend: {--}}
+{{--                        // position: 'right',--}}
+{{--                        // align: 'start'--}}
+{{--                        display: false,--}}
+{{--                    },--}}
+{{--                    tooltips: {--}}
+{{--                        backgroundColor: "rgb(255,255,255)",--}}
+{{--                        bodyFontColor: "#858796",--}}
+{{--                        titleMarginBottom: 10,--}}
+{{--                        titleFontColor: '#6e707e',--}}
+{{--                        titleFontSize: 14,--}}
+{{--                        borderColor: '#dddfeb',--}}
+{{--                        borderWidth: 1,--}}
+{{--                        xPadding: 15,--}}
+{{--                        yPadding: 15,--}}
+{{--                        displayColors: false,--}}
+{{--                        intersect: false,--}}
+{{--                        mode: 'index',--}}
+{{--                        caretPadding: 10,--}}
+{{--                    }--}}
+{{--                }--}}
+{{--            });--}}
+{{--        }--}}
+{{--    </script>--}}
+{{--@endpush--}}

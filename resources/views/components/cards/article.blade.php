@@ -1,7 +1,7 @@
 <div class="card shadow m-2">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <h4 class="text-truncate d-block font-weight-bold text-primary">
-            <a class="" title="{{ $article->title }}" href="{{ $article->url }}">
+            <a title="{{ $article->title }}" href="{{ $article->url }}">
                 {{ $article->title }}
             </a>
         </h4>

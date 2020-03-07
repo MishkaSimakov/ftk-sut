@@ -8,13 +8,14 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
+use function foo\func;
 use function GuzzleHttp\Psr7\str;
 use function MongoDB\BSON\toJSON;
 use Illuminate\Support\Facades\Auth;
 
 class RatingController extends Controller
 {
-    public function chart(Request $request)
+        public function chart(Request $request)
     {
         $rating = Rating::where('date', $request->date)->first();
         $students = $rating->students()->with(['user', 'points'])->get();
@@ -44,4 +45,34 @@ class RatingController extends Controller
 
         return json_encode($chartData);
     }
+
+//    public function chart(Request $request)
+//    {
+//        $rating = Rating::where('date', $request->date)->first();
+//        $students = $rating->students()->with('user', 'points')->get();
+//
+//        $categories = PointCategory::categories();
+//
+//        $data = [];
+//
+//        foreach ($categories as $category) {
+//            $data[$category->title] = [];
+//        }
+//
+//        $labels = $students->map(function ($student) {
+//           return $student->user->name;
+//        });
+//
+//        foreach ($students as $student) {
+//            foreach ($categories as $category) {
+//                array_push($data[$category->title], $student->getAmount($rating, $category));
+//            }
+//        }
+//
+////        $chartData = array_values(Arr::sort($chartData, function ($student) {
+////            return $student[19];
+////        }));
+//
+//        return json_encode([$labels, $data]);
+//    }
 }

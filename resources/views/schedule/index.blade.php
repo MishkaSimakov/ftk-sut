@@ -24,9 +24,11 @@
     @if(Auth::user()->student)
         @push('script')
             <script type="text/javascript">
-                function addStudent(schedule_id) {
+                function register(schedule_id) {
+                    $('#register_' + schedule_id).removeClass('schedule__unregistered').addClass('schedule__registered');
+
                     $.ajax({
-                        url: "{{ route('api.schedule.add_student') }}",
+                        url: "{{ route('api.schedule.register') }}",
                         method: "POST",
                         dataType: 'json',
                         data: {
@@ -34,24 +36,32 @@
                             schedule_id: schedule_id
                         },
                         success: function (data) {
-                            $('#student_count_' + schedule_id).html(Number(data));
+                            if (data === 'error') {
+                                alert('😖О нет! Что-то не так!😖');
+                                window.location.reload();
+                            }
                         }
                     });
                 }
 
-                function removeStudent(schedule_id) {
-                    {{--$.ajax({--}}
-                    {{--    url: "{{ route('api.schedule.remove_student') }}",--}}
-                    {{--    method: "POST",--}}
-                    {{--    dataType: 'json',--}}
-                    {{--    data: {--}}
-                    {{--        student_id: '{{ Auth::user()->student->id }}',--}}
-                    {{--        schedule_id: schedule_id--}}
-                    {{--    },--}}
-                    {{--    success: function (data) {--}}
-                    {{--        $('#student_count_' + schedule_id).html(Number(data));--}}
-                    {{--    }--}}
-                    {{--});--}}
+                function unregister(schedule_id) {
+                    $('#register_' + schedule_id).removeClass('schedule__registered').addClass('schedule__unregistered');
+
+                    $.ajax({
+                        url: "{{ route('api.schedule.unregister') }}",
+                        method: "POST",
+                        dataType: 'json',
+                        data: {
+                            student_id: '{{ Auth::user()->student->id }}',
+                            schedule_id: schedule_id
+                        },
+                        success: function (data) {
+                            if (data === 'error') {
+                                alert('😖О нет! Что-то не так!😖');
+                                window.location.reload();
+                            }
+                        }
+                    });
                 }
             </script>
         @endpush

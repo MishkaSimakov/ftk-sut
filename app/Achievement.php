@@ -2,9 +2,14 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
+
+/**
+ * @mixin Builder
+ */
 class Achievement extends Model
 {
     protected $guarded = [];

@@ -39,8 +39,8 @@
                     },
                     success: function (data) {
                         if (data === 'error') {
-                            alert('О нет! Что-то не так!')
-                            window.location.reload()
+                            alert('😖О нет! Что-то не так!😖');
+                            window.location.reload();
                         }
                     }
                 });
@@ -64,8 +64,8 @@
                     },
                     success: function (data) {
                         if (data === 'error') {
-                            alert('О нет! Что-то не так!')
-                            window.location.reload()
+                            alert('😖О нет! Что-то не так!😖');
+                            window.location.reload();
                         }
                     }
                 });

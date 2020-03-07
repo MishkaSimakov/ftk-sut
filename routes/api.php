@@ -20,11 +20,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/rating/chart', 'Api\RatingController@chart')->name('api.rating.chart');
 
+Route::get('/user/{user}/stats/points', 'Api\StatisticsController@points')->name('api.user.point_stats');
+Route::get('/user/{user}/stats/categories', 'Api\StatisticsController@categories')->name('api.user.categories_stats');
+
 Route::post('/article/points', 'Api\ArticleController@points')->name('api.article.points');
 
-Route::post('/schedule/add_student', 'Api\ScheduleController@add_student')->name('api.schedule.add_student');
+Route::post('/schedule/register', 'Api\ScheduleController@register')->name('api.schedule.register');
+Route::post('/schedule/unregister', 'Api\ScheduleController@unregister')->name('api.schedule.unregister');
 
 Route::post('article/{article}/image', 'Api\ImageController@uploadArticleImage')->name('api.article.upload_image');
+Route::post('article1/{article}/image', 'Api\ImageController@deleteArticleImage')->name('api.article.delete_image');
 
 
 Route::post('/admin/code', 'Api\AdminController@code')->name('api.admin.get_code');

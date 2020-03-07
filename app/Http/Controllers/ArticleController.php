@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Achievements\Events\UserWriteArticle;
+use App\User;
 use Illuminate\Http\Request;
 use App\Article;
 use Illuminate\Support\Facades\Auth;
@@ -45,27 +46,9 @@ class ArticleController extends Controller
 
         $article->save();
 
-        return redirect(route('article.edit', compact('article')));
-    }
+        $names = User::all()->pluck('name');
 
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'title' => 'required',
-            'body' => 'required',
-            'photos' => 'mimes:jpeg,bmp,png'
-        ]);
-
-        $article = Article::make();
-
-        $article->title = $request->title;
-        $article->body = $request->body;
-        $article->user_id = Auth::user()->id;
-        $article->points = 0;
-
-        $article->save();
-
-        return redirect(route('article.index'));
+        return redirect(route('article.edit', compact('article', 'names')));
     }
 
     public function notPublished()
@@ -93,11 +76,14 @@ class ArticleController extends Controller
         return redirect(route('article.index'));
     }
 
+//    TODO: make already loaded on server image load to dropzone!!!!
     public function edit(Article $article)
     {
         $this->authorize('update', $article);
 
-        return view('articles.edit', compact('article'));
+        $names = User::all()->pluck('name');
+
+        return view('articles.edit', compact('article', 'names'));
     }
 
     public function update(Request $request, Article $article)
@@ -110,8 +96,14 @@ class ArticleController extends Controller
         $article->update($validatedData);
         $article->update([
             'is_blank' => false,
-            'is_published' => false
+            'is_published' => false,
         ]);
+
+        if (Auth::user()->is_admin) {
+            $article->update([
+              'user_id' => Auth::user()->where('name', $request->author)->first()->id
+            ]);
+        }
 
         return redirect(route('article.index'));
     }

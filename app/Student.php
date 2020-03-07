@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 class Student extends Model
 {
     protected $fillable = [
-        'name', 'birthday'
+        'birthday', 'admissioned_at', 'is_admin'
     ];
 
     protected $dates = [

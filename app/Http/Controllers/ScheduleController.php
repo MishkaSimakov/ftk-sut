@@ -10,8 +10,7 @@ use Illuminate\Support\Str;
 
 class ScheduleController extends Controller
 {
-    //
-
+//    TODO: make schedule delete
     public function index() {
     	$schedules = Schedule::whereDate('date_start', '>', Carbon::now())->get()->sortByDesc('date_start');
 
@@ -47,5 +46,12 @@ class ScheduleController extends Controller
             ->toMediaCollection();
 
     	return redirect(route('schedule.index'));
+    }
+
+    public function destroy(Schedule $schedule)
+    {
+        $schedule->delete();
+
+        return redirect(route('schedule.index'));
     }
 }
