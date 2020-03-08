@@ -3,7 +3,14 @@
 @section('content')
     <h1 class="text-center m-2">{{ $rating->name }}</h1>
 
-    <div style="display: block;" id="rating_chart"></div>
+    <div class="mx-3 d-sm-block d-md-block d-lg-none d-xl-none">
+        <div class="alert alert-info alert-dismissible fade show" role="contentinfo">
+            🚧 Рейтинг плохо оптимизирован для маленьких экранов. Мы уже работаем над этим. 🚧
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
 
     <div style="display: flex;" id="loader" class="mt-5 justify-content-center">
         <div class="text-gray-600 spinner-border" style="width: 3rem; height: 3rem;" role="status">
@@ -14,6 +21,8 @@
             <strong>Загрузка...</strong><br>
         </span>
     </div>
+
+    <div style="visibility: hidden" id="rating_chart"></div>
 
     <div class="d-none" id="names"></div>
 
@@ -42,8 +51,12 @@
                         user_data.push(value.slice(20));
                     });
 
-                    add_users(user_data)
-                    drawChart(chart_data)
+                    $( "#rating_chart" ).animate({
+                        height: chart_data.length * 25
+                    }, 1000, function () {
+                        add_users(user_data);
+                        drawChart(chart_data);
+                    });
                 }
             })
         }
@@ -52,6 +65,27 @@
             user_data.forEach(function (user) {
                 $('#names').append('<span data-id=' + user[0][0] + ' data-link=' + user[0][2] + '>' + user[0][1] + '</span>')
             })
+        }
+
+        function changeNames() {
+            $($('text:contains("us|")').get().reverse()).each(function(index) {
+                var user_id = $(this).html().split('|')[1];
+
+                var user = $('span[data-id=' + user_id + ']')
+
+                if ($(window).width() < 1000) {
+                    var short_name = user.html().split(' ')[0] + ' ' + user.html().split(' ')[1].substr(0, 1) + '.'
+
+                    $(this).html('<a href=' + user.attr('data-link') + '>' + short_name + '</a>');
+                } else {
+                    $(this).html((index + 1) + ' <a href=' + user.attr('data-link') + '>' + user.html() + '</a>');
+                }
+
+                $(this).attr('text-anchor', 'start').attr('x', '5%')
+            });
+
+            $('#loader').hide();
+            $('#rating_chart').attr('style', 'visibility: visible;');
         }
 
         function drawChart(chart_data) {
@@ -118,27 +152,9 @@
 
             let chart = new google.visualization.BarChart(document.getElementById('rating_chart'));
 
-            $('#loader').hide("slow");
+            google.visualization.events.addListener(chart, 'ready', changeNames);
 
             chart.draw(chartData, options);
-
-            $(document).ready(function () {
-                $($('text:contains("us|")').get().reverse()).each(function(index) {
-                    var user_id = $(this).html().split('|')[1];
-
-                    var user = $('span[data-id=' + user_id + ']')
-
-                    if ($(window).width() < 1000) {
-                        var short_name = user.html().split(' ')[0] + ' ' + user.html().split(' ')[1].substr(0, 1) + '.'
-
-                        $(this).html('<a href=' + user.attr('data-link') + '>' + short_name + '</a>');
-                    } else {
-                        $(this).html((index + 1) + ' <a href=' + user.attr('data-link') + '>' + user.html() + '</a>');
-                    }
-
-                    $(this).attr('text-anchor', 'start').attr('x', '5%')
-                });
-            });
         }
     </script>
 @endpush

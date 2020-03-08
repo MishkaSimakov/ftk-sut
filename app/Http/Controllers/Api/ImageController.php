@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Article;
-use App\Schedule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\UploadedFile;
@@ -17,8 +16,8 @@ class ImageController extends Controller
         foreach ($request->allFiles() as $photo) {
             /** @var UploadedFile $photo */
 
-            $filename = $photo->getClientOriginalName();
-            $name = str_replace("." . $photo->getClientOriginalExtension(), "", $filename);
+            $name = Str::slug(str_replace("." . $photo->getClientOriginalExtension(), "", $photo->getClientOriginalName()));
+            $filename = $name . '.' . $photo->getClientOriginalExtension();
 
             $article->addMedia($photo->path())
                 ->usingFileName($filename)

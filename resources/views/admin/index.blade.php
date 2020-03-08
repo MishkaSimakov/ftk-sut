@@ -5,6 +5,13 @@
     <h1 class="text-center m-2">Панель администратора</h1>
 
     <div class="container mt-3">
+        <div class="alert alert-info alert-dismissible fade show" role="contentinfo">
+            <strong>Внимание</strong> не используйте эту вкладку в личных интересах. За вами следит скрытая камера 📷
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
         @if (!$schedules->isEmpty())
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -41,7 +48,7 @@
             </div>
 
             <div class="card-body">
-                <form class="d-sm-block d-md-none d-lg-none d-xl-none" id="form" method="POST" action="">
+                <form class="d-sm-block d-md-block d-lg-none d-xl-none" id="form" method="POST" action="">
                     @csrf
 
                     <div class="form-group row">
@@ -183,7 +190,7 @@
                 });
             });
 
-            if ($(window).width() > 576) {
+            if ($(window).width() > 992) {
                 $('#admin-table').DataTable({
                     'language': {
                         "decimal": "",

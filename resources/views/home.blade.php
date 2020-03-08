@@ -5,30 +5,32 @@
 
     <div class="container">
         <div class="card-deck">
-            <div class="col-md-6 col-sm-11 mb-4">
-                <div class="card border-left-info shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Достижения</div>
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" style="color: #5a5c69 !important;">{{ round($user->student->achievements->count() / \App\Achievement::all()->count() * 100) }}%</div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: {{ round($user->student->achievements->count() / \App\Achievement::all()->count() * 100) }}%"></div>
+            @if ($user->student)
+                <div class="col-md-6 col-sm-11 mb-4">
+                    <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Достижения</div>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-auto">
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" style="color: #5a5c69 !important;">{{ round($user->student->achievements ? $user->student->achievements->count() : 0 / \App\Achievement::all()->count() * 100) }}%</div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="progress progress-sm mr-2">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ round($user->student->achievements->count() / \App\Achievement::all()->count() * 100) }}%"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-trophy fa-2x text-gray-300" style="color: #dddfeb !important;"></i>
+                                <div class="col-auto">
+                                    <i class="fas fa-trophy fa-2x text-gray-300" style="color: #dddfeb !important;"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
 
             <div class="col-md-6 col-sm-11 mb-4">
                 <div class="card border-left-success shadow h-100 py-2">
