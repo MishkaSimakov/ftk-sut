@@ -1,10 +1,13 @@
-<div class="schedule card">
+<div class="schedule card shadow">
     <img alt="Изображение мероприятия" class="card-img-top" src="/image/{{ $schedule->getMedia()->first()->getUrl() }}">
 
     <div class="card-body d-flex flex-column">
-        <h5 class="card-title row">
-            {{ $schedule->title }}
-            <div class="ml-3 schedule__image_dropdown dropdown no-gutters">
+        <div class="card-title d-flex flex-row align-items-center justify-content-between">
+            <h5 class="d-block font-weight-bold text-primary">
+                {{ $schedule->title }}
+            </h5>
+
+            <div class="schedule__image_dropdown dropdown no-gutters">
                 <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                 </a>
@@ -12,20 +15,21 @@
                     <div class="dropdown-header font-weight-bold">Дополнительно:</div>
 
                     @admin
-                        <div class="dropdown-divider"></div>
+                    <div class="dropdown-divider"></div>
 
-                        <a style="cursor: pointer" class="text-danger dropdown-item" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $schedule->id }}').submit();">
-                            Удалить
-                        </a>
+                    <a style="cursor: pointer" class="text-danger dropdown-item" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $schedule->id }}').submit();">
+                        Удалить
+                    </a>
 
-                        <form method="POST" action="{{ route('schedule.destroy', compact('schedule')) }}" id="delete-form-{{ $schedule->id }}">
-                            @csrf
-                            @method("DELETE")
-                        </form>
+                    <form method="POST" action="{{ route('schedule.destroy', compact('schedule')) }}" id="delete-form-{{ $schedule->id }}">
+                        @csrf
+                        @method("DELETE")
+                    </form>
                     @endadmin
                 </div>
             </div>
-        </h5>
+        </div>
+
         <h6 class="card-subtitle mb-2 text-muted">{{ $schedule->subtitle }}</h6>
         <p class="card-text"><b>Начало:</b> {{ $schedule->date_start->locale('ru')->isoFormat('Do MMMM HH:mm') }}</p>
         <p class="card-text mb-2"><b>Конец:</b> {{ $schedule->date_end->locale('ru')->isoFormat('Do MMMM HH:mm') }}</p>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\Models\Media;
 
 class ImageController extends Controller
 {
@@ -28,6 +29,8 @@ class ImageController extends Controller
 
     public function deleteArticleImage(Article $article, Request $request)
     {
-        dd($article);
+        $media = $article->getMedia()->where('file_name', $request->name)->first();
+
+        $article->deleteMedia($media);
     }
 }

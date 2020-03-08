@@ -22,9 +22,6 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
 
-    {{-- Icons --}}
-    <script src="https://kit.fontawesome.com/799166843b.js" crossorigin="anonymous"></script>
-
     {{--  text editor styles  --}}
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 

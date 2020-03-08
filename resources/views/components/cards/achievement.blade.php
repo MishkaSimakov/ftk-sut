@@ -1,4 +1,4 @@
-<div class="achievement card {{ !$achievement->isGetted ? 'achievement__locked' : '' }}">
+<div class="achievement card shadow {{ !$achievement->isGetted ? 'achievement__locked' : '' }}">
     <div class="achievement__image_card">
         <img class="achievement__image card-img-top" src="{{ $achievement->icon }}" alt="Изображение от достижения">
 

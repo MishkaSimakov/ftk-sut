@@ -81,11 +81,11 @@
                     <tbody>
                         @foreach($students as $student)
                             <tr>
-                                <td>{{ $student->name }}</td>
+                                <td><a href="{{ $student->user->url }}" title="Страница пользователя">{{ $student->name }}</a></td>
                                 <td>{{ $student->user->register_code }}</td>
                                 <td>{{ $student->user->is_admin ? 'Да' : 'Нет' }}</td>
-                                <td>{{ $student->birthday ? $student->birthday->format('Y-m-d') : 'Нет данных' }}</td>
-                                <td>{{ $student->admissioned_at ? $student->admissioned_at->format('Y-m-d') : 'Нет данных' }}</td>
+                                <td>{{ $student->birthday ? $student->birthday->format('d-m-Y') : 'Нет данных' }}</td>
+                                <td>{{ $student->admissioned_at ? $student->admissioned_at->format('d-m-Y') : 'Нет данных' }}</td>
                                 <td class="text-center" data-toggle="modal" data-target="#settings_student_{{ $student->id }}"><i style="cursor: pointer" class="text-primary fas fa-user-cog"></i></td>
                             </tr>
                         @endforeach
@@ -158,8 +158,6 @@
                                         <input id="admissioned_at" type="date" value="{{ optional($student->admissioned_at)->format('Y-m-d') }}" class="form-control" name="admissioned_at">
                                     </div>
                                 </div>
-
-                                {{ $errors }}
                             </form>
                         </div>
                         <div class="modal-footer">

@@ -9,7 +9,7 @@
 
     <div class="container">
         @if($schedules->count() == 0)
-            <div class="d-flex mt-5 justify-content-center">
+            <div class="d-flex mt-5 justify-content-center text-center">
                 <span class="h4 text-muted">Скоро здесь будут события, проходящие в клубе.📅</span>
             </div>
         @endif

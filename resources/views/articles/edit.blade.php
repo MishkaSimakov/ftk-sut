@@ -92,19 +92,51 @@
             $('#body').val($('.ql-editor').html())
         })
 
-        var dz = $('#dropzone').dropzone({
+        Dropzone.autoDiscover = false;
+
+        var article_dropzone = new Dropzone('#dropzone', {
             url: "{{ route('api.article.upload_image', compact('article')) }}",
             maxFiles: 15,
             acceptedFiles: 'image/*',
 
-            // addRemoveLinks: true,
+            addRemoveLinks: true,
 
             //translations
             dictFileTooBig: "Файл слишком большой!",
             dictInvalidFileType: "Данный тип файла не поддерживается!",
-            dictDefaultMessage: "<p>Перенесите фалйы сюда или нажмите, чтобы выбрать из папки</p>"
+            dictDefaultMessage: "<p>Перенесите фалйы сюда или нажмите, чтобы выбрать из папки</p>",
+            dictCancelUpload: "отменить загрузку",
+            dictRemoveFile: 'удалить файл',
+            dictCancelUploadConfirmation: 'Отменить загрузку?'
         });
 
-        dz.on('removedfile')
+        {{--article_dropzone.uploadFiles({!! json_encode($article->getMedia()->map(function ($media) {--}}
+        {{--    return '/image' . $media->getUrl();--}}
+        {{--})) !!});--}}
+
+        @foreach($article->getMedia() as $media)
+            var file = {
+            'name': '{{ $media->file_name }}',
+            'size': '{{ $media->size }}',
+            };
+
+            article_dropzone.emit("addedfile", file);
+            article_dropzone.emit("thumbnail", file, '/image{{ $media->getUrl() }}');
+            article_dropzone.emit("complete", file);
+        @endforeach
+
+        article_dropzone.on('removedfile', function (file) {
+            $.ajax({
+                url: "{{ route('api.article.delete_image', compact('article')) }}",
+                method: "POST",
+                dataType: 'json',
+                data: {
+                    name: file.name,
+                },
+                success: function (data) {
+                    console.log(data)
+                }
+            });
+        })
     </script>
 @endpush

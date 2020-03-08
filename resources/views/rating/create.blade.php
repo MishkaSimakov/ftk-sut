@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card mt-2">
+            <div class="card shadow mt-2">
                 <div class="card-header">Загрузить рейтинг</div>
 
                 <div class="card-body">

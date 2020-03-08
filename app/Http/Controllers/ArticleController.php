@@ -38,7 +38,7 @@ class ArticleController extends Controller
     {
         Article::where('is_blank', true)->delete();
 
-        $article = Article::make();
+        $article = new Article;
 
         $article->is_blank = true;
         $article->user_id = Auth::user()->id;
@@ -76,12 +76,15 @@ class ArticleController extends Controller
         return redirect(route('article.index'));
     }
 
-//    TODO: make already loaded on server image load to dropzone!!!!
     public function edit(Article $article)
     {
         $this->authorize('update', $article);
 
         $names = User::all()->pluck('name');
+
+//        dd($article->getMedia()->map(function ($media) {
+//            return $media->file_name;
+//        }));
 
         return view('articles.edit', compact('article', 'names'));
     }

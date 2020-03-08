@@ -29,7 +29,7 @@ Route::post('/schedule/register', 'Api\ScheduleController@register')->name('api.
 Route::post('/schedule/unregister', 'Api\ScheduleController@unregister')->name('api.schedule.unregister');
 
 Route::post('article/{article}/image', 'Api\ImageController@uploadArticleImage')->name('api.article.upload_image');
-Route::post('article1/{article}/image', 'Api\ImageController@deleteArticleImage')->name('api.article.delete_image');
+Route::post('article/{article}/image/delete', 'Api\ImageController@deleteArticleImage')->name('api.article.delete_image');
 
 
 Route::post('/admin/code', 'Api\AdminController@code')->name('api.admin.get_code');

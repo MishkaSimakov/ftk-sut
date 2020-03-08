@@ -126,7 +126,7 @@
 
                         <div class="card-body">
                             @foreach($user->articles as $article)
-                                <h5><a href="{{ $article->url }}">{{ \Illuminate\Support\Str::limit($article->title, 45, '...') }}</a></h5>
+                                <h5><a href="{{ $article->url }}">{{ $article->title }}</a></h5>
                             @endforeach
                         </div>
                     </div>

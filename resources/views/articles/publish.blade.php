@@ -5,7 +5,7 @@
 <h1 class="text-center m-2">Требуют проверки</h1>
 
 @foreach($articles as $article)
-	<div class="card m-2">
+	<div class="card shadow m-2">
 		<div class="card-header">
 			<h1>{{ $article->title }}</h1>
 		</div>
