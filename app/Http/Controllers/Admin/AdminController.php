@@ -27,21 +27,25 @@ class AdminController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:50|string',
-            'is_admin' => 'boolean|required',
+            'is_admin' => 'nullable|in:on,off',
             'birthday' => 'nullable|date',
             'admissioned_at' => 'nullable|date'
         ]);
 
         $student->update([
-            'birthday' => Carbon::parse($validatedData['birthday']),
-            'admissioned_at' => Carbon::parse($validatedData['admissioned_at']),
+            'birthday' => $validatedData['birthday'] ? Carbon::parse($validatedData['birthday']) : null,
+            'admissioned_at' => $validatedData['admissioned_at'] ? Carbon::parse($validatedData['admissioned_at']) : null,
+            'name' => $validatedData['name']
         ]);
-//        $student->user->updater
+        $student->user->update([
+           'is_admin' => ($validatedData['is_admin'] ?? null) == 'on' ? true : null,
+           'name' => $validatedData['name']
+        ]);
 
 
         $schedules = Schedule::whereDate('date_start', '>', Carbon::now())->get()->sortByDesc('date_start');
         $students = Student::with('user')->get();
 
-        return view('admin.index', compact(['schedules', 'students']));
+        return redirect(route('admin.index', compact(['schedules', 'students'])));
     }
 }

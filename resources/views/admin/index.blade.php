@@ -41,47 +41,40 @@
             </div>
 
             <div class="card-body">
-{{--                <form id="form" method="POST" action="">--}}
-{{--                    @csrf--}}
+                <form class="d-sm-block d-md-none d-lg-none d-xl-none" id="form" method="POST" action="">
+                    @csrf
 
-{{--                    <div class="form-group row">--}}
-{{--                        <label for="user" class="col-md-4 col-form-label text-md-right">Имя пользователя</label>--}}
+                    <div class="form-group row">
+                        <label for="user" class="col-md-4 col-form-label text-md-right">Имя пользователя</label>
 
-{{--                        <div class="col-md-7">--}}
-{{--                            <input oninput="get_code(this)" list="users" id="user" type="text" class="form-control" name="user" required>--}}
-{{--                        </div>--}}
+                        <div class="col-md-7">
+                            <input oninput="get_code(this)" list="users" id="user" type="text" class="form-control" name="user" required>
+                        </div>
 
-{{--                        <datalist id="users">--}}
-{{--                            @foreach($students as $student)--}}
-{{--                                <option>{{ $student->user->name}}</option>--}}
-{{--                            @endforeach--}}
-{{--                        </datalist>--}}
-{{--                    </div>--}}
+                        <datalist id="users">
+                            @foreach($students as $student)
+                                <option>{{ $student->user->name}}</option>
+                            @endforeach
+                        </datalist>
+                    </div>
 
-{{--                    <div class="form-group row">--}}
-{{--                        <label for="user" class="col-md-4 col-form-label text-md-right">Регистрационный код</label>--}}
+                    <div class="form-group row">
+                        <label for="user" class="col-md-4 col-form-label text-md-right">Регистрационный код</label>
 
-{{--                        <div class="col-md-7 py-2">--}}
-{{--                            <span id="register_code">...</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                        <div class="col-md-7 py-2">
+                            <span id="register_code">...</span>
+                        </div>
+                    </div>
+                </form>
 
-
-{{--                    <div class="form-group row mb-0">--}}
-{{--                        <div class="col-md-8 offset-md-4">--}}
-{{--                            <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-info">Информация</button>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </form>--}}
-
-                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <table id="admin-table" class="table table-striped table-bordered" style="display: none; width:100%">
                     <thead>
                         <tr>
                             <th>Имя</th>
                             <th>Регистрационный код</th>
                             <th>Администратор</th>
                             <th>День рождения</th>
-                            <th>Ходит в клуб</th>
+                            <th>Ходит в клуб с</th>
                             <th>Управление</th>
                         </tr>
                     </thead>
@@ -91,8 +84,8 @@
                                 <td>{{ $student->name }}</td>
                                 <td>{{ $student->user->register_code }}</td>
                                 <td>{{ $student->user->is_admin ? 'Да' : 'Нет' }}</td>
-                                <td>{{ $student->birthday ? $student->birthday : 'Нет данных' }}</td>
-                                <td>{{ $student->admissioned_at ? $student->admissioned_at : 'Нет данных' }}</td>
+                                <td>{{ $student->birthday ? $student->birthday->format('Y-m-d') : 'Нет данных' }}</td>
+                                <td>{{ $student->admissioned_at ? $student->admissioned_at->format('Y-m-d') : 'Нет данных' }}</td>
                                 <td class="text-center" data-toggle="modal" data-target="#settings_student_{{ $student->id }}"><i style="cursor: pointer" class="text-primary fas fa-user-cog"></i></td>
                             </tr>
                         @endforeach
@@ -103,7 +96,7 @@
                             <th>Регистрационный код</th>
                             <th>Администратор</th>
                             <th>День рождения</th>
-                            <th>Ходит в клуб</th>
+                            <th>Ходит в клуб с</th>
                             <th>Управление</th>
                         </tr>
                     </tfoot>
@@ -112,73 +105,72 @@
         </div>
     </div>
 
-    @foreach($students as $student)
-        <!-- Modal -->
-        <div class="modal fade" id="settings_student_{{ $student->id }}" tabindex="-1" role="dialog" aria-labelledby="StudentSettings" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{ $student->user->name }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="settings_form_{{ $student->id }}" method="POST" action="{{ route('admin.student.settings', compact('student')) }}">
-                            @csrf
-                            @method("PUT")
+    <div class="user_setting_modals">
+        @foreach($students as $student)
+            <!-- Modal -->
+            <div class="modal fade" id="settings_student_{{ $student->id }}" tabindex="-1" role="dialog" aria-labelledby="StudentSettings" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ $student->user->name }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="settings_form_{{ $student->id }}" method="POST" action="{{ route('admin.student.settings', compact('student')) }}">
+                                @csrf
+                                @method("PUT")
 
-                            <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">Имя</label>
+                                <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">Имя</label>
 
-                                <div class="col-md-6">
-                                    <input value="{{ $student->user->name }}" id="name" type="text" class="form-control" name="name" required>
-                                </div>
-                            </div>
-{{--                            <td>{{ $student->name }}</td>--}}
-{{--                            <td>{{ $student->user->register_code }}</td>--}}
-{{--                            <td>{{ $student->user->is_admin ? 'Да' : 'Нет' }}</td>--}}
-{{--                            <td>{{ $student->birthday ? $student->birthday : 'Нет данных' }}</td>--}}
-{{--                            <td>{{ $student->admissioned_at ? $student->admissioned_at : 'Нет данных' }}</td>--}}
-
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label form-check-label text-md-right" for="is_admin">
-                                    Администратор
-                                </label>
-
-                                <div class="col-md-6">
-                                    <div class="form-check py-2 row">
-                                        <input class="form-check-input" type="checkbox" name="is_admin" id="is_admin" {{ $student->user->is_admin ? 'checked' : '' }}>
-                                        <span class="small text-danger">Осторожнее с этим!</span>
+                                    <div class="col-md-6">
+                                        <input value="{{ $student->user->name }}" id="name" type="text" class="form-control" name="name" required>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <label for="birthday" class="col-md-4 col-form-label text-md-right">Дата рождения</label>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label form-check-label text-md-right" for="is_admin">
+                                        Администратор
+                                    </label>
 
-                                <div class="col-md-6">
-                                    <input id="birthday" type="date" value="{{ optional($student->birthday)->format('Y-m-d') }}" class="form-control" name="birthday">
+                                    <div class="col-md-6">
+                                        <div class="form-check py-2 row">
+                                            <input class="form-check-input" type="checkbox" name="is_admin" id="is_admin" {{ $student->user->is_admin ? 'checked' : '' }}>
+                                            <span class="small text-danger">Осторожнее с этим!</span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <label for="admissioned_at" class="col-md-4 col-form-label text-md-right">Дата поступления в клуб</label>
+                                <div class="form-group row">
+                                    <label for="birthday" class="col-md-4 col-form-label text-md-right">Дата рождения</label>
 
-                                <div class="col-md-6">
-                                    <input id="admissioned_at" type="date" value="{{ optional($student->admissioned_at)->format('Y-m-d') }}" class="form-control" name="admissioned_at">
+                                    <div class="col-md-6">
+                                        <input id="birthday" type="date" value="{{ optional($student->birthday)->format('Y-m-d') }}" class="form-control" name="birthday">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                        <button type="button" class="btn btn-primary" onclick="$('#settings_form_{{ $student->id }}').submit()">Сохранить</button>
+
+                                <div class="form-group row">
+                                    <label for="admissioned_at" class="col-md-4 col-form-label text-md-right">Дата поступления в клуб</label>
+
+                                    <div class="col-md-6">
+                                        <input id="admissioned_at" type="date" value="{{ optional($student->admissioned_at)->format('Y-m-d') }}" class="form-control" name="admissioned_at">
+                                    </div>
+                                </div>
+
+                                {{ $errors }}
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-primary" onclick="$('#settings_form_{{ $student->id }}').submit()">Сохранить</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
 @endsection
 
 @push('script')
@@ -193,36 +185,38 @@
                 });
             });
 
-            $(document).ready(function() {
-                $('#example').DataTable({
+            if ($(window).width() > 576) {
+                $('#admin-table').DataTable({
                     'language': {
-                        "decimal":        "",
-                        "emptyTable":     "No data available in table",
-                        "info":           "Пользователь с _START_ по _END_ из _TOTAL_",
-                        "infoEmpty":      "Нет пользователей",
-                        "infoFiltered":   "",
-                        "infoPostFix":    "",
-                        "thousands":      ",",
-                        "lengthMenu":     "Показать _MENU_ пользователей",
+                        "decimal": "",
+                        "emptyTable": "Нет пользователей",
+                        "info": "Пользователь с _START_ по _END_ из _TOTAL_",
+                        "infoEmpty": "Нет пользователей",
+                        "infoFiltered": "",
+                        "infoPostFix": "",
+                        "thousands": ",",
+                        "lengthMenu": "Показать _MENU_ пользователей",
                         "loadingRecords": "Загрузка...",
-                        "processing":     "Загрузка...",
-                        "search":         "Поиск:",
-                        "zeroRecords":    "Нет таких данных",
+                        "processing": "Загрузка...",
+                        "search": "Поиск:",
+                        "zeroRecords": "Нет таких данных",
 
                         "paginate": {
-                            "first":      "Первый",
-                            "last":       "Последний",
-                            "next":       "<i class=\"fas fa-arrow-right\"></i>",
-                            "previous":   "<i class=\"fas fa-arrow-left\"></i>"
+                            "first": "Первый",
+                            "last": "Последний",
+                            "next": "<i class=\"fas fa-arrow-right\"></i>",
+                            "previous": "<i class=\"fas fa-arrow-left\"></i>"
                         },
 
                         "aria": {
-                            "sortAscending":  ": упорядочить по возрастанию",
+                            "sortAscending": ": упорядочить по возрастанию",
                             "sortDescending": ": упорядочить по убыванию"
                         }
                     }
                 });
-            });
+
+                $('#admin-table').show()
+            }
         });
 
         function get_code(input) {
