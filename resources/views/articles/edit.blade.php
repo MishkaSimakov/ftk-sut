@@ -110,10 +110,6 @@
             dictCancelUploadConfirmation: 'Отменить загрузку?'
         });
 
-        {{--article_dropzone.uploadFiles({!! json_encode($article->getMedia()->map(function ($media) {--}}
-        {{--    return '/image' . $media->getUrl();--}}
-        {{--})) !!});--}}
-
         @foreach($article->getMedia() as $media)
             var file = {
             'name': '{{ $media->file_name }}',

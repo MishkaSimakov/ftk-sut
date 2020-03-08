@@ -82,10 +82,6 @@ class ArticleController extends Controller
 
         $names = User::all()->pluck('name');
 
-//        dd($article->getMedia()->map(function ($media) {
-//            return $media->file_name;
-//        }));
-
         return view('articles.edit', compact('article', 'names'));
     }
 

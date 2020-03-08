@@ -57,6 +57,7 @@ class RegisterController extends Controller
         $messages = [
             'register_code.exists' => 'Что-то не так с регистрационным кодом!',
             'email.unique'  => 'Кто-то уже зарегистрировался с таким email!',
+            'password.confirmed' => 'Поля "Пароль" и "Повторите пароль" должны совпадать!'
         ];
 
 
