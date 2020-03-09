@@ -10,9 +10,8 @@ use Illuminate\Support\Str;
 
 class ScheduleController extends Controller
 {
-//    TODO: make schedule delete
     public function index() {
-    	$schedules = Schedule::whereDate('date_start', '>', Carbon::now())->get()->sortByDesc('date_start');
+    	$schedules = Schedule::whereDate('date_start', '>', Carbon::now())->get()->sortBy('date_start');
 
     	return view('schedule.index', compact('schedules'));
     }

@@ -7,27 +7,27 @@
                 {{ $schedule->title }}
             </h5>
 
-            <div class="schedule__image_dropdown dropdown no-gutters">
-                <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                    <div class="dropdown-header font-weight-bold">Дополнительно:</div>
-
-                    @admin
-                    <div class="dropdown-divider"></div>
-
-                    <a style="cursor: pointer" class="text-danger dropdown-item" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $schedule->id }}').submit();">
-                        Удалить
+            @admin
+                <div class="schedule__image_dropdown dropdown no-gutters">
+                    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                     </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header font-weight-bold">Дополнительно:</div>
 
-                    <form method="POST" action="{{ route('schedule.destroy', compact('schedule')) }}" id="delete-form-{{ $schedule->id }}">
-                        @csrf
-                        @method("DELETE")
-                    </form>
-                    @endadmin
+                        <div class="dropdown-divider"></div>
+
+                        <a style="cursor: pointer" class="text-danger dropdown-item" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $schedule->id }}').submit();">
+                            Удалить
+                        </a>
+
+                        <form method="POST" action="{{ route('schedule.destroy', compact('schedule')) }}" id="delete-form-{{ $schedule->id }}">
+                            @csrf
+                            @method("DELETE")
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @endadmin
         </div>
 
         <h6 class="card-subtitle mb-2 text-muted">{{ $schedule->subtitle }}</h6>

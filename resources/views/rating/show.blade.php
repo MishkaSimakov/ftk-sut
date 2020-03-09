@@ -139,8 +139,6 @@
 
             if ($(window).width() < 1000) {
                 options.chartArea = {left: 100, bottom: 25, top: 0, width:"100%"};
-                options.height = chart_data.length * 85;
-                options.bar = {groupWidth: '50%'};
             } else {
                 options.chartArea = {left: 300, bottom: 25, top: 0, width: "50%"};
                 options.legend = {
