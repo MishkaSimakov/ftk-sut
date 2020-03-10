@@ -36,8 +36,8 @@ class ScheduleController extends Controller
 
         $image = $request->file;
 
-        $filename = $image->getClientOriginalName();
-        $name = str_replace("." . $image->getClientOriginalExtension(), "", $filename);
+        $name = Str::slug(str_replace("." . $image->getClientOriginalExtension(), "", $image->getClientOriginalName()));
+        $filename = $name . '.' . $image->getClientOriginalExtension();
 
         $schedule->addMedia($image->path())
             ->usingFileName($filename)

@@ -60,6 +60,8 @@
                     <span class="article__like_counter">{{ $article->points }}</span>
                 </span>
             @endauth
+
+            <span class="text-gray-500 float-right mr-3">{{ $article->created_at->format("d-m-Y") }}</span>
         </h3>
     </div>
 </div>
