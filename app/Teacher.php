@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Teacher extends Model
 {
+    protected $fillable = ['first_name', 'middle_name', 'last_name', 'club_id'];
+
     public function getFullNameAttribute()
     {
         return implode(" ", [

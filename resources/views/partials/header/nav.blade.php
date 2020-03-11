@@ -13,11 +13,12 @@
                 </a>
 
                 <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
-                    <a href="{{ route('article.index', ['filter' => 'best']) }}" class="page-navigation__link dropdown-item">
-                        Популярные
-                    </a>
                     <a href="{{ route('article.index', ['filter' => 'newest']) }}" class="page-navigation__link dropdown-item">
                         Новые
+                    </a>
+
+                    <a href="{{ route('article.index', ['filter' => 'best']) }}" class="page-navigation__link dropdown-item">
+                        Популярные
                     </a>
 
                     @admin

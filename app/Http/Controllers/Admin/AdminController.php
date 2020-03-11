@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Student;
+use App\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Achievement;
-use Illuminate\Support\Arr;
 use function view;
 use App\Schedule;
-use App\StudentSchedule;
 use Carbon\Carbon;
 
 class AdminController extends Controller
@@ -19,11 +16,12 @@ class AdminController extends Controller
     {
         $schedules = Schedule::whereDate('date_start', '>', Carbon::now())->get()->sortByDesc('date_start');
         $students = Student::with('user')->get();
+        $teachers = Teacher::with('user')->get();
 
-        return view('admin.index', compact(['schedules', 'students']));
+        return view('admin.index', compact(['schedules', 'students', 'teachers']));
     }
 
-    public function settings(Request $request, Student $student)
+    public function studentSettings(Request $request, Student $student)
     {
         $validatedData = $request->validate([
             'name' => 'required|max:50|string',
@@ -47,5 +45,19 @@ class AdminController extends Controller
         $students = Student::with('user')->get();
 
         return redirect(route('admin.index', compact(['schedules', 'students'])));
+    }
+
+    public function teacherSettings(Request $request, Teacher $teacher)
+    {
+        $validatedData = $request->validate([
+            'first_name' => 'required|max:50|string',
+            'middle_name' => 'required|max:50|string',
+            'last_name' => 'required|max:50|string',
+            'club_id' => 'required|integer',
+        ]);
+
+        $teacher->update($validatedData);
+
+        return redirect(route('admin.index'));
     }
 }

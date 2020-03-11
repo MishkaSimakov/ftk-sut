@@ -70,7 +70,8 @@ Auth::routes([
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.index')->middleware(['auth', 'admin']);
-Route::put('/admin/student/{student}/settings', 'Admin\AdminController@settings')->name('admin.student.settings')->middleware(['auth', 'admin']);
+Route::put('/admin/student/{student}/settings', 'Admin\AdminController@studentSettings')->name('admin.student.settings')->middleware(['auth', 'admin']);
+Route::put('/admin/teacher/{teacher}/settings', 'Admin\AdminController@teacherSettings')->name('admin.teacher.settings')->middleware(['auth', 'admin']);
 
 Route::get('/settings', 'Auth\AccountController@settings')->name('settings.show');
 Route::put('/settings', 'Auth\AccountController@update')->name('settings.update');

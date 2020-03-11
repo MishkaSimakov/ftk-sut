@@ -44,7 +44,7 @@
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Пользователи</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Ученики</h6>
             </div>
 
             <div class="card-body">
@@ -74,7 +74,7 @@
                     </div>
                 </form>
 
-                <table id="admin-table" class="table table-striped table-bordered" style="display: none; width:100%">
+                <table id="students-table" class="table table-striped table-bordered" style="display: none; width:100%">
                     <thead>
                         <tr>
                             <th>Имя</th>
@@ -110,9 +110,40 @@
                 </table>
             </div>
         </div>
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Преподаватели</h6>
+            </div>
+
+            <div class="card-body">
+                <table id="teachers-table" style="display: none" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Фамилия</th>
+                            <th>Имя</th>
+                            <th>Отчество</th>
+                            <th>Кружок</th>
+                            <th>Управление</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($teachers as $teacher)
+                        <tr>
+                            <td>{{ $teacher->last_name }}</td>
+                            <td>{{ $teacher->first_name }}</td>
+                            <td>{{ $teacher->middle_name }}</td>
+                            <td>{{ $teacher->club->name }}</td>
+                            <td class="text-center" data-toggle="modal" data-target="#settings_teacher_{{ $teacher->id }}"><i style="cursor: pointer" class="text-primary fas fa-user-cog"></i></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-    <div class="user_setting_modals">
+    <div class="student_setting_modals">
         @foreach($students as $student)
             <!-- Modal -->
             <div class="modal fade" id="settings_student_{{ $student->id }}" tabindex="-1" role="dialog" aria-labelledby="StudentSettings" aria-hidden="true">
@@ -176,6 +207,72 @@
             </div>
         @endforeach
     </div>
+
+    <div class="teacher_setting_modals">
+    @foreach($teachers as $teacher)
+        <!-- Modal -->
+            <div class="modal fade" id="settings_teacher_{{ $teacher->id }}" tabindex="-1" role="dialog" aria-labelledby="TeacherSettings" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ $teacher->fullName }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="teacher_settings_form_{{ $teacher->id }}" method="POST" action="{{ route('admin.teacher.settings', compact('teacher')) }}">
+                                @csrf
+                                @method("PUT")
+
+                                <div class="form-group row">
+                                    <label for="last_name" class="col-md-4 col-form-label text-md-right">Фамилия</label>
+
+                                    <div class="col-md-6">
+                                        <input value="{{ $teacher->last_name }}" id="last_name" type="text" class="form-control" name="last_name" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="first_name" class="col-md-4 col-form-label text-md-right">Имя</label>
+
+                                    <div class="col-md-6">
+                                        <input value="{{ $teacher->first_name }}" id="first_name" type="text" class="form-control" name="first_name" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="middle_name" class="col-md-4 col-form-label text-md-right">Отчество</label>
+
+                                    <div class="col-md-6">
+                                        <input value="{{ $teacher->middle_name }}" id="middle_name" type="text" class="form-control" name="middle_name" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="club_id" class="col-md-4 col-form-label text-md-right">Клуб</label>
+
+                                    <div class="col-md-7">
+                                        <select class="form-control" id="club_id" name="club_id" required>
+                                            @foreach (\App\Club::all() as $club)
+                                                <option value="{{ $club->id }}" {{ $teacher->club->id == $club->id ? 'selected' : '' }}>
+                                                    {{ $club->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-primary" onclick="$('#teacher_settings_form_{{ $teacher->id }}').submit()">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 @endsection
 
 @push('script')
@@ -191,7 +288,9 @@
             });
 
             if ($(window).width() > 992) {
-                $('#admin-table').DataTable({
+                $('#teachers-table').show()
+
+                $('#students-table').DataTable({
                     'language': {
                         "decimal": "",
                         "emptyTable": "Нет пользователей",
@@ -220,7 +319,7 @@
                     }
                 });
 
-                $('#admin-table').show()
+                $('#students-table').show()
             }
         });
 

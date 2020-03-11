@@ -61,7 +61,7 @@
                 </span>
             @endauth
 
-            <span class="text-gray-500 float-right mr-3">{{ $article->created_at->format("d-m-Y") }}</span>
+            <span class="font-weight-light text-gray-500 float-right mr-3">{{ $article->created_at->locale('ru')->isoFormat('D MMMM Y') }}</span>
         </h3>
     </div>
 </div>
