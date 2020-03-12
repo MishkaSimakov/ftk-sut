@@ -15,7 +15,7 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_count')->nullable();
+            $table->integer('user_count')->nullable();
             $table->datetime('date_start');
             $table->datetime('date_end');
             $table->string('title');

@@ -35,7 +35,7 @@
         <p class="card-text mb-2"><b>Конец:</b> {{ $schedule->date_end->locale('ru')->isoFormat('Do MMMM HH:mm') }}</p>
 
         @auth
-            @if(now()->lt($schedule->date_start) && Auth::user()->student)
+            @if(now()->lt($schedule->date_start))
                 <span class="mt-auto {{ $schedule->is_register ? 'schedule__registered' : 'schedule__unregistered' }}" id="register_{{ $schedule->id }}">
                     <a class="text-white btn btn-danger schedule__unregister_link" id="link" onclick="unregister({{ $schedule->id }})">
                         Передумал, не пойду

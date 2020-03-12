@@ -29,9 +29,9 @@
                                 </h5>
 
                                 <ol class="spoiler_body_{{ $schedule->id }}" style="display: none">
-                                    @foreach($schedule->students as $student)
+                                    @foreach($schedule->users as $user)
                                         <li>
-                                            <p class="ml-2"><a href="{{ optional($student->user)->url }}">{{ $student->name }}</a></p>
+                                            <p class="ml-2"><a href="{{ $user->url }}">{{ $user->name }}</a></p>
                                         </li>
                                     @endforeach
                                 </ol>
@@ -124,21 +124,27 @@
                             <th>Имя</th>
                             <th>Отчество</th>
                             <th>Кружок</th>
+                            <th>Регистрационный код</th>
+                            <th>Изображение</th>
                             <th>Управление</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($teachers as $teacher)
-                        <tr>
-                            <td>{{ $teacher->last_name }}</td>
-                            <td>{{ $teacher->first_name }}</td>
-                            <td>{{ $teacher->middle_name }}</td>
-                            <td>{{ $teacher->club->name }}</td>
-                            <td class="text-center" data-toggle="modal" data-target="#settings_teacher_{{ $teacher->id }}"><i style="cursor: pointer" class="text-primary fas fa-user-cog"></i></td>
-                        </tr>
-                    @endforeach
+                        @foreach($teachers as $teacher)
+                            <tr>
+                                <td>{{ $teacher->last_name }}</td>
+                                <td>{{ $teacher->first_name }}</td>
+                                <td>{{ $teacher->middle_name }}</td>
+                                <td>{{ $teacher->club->name }}</td>
+                                <td>{{ $teacher->user->register_code }}</td>
+                                <td><img alt="Изображение преподавателя" class="rounded" src="/image/{{ $teacher->getMedia()->first()->getUrl() }}" style="cursor: pointer; max-width: 5vw; max-height: 5vw;" data-lity data-lity-target="/image/{{ $teacher->getMedia()->first()->getUrl() }}"></td>
+                                <td class="text-center" data-toggle="modal" data-target="#settings_teacher_{{ $teacher->id }}"><i style="cursor: pointer" class="text-primary fas fa-user-cog"></i></td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
+
+                <button class="btn btn-primary" data-toggle="modal" data-target="#teacher_create_modal">Новый преподаватель<span class="ml-2 fa fa-plus"></span></button>
             </div>
         </div>
     </div>
@@ -250,7 +256,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="club_id" class="col-md-4 col-form-label text-md-right">Клуб</label>
+                                    <label for="club_id" class="col-md-4 col-form-label text-md-right">Кружок</label>
 
                                     <div class="col-md-7">
                                         <select class="form-control" id="club_id" name="club_id" required>
@@ -273,6 +279,74 @@
             </div>
         @endforeach
     </div>
+
+    <div class="modal fade" id="teacher_create_modal" tabindex="-1" role="dialog" aria-labelledby="TeacherSettings" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Новый преподаватель</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="teacher_create_form" method="POST" action="{{ route('teacher.store') }}" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="form-group row">
+                            <label for="last_name" class="col-md-4 col-form-label text-md-right">Фамилия</label>
+
+                            <div class="col-md-6">
+                                <input id="last_name" type="text" class="form-control" name="last_name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="first_name" class="col-md-4 col-form-label text-md-right">Имя</label>
+
+                            <div class="col-md-6">
+                                <input id="first_name" type="text" class="form-control" name="first_name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="middle_name" class="col-md-4 col-form-label text-md-right">Отчество</label>
+
+                            <div class="col-md-6">
+                                <input id="middle_name" type="text" class="form-control" name="middle_name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="club_id" class="col-md-4 col-form-label text-md-right">Кружок</label>
+
+                            <div class="col-md-7">
+                                <select class="form-control" id="club_id" name="club_id" required>
+                                    @foreach (\App\Club::all() as $club)
+                                        <option value="{{ $club->id }}">
+                                            {{ $club->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="avatar" class="col-md-4 col-form-label text-md-right">Фотография</label>
+
+                            <div class="col-md-6">
+                                <input id="avatar" type="file" class="my-auto form-control-file" accept="image/*" name="avatar" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary" onclick="$('#teacher_create_form').submit()">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('script')
@@ -293,9 +367,9 @@
                 $('#students-table').DataTable({
                     'language': {
                         "decimal": "",
-                        "emptyTable": "Нет пользователей",
-                        "info": "Пользователь с _START_ по _END_ из _TOTAL_",
-                        "infoEmpty": "Нет пользователей",
+                        "emptyTable": "Нет учеников",
+                        "info": "Ученики с _START_ по _END_ из _TOTAL_",
+                        "infoEmpty": "Нет учеников",
                         "infoFiltered": "",
                         "infoPostFix": "",
                         "thousands": ",",

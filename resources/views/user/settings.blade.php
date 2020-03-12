@@ -5,54 +5,56 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card mt-2">
-                    <div class="card-header">Настроить аккаунт</div>
+                @if(Auth::user()->student)
+                    <div class="card mt-2">
+                        <div class="card-header">Настроить аккаунт</div>
 
-                    <div class="card-body">
-                        <form id="form" method="POST" action="{{ route('settings.update') }}">
-                            @csrf
-                            @method("PUT")
+                        <div class="card-body">
+                            <form id="form" method="POST" action="{{ route('settings.update') }}">
+                                @csrf
+                                @method("PUT")
 
-                            <div class="form-group row">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">Email</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" autofocus>
-                                </div>
-                            </div>
-
-                            @if (Auth::user()->student)
                                 <div class="form-group row">
-                                    <label for="birthday" class="col-sm-4 col-form-label text-md-right">Дата рождения</label>
+                                    <label for="email" class="col-sm-4 col-form-label text-md-right">Email</label>
 
                                     <div class="col-md-6">
-                                        <input id="birthday" type="date" class="form-control" name="birthday" value="{{ optional(Auth::user()->student->birthday)->isoFormat('Y-MM-DD') }}" autofocus>
+                                        <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" autofocus>
                                     </div>
                                 </div>
-                            @endif
 
-                            <div class="form-group row">
-                                <label for="editor" class="col-md-4 col-form-label text-md-right">О себе</label>
+                                @if (Auth::user()->student)
+                                    <div class="form-group row">
+                                        <label for="birthday" class="col-sm-4 col-form-label text-md-right">Дата рождения</label>
 
-                                <div class="col-md-7 mb-5">
-                                    <input type="hidden" name="description" id="description">
+                                        <div class="col-md-6">
+                                            <input id="birthday" type="date" class="form-control" name="birthday" value="{{ optional(Auth::user()->student->birthday)->isoFormat('Y-MM-DD') }}" autofocus>
+                                        </div>
+                                    </div>
+                                @endif
 
-                                    <div id="editor">
-                                        {!! Auth::user()->description !!}
+                                <div class="form-group row">
+                                    <label for="editor" class="col-md-4 col-form-label text-md-right">О себе</label>
+
+                                    <div class="col-md-7 mb-5">
+                                        <input type="hidden" name="description" id="description">
+
+                                        <div id="editor">
+                                            {!! Auth::user()->description !!}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Сохранить
-                                    </button>
+                                <div class="form-group row mb-0">
+                                    <div class="col-md-8 offset-md-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            Сохранить
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                @endif
 
                 <div class="card mt-2">
                     <div class="card-header">Изменить пароль</div>

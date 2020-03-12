@@ -36,7 +36,7 @@ class Article extends Model implements HasMedia
     }
 
     static function notPublished() {
-        return Article::where('is_blank', false)->where('is_published', false)->orWhere('is_published', null)->get();
+        return Article::where([['is_blank', false], ['is_published', false]])->get();
     }
 
     public function getUrlAttribute()

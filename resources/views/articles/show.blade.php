@@ -43,20 +43,31 @@
             <hr>
 
             <h3 class="my-auto">
-                @auth
-                    <span class="{{ $article->is_liked ? 'article__liked' : 'article__unliked' }}" id="like_{{ $article->id }}">
-                        <a class="article__unlike_link" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
-                        <a class="article__like_link" id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="far fa-heart"></i></a>
+                @if($article->is_published)
+                    @auth
+                        <span class="{{ $article->is_liked ? 'article__liked' : 'article__unliked' }}" id="like_{{ $article->id }}">
+                            <a class="article__unlike_link" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
+                            <a class="article__like_link" id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="far fa-heart"></i></a>
 
-                        <span class="article__like_counter point_count{{ $article->id }}">{{ $article->points }}</span>
-                    </span>
+                            <span class="article__like_counter point_count{{ $article->id }}">{{ $article->points }}</span>
+                        </span>
+                    @else
+                        <span class="article__liked" id="like_{{ $article->id }}">
+                            <i class="article__unlike_link fas fa-heart"></i>
+
+                            <span class="article__like_counter">{{ $article->points }}</span>
+                        </span>
+                    @endauth
                 @else
-                    <span class="article__liked" id="like_{{ $article->id }}">
-                        <i class="article__unlike_link fas fa-heart"></i>
+                    @admin
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form-{{ $article->id }}').submit();" class="btn btn-primary">Опубликовать</a>
 
-                        <span class="article__like_counter">{{ $article->points }}</span>
-                    </span>
-                @endauth
+                    <form id="publish-form-{{ $article->id }}" action="{{ route('article.publish', compact('article')) }}" method="POST" class="d-none">
+                        @method('PUT')
+                        @csrf
+                    </form>
+                    @endadmin
+                @endif
             </h3>
         </div>
     </section>

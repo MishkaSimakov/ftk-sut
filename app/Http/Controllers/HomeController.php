@@ -11,10 +11,15 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
+        if (Auth::user()->student) {
+            $user = Auth::user();
+            $achievements = $user->student->achievements;
 
-        $achievements = optional($user->student)->achievements;
+            return view('home.student', compact(['achievements', 'user']));
+        } else {
+            $user = Auth::user();
 
-        return view('home', compact(['achievements', 'user']));
+            return view('home.teacher', compact('user'));
+        }
     }
 }

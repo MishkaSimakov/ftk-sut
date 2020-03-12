@@ -45,7 +45,9 @@ Route::resource('rating', 'RatingController')->only([
 
 
 Route::get('/user/{user}', 'UserController@show')->name('user.show');
+
 Route::get('/teacher/{teacher}', 'TeacherController@show')->name('teacher.show');
+Route::post('/teacher', 'TeacherController@store')->name('teacher.store')->middleware(['auth', 'admin']);
 
 Route::resource('achievements', 'AchievementController')->only([
    'index'

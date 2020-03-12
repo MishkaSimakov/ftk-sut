@@ -18,11 +18,11 @@ class Schedule extends Model implements HasMedia
 
     protected $dates = ['created_at', 'updated_at', 'date_start', 'date_end'];
 
-    public function students() {
-    	return $this->belongsToMany(Student::class, 'student_schedules');
+    public function users() {
+    	return $this->belongsToMany(User::class, 'user_schedules');
     }
 
     public function getIsRegisterAttribute() {
-        return StudentSchedule::where([['schedule_id', $this->id], ['student_id', optional(Auth::user()->student)->id]])->exists();
+        return UserSchedule::where([['schedule_id', $this->id], ['user_id', Auth::user()->id]])->exists();
     }
 }

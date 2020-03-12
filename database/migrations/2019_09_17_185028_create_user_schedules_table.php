@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStudentSchedulesTable extends Migration
+class CreateUserSchedulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateStudentSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('student_schedules', function (Blueprint $table) {
-            $table->primary(['student_id', 'schedule_id']);
+        Schema::create('user_schedules', function (Blueprint $table) {
+            $table->primary(['user_id', 'schedule_id']);
 
-            $table->integer('student_id');
+            $table->integer('user_id');
             $table->integer('schedule_id');
         });
     }

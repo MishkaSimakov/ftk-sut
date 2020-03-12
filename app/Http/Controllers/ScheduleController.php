@@ -26,7 +26,7 @@ class ScheduleController extends Controller
     	$schedule->title = $request->title;
     	$schedule->subtitle = $request->subtitle;
 
-        $schedule->student_count = 0;
+        $schedule->user_count = 0;
 
     	$schedule->date_start = new Carbon(str_replace('T', ' ', $request->date_start));
         $schedule->date_end = new Carbon(str_replace('T', ' ', $request->date_end));

@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(AchievementSeeder::class);
         $this->call(CategorySeeder::class);
-        $this->call(TeacherSeeder::class);
+//        $this->call(TeacherSeeder::class);
         $this->call(ClubSeeder::class);
 //        $this->call(ArticleSeeder::class);
 //        $this->call(ScheduleSeeder::class);

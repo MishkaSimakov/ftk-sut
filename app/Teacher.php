@@ -5,13 +5,35 @@ namespace App;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @mixin Builder
  */
-class Teacher extends Model
+class Teacher extends Model implements HasMedia
 {
-    protected $fillable = ['first_name', 'middle_name', 'last_name', 'club_id'];
+    use HasMediaTrait;
+
+    protected $fillable = ['first_name', 'middle_name', 'last_name', 'club_id', 'avatar'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function (Teacher $teacher) {
+            $user = User::make();
+
+            $user->name = $teacher->last_name . ' ' . $teacher->first_name;
+            $user->register_code = Str::random(6);
+            $user->is_admin = true;
+
+            $user->save();
+
+            $teacher->user_id = $user->id;
+        });
+    }
 
     public function getFullNameAttribute()
     {

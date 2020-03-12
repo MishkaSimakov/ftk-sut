@@ -21,49 +21,47 @@
 @endsection
 
 @auth
-    @if(Auth::user()->student)
-        @push('script')
-            <script type="text/javascript">
-                function register(schedule_id) {
-                    $('#register_' + schedule_id).removeClass('schedule__unregistered').addClass('schedule__registered');
+    @push('script')
+        <script type="text/javascript">
+            function register(schedule_id) {
+                $('#register_' + schedule_id).removeClass('schedule__unregistered').addClass('schedule__registered');
 
-                    $.ajax({
-                        url: "{{ route('api.schedule.register') }}",
-                        method: "POST",
-                        dataType: 'json',
-                        data: {
-                            student_id: '{{ Auth::user()->student->id }}',
-                            schedule_id: schedule_id
-                        },
-                        success: function (data) {
-                            if (data === 'error') {
-                                alert('😖О нет! Что-то не так!😖');
-                                window.location.reload();
-                            }
+                $.ajax({
+                    url: "{{ route('api.schedule.register') }}",
+                    method: "POST",
+                    dataType: 'json',
+                    data: {
+                        user_id: '{{ Auth::user()->id }}',
+                        schedule_id: schedule_id
+                    },
+                    success: function (data) {
+                        if (data === 'error') {
+                            alert('😖О нет! Что-то не так!😖');
+                            window.location.reload();
                         }
-                    });
-                }
+                    }
+                });
+            }
 
-                function unregister(schedule_id) {
-                    $('#register_' + schedule_id).removeClass('schedule__registered').addClass('schedule__unregistered');
+            function unregister(schedule_id) {
+                $('#register_' + schedule_id).removeClass('schedule__registered').addClass('schedule__unregistered');
 
-                    $.ajax({
-                        url: "{{ route('api.schedule.unregister') }}",
-                        method: "POST",
-                        dataType: 'json',
-                        data: {
-                            student_id: '{{ Auth::user()->student->id }}',
-                            schedule_id: schedule_id
-                        },
-                        success: function (data) {
-                            if (data === 'error') {
-                                alert('😖О нет! Что-то не так!😖');
-                                window.location.reload();
-                            }
+                $.ajax({
+                    url: "{{ route('api.schedule.unregister') }}",
+                    method: "POST",
+                    dataType: 'json',
+                    data: {
+                        user_id: '{{ Auth::user()->id }}',
+                        schedule_id: schedule_id
+                    },
+                    success: function (data) {
+                        if (data === 'error') {
+                            alert('😖О нет! Что-то не так!😖');
+                            window.location.reload();
                         }
-                    });
-                }
-            </script>
-        @endpush
-    @endif
+                    }
+                });
+            }
+        </script>
+    @endpush
 @endauth
