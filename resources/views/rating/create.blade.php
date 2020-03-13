@@ -35,12 +35,12 @@
                             <label for="date" class="col-md-4 col-form-label text-md-right">Дата</label>
 
                             <div class="col-md-6">
-                                <input id="date" type="month" value="{{ Carbon\Carbon::now()->format('Y-m') }}" class="form-control {{ $errors->has('date') ? 'is-invalid' : '' }}" name="date" required>
+                                <input id="date" type="month" max="{{ Carbon\Carbon::now()->format('Y-m') }}" value="{{ Carbon\Carbon::now()->subMonth()->format('Y-m') }}" class="form-control{{ $errors->has('date') ? ' is-invalid' : '' }}" name="date" required>
 
                                 @if ($errors->has('date'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('date') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('date') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -67,14 +67,14 @@
 @push('script')
     <script>
         $(document).on('input', '#type', function () {
-            var val = $(this).val();
-
-            if (val == 1) {
-                $('#date').attr('type', 'month');
-                $('#date').val("{{ Carbon\Carbon::now()->format('Y-m') }}");
+            if ($(this).val() == 1) {
+                $('#date').attr('type', 'month')
+                    .attr("max", "{{ Carbon\Carbon::now()->format('Y-m') }}")
+                    .val("{{ Carbon\Carbon::now()->subMonth()->format('Y-m') }}");
             } else {
-                $('#date').attr('type', 'number');
-                $('#date').val("{{ Carbon\Carbon::now()->format('Y') }}");
+                $('#date').attr('type', 'number')
+                    .attr("max", "{{ Carbon\Carbon::now()->format('Y') }}")
+                    .val("{{ Carbon\Carbon::now()->subMonth()->format('Y') }}");
             }
         });
     </script>

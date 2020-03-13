@@ -16,6 +16,7 @@ class Schedule extends Model implements HasMedia
 {
     use HasMediaTrait;
 
+    protected $guarded = [];
     protected $dates = ['created_at', 'updated_at', 'date_start', 'date_end'];
 
     public function users() {

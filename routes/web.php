@@ -55,6 +55,7 @@ Route::resource('achievements', 'AchievementController')->only([
 
 
 Route::get('/schedule', 'ScheduleController@index')->name('schedule.index');
+Route::get('/schedule/archive', 'ScheduleController@archive')->name('schedule.archive');
 
 Route::resource('schedule', 'ScheduleController')->middleware(['auth', 'admin'])->only([
 	'create', 'store', 'destroy'

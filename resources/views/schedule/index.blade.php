@@ -15,9 +15,9 @@
         @endif
 
         @component('components.card-lists.schedules', ['schedules' => $schedules])@endcomponent
-    </div>
 
-{{--    TODO: сделать отдельный view для архивных событий (все события) --}}
+        <h2 class="text-center"><a href="{{ route('schedule.archive') }}">Архив</a></h2>
+    </div>
 @endsection
 
 @auth
