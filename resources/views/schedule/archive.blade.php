@@ -4,6 +4,6 @@
     <h1 class="text-center m-2">Архив мероприятий</h1>
 
     <div class="container">
-        @component('components.card-lists.schedules', ['schedules' => $schedules])@endcomponent
+        @component('components.card-lists.schedules', ['schedules' => $schedules, 'archived' => true])@endcomponent
     </div>
 @endsection

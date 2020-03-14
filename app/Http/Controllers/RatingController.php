@@ -53,25 +53,28 @@ class RatingController extends Controller
         $existsStudents = Student::whereIn('name', array_keys($ratingRows))->get()->keyBy('name'); //TODO: переделать логику на уникальные имена
 
         foreach ($ratingRows as $key => $row) {
-            $student = Student::firstOrCreate(['name' => $key]);
-//            $student = $existsStudents->get($key);
-//
-//            if (!$student) {
-//                $student = new Student();
-//
-//            }
+            // get or create students
+            $student = $existsStudents->get($key);
+
+            if (!$student) {
+                $student = new Student(['name' => $key]);
+                $student->save();
+            }
+
+            //  award points
+            $points = [];
 
             foreach ($row as $category => $point) {
+                $points[$category] = $point;
+
                 $student->award($rating, $categories->get($category), $point);
             }
 
-            UserEarnedPoints::dispatch($rating, $student);
+            // dispatch event
+            UserEarnedPoints::dispatch($rating, $student, $points);
         }
 
-        $categories = PointCategory::all();
-
-        return redirect(route('rating.show', compact(['rating', 'categories'])));
-//        return '123';
+        return redirect(route('rating.show', compact(['rating', 'categories']))); //TODO: check, maybe 'categories' parameter can be removed?
     }
 
     protected function resolveRatingPoints($rows): array

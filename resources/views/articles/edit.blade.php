@@ -80,7 +80,6 @@
     {{--  text editor  --}}
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-
     <script>
         var quill = new Quill('#editor', {
             theme: 'snow',
@@ -88,8 +87,11 @@
 
         $('#form').submit(function () {
             $('#body').val($('.ql-editor').html())
-        })
+        });
 
+
+
+        {{--  dropzone  --}}
         Dropzone.autoDiscover = false;
 
         var article_dropzone = new Dropzone('#dropzone', {
@@ -110,8 +112,8 @@
 
         @foreach($article->getMedia() as $media)
             var file = {
-            'name': '{{ $media->file_name }}',
-            'size': '{{ $media->size }}',
+                'name': '{{ $media->file_name }}',
+                'size': '{{ $media->size }}',
             };
 
             article_dropzone.emit("addedfile", file);

@@ -12,7 +12,7 @@
                     Статьи <span class="caret"></span>
                 </a>
 
-                <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
+                <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-left">
                     <a href="{{ route('article.index', ['filter' => 'newest']) }}" class="page-navigation__link dropdown-item">
                         Новые
                     </a>

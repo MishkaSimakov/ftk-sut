@@ -355,6 +355,10 @@
 
     <script>
         $(document).ready(function () {
+            $('#edit_avatar').each(function () {
+               $(this).attr('filename', $(this).attr('data-value'));
+            });
+
             $('.spoiler_link').each(function () {
                 $(this).click(function () {
                     $('.spoiler_body_' + $(this).attr('data-schedule')).toggle('normal');

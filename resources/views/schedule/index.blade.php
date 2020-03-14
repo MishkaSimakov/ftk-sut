@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        @component('components.card-lists.schedules', ['schedules' => $schedules])@endcomponent
+        @component('components.card-lists.schedules', ['schedules' => $schedules, 'archived' => false])@endcomponent
 
         <h2 class="text-center"><a href="{{ route('schedule.archive') }}">Архив</a></h2>
     </div>
