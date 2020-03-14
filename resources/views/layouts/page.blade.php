@@ -15,7 +15,7 @@
         <title>ФТК СЮТ</title>
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -68,5 +68,13 @@
         </div>
 
         @stack('script')
+
+        <script>
+            const menuButton = document.querySelector('.site-navigation__toggler');
+
+            menuButton.addEventListener('click', function () {
+                menuButton.classList.toggle('site-navigation__toggler--close');
+            });
+        </script>
     </body>
 </html>

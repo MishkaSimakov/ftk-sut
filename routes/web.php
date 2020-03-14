@@ -80,3 +80,5 @@ Route::get('/settings', 'Auth\AccountController@settings')->name('settings.show'
 Route::put('/settings', 'Auth\AccountController@update')->name('settings.update');
 
 Route::view('/register/help', 'auth.help')->name('register.help');
+
+Route::get('markup/{view}', 'MarkupController@show')->name('markup.show');
