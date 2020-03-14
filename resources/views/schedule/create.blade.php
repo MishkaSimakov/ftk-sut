@@ -46,7 +46,7 @@
                             <label for="date_start" class="col-md-4 col-form-label text-md-right">Дата начала</label>
 
                             <div class="col-md-6">
-                                <input id="date_start" type="datetime-local" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}T{{ Carbon\Carbon::now()->format('H:i') }}" class="form-control{{ $errors->has('date_start') ? ' is-invalid' : '' }}" name="date_start" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}T{{ Carbon\Carbon::now()->format('H:i') }}" required>
+                                <input id="date_start" type="datetime-local" value="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" class="form-control{{ $errors->has('date_start') ? ' is-invalid' : '' }}" name="date_start" min="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" required>
 
                                 @if ($errors->has('date_start'))
                                     <span class="invalid-feedback" role="alert">
@@ -60,7 +60,7 @@
                             <label for="date_end" class="col-md-4 col-form-label text-md-right">Дата окончания</label>
 
                             <div class="col-md-6">
-                                <input id="date_end" type="datetime-local" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}T{{ Carbon\Carbon::now()->format('H:i') }}" class="form-control{{ $errors->has('date_end') ? ' is-invalid' : '' }}" name="date_end" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}T{{ Carbon\Carbon::now()->format('H:i') }}" required>
+                                <input id="date_end" type="datetime-local" value="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" class="form-control{{ $errors->has('date_end') ? ' is-invalid' : '' }}" name="date_end" min="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" required>
 
                                 @if ($errors->has('date_end'))
                                     <span class="invalid-feedback" role="alert">

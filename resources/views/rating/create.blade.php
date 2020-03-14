@@ -16,7 +16,13 @@
                             <label for="file" class="col-md-4 col-form-label text-md-right">Рейтинг</label>
 
                             <div class="col-md-6">
-                                <input id="file" type="file" class="form-control-file" accept=".xls" name="file" required>
+                                <input id="file" type="file" class="form-control-file{{ $errors->has('file') ? ' is-invalid' : '' }}" accept=".xls" name="file" required>
+
+                                @if ($errors->has('file'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('file') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -24,10 +30,16 @@
                             <label for="type" class="col-md-4 col-form-label text-md-right">Тип</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="type" id="type" required>
+                                <select class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" id="type" required>
                                   <option value="1" selected>Рейтинг за месяц</option>
                                   <option value="0">Рейтинг за год</option>
                                 </select>
+
+                                @if ($errors->has('type'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('type') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 

@@ -20,8 +20,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
         {{--  text editor styles  --}}
         <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 

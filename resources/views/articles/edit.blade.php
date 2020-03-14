@@ -19,7 +19,13 @@
                             <label for="title" class="col-md-4 col-form-label text-md-right">Название статьи</label>
 
                             <div class="col-md-7">
-                                <input id="title" type="text" class="form-control" name="title" value="{{ $article->title }}" required>
+                                <input max="100" id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') ?? $article->title }}" required>
+
+                                @if ($errors->has('title'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('title') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -30,7 +36,7 @@
                                 <input type="hidden" name="body" id="body">
 
                                 <div id="editor">
-                                    {!! $article->body !!}
+                                    {!! old('body') ?? $article->body !!}
                                 </div>
                             </div>
                         </div>
@@ -81,12 +87,14 @@
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
     <script>
-        var quill = new Quill('#editor', {
-            theme: 'snow',
-        });
+        $(document).ready(function () {
+            var quill = new Quill('#editor', {
+                theme: 'snow',
+            });
 
-        $('#form').submit(function () {
-            $('#body').val($('.ql-editor').html())
+            $('#form').submit(function () {
+                $('#body').val($('.ql-editor').html())
+            });
         });
 
 

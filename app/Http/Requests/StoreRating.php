@@ -15,7 +15,7 @@ class StoreRating extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->is_admin; //TODO: добавить проверку на админа
+        return Auth::user()->is_admin;
     }
 
     /**
@@ -31,8 +31,21 @@ class StoreRating extends FormRequest
                 'date',
                 new UniqueDate(),
             ],
-            'file' => 'required',
-            'type' => 'required',
+            'file' => 'required|mimes:xls',
+            'type' => 'required|in:0,1',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+          'date.required' => 'Не хватает даты',
+          'date.date' => 'Здесь должна быть дата',
+
+          'file.required' => 'Не хватает файла',
+          'file.mimes' => 'Рейтинг должен быть таблицей Excel',
+
+          'type.required' => 'Выберите один из типов рейтинга',
         ];
     }
 }

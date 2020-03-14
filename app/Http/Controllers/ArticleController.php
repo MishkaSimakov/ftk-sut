@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Achievements\Events\UserWriteArticle;
+use App\Http\Requests\StoreArticle;
 use App\User;
 use Illuminate\Http\Request;
 use App\Article;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
 
 class ArticleController extends Controller
 {
@@ -22,9 +21,7 @@ class ArticleController extends Controller
 
         $articles = $articles->paginate(10);
 
-        $notPublishedCount = Article::notPublished()->count();
-
-        return view('articles.index', compact('articles', 'notPublishedCount'));
+        return view('articles.index', compact('articles'));
     }
 
     public function show(Article $article)
@@ -85,7 +82,7 @@ class ArticleController extends Controller
         return view('articles.edit', compact('article', 'names'));
     }
 
-    public function update(Request $request, Article $article)
+    public function update(StoreArticle $request, Article $article)
     {
         $validatedData = $request->validate([
             'title' => 'required|max:100|string',

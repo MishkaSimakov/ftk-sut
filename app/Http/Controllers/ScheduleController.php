@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreSchedule;
 use App\Schedule;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class ScheduleController extends Controller
@@ -27,31 +27,15 @@ class ScheduleController extends Controller
     	return view('schedule.create');
     }
 
-    public function store(Request $request) {
-        $request->date_start = new Carbon(str_replace('T', ' ', $request->date_start));
-        $request->date_end = new Carbon(str_replace('T', ' ', $request->date_end));
+    public function store(StoreSchedule $request) {
+    	$schedule = Schedule::make(Arr::except($request->all(), 'file'));
 
-        $validatedData = $request->validate([
-            'title' => 'required|max:100|string',
-            'subtitle' => 'required|max:100|string',
-            'date_start' => 'required|date|after:now',
-            'date_end' => 'required|date|after:date_start',
-        ]);
-
-    	$schedule = Schedule::make($validatedData);
-
-//    	$schedule->title = $request->title;
-//    	$schedule->subtitle = $request->subtitle;
-//
-        $schedule->user_count = 0;
-//
-//    	$schedule->date_start = new Carbon(str_replace('T', ' ', $request->date_start));
-//        $schedule->date_end = new Carbon(str_replace('T', ' ', $request->date_end));
+    	$schedule->user_count = 0;
 
     	$schedule->save();
 
-//        add image
-        $image = $request->file;
+//      add image
+        $image = Arr::first($request->allFiles());
 
         $name = Str::slug(str_replace("." . $image->getClientOriginalExtension(), "", $image->getClientOriginalName()));
         $filename = $name . '.' . $image->getClientOriginalExtension();
