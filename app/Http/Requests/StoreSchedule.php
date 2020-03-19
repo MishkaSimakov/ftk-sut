@@ -29,6 +29,7 @@ class StoreSchedule extends FormRequest
             'subtitle' => 'max:100|string',
             'date_start' => 'required|date|after:now',
             'date_end' => 'required|date|after:date_start',
+            'file' => 'required|file|image'
         ];
     }
 
@@ -49,6 +50,10 @@ class StoreSchedule extends FormRequest
             'date_end.required' => 'Мероприятие должно когда-нибудь закончиться',
             'date_end.date' => 'Здесь должна быть дата',
             'date_end.after' => 'Мероприятие должно закончиться позже, чем начаться',
+
+            'file.required' => 'Необходимо загрузить фотографию',
+            'file.file' => 'Здесь должен быть файл',
+            'file.image' => 'Здесь должно быть изображение',
         ];
     }
 }

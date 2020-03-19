@@ -15,7 +15,9 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('chats', require('./components/chat/Chats.vue').default);
+// Vue.component('chat', require('./components/chat/Chat.vue').default);
+// Vue.component('chat-add-form', require('./components/chat/forms/ChatAddForm.vue').default);
 
 
 const app = new Vue({

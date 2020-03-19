@@ -26,4 +26,9 @@ class Schedule extends Model implements HasMedia
     public function getIsRegisterAttribute() {
         return UserSchedule::where([['schedule_id', $this->id], ['user_id', Auth::user()->id]])->exists();
     }
+
+    public function getIsArchivedAttribute()
+    {
+        return $this->date_start->isBefore(now());
+    }
 }

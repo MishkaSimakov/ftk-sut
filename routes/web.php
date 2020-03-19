@@ -58,7 +58,7 @@ Route::get('/schedule', 'ScheduleController@index')->name('schedule.index');
 Route::get('/schedule/archive', 'ScheduleController@archive')->name('schedule.archive');
 
 Route::resource('schedule', 'ScheduleController')->middleware(['auth', 'admin'])->only([
-	'create', 'store', 'destroy'
+	'create', 'store', 'destroy', 'edit', 'update'
 ]);
 
 
@@ -72,13 +72,19 @@ Auth::routes([
 
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 
-Route::get('/admin', 'Admin\AdminController@index')->name('admin.index')->middleware(['auth', 'admin']);
-Route::put('/admin/student/{student}/settings', 'Admin\AdminController@studentSettings')->name('admin.student.settings')->middleware(['auth', 'admin']);
-Route::put('/admin/teacher/{teacher}/settings', 'Admin\AdminController@teacherSettings')->name('admin.teacher.settings')->middleware(['auth', 'admin']);
+Route::prefix('admin')->middleware(['auth', 'admin'])->namespace('Admin')->group(function () {
+    Route::get('/', 'AdminController@index')->name('admin.index');
+
+    Route::get('teacher/{teacher}/edit', 'AdminController@teacherEdit')->name('admin.teacher.edit');
+
+    Route::put('student/{student}/settings', 'AdminController@studentSettings')->name('admin.student.settings');
+    Route::put('teacher/{teacher}/settings', 'AdminController@teacherSettings')->name('admin.teacher.settings');
+});
+
 
 Route::get('/settings', 'Auth\AccountController@settings')->name('settings.show');
 Route::put('/settings', 'Auth\AccountController@update')->name('settings.update');
 
 Route::view('/register/help', 'auth.help')->name('register.help');
 
-Route::get('markup/{view}', 'MarkupController@show')->name('markup.show');
+Route::get('/markup/{view}', 'MarkupController@show')->name('markup.show');

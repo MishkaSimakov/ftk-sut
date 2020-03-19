@@ -7,18 +7,19 @@ use App\Schedule;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
 {
     public function index() {
-    	$schedules = Schedule::whereDate('date_start', '>', Carbon::now())->get()->sortBy('date_start');
+        $schedules = Schedule::all();
 
     	return view('schedule.index', compact('schedules'));
     }
 
     public function archive()
     {
-        $schedules = Schedule::whereDate('date_start', '<', Carbon::now())->get()->sortBy('date_start');
+        $schedules = Schedule::all()->filter->isArchived;
 
         return view('schedule.archive', compact('schedules'));
     }
@@ -51,6 +52,25 @@ class ScheduleController extends Controller
     public function destroy(Schedule $schedule)
     {
         $schedule->delete();
+
+        return redirect(route('schedule.index'));
+    }
+
+    public function edit(Schedule $schedule)
+    {
+        return view('schedule.edit', compact('schedule'));
+    }
+
+    public function update(Request $request, Schedule $schedule)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required|max:100|string',
+            'subtitle' => 'max:100|string',
+            'date_start' => 'required|date|after:now',
+            'date_end' => 'required|date|after:date_start',
+        ]);
+
+        $schedule->update($validatedData);
 
         return redirect(route('schedule.index'));
     }

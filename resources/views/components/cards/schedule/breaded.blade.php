@@ -1,5 +1,7 @@
 <div class="schedule card shadow">
-    <img alt="Изображение мероприятия" class="card-img-top" src="/image/{{ $schedule->getMedia()->first()->getUrl() }}">
+    <img alt="Изображение мероприятия" class="card-img-top"
+         src="/image/{{ $schedule->getMedia() ? $schedule->getMedia()->first()->getUrl() : "https://pbs.twimg.com/profile_images/600060188872155136/st4Sp6Aw_400x400.jpg" }}"
+    >
 
     <div class="card-body d-flex flex-column">
         <div class="card-title d-flex flex-row align-items-center justify-content-between">
@@ -14,6 +16,10 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                     <div class="dropdown-header font-weight-bold">Дополнительно:</div>
+
+                    <a href="{{ route('schedule.edit', compact('schedule')) }}" style="cursor: pointer" class="dropdown-item">
+                        Редактировать
+                    </a>
 
                     <div class="dropdown-divider"></div>
 

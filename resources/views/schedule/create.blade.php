@@ -46,7 +46,7 @@
                             <label for="date_start" class="col-md-4 col-form-label text-md-right">Дата начала</label>
 
                             <div class="col-md-6">
-                                <input id="date_start" type="datetime-local" value="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" class="form-control{{ $errors->has('date_start') ? ' is-invalid' : '' }}" name="date_start" min="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" required>
+                                <input id="date_start" type="datetime-local" value="{{ old('date_start') ?? Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" class="form-control{{ $errors->has('date_start') ? ' is-invalid' : '' }}" name="date_start" min="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" required>
 
                                 @if ($errors->has('date_start'))
                                     <span class="invalid-feedback" role="alert">
@@ -60,7 +60,7 @@
                             <label for="date_end" class="col-md-4 col-form-label text-md-right">Дата окончания</label>
 
                             <div class="col-md-6">
-                                <input id="date_end" type="datetime-local" value="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" class="form-control{{ $errors->has('date_end') ? ' is-invalid' : '' }}" name="date_end" min="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" required>
+                                <input id="date_end" type="datetime-local" value="{{ old('date_end') ?? Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" class="form-control{{ $errors->has('date_end') ? ' is-invalid' : '' }}" name="date_end" min="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" required>
 
                                 @if ($errors->has('date_end'))
                                     <span class="invalid-feedback" role="alert">
@@ -74,7 +74,13 @@
                             <label for="file" class="col-md-4 col-form-label text-md-right">Изображение</label>
 
                             <div class="col-md-6">
-                                <input id="file" type="file" class="form-control-file" accept="image/*" name="file" required>
+                                <input id="file" type="file" class="form-control-file{{ $errors->has('file') ? ' is-invalid' : '' }}" accept="image/*" name="file" required>
+
+                                @if ($errors->has('file'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('file') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 

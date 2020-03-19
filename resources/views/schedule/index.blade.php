@@ -14,9 +14,14 @@
             </div>
         @endif
 
-        @component('components.card-lists.schedules', ['schedules' => $schedules, 'archived' => false])@endcomponent
+        @component('components.card-lists.schedules', ['schedules' => $schedules->filter(function ($schedule) {
+            return !$schedule->isArchived;
+        }), 'archived' => false])
+        @endcomponent
 
-        <h2 class="text-center"><a href="{{ route('schedule.archive') }}">Архив</a></h2>
+        @if($schedules->filter->isArchived)
+            <h2 class="text-center"><a href="{{ route('schedule.archive') }}">Архив</a></h2>
+        @endif
     </div>
 @endsection
 

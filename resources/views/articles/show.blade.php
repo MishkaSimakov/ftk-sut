@@ -34,7 +34,10 @@
                 <div class="container">
                     @foreach($article->getMedia() as $photo)
                         <div class="col-md-2 m-2 p-0 d-inline-block">
-                            <img class="mw-100 mh-100 rounded" src="/image/{{ $photo->getUrl() }}" style="cursor: pointer" data-lity data-lity-target="/image/{{ $photo->getUrl() }}">
+                            <img alt="Изображение для статьи" class="mw-100 mh-100 rounded"
+                                 data-lity data-lity-target="/image/{{ $photo->getUrl() }}"
+                                 src="/image/{{ $photo->getUrl() }}"
+                                 style="cursor: pointer">
                         </div>
                     @endforeach
                 </div>

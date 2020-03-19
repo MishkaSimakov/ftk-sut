@@ -47,6 +47,11 @@ class AdminController extends Controller
         return redirect(route('admin.index', compact(['schedules', 'students'])));
     }
 
+    public function teacherEdit(Teacher $teacher)
+    {
+        return view('teacher.edit', compact('teacher'));
+    }
+
     public function teacherSettings(Request $request, Teacher $teacher)
     {
         $validatedData = $request->validate([

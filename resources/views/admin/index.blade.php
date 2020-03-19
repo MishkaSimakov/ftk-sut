@@ -137,8 +137,8 @@
                                 <td>{{ $teacher->middle_name }}</td>
                                 <td>{{ $teacher->club->name }}</td>
                                 <td>{{ $teacher->user->register_code }}</td>
-                                <td><img alt="Изображение преподавателя" class="rounded" src="/image/{{ $teacher->getMedia()->first()->getUrl() }}" style="cursor: pointer; max-width: 5vw; max-height: 5vw;" data-lity data-lity-target="/image/{{ $teacher->getMedia()->first()->getUrl() }}"></td>
-                                <td class="text-center" data-toggle="modal" data-target="#settings_teacher_{{ $teacher->id }}"><i style="cursor: pointer" class="text-primary fas fa-user-cog"></i></td>
+                                <td><img alt="Изображение преподавателя" class="rounded" src="/image/{{ optional($teacher->getMedia()->first())->getUrl() }}" style="cursor: pointer; max-width: 5vw; max-height: 5vw;" data-lity data-lity-target="/image/{{ optional($teacher->getMedia()->first())->getUrl() }}"></td>
+                                <td class="text-center"><a href="{{ route('admin.teacher.edit', compact('teacher')) }}"><i class="fas fa-user-cog"></i></a></td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -214,71 +214,71 @@
         @endforeach
     </div>
 
-    <div class="teacher_setting_modals">
-    @foreach($teachers as $teacher)
-        <!-- Modal -->
-            <div class="modal fade" id="settings_teacher_{{ $teacher->id }}" tabindex="-1" role="dialog" aria-labelledby="TeacherSettings" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">{{ $teacher->fullName }}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="teacher_settings_form_{{ $teacher->id }}" method="POST" action="{{ route('admin.teacher.settings', compact('teacher')) }}">
-                                @csrf
-                                @method("PUT")
+{{--    <div class="teacher_setting_modals">--}}
+{{--    @foreach($teachers as $teacher)--}}
+{{--        <!-- Modal -->--}}
+{{--            <div class="modal fade" id="settings_teacher_{{ $teacher->id }}" tabindex="-1" role="dialog" aria-labelledby="TeacherSettings" aria-hidden="true">--}}
+{{--                <div class="modal-dialog modal-lg" role="document">--}}
+{{--                    <div class="modal-content">--}}
+{{--                        <div class="modal-header">--}}
+{{--                            <h5 class="modal-title" id="exampleModalLabel">{{ $teacher->fullName }}</h5>--}}
+{{--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                                <span aria-hidden="true">&times;</span>--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-body">--}}
+{{--                            <form id="teacher_settings_form_{{ $teacher->id }}" method="POST" action="{{ route('admin.teacher.settings', compact('teacher')) }}">--}}
+{{--                                @csrf--}}
+{{--                                @method("PUT")--}}
 
-                                <div class="form-group row">
-                                    <label for="last_name" class="col-md-4 col-form-label text-md-right">Фамилия</label>
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="last_name" class="col-md-4 col-form-label text-md-right">Фамилия</label>--}}
 
-                                    <div class="col-md-6">
-                                        <input value="{{ $teacher->last_name }}" id="last_name" type="text" class="form-control" name="last_name" required>
-                                    </div>
-                                </div>
+{{--                                    <div class="col-md-6">--}}
+{{--                                        <input value="{{ $teacher->last_name }}" id="last_name" type="text" class="form-control" name="last_name" required>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group row">
-                                    <label for="first_name" class="col-md-4 col-form-label text-md-right">Имя</label>
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="first_name" class="col-md-4 col-form-label text-md-right">Имя</label>--}}
 
-                                    <div class="col-md-6">
-                                        <input value="{{ $teacher->first_name }}" id="first_name" type="text" class="form-control" name="first_name" required>
-                                    </div>
-                                </div>
+{{--                                    <div class="col-md-6">--}}
+{{--                                        <input value="{{ $teacher->first_name }}" id="first_name" type="text" class="form-control" name="first_name" required>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group row">
-                                    <label for="middle_name" class="col-md-4 col-form-label text-md-right">Отчество</label>
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="middle_name" class="col-md-4 col-form-label text-md-right">Отчество</label>--}}
 
-                                    <div class="col-md-6">
-                                        <input value="{{ $teacher->middle_name }}" id="middle_name" type="text" class="form-control" name="middle_name" required>
-                                    </div>
-                                </div>
+{{--                                    <div class="col-md-6">--}}
+{{--                                        <input value="{{ $teacher->middle_name }}" id="middle_name" type="text" class="form-control" name="middle_name" required>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group row">
-                                    <label for="club_id" class="col-md-4 col-form-label text-md-right">Кружок</label>
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="club_id" class="col-md-4 col-form-label text-md-right">Кружок</label>--}}
 
-                                    <div class="col-md-7">
-                                        <select class="form-control" id="club_id" name="club_id" required>
-                                            @foreach (\App\Club::all() as $club)
-                                                <option value="{{ $club->id }}" {{ $teacher->club->id == $club->id ? 'selected' : '' }}>
-                                                    {{ $club->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                            <button type="button" class="btn btn-primary" onclick="$('#teacher_settings_form_{{ $teacher->id }}').submit()">Сохранить</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <select class="form-control" id="club_id" name="club_id" required>--}}
+{{--                                            @foreach (\App\Club::all() as $club)--}}
+{{--                                                <option value="{{ $club->id }}" {{ $teacher->club->id == $club->id ? 'selected' : '' }}>--}}
+{{--                                                    {{ $club->name }}--}}
+{{--                                                </option>--}}
+{{--                                            @endforeach--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-footer">--}}
+{{--                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>--}}
+{{--                            <button type="button" class="btn btn-primary" onclick="$('#teacher_settings_form_{{ $teacher->id }}').submit()">Сохранить</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        @endforeach--}}
+{{--    </div>--}}
 
     <div class="modal fade" id="teacher_create_modal" tabindex="-1" role="dialog" aria-labelledby="TeacherSettings" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -366,9 +366,9 @@
             });
 
             if ($(window).width() > 992) {
-                $('#teachers-table').show()
+                $('#teachers-table').show();
 
-                $('#students-table').DataTable({
+                $('#students-table').show().DataTable({
                     'language': {
                         "decimal": "",
                         "emptyTable": "Нет учеников",
@@ -396,8 +396,6 @@
                         }
                     }
                 });
-
-                $('#students-table').show()
             }
         });
 
