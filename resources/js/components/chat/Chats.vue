@@ -10,18 +10,20 @@
                 </div>
                 <div v-else-if="chats.length" v-for="chat in chats" :key="chat.id" :chat="chat">
                     <div class="chat border p-2">
-                        <div class="chat__header text-lg">
+                        <div class="chat__header text-lg m-1 row d-flex">
                             <a v-bind:href="'/chat/' + chat.id">
-                                {{ chat.name }}
+                                {{ trunc(chat.name, 50) }}
                             </a>
                         </div>
-                        <ul class="list-inline chat__users">
+                        <ul class="list-inline chat__users text-muted m-1">
                             <li class="list-inline-item"><strong>Участники: </strong></li>
                             <li class="list-inline-item" v-for="user in chat.users">{{ user.name }}</li>
                         </ul>
                     </div>
                 </div>
-                <div v-else>Нет бесед</div>
+                <div v-else class="d-flex justify-content-center my-4 mx-auto">
+                    <span>Нет бесед</span>
+                </div>
             </div>
         </div>
     </div>
@@ -29,6 +31,7 @@
 
 <script>
     import { mapActions, mapGetters } from 'vuex'
+    import trunc from '../../helpers/trunc'
 
     export default {
         computed: mapGetters({
@@ -40,6 +43,7 @@
                 'getChat',
                 'getChats',
             ]),
+            trunc: trunc,
         },
         mounted() {
             this.getChats(1)

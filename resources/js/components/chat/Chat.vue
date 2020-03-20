@@ -23,8 +23,8 @@
                     <div v-else-if="chat.messages.length">
                         <message v-for="message in chat.messages" :key="message.data" :message="message"></message>
                     </div>
-                    <div v-else class="my-2 mx-2">
-                        Нет сообщений
+                    <div v-else class="d-flex justify-content-center my-4 mx-auto">
+                        <span>Нет сообщений</span>
                     </div>
                 </div>
 

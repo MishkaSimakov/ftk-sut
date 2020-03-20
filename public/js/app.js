@@ -10012,6 +10012,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _helpers_trunc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers/trunc */ "./resources/js/helpers/trunc.js");
+/* harmony import */ var _helpers_trunc__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_helpers_trunc__WEBPACK_IMPORTED_MODULE_1__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -10047,13 +10049,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     chats: 'allChats',
     loading: 'loadingChats'
   }),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getChat', 'getChats'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getChat', 'getChats']), {
+    trunc: _helpers_trunc__WEBPACK_IMPORTED_MODULE_1___default.a
+  }),
   mounted: function mounted() {
     this.getChats(1);
   }
@@ -46694,11 +46701,11 @@ var render = function() {
                   }),
                   1
                 )
-              : _c("div", { staticClass: "my-2 mx-2" }, [
-                  _vm._v(
-                    "\n                    Нет сообщений\n                "
-                  )
-                ])
+              : _c(
+                  "div",
+                  { staticClass: "d-flex justify-content-center my-4 mx-auto" },
+                  [_c("span", [_vm._v("Нет сообщений")])]
+                )
           ]),
           _vm._v(" "),
           _c("message-add-form")
@@ -46769,19 +46776,25 @@ var render = function() {
               ? _vm._l(_vm.chats, function(chat) {
                   return _c("div", { key: chat.id, attrs: { chat: chat } }, [
                     _c("div", { staticClass: "chat border p-2" }, [
-                      _c("div", { staticClass: "chat__header text-lg" }, [
-                        _c("a", { attrs: { href: "/chat/" + chat.id } }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(chat.name) +
-                              "\n                        "
-                          )
-                        ])
-                      ]),
+                      _c(
+                        "div",
+                        { staticClass: "chat__header text-lg m-1 row d-flex" },
+                        [
+                          _c("a", { attrs: { href: "/chat/" + chat.id } }, [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.trunc(chat.name, 50)) +
+                                "\n                        "
+                            )
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _c(
                         "ul",
-                        { staticClass: "list-inline chat__users" },
+                        {
+                          staticClass: "list-inline chat__users text-muted m-1"
+                        },
                         [
                           _vm._m(0, true),
                           _vm._v(" "),
@@ -46798,7 +46811,11 @@ var render = function() {
                     ])
                   ])
                 })
-              : _c("div", [_vm._v("Нет бесед")])
+              : _c(
+                  "div",
+                  { staticClass: "d-flex justify-content-center my-4 mx-auto" },
+                  [_c("span", [_vm._v("Нет бесед")])]
+                )
           ],
           2
         )
@@ -46975,7 +46992,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Send")]
+        [_vm._v("Добавить")]
       )
     ])
   }
@@ -60809,6 +60826,19 @@ var userautocomplete = function userautocomplete(selector) {
       empty: '<div class="aa-empty">Нет таких людей!</div>'
     }
   });
+};
+
+/***/ }),
+
+/***/ "./resources/js/helpers/trunc.js":
+/*!***************************************!*\
+  !*** ./resources/js/helpers/trunc.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function (str, limit) {
+  return str.length > limit ? str.substr(0, limit - 1) + '...' : str;
 };
 
 /***/ }),
