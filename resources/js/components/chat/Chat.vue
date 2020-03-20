@@ -51,7 +51,9 @@
             ]),
         },
         mounted() {
-            this.getChat(this.id)
+            this.getChat(this.id).then(() => {
+                //scroll messages down
+            })
         }
     }
 </script>

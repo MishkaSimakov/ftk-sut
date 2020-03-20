@@ -5,6 +5,7 @@ namespace App\Chat;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Chat extends Model
 {
@@ -15,12 +16,17 @@ class Chat extends Model
 
     public function messages()
     {
-        return $this->hasMany(Message::class)->orderBy('created_at', 'desc')->with('user');
+        return $this->hasMany(Message::class)->orderBy('created_at')->with('user');
     }
 
     public function touchLastMessage()
     {
         $this->last_message = Carbon::now();
         $this->save();
+    }
+
+    public function usersExceptCurrentlyAuthenticated()
+    {
+        return $this->users()->where('id', '!=', Auth::user()->id);
     }
 }

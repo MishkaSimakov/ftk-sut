@@ -20,16 +20,16 @@ const actions = {
         commit('setChatsLoading', true);
 
         api.getChats(1).then((response) => {
-            // Echo.private(`user.${window.user.id}`)
-            //     .listen('ConversationCreated', (e) => {
-            //         commit('prependToConversations', e.data)
-            //     })
-            //     .listen('ConversationReplyCreated', (e) => {
-            //         commit('prependToConversations', e.data.parent.data)
-            //     })
-            //     .listen('ConversationUserCreated', (e) => {
-            //         commit('updateConversationInList', e.data)
-            //     });
+            Echo.private(`user.${window.Laravel.user.id}`)
+                .listen('ChatCreated', (e) => {
+                    commit('prependToChats', e.chat)
+                });
+                // .listen('ConversationReplyCreated', (e) => {
+                //     commit('prependToConversations', e.data.parent.data)
+                // })
+                // .listen('ConversationUserCreated', (e) => {
+                //     commit('updateConversationInList', e.data)
+                // });
 
             commit('setChats', response.data);
 
@@ -48,6 +48,13 @@ const mutations = {
     },
     setChatsLoading(state, status) {
         state.loadingChats = status
+    },
+    prependToChats(state, chat) {
+        state.chats = state.chats.filter((c) => {
+            return c.id !== chat.id
+        });
+
+        state.chats.unshift(chat)
     },
 };
 

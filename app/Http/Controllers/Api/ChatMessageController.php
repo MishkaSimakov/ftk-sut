@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Chat\Chat;
 use App\Chat\Message;
+use App\Events\ChatMessageCreated;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,7 @@ class ChatMessageController extends Controller
 
         $chat->touchLastMessage();
 
-//        broadcast(new ConversationReplyCreated($reply))->toOthers();
+        broadcast(new ChatMessageCreated($message))->toOthers();
 
         return $message->load(['user']);
     }

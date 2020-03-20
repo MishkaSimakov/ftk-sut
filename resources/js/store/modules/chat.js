@@ -22,9 +22,21 @@ const actions = {
     getChat({dispatch, commit}, id) {
         commit('setChatLoading', true)
 
+        if (state.chat) {
+            Echo.leave('chat.' + state.chat.id)
+        }
+
         api.getChat(id).then((response) => {
             commit('setChat', response.data);
             commit('setChatLoading', false);
+
+            Echo.private('chat.' + id)
+                .listen('ChatMessageCreated', (e) => {
+                    commit('appendToChat', e.message)
+                })
+                // .listen('ConversationUserCreated', (e) => {
+                //     commit('updateUsersInConversation', e.data.users.data)
+                // });
         })
     },
     createChatMessage({dispatch, commit}, {id, body}) {
@@ -58,7 +70,7 @@ const mutations = {
         state.loadingChat = status
     },
     appendToChat(state, message) {
-        state.chat.messages.unshift(message)
+        state.chat.messages.push(message)
     },
     setMessageError(state, status) {
         state.messageError = status

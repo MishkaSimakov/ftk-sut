@@ -56,6 +56,11 @@ class User extends Authenticatable
 
     public function chats()
     {
-        return $this->belongsToMany(Chat::class, ChatUser::class);
+        return $this->belongsToMany(Chat::class, ChatUser::class)->orderBy('last_message', 'desc');
+    }
+
+    public function isInChat(Chat $chat)
+    {
+        return $this->chats->contains($chat);
     }
 }

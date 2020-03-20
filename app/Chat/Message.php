@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $appends = [
-        'timeForHuman'
+        'timeForHuman',
+        'selfOwned'
     ];
 
     public function user()
@@ -24,5 +25,10 @@ class Message extends Model
     public function getTimeForHumanAttribute()
     {
         return $this->created_at ? $this->created_at->diffForHumans() : null;
+    }
+
+    public function getSelfOwnedAttribute()
+    {
+        return $this->user_id === auth()->user()->id;
     }
 }

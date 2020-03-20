@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Chat\Chat;
+use App\Events\ChatCreated;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,9 @@ class ChatController extends Controller
                 array_merge($request->recipients, [$request->user()->id]))
         );
 
-//        broadcast(new ConversationCreated($conversation))->toOthers();
+        $chat->load('users');
+
+        broadcast(new ChatCreated($chat))->toOthers();
 
         return response()->json('/chat/' . $chat->id);
     }
