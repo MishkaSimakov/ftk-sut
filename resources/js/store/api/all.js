@@ -15,8 +15,21 @@ export default {
     },
     storeChatMessage(id, {body}) {
         return new Promise((resolve, reject) => {
-            axios.post('/webapi/conversations/' + id + '/reply', {
+            axios.post('/webapi/chats/' + id + '/message', {
                 body: body
+            }).then((response) => {
+                console.log(response);
+                resolve(response)
+            }).catch((e) => {
+                resolve("error")
+            });
+        })
+    },
+    storeChat({title, recipients}) {
+        return new Promise((resolve, reject) => {
+            axios.post('/webapi/chats/', {
+                title: title,
+                recipients: recipients
             }).then((response) => {
                 resolve(response)
             })

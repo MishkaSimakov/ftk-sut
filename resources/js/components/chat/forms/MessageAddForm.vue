@@ -1,6 +1,6 @@
 <template>
     <form action="#" class="chat__form">
-        <textarea @keydown="handleMessageInput" v-model="body" id="body" cols="30" rows="4" class="chat__form-input"></textarea>
+        <textarea v-bind:class="{ 'is-invalid': error }" @keydown="handleMessageInput" v-model="body" id="body" cols="30" rows="4" class="form-control chat__form-input"></textarea>
 
         <span class="chat__form-helptext">
             <b>Return</b> чтобы отправить или <b>Shift + Return</b> для переноса на новую строку
@@ -18,7 +18,8 @@
             }
         },
         computed: mapGetters({
-            chat: 'currentChat'
+            chat: 'currentChat',
+            error: 'messageError'
         }),
         methods: {
             ...mapActions([
@@ -39,8 +40,10 @@
                     id: this.chat.id,
                     body: this.body
                 }).then(() => {
-                    this.body = null;
-                })
+                    if (!this.error) {
+                        this.body = null;
+                    }
+                });
             }
         }
     }

@@ -17,4 +17,9 @@ class ChatController extends Controller
     {
         return view('chat.show', compact('chat'));
     }
+
+    public function create()
+    {
+        return view('chat.create');
+    }
 }

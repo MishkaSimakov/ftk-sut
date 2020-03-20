@@ -24,4 +24,20 @@ class ChatController extends Controller
     {
         return $chat->load(['users', 'messages']);
     }
+
+    public function store(Request $request)
+    {
+        $chat = new Chat;
+        $chat->name = $request->title;
+
+        $chat->save();
+
+        $chat->users()->sync(array_unique(
+                array_merge($request->recipients, [$request->user()->id]))
+        );
+
+//        broadcast(new ConversationCreated($conversation))->toOthers();
+
+        return response()->json('/chat/' . $chat->id);
+    }
 }

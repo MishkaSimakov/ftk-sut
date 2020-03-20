@@ -20,6 +20,11 @@ class CreateMessagesTable extends Migration
 
             $table->text('body');
             $table->timestamps();
+
+            $table->foreign('chat_id')
+                ->references('id')
+                ->on('chats')
+                ->onDelete('cascade');
         });
     }
 

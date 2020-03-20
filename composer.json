@@ -6,11 +6,13 @@
     "type": "project",
     "require": {
         "php": "^7.2.5",
+        "algolia/scout-extended": "^1.9",
         "barryvdh/laravel-debugbar": "^3.2",
         "facade/ignition": "^2.0",
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.5",
         "laravel/framework": "^7.0",
+        "laravel/scout": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "maatwebsite/excel": "^3.1",

@@ -1,5 +1,7 @@
 <template>
     <div class="container mt-2">
+        <chat-add-form></chat-add-form>
+
         <div class="card">
             <div class="card-header">Беседы</div>
             <div class="card-body p-0">
@@ -7,16 +9,17 @@
                     <span class="sr-only">Загрузка...</span>
                 </div>
                 <div v-else-if="chats.length" v-for="chat in chats" :key="chat.id" :chat="chat">
-                    <a v-bind:href="chat.id">
-                        <div class="chat border p-2">
-                            <div class="chat__header">
+                    <div class="chat border p-2">
+                        <div class="chat__header text-lg">
+                            <a v-bind:href="'/chat/' + chat.id">
                                 {{ chat.name }}
-                            </div>
-                            <ul class="list-inline chat__users">
-                                <li class="list-inline-item" v-for="user in chat.users">{{ user.name }}</li>
-                            </ul>
+                            </a>
                         </div>
-                    </a>
+                        <ul class="list-inline chat__users">
+                            <li class="list-inline-item"><strong>Участники: </strong></li>
+                            <li class="list-inline-item" v-for="user in chat.users">{{ user.name }}</li>
+                        </ul>
+                    </div>
                 </div>
                 <div v-else>Нет бесед</div>
             </div>

@@ -10,7 +10,7 @@ Vue.component('chats', require('./components/chat/Chats.vue').default);
 Vue.component('chat', require('./components/chat/Chat.vue').default);
 Vue.component('message', require('./components/chat/Message.vue').default);
 
-// Vue.component('chat-add-form', require('./components/chat/forms/ChatAddForm.vue').default);
+Vue.component('chat-add-form', require('./components/chat/forms/ChatAddForm.vue').default);
 Vue.component('message-add-form', require('./components/chat/forms/MessageAddForm.vue').default);
 
 import store from './store/index.js'

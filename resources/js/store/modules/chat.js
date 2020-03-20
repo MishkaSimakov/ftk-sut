@@ -2,7 +2,8 @@ import api from '../api/all'
 
 const state = {
     chat: null,
-    loadingChat: true
+    loadingChat: true,
+    messageError: false
 };
 
 const getters = {
@@ -11,6 +12,9 @@ const getters = {
     },
     loadingChat: state => {
         return state.loadingChat
+    },
+    messageError: state => {
+        return state.messageError
     }
 };
 
@@ -19,8 +23,6 @@ const actions = {
         commit('setChatLoading', true)
 
         api.getChat(id).then((response) => {
-            console.log(response.data);
-
             commit('setChat', response.data);
             commit('setChatLoading', false);
         })
@@ -29,8 +31,21 @@ const actions = {
         return api.storeChatMessage(id, {
             body: body
         }).then((response) => {
-            commit('appendToConversation', response.data.data)
-            commit('prependToConversations', response.data.data.parent.data)
+            if (response === "error") {
+                commit("setMessageError", true)
+            } else {
+                commit("setMessageError", false)
+                commit('appendToChat', response.data);
+            }
+        })
+    },
+    createChat({dispatch, commit}, {title, recipients}) {
+        return api.storeChat({
+            title: title,
+            recipients: recipients,
+        }).then((response) => {
+            window.history.pushState(null, null, response.data);
+            location.reload();
         })
     },
 };
@@ -42,6 +57,12 @@ const mutations = {
     setChatLoading(state, status) {
         state.loadingChat = status
     },
+    appendToChat(state, message) {
+        state.chat.messages.unshift(message)
+    },
+    setMessageError(state, status) {
+        state.messageError = status
+    }
 };
 
 export default {

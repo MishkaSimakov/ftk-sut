@@ -4,7 +4,7 @@
             <strong>{{ message.user.name }}</strong>
             <span class="ml-2 text-muted">{{ message.timeForHuman }}</span>
         </div>
-        {{ message.body }}
+        <span style="white-space: pre-wrap">{{ message.body }}</span>
     </div>
 </template>
 
