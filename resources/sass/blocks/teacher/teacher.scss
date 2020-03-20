@@ -1,34 +1,170 @@
+//.teacher {
+//    flex-grow: 1;
+//    display: flex;
+//    justify-content: space-between;
+//    align-items: center;
+//    flex-direction: column;
+//    height: auto;
+//    margin-bottom: 30px;
+//
+//
+//    &__photo {
+//        object-fit: cover;
+//        width: 140px;
+//        height: 140px;
+//        margin-bottom: 20px;
+//        text-indent: -200vw;
+//        border-radius: 50%;
+//        background-color: lighten(#000, 50%);
+//        overflow: hidden;
+//    }
+//    &__name {
+//        max-width: 350px;
+//        margin-bottom: 20px !important;
+//        color: #000;
+//        font-size: 24px;
+//        font-weight: 500;
+//        text-align: center;
+//        line-height: 30px;
+//    }
+//    &__employment {
+//        font-size: 14px;
+//        color: lighten(#000, 50%);
+//    }
+//}
+
+.teachers {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    max-height: 708px;
+    transition: 0.7s;
+    overflow: hidden;
+}
+
 .teacher {
-    flex-grow: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    height: auto;
-    margin-bottom: 30px;
-
-
+    width: 100%;
+    margin-bottom: 2rem;
     &__photo {
         object-fit: cover;
         width: 140px;
         height: 140px;
-        margin-bottom: 20px;
-        text-indent: -200vw;
+        margin-bottom: 1.5rem;
         border-radius: 50%;
         background-color: lighten(#000, 50%);
         overflow: hidden;
     }
     &__name {
-        max-width: 350px;
+        display: inline-block;
         margin-bottom: 20px !important;
         color: #000;
-        font-size: 24px;
+        font-size: 1.5rem;
         font-weight: 500;
         text-align: center;
         line-height: 30px;
     }
     &__employment {
-        font-size: 14px;
+        display: inline-block;
+        font-size: 1rem;
         color: lighten(#000, 50%);
+        text-align: center;
+    }
+}
+
+#teachersToggle {
+    display: block;
+    margin: 1rem auto;
+    background: none;
+    border: none;
+    &:focus {
+        outline: none;
+    }
+}
+
+.toggled--teachers {
+    display: none;
+    font-weight: 600;
+    color: #4e73df;
+    &:hover {
+        color: #224abe;
+    }
+}
+
+.none-toggled--teachers {
+    display: inline-block;
+    color: #4e73df;
+    font-weight: 600;
+    &:hover {
+        color: #224abe;
+    }
+}
+
+.teachers.full-size {
+    max-height: 2478px;
+}
+
+.toggled--teachers.full-size {
+    display: inline-block;
+}
+
+.none-toggled--teachers.full-size {
+    display: none;
+}
+
+@media screen and (min-width: 358px) {
+    .teachers {
+        max-height: 648px;
+    }
+    .teachers.full-size {
+        max-height: 2268px;
+    }
+}
+
+@media screen and (min-width: 364px) {
+    .teachers {
+        max-height: 600px;
+    }
+    .teachers.full-size {
+        max-height: 2100px;
+    }
+}
+
+@media screen and (min-width: 545px) {
+    .teachers {
+        max-height: 810px;
+    }
+    .teachers.full-size {
+        max-height: 1890px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .teachers {
+        max-height: 600px;
+    }
+    .teachers.full-size {
+        max-height: 1200px;
+    }
+}
+
+@media screen and (min-width: 1105px) {
+    .teachers {
+        max-height: 540px;
+    }
+    .teachers.full-size {
+        max-height: 1080px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .teachers {
+        max-height: 270px;
+    }
+    .teachers.full-size {
+        max-height: 900px;
     }
 }

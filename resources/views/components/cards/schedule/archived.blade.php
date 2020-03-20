@@ -1,6 +1,6 @@
 <div class="schedule card shadow schedule__archived" data-toggle="modal" data-target="#photos_schedule_{{ $schedule->id }}">
     <img alt="Изображение мероприятия" class="card-img-top"
-         src="/image/{{ $schedule->getMedia() ? $schedule->getMedia()->first()->getUrl() : "https://pbs.twimg.com/profile_images/600060188872155136/st4Sp6Aw_400x400.jpg" }}"
+         src="{{ $schedule->getMedia()->count() ? '/image/' . $schedule->getMedia()->first()->getUrl() : "https://pbs.twimg.com/profile_images/600060188872155136/st4Sp6Aw_400x400.jpg" }}"
     >
 
     <div class="schedule__gallery"><i style="color: black;" class="fa-7x fas fa-images"></i></div>
@@ -53,11 +53,15 @@
             </div>
 
             <div class="modal-body">
-                @foreach($schedule->getMedia() as $media)
-                    <div class="col-md-2 m-2 p-0 d-inline-block">
-                        <img alt="Фотография с мероприятия" class="mw-100 mh-100 rounded" src="/image/{{ $media->getUrl() }}" style="cursor: pointer" data-lity data-lity-target="/image/{{ $media->getUrl() }}">
-                    </div>
-                @endforeach
+                @if($schedule->getMedia()->count())
+                    @foreach($schedule->getMedia() as $media)
+                        <div class="col-md-2 m-2 p-0 d-inline-block">
+                            <img alt="Фотография с мероприятия" class="mw-100 mh-100 rounded" src="/image/{{ $media->getUrl() }}" style="cursor: pointer" data-lity data-lity-target="/image/{{ $media->getUrl() }}">
+                        </div>
+                    @endforeach
+                @else
+                    <p class="text-center">Здесь ничего нет!!!</p>
+                @endif
             </div>
 
             @admin

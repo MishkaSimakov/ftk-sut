@@ -1,22 +1,7 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 use \Illuminate\Support\Facades\Route;
-use \Illuminate\Support\Facades\Event;
 use \Illuminate\Support\Facades\Auth;
-
-
-
 
 Route::get('/', 'MainController@index')->name('main');
 
@@ -82,9 +67,25 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->namespace('Admin')->group
 });
 
 
-Route::get('/settings', 'Auth\AccountController@settings')->name('settings.show');
-Route::put('/settings', 'Auth\AccountController@update')->name('settings.update');
+Route::get('/settings', 'Auth\AccountController@settings')->name('settings.show')->middleware('auth');
+Route::put('/settings', 'Auth\AccountController@update')->name('settings.update')->middleware('auth');
 
 Route::view('/register/help', 'auth.help')->name('register.help');
 
 Route::get('/markup/{view}', 'MarkupController@show')->name('markup.show');
+
+Route::prefix('chat')->middleware(['auth'])->namespace('Chat')->group(function () {
+    Route::get('/', 'ChatController@index')->name('chat.index');
+
+    Route::get('/{chat}', 'ChatController@show')->name('chat.show');
+});
+
+Route::group(['prefix' => 'webapi', 'namespace' => 'Api'], function () {
+    Route::get('/chats', 'ChatController@index');
+//    Route::post('/conversations', 'ConversationController@store');
+//
+    Route::get('/chats/{chat}', 'ChatController@show');
+//    Route::post('/conversations/{conversation}/reply', 'ConversationReplyController@store');
+//
+//    Route::post('/conversations/{conversation}/users', 'ConversationUserController@store');
+});

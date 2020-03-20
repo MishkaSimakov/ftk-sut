@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Achievements\Events\UserEarnedPoints;
+use App\Chat\Chat;
+use App\Chat\ChatUser;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -49,5 +51,10 @@ class User extends Authenticatable
 
     public function getUrlAttribute() {
         return route('user.show', $this);
+    }
+
+    public function chats()
+    {
+        return $this->belongsToMany(Chat::class, ChatUser::class);
     }
 }

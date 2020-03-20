@@ -1,8 +1,12 @@
-<div class="row">
-    @foreach($teachers as $teacher)
-        <div class="col-md-4">
+<div>
+    <div class="teachers row" id="teachers">
+        @foreach($teachers as $teacher)
             @component('components.cards.teacher', ['teacher' => $teacher])@endcomponent
-        </div>
-    @endforeach
-</div>
+        @endforeach
+    </div>
 
+    <button id="teachersToggle">
+        <span class="none-toggled--teachers">Показать всех</span>
+        <span class="toggled--teachers">Скрыть</span>
+    </button>
+</div>
