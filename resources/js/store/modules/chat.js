@@ -2,7 +2,7 @@ import api from '../api/all'
 
 const state = {
     chat: null,
-    loadingChat: false
+    loadingChat: true
 };
 
 const getters = {
@@ -19,8 +19,18 @@ const actions = {
         commit('setChatLoading', true)
 
         api.getChat(id).then((response) => {
+            console.log(response.data);
+
             commit('setChat', response.data);
             commit('setChatLoading', false);
+        })
+    },
+    createChatMessage({dispatch, commit}, {id, body}) {
+        return api.storeChatMessage(id, {
+            body: body
+        }).then((response) => {
+            commit('appendToConversation', response.data.data)
+            commit('prependToConversations', response.data.data.parent.data)
         })
     },
 };

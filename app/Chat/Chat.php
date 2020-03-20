@@ -11,4 +11,9 @@ class Chat extends Model
     {
         return $this->belongsToMany(User::class, ChatUser::class);
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class)->orderBy('created_at')->with('user');
+    }
 }

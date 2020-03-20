@@ -22,6 +22,6 @@ class ChatController extends Controller
 
     public function show(Chat $chat)
     {
-        return $chat->load(['users']);
+        return $chat->load(['users', 'messages']);
     }
 }

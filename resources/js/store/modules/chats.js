@@ -1,4 +1,5 @@
 import api from '../api/all'
+import chat from "./chat";
 
 const state = {
     chats: [],
@@ -38,7 +39,7 @@ const actions = {
 };
 
 const modules = {
-    // conversation: conversation
+    chat: chat
 };
 
 const mutations = {
@@ -55,6 +56,6 @@ export default {
     getters,
     mutations,
     actions,
-    // modules
+    modules
 };
 
