@@ -1,6 +1,10 @@
 @extends('layouts.page')
 
 @section('content')
+    @component('components.sections.section', ['header' => 'Новости'])
+        @component('components.card-lists.news', ['news' => $news])@endcomponent
+    @endcomponent
+
     @component('components.sections.section', ['header' => 'Наши преподаватели'])
         @component('components.card-lists.teachers', ['teachers' => $teachers])@endcomponent
     @endcomponent

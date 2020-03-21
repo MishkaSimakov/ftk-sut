@@ -5,6 +5,7 @@
     </div>
     <div class="site-navigation collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="page-navigation navbar-nav mr-auto">
+            <li class="page-navigation__item nav-item"><a class="page-navigation__link nav-link" href="{{ route('news.index') }}">Новости</a></li>
             <li class="page-navigation__item nav-item"><a class="page-navigation__link nav-link" href="{{ route('rating.index') }}">Рейтинг</a></li>
             <li class="page-navigation__item nav-item"><a class="page-navigation__link nav-link" href="{{ route('achievements.index') }}">Достижения</a></li>
             <li class="page-navigation__item nav-item dropdown">

@@ -29,6 +29,6 @@ class Schedule extends Model implements HasMedia
 
     public function getIsArchivedAttribute()
     {
-        return $this->date_start->isBefore(now());
+        return $this->date_end->isBefore(now());
     }
 }

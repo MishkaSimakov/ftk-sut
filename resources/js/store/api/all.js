@@ -35,4 +35,13 @@ export default {
             })
         })
     },
+    storeChatUsers(id, {recipients}) {
+        return new Promise((resolve, reject) => {
+            axios.post('/webapi/chats/' + id + "/users", {
+                recipients: recipients
+            }).then((response) => {
+                resolve(response)
+            })
+        })
+    },
 }

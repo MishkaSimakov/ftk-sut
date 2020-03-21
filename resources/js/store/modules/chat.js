@@ -60,6 +60,22 @@ const actions = {
             location.reload();
         })
     },
+    addChatUsers({dispatch, commit}, {id, recipients}) {
+        return api.storeChatUsers(id, {
+            recipients: recipients
+        }).then((response) => {
+            commit('updateUsersInChat', response.data.users)
+        })
+    },
+    changeChatName({dispatch, commit}, {id, name}) {
+        // return api.changeChatName(id, {
+        //     name: name
+        // }).then((response) => {
+        //     commit('updateChatName', response.data.name)
+        // })
+
+        console.log(name);
+    }
 };
 
 const mutations = {
@@ -74,6 +90,9 @@ const mutations = {
     },
     setMessageError(state, status) {
         state.messageError = status
+    },
+    updateUsersInChat(state, users) {
+        state.chat.users = users
     }
 };
 

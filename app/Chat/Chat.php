@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class Chat extends Model
 {
+    protected $appends = [
+        'selfOwned'
+    ];
+
     public function users()
     {
         return $this->belongsToMany(User::class, ChatUser::class);
@@ -28,5 +32,10 @@ class Chat extends Model
     public function usersExceptCurrentlyAuthenticated()
     {
         return $this->users()->where('id', '!=', Auth::user()->id);
+    }
+
+    public function getSelfOwnedAttribute()
+    {
+        return $this->users()->where('is_admin', true)->first()->id == auth()->user()->id;
     }
 }

@@ -81,6 +81,14 @@ Route::prefix('chat')->middleware(['auth'])->namespace('Chat')->group(function (
     Route::post('/', 'ChatController@store')->name('chat.store');
 });
 
+
+
+Route::get('/news', 'NewsController@index')->name('news.index');
+Route::get('/news/create', 'NewsController@create')->name('news.create');
+Route::post('/news', 'NewsController@store')->name('news.store');
+
+
+
 Route::group(['prefix' => 'webapi/chats', 'namespace' => 'Api'], function () {
     Route::get('/', 'ChatController@index');
     Route::post('/', 'ChatController@store');
@@ -88,5 +96,5 @@ Route::group(['prefix' => 'webapi/chats', 'namespace' => 'Api'], function () {
     Route::get('/{chat}', 'ChatController@show');
     Route::post('/{chat}/message', 'ChatMessageController@store');
 //
-//    Route::post('/conversations/{conversation}/users', 'ConversationUserController@store');
+    Route::post('/{chat}/users', 'ChatUserController@store');
 });

@@ -103,7 +103,7 @@
         Dropzone.autoDiscover = false;
 
         var article_dropzone = new Dropzone('#dropzone', {
-            url: "{{ route('api.image.upload', compact('article')) }}",
+            url: "{{ route('api.article.upload_image', compact('article')) }}",
             maxFiles: 15,
             acceptedFiles: 'image/*',
 
@@ -131,7 +131,7 @@
 
         article_dropzone.on('removedfile', function (file) {
             $.ajax({
-                url: "{{ route('api.image.delete', compact('article')) }}",
+                url: "{{ route('api.article.delete_image', compact('article')) }}",
                 method: "POST",
                 dataType: 'json',
                 data: {

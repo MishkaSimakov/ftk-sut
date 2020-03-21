@@ -33,9 +33,11 @@ class ChatController extends Controller
 
         $chat->save();
 
-        $chat->users()->sync(array_unique(
-                array_merge($request->recipients, [$request->user()->id]))
+        $chat->users()->sync(
+            array_unique($request->recipients)
         );
+        $chat->users()->syncWithoutDetaching([$request->user()->id => ['is_owner' => true]]);
+
 
         $chat->load('users');
 

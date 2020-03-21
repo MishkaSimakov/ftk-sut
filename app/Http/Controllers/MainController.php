@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\News;
 use App\Teacher;
 
 class MainController extends Controller
@@ -10,7 +11,8 @@ class MainController extends Controller
     {
         $teachers = Teacher::all();
         $advantages = config('advantages');
+        $news = News::all()->sortBy('created_at')->take(3);
 
-        return view('main', compact('teachers', 'advantages'));
+        return view('main', compact('teachers', 'advantages', 'news'));
     }
 }
