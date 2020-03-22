@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ChatUser extends Model
 {
-    //
+    protected $fillable = [
+        'is_unread'
+    ];
 }

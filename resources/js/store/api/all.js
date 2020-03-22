@@ -44,4 +44,27 @@ export default {
             })
         })
     },
+    changeChatName(id, {name}) {
+        return new Promise((resolve, reject) => {
+            axios.post('/webapi/chats/' + id + "/name", {
+                name: name
+            }).then((response) => {
+                resolve(response)
+            })
+        })
+    },
+    removeChatUser(id, {user}) {
+        return new Promise((resolve, reject) => {
+            axios.post('/webapi/chats/' + id + "/removeUser", {
+                user: user
+            }).then((response) => {
+                resolve(response)
+            })
+        })
+    },
+    setRead(id) {
+        return new Promise((resolve, reject) => {
+            axios.post('/webapi/chats/' + id + "/read");
+        })
+    },
 }

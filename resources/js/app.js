@@ -12,6 +12,8 @@ Vue.component('chat', require('./components/chat/Chat.vue').default);
 Vue.component('message', require('./components/chat/Message.vue').default);
 Vue.component('chat-users', require('./components/chat/ChatUsers.vue').default);
 
+Vue.component('chat-button', require('./components/chat/ChatButton.vue').default);
+
 Vue.component('chat-add-form', require('./components/chat/forms/ChatAddForm.vue').default);
 Vue.component('message-add-form', require('./components/chat/forms/MessageAddForm.vue').default);
 Vue.component('chat-user-add-form', require('./components/chat/forms/ChatUserAddForm.vue').default);

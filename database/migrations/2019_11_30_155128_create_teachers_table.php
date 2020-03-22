@@ -19,9 +19,7 @@ class CreateTeachersTable extends Migration
             $table->string('middle_name')->nullable();
             $table->string('last_name');
             $table->integer('user_id')->unique();
-//            $table->string('job_title');
             $table->integer('club_id')->nullable();
-//            $table->string('avatar')->nullable();
             $table->timestamps();
         });
     }

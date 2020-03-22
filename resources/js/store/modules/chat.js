@@ -32,7 +32,11 @@ const actions = {
 
             Echo.private('chat.' + id)
                 .listen('ChatMessageCreated', (e) => {
-                    commit('appendToChat', e.message)
+                    e.message.selfOwned = false;
+
+                    commit('appendToChat', e.message);
+
+                    actions.setRead(e.chat.id);
                 })
                 // .listen('ConversationUserCreated', (e) => {
                 //     commit('updateUsersInConversation', e.data.users.data)
@@ -47,7 +51,8 @@ const actions = {
                 commit("setMessageError", true)
             } else {
                 commit("setMessageError", false)
-                commit('appendToChat', response.data);
+
+                commit('appendToChat', response.data.message);
             }
         })
     },
@@ -68,14 +73,22 @@ const actions = {
         })
     },
     changeChatName({dispatch, commit}, {id, name}) {
-        // return api.changeChatName(id, {
-        //     name: name
-        // }).then((response) => {
-        //     commit('updateChatName', response.data.name)
-        // })
-
-        console.log(name);
-    }
+        return api.changeChatName(id, {
+            name: name
+        }).then((response) => {
+            commit('updateChatName', response.data.name)
+        });
+    },
+    removeChatUser({dispatch, commit}, {id, user}) {
+        return api.removeChatUser(id, {
+            user: user
+        }).then((response) => {
+            commit('updateUsersInChat', response.data.users)
+        });
+    },
+    setRead(id) {
+        api.setRead(id);
+    },
 };
 
 const mutations = {
@@ -93,6 +106,9 @@ const mutations = {
     },
     updateUsersInChat(state, users) {
         state.chat.users = users
+    },
+    updateChatName(state, name) {
+        state.chat.name = name
     }
 };
 

@@ -34,12 +34,11 @@
                 </div>
             </div>
             </div>
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-4 col-sm-12 mt-sm-2">
                 <div v-if="loading" class="spinner-border-sm spinner-border mx-1 my-auto" role="status">
                     <span class="sr-only">Загрузка...</span>
                 </div>
                 <div v-else>
-                    <chat-name-form v-if="chat.selfOwned"></chat-name-form>
                     <chat-users></chat-users>
                 </div>
             </div>
@@ -60,21 +59,24 @@
         }),
         methods: {
             ...mapActions([
-                'getChat'
+                'getChat',
+                'setRead'
             ]),
         },
         mounted() {
-            this.getChat(this.id).then(() => {
-
-
-                // chat.scroll(0, chat.scrollHeight);
-            })
+            this.getChat(this.id)
         },
         watch: {
-            loading() {
-            //    add chat scrolling
+            chat(chat) {
+                if (chat.isUnread) {
+                    this.setRead(chat.id)
+                }
             }
-        }
+        },
+        updated() {
+            var messages = document.getElementsByClassName('chat__messages')[0];
+            messages.scroll(0, messages.scrollHeight);
+        },
     }
 </script>
 

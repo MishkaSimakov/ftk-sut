@@ -17,21 +17,18 @@ class TeacherSeeder extends Seeder
                 'last_name' => 'Бильченко',
                 'first_name' => 'Александр',
                 'middle_name' => 'Константинович',
-//                'job_title' => 'Преподователь по робототехнике',
                 'club_id' => 1,
             ],
             [
                 'last_name' => 'Бильченко',
                 'first_name' => 'Константин',
                 'middle_name' => 'Дмитриевич',
-//                'job_title' => 'Преподователь по робототехнике',
                 'club_id' => 1,
             ],
             [
                 'last_name' => 'Маркин',
                 'first_name' => 'Игорь',
                 'middle_name' => 'Вячеславович',
-//                'job_title' => 'Преподователь по web-программированию',
                 'club_id' => 3,
             ]
         ]);

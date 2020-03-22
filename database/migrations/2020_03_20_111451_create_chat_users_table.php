@@ -20,6 +20,7 @@ class CreateChatUsersTable extends Migration
             $table->integer('chat_id');
 
             $table->boolean('is_owner')->nullable();
+            $table->boolean('is_unread')->nullable();
         });
     }
 

@@ -1,15 +1,11 @@
 <template>
-    <div class="card mb-2">
-        <div class="card-header">
-            Название
-        </div>
-        <div class="card-body">
-            <div class="row container">
-                <input type="text" class="form-control col-md-10" placeholder="Название чата" v-model="name">
-                <a class="mx-auto my-auto" href="#" @click:prevent="changeName">
-                    <span class="fa fa-save fa-2x"></span>
-                </a>
-            </div>
+    <div class="input-group">
+        <input aria-label="" type="text" class="form-control col-md-10" placeholder="Название чата" v-model="name">
+
+        <div class="input-group-append">
+            <a class="btn btn-outline-primary" href="#" @click.prevent="changeName">
+                <span class="fa fa-check"></span>
+            </a>
         </div>
     </div>
 </template>

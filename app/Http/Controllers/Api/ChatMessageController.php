@@ -24,9 +24,13 @@ class ChatMessageController extends Controller
         $chat->messages()->save($message);
 
         $chat->touchLastMessage();
+        $chat->setUnread($message);
 
         broadcast(new ChatMessageCreated($message))->toOthers();
 
-        return $message->load(['user']);
+        return response()->json([
+            'message' => $message->load(['user']),
+            'chat' => $message->chat->load(['users'])
+        ]);
     }
 }

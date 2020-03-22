@@ -23,6 +23,10 @@ class ChatController extends Controller
 
     public function show(Chat $chat)
     {
+        $this->authorize('show', $chat);
+
+        $chat->read(auth()->user());
+
         return $chat->load(['users', 'messages']);
     }
 
@@ -44,5 +48,40 @@ class ChatController extends Controller
         broadcast(new ChatCreated($chat))->toOthers();
 
         return response()->json('/chat/' . $chat->id);
+    }
+
+    public function changeName(Chat $chat, Request $request)
+    {
+        $this->authorize('tune', $chat);
+
+        $chat->update(['name' => $request->name]);
+
+        $chat->load('users');
+
+//        broadcast(new ChatCreated($chat))->toOthers();
+
+        return response()->json($chat);
+    }
+
+    public function removeUser(Chat $chat, Request $request)
+    {
+        $this->authorize('tune', $chat);
+
+        $chat->users()->sync($chat->users->filter(function($user) use ($request) {
+            return $user->id !== $request->user;
+        }));
+
+        $chat->load('users');
+
+//        broadcast(new ChatCreated($chat))->toOthers();
+
+        return response()->json($chat);
+    }
+
+    public function read(Chat $chat)
+    {
+        $this->authorize('show', $chat);
+
+        $chat->read(auth()->user());
     }
 }

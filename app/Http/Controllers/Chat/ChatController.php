@@ -16,6 +16,8 @@ class ChatController extends Controller
 
     public function show(Chat $chat)
     {
+        $this->authorize('show', $chat);
+
         return view('chat.show', compact('chat'));
     }
 

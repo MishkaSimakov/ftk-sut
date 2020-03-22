@@ -9,8 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class Chat extends Model
 {
+    protected $fillable = [
+        'name'
+    ];
+
     protected $appends = [
-        'selfOwned'
+        'selfOwned',
+        'isUnread',
+        'ownerId'
     ];
 
     public function users()
@@ -29,6 +35,15 @@ class Chat extends Model
         $this->save();
     }
 
+    public function setUnread(Message $message)
+    {
+        $this->users()->where('id', '!=', $message->user_id)->update(['is_unread' => true]);
+    }
+
+    public function read(User $user) {
+        $this->users()->where('id', $user->id)->update(['is_unread' => false]);
+    }
+
     public function usersExceptCurrentlyAuthenticated()
     {
         return $this->users()->where('id', '!=', Auth::user()->id);
@@ -36,6 +51,16 @@ class Chat extends Model
 
     public function getSelfOwnedAttribute()
     {
-        return $this->users()->where('is_admin', true)->first()->id == auth()->user()->id;
+        return $this->getOwnerIdAttribute() === auth()->user()->id;
+    }
+
+    public function getOwnerIdAttribute()
+    {
+        return $this->users()->where('is_owner', true)->first()->id;
+    }
+
+    public function getIsUnreadAttribute()
+    {
+        return $this->users()->where('id', auth()->user()->id)->pluck('is_unread')->first();
     }
 }

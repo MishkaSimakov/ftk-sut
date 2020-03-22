@@ -14,6 +14,7 @@
                             <a v-bind:href="'/chat/' + chat.id">
                                 {{ trunc(chat.name, 50) }}
                             </a>
+                            <div v-if="chat.isUnread" class="badge badge-info my-auto ml-2">new</div>
                         </div>
                         <ul class="list-inline chat__users text-muted m-1">
                             <li class="list-inline-item"><strong>Участники: </strong></li>

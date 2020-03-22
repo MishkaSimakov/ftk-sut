@@ -40,6 +40,8 @@
                 <li class="user-navigation__item nav-item"><a class="user-navigation__link nav-link" href="{{ route('register') }}">Регистрация</a></li>
                 <li class="user-navigation__item nav-item"><a class="user-navigation__link nav-link" href="{{ route('login') }}">Вход</a></li>
             @else
+                <chat-button url="{{ route('chat.index') }}"></chat-button>
+
                 <li class="user-navigation__item nav-item dropdown">
                     <a id="navbarDropdown" class="user-navigation__link nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }} <span class="caret"></span>

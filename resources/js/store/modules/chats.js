@@ -23,10 +23,11 @@ const actions = {
             Echo.private(`user.${window.Laravel.user.id}`)
                 .listen('ChatCreated', (e) => {
                     commit('prependToChats', e.chat)
+                })
+                .listen('ChatMessageCreated', (e) => {
+                    e.chat.isUnread = true;
+                    commit('prependToChats', e.chat)
                 });
-                // .listen('ConversationReplyCreated', (e) => {
-                //     commit('prependToConversations', e.data.parent.data)
-                // })
                 // .listen('ConversationUserCreated', (e) => {
                 //     commit('updateConversationInList', e.data)
                 // });
