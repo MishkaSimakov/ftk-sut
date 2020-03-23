@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Auth;
 
 class RatingController extends Controller
 {
-        public function chart(Request $request)
+    public function show(Rating $rating)
     {
-        $rating = Rating::where('date', $request->date)->first();
         $students = $rating->students()->with(['user', 'points'])->get();
 
         $categories = PointCategory::categories();

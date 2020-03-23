@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/rating/chart', 'Api\RatingController@chart')->name('api.rating.chart');
+Route::get('/rating/{rating}', 'Api\RatingController@show')->name('api.rating.show');
 
 
 Route::get('/user/{user}/stats/points', 'Api\StatisticsController@points')->name('api.user.point_stats');
