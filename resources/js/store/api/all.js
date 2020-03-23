@@ -1,3 +1,5 @@
+// for production delete "/"
+
 export default {
     getChats(page) {
         return new Promise((resolve, reject) => {
@@ -27,7 +29,7 @@ export default {
     },
     storeChat({title, recipients}) {
         return new Promise((resolve, reject) => {
-            axios.post('/webapi/chats/', {
+            axios.post('/webapi/chats', {
                 title: title,
                 recipients: recipients
             }).then((response) => {

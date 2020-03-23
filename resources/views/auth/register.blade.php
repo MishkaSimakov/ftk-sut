@@ -16,7 +16,7 @@
                                 <label for="register_code" class="col-md-4 col-form-label text-md-right">Регистрационный код</label>
 
                                 <div class="col-md-6">
-                                    <input id="register_code" type="text" class="form-control{{ $errors->has('register_code') ? ' is-invalid' : '' }}" name="register_code" required>
+                                    <input value="{{ old('register_code') }}" id="register_code" type="text" class="form-control{{ $errors->has('register_code') ? ' is-invalid' : '' }}" name="register_code" required>
 
                                     @if ($errors->has('register_code'))
                                         <span class="invalid-feedback" role="alert">

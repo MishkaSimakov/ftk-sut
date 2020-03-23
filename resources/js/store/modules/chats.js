@@ -25,12 +25,8 @@ const actions = {
                     commit('prependToChats', e.chat)
                 })
                 .listen('ChatMessageCreated', (e) => {
-                    e.chat.isUnread = true;
-                    commit('prependToChats', e.chat)
-                });
-                // .listen('ConversationUserCreated', (e) => {
-                //     commit('updateConversationInList', e.data)
-                // });
+                    commit('setChatToUnread', e.message.chat)
+                })
 
             commit('setChats', response.data);
 
@@ -57,6 +53,23 @@ const mutations = {
 
         state.chats.unshift(chat)
     },
+    setChatToUnread(state, chat) {
+        var full_chat = null;
+
+        state.chats.forEach((c) => {
+            if (c.id === chat.id) {
+                full_chat = c
+            }
+        });
+
+        full_chat.isUnread = true;
+
+        state.chats = state.chats.filter((c) => {
+            return c.id !== chat.id
+        });
+
+        state.chats.unshift(full_chat)
+    }
 };
 
 export default {

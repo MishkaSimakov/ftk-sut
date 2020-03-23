@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Chat\Chat;
 use App\Events\ChatCreated;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreChat;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -30,7 +31,7 @@ class ChatController extends Controller
         return $chat->load(['users', 'messages']);
     }
 
-    public function store(Request $request)
+    public function store(StoreChat $request)
     {
         $chat = new Chat;
         $chat->name = $request->title;

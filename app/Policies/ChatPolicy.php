@@ -22,7 +22,7 @@ class ChatPolicy
 
     public function tune(User $user, Chat $chat)
     {
-        return $chat->isAdmin($user);
+        return $chat->ownerId === $user->id;
     }
 
     public function write(User $user, Chat $chat)

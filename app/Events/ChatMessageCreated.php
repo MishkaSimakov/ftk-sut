@@ -44,12 +44,4 @@ class ChatMessageCreated implements ShouldBroadcast
 
         return $channels;
     }
-
-    public function broadcastWith()
-    {
-        return [
-            'message' => $this->message->load('user'),
-            'chat' => $this->message->chat->load('users')
-        ];
-    }
 }

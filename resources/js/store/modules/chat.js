@@ -36,7 +36,7 @@ const actions = {
 
                     commit('appendToChat', e.message);
 
-                    actions.setRead(e.chat.id);
+                    actions.setRead(e.message.chat.id);
                 })
                 // .listen('ConversationUserCreated', (e) => {
                 //     commit('updateUsersInConversation', e.data.users.data)
@@ -88,6 +88,7 @@ const actions = {
     },
     setRead(id) {
         api.setRead(id);
+    //    TODO: make response with chat and set is_unread to false
     },
 };
 

@@ -10,6 +10,8 @@ class ChatUserController extends Controller
 {
     public function store(Chat $chat, Request $request)
     {
+        $this->authorize('tune', $chat);
+
         $chat->users()->syncWithoutDetaching($request->recipients);
 
         $chat->load(['users']);

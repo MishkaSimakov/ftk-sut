@@ -1,7 +1,7 @@
 <template>
-    <div class="container mt-2">
+    <div class="container">
         <div class="row">
-            <div class="col-md-8 col-sm-12">
+            <div class="col-md-8 col-sm-12 mt-2">
                 <div class="card">
                 <div class="card-header">
                     <div class="row">
@@ -34,7 +34,7 @@
                 </div>
             </div>
             </div>
-            <div class="col-md-4 col-sm-12 mt-sm-2">
+            <div class="col-md-4 col-sm-12 mt-2">
                 <div v-if="loading" class="spinner-border-sm spinner-border mx-1 my-auto" role="status">
                     <span class="sr-only">Загрузка...</span>
                 </div>
