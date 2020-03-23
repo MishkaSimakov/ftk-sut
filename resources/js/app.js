@@ -20,7 +20,8 @@ Vue.component('chat-user-add-form', require('./components/chat/forms/ChatUserAdd
 Vue.component('chat-name-form', require('./components/chat/forms/ChatNameForm.vue').default);
 
 // rating
-// Vue.component('rating', require('./components/rating/Rating.vue').default);
+Vue.component('rating', require('./components/rating/Rating.vue').default);
+
 
 import store from './store/index.js'
 
