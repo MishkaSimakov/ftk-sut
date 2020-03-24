@@ -51,6 +51,11 @@ class ChatController extends Controller
         return response()->json('/chat/' . $chat->id);
     }
 
+    public function destroy(Chat $chat)
+    {
+        $chat->delete();
+    }
+
     public function changeName(Chat $chat, Request $request)
     {
         $this->authorize('tune', $chat);

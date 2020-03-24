@@ -1,5 +1,4 @@
 import api from '../api/rating'
-import { GoogleCharts } from 'google-charts'
 
 const state = {
     loading: true,
@@ -25,29 +24,6 @@ const actions = {
             commit('setRating', response.data);
             commit('setRatingLoading', false);
         })
-    },
-    loadChart({dispatch, commit}) {
-        GoogleCharts.load('current', {packages: ['corechart']}).then(() => {
-            dispatch('prepareData');
-        });
-    },
-    prepareData({dispatch, commit}) {
-        // Define the chart to be drawn.
-        var data = new GoogleCharts.api.visualization.DataTable();
-
-        data.addColumn('string', 'Element');
-        data.addColumn('number', 'Percentage');
-        data.addRows([
-            ['Nitrogen', 0.78],
-            ['Oxygen', 0.21],
-            ['Other', 0.01]
-        ]);
-
-        commit('setChartData', data);
-    },
-    drawChart({dispatch, commit}, container) {
-        var chart = new GoogleCharts.api.visualization.PieChart(container);
-        chart.draw(state.chartData, null);
     }
 };
 

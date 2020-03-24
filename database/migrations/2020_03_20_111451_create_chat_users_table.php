@@ -16,11 +16,13 @@ class CreateChatUsersTable extends Migration
         Schema::create('chat_users', function (Blueprint $table) {
             $table->primary(['user_id', 'chat_id']);
 
-            $table->integer('user_id');
-            $table->integer('chat_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('chat_id');
 
             $table->boolean('is_owner')->nullable();
             $table->boolean('is_unread')->nullable();
+
+            $table->foreign('chat_id')->references('id')->on('chats')->onDelete('cascade');
         });
     }
 

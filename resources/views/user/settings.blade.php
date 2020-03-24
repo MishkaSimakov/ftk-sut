@@ -95,9 +95,6 @@
 @endsection
 
 @push('script')
-    {{--  text editor  --}}
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
     <script>
         var quill = new Quill('#editor', {
             theme: 'snow',

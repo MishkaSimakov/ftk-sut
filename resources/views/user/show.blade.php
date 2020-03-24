@@ -228,7 +228,7 @@
                     layout: {
                         padding: {
                             left: 10,
-                            right: 25,
+                            right: 40,
                             top: 25,
                             bottom: 0
                         }
@@ -243,6 +243,7 @@
                                 drawBorder: false
                             },
                             ticks: {
+                                reverse: true,
                                 maxTicksLimit: 7
                             }
                         }],

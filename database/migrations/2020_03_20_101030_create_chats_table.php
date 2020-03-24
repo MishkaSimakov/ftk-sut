@@ -18,6 +18,8 @@ class CreateChatsTable extends Migration
             $table->string('name');
             $table->timestamp('last_message')->nullable();
             $table->timestamps();
+
+
         });
     }
 

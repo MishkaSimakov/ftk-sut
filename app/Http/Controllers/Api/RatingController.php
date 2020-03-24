@@ -25,7 +25,6 @@ class RatingController extends Controller
 
         foreach ($students as $student) {
             $studentPoints = ['us|' . optional($student->user)->id];
-//            $studentPoints = ['us|' . optional($student->user)->id . '|' . $student->name];
 
             foreach ($categories as $category) {
                 array_push($studentPoints, $student->getAmount($rating, $category), 'stroke-width: 1; stroke-color: black;');
@@ -45,9 +44,8 @@ class RatingController extends Controller
         return json_encode($chartData);
     }
 
-//    public function chart(Request $request)
+//    public function show(Rating $rating)
 //    {
-//        $rating = Rating::where('date', $request->date)->first();
 //        $students = $rating->students()->with('user', 'points')->get();
 //
 //        $categories = PointCategory::categories();
@@ -72,6 +70,6 @@ class RatingController extends Controller
 ////            return $student[19];
 ////        }));
 //
-//        return json_encode([$labels, $data]);
+//        return response()->json([$labels, $data]);
 //    }
 }

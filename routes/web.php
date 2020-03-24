@@ -94,6 +94,7 @@ Route::group(['prefix' => 'webapi/chats', 'namespace' => 'Api'], function () {
     Route::post('/', 'ChatController@store')->middleware('throttle:5,1');
 //
     Route::get('/{chat}', 'ChatController@show');
+    Route::delete('/{chat}', 'ChatController@destroy');
     Route::post('/{chat}/message', 'ChatMessageController@store')->middleware('throttle:30,1');
 //
     Route::post('/{chat}/users', 'ChatUserController@store')->middleware('throttle:10,1');

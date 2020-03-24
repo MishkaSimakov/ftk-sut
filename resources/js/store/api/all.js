@@ -69,4 +69,11 @@ export default {
             axios.post('/webapi/chats/' + id + "/read");
         })
     },
+    removeChat(id) {
+        return new Promise((resolve, reject) => {
+            axios.delete('/webapi/chats/' + id).then((response) => {
+                resolve(response)
+            });
+        })
+    }
 }

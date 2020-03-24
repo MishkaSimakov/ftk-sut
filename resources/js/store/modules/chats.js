@@ -32,6 +32,11 @@ const actions = {
 
             commit('setChatsLoading', false)
         })
+    },
+    deleteChat({commit, dispatch}, chat) {
+        api.removeChat(chat.id).then((response) => {
+            commit('deleteFromChatList', chat)
+        })
     }
 };
 
@@ -69,6 +74,11 @@ const mutations = {
         });
 
         state.chats.unshift(full_chat)
+    },
+    deleteFromChatList(state, chat) {
+        state.chats = state.chats.filter((c) => {
+            return c.id !== chat.id
+        })
     }
 };
 

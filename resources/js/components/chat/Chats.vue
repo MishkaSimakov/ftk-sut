@@ -15,6 +15,7 @@
                                 {{ trunc(chat.name, 50) }}
                             </a>
                             <div v-if="chat.isUnread" class="badge badge-info my-auto ml-2">new</div>
+                            <a v-if="chat.selfOwned" href="#" @click.prevent="deleteChat(chat)" class="ml-auto"><span class="fa fa-trash text-danger fa-sm"></span></a>
                         </div>
                         <ul class="list-inline chat__users text-muted m-1">
                             <li class="list-inline-item"><strong>Участники: </strong></li>
@@ -43,6 +44,7 @@
             ...mapActions([
                 'getChat',
                 'getChats',
+                'deleteChat'
             ]),
             trunc: trunc,
         },

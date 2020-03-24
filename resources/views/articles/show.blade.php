@@ -25,7 +25,7 @@
 
     <section class="section pb-1">
         <div class="container">
-            <div class="mb-2">
+            <div class="mb-2" style="overflow-wrap: break-word">
                 {!! $article->body !!}
             </div>
 

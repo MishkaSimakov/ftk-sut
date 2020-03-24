@@ -6,6 +6,9 @@ window.Vue = require('vue');
 import Vuex from 'vuex';
 Vue.use(Vuex);
 
+require('./quill.js');
+window.Quill = require('Quill');
+
 // chat
 Vue.component('chats', require('./components/chat/Chats.vue').default);
 Vue.component('chat', require('./components/chat/Chat.vue').default);
@@ -20,7 +23,7 @@ Vue.component('chat-user-add-form', require('./components/chat/forms/ChatUserAdd
 Vue.component('chat-name-form', require('./components/chat/forms/ChatNameForm.vue').default);
 
 // rating
-Vue.component('rating', require('./components/rating/Rating.vue').default);
+// Vue.component('rating', require('./components/rating/Rating.vue').default);
 
 
 import store from './store/index.js'

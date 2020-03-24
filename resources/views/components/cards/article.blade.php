@@ -37,7 +37,13 @@
     </div>
 
     <div class="card-body">
-        <p>{!! \Illuminate\Support\Str::limit($article->body, 750, '...') !!}</p>
+        <p>
+            {!! \Illuminate\Support\Str::limit($article->body, 825, '...') !!}
+        </p>
+
+        <a title="{{ $article->title }}" href="{{ $article->url }}">
+            Читать полностью
+        </a>
 
         @if($article->hasMedia())
             <p class="text-muted m-0">+{{ count($article->getMedia()) }} фото</p>

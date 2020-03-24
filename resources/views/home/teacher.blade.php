@@ -1,15 +1,20 @@
 @extends('layouts.page')
 
 @section('content')
-    <h1 class="text-center m-2">{{ $user->teacher->full_name }}</h1>
+    <h1 class="text-center m-2">{{ $user->name }}</h1>
 
     <div class="container">
-        <div class="alert alert-info alert-dismissible fade show" role="contentinfo">
-            Пока что здесь ничего нет, но очень скоро что-то будет!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+        @if ($user->description)
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    <h4 class="font-weight-bold text-primary">О себе</h4>
+                </div>
+
+                <div class="card-body">
+                    {!! $user->description !!}
+                </div>
+            </div>
+        @endif
 
         <div class="card shadow">
             <div class="card-header">

@@ -32,21 +32,14 @@
         methods: {
             ...mapActions([
                 'getRating',
-                'drawChart',
-                'loadChart'
+                'getRandomColor'
             ]),
         },
         mounted() {
             this.getRating(this.id);
-
-            this.loadChart()
         },
-        watch: {
-            rating() {
-                console.log($('#rating_chart'))
+        updated() {
 
-                this.drawChart($('#rating_chart'))
-            }
         }
     }
 </script>

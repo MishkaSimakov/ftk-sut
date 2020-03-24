@@ -2,9 +2,9 @@
     <form action="#" class="chat__form">
         <textarea v-bind:class="{ 'is-invalid': error }" @keydown="handleMessageInput" v-model="body" id="body" cols="30" rows="4" class="form-control chat__form-input"></textarea>
 
-        <span class="chat__form-helptext">
-            <b>Return</b> чтобы отправить или <b>Shift + Return</b> для переноса на новую строку
-        </span>
+<!--        <span v-if="document" class="chat__form-helptext">-->
+<!--            <b>Enter</b> чтобы отправить или <b>Shift + Enter</b> для переноса на новую строку-->
+<!--        </span>-->
     </form>
 </template>
 
@@ -19,7 +19,7 @@
         },
         computed: mapGetters({
             chat: 'currentChat',
-            error: 'messageError'
+            error: 'messageError',
         }),
         methods: {
             ...mapActions([
