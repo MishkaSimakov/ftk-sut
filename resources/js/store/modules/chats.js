@@ -3,7 +3,8 @@ import chat from "./chat";
 
 const state = {
     chats: [],
-    loadingChats: true
+    loadingChats: true,
+    deletingChatId: null,
 };
 
 const getters = {
@@ -12,6 +13,9 @@ const getters = {
     },
     loadingChats: state => {
         return state.loadingChats
+    },
+    deletingChatId: state => {
+        return state.deletingChatId
     }
 };
 
@@ -34,8 +38,12 @@ const actions = {
         })
     },
     deleteChat({commit, dispatch}, chat) {
+        commit('setDeletingChat', chat.id);
+
         api.removeChat(chat.id).then((response) => {
-            commit('deleteFromChatList', chat)
+            commit('deleteFromChatList', chat);
+
+            commit('setDeletingChat', null);
         })
     }
 };
@@ -79,6 +87,9 @@ const mutations = {
         state.chats = state.chats.filter((c) => {
             return c.id !== chat.id
         })
+    },
+    setDeletingChat(state, chat) {
+        state.deletingChatId = chat
     }
 };
 

@@ -1,4 +1,5 @@
 import api from '../api/all'
+import moment from 'moment'
 
 const state = {
     chat: null,
@@ -19,6 +20,21 @@ const getters = {
 };
 
 const actions = {
+    buildTempMessage(chat_id, body) {
+        let tempId = Date.now();
+
+        return {
+            id: tempId,
+            chat_id: chat_id,
+            user: {
+                name: window.Laravel.user.name
+            },
+
+            body: body,
+            timeForHuman: moment().locale('ru').fromNow(),
+            selfOwned: true,
+        }
+    },
     getChat({dispatch, commit}, id) {
         commit('setChatLoading', true)
 
@@ -44,15 +60,17 @@ const actions = {
         })
     },
     createChatMessage({dispatch, commit}, {id, body}) {
+        let tempMessage = actions.buildTempMessage(id, body);
+        commit('appendToChat', tempMessage);
+
         return api.storeChatMessage(id, {
             body: body
         }).then((response) => {
             if (response === "error") {
                 commit("setMessageError", true)
+                commit("removeChatMessage", tempMessage)
             } else {
                 commit("setMessageError", false)
-
-                commit('appendToChat', response.data.message);
             }
         })
     },
@@ -110,6 +128,11 @@ const mutations = {
     },
     updateChatName(state, name) {
         state.chat.name = name
+    },
+    removeChatMessage(state, message) {
+        state.chat.messages = state.chat.messages.filter((m) => {
+            return m.id !== message.id
+        })
     }
 };
 

@@ -15,7 +15,13 @@
                                 {{ trunc(chat.name, 50) }}
                             </a>
                             <div v-if="chat.isUnread" class="badge badge-info my-auto ml-2">new</div>
-                            <a v-if="chat.selfOwned" href="#" @click.prevent="deleteChat(chat)" class="ml-auto"><span class="fa fa-trash text-danger fa-sm"></span></a>
+
+                            <div v-if="chat.selfOwned" class="ml-auto">
+                                <a v-if="deletingChat !== chat.id" href="#" @click.prevent="deleteChat(chat)"><span class="fa fa-trash fa-sm text-danger"></span></a>
+                                <div v-else class="spinner-border-sm spinner-border my-auto text-danger" role="status">
+                                    <span class="sr-only">Загрузка...</span>
+                                </div>
+                            </div>
                         </div>
                         <ul class="list-inline chat__users text-muted m-1">
                             <li class="list-inline-item"><strong>Участники: </strong></li>
@@ -38,7 +44,8 @@
     export default {
         computed: mapGetters({
             chats: 'allChats',
-            loading: 'loadingChats'
+            loading: 'loadingChats',
+            deletingChat: 'deletingChatId'
         }),
         methods: {
             ...mapActions([

@@ -1,26 +1,33 @@
 @extends('layouts.page')
 
 @section('content')
+    <h1 class="text-center m-2">{{ $user->teacher->full_name }}</h1>
 
-<h1 class="text-center m-2">{{ $user->name }}</h1>
-
-@if ($achievements->count())
-    <div>
-        <div class="text-center">
-            <h2>Достижения</h2>
-
-            @foreach($achievements as $achievement)
-                <div class="card m-3 d-inline-block" style="width: 18rem">
-                    <img class="card-img-top" src="{{ $achievement->icon }}" alt="Изображение от достижения">
-
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $achievement->name }}</h5>
-                        <p class="card-text">{{ $achievement->description }}</p>
-                    </div>
+    <div class="container">
+        @if ($user->description)
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    <h4 class="font-weight-bold text-primary">О себе</h4>
                 </div>
-            @endforeach
-        </div>
-    </div>
-@endif
 
+                <div class="card-body">
+                    {!! $user->description !!}
+                </div>
+            </div>
+        @endif
+
+        @if (!$user->articles->isEmpty())
+            <div class="card shadow">
+                <div class="card-header">
+                    <h4 class="font-weight-bold text-primary">Статьи</h4>
+                </div>
+
+                <div class="card-body">
+                    @foreach($user->articles->where('is_published', true) as $article)
+                        <h5><a href="{{ $article->url }}">{{ $article->title }}</a></h5>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+    </div>
 @endsection

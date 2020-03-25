@@ -18,7 +18,8 @@
         <script>
             window.Laravel = {!! json_encode([
                 'user' => [
-                    'id' => Auth::check() ? Auth::user()->id : null
+                    'id' => Auth::check() ? Auth::user()->id : null,
+                    'name' => Auth::check() ? Auth::user()->name : null,
                 ]
             ]) !!}
         </script>

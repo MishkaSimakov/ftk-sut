@@ -9,8 +9,12 @@ use function compact;
 class UserController extends Controller
 {
     public function show(User $user) {
-        $achievements = optional($user->student)->achievements;
+        if ($user->student) {
+            $achievements = optional($user->student)->achievements;
 
-    	return view('user.show', compact('user', 'achievements'));
+            return view('user.show', compact('user', 'achievements'));
+        } else {
+            return view('teacher.show', compact('user'));
+        }
     }
 }

@@ -1,17 +1,22 @@
 <template>
     <div class="chat__message" :class="{ 'chat__message--own' : message.selfOwned }">
         <strong class="chat__message-user">{{ message.user.name }}</strong>
-        <span class="chat__message-timestamp">{{ message.timeForHuman }}</span>
+        <span class="chat__message-timestamp">{{ moment(message.created_at).locale('ru').fromNow() }}</span>
 
         <p class="chat__message-body">{{ message.body }}</p>
     </div>
 </template>
 
 <script>
+    import moment from 'moment'
+
     export default {
         props: [
             'message'
-        ]
+        ],
+        methods: {
+            moment: moment
+        }
     }
 </script>
 

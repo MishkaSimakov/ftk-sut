@@ -15,6 +15,7 @@
         data() {
             return {
                 body: null,
+                bodyBackedUp: null
             }
         },
         computed: mapGetters({
@@ -26,6 +27,8 @@
                 'createChatMessage'
             ]),
             handleMessageInput(e) {
+                this.bodyBackedUp = this.body;
+
                 if (e.keyCode === 13 && !e.shiftKey) {
                     e.preventDefault();
                     this.send();
@@ -36,12 +39,14 @@
                     return
                 }
 
+                this.body = null;
+
                 this.createChatMessage({
                     id: this.chat.id,
-                    body: this.body
+                    body: this.bodyBackedUp
                 }).then(() => {
-                    if (!this.error) {
-                        this.body = null;
+                    if (this.error) {
+                        this.body = this.bodyBackedUp;
                     }
                 });
             }

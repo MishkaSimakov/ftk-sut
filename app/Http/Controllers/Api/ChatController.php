@@ -53,6 +53,8 @@ class ChatController extends Controller
 
     public function destroy(Chat $chat)
     {
+        $this->authorize('tune', $chat);
+
         $chat->delete();
     }
 
