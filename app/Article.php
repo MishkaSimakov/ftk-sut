@@ -43,4 +43,9 @@ class Article extends Model implements HasMedia
     {
         return route('article.show', $this);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->orderByDesc('created_at')->with('user');
+    }
 }

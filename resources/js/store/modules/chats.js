@@ -16,6 +16,17 @@ const getters = {
     },
     deletingChatId: state => {
         return state.deletingChatId
+    },
+    unreadCount: state => {
+        let unread_count = 0;
+
+        state.chats.forEach((chat) => {
+            if (chat.isUnread) {
+                unread_count++;
+            }
+        });
+
+        return unread_count
     }
 };
 
@@ -26,6 +37,8 @@ const actions = {
         api.getChats(1).then((response) => {
             Echo.private(`user.${window.Laravel.user.id}`)
                 .listen('ChatCreated', (e) => {
+                    e.chat.selfOwned = false;
+
                     commit('prependToChats', e.chat)
                 })
                 .listen('ChatMessageCreated', (e) => {
@@ -67,12 +80,8 @@ const mutations = {
         state.chats.unshift(chat)
     },
     setChatToUnread(state, chat) {
-        var full_chat = null;
-
-        state.chats.forEach((c) => {
-            if (c.id === chat.id) {
-                full_chat = c
-            }
+        let full_chat = state.chats.find(function (c) {
+            return c.id === chat.id
         });
 
         full_chat.isUnread = true;

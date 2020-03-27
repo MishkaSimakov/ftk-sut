@@ -1,79 +1,88 @@
 @extends('layouts.page')
 
 @section('content')
-    <h1 class="text-center m-2">
-        {{ $article->title }}
+    <div class="container">
+        <h1 class="text-center m-2">
+            LEGO Digital Designer
 
-        <div class="float-right">
-            @can('update', $article)
-                <a class="text-decoration-none" href="{{ route('article.edit', compact('article')) }}">
-                    <span class="fa-xs ml-2 fas fa-cog"></span>
-                </a>
-            @endcan
-            @can('delete', $article)
-                <a class="text-primary" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
-                    <span class="fa-xs ml-2 fas fa-trash"></span>
-                </a>
+            <div class="float-right">
+                @can('update', $article)
+                    <a class="text-decoration-none" href="{{ route('article.edit', compact('article')) }}">
+                        <span class="fa-xs ml-2 fas fa-cog"></span>
+                    </a>
+                @endcan
+                @can('delete', $article)
+                    <a class="text-primary" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
+                        <span class="fa-xs ml-2 fas fa-trash"></span>
+                    </a>
 
-                <form method="POST" action="{{ route('article.destroy', compact('article')) }}" id="delete-form">
-                    @csrf
-                    @method("DELETE")
-                </form>
-            @endcan
-        </div>
-    </h1>
+                    <form method="POST" action="{{ route('article.destroy', compact('article')) }}" id="delete-form">
+                        @csrf
+                        @method("DELETE")
+                    </form>
+                @endcan
+            </div>
+        </h1>
 
-    <section class="section pb-1">
-        <div class="container">
-            <div class="mb-2" style="overflow-wrap: break-word">
-                {!! $article->body !!}
+        <div class="card shadow mt-3">
+            <div class="card-body">
+                <p>
+                    {!! $article->body !!}
+                </p>
+
+                @if($article->hasMedia())
+                    <hr>
+
+                    <div class="container">
+                        @foreach($article->getMedia() as $photo)
+                            <div class="col-md-2 m-2 p-0 d-inline-block">
+                                <img alt="Изображение для статьи" class="mw-100 mh-100 rounded"
+                                     data-lity data-lity-target="/image/{{ $photo->getUrl() }}"
+                                     src="/image/{{ $photo->getUrl() }}"
+                                     style="cursor: pointer">
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
 
-            @if($article->hasMedia())
-                <hr>
-                <div class="container">
-                    @foreach($article->getMedia() as $photo)
-                        <div class="col-md-2 m-2 p-0 d-inline-block">
-                            <img alt="Изображение для статьи" class="mw-100 mh-100 rounded"
-                                 data-lity data-lity-target="/image/{{ $photo->getUrl() }}"
-                                 src="/image/{{ $photo->getUrl() }}"
-                                 style="cursor: pointer">
-                        </div>
-                    @endforeach
-                </div>
-            @endif
+            <div class="card-footer p-1">
+                <h3 class="my-auto ml-2">
+                    @if($article->is_published)
+                        @auth
+                            <span class="{{ $article->is_liked ? 'article__liked' : 'article__unliked' }}" id="like_{{ $article->id }}">
+                                <a class="article__unlike_link" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
+                                <a class="article__like_link" id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="far fa-heart"></i></a>
 
-            <hr>
+                                <span class="article__like_counter point_count{{ $article->id }}">{{ $article->points }}</span>
+                            </span>
+                        @else
+                            <span class="article__liked" id="like_{{ $article->id }}">
+                                <i class="article__unlike_link fas fa-heart"></i>
 
-            <h3 class="my-auto">
-                @if($article->is_published)
-                    @auth
-                        <span class="{{ $article->is_liked ? 'article__liked' : 'article__unliked' }}" id="like_{{ $article->id }}">
-                            <a class="article__unlike_link" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
-                            <a class="article__like_link" id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="far fa-heart"></i></a>
-
-                            <span class="article__like_counter point_count{{ $article->id }}">{{ $article->points }}</span>
-                        </span>
+                                <span class="article__like_counter">{{ $article->points }}</span>
+                            </span>
+                        @endauth
                     @else
-                        <span class="article__liked" id="like_{{ $article->id }}">
-                            <i class="article__unlike_link fas fa-heart"></i>
+                        @admin
+                        <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form-{{ $article->id }}').submit();" class="btn btn-primary">Опубликовать</a>
 
-                            <span class="article__like_counter">{{ $article->points }}</span>
-                        </span>
-                    @endauth
-                @else
-                    @admin
-                    <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form-{{ $article->id }}').submit();" class="btn btn-primary">Опубликовать</a>
+                        <form id="publish-form-{{ $article->id }}" action="{{ route('article.publish', compact('article')) }}" method="POST" class="d-none">
+                            @method('PUT')
+                            @csrf
+                        </form>
+                        @endadmin
+                    @endif
 
-                    <form id="publish-form-{{ $article->id }}" action="{{ route('article.publish', compact('article')) }}" method="POST" class="d-none">
-                        @method('PUT')
-                        @csrf
-                    </form>
-                    @endadmin
-                @endif
-            </h3>
+                    <span class="font-weight-light text-gray-500 float-right mr-3">{{ $article->created_at->locale('ru')->isoFormat('D MMMM Y') }}</span>
+                </h3>
+            </div>
         </div>
-    </section>
+
+        @if($article->is_published)
+            <comments article_id="{{ $article->id }}"></comments>
+        @endif
+    </div>
 @endsection
 
 @push('script')

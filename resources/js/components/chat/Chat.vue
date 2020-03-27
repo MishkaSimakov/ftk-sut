@@ -55,7 +55,8 @@
         ],
         computed: mapGetters({
             chat: 'currentChat',
-            loading: 'loadingChat'
+            loading: 'loadingChat',
+            chats: 'getChats'
         }),
         methods: {
             ...mapActions([
@@ -66,16 +67,22 @@
         mounted() {
             this.getChat(this.id)
         },
-        watch: {
-            chat(chat) {
-                if (chat.isUnread) {
-                    this.setRead(chat.id)
-                }
-            }
-        },
         updated() {
-            var messages = document.getElementsByClassName('chat__messages')[0];
+            let messages = document.getElementsByClassName('chat__messages')[0];
             messages.scroll(0, messages.scrollHeight);
+
+            if (this.chat.isUnread) {
+                this.setRead(this.chat.id);
+
+                this.chats.map((c) => {
+                    if (c.id === this.chat.id) {
+                        c.isUnread = false;
+                        return c
+                    }
+
+                    return c
+                });
+            }
         },
     }
 </script>

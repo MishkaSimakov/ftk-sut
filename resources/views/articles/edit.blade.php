@@ -54,7 +54,7 @@
                                 <label for="author" class="col-md-4 col-form-label text-md-right">Автор</label>
 
                                 <div class="col-md-7">
-                                    <input list="users" id="user" type="text" class="form-control" name="author" value="{{ Auth::user()->name }}">
+                                    <input list="users" id="user" type="text" class="form-control" name="author" value="{{ optional($article->user)->name ?? Auth::user()->name }}">
                                 </div>
 
                                 <datalist id="users">

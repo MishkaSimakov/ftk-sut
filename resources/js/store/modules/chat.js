@@ -16,6 +16,9 @@ const getters = {
     },
     messageError: state => {
         return state.messageError
+    },
+    getChats: (state, getters, rootState) => {
+        return rootState.chats.chats
     }
 };
 
@@ -44,15 +47,14 @@ const actions = {
 
         api.getChat(id).then((response) => {
             commit('setChat', response.data);
+
             commit('setChatLoading', false);
 
             Echo.private('chat.' + id)
                 .listen('ChatMessageCreated', (e) => {
                     e.message.selfOwned = false;
-
                     commit('appendToChat', e.message);
-
-                    actions.setRead(e.message.chat.id);
+                    commit('setChatUnreadState', true)
                 })
                 // .listen('ConversationUserCreated', (e) => {
                 //     commit('updateUsersInConversation', e.data.users.data)
@@ -104,9 +106,9 @@ const actions = {
             commit('updateUsersInChat', response.data.users)
         });
     },
-    setRead(id) {
+    setRead({dispatch, commit}, id) {
         api.setRead(id);
-    //    TODO: make response with chat and set is_unread to false
+        commit('setChatUnreadState', false)
     },
 };
 
@@ -133,6 +135,9 @@ const mutations = {
         state.chat.messages = state.chat.messages.filter((m) => {
             return m.id !== message.id
         })
+    },
+    setChatUnreadState(state, status) {
+        state.chat.isUnread = status
     }
 };
 

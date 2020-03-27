@@ -4,14 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\PointCategory;
 use App\Rating;
-use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
-use function foo\func;
-use function GuzzleHttp\Psr7\str;
-use function MongoDB\BSON\toJSON;
-use Illuminate\Support\Facades\Auth;
 
 class RatingController extends Controller
 {

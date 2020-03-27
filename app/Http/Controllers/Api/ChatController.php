@@ -26,8 +26,6 @@ class ChatController extends Controller
     {
         $this->authorize('show', $chat);
 
-        $chat->read(auth()->user());
-
         return $chat->load(['users', 'messages']);
     }
 

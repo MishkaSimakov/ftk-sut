@@ -22,6 +22,11 @@ Vue.component('message-add-form', require('./components/chat/forms/MessageAddFor
 Vue.component('chat-user-add-form', require('./components/chat/forms/ChatUserAddForm.vue').default);
 Vue.component('chat-name-form', require('./components/chat/forms/ChatNameForm.vue').default);
 
+//comments
+Vue.component('comments', require('./components/comments/Comments.vue').default);
+Vue.component('comment', require('./components/comments/Comment.vue').default);
+Vue.component('comment-add-form', require('./components/comments/AddCommentForm.vue').default);
+
 // rating
 // Vue.component('rating', require('./components/rating/Rating.vue').default);
 

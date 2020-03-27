@@ -11,7 +11,7 @@ class MainController extends Controller
     {
         $teachers = Teacher::all();
         $advantages = config('advantages');
-        $news = News::all()->sortBy('created_at')->take(3);
+        $news = News::all()->sortBy('created_at')->take(3)->sortByDesc('created_at');
 
         return view('main', compact('teachers', 'advantages', 'news'));
     }

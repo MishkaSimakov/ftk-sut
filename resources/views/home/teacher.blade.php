@@ -27,11 +27,11 @@
                         <h5><a href="{{ $article->url }}">{{ $article->title }}</a></h5>
                     @endforeach
                 @else
-                    <row>
+                    <div>
                         <strong>Похоже у вас нет статей! Напишите первую прямо сейчас:</strong>
 
                         <a class="text-white ml-3 btn btn-info" href="{{ route('article.create') }}"><i class="fas fa-plus mr-1"></i>Написать статью</a>
-                    </row>
+                    </div>
                 @endif
             </div>
         </div>

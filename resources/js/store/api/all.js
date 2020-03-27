@@ -20,7 +20,6 @@ export default {
             axios.post('/webapi/chats/' + id + '/message', {
                 body: body
             }).then((response) => {
-                console.log(response);
                 resolve(response)
             }).catch((e) => {
                 resolve("error")
