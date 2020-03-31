@@ -29,6 +29,8 @@ class ChatMessageController extends Controller
         $chat->touchLastMessage();
         $chat->setUnread($message);
 
+        dd($message->withoutRelations());
+
         broadcast(new ChatMessageCreated($message))->toOthers();
 
         return response()->json([

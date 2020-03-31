@@ -122,7 +122,7 @@
             };
 
             article_dropzone.emit("addedfile", file);
-            article_dropzone.emit("thumbnail", file, '/image{{ $media->getUrl() }}');
+            article_dropzone.emit("thumbnail", file, '{{ $media->getUrl() }}');
             article_dropzone.emit("complete", file);
         @endforeach
 

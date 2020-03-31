@@ -1,6 +1,6 @@
 <template>
     <div class="input-group p-2 border-bottom">
-        <input v-bind:class="{ 'is-invalid': error }" type="text" @keydown="handleCommentInput" v-model="body" id="body" class="form-control">
+        <input placeholder="Написать комментарий..." v-bind:class="{ 'is-invalid': error }" type="text" @keydown="handleCommentInput" v-model="body" id="body" class="form-control">
 
         <div class="input-group-append">
            <div v-if="sending" class="btn btn-outline-primary">
@@ -59,5 +59,10 @@
                 });
             }
         },
+        mounted() {
+            if (window.location.hash === "#comments") {
+                $('input').focus();
+            }
+        }
     }
 </script>

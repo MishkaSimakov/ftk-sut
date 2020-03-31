@@ -123,7 +123,7 @@
             };
 
             dropzone.emit("addedfile", file);
-            dropzone.emit("thumbnail", file, '/image{{ $teacher->getMedia()->first()->getUrl() }}');
+            dropzone.emit("thumbnail", file, '{{ $teacher->getMedia()->first()->getUrl() }}');
             dropzone.emit("complete", file);
         @endif
 
@@ -134,9 +134,6 @@
                 dataType: 'json',
                 data: {
                     name: file.name,
-                },
-                success: function (data) {
-                    console.log(data)
                 }
             });
         })

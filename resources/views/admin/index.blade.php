@@ -137,7 +137,7 @@
                                 <td>{{ $teacher->middle_name }}</td>
                                 <td>{{ $teacher->club->name }}</td>
                                 <td>{{ $teacher->user->register_code }}</td>
-                                <td><img alt="Изображение преподавателя" class="rounded" src="/image/{{ optional($teacher->getMedia()->first())->getUrl() }}" style="cursor: pointer; max-width: 5vw; max-height: 5vw;" data-lity data-lity-target="/image/{{ optional($teacher->getMedia()->first())->getUrl() }}"></td>
+                                <td><img alt="Изображение преподавателя" class="rounded" src="{{ optional($teacher->getMedia()->first())->getUrl() }}" style="cursor: pointer; max-width: 5vw; max-height: 5vw;" data-lity data-lity-target="{{ optional($teacher->getMedia()->first())->getUrl() }}"></td>
                                 <td class="text-center"><a href="{{ route('admin.teacher.edit', compact('teacher')) }}"><i class="fas fa-user-cog"></i></a></td>
                             </tr>
                         @endforeach

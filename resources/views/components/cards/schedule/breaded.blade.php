@@ -1,6 +1,6 @@
 <div class="schedule card shadow">
     <img alt="Изображение мероприятия" class="card-img-top"
-         src="{{ $schedule->getMedia()->count() ? '/image/' . $schedule->getMedia()->first()->getUrl() : "https://pbs.twimg.com/profile_images/600060188872155136/st4Sp6Aw_400x400.jpg" }}"
+         src="{{ $schedule->getMedia()->count() ? $schedule->getMedia()->first()->getUrl() : "https://pbs.twimg.com/profile_images/600060188872155136/st4Sp6Aw_400x400.jpg" }}"
     >
 
     <div class="card-body d-flex flex-column">

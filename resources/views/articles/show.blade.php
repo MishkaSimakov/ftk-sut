@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h1 class="text-center m-2">
-            LEGO Digital Designer
+            {{ $article->title }}
 
             <div class="float-right">
                 @can('update', $article)
@@ -37,8 +37,8 @@
                         @foreach($article->getMedia() as $photo)
                             <div class="col-md-2 m-2 p-0 d-inline-block">
                                 <img alt="Изображение для статьи" class="mw-100 mh-100 rounded"
-                                     data-lity data-lity-target="/image/{{ $photo->getUrl() }}"
-                                     src="/image/{{ $photo->getUrl() }}"
+                                     data-lity data-lity-target="{{ $photo->getUrl() }}"
+                                     src="{{ $photo->getUrl() }}"
                                      style="cursor: pointer">
                             </div>
                         @endforeach

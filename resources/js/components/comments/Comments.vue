@@ -8,13 +8,16 @@
                 <span class="sr-only">Загрузка...</span>
             </div>
 
-            <div v-else-if="comments.length">
+            <div v-else>
                 <comment-add-form v-bind:article_id="article_id" v-if="window.Laravel.user.id"></comment-add-form>
-                <comment  v-for="comment in comments" :key="comment.id" :comment="comment"></comment>
-            </div>
 
-            <div v-else class="d-flex justify-content-center my-4 mx-auto">
-                <span>Нет комментариев</span>
+                <div v-if="comments.length">
+                    <comment  v-for="comment in comments" :key="comment.id" :comment="comment"></comment>
+                </div>
+
+                <div v-else class="d-flex justify-content-center my-4 mx-auto">
+                    <span>Нет комментариев</span>
+                </div>
             </div>
         </div>
     </div>

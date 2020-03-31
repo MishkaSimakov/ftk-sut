@@ -58,7 +58,7 @@
         @endif
 
         <!-- Styles -->
-        <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
         <div id="app">
@@ -71,7 +71,7 @@
             @include('partials.footer.footer')
         </div>
 
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ mix('js/app.js') }}"></script>
 
         @stack('script')
 

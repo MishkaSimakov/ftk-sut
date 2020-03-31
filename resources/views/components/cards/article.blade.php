@@ -80,6 +80,14 @@
                 @endadmin
             @endif
 
+            <div class="ml-4 d-inline-block">
+                <a href="{{ $article->url }}#comments" class="article__comment_link">
+                    <i style="cursor: pointer;" class="far fa-comment"></i>
+                </a>
+
+                <span class="article__comments_counter">{{ $article->comments->count() }}</span>
+            </div>
+
             <span class="font-weight-light text-gray-500 float-right mr-3">{{ $article->created_at->locale('ru')->isoFormat('D MMMM Y') }}</span>
         </h3>
     </div>
