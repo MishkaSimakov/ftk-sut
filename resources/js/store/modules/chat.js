@@ -1,5 +1,6 @@
 import api from '../api/all'
 import moment from 'moment'
+import Bus from '../../bus'
 
 const state = {
     chat: null,
@@ -23,7 +24,7 @@ const getters = {
 };
 
 const actions = {
-    buildTempMessage(chat_id, body) {
+    buildTempMessage(chat_id, body, images) {
         let tempId = Date.now();
 
         return {
@@ -32,14 +33,16 @@ const actions = {
             user: {
                 name: window.Laravel.user.name
             },
-
+            images: images.map((i) => {
+                return URL.createObjectURL(i)
+            }),
             body: body,
             timeForHuman: moment().locale('ru').fromNow(),
             selfOwned: true,
         }
     },
     getChat({dispatch, commit}, id) {
-        commit('setChatLoading', true)
+        commit('setChatLoading', true);
 
         if (state.chat) {
             Echo.leave('chat.' + state.chat.id)
@@ -54,22 +57,28 @@ const actions = {
                 .listen('ChatMessageCreated', (e) => {
                     e.message.selfOwned = false;
                     commit('appendToChat', e.message);
-                    commit('setChatUnreadState', true)
                 })
                 // .listen('ConversationUserCreated', (e) => {
                 //     commit('updateUsersInConversation', e.data.users.data)
                 // });
         })
     },
-    createChatMessage({dispatch, commit}, {id, body}) {
-        let tempMessage = actions.buildTempMessage(id, body);
+    createChatMessage({dispatch, commit}, {id, body, images}) {
+        let tempMessage = actions.buildTempMessage(id, body, images);
         commit('appendToChat', tempMessage);
 
+        const formData = new FormData();
+
+        images.forEach((x, key) => {
+            formData.append('files[' + key + ']', x, x.name);
+        });
+
         return api.storeChatMessage(id, {
-            body: body
+            body: body,
+            images: formData
         }).then((response) => {
             if (response === "error") {
-                commit("setMessageError", true)
+                commit("setMessageError", true);
                 commit("removeChatMessage", tempMessage)
             } else {
                 commit("setMessageError", false)
@@ -121,6 +130,8 @@ const mutations = {
     },
     appendToChat(state, message) {
         state.chat.messages.push(message)
+
+        Bus.$emit('message.added', message)
     },
     setMessageError(state, status) {
         state.messageError = status

@@ -28,7 +28,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
         {{--  lity for lightboxes  --}}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.0/lity.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.0/lity.js"></script>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">

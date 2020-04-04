@@ -24,7 +24,7 @@ class StoreChatMessage extends FormRequest
     public function rules()
     {
         return [
-            'body' => 'required|max:3000'
+            'body' => 'required|max:3000',
         ];
     }
 }

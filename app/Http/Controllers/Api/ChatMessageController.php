@@ -8,6 +8,8 @@ use App\Events\ChatMessageCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreChatMessage;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 
 class ChatMessageController extends Controller
 {
@@ -29,13 +31,27 @@ class ChatMessageController extends Controller
         $chat->touchLastMessage();
         $chat->setUnread($message);
 
-        dd($message->withoutRelations());
+        return response()->json($message->id);
+    }
 
-        broadcast(new ChatMessageCreated($message))->toOthers();
+    public function storeImage(Message $message, Request $request)
+    {
+        if (count($request->allFiles())) {
+            foreach ($request->allFiles()['files'] as $image) {
+                /** @var UploadedFile $image */
 
-        return response()->json([
-            'message' => $message->load(['user']),
-            'chat' => $message->chat->load(['users'])
-        ]);
+                $name = Str::slug(str_replace("." . $image->getClientOriginalExtension(), "", $image->getClientOriginalName()));
+                $filename = $name . '.' . $image->getClientOriginalExtension();
+
+                $message->addMedia($image->path())
+                    ->usingFileName($filename)
+                    ->usingName($name)
+                    ->toMediaCollection();
+            }
+        }
+
+        broadcast(new ChatMessageCreated($message->withoutRelations()->load(['user'])))->toOthers();
+
+        return response()->json('ok');
     }
 }

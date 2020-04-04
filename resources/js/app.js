@@ -30,7 +30,6 @@ Vue.component('comment-add-form', require('./components/comments/AddCommentForm.
 // rating
 // Vue.component('rating', require('./components/rating/Rating.vue').default);
 
-
 import store from './store/index.js'
 
 const app = new Vue({

@@ -4,11 +4,16 @@ namespace App\Chat;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Message extends Model
+class Message extends Model implements HasMedia
 {
+    use HasMediaTrait;
+
     protected $appends = [
-        'selfOwned'
+        'selfOwned',
+        'images'
     ];
 
     public function user()
@@ -24,5 +29,10 @@ class Message extends Model
     public function getSelfOwnedAttribute()
     {
         return $this->user_id === auth()->user()->id;
+    }
+
+    public function getImagesAttribute()
+    {
+        return $this->media->map->getUrl();
     }
 }

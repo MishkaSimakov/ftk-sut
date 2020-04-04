@@ -88,4 +88,10 @@ return [
         'secret' => 'ffe0bacee403f800d4359bdcc76c0c8d',
     ],
 
+//  for production
+//    'algolia' => [
+//        'id' => '4J119ZGKYQ',
+//        'secret' => 'b72e1784926fde5e3123fcca8f37124b',
+//    ],
+
 ];

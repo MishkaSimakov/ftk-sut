@@ -26,8 +26,8 @@ class CategorySeeder extends Seeder
             'Мастерская творчества - занятия' => 'creation_lessons',
             'Интеллект - занятия' => 'intelligence_lessons',
 
-            'Игры в клубе' => 'games',
-            'Газета и группа ВКонтанкте' => 'press',
+            'Игры и конкурсы' => 'games',
+            'Газета, сайт клуба, группа ВК' => 'press',
             'Походы и экскурсии' => 'travels',
             'Городские соревнования' => 'local_competitions',
             'Областные, всероссийские, международные соревнования' => 'global_competitions',

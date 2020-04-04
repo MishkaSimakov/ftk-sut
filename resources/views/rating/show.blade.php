@@ -105,10 +105,14 @@
 
             //chart options
             let options = {
-                fontSize: 19,
+                // fontSize: 15,
                 vAxis: {
                     title: '',
                     direction: -1,
+                    textStyle: {
+                        fontSize: 16,
+                        bold: true
+                    },
                 },
                 tooltip: {
                     trigger: 'none',
@@ -141,7 +145,7 @@
             if ($(window).width() < 1000) {
                 options.chartArea = {left: 100, bottom: 25, top: 0, width:"100%"};
             } else {
-                options.chartArea = {left: 300, bottom: 25, top: 0, width: "50%"};
+                options.chartArea = {left: 350, bottom: 25, top: 0, width: "50%"};
                 options.legend = {
                     maxLines: 2,
                     position: 'right',

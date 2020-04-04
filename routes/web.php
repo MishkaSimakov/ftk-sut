@@ -92,11 +92,12 @@ Route::post('/news', 'NewsController@store')->name('news.store');
 Route::group(['prefix' => 'webapi/chats', 'namespace' => 'Api'], function () {
     Route::get('/', 'ChatController@index');
     Route::post('/', 'ChatController@store')->middleware('throttle:5,1');
-//
+
     Route::get('/{chat}', 'ChatController@show');
     Route::delete('/{chat}', 'ChatController@destroy');
+    Route::post('/message/{message}/image', 'ChatMessageController@storeImage')->middleware('throttle:30,1');
     Route::post('/{chat}/message', 'ChatMessageController@store')->middleware('throttle:30,1');
-//
+
     Route::post('/{chat}/users', 'ChatUserController@store')->middleware('throttle:10,1');
     Route::post('/{chat}/name', 'ChatController@changeName');
     Route::post('/{chat}/removeUser', 'ChatController@removeUser')->middleware('throttle:10,1');

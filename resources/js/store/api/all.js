@@ -15,13 +15,28 @@ export default {
             })
         })
     },
-    storeChatMessage(id, {body}) {
+    storeChatMessage(id, {body, images}) {
         return new Promise((resolve, reject) => {
             axios.post('/webapi/chats/' + id + '/message', {
-                body: body
-            }).then((response) => {
+                body: body,
+            })
+            .then((response) => {
+                this.storeMessageImage(response.data, {
+                    images: images
+                });
+            })
+            .catch((e) => {
+                resolve("error")
+            });
+        })
+    },
+    storeMessageImage(id, {images}) {
+        return new Promise((resolve, reject) => {
+            axios.post('/webapi/chats/message/' + id + '/image', images)
+            .then((response) => {
                 resolve(response)
-            }).catch((e) => {
+            })
+            .catch((e) => {
                 resolve("error")
             });
         })

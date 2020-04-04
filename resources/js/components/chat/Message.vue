@@ -4,6 +4,10 @@
         <span class="chat__message-timestamp">{{ moment(message.created_at).locale('ru').fromNow() }}</span>
 
         <p class="chat__message-body">{{ message.body }}</p>
+
+        <div class="row" v-if="message.images && message.images.length">
+            <img v-for="image in message.images" alt="Картинка" class="chat__message-image card-img m-2" v-bind:src="image" data-lity>
+        </div>
     </div>
 </template>
 
@@ -42,6 +46,12 @@
 
             &--own {
                 background-color: #f0f0f0;
+            }
+
+            &-image {
+                max-height: 10rem;
+                max-width: 10rem;
+                cursor: pointer;
             }
         }
     }
