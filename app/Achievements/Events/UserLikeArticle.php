@@ -3,6 +3,7 @@
 namespace App\Achievements\Events;
 
 use App\Article;
+use App\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -13,13 +14,15 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class UserLikeArticle
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, SerializesModels;
 
     public $article;
+    public $user;
 
 
-    public function __construct(Article $article)
+    public function __construct(User $user, Article $article)
     {
         $this->article = $article;
+        $this->user = $user;
     }
 }

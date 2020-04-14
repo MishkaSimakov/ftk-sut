@@ -26,9 +26,9 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
-        $notPublishedCount = Article::notPublished()->count();
+        views($article)->cooldown(now()->addHours(1))->record();
 
-        return view('articles.show', compact('article', 'notPublishedCount'));
+        return view('articles.show', compact('article'));
     }
 
     public function create()
@@ -52,9 +52,7 @@ class ArticleController extends Controller
     {
         $articles = Article::notPublished();
 
-        $notPublishedCount = $articles->count();
-
-        return view('articles.publish', compact('articles', 'notPublishedCount'));
+        return view('articles.publish', compact('articles'));
     }
 
     public function publish(Article $article)

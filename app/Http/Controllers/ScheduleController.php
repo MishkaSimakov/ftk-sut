@@ -19,7 +19,7 @@ class ScheduleController extends Controller
 
     public function archive()
     {
-        $schedules = Schedule::all()->filter->isArchived;
+        $schedules = Schedule::all()->filter->isArchived; // TODO: make sorting by date
 
         return view('schedule.archive', compact('schedules'));
     }

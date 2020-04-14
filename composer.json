@@ -8,6 +8,7 @@
         "php": "^7.2.5",
         "algolia/scout-extended": "^1.9",
         "barryvdh/laravel-debugbar": "^3.2",
+        "cyrildewit/eloquent-viewable": "^5.2",
         "facade/ignition": "^2.0",
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.5",

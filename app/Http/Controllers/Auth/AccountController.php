@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Achievements\Events\UserWriteDescription;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -47,6 +48,8 @@ class AccountController extends Controller
                 'email' => $validatedData['email'],
                 'description' => $validatedData['description'],
             ]);
+
+            UserWriteDescription::dispatch($request->user());
         }
 
         return redirect()->back();

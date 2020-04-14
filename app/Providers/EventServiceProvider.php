@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Achievements\Events\UserEarnedPoints;
 use App\Achievements\Events\UserLikeArticle;
 use App\Achievements\Events\UserWriteArticle;
+use App\Achievements\Events\UserWriteDescription;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -26,11 +27,14 @@ class EventServiceProvider extends ServiceProvider
             \App\Achievements\Listeners\AwardPointAchievements::class,
         ],
         UserLikeArticle::class => [
-            \App\Achievements\Listeners\AwardArticleAchievements::class,
+            \App\Achievements\Listeners\AwardLikeAchievements::class,
         ],
         UserWriteArticle::class => [
             \App\Achievements\Listeners\AwardArticleAchievements::class,
-        ]
+        ],
+        UserWriteDescription::class => [
+            \App\Achievements\Listeners\AwardAccountAchievements::class,
+        ],
     ];
 
     /**

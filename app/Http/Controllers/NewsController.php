@@ -13,6 +13,10 @@ class NewsController extends Controller
     {
         $news = News::all()->sortByDesc('created_at');
 
+        $news->each(function ($news) {
+            views($news)->cooldown(now()->addHours(1))->record();
+        });
+
         return view('news.index', compact('news'));
     }
 

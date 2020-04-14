@@ -63,6 +63,22 @@
                                 <span class="article__like_counter">{{ $article->points }}</span>
                             </span>
                         @endauth
+
+                        <div class="ml-4 d-inline-block">
+                            <a href="{{ $article->url }}#comments" class="article__comment_link">
+                                <i style="cursor: pointer;" class="far fa-comment"></i>
+                            </a>
+
+                            <span class="article__comments_counter">{{ $article->comments->count() }}</span>
+                        </div>
+
+                        <div class="ml-4 d-inline-block">
+                            <a class="article__comment_link">
+                                <i class="far fa-eye"></i>
+                            </a>
+
+                            <span class="article__comments_counter">{{ views($article)->count() }}</span>
+                        </div>
                     @else
                         @admin
                         <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form-{{ $article->id }}').submit();" class="btn btn-primary">Опубликовать</a>

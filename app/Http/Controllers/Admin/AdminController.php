@@ -14,7 +14,10 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $schedules = Schedule::whereDate('date_start', '>', Carbon::now())->get()->sortByDesc('date_start');
+        $schedules = Schedule::all()->filter(function ($schedule) {
+            return !$schedule->isArchived;
+        })->sortByDesc('date_start');
+
         $students = Student::with('user')->get();
         $teachers = Teacher::with('user')->get();
 

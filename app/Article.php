@@ -2,6 +2,8 @@
 
 namespace App;
 
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,9 +15,9 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 /**
  * @mixin Builder
  */
-class Article extends Model implements HasMedia
+class Article extends Model implements HasMedia, Viewable
 {
-    use HasMediaTrait;
+    use HasMediaTrait, InteractsWithViews;
 
     //
 

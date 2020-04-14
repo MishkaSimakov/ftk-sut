@@ -27,6 +27,9 @@ Vue.component('comments', require('./components/comments/Comments.vue').default)
 Vue.component('comment', require('./components/comments/Comment.vue').default);
 Vue.component('comment-add-form', require('./components/comments/AddCommentForm.vue').default);
 
+// articles
+Vue.component('tags-add-form', require('./components/article/AddTagForm.vue').default);
+
 // rating
 // Vue.component('rating', require('./components/rating/Rating.vue').default);
 

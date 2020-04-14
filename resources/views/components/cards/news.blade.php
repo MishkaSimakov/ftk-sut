@@ -12,11 +12,14 @@
     <div class="card-body">
         <p>{!! $current_news->body !!}</p>
     </div>
-</div>
 
-{{--<div class="jumbotron jumbotron-fluid">--}}
-{{--    <div class="container">--}}
-{{--        <h1 class="display-4">{{ $current_news->title }}</h1>--}}
-{{--        <p class="lead">{!! $current_news->body !!}</p>--}}
-{{--    </div>--}}
-{{--</div>--}}
+    <div class="card-footer">
+        <div class="h3 my-auto ml-0 d-inline-block">
+            <a class="article__comment_link">
+                <i class="far fa-eye"></i>
+            </a>
+
+            <span class="article__comments_counter">{{ views($current_news)->count() }}</span>
+        </div>
+    </div>
+</div>

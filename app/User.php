@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->chats->contains($chat);
     }
+
+    public function likedArticles()
+    {
+        return $this->belongsToMany(Article::class, UserLike::class);
+    }
 }

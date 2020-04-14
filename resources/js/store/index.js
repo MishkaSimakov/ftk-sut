@@ -11,6 +11,6 @@ export default new Vuex.Store({
     modules: {
         chats,
         comments,
-        // rating
+        // rating,
     }
 })

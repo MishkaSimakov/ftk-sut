@@ -27,7 +27,7 @@ class StoreSchedule extends FormRequest
         return [
             'title' => 'required|max:100|string',
             'subtitle' => 'max:100|string',
-            'date_start' => 'required|date|after:now',
+            'date_start' => 'required|date',
             'date_end' => 'required|date|after:date_start',
             'file' => 'required|file|image'
         ];

@@ -62,7 +62,6 @@
                 return true === ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
             },
             handleMessageInput(e) {
-                this.bodyBackedUp = this.body;
                 if (e.keyCode === 13 && !e.shiftKey) {
                     e.preventDefault();
                     this.send();
@@ -93,6 +92,7 @@
                 this.imagesBackedUp = this.images;
                 this.images = [];
 
+                this.bodyBackedUp = this.body;
                 this.body = null;
 
                 this.createChatMessage({

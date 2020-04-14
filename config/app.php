@@ -153,6 +153,7 @@ return [
 
         Laravel\Scout\ScoutServiceProvider::class,
         \Algolia\ScoutExtended\ScoutExtendedServiceProvider::class,
+        CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
 
         /*
          * Application Service Providers...

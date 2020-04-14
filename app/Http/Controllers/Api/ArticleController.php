@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Achievements\Events\UserLikeArticle;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Article;
@@ -21,9 +23,12 @@ class ArticleController extends Controller
             $article->increment('points');
 
             $article->users()->attach($request->user_id);
+
+            UserLikeArticle::dispatch(User::where('id', $request->user_id)->first(), $article);
         } else {
             return json_encode('error');
         }
+
 
         return $article->points;
     }
