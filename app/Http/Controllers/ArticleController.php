@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Achievements\Events\UserWriteArticle;
 use App\Http\Requests\StoreArticle;
+use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
 use App\Article;
@@ -13,10 +14,34 @@ class ArticleController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->filter == 'newest') {
-            $articles = Article::where('is_published', true)->latest();
+        if ($request->get('query')) {
+            $query = $request->get('query');
+
+            $articles = Article::where('title', 'like', "%" . $query . "%")
+//                ->orWhereHas('tags', function ($q) use ($query) {
+//                    $q->where('name', 'like', "%" . $query . "%");
+//                })
+//                ->orWhereHas('users', function ($q) use ($query) {
+//                    $q->where('name', 'like', "%" . $query . "%");
+//                })
+//                ->orWhere('tags.name', $query)
+                ->where('is_published', true);
         } else {
-            $articles = Article::where('is_published', true)->orderBy('points', 'desc');
+            $articles = Article::where('is_published', true);
+        }
+
+        if ($request->tag) {
+            $tag = $request->tag;
+
+            $articles = $articles->whereHas('tags', function ($q) use ($tag) {
+                return $q->where('name', $tag);
+            });
+        }
+
+        if ($request->filter == 'newest') {
+            $articles = $articles->latest();
+        } else {
+            $articles = $articles->orderBy('points', 'desc');
         }
 
         $articles = $articles->paginate(10);
@@ -92,6 +117,14 @@ class ArticleController extends Controller
             'is_blank' => false,
             'is_published' => false,
         ]);
+
+        $article->tags()->sync([]);
+
+        foreach (json_decode($request->tags) as $tag) {
+            $tag_id = Tag::firstOrCreate(['name' => $tag->value]);
+
+            $article->tags()->syncWithoutDetaching($tag_id);
+        }
 
         if (Auth::user()->is_admin) {
             $article->update([

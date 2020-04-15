@@ -1,14 +1,30 @@
 @extends('layouts.page')
 
 @section('content')
-    <h1 class="text-center m-2">Статьи</h1>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <h1 class="my-2">Статьи</h1>
 
-    @auth
-        <h2 class="ml-2"><a href="{{ route('article.create') }}"><i class="fas fa-plus mr-1"></i>Написать статью</a></h2>
-    @endauth
+            @auth
+                <span class="h3 my-auto ml-3">
+                    <a title="Написать статью" href="{{ route('article.create') }}">
+                        <i class="fas fa-pen"></i>
+                    </a>
+                </span>
+            @endauth
+        </div>
 
-    <div class="m-3">
-        @component('components.card-lists.articles', ['articles' => $articles])@endcomponent
+        <find-articles-form></find-articles-form>
+
+        <div class="row">
+            <div class="mt-2 col-lg-8">
+                @component('components.card-lists.articles', ['articles' => $articles])@endcomponent
+            </div>
+
+            <div id="sidebar" class="col-lg-4 mt-2 d-none d-lg-block">
+                <writers-top></writers-top>
+            </div>
+        </div>
     </div>
 
     <div class="d-flex">

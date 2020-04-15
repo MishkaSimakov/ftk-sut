@@ -108,3 +108,8 @@ Route::group(['prefix' => 'webapi/comments', 'namespace' => 'Api'], function () 
     Route::get('/{article}', 'CommentController@show');
     Route::post('/{article}', 'CommentController@store');
 });
+
+Route::group(['prefix' => 'webapi/articles', 'namespace' => 'Api'], function () {
+    Route::get('/tags', 'ArticleController@tags');
+    Route::get('/top', 'ArticleController@top');
+});

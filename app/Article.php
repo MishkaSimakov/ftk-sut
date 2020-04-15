@@ -19,8 +19,6 @@ class Article extends Model implements HasMedia, Viewable
 {
     use HasMediaTrait, InteractsWithViews;
 
-    //
-
     protected $guarded = [];
 
     public function users()
@@ -49,5 +47,10 @@ class Article extends Model implements HasMedia, Viewable
     public function comments()
     {
         return $this->hasMany(Comment::class)->orderByDesc('created_at')->with('user');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'article_tags');
     }
 }

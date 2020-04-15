@@ -29,15 +29,30 @@
                             </div>
                         </div>
 
+{{--                        <div class="form-group row">--}}
+{{--                            <label for="preview-image" class="col-md-4 col-form-label text-md-right">Изображение для предпросмотра</label>--}}
+
+{{--                            <div class="col-md-7">--}}
+{{--                                <input max="100" id="preview-image" type="file" class="form-control" name="title" value="{{ old('title') ?? $article->title }}" required>--}}
+
+{{--                                @if ($errors->has('title'))--}}
+{{--                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $errors->first('title') }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
                         <div class="form-group row">
                             <label for="editor" class="col-md-4 col-form-label text-md-right">Статья</label>
 
                             <div class="col-md-7 mb-5">
-                                <input type="hidden" name="body" id="body">
-
-                                <div id="editor">
+                                <textarea name="body" id="editor">
                                     {!! old('body') ?? $article->body !!}
-                                </div>
+                                </textarea>
+{{--                                <div id="editor">--}}
+{{--                                    {!! old('body') ?? $article->body !!}--}}
+{{--                                </div>--}}
                             </div>
                         </div>
 
@@ -85,15 +100,45 @@
 @endsection
 
 @push('script')
+    <script src="https://cdn.tiny.cloud/1/hnviucqus9116ko1nycfet8r4rlvw0akh6w27lord3o9nz15/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
     <script>
         $(document).ready(function () {
-            var quill = new Quill('#editor', {
-                theme: 'snow',
+            // Quill.register('modules/imageUpload', ImageUpload);
+
+            // let quill = new Quill('#editor', {
+            //     theme: 'snow',
+            // });
+
+            // ClassicEditor
+            //     .create(document.querySelector('#editor'), {
+            //         ckfinder: {
+            //             uploadUrl: '/image/upload',
+            //             options: {
+            //                 resourceType: 'Images',
+            //                 headers: {
+            //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //                 },
+            //             }
+            //         }
+            //     })
+            //     .catch(error => {
+            //         console.error(error);
+            //     });
+
+            tinymce.init({
+                selector: '#editor',
+                branding: false,
+                plugins: "lists link image",
+                toolbar: 'styleselect | bold italic underline | numlist bullist | link image',
+                menubar: '',
+                language: 'ru',
+                // statusbar: false,
             });
 
-            $('#form').submit(function () {
-                $('#body').val($('.ql-editor').html())
-            });
+            // $('#form').submit(function () {
+            //     $('#body').val($('.ql-editor').html())
+            // });
         });
 
 

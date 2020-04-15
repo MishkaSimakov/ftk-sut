@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Achievements\Events\UserLikeArticle;
+use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,7 +30,20 @@ class ArticleController extends Controller
             return json_encode('error');
         }
 
-
         return $article->points;
+    }
+
+    public function tags()
+    {
+       $tags = Tag::all()->sortByDesc('articleCount')->pluck('name');
+
+       return response()->json($tags);
+    }
+
+    public function top()
+    {
+        $users = User::all()->sortByDesc('articleCount')->take(10);
+
+        return response()->json($users);
     }
 }

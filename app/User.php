@@ -35,6 +35,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $appends = [
+        'articleCount',
+        'url'
+    ];
+
     public function student(): HasOne
     {
         return $this->hasOne(Student::class);
@@ -67,5 +72,10 @@ class User extends Authenticatable
     public function likedArticles()
     {
         return $this->belongsToMany(Article::class, UserLike::class);
+    }
+
+    public function getArticleCountAttribute()
+    {
+        return $this->articles()->where('is_published', true)->count();
     }
 }

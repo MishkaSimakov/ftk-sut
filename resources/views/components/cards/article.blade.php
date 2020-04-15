@@ -1,4 +1,4 @@
-<div class="card shadow m-2">
+<div class="card shadow mb-3">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <h4 class="text-truncate d-block font-weight-bold text-primary">
             <a title="{{ $article->title }}" href="{{ $article->url }}">
@@ -41,18 +41,34 @@
     </div>
 
     <div class="card-body">
+        <div style="width: 100vh; max-width: 100%;" class="mb-3">
+            <img class="card-img mw-100 mh-100 rounded" src="https://cdn.pixabay.com/photo/2020/04/07/17/01/chicks-5014152__340.jpg">
+        </div>
         <p>
             {!! \Illuminate\Support\Str::limit($article->body, 825, '...') !!}
         </p>
 
         @if(strlen($article->body) > 825)
-            <a title="{{ $article->title }}" href="{{ $article->url }}">
-                Читать полностью
+            <a class="btn btn-outline-primary mt-2" title="{{ $article->title }}" href="{{ $article->url }}">
+                Читать полностью <i class="fa fa-arrow-right ml-1"></i>
             </a>
         @endif
 
         @if($article->hasMedia())
             <p class="text-muted m-0">+{{ count($article->getMedia()) }} фото</p>
+        @endif
+
+        @if($article->tags->count())
+            <hr>
+
+            <span class="mb-1">
+                Теги:
+                @foreach($article->tags as $tag)
+                    <a href="?tag={{ $tag->name }}">
+                        <span class="badge badge-info">{{ $tag->name }}</span>
+                    </a>
+                @endforeach
+            </span>
         @endif
     </div>
 

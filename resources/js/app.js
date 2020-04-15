@@ -6,8 +6,13 @@ window.Vue = require('vue');
 import Vuex from 'vuex';
 Vue.use(Vuex);
 
-require('./quill.js');
-window.Quill = require('Quill');
+// import { ImageUpload } from 'quill-image-upload';
+// window.ImageUpload = ImageUpload;
+
+// require('./quill.js');
+// window.Quill = require('Quill');
+
+window.ClassicEditor = require('@ckeditor/ckeditor5-build-classic');
 
 // chat
 Vue.component('chats', require('./components/chat/Chats.vue').default);
@@ -29,6 +34,8 @@ Vue.component('comment-add-form', require('./components/comments/AddCommentForm.
 
 // articles
 Vue.component('tags-add-form', require('./components/article/AddTagForm.vue').default);
+Vue.component('find-articles-form', require('./components/article/FindArticlesForm.vue').default);
+Vue.component('writers-top', require('./components/article/writersTop.vue').default);
 
 // rating
 // Vue.component('rating', require('./components/rating/Rating.vue').default);
