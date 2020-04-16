@@ -1,4 +1,15 @@
 .article {
+    &__body {
+        &-text {
+            max-height: 500px;
+            overflow: hidden;
+        }
+
+        img {
+            border-radius: 0.25rem !important;
+        }
+    }
+
     &__like_link {
         color: rgb(130, 138, 153) !important;
 

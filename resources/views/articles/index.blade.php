@@ -37,6 +37,14 @@
 @auth
     @push('script')
         <script type="text/javascript">
+            $(document).ready(function() {
+                $('.article__body').each(function () {
+                    if ($(this).children('#article_text').height() >= 500) {
+                        $(this).children('#article_read_more').show()
+                    }
+                })
+            });
+
             function like(article) {
                 var counter = $('.point_count' + article)
 

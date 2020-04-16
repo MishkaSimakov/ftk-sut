@@ -40,32 +40,22 @@
         </div>
     </div>
 
-    <div class="card-body">
-        <div style="width: 100vh; max-width: 100%;" class="mb-3">
-            <img class="card-img mw-100 mh-100 rounded" src="https://cdn.pixabay.com/photo/2020/04/07/17/01/chicks-5014152__340.jpg">
+    <div class="card-body article__body">
+        <div id="article_text" class="article__body-text">
+            {!! $article->body !!}
         </div>
-        <p>
-            {!! \Illuminate\Support\Str::limit($article->body, 825, '...') !!}
-        </p>
 
-        @if(strlen($article->body) > 825)
-            <a class="btn btn-outline-primary mt-2" title="{{ $article->title }}" href="{{ $article->url }}">
-                Читать полностью <i class="fa fa-arrow-right ml-1"></i>
-            </a>
-        @endif
-
-        @if($article->hasMedia())
-            <p class="text-muted m-0">+{{ count($article->getMedia()) }} фото</p>
-        @endif
+        <a id="article_read_more" style="display: none;" class="btn btn-outline-primary mt-2" title="Читать полностью" href="{{ $article->url }}">
+            Читать полностью <i class="fa fa-arrow-right ml-1"></i>
+        </a>
 
         @if($article->tags->count())
             <hr>
 
             <span class="mb-1">
-                Теги:
                 @foreach($article->tags as $tag)
                     <a href="?tag={{ $tag->name }}">
-                        <span class="badge badge-info">{{ $tag->name }}</span>
+                        <span class="text-muted mr-2">{{ $tag->name }}</span>
                     </a>
                 @endforeach
             </span>
@@ -99,7 +89,6 @@
                 </div>
 
                 <div class="ml-4 d-inline-block">
-{{--                    TODO: make normal class--}}
                     <a class="article__comment_link">
                         <i class="far fa-eye"></i>
                     </a>

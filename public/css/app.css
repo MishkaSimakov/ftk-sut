@@ -12592,6 +12592,15 @@ button {
   border-radius: 0.35rem;
 }
 
+.article__body-text {
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.article__body img {
+  border-radius: 0.25rem !important;
+}
+
 .article__like_link {
   color: #828a99 !important;
   opacity: 0.7 !important;

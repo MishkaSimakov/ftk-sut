@@ -8,6 +8,7 @@ use App\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\Models\Media;
 
@@ -15,17 +16,18 @@ class ImageController extends Controller
 {
     public function uploadArticleImage(Article $article, Request $request)
     {
-        foreach ($request->allFiles() as $photo) {
-            /** @var UploadedFile $photo */
+        /** @var UploadedFile $photo */
+        $photo = Arr::first($request->allFiles());
 
-            $name = Str::slug(str_replace("." . $photo->getClientOriginalExtension(), "", $photo->getClientOriginalName()));
-            $filename = $name . '.' . $photo->getClientOriginalExtension();
+        $name = Str::slug(str_replace("." . $photo->getClientOriginalExtension(), "", $photo->getClientOriginalName()));
+        $filename = $name . '.' . $photo->getClientOriginalExtension();
 
-            $article->addMedia($photo->path())
-                ->usingFileName($filename)
-                ->usingName($name)
-                ->toMediaCollection();
-        }
+        return response()->json([
+            'location' => $article->addMedia($photo->path())
+            ->usingFileName($filename)
+            ->usingName($name)
+            ->toMediaCollection()->getUrl()
+        ]);
     }
 
     public function deleteArticleImage(Article $article, Request $request)

@@ -29,20 +29,6 @@
                             </div>
                         </div>
 
-{{--                        <div class="form-group row">--}}
-{{--                            <label for="preview-image" class="col-md-4 col-form-label text-md-right">Изображение для предпросмотра</label>--}}
-
-{{--                            <div class="col-md-7">--}}
-{{--                                <input max="100" id="preview-image" type="file" class="form-control" name="title" value="{{ old('title') ?? $article->title }}" required>--}}
-
-{{--                                @if ($errors->has('title'))--}}
-{{--                                    <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $errors->first('title') }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
                         <div class="form-group row">
                             <label for="editor" class="col-md-4 col-form-label text-md-right">Статья</label>
 
@@ -50,17 +36,6 @@
                                 <textarea name="body" id="editor">
                                     {!! old('body') ?? $article->body !!}
                                 </textarea>
-{{--                                <div id="editor">--}}
-{{--                                    {!! old('body') ?? $article->body !!}--}}
-{{--                                </div>--}}
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="photos" class="col-md-4 col-form-label text-md-right">Фотографии</label>
-
-                            <div class="col-md-7">
-                                <div class="dropzone" id="dropzone"></div>
                             </div>
                         </div>
 
@@ -104,87 +79,18 @@
 
     <script>
         $(document).ready(function () {
-            // Quill.register('modules/imageUpload', ImageUpload);
-
-            // let quill = new Quill('#editor', {
-            //     theme: 'snow',
-            // });
-
-            // ClassicEditor
-            //     .create(document.querySelector('#editor'), {
-            //         ckfinder: {
-            //             uploadUrl: '/image/upload',
-            //             options: {
-            //                 resourceType: 'Images',
-            //                 headers: {
-            //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //                 },
-            //             }
-            //         }
-            //     })
-            //     .catch(error => {
-            //         console.error(error);
-            //     });
-
             tinymce.init({
                 selector: '#editor',
                 branding: false,
-                plugins: "lists link image",
-                toolbar: 'styleselect | bold italic underline | numlist bullist | link image',
+                plugins: "lists link image fullscreen",
+                toolbar: 'styleselect | bold italic underline | numlist bullist | link image | fullscreen',
                 menubar: '',
                 language: 'ru',
+
+                /* without images_upload_url set, Upload tab won't show up*/
+                images_upload_url: '{{ route('api.article.upload_image', compact('article')) }}',
                 // statusbar: false,
             });
-
-            // $('#form').submit(function () {
-            //     $('#body').val($('.ql-editor').html())
-            // });
         });
-
-
-
-        {{--  dropzone  --}}
-        Dropzone.autoDiscover = false;
-
-        var article_dropzone = new Dropzone('#dropzone', {
-            url: "{{ route('api.article.upload_image', compact('article')) }}",
-            maxFiles: 15,
-            acceptedFiles: 'image/*',
-
-            addRemoveLinks: true,
-
-            //translations
-            dictFileTooBig: "Файл слишком большой!",
-            dictInvalidFileType: "Данный тип файла не поддерживается!",
-            dictDefaultMessage: "<p>Перенесите фалйы сюда или нажмите, чтобы выбрать из папки</p>",
-            dictCancelUpload: "отменить загрузку",
-            dictRemoveFile: 'удалить файл',
-            dictCancelUploadConfirmation: 'Отменить загрузку?'
-        });
-
-        @foreach($article->getMedia() as $media)
-            var file = {
-                'name': '{{ $media->file_name }}',
-                'size': '{{ $media->size }}',
-            };
-
-            article_dropzone.emit("addedfile", file);
-            article_dropzone.emit("thumbnail", file, '{{ $media->getUrl() }}');
-            article_dropzone.emit("complete", file);
-        @endforeach
-
-        article_dropzone.on('removedfile', function (file) {
-            $.ajax({
-                url: "{{ route('api.article.delete_image', compact('article')) }}",
-                method: "POST",
-                dataType: 'json',
-                data: {
-                    name: file.name,
-                },
-                success: function (data) {
-                    console.log(data)
-                }
-            });
-        })
     </script>
 @endpush

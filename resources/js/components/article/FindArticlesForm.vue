@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <li class="list-inline text-truncate">
+        <li class="list-inline text-truncate text-muted">
             <ul class="list-inline-item d-none d-md-inline">Популярные теги:</ul>
             <ul class="list-inline-item" v-for="tag in tags"><a href="#" @click.prevent="searchTag(tag)">{{ tag }}</a></ul>
         </li>
