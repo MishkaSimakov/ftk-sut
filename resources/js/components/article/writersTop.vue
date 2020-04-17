@@ -29,7 +29,7 @@
         },
         mounted() {
             new Promise((resolve, reject) => {
-                axios.get('/webapi/articles/top').then((response) => {
+                axios.get('/webapi/articles/top/writers').then((response) => {
                     this.users = response.data;
                 })
             })

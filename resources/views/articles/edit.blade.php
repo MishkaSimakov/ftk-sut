@@ -55,7 +55,7 @@
                             </div>
                         @endadmin
 
-                        <tags-add-form></tags-add-form>
+                        <tags-add-form value="{{ $article->tags->pluck('name') }}"></tags-add-form>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

@@ -12,6 +12,9 @@ Vue.use(Vuex);
 // import { ImageUpload } from 'quill-image-upload';
 // window.ImageUpload = ImageUpload;
 
+import Cropper from 'cropperjs';
+window.Cropper = Cropper;
+
 require('./quill.js');
 window.Quill = require('Quill');
 
@@ -39,6 +42,7 @@ Vue.component('comment-add-form', require('./components/comments/AddCommentForm.
 Vue.component('tags-add-form', require('./components/article/AddTagForm.vue').default);
 Vue.component('find-articles-form', require('./components/article/FindArticlesForm.vue').default);
 Vue.component('writers-top', require('./components/article/writersTop.vue').default);
+Vue.component('articles-top', require('./components/article/articlesTop.vue').default);
 
 // home
 Vue.component('new-chat-button', require('./components/home/NewChatButton.vue').default);

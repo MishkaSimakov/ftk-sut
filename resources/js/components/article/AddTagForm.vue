@@ -3,7 +3,7 @@
         <label for="tags" class="col-md-4 col-form-label text-md-right">Теги</label>
 
         <div class="col-md-7">
-            <input class="rounded" id="tags" name="tags">
+            <input v-bind:value="this.value" class="rounded" id="tags" name="tags">
         </div>
     </div>
 </template>
@@ -12,7 +12,12 @@
     import Tagify from '@yaireo/tagify'
 
     export default {
+        props: [
+          'value'
+        ],
         mounted() {
+            console.log(this.value);
+
             new Promise((resolve, reject) => {
                 axios.get('/webapi/articles/tags').then((response) => {
                     let input = document.querySelector('#tags');

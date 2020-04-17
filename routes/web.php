@@ -111,5 +111,7 @@ Route::group(['prefix' => 'webapi/comments', 'namespace' => 'Api'], function () 
 
 Route::group(['prefix' => 'webapi/articles', 'namespace' => 'Api'], function () {
     Route::get('/tags', 'ArticleController@tags');
-    Route::get('/top', 'ArticleController@top');
+
+    Route::get('/top/writers', 'ArticleController@writersTop');
+    Route::get('/top/articles', 'ArticleController@articlesTop');
 });

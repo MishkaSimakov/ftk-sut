@@ -40,10 +40,47 @@ class ArticleController extends Controller
        return response()->json($tags);
     }
 
-    public function top()
+    public function writersTop()
     {
+        $users_sorted_array = [];
+
         $users = User::all()->sortByDesc('articleCount')->take(10);
 
-        return response()->json($users);
+        foreach ($users as $user) {
+            array_push($users_sorted_array, [
+                'name' => $user->name,
+                'articleCount' => $user->articleCount,
+                'url' => $user->url,
+            ]);
+        }
+
+        return response()->json($users_sorted_array);
+    }
+
+    public function articlesTop()
+    {
+        $articles_sorted_array = [];
+
+        $articles = Article::all()->sort(function ($article1, $article2) {
+            $a = 2 * $article1->points + views($article1)->count();
+            $b = 2 * $article2->points + views($article2)->count();
+
+            if ($a == $b) {
+                return 0;
+            }
+
+            return ($a > $b) ? -1 : 1;
+        });
+
+        foreach ($articles as $article) {
+            array_push($articles_sorted_array, [
+               'title' => $article->title,
+               'points' => $article->points,
+               'views' => views($article)->count(),
+               'url' => $article->url,
+            ]);
+        }
+
+        return response()->json($articles_sorted_array);
     }
 }

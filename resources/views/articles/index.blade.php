@@ -23,6 +23,8 @@
 
             <div id="sidebar" class="col-lg-4 mt-2 d-none d-lg-block">
                 <writers-top></writers-top>
+
+                <articles-top></articles-top>
             </div>
         </div>
     </div>

@@ -281,7 +281,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div id="tui-image-editor-container"></div>
+                    <div>
+                        <img class="mw-100" id="profile-image-edit" src="/image/10/img-5598.jpg">
+                    </div>
+
+                    <button onclick="$('#profile-image-upload').trigger('click');" class="mt-2 btn btn-outline-primary">
+                        Загрузить новое изображение
+                    </button>
+
+                    <input accept="image/*" id="profile-image-upload" type="file" class="d-none">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">Сохранить</button>
@@ -295,6 +303,18 @@
 
 @push('script')
     <script>
+        $(document).ready(function() {
+            var image = document.getElementById('profile-image-edit');
+            var croppable = false;
+            var cropper = new Cropper(image, {
+                aspectRatio: 1,
+                viewMode: 1,
+                ready: function () {
+                    croppable = true;
+                },
+            });
+        });
+
         $.ajax({
             url: "{{ route('api.user.point_stats', compact('user')) }}",
             method: "GET",
