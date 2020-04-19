@@ -1,5 +1,3 @@
-// for production delete "/"
-
 export default {
     getChats(page) {
         return new Promise((resolve, reject) => {
@@ -89,5 +87,16 @@ export default {
                 resolve(response)
             });
         })
-    }
+    },
+    editChatMessage(id, {body, message_id}) {
+        return new Promise((resolve, reject) => {
+            axios.put('/webapi/chats/' + id + '/message/' + message_id, {
+                body: body,
+            }).then((response) => {
+                resolve(response)
+            }).catch((e) => {
+                resolve("error")
+            });
+        })
+    },
 }

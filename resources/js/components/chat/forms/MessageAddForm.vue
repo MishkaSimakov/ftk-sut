@@ -11,6 +11,14 @@
         </div>
 
         <div v-else>
+            <div class="chat__form-helptext mb-2" v-if="edited_message">
+                Редактирование сообщения
+
+                <a href="#" @click.prevent="cancel_edit" class="text-gray-500 float-right">
+                    <i class="fas fa-times"></i>
+                </a>
+            </div>
+
             <div class="form-group has-feedback">
                 <div class="col p-0">
                     <textarea v-bind:class="{ 'is-invalid': error }" @keydown="handleMessageInput" v-model="body" cols="30" rows="4" class="form-control chat__form-input"></textarea>
@@ -28,7 +36,10 @@
                 </ul>
             </div>
 
-            <span class="chat__form-helptext">
+            <span class="chat__form-helptext" v-if="edited_message">
+                <b>Enter</b> чтобы сохранить или <b>Shift + Enter</b> для переноса на новую строку
+            </span>
+            <span class="chat__form-helptext" v-else>
                 <b>Enter</b> чтобы отправить или <b>Shift + Enter</b> для переноса на новую строку
             </span>
         </div>
@@ -39,6 +50,9 @@
 
 <script>
     import {mapActions, mapGetters} from 'vuex'
+    import Bus from '../../../bus'
+    import moment from 'moment'
+
     export default {
         data() {
             return {
@@ -47,7 +61,10 @@
                 touch: false,
 
                 images: [],
-                imagesBackedUp: []
+                imagesBackedUp: [],
+
+                edited_message: null,
+                edited_message_backed_up: null,
             }
         },
         computed: mapGetters({
@@ -56,8 +73,10 @@
         }),
         methods: {
             ...mapActions([
-                'createChatMessage'
+                'createChatMessage',
+                'editChatMessage'
             ]),
+            moment: moment,
             isTouchDevice() {
                 return true === ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
             },
@@ -95,19 +114,51 @@
                 this.bodyBackedUp = this.body;
                 this.body = null;
 
-                this.createChatMessage({
-                    id: this.chat.id,
-                    body: this.bodyBackedUp,
-                    images: this.imagesBackedUp,
-                }).then(() => {
-                    if (this.error) {
-                        this.body = this.bodyBackedUp;
-                        this.images = this.imagesBackedUp
-                    }
-                });
+                if (!this.edited_message) {
+                    this.createChatMessage({
+                        id: this.chat.id,
+                        body: this.bodyBackedUp,
+                        images: this.imagesBackedUp,
+                    }).then(() => {
+                        if (this.error) {
+                            this.body = this.bodyBackedUp;
+                            this.images = this.imagesBackedUp
+                        }
+                    });
+                } else {
+                    this.edited_message.body = this.bodyBackedUp;
+                    this.edited_message_backed_up = this.edited_message;
+
+                    this.cancel_edit();
+
+                    this.editChatMessage({
+                        id: this.chat.id,
+                        body: this.bodyBackedUp,
+                        message_id: this.edited_message_backed_up.id
+                        // images: this.imagesBackedUp,
+                    }).then(() => {
+                        if (this.error) {
+                            this.edited_message = this.edited_message_backed_up;
+                            this.body = this.edited_message_backed_up.body
+                        } else {
+                            $('#tooltip_message_' + this.edited_message_backed_up.id).tooltip({
+                                title: 'изменено ' + moment().locale('ru').calendar().toLowerCase(),
+                            })
+                        }
+                    });
+                }
+            },
+            cancel_edit() {
+                this.edited_message = null;
+                this.body = null;
             }
         },
         mounted() {
+            Bus.$on('message.edited', (m) => {
+                this.edited_message = m;
+                this.body = m.body
+            });
+
             this.touch = this.isTouchDevice()
         }
     }

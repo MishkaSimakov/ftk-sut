@@ -71,19 +71,6 @@
         updated() {
             let messages = document.getElementsByClassName('chat__messages')[0];
             messages.scroll(0, messages.scrollHeight);
-
-            if (this.chat.isUnread) {
-                this.setRead(this.chat.id);
-
-                this.chats.map((c) => {
-                    if (c.id === this.chat.id) {
-                        c.isUnread = false;
-                        return c
-                    }
-
-                    return c
-                });
-            }
         },
     }
 </script>

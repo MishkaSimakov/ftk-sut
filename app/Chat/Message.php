@@ -11,6 +11,11 @@ class Message extends Model implements HasMedia
 {
     use HasMediaTrait;
 
+    protected $fillable = [
+        'body',
+        'is_edited'
+    ];
+
     protected $appends = [
         'selfOwned',
         'images'

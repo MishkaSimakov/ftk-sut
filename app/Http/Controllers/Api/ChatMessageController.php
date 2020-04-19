@@ -54,4 +54,16 @@ class ChatMessageController extends Controller
 
         return response()->json('ok');
     }
+
+    public function update(Chat $chat, Message $message, Request $request)
+    {
+        $this->authorize('edit', $message);
+
+        $message->update([
+            'body' => $request->body,
+            'is_edited' => true,
+        ]);
+
+        return response()->json($message->id);
+    }
 }

@@ -52,6 +52,8 @@ Vue.component('new-chat-button', require('./components/home/NewChatButton.vue').
 
 import store from './store/index.js'
 
+import './Notifications'
+
 const app = new Vue({
     el: '#app',
     store: store

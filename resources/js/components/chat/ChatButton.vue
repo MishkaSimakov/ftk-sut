@@ -9,6 +9,7 @@
 
 <script>
     import { mapActions, mapGetters } from 'vuex'
+    import Bus from '../../bus'
 
     export default {
         props: [
@@ -24,6 +25,11 @@
         },
         mounted() {
             this.getChats(1);
+
+            Bus.$on('chat.read', (id) => {
+                console.log("here");
+                this.getChats(1)
+            })
         },
     }
 </script>

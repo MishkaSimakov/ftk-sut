@@ -53,10 +53,14 @@ const actions = {
 
             commit('setChatLoading', false);
 
+            actions.setRead({dispatch, commit}, id);
+
             Echo.private('chat.' + id)
                 .listen('ChatMessageCreated', (e) => {
                     e.message.selfOwned = false;
                     commit('appendToChat', e.message);
+
+                    actions.setRead({dispatch, commit}, id);
                 })
                 // .listen('ConversationUserCreated', (e) => {
                 //     commit('updateUsersInConversation', e.data.users.data)
@@ -117,8 +121,34 @@ const actions = {
     },
     setRead({dispatch, commit}, id) {
         api.setRead(id);
-        commit('setChatUnreadState', false)
+        commit('setChatUnreadState', false);
+
+        Bus.$emit('chat.read', id);
     },
+    editChatMessage({dispatch, commit}, {id, body, message_id}) { //TODO: add images
+        const chat_messages_backed_up = state.chat.messages;
+
+        state.chat.messages = state.chat.messages.map((m) => {
+            if (m.id === message_id) {
+                m.body = body;
+                m.is_edited = true
+            }
+
+            return m
+        });
+
+        return api.editChatMessage(id, {
+            body: body,
+            message_id: message_id
+        }).then((response) => {
+            if (response === "error") {
+                state.chat.messages = chat_messages_backed_up;
+                commit("setMessageError", true);
+            } else {
+                commit("setMessageError", false);
+            }
+        })
+    }
 };
 
 const mutations = {
