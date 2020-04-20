@@ -81,7 +81,7 @@
                             <th>Регистрационный код</th>
                             <th>Администратор</th>
                             <th>День рождения</th>
-                            <th>Ходит в клуб с</th>
+                            <th>Зарегистрирован</th>
                             <th>Управление</th>
                         </tr>
                     </thead>
@@ -92,7 +92,8 @@
                                 <td>{{ $student->user->register_code }}</td>
                                 <td>{{ $student->user->is_admin ? 'Да' : 'Нет' }}</td>
                                 <td>{{ $student->birthday ? $student->birthday->format('d-m-Y') : 'Нет данных' }}</td>
-                                <td>{{ $student->admissioned_at ? $student->admissioned_at->format('d-m-Y') : 'Нет данных' }}</td>
+                                <td>{{ $student->user->email ? 'Да' : 'Нет' }}</td>
+{{--                                <td>{{ $student->admissioned_at ? $student->admissioned_at->format('d-m-Y') : 'Нет данных' }}</td>--}}
                                 <td class="text-center" data-toggle="modal" data-target="#settings_student_{{ $student->id }}"><i style="cursor: pointer" class="text-primary fas fa-user-cog"></i></td>
                             </tr>
                         @endforeach
@@ -103,7 +104,7 @@
                             <th>Регистрационный код</th>
                             <th>Администратор</th>
                             <th>День рождения</th>
-                            <th>Ходит в клуб с</th>
+                            <th>Зарегистрирован</th>
                             <th>Управление</th>
                         </tr>
                     </tfoot>

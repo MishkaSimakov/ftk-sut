@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Chat\Chat;
 use App\Chat\Message;
 use App\Events\ChatMessageCreated;
+use App\Events\ChatMessageUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreChatMessage;
 use Illuminate\Http\Request;
@@ -63,6 +64,8 @@ class ChatMessageController extends Controller
             'body' => $request->body,
             'is_edited' => true,
         ]);
+
+        broadcast(new ChatMessageUpdated($message->withoutRelations()->load(['user'])))->toOthers();
 
         return response()->json($message->id);
     }

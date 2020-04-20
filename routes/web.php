@@ -103,7 +103,7 @@ Route::group(['prefix' => 'webapi/chats', 'namespace' => 'Api'], function () {
     Route::post('/{chat}/removeUser', 'ChatController@removeUser')->middleware('throttle:10,1');
     Route::post('/{chat}/read', 'ChatController@read');
 
-//    Route::put('/{chat}/message/{message}', 'ChatMessageController@update')->middleware('throttle:30,1');
+    Route::put('/{chat}/message/{message}', 'ChatMessageController@update')->middleware('throttle:30,1');
 });
 
 Route::group(['prefix' => 'webapi/comments', 'namespace' => 'Api'], function () {

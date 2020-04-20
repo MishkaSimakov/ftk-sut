@@ -7,7 +7,7 @@
             <a href="#" @click.prevent="edit" title="Редактировать"><i class="small fa fa-pen"></i></a>
         </div>
 
-        <p class="chat__message-body">{{ message.body }}<span v-if="message.is_edited" class="text-muted ml-2" v-bind:id="'tooltip_message_' + message.id">(ред.)</span></p>
+        <p class="chat__message-body"><span v-html="link(message.body)"></span><span v-if="message.is_edited" class="text-muted ml-2" v-bind:id="'tooltip_message_' + message.id">(ред.)</span></p>
 
         <div class="row" v-if="message.images && message.images.length">
             <img v-for="image in message.images" alt="Картинка" class="chat__message-image card-img m-2" v-bind:src="image" data-lity>
@@ -18,6 +18,7 @@
 <script>
     import moment from 'moment'
     import Bus from '../../bus'
+    import link from '../../helpers/link'
 
     export default {
         props: [
@@ -25,8 +26,9 @@
         ],
         methods: {
             moment: moment,
+            link: link,
             edit() {
-                Bus.$emit('message.edited', this.message)
+                Bus.$emit('message.edit', this.message)
             }
         },
         mounted() {

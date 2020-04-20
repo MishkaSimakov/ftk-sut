@@ -64,7 +64,6 @@
                 imagesBackedUp: [],
 
                 edited_message: null,
-                edited_message_backed_up: null,
             }
         },
         computed: mapGetters({
@@ -126,23 +125,22 @@
                         }
                     });
                 } else {
-                    this.edited_message.body = this.bodyBackedUp;
-                    this.edited_message_backed_up = this.edited_message;
+                    let edited_m_id = this.edited_message.id;
 
                     this.cancel_edit();
 
                     this.editChatMessage({
                         id: this.chat.id,
                         body: this.bodyBackedUp,
-                        message_id: this.edited_message_backed_up.id
-                        // images: this.imagesBackedUp,
+                        message_id: edited_m_id,
                     }).then(() => {
                         if (this.error) {
-                            this.edited_message = this.edited_message_backed_up;
-                            this.body = this.edited_message_backed_up.body
+                            alert('😵 Ой-ой! Ошибка! 😵');
+                            window.location.reload();
                         } else {
-                            $('#tooltip_message_' + this.edited_message_backed_up.id).tooltip({
-                                title: 'изменено ' + moment().locale('ru').calendar().toLowerCase(),
+                            Bus.$emit('message.edited', {
+                                id: edited_m_id,
+                                time: this.moment()
                             })
                         }
                     });
@@ -154,9 +152,9 @@
             }
         },
         mounted() {
-            Bus.$on('message.edited', (m) => {
+            Bus.$on('message.edit', (m) => {
                 this.edited_message = m;
-                this.body = m.body
+                this.body = m.body;
             });
 
             this.touch = this.isTouchDevice()

@@ -62,6 +62,20 @@ const actions = {
 
                     actions.setRead({dispatch, commit}, id);
                 })
+                .listen('ChatMessageUpdated', (e) => {
+                    state.chat.messages = state.chat.messages.map((m) => {
+                        if (m.id === e.message.id) {
+                            m = e.message
+                        }
+
+                        return m
+                    });
+
+                    Bus.$emit('message.edited', {
+                        id: e.message.id,
+                        time: e.message.updated_at,
+                    })
+                })
                 // .listen('ConversationUserCreated', (e) => {
                 //     commit('updateUsersInConversation', e.data.users.data)
                 // });
@@ -126,8 +140,6 @@ const actions = {
         Bus.$emit('chat.read', id);
     },
     editChatMessage({dispatch, commit}, {id, body, message_id}) { //TODO: add images
-        const chat_messages_backed_up = state.chat.messages;
-
         state.chat.messages = state.chat.messages.map((m) => {
             if (m.id === message_id) {
                 m.body = body;
@@ -142,7 +154,6 @@ const actions = {
             message_id: message_id
         }).then((response) => {
             if (response === "error") {
-                state.chat.messages = chat_messages_backed_up;
                 commit("setMessageError", true);
             } else {
                 commit("setMessageError", false);

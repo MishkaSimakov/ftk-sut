@@ -49,6 +49,7 @@
 
 <script>
     import { mapActions, mapGetters } from 'vuex'
+    import Bus from '../../bus'
 
     export default {
         props: [
@@ -67,6 +68,12 @@
         },
         mounted() {
             this.getChat(this.id)
+
+            Bus.$on('message.edited', ({id, time}) => {
+                $('#tooltip_message_' + id).tooltip({
+                    title: 'изменено ' + moment(time).locale('ru').calendar().toLowerCase(),
+                })
+            })
         },
         updated() {
             let messages = document.getElementsByClassName('chat__messages')[0];

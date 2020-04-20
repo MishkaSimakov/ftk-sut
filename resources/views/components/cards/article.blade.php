@@ -65,6 +65,7 @@
     <div class="card-footer p-1">
         <h3 class="my-auto ml-2">
             @if($article->is_published)
+{{--                TODO: make this as vue component--}}
                 @auth
                     <span class="{{ $article->is_liked ? 'article__liked' : 'article__unliked' }}" id="like_{{ $article->id }}">
                         <a class="article__unlike_link" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
