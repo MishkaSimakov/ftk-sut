@@ -9,6 +9,9 @@
         <meta name="author" content="Симаков Михаил">
         <meta name="robots" content="index,follow">
 
+{{--        vk snippet data --}}
+        <meta property="og:title" content="{{ isset($title) ? $title . ' | ФТК СЮТ' : 'ФТК СЮТ' }}"/>
+
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -24,6 +27,7 @@
             ]) !!}
         </script>
 
+{{--        TODO: install all this libraries to local --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 

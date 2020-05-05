@@ -13,14 +13,20 @@ export default {
             })
         })
     },
-    storeChatMessage(id, {body, images}) {
+    storeChatMessage(id, {body, images, reply_id}) {
         return new Promise((resolve, reject) => {
             axios.post('/webapi/chats/' + id + '/message', {
                 body: body,
+                reply: reply_id
             })
-            .then((response) => {
-                this.storeMessageImage(response.data, {
+            .then((message) => {
+                this.storeMessageImage(message.data, {
                     images: images
+                }).then((images) => {
+                    resolve({
+                        'id': message.data,
+                        'images': images.data,
+                    });
                 });
             })
             .catch((e) => {
@@ -88,10 +94,11 @@ export default {
             });
         })
     },
-    editChatMessage(id, {body, message_id}) {
+    editChatMessage(id, {body, message_id, reply_id}) {
         return new Promise((resolve, reject) => {
             axios.put('/webapi/chats/' + id + '/message/' + message_id, {
                 body: body,
+                reply: reply_id
             }).then((response) => {
                 resolve(response)
             }).catch((e) => {

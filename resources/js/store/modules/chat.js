@@ -24,7 +24,7 @@ const getters = {
 };
 
 const actions = {
-    buildTempMessage(chat_id, body, images) {
+    buildTempMessage(chat_id, body, images, reply) {
         let tempId = Date.now();
 
         return {
@@ -37,8 +37,10 @@ const actions = {
                 return URL.createObjectURL(i)
             }),
             body: body,
+            reply: reply,
             timeForHuman: moment().locale('ru').fromNow(),
             selfOwned: true,
+            loading: true,
         }
     },
     getChat({dispatch, commit}, id) {
@@ -81,8 +83,8 @@ const actions = {
                 // });
         })
     },
-    createChatMessage({dispatch, commit}, {id, body, images}) {
-        let tempMessage = actions.buildTempMessage(id, body, images);
+    createChatMessage({dispatch, commit}, {id, body, images, reply}) {
+        let tempMessage = actions.buildTempMessage(id, body, images, reply);
         commit('appendToChat', tempMessage);
 
         const formData = new FormData();
@@ -93,13 +95,25 @@ const actions = {
 
         return api.storeChatMessage(id, {
             body: body,
-            images: formData
+            images: formData,
+            reply_id: (reply ? reply.id : ""),
         }).then((response) => {
             if (response === "error") {
                 commit("setMessageError", true);
                 commit("removeChatMessage", tempMessage)
             } else {
-                commit("setMessageError", false)
+                commit("setMessageError", false);
+
+                state.chat.messages = state.chat.messages.map((m) => {
+                    if (m.id === tempMessage.id) {
+                        m.id = response.id;
+                        m.images = response.images;
+
+                        m.loading = false;
+                    }
+
+                    return m
+                })
             }
         })
     },
@@ -139,10 +153,11 @@ const actions = {
 
         Bus.$emit('chat.read', id);
     },
-    editChatMessage({dispatch, commit}, {id, body, message_id}) { //TODO: add images
+    editChatMessage({dispatch, commit}, {id, body, message_id, reply}) { //TODO: add images
         state.chat.messages = state.chat.messages.map((m) => {
             if (m.id === message_id) {
                 m.body = body;
+                m.reply = reply;
                 m.is_edited = true
             }
 
@@ -151,7 +166,8 @@ const actions = {
 
         return api.editChatMessage(id, {
             body: body,
-            message_id: message_id
+            message_id: message_id,
+            reply_id: (reply ? reply.id : ""),
         }).then((response) => {
             if (response === "error") {
                 commit("setMessageError", true);

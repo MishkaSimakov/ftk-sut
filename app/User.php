@@ -2,20 +2,21 @@
 
 namespace App;
 
-use App\Achievements\Events\UserEarnedPoints;
 use App\Chat\Chat;
 use App\Chat\ChatUser;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Scout\Searchable;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @property-read \Illuminate\Support\Collection|\App\Point[] $points
  */
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use Notifiable, Searchable;
+    use Notifiable, Searchable, HasMediaTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'description', 'is_admin'
+        'name', 'email', 'password', 'description', 'is_admin', 'phone', 'vk_link'
     ];
 
     /**
@@ -76,6 +77,6 @@ class User extends Authenticatable
 
     public function getArticleCountAttribute()
     {
-        return $this->articles()->where('is_published', true)->count();
+        return $this->articles()->where([['is_blank', false], ['is_published', true]])->count();
     }
 }

@@ -27,7 +27,6 @@
             this.getChats(1);
 
             Bus.$on('chat.read', (id) => {
-                console.log("here");
                 this.getChats(1)
             })
         },

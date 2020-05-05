@@ -11,4 +11,6 @@ class News extends Model implements Viewable
     use InteractsWithViews;
 
     protected $table = 'news';
+
+    protected $fillable = ['title', 'body'];
 }

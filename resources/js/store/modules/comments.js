@@ -49,6 +49,29 @@ const actions = {
 
             commit('setCommentSending', false);
         })
+    },
+    editArticleComment({dispatch, commit}, {comment, body}) {
+        commit('setCommentSending', true);
+
+        return api.editArticleComment(comment, {
+            body: body
+        }).then((response) => {
+            if (response === "error") {
+                commit("setCommentError", true)
+            } else {
+                commit("setCommentError", false);
+
+                state.comments = state.comments.map((c) => {
+                    if (c.id === comment) {
+                        c.body = body;
+                    }
+
+                    return c;
+                })
+            }
+
+            commit('setCommentSending', false);
+        })
     }
 };
 

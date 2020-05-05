@@ -18,6 +18,8 @@ class CreateMessagesTable extends Migration
             $table->unsignedBigInteger('chat_id');
             $table->unsignedBigInteger('user_id');
 
+            $table->integer('forwarded_id')->nullable();
+
             $table->text('body');
             $table->boolean('is_edited')->nullable();
 

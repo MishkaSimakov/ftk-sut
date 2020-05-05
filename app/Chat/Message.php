@@ -13,12 +13,14 @@ class Message extends Model implements HasMedia
 
     protected $fillable = [
         'body',
-        'is_edited'
+        'is_edited',
+        'forwarded_id'
     ];
 
     protected $appends = [
         'selfOwned',
-        'images'
+        'images',
+        'reply'
     ];
 
     public function user()
@@ -39,5 +41,10 @@ class Message extends Model implements HasMedia
     public function getImagesAttribute()
     {
         return $this->media->map->getUrl();
+    }
+
+    public function getReplyAttribute()
+    {
+        return optional(Message::where('id', $this->forwarded_id)->first())->load('user');
     }
 }

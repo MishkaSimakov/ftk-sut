@@ -1,4 +1,4 @@
-@extends('layouts.page')
+@extends('layouts.page', ['title' => $rating->name])
 
 @section('content')
     <h1 class="text-center m-2">{{ $rating->name }}</h1>
@@ -44,8 +44,8 @@
                 method: "GET",
                 dataType: 'json',
                 success: function (data) {
-                    var chart_data = [];
-                    var user_data = [];
+                    let chart_data = [];
+                    let user_data = [];
 
                     data.forEach(function(value) {
                         chart_data.push(value.slice(0, 20));
@@ -70,9 +70,9 @@
 
         function changeNames() {
             $($('text:contains("us|")').get().reverse()).each(function(index) {
-                var user_id = $(this).html().split('|')[1];
+                let user_id = $(this).html().split('|')[1];
 
-                var user = $('span[data-id=' + user_id + ']')
+                let user = $('span[data-id=' + user_id + ']');
 
                 if ($(window).width() < 1000) {
                     var short_name = user.html().split(' ')[0] + ' ' + user.html().split(' ')[1].substr(0, 1) + '.'
@@ -145,7 +145,7 @@
             if ($(window).width() < 1000) {
                 options.chartArea = {left: 100, bottom: 25, top: 0, width:"100%"};
             } else {
-                options.chartArea = {left: 350, bottom: 25, top: 0, width: "50%"};
+                options.chartArea = {left: 350, bottom: 25, top: 0, width: "45%"};
                 options.legend = {
                     maxLines: 2,
                     position: 'right',

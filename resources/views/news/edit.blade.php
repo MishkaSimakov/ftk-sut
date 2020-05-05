@@ -11,14 +11,15 @@
                     </div>
 
                     <div class="card-body">
-                        <form id="form" method="POST" action="{{ route('news.store') }}">
+                        <form id="form" method="POST" action="{{ route('news.update', compact('news')) }}">
                             @csrf
+                            @method('PUT')
 
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label text-md-right">Название новости</label>
 
                                 <div class="col-md-7">
-                                    <input max="100" id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}" required>
+                                    <input max="100" id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') ?? $news->title }}" required>
 
                                     @if ($errors->has('title'))
                                         <span class="invalid-feedback" role="alert">
@@ -35,7 +36,7 @@
                                     <input type="hidden" name="body" id="body">
 
                                     <div id="editor">
-                                        {!! old('body') !!}
+                                        {!! old('body') ?? $news->body !!}
                                     </div>
                                 </div>
                             </div>

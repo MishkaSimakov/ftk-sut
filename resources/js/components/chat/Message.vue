@@ -1,11 +1,25 @@
 <template>
-    <div class="chat__message" :class="{ 'chat__message--own' : message.selfOwned }">
+    <div class="chat__message" :class="[{ 'chat__message--own' : message.selfOwned }, { 'border-left pl-2 py-1 my-1' : is_replied}]">
         <strong class="chat__message-user">{{ message.user.name }}</strong>
-        <span class="chat__message-timestamp">{{ moment(message.created_at).locale('ru').fromNow() }}</span>
+        <span class="chat__message-timestamp" v-if="!is_replied">{{ moment(message.created_at).locale('ru').fromNow() }}</span>
 
-        <div v-if="message.selfOwned" class="chat__message-edit float-right">
-            <a href="#" @click.prevent="edit" title="Редактировать"><i class="small fa fa-pen"></i></a>
+        <div class="row mr-2 float-right chat__message-other" v-if="!is_replied">
+            <div v-if="!message.loading && !message.reply && !is_editing" class="mr-2">
+                <a href="#" @click.prevent="reply" title="Ответить"><i class="small fa fa-reply"></i></a>
+            </div>
+
+            <div v-if="message.selfOwned">
+                <div v-if="message.loading">
+                    <div style="opacity: 1!important;" class="spinner-border-sm spinner-border mx-auto text-info" role="status"></div>
+                </div>
+
+                <div v-else>
+                    <a v-if="moment(message.created_at).isAfter(moment().subtract(2, 'hours'))" href="#" @click.prevent="edit" title="Редактировать"><i class="small fa fa-pen"></i></a>
+                </div>
+            </div>
         </div>
+
+        <message v-if="message.reply" is_replied="true" v-bind:message="message.reply"></message>
 
         <p class="chat__message-body"><span v-html="link(message.body)"></span><span v-if="message.is_edited" class="text-muted ml-2" v-bind:id="'tooltip_message_' + message.id">(ред.)</span></p>
 
@@ -22,13 +36,23 @@
 
     export default {
         props: [
-            'message'
+            'message',
+            'is_replied'
         ],
+        data() {
+          return {
+              is_editing: false,
+          };
+        },
         methods: {
             moment: moment,
             link: link,
             edit() {
+                this.is_editing = true;
                 Bus.$emit('message.edit', this.message)
+            },
+            reply() {
+                Bus.$emit('message.reply', this.message)
             }
         },
         mounted() {
@@ -37,6 +61,10 @@
                     title: 'изменено ' + moment(this.message.updated_at).locale('ru').calendar().toLowerCase(),
                 })
             }
+
+            Bus.$on('message.edit.canceled', () => {
+                this.is_editing = false;
+            });
         }
     }
 </script>
@@ -71,14 +99,14 @@
                 cursor: pointer;
             }
 
-            &-edit {
+            &-other {
                 opacity: 0;
                 transition: opacity 100ms ease 100ms;
             }
         }
 
         &__message:hover {
-            .chat__message-edit {
+            .chat__message-other {
                 opacity: 1;
             }
         }

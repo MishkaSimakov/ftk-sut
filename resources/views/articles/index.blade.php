@@ -1,4 +1,4 @@
-@extends('layouts.page')
+@extends('layouts.page', ['title' => 'Статьи'])
 
 @section('content')
     <div class="container">
@@ -22,80 +22,16 @@
             </div>
 
             <div id="sidebar" class="col-lg-4 mt-2 d-none d-lg-block">
-                <writers-top></writers-top>
-
                 <articles-top></articles-top>
+                <writers-top></writers-top>
+                <comments-top></comments-top>
             </div>
         </div>
     </div>
 
     <div class="d-flex">
         <div class="mx-auto">
-            {{ $articles->appends(['filter' => request()->get('filter')])->links() }}
+            {{ $articles->appends(['filter' => request()->get('filter'), 'query' => request()->get('query'), 'tag' => request()->get('tag')])->links() }}
         </div>
     </div>
 @endsection
-
-@auth
-    @push('script')
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('.article__body').each(function () {
-                    if ($(this).children('#article_text').height() >= 500) {
-                        $(this).children('#article_read_more').show()
-                    }
-                })
-            });
-
-            function like(article) {
-                var counter = $('.point_count' + article)
-
-                counter.html(Number(counter.html()) + 1);
-
-                $('#like_' + article).attr('class', 'article__liked')
-
-                $.ajax({
-                    url: "{{ route('api.article.points') }}",
-                    method: "POST",
-                    dataType: 'json',
-                    data: {
-                        user_id: '{{ Auth::user()->id }}',
-                        article_id: article,
-                        type: 'like'
-                    },
-                    success: function (data) {
-                        if (data === 'error') {
-                            alert('😖О нет! Что-то не так!😖');
-                            window.location.reload();
-                        }
-                    }
-                });
-            }
-
-            function unlike(article) {
-                var counter = $('.point_count' + article)
-
-                counter.html(Number(counter.html()) - 1);
-
-                $('#like_' + article).attr('class', 'article__unliked')
-
-                $.ajax({
-                    url: "{{ route('api.article.points') }}",
-                    method: "POST",
-                    dataType: 'json',
-                    data: {
-                        user_id: '{{ Auth::user()->id }}',
-                        article_id: article,
-                        type: 'unlike'
-                    },
-                    success: function (data) {
-                        if (data === 'error') {
-                            alert('😖О нет! Что-то не так!😖');
-                            window.location.reload();
-                        }
-                    }
-                });
-            }
-        </script>
-    @endpush
-@endauth

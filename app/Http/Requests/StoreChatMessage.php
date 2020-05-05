@@ -25,6 +25,7 @@ class StoreChatMessage extends FormRequest
     {
         return [
             'body' => 'required|max:3000',
+            'reply' => 'nullable|exists:messages,id'
         ];
     }
 }

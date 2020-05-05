@@ -17,4 +17,15 @@ export default {
             });
         })
     },
+    editArticleComment(comment, {body}) {
+        return new Promise((resolve, reject) => {
+            axios.put('/webapi/comments/' + comment, {
+                body: body
+            }).then((response) => {
+                resolve(response)
+            }).catch((e) => {
+                resolve("error")
+            });
+        })
+    },
 }

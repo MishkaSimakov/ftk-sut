@@ -64,7 +64,7 @@
 
     <div class="card-footer p-1">
         <h3 class="my-auto ml-2">
-            @if($article->is_published)
+            @if($article->is_published && !$article->is_blank)
 {{--                TODO: make this as vue component--}}
                 @auth
                     <span class="{{ $article->is_liked ? 'article__liked' : 'article__unliked' }}" id="like_{{ $article->id }}">
@@ -96,6 +96,8 @@
 
                     <span class="article__comments_counter">{{ views($article)->count() }}</span>
                 </div>
+            @elseif($article->is_blank && $article->is_published)
+                <a href="{{ route('article.edit', compact('article')) }}" class="btn btn-primary">Редактировать</a>
             @else
                 @admin
                     <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form-{{ $article->id }}').submit();" class="btn btn-primary">Опубликовать</a>

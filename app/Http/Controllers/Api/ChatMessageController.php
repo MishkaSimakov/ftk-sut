@@ -26,6 +26,7 @@ class ChatMessageController extends Controller
         $message = new Message;
         $message->body = $request->body;
         $message->user()->associate($request->user());
+        $message->forwarded_id = $request->reply;
 
         $chat->messages()->save($message);
 
@@ -37,6 +38,8 @@ class ChatMessageController extends Controller
 
     public function storeImage(Message $message, Request $request)
     {
+        $images = [];
+
         if (count($request->allFiles())) {
             foreach ($request->allFiles()['files'] as $image) {
                 /** @var UploadedFile $image */
@@ -44,16 +47,19 @@ class ChatMessageController extends Controller
                 $name = Str::slug(str_replace("." . $image->getClientOriginalExtension(), "", $image->getClientOriginalName()));
                 $filename = $name . '.' . $image->getClientOriginalExtension();
 
-                $message->addMedia($image->path())
+                array_push(
+                    $images, $message->addMedia($image->path())
                     ->usingFileName($filename)
                     ->usingName($name)
-                    ->toMediaCollection();
+                    ->toMediaCollection()
+                    ->getUrl()
+                );
             }
         }
 
         broadcast(new ChatMessageCreated($message->withoutRelations()->load(['user'])))->toOthers();
 
-        return response()->json('ok');
+        return response()->json($images);
     }
 
     public function update(Chat $chat, Message $message, Request $request)
@@ -63,6 +69,7 @@ class ChatMessageController extends Controller
         $message->update([
             'body' => $request->body,
             'is_edited' => true,
+            'forwarded_id' => $request->reply
         ]);
 
         broadcast(new ChatMessageUpdated($message->withoutRelations()->load(['user'])))->toOthers();

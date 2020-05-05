@@ -4,22 +4,38 @@
             {{ $current_news->title }}
         </h4>
 
-        <div>
-            <h4 class="font-weight-light text-gray-500 mr-3">{{ $current_news->created_at->locale('ru')->isoFormat('D MMMM Y') }}</h4>
-        </div>
+        @admin
+            <div class="float-right row">
+                <div class="dropdown no-gutters">
+                    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header font-weight-bold">Дополнительно:</div>
+                        <a class="dropdown-item" href="{{ route('news.edit', $current_news) }}">
+                            Редактировать
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endadmin
     </div>
 
     <div class="card-body">
         <p>{!! $current_news->body !!}</p>
     </div>
 
-    <div class="card-footer">
+    <div class="card-footer p-2 px-3">
         <div class="h3 my-auto ml-0 d-inline-block">
             <a class="article__comment_link">
                 <i class="far fa-eye"></i>
             </a>
 
             <span class="article__comments_counter">{{ views($current_news)->count() }}</span>
+        </div>
+
+        <div class="float-right">
+            <h4 class="font-weight-light text-gray-500 my-auto">{{ $current_news->created_at->locale('ru')->isoFormat('D MMMM Y') }}</h4>
         </div>
     </div>
 </div>

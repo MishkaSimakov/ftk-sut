@@ -60,8 +60,14 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Сохранить
+                                    Опубликовать
                                 </button>
+
+                                <div class="d-inline-block">
+                                    <button name="is_blank" value="true" type="submit" class="btn btn-secondary {{ !$is_draftable ? 'disabled' : '' }}" {{ !$is_draftable ? 'disabled' : '' }}>
+                                        Добавить в черновики
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -82,14 +88,19 @@
             tinymce.init({
                 selector: '#editor',
                 branding: false,
-                plugins: "lists link image fullscreen",
-                toolbar: 'styleselect | bold italic underline | numlist bullist | link image | fullscreen',
+                plugins: [
+                    "lists link image fullscreen",
+                ],
+                toolbar: 'styleselect | fontsizeselect  | bold italic underline | numlist bullist | link image | undo redo | fullscreen',
+                fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
                 menubar: '',
                 language: 'ru',
 
                 /* without images_upload_url set, Upload tab won't show up*/
                 images_upload_url: '{{ route('api.article.upload_image', compact('article')) }}',
                 // statusbar: false,
+                relative_urls: false,
+                remove_script_host: false
             });
         });
     </script>

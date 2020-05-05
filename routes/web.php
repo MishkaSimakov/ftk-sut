@@ -9,8 +9,10 @@ Route::get('/article/publish', 'ArticleController@notPublished')->name('article.
 Route::put('/article/{article}/publish', 'ArticleController@publish')->name('article.publish')->middleware(['auth', 'admin']);
 Route::delete('/article/{article}', 'ArticleController@destroy')->name('article.destroy')->middleware(['auth', 'admin']);
 
+Route::get('/article/draft', 'ArticleController@draft')->name('article.draft')->middleware('auth');
+
 Route::resource('article', 'ArticleController')->middleware('auth')->only([
-'create', 'store', 'edit', 'update', 'destroy'
+    'create', 'store', 'edit', 'update', 'destroy'
 ]);
 
 Route::resource('article', 'ArticleController')->only([
@@ -67,7 +69,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->namespace('Admin')->group
 });
 
 
-Route::get('/settings', 'Auth\AccountController@settings')->name('settings.show')->middleware('auth');
+Route::get('/settings', 'Auth\AccountController@settings')->name('settings.show')->middleware(['auth', 'throttle:5,1']);
+Route::post('/settings/image', 'Auth\AccountController@image')->name('settings.image')->middleware('auth');
 Route::put('/settings', 'Auth\AccountController@update')->name('settings.update')->middleware('auth');
 
 Route::view('/register/help', 'auth.help')->name('register.help');
@@ -84,8 +87,11 @@ Route::prefix('chat')->middleware(['auth'])->namespace('Chat')->group(function (
 
 
 Route::get('/news', 'NewsController@index')->name('news.index');
-Route::get('/news/create', 'NewsController@create')->name('news.create');
-Route::post('/news', 'NewsController@store')->name('news.store');
+Route::get('/news/create', 'NewsController@create')->name('news.create')->middleware(['auth', 'admin']);
+Route::post('/news', 'NewsController@store')->name('news.store')->middleware(['auth', 'admin']);
+
+Route::get('/news/{news}/edit', 'NewsController@edit')->name('news.edit')->middleware(['auth', 'admin']);
+Route::put('/news/{news}', 'NewsController@update')->name('news.update')->middleware(['auth', 'admin']);
 
 
 
@@ -109,6 +115,7 @@ Route::group(['prefix' => 'webapi/chats', 'namespace' => 'Api'], function () {
 Route::group(['prefix' => 'webapi/comments', 'namespace' => 'Api'], function () {
     Route::get('/{article}', 'CommentController@show');
     Route::post('/{article}', 'CommentController@store');
+    Route::put('/{comment}', 'CommentController@update');
 });
 
 Route::group(['prefix' => 'webapi/articles', 'namespace' => 'Api'], function () {
@@ -116,4 +123,8 @@ Route::group(['prefix' => 'webapi/articles', 'namespace' => 'Api'], function () 
 
     Route::get('/top/writers', 'ArticleController@writersTop');
     Route::get('/top/articles', 'ArticleController@articlesTop');
+    Route::get('/top/comments', 'ArticleController@commentsTop');
 });
+
+
+Route::view('cellular', 'cellular.test');

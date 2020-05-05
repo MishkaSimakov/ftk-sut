@@ -36,4 +36,19 @@ class NewsController extends Controller
 
         return redirect(route('news.index'));
     }
+
+    public function edit(News $news)
+    {
+        return view('news.edit', compact('news'));
+    }
+
+    public function update(News $news, StoreNewsRequest $request)
+    {
+        $news->update([
+            'title' => $request->title,
+            'body' => $request->body,
+        ]);
+
+        return redirect(route('news.index'));
+    }
 }

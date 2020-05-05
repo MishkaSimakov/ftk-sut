@@ -1,4 +1,4 @@
-@extends('layouts.page')
+@extends('layouts.page', ['title' => $article->title])
 
 @section('content')
     <div class="container">
@@ -26,29 +26,25 @@
 
         <div class="card shadow mt-3">
             <div class="card-body">
-                <p>
+                <div>
                     {!! $article->body !!}
-                </p>
+                </div>
 
-                @if($article->hasMedia())
+                @if($article->tags->count())
                     <hr>
-
-                    <div class="container">
-                        @foreach($article->getMedia() as $photo)
-                            <div class="col-md-2 m-2 p-0 d-inline-block">
-                                <img alt="Изображение для статьи" class="mw-100 mh-100 rounded"
-                                     data-lity data-lity-target="{{ $photo->getUrl() }}"
-                                     src="{{ $photo->getUrl() }}"
-                                     style="cursor: pointer">
-                            </div>
+                    <span class="mb-1">
+                        @foreach($article->tags as $tag)
+                            <a href="{{ route('article.index') }}?tag={{ $tag->name }}">
+                                <span class="text-muted mr-2">{{ $tag->name }}</span>
+                            </a>
                         @endforeach
-                    </div>
+                    </span>
                 @endif
             </div>
 
             <div class="card-footer p-1">
                 <h3 class="my-auto ml-2">
-                    @if($article->is_published)
+                    @if($article->is_published && !$article->is_blank)
                         @auth
                             <span class="{{ $article->is_liked ? 'article__liked' : 'article__unliked' }}" id="like_{{ $article->id }}">
                                 <a class="article__unlike_link" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
@@ -79,6 +75,8 @@
 
                             <span class="article__comments_counter">{{ views($article)->count() }}</span>
                         </div>
+                    @elseif($article->is_blank && $article->is_published)
+                        <a href="{{ route('article.edit', compact('article')) }}" class="btn btn-primary">Редактировать</a>
                     @else
                         @admin
                         <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form-{{ $article->id }}').submit();" class="btn btn-primary">Опубликовать</a>
@@ -95,7 +93,7 @@
             </div>
         </div>
 
-        @if($article->is_published)
+        @if($article->is_published && !$article->is_blank)
             <comments article_id="{{ $article->id }}"></comments>
         @endif
     </div>
@@ -155,4 +153,12 @@
             }
         </script>
     @endauth
+
+    <script>
+        $('img').each(function () {
+            $(this).on('click', lity);
+            $(this).addClass('mw-100 h-auto');
+            $(this).attr('style', 'cursor: pointer;')
+        });
+    </script>
 @endpush

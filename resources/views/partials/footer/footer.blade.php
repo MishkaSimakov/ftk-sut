@@ -3,7 +3,7 @@
         <div class="footer__contacts contacts">
             <a class="contacts__link--main" href="#">фтк сют</a>
             <a href="https://vk.com/ftksut" class="contacts__link--vk" target="_blank">
-                <span class="contacts__link--vk__block fab fa-vk" aria-hidden="true"></span>
+                <span class="fab fa-vk fa-3x mr-1" aria-hidden="true"></span>
                 <span class="contacts__link--vk__title">Наша группа Вконтакте</span>
             </a>
             <div class="contacts__telephone">

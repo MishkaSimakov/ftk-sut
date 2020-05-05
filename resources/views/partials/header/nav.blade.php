@@ -22,6 +22,12 @@
                         Популярные
                     </a>
 
+                    @auth
+                        <a href="{{ route('article.draft') }}" class="page-navigation__link dropdown-item">
+                            Черновики
+                        </a>
+                    @endauth
+
                     @admin
                     <a href="{{ route('article.notPublished') }}" class="page-navigation__link dropdown-item">
                         Требуют проверки

@@ -35,9 +35,7 @@ class Article extends Model implements HasMedia, Viewable
         return UserLike::where([['article_id', $this->id], ['user_id', Auth::user()->id]])->exists();
     }
 
-    static function notPublished() {
-        return Article::where([['is_blank', false], ['is_published', false]])->get();
-    }
+
 
     public function getUrlAttribute()
     {
@@ -52,5 +50,31 @@ class Article extends Model implements HasMedia, Viewable
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'article_tags');
+    }
+
+    public function getRecentCommentCountAttribute() {
+        return $this->comments()->where('created_at', '>', now()->subDays(3))->get()->count();
+    }
+
+
+//    scopes
+    public function scopePublished()
+    {
+        return Article::where([['is_blank', false], ['is_published', true]]);
+    }
+
+    public function scopeNotPublished()
+    {
+        return Article::where([['is_blank', false], ['is_published', false]]);
+    }
+
+    public function scopeDraft()
+    {
+        return Article::where([['is_blank', true], ['is_published', true]]);
+    }
+
+    public function scopeBlank()
+    {
+        return Article::where([['is_blank', true], ['is_published', false]]);
     }
 }

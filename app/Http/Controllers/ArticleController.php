@@ -14,20 +14,20 @@ class ArticleController extends Controller
 {
     public function index(Request $request)
     {
+        $articles = Article::published();
+
         if ($request->get('query')) {
             $query = $request->get('query');
 
-            $articles = Article::where('title', 'like', "%" . $query . "%")
-//                ->orWhereHas('tags', function ($q) use ($query) {
-//                    $q->where('name', 'like', "%" . $query . "%");
-//                })
-//                ->orWhereHas('users', function ($q) use ($query) {
-//                    $q->where('name', 'like', "%" . $query . "%");
-//                })
-//                ->orWhere('tags.name', $query)
-                ->where('is_published', true);
-        } else {
-            $articles = Article::where('is_published', true);
+            $articles = $articles->where(function($article) use ($query) {
+                    $article->orWhere('title', 'like', "%" . $query . "%")
+                        ->orWhereHas('tags', function ($q) use ($query) {
+                            $q->where('name', 'like', "%" . $query . "%");
+                        })
+                        ->orWhereHas('user', function ($q) use ($query) {
+                            $q->where('name', 'like', "%" . $query . "%");
+                        });
+                });
         }
 
         if ($request->tag) {
@@ -38,10 +38,10 @@ class ArticleController extends Controller
             });
         }
 
-        if ($request->filter == 'newest') {
-            $articles = $articles->latest();
-        } else {
+        if ($request->filter == 'best') {
             $articles = $articles->orderBy('points', 'desc');
+        } else {
+            $articles = $articles->latest();
         }
 
         $articles = $articles->paginate(10);
@@ -58,15 +58,14 @@ class ArticleController extends Controller
 
     public function create()
     {
-        Article::where('is_blank', true)->delete();
+        Article::blank()->get()->each->delete();
 
-        $article = new Article;
-
-        $article->is_blank = true;
-        $article->user_id = Auth::user()->id;
-        $article->points = 0;
-
-        $article->save();
+        $article = Article::create([
+            'is_blank' => true,
+            'is_published' => false,
+            'user_id' => auth()->user()->id,
+            'points' => 0
+        ]);
 
         $names = User::all()->pluck('name');
 
@@ -75,14 +74,17 @@ class ArticleController extends Controller
 
     public function notPublished()
     {
-        $articles = Article::notPublished();
+        $articles = Article::notPublished()->get();
 
         return view('articles.publish', compact('articles'));
     }
 
     public function publish(Article $article)
     {
-        $article->update(['is_published' => true]);
+        $article->update([
+            'is_published' => true,
+            'is_blank' => false
+        ]);
 
         UserWriteArticle::dispatch($article);
 
@@ -93,7 +95,7 @@ class ArticleController extends Controller
     {
         $article->delete();
 
-        return redirect(route('article.index'));
+        return redirect()->back();
     }
 
     public function edit(Article $article)
@@ -101,8 +103,10 @@ class ArticleController extends Controller
         $this->authorize('update', $article);
 
         $names = User::all()->pluck('name');
+        $is_draftable = Article::draft()->where('user_id', auth()->user()->id)
+            ->count() < 10;
 
-        return view('articles.edit', compact('article', 'names'));
+        return view('articles.edit', compact('article', 'names', 'is_draftable'));
     }
 
     public function update(StoreArticle $request, Article $article)
@@ -114,16 +118,18 @@ class ArticleController extends Controller
 
         $article->update($validatedData);
         $article->update([
-            'is_blank' => false,
-            'is_published' => false,
+            'is_blank' => $request->is_blank == true,
+            'is_published' => $request->is_blank == true,
         ]);
 
-        $article->tags()->sync([]);
+        if ($request->tags) {
+            $article->tags()->sync([]);
 
-        foreach (json_decode($request->tags) as $tag) {
-            $tag_id = Tag::firstOrCreate(['name' => $tag->value]);
+            foreach (json_decode($request->tags) as $tag) {
+                $tag_id = Tag::firstOrCreate(['name' => $tag->value]);
 
-            $article->tags()->syncWithoutDetaching($tag_id);
+                $article->tags()->syncWithoutDetaching($tag_id);
+            }
         }
 
         if (Auth::user()->is_admin) {
@@ -133,5 +139,11 @@ class ArticleController extends Controller
         }
 
         return redirect(route('article.index'));
+    }
+
+    public function draft() {
+        $articles = Article::draft()->where('user_id', auth()->user()->id)->get();
+
+        return view('articles.draft', compact('articles'));
     }
 }

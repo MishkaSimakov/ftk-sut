@@ -4,6 +4,7 @@ namespace App\Achievements;
 
 use App\Achievements\Console\GenerateAchievementCommand;
 use App\Achievements\Types\Get10LikesOnSelfArticle;
+use App\Achievements\Types\GetLessThen0PointsInRating;
 use App\Achievements\Types\GetMoreThen1000PointsInRating;
 use App\Achievements\Types\GetLessThen250PointsInRating;
 use App\Achievements\Types\LikeSelfArticle;
@@ -22,6 +23,7 @@ class AchievementsServiceProvider extends ServiceProvider
         'points' => [
             GetMoreThen1000PointsInRating::class,
             GetLessThen250PointsInRating::class,
+            GetLessThen0PointsInRating::class,
         ],
         'articles' => [
             WriteFirstArticle::class,

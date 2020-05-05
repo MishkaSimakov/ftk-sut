@@ -18,6 +18,13 @@
                     <i class="fas fa-times"></i>
                 </a>
             </div>
+            <div class="pl-3 border-left mb-1" v-if="reply_message">
+                <a href="#" @click.prevent="cancel_reply" class="float-right text-gray-500">
+                    <i class="fas fa-times"></i>
+                </a>
+                <strong class="chat__message-user">{{ reply_message.user.name }}</strong>
+                <p class="chat__message-body"><span v-html="reply_message.body"></span></p>
+            </div>
 
             <div class="form-group has-feedback">
                 <div class="col p-0">
@@ -64,6 +71,7 @@
                 imagesBackedUp: [],
 
                 edited_message: null,
+                reply_message: null
             }
         },
         computed: mapGetters({
@@ -113,11 +121,15 @@
                 this.bodyBackedUp = this.body;
                 this.body = null;
 
+                let reply = this.reply_message;
+                this.cancel_reply();
+
                 if (!this.edited_message) {
                     this.createChatMessage({
                         id: this.chat.id,
                         body: this.bodyBackedUp,
                         images: this.imagesBackedUp,
+                        reply: reply,
                     }).then(() => {
                         if (this.error) {
                             this.body = this.bodyBackedUp;
@@ -133,6 +145,7 @@
                         id: this.chat.id,
                         body: this.bodyBackedUp,
                         message_id: edited_m_id,
+                        reply: reply,
                     }).then(() => {
                         if (this.error) {
                             alert('😵 Ой-ой! Ошибка! 😵');
@@ -140,21 +153,29 @@
                         } else {
                             Bus.$emit('message.edited', {
                                 id: edited_m_id,
-                                time: this.moment()
+                                time: moment()
                             })
                         }
                     });
                 }
             },
             cancel_edit() {
+                Bus.$emit('message.edit.canceled');
+
                 this.edited_message = null;
                 this.body = null;
+            },
+            cancel_reply() {
+                this.reply_message = null;
             }
         },
         mounted() {
             Bus.$on('message.edit', (m) => {
                 this.edited_message = m;
                 this.body = m.body;
+                this.reply_message = m.reply
+            }).$on('message.reply', (m) => {
+                this.reply_message = m;
             });
 
             this.touch = this.isTouchDevice()

@@ -28,4 +28,15 @@ class CommentController extends Controller
 
         return response()->json($comment->load(['user']));
     }
+
+    public function update(Comment $comment, Request $request)
+    {
+        $this->middleware(['auth']);
+
+        $comment->update([
+            'body' => $request->body
+        ]);
+
+        return response()->json($comment->load(['user']));
+    }
 }

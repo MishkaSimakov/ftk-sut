@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card mt-2">
         <div class="card-header py-3">
             <h4 class="font-weight-bold text-primary">
                 Топ авторов
@@ -29,7 +29,8 @@
         },
         mounted() {
             new Promise((resolve, reject) => {
-                axios.get('/webapi/articles/top/writers').then((response) => {
+                let tag = new URLSearchParams(window.location.search).get('tag');
+                axios.get('/webapi/articles/top/writers' + (tag ? `?tag=${tag}` : '')).then((response) => {
                     this.users = response.data;
                 })
             })

@@ -9,13 +9,14 @@
 <script>
     export default {
         props: [
-            'recipients'
+            'recipients',
+            'title'
         ],
         methods: {
             click() {
                 new Promise((resolve, reject) => {
                     axios.post('/webapi/chats', {
-                        title: "Chat",
+                        title: this.title,
                         recipients: [JSON.parse(this.recipients).id]
                     }).then((response) => {
                         window.history.pushState(null, null, response.data);

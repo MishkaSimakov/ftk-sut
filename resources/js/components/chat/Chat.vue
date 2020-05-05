@@ -50,6 +50,7 @@
 <script>
     import { mapActions, mapGetters } from 'vuex'
     import Bus from '../../bus'
+    import moment from 'moment'
 
     export default {
         props: [
@@ -64,13 +65,14 @@
             ...mapActions([
                 'getChat',
                 'setRead'
-            ])
+            ]),
+            moment: moment,
         },
         mounted() {
-            this.getChat(this.id)
+            this.getChat(this.id);
 
             Bus.$on('message.edited', ({id, time}) => {
-                $('#tooltip_message_' + id).tooltip({
+                $('#tooltip_message_' + id).tooltip('dispose').tooltip({
                     title: 'изменено ' + moment(time).locale('ru').calendar().toLowerCase(),
                 })
             })

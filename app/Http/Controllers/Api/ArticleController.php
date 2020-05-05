@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Achievements\Events\UserLikeArticle;
+use App\Comment;
 use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
@@ -57,20 +58,19 @@ class ArticleController extends Controller
         return response()->json($users_sorted_array);
     }
 
-    public function articlesTop()
+    public function articlesTop(Request $request)
     {
         $articles_sorted_array = [];
 
-        $articles = Article::all()->sort(function ($article1, $article2) {
-            $a = 2 * $article1->points + views($article1)->count();
-            $b = 2 * $article2->points + views($article2)->count();
+        $articles = Article::published();
 
-            if ($a == $b) {
-                return 0;
-            }
+        if ($request->tag) {
+            $articles = $articles->whereHas('tags', function ($q) use ($request) {
+                $q->where('name', $request->tag);
+            });
+        }
 
-            return ($a > $b) ? -1 : 1;
-        });
+        $articles = $articles->get()->sortByDesc('points')->take(10);
 
         foreach ($articles as $article) {
             array_push($articles_sorted_array, [
@@ -78,6 +78,26 @@ class ArticleController extends Controller
                'points' => $article->points,
                'views' => views($article)->count(),
                'url' => $article->url,
+            ]);
+        }
+
+        return response()->json($articles_sorted_array);
+    }
+
+    public function commentsTop()
+    {
+        $articles_sorted_array = [];
+
+        $articles = Article::published()->get()
+            ->sortByDesc->recentCommentCount->take(10)->filter(function ($article) {
+                return $article->recentCommentCount;
+            });
+
+        foreach ($articles as $article) {
+            array_push($articles_sorted_array, [
+                'url' => $article->url,
+                'title' => $article->title,
+                'comments' => $article->recentCommentCount
             ]);
         }
 
