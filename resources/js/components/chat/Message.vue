@@ -1,5 +1,5 @@
 <template>
-    <div class="chat__message" :class="[{ 'chat__message--own' : message.selfOwned }, { 'border-left pl-2 py-1 my-1' : is_replied}]">
+    <div class="chat__message" :class="[{ 'chat__message--own' : message.selfOwned }, { 'chat__message--unread' : isUnread }, { 'chat__message--replied' : is_replied}]">
         <strong class="chat__message-user">{{ message.user.name }}</strong>
         <span class="chat__message-timestamp" v-if="!is_replied">{{ moment(message.created_at).locale('ru').fromNow() }}</span>
 
@@ -42,6 +42,7 @@
         data() {
           return {
               is_editing: false,
+              isUnread: moment()
           };
         },
         methods: {
@@ -91,6 +92,13 @@
 
             &--own {
                 background-color: #f0f0f0;
+            }
+
+            &--replied {
+                border-left: 1px solid lightgray;
+
+                padding: 0.25rem 0 0.25rem 0.5rem;
+                margin: 0.25rem 0;
             }
 
             &-image {

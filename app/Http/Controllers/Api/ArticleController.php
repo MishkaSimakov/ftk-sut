@@ -36,9 +36,9 @@ class ArticleController extends Controller
 
     public function tags()
     {
-       $tags = Tag::all()->sortByDesc('articleCount')->pluck('name');
+        $tags = Tag::all()->sortByDesc('articleCount')->pluck('name');
 
-       return response()->json($tags);
+        return response()->json($tags);
     }
 
     public function writersTop()
@@ -74,10 +74,10 @@ class ArticleController extends Controller
 
         foreach ($articles as $article) {
             array_push($articles_sorted_array, [
-               'title' => $article->title,
-               'points' => $article->points,
-               'views' => views($article)->count(),
-               'url' => $article->url,
+                'title' => $article->title,
+                'points' => $article->points,
+                'views' => views($article)->count(),
+                'url' => $article->url,
             ]);
         }
 

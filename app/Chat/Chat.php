@@ -41,7 +41,10 @@ class Chat extends Model
     }
 
     public function read(User $user) {
-        $this->users()->where('id', $user->id)->update(['is_unread' => false]);
+        $this->users()->where('id', $user->id)->update([
+            'is_unread' => false,
+            'read_at' => Carbon::now(),
+        ]);
     }
 
     public function usersExceptCurrentlyAuthenticated()

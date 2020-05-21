@@ -9,7 +9,10 @@
                 $('img').each(function () {
                     $(this).addClass('mw-100 h-auto');
                 });
-
+                $('blockquote').each(function () {
+                    $(this).addClass('pl-3 my-1 blockquote');
+                    $(this).attr('style', 'border-left: 3px solid lightgray;')
+                });
                 $('.article__body').each(function () {
                     if ($(this).children('#article_text').height() >= 500) {
                         $(this).children('#article_read_more').show()
@@ -23,12 +26,9 @@
         @push('script')
             <script type="text/javascript">
                 function like(article) {
-                    var counter = $('.point_count' + article)
-
+                    let counter = $('.point_count' + article)
                     counter.html(Number(counter.html()) + 1);
-
                     $('#like_' + article).attr('class', 'article__liked')
-
                     $.ajax({
                         url: "{{ route('api.article.points') }}",
                         method: "POST",
@@ -46,14 +46,10 @@
                         }
                     });
                 }
-
                 function unlike(article) {
-                    var counter = $('.point_count' + article)
-
+                    let counter = $('.point_count' + article)
                     counter.html(Number(counter.html()) - 1);
-
                     $('#like_' + article).attr('class', 'article__unliked')
-
                     $.ajax({
                         url: "{{ route('api.article.points') }}",
                         method: "POST",

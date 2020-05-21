@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 use App\News;
 use App\Teacher;
+use Illuminate\Support\Collection;
 
 class MainController extends Controller
 {
@@ -18,5 +20,9 @@ class MainController extends Controller
         });
 
         return view('main', compact('teachers', 'advantages', 'news'));
+
+//        $articles = Article::all();
+//
+//        $tape =
     }
 }

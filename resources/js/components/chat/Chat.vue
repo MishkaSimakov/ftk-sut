@@ -75,7 +75,7 @@
                 $('#tooltip_message_' + id).tooltip('dispose').tooltip({
                     title: 'изменено ' + moment(time).locale('ru').calendar().toLowerCase(),
                 })
-            })
+            });
         },
         updated() {
             let messages = document.getElementsByClassName('chat__messages')[0];

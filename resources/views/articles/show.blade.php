@@ -155,6 +155,10 @@
     @endauth
 
     <script>
+        $('blockquote').each(function () {
+            $(this).addClass('pl-3 my-1 blockquote');
+            $(this).attr('style', 'border-left: 3px solid lightgray;')
+        });
         $('img').each(function () {
             $(this).on('click', lity);
             $(this).addClass('mw-100 h-auto');

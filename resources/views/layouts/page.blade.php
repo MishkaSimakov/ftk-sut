@@ -63,27 +63,33 @@
         <!-- Styles -->
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     </head>
-    <body>
+    <body class="{{ isset($nav) ? 'mb-0' : '' }}">
         <div id="app">
-            @include('partials.header.header')
+            @if (isset($nav) ? $nav !== 'none' : true)
+                @include('partials.header.header')
+            @endif
 
-            <main class="main-container">
+            <main>
                 @yield('content')
             </main>
 
-            @include('partials.footer.footer')
+            @if (isset($nav) ? $nav !== 'none' : true)
+                @include('partials.footer.footer')
+            @endif
         </div>
 
         <script src="{{ mix('js/app.js') }}"></script>
 
         @stack('script')
 
-        <script>
-            const menuButton = document.querySelector('.site-navigation__toggler');
+        @if (isset($nav) ? $nav !== 'none' : true)
+            <script>
+                const menuButton = document.querySelector('.site-navigation__toggler');
 
-            menuButton.addEventListener('click', function () {
-                menuButton.classList.toggle('site-navigation__toggler--close');
-            });
-        </script>
+                menuButton.addEventListener('click', function () {
+                    menuButton.classList.toggle('site-navigation__toggler--close');
+                });
+            </script>
+        @endif
     </body>
 </html>

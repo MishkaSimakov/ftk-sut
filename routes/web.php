@@ -5,11 +5,12 @@ use \Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'MainController@index')->name('main');
 
-Route::get('/article/publish', 'ArticleController@notPublished')->name('article.notPublished')->middleware(['auth', 'admin']);
-Route::put('/article/{article}/publish', 'ArticleController@publish')->name('article.publish')->middleware(['auth', 'admin']);
-Route::delete('/article/{article}', 'ArticleController@destroy')->name('article.destroy')->middleware(['auth', 'admin']);
-
-Route::get('/article/draft', 'ArticleController@draft')->name('article.draft')->middleware('auth');
+Route::prefix('article')->name('article.')->middleware('auth')->group(function() {
+    Route::get('/publish', 'ArticleController@notPublished')->name('notPublished')->middleware('admin');
+    Route::put('/{article}/publish', 'ArticleController@publish')->name('publish')->middleware('admin');
+    Route::delete('/{article}', 'ArticleController@destroy')->name('destroy')->middleware('admin');
+    Route::get('/draft', 'ArticleController@draft')->name('draft');
+});
 
 Route::resource('article', 'ArticleController')->middleware('auth')->only([
     'create', 'store', 'edit', 'update', 'destroy'
@@ -49,6 +50,13 @@ Route::resource('schedule', 'ScheduleController')->middleware(['auth', 'admin'])
 ]);
 
 
+Route::get('/vote/create', 'VoteController@create')->name('vote.create')->middleware('auth');
+Route::post('/vote/store', 'VoteController@store')->name('vote.store')->middleware('auth');
+Route::get('/vote/{vote}', 'VoteController@show')->name('vote.show');
+Route::get('/vote/{vote}/widget', 'VoteController@widget');
+
+Route::get('/webapi/vote/all', 'Api\VoteController@all');
+Route::post('/webapi/vote/{vote}/vote', 'Api\VoteController@vote')->middleware('auth');
 
 Auth::routes([
     'register' => true,
@@ -73,10 +81,6 @@ Route::get('/settings', 'Auth\AccountController@settings')->name('settings.show'
 Route::post('/settings/image', 'Auth\AccountController@image')->name('settings.image')->middleware('auth');
 Route::put('/settings', 'Auth\AccountController@update')->name('settings.update')->middleware('auth');
 
-Route::view('/register/help', 'auth.help')->name('register.help');
-
-Route::get('/markup/{view}', 'MarkupController@show')->name('markup.show');
-
 Route::prefix('chat')->middleware(['auth'])->namespace('Chat')->group(function () {
     Route::get('/', 'ChatController@index')->name('chat.index');
     Route::get('/{chat}', 'ChatController@show')->name('chat.show');
@@ -86,13 +90,14 @@ Route::prefix('chat')->middleware(['auth'])->namespace('Chat')->group(function (
 
 
 
-Route::get('/news', 'NewsController@index')->name('news.index');
-Route::get('/news/create', 'NewsController@create')->name('news.create')->middleware(['auth', 'admin']);
-Route::post('/news', 'NewsController@store')->name('news.store')->middleware(['auth', 'admin']);
+Route::prefix('news')->name('news.')->group(function () {
+    Route::get('/', 'NewsController@index')->name('index');
+    Route::get('/create', 'NewsController@create')->name('create')->middleware(['auth', 'admin']);
+    Route::post('/', 'NewsController@store')->name('store')->middleware(['auth', 'admin']);
 
-Route::get('/news/{news}/edit', 'NewsController@edit')->name('news.edit')->middleware(['auth', 'admin']);
-Route::put('/news/{news}', 'NewsController@update')->name('news.update')->middleware(['auth', 'admin']);
-
+    Route::get('/{news}/edit', 'NewsController@edit')->name('edit')->middleware(['auth', 'admin']);
+    Route::put('/{news}', 'NewsController@update')->name('update')->middleware(['auth', 'admin']);
+});
 
 
 Route::group(['prefix' => 'webapi/chats', 'namespace' => 'Api'], function () {
@@ -127,4 +132,13 @@ Route::group(['prefix' => 'webapi/articles', 'namespace' => 'Api'], function () 
 });
 
 
-Route::view('cellular', 'cellular.test');
+Route::group(['prefix' => 'lab'], function () {
+    Route::view('/', 'lab.main')->name('lab.main');
+    Route::view('/live', 'lab.live')->name('lab.live');
+    Route::view('/mandelbrot', 'lab.mandelbrot')->name('lab.mandelbrot');
+    Route::view('/place', 'lab.place')->name('lab.place');
+    Route::view('/shadow', 'lab.shadow')->name('lab.shadow');
+    Route::view('/primes', 'lab.primes')->name('lab.primes');
+    Route::view('/pendulum', 'lab.pendulum')->name('lab.pendulum');
+    Route::view('/earth', 'lab.earth')->name('lab.earth');
+});

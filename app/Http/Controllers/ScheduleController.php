@@ -12,9 +12,9 @@ use Illuminate\Http\Request;
 class ScheduleController extends Controller
 {
     public function index() {
-        $schedules = Schedule::all();
+        $schedules = Schedule::all()->sortBy('date_start');
 
-    	return view('schedule.index', compact('schedules'));
+        return view('schedule.index', compact('schedules'));
     }
 
     public function archive()
@@ -25,15 +25,15 @@ class ScheduleController extends Controller
     }
 
     public function create() {
-    	return view('schedule.create');
+        return view('schedule.create');
     }
 
     public function store(StoreSchedule $request) {
-    	$schedule = Schedule::make(Arr::except($request->all(), 'file'));
+        $schedule = Schedule::make(Arr::except($request->all(), 'file'));
 
-    	$schedule->user_count = 0;
+        $schedule->user_count = 0;
 
-    	$schedule->save();
+        $schedule->save();
 
 //      add image
         $image = Arr::first($request->allFiles());
@@ -46,7 +46,7 @@ class ScheduleController extends Controller
             ->usingName($name)
             ->toMediaCollection();
 
-    	return redirect(route('schedule.index'));
+        return redirect(route('schedule.index'));
     }
 
     public function destroy(Schedule $schedule)

@@ -6,6 +6,7 @@ use App\Achievements\Events\UserWriteArticle;
 use App\Http\Requests\StoreArticle;
 use App\Tag;
 use App\User;
+use App\Vote;
 use Illuminate\Http\Request;
 use App\Article;
 use Illuminate\Support\Facades\Auth;
@@ -67,9 +68,7 @@ class ArticleController extends Controller
             'points' => 0
         ]);
 
-        $names = User::all()->pluck('name');
-
-        return redirect(route('article.edit', compact('article', 'names')));
+        return redirect(route('article.edit', compact('article')));
     }
 
     public function notPublished()

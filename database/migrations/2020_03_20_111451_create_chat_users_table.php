@@ -20,7 +20,9 @@ class CreateChatUsersTable extends Migration
             $table->unsignedBigInteger('chat_id');
 
             $table->boolean('is_owner')->nullable();
+
             $table->boolean('is_unread')->nullable();
+            $table->dateTime('read_at')->nullable();
 
             $table->foreign('chat_id')->references('id')->on('chats')->onDelete('cascade');
         });

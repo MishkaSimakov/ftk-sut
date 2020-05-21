@@ -79,4 +79,9 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->articles()->where([['is_blank', false], ['is_published', true]])->count();
     }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
 }

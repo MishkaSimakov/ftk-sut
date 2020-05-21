@@ -91,7 +91,7 @@
                 plugins: [
                     "lists link image fullscreen",
                 ],
-                toolbar: 'styleselect | fontsizeselect  | bold italic underline | numlist bullist | link image | undo redo | fullscreen',
+                toolbar: 'styleselect | fontsizeselect  | bold italic underline | numlist bullist | link image voting | undo redo | fullscreen',
                 fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
                 menubar: '',
                 language: 'ru',
@@ -100,7 +100,71 @@
                 images_upload_url: '{{ route('api.article.upload_image', compact('article')) }}',
                 // statusbar: false,
                 relative_urls: false,
-                remove_script_host: false
+                remove_script_host: false,
+
+                setup: function (editor) {
+                    editor.ui.registry.addMenuButton('voting', {
+                        text: 'Голосования',
+                        fetch: function (callback) {
+                            let items = [
+                                {
+                                    type: 'menuitem',
+                                    text: 'Вставить',
+                                    onAction: function () {
+                                        new Promise((resolve, reject) => {
+                                            axios.get('/webapi/vote/all').then(function (response) {
+                                                let options = Object.values(response.data);
+
+                                                tinymce.activeEditor.windowManager.open({
+                                                    title: 'Вставка опроса',
+                                                    body: {
+                                                        type: 'panel',
+                                                        items: [
+                                                            {
+                                                                type: 'selectbox',
+                                                                name: 'voting',
+                                                                label: 'Выберите голосование',
+                                                                items: options,
+                                                            }
+                                                        ]
+                                                    },
+                                                    buttons: [
+                                                        {
+                                                            type: 'cancel',
+                                                            name: 'closeButton',
+                                                            text: 'Отменить'
+                                                        },
+                                                        {
+                                                            type: 'submit',
+                                                            name: 'submitButton',
+                                                            text: 'Вставить',
+                                                            primary: true
+                                                        }
+                                                    ],
+                                                    onSubmit: function (api) {
+                                                        let data = api.getData();
+
+                                                        tinymce.activeEditor.execCommand('mceInsertContent', false, '<div class="embed-responsive embed-responsive-16by9 z-depth-2"><iframe class="embed-responsive-item" src="/vote/' + data.voting + '/widget"></iframe></div>');
+                                                        api.close();
+                                                    }
+                                                });
+                                            })
+                                        })
+                                    }
+                                },
+                                {
+                                    type: 'menuitem',
+                                    text: 'Создать',
+                                    onAction: function () {
+                                        let win = window.open('{{ route('vote.create') }}', '_blank');
+                                        win.focus();
+                                    }
+                                }
+                            ];
+                            callback(items);
+                        }
+                    });
+                }
             });
         });
     </script>
