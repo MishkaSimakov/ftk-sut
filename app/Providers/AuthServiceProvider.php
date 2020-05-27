@@ -8,6 +8,8 @@ use App\Policies\ArticlePolicy;
 use App\Article;
 use App\Policies\ChatPolicy;
 use App\Policies\MessagePolicy;
+use App\Policies\SchedulePolicy;
+use App\Schedule;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -21,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         Article::class => ArticlePolicy::class,
         Chat::class => ChatPolicy::class,
         Message::class => MessagePolicy::class,
+        Schedule::class => SchedulePolicy::class
     ];
 
     /**

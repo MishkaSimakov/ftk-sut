@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => ['index', 'show']
+        ]);
+        $this->middleware('admin', [
+            'only' => ['notPublished', 'publish']
+        ]);
+    }
+
     public function index(Request $request)
     {
         $articles = Article::published();

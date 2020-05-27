@@ -29,9 +29,13 @@ export default function () {
     Vue.component('user-photo', require('./components/user/Photo.vue').default);
 
     // rating
-    // Vue.component('rating', require('./components/rating/Rating.vue').default);
+    Vue.component('rating', require('./components/rating/Rating.vue').default);
 
     // vote
     Vue.component('vote', require('./components/vote/Vote.vue').default);
     Vue.component('add-questions', require('./components/vote/Questions.vue').default);
+
+    //schedule
+    Vue.component('sign-button', require('./components/schedule/SignButton.vue').default);
+    Vue.component('people-list', require('./components/schedule/PeopleList.vue').default);
 }

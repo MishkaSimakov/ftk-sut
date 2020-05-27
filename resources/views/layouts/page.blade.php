@@ -63,33 +63,53 @@
         <!-- Styles -->
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     </head>
-    <body class="{{ isset($nav) ? 'mb-0' : '' }}">
+    <body class="mb-0">
         <div id="app">
-            @if (isset($nav) ? $nav !== 'none' : true)
-                @include('partials.header.header')
-            @endif
+            @include('partials.header.header')
 
             <main>
-                @yield('content')
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            @yield('content')
+                        </div>
+
+                        <div class="col-md-4">
+                            <div id="sidebar" style="position: relative; bottom: 0;">
+                                @include('partials.side.nav')
+
+                                @stack('side')
+
+                                <div id="side_bottom"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
 
-            @if (isset($nav) ? $nav !== 'none' : true)
-                @include('partials.footer.footer')
-            @endif
+{{--            @include('partials.footer.footer')--}}
         </div>
 
         <script src="{{ mix('js/app.js') }}"></script>
-
         @stack('script')
+        <script>
+            let lastScrollTop = 0;
+            $(window).scroll(function(event){
+                let st = $(this).scrollTop();
+                let sidebar = $('#sidebar');
+                let bottom = $('#side_bottom');
 
-        @if (isset($nav) ? $nav !== 'none' : true)
-            <script>
-                const menuButton = document.querySelector('.site-navigation__toggler');
-
-                menuButton.addEventListener('click', function () {
-                    menuButton.classList.toggle('site-navigation__toggler--close');
-                });
-            </script>
-        @endif
+                if (st > lastScrollTop){
+                    if (bottom.position().top - sidebar.height() / 2 < $(this).scrollTop()) {
+                        sidebar.css('bottom', Math.min(0, -$(this).scrollTop() + sidebar.height() / 2) + 'px');
+                    }
+                } else {
+                    if (sidebar.position().top > $(this).scrollTop()) {
+                        sidebar.css('bottom', Math.min(0, -$(this).scrollTop()) + 'px');
+                    }
+                }
+                lastScrollTop = st;
+            });
+        </script>
     </body>
 </html>

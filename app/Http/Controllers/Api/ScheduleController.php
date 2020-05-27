@@ -9,33 +9,14 @@ use App\Schedule;
 
 class ScheduleController extends Controller
 {
-    public function register(Request $request)
+    public function sign(Schedule $schedule, Request $request)
     {
-        $schedule = Schedule::where('id', $request->schedule_id)->first();
-
-        if (!UserSchedule::where([['user_id', $request->user_id], ['schedule_id', $request->schedule_id]])->exists()) {
-            $schedule->increment('user_count');
-
-            $schedule->users()->attach($request->user_id);
+        if ($request->state) {
+            $schedule->users()->syncWithoutDetaching(auth()->user()->id);
         } else {
-            return json_encode('error');
+            $schedule->users()->detach(auth()->user()->id);
         }
 
-        return $schedule->user_count;
-    }
-
-    public function unregister(Request $request)
-    {
-        $schedule = Schedule::where('id', $request->schedule_id)->first();
-
-        if (UserSchedule::where([['user_id', $request->user_id], ['schedule_id', $request->schedule_id]])->exists()) {
-            $schedule->decrement('user_count');
-
-            $schedule->users()->detach($request->user_id);
-        } else {
-            return json_encode('error');
-        }
-
-        return $schedule->user_count;
+        return response()->json($schedule->load('users'));
     }
 }

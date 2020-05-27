@@ -5,20 +5,16 @@ use \Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'MainController@index')->name('main');
 
-Route::prefix('article')->name('article.')->middleware('auth')->group(function() {
+Route::prefix('article')->name('article.')->group(function() {
     Route::get('/publish', 'ArticleController@notPublished')->name('notPublished')->middleware('admin');
     Route::put('/{article}/publish', 'ArticleController@publish')->name('publish')->middleware('admin');
     Route::delete('/{article}', 'ArticleController@destroy')->name('destroy')->middleware('admin');
     Route::get('/draft', 'ArticleController@draft')->name('draft');
 });
 
-Route::resource('article', 'ArticleController')->middleware('auth')->only([
-    'create', 'store', 'edit', 'update', 'destroy'
-]);
+Route::resource('article', 'ArticleController');
 
-Route::resource('article', 'ArticleController')->only([
-    'index', 'show'
-]);
+
 
 
 Route::resource('rating', 'RatingController')->middleware(['auth', 'admin'])->only([
@@ -42,12 +38,8 @@ Route::resource('achievements', 'AchievementController')->only([
 ]);
 
 
-Route::get('/schedule', 'ScheduleController@index')->name('schedule.index');
-Route::get('/schedule/archive', 'ScheduleController@archive')->name('schedule.archive');
-
-Route::resource('schedule', 'ScheduleController')->middleware(['auth', 'admin'])->only([
-	'create', 'store', 'destroy', 'edit', 'update'
-]);
+Route::post('/schedule/{schedule}/sign', 'Api\ScheduleController@sign')->name('schedule.sign');
+Route::resource('schedule', 'ScheduleController');
 
 
 Route::get('/vote/create', 'VoteController@create')->name('vote.create')->middleware('auth');

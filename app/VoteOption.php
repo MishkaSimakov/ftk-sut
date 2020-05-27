@@ -29,7 +29,7 @@ class VoteOption extends Model
     public function getPercentAttribute()
     {
         if ($this->vote->users->count()) {
-            return $this->users->count() / $this->vote->users->count() * 100;
+            return floor($this->users->count() / $this->vote->users->count() * 100);
         }
 
         return 0;

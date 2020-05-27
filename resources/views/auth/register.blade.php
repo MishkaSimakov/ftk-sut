@@ -23,10 +23,6 @@
                                             <strong>{{ $errors->first('register_code') }}</strong>
                                         </span>
                                     @endif
-
-                                    <span class="small">
-                                        <a href="{{ route('register.help') }}">Нет регистрационного кода?</a>
-                                    </span>
                                 </div>
                             </div>
 

@@ -9,8 +9,8 @@ Vue.use(Vuex);
 require('./quill.js');
 window.Quill = require('Quill');
 
-import VueObserveVisibility from 'vue-observe-visibility'
-Vue.use(VueObserveVisibility);
+// import VueObserveVisibility from 'vue-observe-visibility'
+// Vue.use(VueObserveVisibility);
 
 import loadComponents from './components';
 loadComponents();

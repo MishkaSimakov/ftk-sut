@@ -19,16 +19,37 @@ class Schedule extends Model implements HasMedia
     protected $guarded = [];
     protected $dates = ['created_at', 'updated_at', 'date_start', 'date_end'];
 
+    protected $appends = [
+        'isRegister'
+    ];
+
     public function users() {
     	return $this->belongsToMany(User::class, 'user_schedules');
     }
 
     public function getIsRegisterAttribute() {
-        return UserSchedule::where([['schedule_id', $this->id], ['user_id', Auth::user()->id]])->exists();
+        return $this->users->contains(auth()->user());
     }
 
     public function getIsArchivedAttribute()
     {
         return $this->date_end->isBefore(now());
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->getMedia()->count() ?
+            $this->getMedia()->first()->getUrl() :
+            "https://pbs.twimg.com/profile_images/600060188872155136/st4Sp6Aw_400x400.jpg";
+    }
+
+    public function scopeArchived()
+    {
+        return Article::where('date_end', '<=', now());
+    }
+
+    public function scopeFuture()
+    {
+        return Article::where('date_end', '>', now());
     }
 }

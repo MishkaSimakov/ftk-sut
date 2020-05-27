@@ -11,17 +11,17 @@ use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'admin'], [
+            'except' => ['index']
+        ]);
+    }
+
     public function index() {
         $schedules = Schedule::all()->sortBy('date_start');
 
         return view('schedule.index', compact('schedules'));
-    }
-
-    public function archive()
-    {
-        $schedules = Schedule::all()->filter->isArchived; // TODO: make sorting by date
-
-        return view('schedule.archive', compact('schedules'));
     }
 
     public function create() {
@@ -30,9 +30,6 @@ class ScheduleController extends Controller
 
     public function store(StoreSchedule $request) {
         $schedule = Schedule::make(Arr::except($request->all(), 'file'));
-
-        $schedule->user_count = 0;
-
         $schedule->save();
 
 //      add image

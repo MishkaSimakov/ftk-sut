@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\News;
+use App\Schedule;
 use App\Teacher;
 use Illuminate\Support\Collection;
 
@@ -11,18 +12,16 @@ class MainController extends Controller
 {
     public function index()
     {
-        $teachers = Teacher::all();
-        $advantages = config('advantages');
+//        $teachers = Teacher::all();
+//        $advantages = config('advantages');
 
-        $news = News::all()->sortBy('created_at')->sortByDesc('created_at')->take(3);
+        $news = News::all()->sortByDesc('created_at')->take(3);
         $news->each(function ($news) {
             views($news)->cooldown(now()->addHours(1))->record();
         });
 
-        return view('main', compact('teachers', 'advantages', 'news'));
+        $articles = Article::published()->orderBy('created_at')->limit(3)->get();
 
-//        $articles = Article::all();
-//
-//        $tape =
+        return view('main', compact('news', 'articles'));
     }
 }

@@ -2,16 +2,26 @@
 
 @section('content')
     @if($news->count())
-        @component('components.sections.section', ['header' => 'Новости'])
-            @component('components.card-lists.news', ['news' => $news])@endcomponent
-        @endcomponent
+        <h2 class="text-center mt-2">Последние новости</h2>
+        @component('components.card-lists.news', ['news' => $news])@endcomponent
+
+        <div class="text-center h5 mt-1 mb-4">
+            <a href="{{ route('news.index') }}">
+                Смотреть все
+            </a>
+        </div>
     @endif
 
-    @component('components.sections.section', ['header' => 'Наши преподаватели'])
-        @component('components.card-lists.teachers', ['teachers' => $teachers])@endcomponent
-    @endcomponent
+    @if($articles->count())
+        <hr>
 
-    @component('components.sections.section', ['header' => 'Наши преимущества'])
-        @include('partials.advantages.advantage-list', ['advantages' => $advantages])
-    @endcomponent
+        <h2 class="text-center mt-2">Последние статьи</h2>
+        @component('components.card-lists.articles', ['articles' => $articles])@endcomponent
+
+        <div class="text-center h5 mt-1 mb-4">
+            <a href="{{ route('article.index') }}">
+                Смотреть все
+            </a>
+        </div>
+    @endif
 @endsection

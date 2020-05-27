@@ -14,7 +14,7 @@
 
             <ul class="mb-0">
                 <li v-for="user in chat.users">
-                    <a v-bind:href="'/user/' + user.id" v-bind:title="user.name">{{ user.name }}</a>
+                    <a v-bind:href="user.url" v-bind:title="user.name">{{ user.name }}</a>
 
                     <span v-if="chat.ownerId === user.id">
                         <span class="fa fa-star text-info" title="Создатель группы"></span>

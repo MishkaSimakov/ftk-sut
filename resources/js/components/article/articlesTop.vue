@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card mt-2">
         <div class="card-header py-3">
             <h4 class="font-weight-bold text-primary">
                 Топ статей

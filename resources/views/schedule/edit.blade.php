@@ -71,14 +71,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="photos" class="col-md-4 col-form-label text-md-right">Фотографии</label>
-
-                                <div class="col-md-7">
-                                    <div class="dropzone" id="dropzone"></div>
-                                </div>
-                            </div>
-
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
@@ -93,52 +85,4 @@
         </div>
     </div>
 
-
 @endsection
-
-@push('script')
-    <script>
-        Dropzone.autoDiscover = false;
-
-        var dropzone = new Dropzone('#dropzone', {
-            url: "{{ route('api.schedule.upload_image', compact('schedule')) }}",
-            maxFiles: 15,
-            acceptedFiles: 'image/*',
-
-            addRemoveLinks: true,
-
-            //translations
-            dictFileTooBig: "Файл слишком большой!",
-            dictInvalidFileType: "Данный тип файла не поддерживается!",
-            dictDefaultMessage: "<p>Перенесите фалйы сюда или нажмите, чтобы выбрать из папки</p>",
-            dictCancelUpload: "отменить загрузку",
-            dictRemoveFile: 'удалить файл',
-            dictCancelUploadConfirmation: 'Отменить загрузку?'
-        });
-
-        @foreach($schedule->getMedia() as $media)
-            var file = {
-                    'name': '{{ $media->file_name }}',
-                    'size': '{{ $media->size }}',
-                };
-
-            dropzone.emit("addedfile", file);
-            dropzone.emit("thumbnail", file, '/image{{ $media->getUrl() }}');
-            dropzone.emit("complete", file);
-        @endforeach
-
-        dropzone.on('removedfile', function (file) {
-            $.ajax({
-                url: "{{ route('api.schedule.delete_image', compact('schedule')) }}",
-                method: "POST",
-                dataType: 'json',
-                data: {
-                    name: file.name,
-                },
-                success: function (data) {
-                    console.log(data)
-                }
-            });
-        })
-    </script>
-@endpush
