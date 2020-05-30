@@ -12699,3 +12699,7 @@ button {
   color: #212529 !important;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+

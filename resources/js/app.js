@@ -6,8 +6,14 @@ window.Vue = require('vue');
 import Vuex from 'vuex';
 Vue.use(Vuex);
 
+import VueSuggestion from 'vue-suggestion'
+Vue.use(VueSuggestion);
+
 require('./quill.js');
 window.Quill = require('Quill');
+
+// import tinymce from 'tinymce'
+// window.tinymce = tinymce;
 
 // import VueObserveVisibility from 'vue-observe-visibility'
 // Vue.use(VueObserveVisibility);

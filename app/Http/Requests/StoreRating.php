@@ -15,7 +15,7 @@ class StoreRating extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->is_admin;
+        return auth()->user()->is_admin;
     }
 
     /**
@@ -28,7 +28,6 @@ class StoreRating extends FormRequest
         return [
             'date' => [
                 'required',
-                'date',
                 new UniqueDate(),
             ],
             'file' => 'required|mimes:xls',

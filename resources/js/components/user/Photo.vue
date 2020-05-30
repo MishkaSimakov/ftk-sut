@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img class="card-img-top" v-bind:src="path" alt="Card image cap">
+        <img data-lity style="cursor: pointer; object-fit: cover" v-bind:src="path" class="h-100 w-100 card-img" alt="Изображение пользователя">
         <a v-if="editable" style="cursor: pointer;" class="text-gray-600" title="Загрузить изображение" data-toggle="modal" data-target="#image-upload">
             <i class="fas fa-upload h3 upload_icon"></i>
         </a>
@@ -29,9 +29,6 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Готово</button>
                     </div>
                 </div>
             </div>

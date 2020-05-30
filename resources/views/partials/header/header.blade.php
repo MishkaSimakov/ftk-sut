@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sticky-top navbar navbar-expand navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 ФТК СЮТ

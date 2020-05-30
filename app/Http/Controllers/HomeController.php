@@ -11,15 +11,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        $articles = $user->articles()->where([['is_blank', false], ['is_published', true]])->orderBy('points', 'desc')->paginate(5);
+        $user = auth()->user();
+        $achievements = optional($user->student)->achievements;
 
-        if (Auth::user()->student) {
-            $achievements = $user->student->achievements;
-
-            return view('home.student', compact(['achievements', 'user', 'articles']));
-        } else {
-            return view('home.teacher', compact('user', 'articles'));
-        }
+        return view('user.home', compact('achievements', 'user'));
     }
 }

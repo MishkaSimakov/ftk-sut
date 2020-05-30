@@ -27,19 +27,20 @@
             ]) !!}
         </script>
 
-{{--        TODO: install all this libraries to local --}}
+{{--            TODO: install all this libraries to local --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-        {{--  lity for lightboxes  --}}
+{{--            lity for lightboxes --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.0/lity.js"></script>
 
+{{--            dropzone --}}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
-        {{--    datatables --}}
+{{--            datatables --}}
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 
         @if (env("APP_ENV") !== 'local')
@@ -67,48 +68,37 @@
         <div id="app">
             @include('partials.header.header')
 
-            <main>
+            <main style="min-height: calc(100vh - 57px - 1rem - 1.6em)">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-12 col-lg-9">
                             @yield('content')
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-lg-3 d-none d-lg-block">
                             <div id="sidebar" style="position: relative; bottom: 0;">
                                 @include('partials.side.nav')
 
                                 @stack('side')
-
-                                <div id="side_bottom"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </main>
 
-{{--            @include('partials.footer.footer')--}}
+            @include('partials.footer.footer')
         </div>
 
         <script src="{{ mix('js/app.js') }}"></script>
         @stack('script')
         <script>
             let lastScrollTop = 0;
-            $(window).scroll(function(event){
-                let st = $(this).scrollTop();
+
+            $(window).scroll(function() {
                 let sidebar = $('#sidebar');
                 let bottom = $('#side_bottom');
 
-                if (st > lastScrollTop){
-                    if (bottom.position().top - sidebar.height() / 2 < $(this).scrollTop()) {
-                        sidebar.css('bottom', Math.min(0, -$(this).scrollTop() + sidebar.height() / 2) + 'px');
-                    }
-                } else {
-                    if (sidebar.position().top > $(this).scrollTop()) {
-                        sidebar.css('bottom', Math.min(0, -$(this).scrollTop()) + 'px');
-                    }
-                }
-                lastScrollTop = st;
+                sidebar.css('bottom', Math.min(0, -$(this).scrollTop() + 57) + 'px')
             });
         </script>
     </body>

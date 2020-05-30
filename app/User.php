@@ -7,16 +7,16 @@ use App\Chat\ChatUser;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Scout\Searchable;
+use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * @property-read \Illuminate\Support\Collection|\App\Point[] $points
  */
-class User extends Authenticatable implements HasMedia
+class User extends Authenticatable
 {
-    use Notifiable, Searchable, HasMediaTrait;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +24,7 @@ class User extends Authenticatable implements HasMedia
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'description', 'is_admin', 'phone', 'vk_link'
+        'name', 'email', 'password', 'description', 'is_admin', 'phone', 'vk_link', 'image'
     ];
 
     /**
@@ -83,5 +83,12 @@ class User extends Authenticatable implements HasMedia
     public function votes()
     {
         return $this->hasMany(Vote::class);
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->image ?
+            Storage::url($this->image) :
+            'https://upload.wikimedia.org/wikipedia/commons/4/46/%D0%A1%D0%B5%D1%80%D1%8B%D0%B9_%D1%86%D0%B2%D0%B5%D1%82-_2014-03-15_18-16.jpg';
     }
 }

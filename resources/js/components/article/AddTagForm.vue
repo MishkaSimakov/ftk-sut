@@ -1,10 +1,8 @@
 <template>
-    <div class="form-group row">
-        <label for="tags" class="col-md-4 col-form-label text-md-right">Теги</label>
+    <div class="form-group">
+        <label for="tags">Теги</label>
 
-        <div class="col-md-7">
-            <input v-bind:value="this.value" class="rounded" id="tags" name="tags">
-        </div>
+        <input v-bind:value="this.value" class="rounded" id="tags" name="tags">
     </div>
 </template>
 

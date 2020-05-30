@@ -9,11 +9,13 @@
                     </button>
                 </div>
                 <div class="modal-body p-4">
-                    <ul class="list-unstyled mb-0">
+                    <ul v-if="schedule.users.length" class="list-unstyled mb-0">
                         <li v-for="user in schedule.users">
                             <a :href="user.url">{{ user.name }}</a>
                         </li>
                     </ul>
+
+                    <p class="text-center" v-else>Никто не идёт!</p>
                 </div>
             </div>
         </div>

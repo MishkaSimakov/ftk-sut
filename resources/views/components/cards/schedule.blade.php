@@ -2,9 +2,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3 p-0">
-                <img data-lity src="{{ $schedule->imageUrl }}" class="h-100 w-100 card-img img-responsive" style="cursor: pointer;  object-fit: cover">
+                <img data-lity src="{{ $schedule->imageUrl }}" class="h-100 w-100 card-img" style="cursor: pointer; object-fit: cover">
             </div>
-            <div class="col-md-9 py-2 px-3">
+            <div class="d-flex flex-column col-md-9 py-2 px-3">
                 <div class="card-title">
                     @admin
                         <div class="dropdown no-gutters float-right mr-1">
@@ -41,6 +41,7 @@
                     <sign-button
                         url="{{ route('schedule.sign', compact('schedule')) }}"
                         data="{{ $schedule->load('users')->toJson() }}"
+                        class="mt-auto"
                     ></sign-button>
                 @endcan
             </div>

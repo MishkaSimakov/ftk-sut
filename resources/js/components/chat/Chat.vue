@@ -1,19 +1,23 @@
 <template>
-    <div class="container">
+    <div class="container mt-2">
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <a href="/chat">
-                        <span class="fa fa-arrow-left my-auto ml-2 mr-5"></span>
+                    <a href="/chat" class="ml-1">
+                        <i class="fas fa-arrow-left"></i>
                     </a>
 
-                    <div v-if="loading" class="spinner-border-sm spinner-border mx-1 my-auto" role="status">
-                        <span class="sr-only">Загрузка...</span>
+                    <div class="text-truncate col-8 text-primary h5 m-auto">
+                        <span v-if="!loading">
+                            {{ chat.name }}
+                        </span>
                     </div>
 
-                    <div class="text-primary text-lg" v-else>
-                        {{ chat.name }}
+                    <div v-on:click="openSettings" style="cursor: pointer" class="my-auto text-primary mr-1">
+                        <i class="fas fa-cog"></i>
                     </div>
+
+                    <chat-settings ref="settings" :chat="chat" v-if="!loading"></chat-settings>
                 </div>
             </div>
             <div class="card-body p-1">
@@ -33,14 +37,6 @@
             </div>
         </div>
     </div>
-<!--            <div class="col-md-4 col-sm-12 mt-2">-->
-<!--                <div v-if="loading" class="spinner-border-sm spinner-border mx-1 my-auto" role="status">-->
-<!--                    <span class="sr-only">Загрузка...</span>-->
-<!--                </div>-->
-<!--                <div v-else>-->
-<!--                    <chat-users></chat-users>-->
-<!--                </div>-->
-<!--            </div>-->
 </template>
 
 <script>
@@ -63,6 +59,9 @@
                 'setRead'
             ]),
             moment: moment,
+            openSettings() {
+                $(this.$refs.settings.$el).modal('show')
+            }
         },
         mounted() {
             this.getChat(this.id);
@@ -71,7 +70,7 @@
                 $('#tooltip_message_' + id).tooltip('dispose').tooltip({
                     title: 'изменено ' + moment(time).locale('ru').calendar().toLowerCase(),
                 })
-            });
+            })
         },
         updated() {
             let messages = document.getElementsByClassName('chat__messages')[0];

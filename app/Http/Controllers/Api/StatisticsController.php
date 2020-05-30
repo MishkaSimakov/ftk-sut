@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class StatisticsController extends Controller
 {
     public function points(User $user) {
-        $ratings = Rating::all()->sortByDesc('date')->load('points');
+        $ratings = Rating::where('type', 'monthly')->get()->sortByDesc('date')->load('points');
 
         $labels = [];
         $values = [];
@@ -26,33 +26,20 @@ class StatisticsController extends Controller
             }
         }
 
-        return json_encode([$labels, $values]);
+        return response()->json([$labels, $values]);
     }
 
     public function categories(User $user) {
-        $ratings = Rating::all()->load('points.category');
+        $values = $user->student->points()
+            ->WhereHas('rating', function ($q) {
+            $q->where('type', 'monthly');
+        })->get()->groupBy('category_id')->map(function ($category) {
+            return $category->pluck('amount')->sum();
+        });
+        $categories = $values->map(function ($value, $index) {
+            return PointCategory::where('id', $index)->select('color', 'title')->first();
+        })->toArray();
 
-        $labels = [];
-        $values = [];
-
-        foreach ($ratings as $rating) {
-            $points = $rating->points()->where('student_id', optional($user->student)->id)->get()->sortBy('category_id');
-
-            if ($points->count() != 0) {
-                foreach ($points as $point) {
-                    if (!in_array($point->category->title, $labels)) {
-                        array_push($labels, $point->category->title);
-                    }
-
-                    $values[array_search($point->category->title, $labels)][] = $point->amount;
-                }
-            }
-        }
-
-        foreach ($values as $key => $value) {
-            $values[$key] = array_sum($value);
-        }
-
-        return json_encode([$labels, $values]);
+        return response()->json([$categories, $values]);
     }
 }

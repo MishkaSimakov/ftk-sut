@@ -28,3 +28,7 @@
 @import "~lity/dist/lity.css";
 
 @import "~@yaireo/tagify/dist/tagify.css";
+
+html {
+    scroll-behavior: smooth;
+}

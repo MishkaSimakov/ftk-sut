@@ -1,35 +1,33 @@
-<footer class="footer">
-    <nav class="footer__wrapper">
-        <div class="footer__contacts contacts">
-            <a class="contacts__link--main" href="#">фтк сют</a>
-            <a href="https://vk.com/ftksut" class="contacts__link--vk" target="_blank">
-                <span class="fab fa-vk fa-3x mr-1" aria-hidden="true"></span>
-                <span class="contacts__link--vk__title">Наша группа Вконтакте</span>
-            </a>
-            <div class="contacts__telephone">
-                <span class="contacts__telephone--title">Контактный телефон:</span>
-                <a href="tel:+78639242821"><span class="contacts__telephone--number">+7 (8639) 24-28-21</span></a>
-            </div>
-            <div class="contacts__address">
-                <span class="contacts__address--title">Адрес:</span>
-                <span class="contacts__address--position">пр. Курчатова, 47,<br>
-                                                    подъезд 1, этаж 1</span>
-                <a href="https://yandex.ru/maps/-/CGd~eEpW" class="contacts__address--map" target="_blank">Показать на карте</a>
-            </div>
+<footer>
+    <div class="mx-2">
+        <hr class="mb-0">
+
+        <div class="ml-3 float-left">
+            <a href="{{ route('main') }}" class="text-muted">Главная</a>
         </div>
 
-        <ul class="footer__navigation">
-            <li class="footer__navigation__item"><a href="{{ route('rating.index') }}" class="footer__navigation__link">Рейтинг</a></li>
-            <li class="footer__navigation__item"><a href="{{ route('achievements.index') }}" class="footer__navigation__link">Достижения</a></li>
-            <li class="footer__navigation__item"><a href="{{ route('article.index', ['filter' => 'best']) }}" class="footer__navigation__link">Статьи</a></li>
-            <li class="footer__navigation__item"><a href="{{ route('schedule.index') }}" class="footer__navigation__link">Расписание</a></li>
-        </ul>
-    </nav>
+        <div class="mr-3 text-muted float-right">
+            <a href="https://vk.com/ftksut" class="text-muted">Группа ВК</a>
 
-    <div class="footer__copyright copyright">
-        <p class="copyright__title"><span class="copyright__letter">©</span> {{ now()->year }}</p>
-        <ul class="copyright__authors">
-            <li class="copyright__author"><a href="https://vk.com/simakovkin" class="copyright__author__link">Михаил Симаков</a></li>
-        </ul>
+            <div class="dropdown dropup d-inline">
+                <a href="#" class="text-muted" id="creators" data-toggle="dropdown" data-boundary="window">
+                    Создатели
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="https://vk.com/simakovkin">Симаков Михаил</a>
+                    <a class="dropdown-item" href="https://vk.com/quanz">Даричев Егор</a>
+
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Отдельная благодарность</h6>
+                    <a class="dropdown-item">Игорь Вячеславович<br> Маркин</a>
+            </div>
+            </div>
+        </div>
     </div>
 </footer>
+
+{{--@push('script')--}}
+{{--    <script>--}}
+{{--        // $('.dropdown-toggle').dropdown( )--}}
+{{--    </script>--}}
+{{--@endpush--}}

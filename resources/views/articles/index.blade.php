@@ -28,8 +28,8 @@
     </div>
 @endsection
 
-@push('side')
-    <articles-top></articles-top>
-    <writers-top></writers-top>
-    <comments-top></comments-top>
-@endpush
+{{--@push('side')--}}
+{{--    <articles-top></articles-top>--}}
+{{--    <writers-top></writers-top>--}}
+{{--    <comments-top></comments-top>--}}
+{{--@endpush--}}

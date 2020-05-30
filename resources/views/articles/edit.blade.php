@@ -3,76 +3,62 @@
 @section('content')
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-11">
-            <div class="card shadow mt-2">
-                <div class="card-header">
-                    <h4 class="font-weight-bold text-primary">Статья</h4>
+    <div class="card shadow mt-2">
+        <div class="card-header">
+            <h4 class="font-weight-bold text-primary">Статья</h4>
+        </div>
+
+        <div class="card-body container">
+            <form id="form" enctype="multipart/form-data" method="POST" action="{{ route('article.update', compact('article')) }}">
+                @csrf
+                @method("PUT")
+
+                <div class="form-group">
+                    <label for="title">Название статьи</label>
+                    <input max="100" id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') ?? $article->title }}" required>
+
+                    @if ($errors->has('title'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('title') }}</strong>
+                        </span>
+                    @endif
                 </div>
 
-                <div class="card-body">
-                    <form id="form" enctype="multipart/form-data" method="POST" action="{{ route('article.update', compact('article')) }}">
-                        @csrf
-                        @method("PUT")
+                <div class="form-group">
+                    <label for="editor">Статья</label>
 
-                        <div class="form-group row">
-                            <label for="title" class="col-md-4 col-form-label text-md-right">Название статьи</label>
-
-                            <div class="col-md-7">
-                                <input max="100" id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') ?? $article->title }}" required>
-
-                                @if ($errors->has('title'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="editor" class="col-md-4 col-form-label text-md-right">Статья</label>
-
-                            <div class="col-md-7 mb-5">
-                                <textarea name="body" id="editor">
-                                    {!! old('body') ?? $article->body !!}
-                                </textarea>
-                            </div>
-                        </div>
-
-                        @admin
-                            <div class="form-group row">
-                                <label for="author" class="col-md-4 col-form-label text-md-right">Автор</label>
-
-                                <div class="col-md-7">
-                                    <input list="users" id="user" type="text" class="form-control" name="author" value="{{ optional($article->user)->name ?? Auth::user()->name }}">
-                                </div>
-
-                                <datalist id="users">
-                                    @foreach($names as $name)
-                                        <option>{{ $name }}</option>
-                                    @endforeach
-                                </datalist>
-                            </div>
-                        @endadmin
-
-                        <tags-add-form value="{{ $article->tags->pluck('name') }}"></tags-add-form>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Опубликовать
-                                </button>
-
-                                <div class="d-inline-block">
-                                    <button name="is_blank" value="true" type="submit" class="btn btn-secondary {{ !$is_draftable ? 'disabled' : '' }}" {{ !$is_draftable ? 'disabled' : '' }}>
-                                        Добавить в черновики
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    <textarea name="body" id="editor">
+                        {!! old('body') ?? $article->body !!}
+                    </textarea>
                 </div>
-            </div>
+
+                @admin
+                    <div class="form-group">
+                        <label for="author">Автор</label>
+                        <input list="users" id="user" type="text" class="form-control" name="author" value="{{ optional($article->user)->name ?? Auth::user()->name }}">
+
+                        <datalist id="users">
+                            @foreach($names as $name)
+                                <option>{{ $name }}</option>
+                            @endforeach
+                        </datalist>
+                    </div>
+                @endadmin
+
+                <tags-add-form value="{{ $article->tags->pluck('name') }}"></tags-add-form>
+
+                <div class="form-group mb-0">
+                    <button type="submit" class="btn btn-outline-primary">
+                        Опубликовать
+                    </button>
+
+                    <div class="d-inline-block">
+                        <button name="is_blank" value="true" type="submit" class="btn btn-outline-secondary {{ !$is_draftable ? 'disabled' : '' }}" {{ !$is_draftable ? 'disabled' : '' }}>
+                            Добавить в черновики
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -33,4 +33,9 @@ class Rating extends Model
     {
         return route('rating.show', $this);
     }
+
+    public function getYearAttribute()
+    {
+        return $this->type == 'montly' ? $this->date->year : $this->date;
+    }
 }

@@ -18,8 +18,6 @@ class CreateStudentsTable extends Migration
             $table->string('name');
 
             $table->unsignedInteger('user_id')->nullable();
-            $table->date('admissioned_at')->nullable();
-            $table->date('birthday')->nullable();
             $table->timestamps();
         });
     }

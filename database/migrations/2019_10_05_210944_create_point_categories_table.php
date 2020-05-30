@@ -15,7 +15,8 @@ class CreatePointCategoriesTable extends Migration
     {
         Schema::create('point_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('slug');
+            $table->string('color');
             $table->string('title');
             $table->timestamps();
         });

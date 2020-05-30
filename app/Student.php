@@ -47,13 +47,6 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getAmount(Rating $rating, PointCategory $category)
-    {
-        $point = $this->points->where('rating_id', $rating->id)->where('category_id', $category->id)->first();
-
-        return $point ? $point->amount : 0;
-    }
-
     public function award(Rating $rating, PointCategory $category, $amount) {
         $point = Point::make();
 
@@ -68,11 +61,6 @@ class Student extends Model
     public function achievements()
     {
         return $this->belongsToMany(Achievement::class, 'student_achievements');
-    }
-
-    public function clubs()
-    {
-        return $this->belongsToMany(Club::class, 'student_clubs');
     }
 
     public function points()

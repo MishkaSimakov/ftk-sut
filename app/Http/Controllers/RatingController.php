@@ -16,18 +16,25 @@ use function view;
 
 class RatingController extends Controller
 {
-    public function index(Request $request)
+    public function __construct()
+    {
+        $this->middleware('admin', [
+            'except' => ['index', 'show']
+        ]);
+    }
+
+    public function index()
     {
         $ratings = Rating::all()->sortByDesc('date');
+
+        dd($ratings->first()->year);
 
         return view('rating.index', compact('ratings'));
     }
 
     public function show(Rating $rating)
     {
-        $categories = PointCategory::all();
-
-        return view('rating.show', compact(['rating', 'categories']));
+        return view('rating.show', compact('rating'));
     }
 
     public function create()
@@ -47,10 +54,10 @@ class RatingController extends Controller
         $rating->save();
 
 
-        $categories = PointCategory::categories();
+        $categories = PointCategory::all()->keyBy('slug');
 
         $ratingRows = $this->resolveRatingPoints($rows);
-        $existsStudents = Student::whereIn('name', array_keys($ratingRows))->get()->keyBy('name'); //TODO: переделать логику на уникальные имена
+        $existsStudents = Student::whereIn('name', array_keys($ratingRows))->get()->keyBy('name');
 
         foreach ($ratingRows as $key => $row) {
             // get or create students
@@ -67,7 +74,7 @@ class RatingController extends Controller
             foreach ($row as $category => $point) {
                 $points[$category] = $point;
 
-                $student->award($rating, $categories->get($category), $point);
+                $student->award($rating, $categories[$category], $point);
             }
 
             // dispatch event

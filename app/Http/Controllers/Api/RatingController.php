@@ -11,59 +11,30 @@ class RatingController extends Controller
 {
     public function show(Rating $rating)
     {
-        $students = $rating->students()->with(['user', 'points'])->get();
+        $students = $rating->students()->with([
+            'user',
+            'points' => function ($query) use ($rating) {
+                $query->where('rating_id', $rating->id);
+            },
+            'points.category'
+        ])->get();
+        $categories = PointCategory::select('id', 'color', 'title')->get();
 
-        $categories = PointCategory::categories();
+        $data = $students->map(function ($student) {
+            return [
+                'user' => $student->user,
+                'total' => array_sum($student->points->pluck('amount')->toArray()),
+                'points' => $student->points->map(function ($point) {
+                    return [
+                        'id' => $point->category->id,
+                        'amount' => $point->amount,
+                        'color' => $point->category->color,
+                        'title' => $point->category->title
+                    ];
+                })
+            ];
+        });
 
-        $chartData = [];
-
-        foreach ($students as $student) {
-            $studentPoints = ['us|' . optional($student->user)->id];
-
-            foreach ($categories as $category) {
-                array_push($studentPoints, $student->getAmount($rating, $category), 'stroke-width: 1; stroke-color: black;');
-            }
-
-            array_push($studentPoints, array_sum($studentPoints));
-
-            array_push($studentPoints, [optional($student->user)->id, $student->name, optional($student->user)->url]);
-
-            array_push($chartData, $studentPoints);
-        }
-
-        $chartData = array_values(Arr::sort($chartData, function ($student) {
-            return $student[19];
-        }));
-
-        return json_encode($chartData);
+        return response()->json([$categories, $data]);
     }
-
-//    public function show(Rating $rating)
-//    {
-//        $students = $rating->students()->with('user', 'points')->get();
-//
-//        $categories = PointCategory::categories();
-//
-//        $data = [];
-//
-//        foreach ($categories as $category) {
-//            $data[$category->title] = [];
-//        }
-//
-//        $labels = $students->map(function ($student) {
-//           return $student->user->name;
-//        });
-//
-//        foreach ($students as $student) {
-//            foreach ($categories as $category) {
-//                array_push($data[$category->title], $student->getAmount($rating, $category));
-//            }
-//        }
-//
-////        $chartData = array_values(Arr::sort($chartData, function ($student) {
-////            return $student[19];
-////        }));
-//
-//        return response()->json([$labels, $data]);
-//    }
 }
