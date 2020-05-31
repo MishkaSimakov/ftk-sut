@@ -13,6 +13,7 @@ class RatingsImport implements ToModel
         return new Point([
             'user_name' => $row[0],
 
+            'activity' => $row[2],
             'games' => $row[3],
             'press' => $row[4],
             'travels' => $row[5],

@@ -26,7 +26,7 @@ class StoreNewsRequest extends FormRequest
     {
         return [
             'title' => 'required|max:100|string',
-            'body' => 'required|max:1000|string',
+            'body' => 'required|max:5000|string',
         ];
     }
 
@@ -38,7 +38,7 @@ class StoreNewsRequest extends FormRequest
             'title.string' => 'Здесь должен быть текст',
 
             'body.required' => 'Введите текст новости',
-            'body.max' => 'Текст должно быть короче 1000 символов',
+            'body.max' => 'Текст должно быть короче 5000 символов',
             'body.string' => 'Здесь должен быть текст',
         ];
     }

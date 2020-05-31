@@ -33,6 +33,7 @@ export default function () {
     // rating
     Vue.component('rating', require('./components/rating/Rating.vue').default);
     Vue.component('rating-bar', require('./components/rating/Bar.vue').default);
+    Vue.component('rating-select-date', require('./components/rating/DateSelect.vue').default);
 
     // vote
     Vue.component('vote', require('./components/vote/Vote.vue').default);

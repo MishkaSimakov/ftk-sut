@@ -1,9 +1,24 @@
 <div class="card shadow mb-2">
     <div class="card-body p-2">
-        <p class="float-right text-muted">{{ $current_news->created_at->locale('ru')->isoFormat('D MMMM Y') }}</p>
-        <h3 class="text-center">{{ $current_news->title }}</h3>
+        <div class="row no-gutters">
+            <div class="col-md-2">
+                <p class="my-auto float-left text-muted">{{ $current_news->created_at->locale('ru')->isoFormat('D MMMM Y') }}</p>
+            </div>
 
-        <p>{!! $current_news->body !!}</p>
+            <div class="col-md-8 text-center">
+                <h3 class="font-weight-bolder">{{ $current_news->title }}</h3>
+            </div>
+
+            <div class="col-md-2">
+                @admin
+                    <a href="{{ route('news.edit', ['news' => $current_news]) }}"><i class="fas fa-cog float-right"></i></a>
+                @endadmin
+            </div>
+        </div>
+
+        <div class="mx-2">
+            {!! $current_news->body !!}
+        </div>
 
         <div class="float-right h5 m-0">
             <a class="article__comment_link">

@@ -1,7 +1,7 @@
 <template>
     <div class="chat__message" :class="[{ 'chat__message--own' : message.selfOwned }, { 'chat__message--unread' : isUnread }, { 'chat__message--replied' : is_replied}]">
-        <strong class="chat__message-user">{{ message.user.name }}</strong>
-        <span class="chat__message-timestamp" v-if="!is_replied">{{ moment(message.created_at).locale('ru').fromNow() }}</span>
+        <strong class="font-weight-bolder">{{ message.user.name }}</strong>
+        <span class="chat__message-timestamp d-none d-md-inline" v-if="!is_replied">{{ moment(message.created_at).locale('ru').fromNow() }}</span>
 
         <div class="row mr-2 float-right chat__message-other" v-if="!is_replied">
             <div v-if="!message.loading && !message.reply && !is_editing" class="mr-2">
@@ -79,10 +79,6 @@
             &-timestamp {
                 margin-left: 10px;
                 color: #aaa;
-            }
-
-            &-user {
-                font-weight: 800;
             }
 
             &-body {

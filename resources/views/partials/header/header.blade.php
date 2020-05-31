@@ -1,7 +1,9 @@
 <header>
-    <nav class="sticky-top navbar navbar-expand navbar-dark bg-dark">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <a href="#" class="d-block d-lg-none" id="small_nav_toggler"><i class="fa fa-bars"></i></a>
+
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="d-none d-lg-block navbar-brand" href="{{ url('/') }}">
                 ФТК СЮТ
             </a>
 

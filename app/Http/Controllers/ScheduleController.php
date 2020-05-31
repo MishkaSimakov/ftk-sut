@@ -19,7 +19,7 @@ class ScheduleController extends Controller
     }
 
     public function index() {
-        $schedules = Schedule::all()->sortBy('date_start');
+        $schedules = Schedule::future()->get()->sortByDesc('date_start');
 
         return view('schedule.index', compact('schedules'));
     }

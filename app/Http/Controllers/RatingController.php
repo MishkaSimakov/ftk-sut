@@ -25,9 +25,7 @@ class RatingController extends Controller
 
     public function index()
     {
-        $ratings = Rating::all()->sortByDesc('date');
-
-        dd($ratings->first()->year);
+        $ratings = Rating::all()->sortByDesc('date')->groupBy('academicYear');
 
         return view('rating.index', compact('ratings'));
     }
@@ -48,8 +46,13 @@ class RatingController extends Controller
 
         $rating = Rating::make();
 
-        $rating->type = $request->type ? 'monthly' : 'yearly';
-        $rating->date = Carbon::parse($request->date);
+        $rating->type = $request->type;
+
+        if ($request->type === 'yearly') {
+            $rating->date = now()->setYear($request->date + 1)->setMonth(5)->endOfMonth();
+        } else {
+            $rating->date = Carbon::parse($request->date);
+        }
 
         $rating->save();
 
@@ -81,7 +84,7 @@ class RatingController extends Controller
             UserEarnedPoints::dispatch($rating, $student, $points);
         }
 
-        return redirect(route('rating.show', compact(['rating', 'categories']))); //TODO: check, maybe 'categories' parameter can be removed?
+        return redirect(route('rating.show', compact('rating')));
     }
 
     protected function resolveRatingPoints($rows): array
@@ -94,6 +97,7 @@ class RatingController extends Controller
 
         foreach ($ratingRows as $row) {
             $points = Arr::add($points, $row[0], array_filter([
+                'activity' => $row[2],
                 'games' => $row[3],
                 'press' => $row[4],
                 'travels' => $row[5],

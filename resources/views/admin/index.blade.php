@@ -50,7 +50,7 @@
                                 <td><a href="{{ $student->user->url }}" title="Страница пользователя">{{ $student->name }}</a></td>
                                 <td>{{ $student->user->register_code }}</td>
                                 <td>{{ $student->user->email ? 'Да' : 'Нет' }}</td>
-                                <td class="text-center" data-toggle="modal" data-target="#settings_student_{{ $student->id }}"><i style="cursor: pointer" class="text-primary fas fa-user-cog"></i></td>
+                                <td class="text-center"><a href="{{ route('settings.show.admin', ['user' => $student->user]) }}"><i class="fas fa-user-cog"></i></a></td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -68,7 +68,7 @@
                     <thead>
                         <tr>
                             <th>ФИО</th>
-                            <th>Кружок</th>
+                            <th>Регистрационный код</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -78,7 +78,7 @@
                                 <td>{{ $teacher->full_name }}</td>
                                 <td>{{ $teacher->user->register_code }}</td>
 
-                                <td class="text-center"><a href="{{ route('admin.teacher.edit', compact('teacher')) }}"><i class="fas fa-user-cog"></i></a></td>
+                                <td class="text-center"><a href="{{ route('settings.show.admin', ['user' => $teacher->user]) }}"><i class="fas fa-user-cog"></i></a></td>
                             </tr>
                         @endforeach
                     </tbody>

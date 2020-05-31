@@ -72,6 +72,9 @@
 
 <script>
     export default {
+        props: [
+            'id'
+        ],
         data: function () {
             return {
                 hiding: {
@@ -135,7 +138,7 @@
         },
         mounted() {
             new Promise((resolve, reject) => {
-                axios.get('/api/rating/1').then((response) => {
+                axios.get('/api/rating/' + this.id).then((response) => {
                     this.prepareData(response.data[1]);
                     this.rating = this.data;
 

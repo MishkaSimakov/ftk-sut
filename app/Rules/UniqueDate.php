@@ -27,7 +27,11 @@ class UniqueDate implements Rule
      */
     public function passes($attribute, $value)
     {
-        return !Rating::whereDate('date', Carbon::parse($value))->exists();
+        if (is_numeric($value)) {
+            return !Rating::whereDate('date', now()->setYear($value + 1)->setMonth(5)->endOfMonth())->exists();
+        } else {
+            return !Rating::whereDate('date', Carbon::parse($value))->exists();
+        }
     }
 
     /**

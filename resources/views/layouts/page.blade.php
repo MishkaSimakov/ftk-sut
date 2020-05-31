@@ -82,6 +82,11 @@
                                 @stack('side')
                             </div>
                         </div>
+                        <div class="d-block d-lg-none">
+                            <div>
+                                @include('partials.side.small')
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -100,6 +105,26 @@
 
                 sidebar.css('bottom', Math.min(0, -$(this).scrollTop() + 57) + 'px')
             });
+
+            $(document).ready(function () {
+                let opened = false;
+
+                $('#small_nav_toggler').click(function () {
+                    $('#small_sidebar').toggle('normal');
+
+                    setTimeout(function () {
+                        opened = !opened
+                    }, 100);
+                });
+
+                $(document).on('click', '*:not(#small_sidebar)', function (e) {
+                    if (opened) {
+                        $('#small_sidebar').hide('normal');
+
+                        opened = false;
+                    }
+                });
+            })
         </script>
     </body>
 </html>

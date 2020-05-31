@@ -1,9 +1,8 @@
 <template>
-    <li class="page-navigation__item nav-item">
-        <a class="page-navigation__link nav-link" v-bind:href="url">
-            Сообщения
-            <span v-if="unread_count" class="badge badge-light">{{ unread_count }}</span>
-        </a>
+    <li>
+        <a v-bind:href="url"><i class="fas fa-comments mr-2"></i>Сообщения</a>
+
+        <span v-if="unread_count" class="ml-2 badge badge-light my-auto">{{ unread_count }}</span>
     </li>
 </template>
 

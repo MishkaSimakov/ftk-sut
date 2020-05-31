@@ -2,7 +2,6 @@
     <!--        <chat-add-form></chat-add-form>-->
 
     <div class="mt-4 shadow card">
-        <div class="card-header">Комментарии</div>
         <div class="card-body p-0">
             <div v-if="loading" class="d-flex spinner-border my-4 mx-auto" role="status">
                 <span class="sr-only">Загрузка...</span>

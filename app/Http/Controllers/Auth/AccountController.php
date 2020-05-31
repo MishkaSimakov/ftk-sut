@@ -8,6 +8,7 @@ use App\Http\Requests\StoreUser;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -44,12 +45,21 @@ class AccountController extends Controller
 
     public function image(Request $request)
     {
-        Storage::delete(auth()->user()->image);
+        if ($request->user()->getMedia()->count()) {
+            $request->user()->deleteMedia($request->user()->getMedia()->first());
+        }
 
-        auth()->user()->update([
-            'image' => Arr::first($request->allFiles())->store('user'),
-        ]);
+        /** @var UploadedFile $photo */
+        $photo = Arr::first($request->allFiles());
 
-        return auth()->user()->imageUrl;
+        $name = Str::slug(str_replace("." . $photo->getClientOriginalExtension(), "", $photo->getClientOriginalName()));
+        $filename = $name . '.' . $photo->getClientOriginalExtension();
+
+        return response()->json(
+            $request->user()->addMedia($photo->path())
+                ->usingFileName($filename)
+                ->usingName($name)
+                ->toMediaCollection()->getUrl()
+        );
     }
 }

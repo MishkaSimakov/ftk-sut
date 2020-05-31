@@ -9,14 +9,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div v-if="chat.selfOwned">
-                        <chat-name-form></chat-name-form>
+                    <chat-name-form v-if="chat.selfOwned"></chat-name-form>
 
-                        <hr>
-                    </div>
-                    <div v-else>
-                        {{ chat.name }}
-                    </div>
+                    <p v-else class="text-center">{{ chat.name }}</p>
+
+                    <hr>
 
                     <chat-users></chat-users>
                 </div>

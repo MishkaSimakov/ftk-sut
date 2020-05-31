@@ -31,7 +31,7 @@ class StoreRating extends FormRequest
                 new UniqueDate(),
             ],
             'file' => 'required|mimes:xls',
-            'type' => 'required|in:0,1',
+            'type' => 'required|in:monthly,yearly',
         ];
     }
 

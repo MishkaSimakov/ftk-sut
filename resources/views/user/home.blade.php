@@ -46,7 +46,7 @@
     @endif
 
     @if ($user->articles->count())
-        <p>Статьи</p>
+{{--        articles--}}
     @endif
 @endsection
 

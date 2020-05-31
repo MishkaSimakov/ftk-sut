@@ -26,7 +26,9 @@ Route::resource('achievements', 'AchievementController')->only([
 
 
 Route::post('/schedule/{schedule}/sign', 'Api\ScheduleController@sign')->name('schedule.sign');
-Route::resource('schedule', 'ScheduleController');
+Route::resource('schedule', 'ScheduleController')->except([
+    'show'
+]);
 
 
 Route::get('/vote/create', 'VoteController@create')->name('vote.create')->middleware('auth');

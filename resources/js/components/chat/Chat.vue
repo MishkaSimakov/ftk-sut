@@ -7,8 +7,8 @@
                         <i class="fas fa-arrow-left"></i>
                     </a>
 
-                    <div class="text-truncate col-8 text-primary h5 m-auto">
-                        <span v-if="!loading">
+                    <div class="text-truncate col-8 text-center text-primary h5 m-auto">
+                        <span data-toggle="tooltip" :data-title="chat.name" v-if="!loading">
                             {{ chat.name }}
                         </span>
                     </div>
@@ -70,11 +70,15 @@
                 $('#tooltip_message_' + id).tooltip('dispose').tooltip({
                     title: 'изменено ' + moment(time).locale('ru').calendar().toLowerCase(),
                 })
-            })
+            });
         },
         updated() {
             let messages = document.getElementsByClassName('chat__messages')[0];
             messages.scroll(0, messages.scrollHeight);
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            });
         },
     }
 </script>

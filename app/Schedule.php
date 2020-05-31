@@ -45,11 +45,11 @@ class Schedule extends Model implements HasMedia
 
     public function scopeArchived()
     {
-        return Article::where('date_end', '<=', now());
+        return Schedule::where('date_end', '<=', now());
     }
 
     public function scopeFuture()
     {
-        return Article::where('date_end', '>', now());
+        return Schedule::where('date_end', '>', now());
     }
 }

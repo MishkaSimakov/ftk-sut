@@ -24,18 +24,35 @@ class Rating extends Model
         return $this->belongsToMany(Student::class, 'points')->distinct();
     }
 
+    public function getYearAttribute()
+    {
+        return $this->date->isoFormat('YYYY');
+    }
+
+    public function getAcademicYearAttribute()
+    {
+        if ($this->type === 'yearly') {
+            return ($this->year - 1) . '-' . $this->year;
+        }
+
+        if ($this->date->isoFormat('MM') <= 5) {
+            return ($this->year - 1) . '-' . $this->year;
+        } else if ($this->date->isoFormat('MM') >= 9) {
+            return $this->year . '-' . ($this->year + 1);
+        }
+
+        return null;
+    }
+
     public function getNameAttribute()
     {
-        return $this->date->locale('ru')->isoFormat($this->type == 'monthly' ? 'Рейтинг за MMMM YYYY' : 'Рейтинг за YYYY год');
+        return $this->type == 'monthly' ?
+                'Рейтинг за ' . $this->date->locale('ru')->isoFormat('MMMM YYYY') :
+                'Рейтинг за '. $this->academicYear . ' гг.';
     }
 
     public function getUrlAttribute()
     {
         return route('rating.show', $this);
-    }
-
-    public function getYearAttribute()
-    {
-        return $this->type == 'montly' ? $this->date->year : $this->date;
     }
 }

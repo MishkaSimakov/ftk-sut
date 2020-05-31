@@ -7,12 +7,12 @@
 
             <div class="float-right">
                 @can('update', $article)
-                    <a class="text-decoration-none" href="{{ route('article.edit', compact('article')) }}">
+                    <a class="d-none d-md-block text-decoration-none" href="{{ route('article.edit', compact('article')) }}">
                         <span class="fa-xs ml-2 fas fa-cog"></span>
                     </a>
                 @endcan
                 @can('delete', $article)
-                    <a class="text-primary" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
+                    <a class="d-none d-mdblock text-primary" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
                         <span class="fa-xs ml-2 fas fa-trash"></span>
                     </a>
 

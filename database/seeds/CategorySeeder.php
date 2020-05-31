@@ -23,5 +23,7 @@ class CategorySeeder extends Seeder
         factory(PointCategory::class)->create(['title' => 'Походы и экскурсии', 'slug' => 'travels', 'color' => '#ccffff']);
         factory(PointCategory::class)->create(['title' => 'Городские соревнования', 'slug' => 'local_competitions', 'color' => '#00ff00']);
         factory(PointCategory::class)->create(['title' => 'Областные, всероссийские, международные соревнования', 'slug' => 'global_competitions', 'color' => '#ff8080']);
+
+        factory(PointCategory::class)->create(['title' => 'Занятия (кружок неизвестен)', 'slug' => 'activity', 'color' => '#808080']);
     }
 }
