@@ -13,6 +13,13 @@ export default {
             })
         })
     },
+    loadChatPage(id, page) {
+        return new Promise((resolve, reject) => {
+            axios.get('/webapi/chats/' + id + '?page=' + page).then((response) => {
+                resolve(response)
+            })
+        })
+    },
     storeChatMessage(id, {body, images, reply_id}) {
         // console.log(images.get('files'));
 

@@ -18,3 +18,16 @@
         </ul>
     </div>
 </div>
+
+@push('script')
+    <script>
+        let lastScrollTop = 0;
+
+        $(window).scroll(function() {
+            let sidebar = $('#sidebar');
+            let bottom = Math.min(0, -$(this).scrollTop());
+
+            sidebar.css('bottom', bottom + 'px')
+        });
+    </script>
+@endpush

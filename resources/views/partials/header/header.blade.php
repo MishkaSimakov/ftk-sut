@@ -1,6 +1,6 @@
 <header>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <a href="#" class="d-block d-lg-none" id="small_nav_toggler"><i class="fa fa-bars"></i></a>
+    <nav class="fixed-top navbar navbar-expand navbar-dark bg-dark">
+        <a style="cursor: pointer" class="text-primary d-block d-lg-none" id="small_nav_toggler"><i class="fa fa-bars"></i></a>
 
         <div class="container">
             <a class="d-none d-lg-block navbar-brand" href="{{ url('/') }}">

@@ -5,7 +5,9 @@ import Bus from '../../bus'
 const state = {
     chat: null,
     loadingChat: true,
-    messageError: false
+    loadingPage: true,
+    messageError: false,
+    currentPage: 0
 };
 
 const getters = {
@@ -15,12 +17,18 @@ const getters = {
     loadingChat: state => {
         return state.loadingChat
     },
+    loadingPage: state => {
+        return state.loadingPage
+    },
     messageError: state => {
         return state.messageError
     },
     getChats: (state, getters, rootState) => {
         return rootState.chats.chats
-    }
+    },
+    getCurrentPage: state => {
+        return state.currentPage;
+    },
 };
 
 const actions = {
@@ -34,7 +42,13 @@ const actions = {
                 name: window.Laravel.user.name
             },
             images: images.map((i) => {
-                return URL.createObjectURL(i)
+                let url = URL.createObjectURL(i);
+
+                return {
+                    'url': url,
+                    'width': null,
+                    'height': null,
+                }
             }),
             body: body,
             reply: reply,
@@ -45,17 +59,26 @@ const actions = {
     },
     getChat({dispatch, commit}, id) {
         commit('setChatLoading', true);
+        state.loadingPage = true;
 
         if (state.chat) {
             Echo.leave('chat.' + state.chat.id)
         }
 
         api.getChat(id).then((response) => {
-            commit('setChat', response.data);
+            response.data.messages = response.data.messages.reverse();
 
+            commit('setChat', response.data);
             commit('setChatLoading', false);
 
+            Bus.$emit(
+                'chat.scroll',
+                response.data.messages[response.data.messages.length - 1].id
+            );
+
             actions.setRead({dispatch, commit}, id);
+
+            state.currentPage = response.data.pageCount - 1;
 
             Echo.private('chat.' + id)
                 .listen('ChatMessageCreated', (e) => {
@@ -78,14 +101,30 @@ const actions = {
                         time: e.message.updated_at,
                     })
                 })
-                // .listen('ConversationUserCreated', (e) => {
-                //     commit('updateUsersInConversation', e.data.users.data)
-                // });
         })
+    },
+    scrolled() {
+        state.loadingPage = false;
+    },
+    loadChatPage({dispatch, commit}, id) {
+        state.loadingPage = true;
+        state.currentPage--;
+
+        let first_message = state.chat.messages[0].id;
+
+        api.loadChatPage(id, state.currentPage).then((response) => {
+            state.chat.messages.unshift(...response.data.messages.reverse());
+
+            Bus.$emit(
+                'chat.scroll',
+                first_message
+            );
+        });
     },
     createChatMessage({dispatch, commit}, {id, body, images, reply}) {
         let tempMessage = actions.buildTempMessage(id, body, images, reply);
         commit('appendToChat', tempMessage);
+        Bus.$emit('chat.scroll', tempMessage.id);
 
         const formData = new FormData();
 

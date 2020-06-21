@@ -16,8 +16,11 @@ class Chat extends Model
     protected $appends = [
         'selfOwned',
         'isUnread',
-        'ownerId'
+        'ownerId',
+        'pageCount'
     ];
+
+    public $perPage = 25;
 
     public function users()
     {
@@ -26,7 +29,7 @@ class Chat extends Model
 
     public function messages()
     {
-        return $this->hasMany(Message::class)->orderBy('created_at')->with('user');
+        return $this->hasMany(Message::class)->with('user');
     }
 
     public function touchLastMessage()
@@ -65,5 +68,14 @@ class Chat extends Model
     public function getIsUnreadAttribute()
     {
         return $this->users()->where('id', auth()->user()->id)->pluck('is_unread')->first();
+    }
+
+    public function getPageCountAttribute()
+    {
+        return intval(
+            ceil(
+                $this->messages()->count() / $this->perPage
+            )
+        );
     }
 }

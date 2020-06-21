@@ -15,8 +15,11 @@ window.Quill = require('Quill');
 // import tinymce from 'tinymce'
 // window.tinymce = tinymce;
 
-// import VueObserveVisibility from 'vue-observe-visibility'
-// Vue.use(VueObserveVisibility);
+import VueObserveVisibility from 'vue-observe-visibility'
+Vue.use(VueObserveVisibility);
+
+let VueScrollTo = require('vue-scrollto');
+Vue.use(VueScrollTo);
 
 import loadComponents from './components';
 loadComponents();

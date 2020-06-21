@@ -59,7 +59,7 @@ class ChatMessageController extends Controller
 
         broadcast(new ChatMessageCreated($message->withoutRelations()->load(['user'])))->toOthers();
 
-        return response()->json($images);
+        return response()->json($message->images);
     }
 
     public function update(Chat $chat, Message $message, Request $request)

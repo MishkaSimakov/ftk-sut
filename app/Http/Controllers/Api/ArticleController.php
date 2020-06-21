@@ -103,4 +103,11 @@ class ArticleController extends Controller
 
         return response()->json($articles_sorted_array);
     }
+
+//    public function articles(Request $request)
+//    {
+//        $articles = Article::paginate(1, ['*'], null, $request->page);
+//
+//        return response()->json($articles);
+//    }
 }

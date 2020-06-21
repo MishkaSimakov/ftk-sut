@@ -9,7 +9,7 @@
             </div>
         </div>
 
-        <p class="article__comment-body">{{ comment.body }}</p>
+        <p class="article__comment-body">{{ comment.body }}<span v-if="comment.created_at !== comment.updated_at" class="text-muted ml-2" v-bind:id="'tooltip_comment_' + comment.id">(ред.)</span></p>
     </div>
 </template>
 
@@ -24,7 +24,14 @@
         methods: {
             moment: moment,
             edit() {
-                Bus.$emit('comment.edit', this.comment)
+                Bus.$emit('comment.edit', this.comment);
+            }
+        },
+        mounted() {
+            if (this.comment.updated_at !== this.comment.created_at) {
+                $('#tooltip_comment_' + this.comment.id).tooltip({
+                    title: 'изменено ' + moment(this.comment.updated_at).locale('ru').calendar().toLowerCase(),
+                })
             }
         }
     }

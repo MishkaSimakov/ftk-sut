@@ -1,4 +1,5 @@
 import api from '../api/comment'
+import moment from "moment";
 
 const state = {
     comments: [],
@@ -64,6 +65,7 @@ const actions = {
                 state.comments = state.comments.map((c) => {
                     if (c.id === comment) {
                         c.body = body;
+                        c.updated_at = moment()
                     }
 
                     return c;

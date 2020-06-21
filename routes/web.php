@@ -12,6 +12,8 @@ Route::prefix('article')->name('article.')->group(function() {
     Route::get('/draft', 'ArticleController@draft')->name('draft');
 });
 
+//Route::get('webapi/articles', 'Api\ArticleController@articles')->name('api.articles.get');
+
 Route::resource('article', 'ArticleController');
 
 Route::resource('rating', 'RatingController')->only([

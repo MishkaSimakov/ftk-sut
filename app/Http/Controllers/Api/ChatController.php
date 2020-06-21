@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreChat;
 use Illuminate\Http\Request;
 
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 class ChatController extends Controller
 {
     public function __construct()
@@ -22,11 +26,22 @@ class ChatController extends Controller
         return response()->json($chats);
     }
 
-    public function show(Chat $chat)
+    public function show(Chat $chat, Request $request)
     {
         $this->authorize('show', $chat);
 
-        return $chat->load(['messages', 'users']);
+        $page = $request->has('page') ?
+            $chat->pageCount - $request->page:
+            0;
+
+        $chat->load([
+            'messages' => function ($query) use ($page, $chat) {
+                return $query->orderBy('created_at', 'desc')->forPage($page, $chat->perPage);
+            },
+            'users'
+        ]);
+
+        return response()->json($chat);
     }
 
     public function store(StoreChat $request)

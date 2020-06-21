@@ -15,14 +15,14 @@
                     </vue-suggestion>
                 </div>
                 <ul v-if="recipients.length" class="list-inline">
-                    <li class="list-inline-item" v-for="recipient in recipients">{{ recipient.name }} [<a href="#" @click.prevent="removeRecipient(recipient)">x</a>]</li>
+                    <li class="list-inline-item" v-for="recipient in recipients">{{ recipient.name }} <a title="Удалить" class="my-auto font-weight-bolder" href="#" @click.prevent="removeRecipient(recipient)">x</a></li>
                 </ul>
 
                 <div class="form-group">
                     <input type="text" v-model="title" id="message" placeholder="Название беседы" class="form-control">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-0">
                     <button type="submit" class="btn btn-primary">Добавить</button>
                 </div>
             </form>

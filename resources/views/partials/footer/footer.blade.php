@@ -7,7 +7,7 @@
         </div>
 
         <div class="mr-3 text-muted float-right">
-            <a href="https://vk.com/ftksut" class="text-muted">Группа ВК</a>
+            <a href="https://vk.com/ftksut" class="text-muted mr-2">Группа ВК</a>
 
             <div class="dropdown dropup d-inline">
                 <a href="#" class="text-muted" id="creators" data-toggle="dropdown" data-boundary="window">

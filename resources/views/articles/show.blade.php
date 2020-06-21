@@ -2,17 +2,19 @@
 
 @section('content')
     <div class="container">
-        <h1 class="text-center m-2">
-            {{ $article->title }}
+        <div class="h1 row no-gutters m-2">
+            <div class="mx-auto text-center">
+                {{ $article->title }}
+            </div>
 
-            <div class="float-right">
+            <div class="d-none d-md-inline">
                 @can('update', $article)
-                    <a class="d-none d-md-block text-decoration-none" href="{{ route('article.edit', compact('article')) }}">
+                    <a class="text-decoration-none" href="{{ route('article.edit', compact('article')) }}">
                         <span class="fa-xs ml-2 fas fa-cog"></span>
                     </a>
                 @endcan
                 @can('delete', $article)
-                    <a class="d-none d-mdblock text-primary" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
+                    <a class="text-danger" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
                         <span class="fa-xs ml-2 fas fa-trash"></span>
                     </a>
 
@@ -22,7 +24,7 @@
                     </form>
                 @endcan
             </div>
-        </h1>
+        </div>
 
         <div class="card shadow mt-3">
             <div class="card-body">
@@ -165,4 +167,8 @@
             $(this).attr('style', 'cursor: pointer;')
         });
     </script>
+@endpush
+
+@push('side')
+    @component('components.navs.article')@endcomponent
 @endpush

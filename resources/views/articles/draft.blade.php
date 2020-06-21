@@ -27,3 +27,7 @@
     </div>
 
 @endsection
+
+@push('side')
+    @component('components.navs.article')@endcomponent
+@endpush

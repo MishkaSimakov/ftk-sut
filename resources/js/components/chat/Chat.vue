@@ -26,6 +26,13 @@
                         <span class="sr-only">Загрузка...</span>
                     </div>
                     <div id="messages" v-else-if="chat.messages.length">
+                            <div
+                                v-if="!(loading || page <= 0) || loadingPage"
+                                v-observe-visibility="loadPage"
+                                class="d-flex flex-grow-1 my-5 spinner-border mx-auto text-info"
+                                role="status"
+                            ></div>
+
                         <message v-for="message in chat.messages" :key="message.data" :message="message"></message>
                     </div>
                     <div v-else class="d-flex justify-content-center my-4 mx-auto">
@@ -51,17 +58,45 @@
         computed: mapGetters({
             chat: 'currentChat',
             loading: 'loadingChat',
-            chats: 'getChats'
+            loadingPage: 'loadingPage',
+            chats: 'getChats',
+            page: 'getCurrentPage',
         }),
         methods: {
             ...mapActions([
                 'getChat',
-                'setRead'
+                'setRead',
+                'loadChatPage',
+                'scrolled'
             ]),
             moment: moment,
             openSettings() {
                 $(this.$refs.settings.$el).modal('show')
-            }
+            },
+            loadPage(isVisible) {
+                if (isVisible && !this.loadingPage) {
+                    this.loadChatPage(this.id);
+                }
+            },
+            scrollToMessage(id) {
+                let message = document.getElementById('message_' + id);
+                let offset = -$('.chat__messages').innerHeight() + message.clientHeight;
+
+                let options = {
+                    container: '.chat__messages',
+                    easing: 'ease-in',
+                    offset: offset,
+                    force: true,
+                    cancelable: false,
+                    onDone: () => {
+                        this.scrolled();
+                    },
+                    x: false,
+                    y: true
+                };
+
+                this.$scrollTo(message, 500, options)
+            },
         },
         mounted() {
             this.getChat(this.id);
@@ -70,16 +105,17 @@
                 $('#tooltip_message_' + id).tooltip('dispose').tooltip({
                     title: 'изменено ' + moment(time).locale('ru').calendar().toLowerCase(),
                 })
+            }).$on('chat.scroll', (id) => {
+                this.$nextTick(() => {
+                    this.scrollToMessage(id);
+                });
             });
         },
         updated() {
-            let messages = document.getElementsByClassName('chat__messages')[0];
-            messages.scroll(0, messages.scrollHeight);
-
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             });
-        },
+        }
     }
 </script>
 
@@ -88,6 +124,7 @@
         &__messages {
             height: 400px;
             max-height: 400px;
+
             overflow-y: visible;
             overflow-x: hidden;
         }

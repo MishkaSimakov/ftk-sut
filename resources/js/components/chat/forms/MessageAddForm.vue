@@ -18,7 +18,7 @@
                     <i class="fas fa-times"></i>
                 </a>
             </div>
-            <div class="pl-3 border-left mb-1" v-if="reply_message">
+            <div class="pl-3 border-left mb-1" v-if="reply_message" style="cursor: pointer" v-on:click="scrollToReplyed">
                 <a href="#" @click.prevent="cancel_reply" class="float-right text-gray-500">
                     <i class="fas fa-times"></i>
                 </a>
@@ -86,6 +86,9 @@
             moment: moment,
             isTouchDevice() {
                 return true === ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
+            },
+            scrollToReplyed() {
+                Bus.$emit('chat.scroll', this.reply_message.id);
             },
             handleMessageInput(e) {
                 if (e.keyCode === 13 && !e.shiftKey) {

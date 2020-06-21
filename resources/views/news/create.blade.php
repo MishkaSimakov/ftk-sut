@@ -58,7 +58,7 @@
                 plugins: [
                     "lists link",
                 ],
-                toolbar: 'bold italic underline | numlist bullist | link image voting | undo redo | fullscreen',
+                toolbar: 'bold italic underline | numlist bullist | link | undo redo | fullscreen',
                 menubar: '',
                 language: 'ru',
             });

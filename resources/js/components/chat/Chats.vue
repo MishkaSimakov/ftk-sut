@@ -24,7 +24,11 @@
                         </div>
                         <ul class="list-inline chat__users text-muted m-1">
                             <li class="list-inline-item"><strong>Участники: </strong></li>
-                            <li class="list-inline-item" v-for="user in chat.users">{{ user.name }}</li>
+                            <li class="list-inline-item" v-for="user in chat.users">
+                                <a :title="user.name" class="text-muted" :href="user.url">
+                                    {{ user.name }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

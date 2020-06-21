@@ -25,6 +25,7 @@
 </template>
 
 <script>
+    import moment from 'moment'
     import {mapActions, mapGetters} from 'vuex'
     import Bus from '../../bus'
 
@@ -44,6 +45,8 @@
             sending: 'commentSending'
         }),
         methods: {
+            moment: moment,
+
             ...mapActions([
                 'createArticleComment',
                 'editArticleComment'
@@ -68,6 +71,10 @@
                         body: this.bodyBackedUp
                     }).then(() => {
                         if (!this.error) {
+                            $('#tooltip_comment_' + this.edited_comment.id).tooltip('dispose').tooltip({
+                                title: 'изменено ' + moment().locale('ru').calendar().toLowerCase(),
+                            });
+
                             this.cancel_edit();
                         }
                     })

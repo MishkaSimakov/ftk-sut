@@ -1,4 +1,4 @@
-<div class="col-6 p-0 position-fixed" style="z-index: 100; display: none; top: 0; left: 0;" id="small_sidebar">
+<div class="col-8 p-0 position-fixed" style="z-index: 100; display: none; top: 57px; left: 0;" id="small_sidebar">
     <div class="bg-light pt-2 p-3 vh-100">
         <div class="w-100 text-center">
             <a href="{{ route('main') }}" class="h3 font-weight-bolder mb-2">ФТК СЮТ</a>

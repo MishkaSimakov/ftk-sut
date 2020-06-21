@@ -40,7 +40,13 @@ class Message extends Model implements HasMedia
 
     public function getImagesAttribute()
     {
-        return $this->media->map->getUrl();
+        return $this->media->map(function ($m) {
+            return [
+                'url' => $m->getUrl(),
+                'width' => getimagesize($m->getPath())[0],
+                'height' => getimagesize($m->getPath())[1],
+            ];
+        });
     }
 
     public function getReplyAttribute()

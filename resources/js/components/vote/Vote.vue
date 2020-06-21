@@ -1,29 +1,23 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="text-white card shadow mt-2 p-2" style="background: linear-gradient(135deg, #a8e063 0%, #56ab2f 100%);">
-                    <div class="container">
-                        <div class="h1 text-center">
-                            {{ vote.title }}
-                        </div>
+    <div class="text-white card shadow mt-2 p-2" style="background: linear-gradient(135deg, #a8e063 0%, #56ab2f 100%);">
+        <div class="container">
+            <div class="h1 text-center">
+                {{ vote.title }}
+            </div>
 
-                        <p class="mb-4">{{ vote.description }}</p>
+            <p class="mb-4">{{ vote.description }}</p>
 
-                        <ul class="list-unstyled">
-                            <li :class="{ 'vote__option--selected' : option.selected, 'vote__option--active' : active }" v-on:click="select(option)" v-for="option in vote.options" class="vote__option my-1 w-100 p-1 px-2 rounded">
-                                {{ option.title }} <span class="float-right font-weight-bold">{{ option.percent }}%</span>
-                            </li>
-                        </ul>
+            <ul class="list-unstyled">
+                <li :class="{ 'vote__option--selected' : option.selected, 'vote__option--active' : active }" v-on:click="select(option)" v-for="option in vote.options" class="vote__option my-1 w-100 p-1 px-2 rounded">
+                    {{ option.title }} <span class="float-right font-weight-bold">{{ option.percent }}%</span>
+                </li>
+            </ul>
 
-                        <p v-if="!sending" class="text-center">Проголосовали <span class="font-weight-bold">{{ vote.users.length }}</span> человек</p>
+            <p v-if="!sending" class="text-center">Проголосовали <span class="font-weight-bold">{{ vote.users.length }}</span> человек</p>
 
-                        <div v-else class="w-100 text-center">
-                            <div class="spinner-border-sm spinner-border mx-auto" role="status">
-                                <span class="sr-only">Загрузка...</span>
-                            </div>
-                        </div>
-                    </div>
+            <div v-else class="w-100 text-center">
+                <div class="spinner-border-sm spinner-border mx-auto" role="status">
+                    <span class="sr-only">Загрузка...</span>
                 </div>
             </div>
         </div>

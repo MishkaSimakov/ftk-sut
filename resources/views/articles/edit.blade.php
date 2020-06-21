@@ -155,3 +155,7 @@
         });
     </script>
 @endpush
+
+@push('side')
+    @component('components.navs.article')@endcomponent
+@endpush

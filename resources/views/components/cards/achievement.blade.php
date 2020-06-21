@@ -21,8 +21,9 @@
 <div class="mb-2 card shadow w-100">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 p-0">
+            <div class="col-md-3 p-0 {{ $achievement->isGetted ? '' : 'achievement__locked' }}">
                 <img src="{{ $achievement->icon }}" class="h-100 w-100 card-img img-responsive">
+                <div class="achievement__locked_icon"><i class="fas fa-lock fa-6x"></i></div>
             </div>
             <div class="col-md-9 py-2 px-3">
                 <div class="card-title">

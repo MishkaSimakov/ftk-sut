@@ -21,10 +21,13 @@ export default function () {
 
     // articles
     Vue.component('tags-add-form', require('./components/article/AddTagForm.vue').default);
-    Vue.component('find-articles-form', require('./components/article/FindArticlesForm.vue').default);
-    Vue.component('writers-top', require('./components/article/writersTop.vue').default);
-    Vue.component('articles-top', require('./components/article/articlesTop.vue').default);
-    Vue.component('comments-top', require('./components/article/recentComments.vue').default);
+    Vue.component('find-articles-form', require('./components/article/Search/FindArticlesForm.vue').default);
+    Vue.component('writers-top', require('./components/article/Statistics/writersTop.vue').default);
+    Vue.component('articles-top', require('./components/article/Statistics/articlesTop.vue').default);
+    Vue.component('comments-top', require('./components/article/Statistics/recentComments.vue').default);
+
+    // Vue.component('articles-list', require('./components/article/ArticleList.vue').default);
+    // Vue.component('article-preview', require('./components/article/Article.vue').default);
 
     // home
     Vue.component('new-chat-button', require('./components/chat/NewChatButton.vue').default);
