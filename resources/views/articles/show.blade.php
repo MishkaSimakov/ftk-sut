@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div class="card shadow mt-3">
+        <div class="card mt-3">
             <div class="card-body">
                 <div>
                     {!! $article->body !!}
@@ -44,54 +44,75 @@
                 @endif
             </div>
 
-            <div class="card-footer p-1">
-                <h3 class="my-auto ml-2">
-                    @if($article->is_published && !$article->is_blank)
-                        @auth
-                            <span class="{{ $article->is_liked ? 'article__liked' : 'article__unliked' }}" id="like_{{ $article->id }}">
-                                <a class="article__unlike_link" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
-                                <a class="article__like_link" id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="far fa-heart"></i></a>
+{{--            <div class="card-footer p-1">--}}
+{{--                <h3 class="my-auto ml-2">--}}
+{{--                    @if($article->is_published && !$article->is_blank)--}}
+{{--                        @auth--}}
+{{--                            <span class="{{ $article->is_liked ? 'article__liked' : 'article__unliked' }}" id="like_{{ $article->id }}">--}}
+{{--                                <a class="article__unlike_link" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>--}}
+{{--                                <a class="article__like_link" id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="far fa-heart"></i></a>--}}
 
-                                <span class="article__like_counter point_count{{ $article->id }}">{{ $article->points }}</span>
-                            </span>
-                        @else
-                            <span class="article__liked" id="like_{{ $article->id }}">
-                                <i class="article__unlike_link fas fa-heart"></i>
+{{--                                <span class="article__like_counter point_count{{ $article->id }}">{{ $article->points }}</span>--}}
+{{--                            </span>--}}
+{{--                        @else--}}
+{{--                            <span class="article__liked" id="like_{{ $article->id }}">--}}
+{{--                                <i class="article__unlike_link fas fa-heart"></i>--}}
 
-                                <span class="article__like_counter">{{ $article->points }}</span>
-                            </span>
-                        @endauth
+{{--                                <span class="article__like_counter">{{ $article->points }}</span>--}}
+{{--                            </span>--}}
+{{--                        @endauth--}}
 
-                        <div class="ml-4 d-inline-block">
-                            <a href="{{ $article->url }}#comments" class="article__comment_link">
-                                <i style="cursor: pointer;" class="far fa-comment"></i>
-                            </a>
+{{--                        <div class="ml-4 d-inline-block">--}}
+{{--                            <a href="{{ $article->url }}#comments" class="article__comment_link">--}}
+{{--                                <i style="cursor: pointer;" class="far fa-comment"></i>--}}
+{{--                            </a>--}}
 
-                            <span class="article__comments_counter">{{ $article->comments->count() }}</span>
-                        </div>
+{{--                            <span class="article__comments_counter">{{ $article->comments->count() }}</span>--}}
+{{--                        </div>--}}
 
-                        <div class="ml-4 d-inline-block">
-                            <a class="article__comment_link">
-                                <i class="far fa-eye"></i>
-                            </a>
+{{--                        <div class="ml-4 d-inline-block">--}}
+{{--                            <a class="article__comment_link">--}}
+{{--                                <i class="far fa-eye"></i>--}}
+{{--                            </a>--}}
 
-                            <span class="article__comments_counter">{{ views($article)->count() }}</span>
-                        </div>
-                    @elseif($article->is_blank && $article->is_published)
-                        <a href="{{ route('article.edit', compact('article')) }}" class="btn btn-primary">Редактировать</a>
-                    @else
-                        @admin
-                        <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form-{{ $article->id }}').submit();" class="btn btn-primary">Опубликовать</a>
+{{--                            <span class="article__comments_counter">{{ views($article)->count() }}</span>--}}
+{{--                        </div>--}}
+{{--                    @elseif($article->is_blank && $article->is_published)--}}
+{{--                        <a href="{{ route('article.edit', compact('article')) }}" class="btn btn-primary">Редактировать</a>--}}
+{{--                    @else--}}
+{{--                        @admin--}}
+{{--                        <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form-{{ $article->id }}').submit();" class="btn btn-primary">Опубликовать</a>--}}
 
-                        <form id="publish-form-{{ $article->id }}" action="{{ route('article.publish', compact('article')) }}" method="POST" class="d-none">
-                            @method('PUT')
-                            @csrf
-                        </form>
-                        @endadmin
-                    @endif
+{{--                        <form id="publish-form-{{ $article->id }}" action="{{ route('article.publish', compact('article')) }}" method="POST" class="d-none">--}}
+{{--                            @method('PUT')--}}
+{{--                            @csrf--}}
+{{--                        </form>--}}
+{{--                        @endadmin--}}
+{{--                    @endif--}}
 
-                    <span class="font-weight-light text-gray-500 float-right mr-3">{{ $article->created_at->locale('ru')->isoFormat('D MMMM Y') }}</span>
-                </h3>
+{{--                    <span class="font-weight-light text-gray-500 float-right mr-3">{{ $article->created_at->locale('ru')->isoFormat('D MMMM Y') }}</span>--}}
+{{--                </h3>--}}
+{{--            </div>--}}
+        </div>
+
+        <div class="card mt-2 p-1">
+            <div class="h3 my-auto mx-2 d-flex flex-grow-1">
+                @if($article->is_published && !$article->is_blank)
+                    <article-actions url="{{ route('api.article.points', compact('article')) }}" auth="{{ auth()->check() }}" data="{{ $article->load(['comments', 'users'])->toJson() }}"></article-actions>
+                @elseif($article->is_blank && $article->is_published)
+                    <a href="{{ route('article.edit', compact('article')) }}" class="btn btn-primary">Редактировать</a>
+                @else
+                    @admin
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form-{{ $article->id }}').submit();" class="btn btn-primary">Опубликовать</a>
+
+                    <form id="publish-form-{{ $article->id }}" action="{{ route('article.publish', compact('article')) }}" method="POST" class="d-none">
+                        @method('PUT')
+                        @csrf
+                    </form>
+                    @endadmin
+                @endif
+
+                <span class="h5 my-auto text-muted ml-auto">{{ $article->created_at->locale('ru')->isoFormat('D MMMM Y') }}</span>
             </div>
         </div>
 
@@ -102,60 +123,6 @@
 @endsection
 
 @push('script')
-    @auth
-        <script type="text/javascript">
-            function like(article) {
-                var counter = $('.point_count' + article);
-
-                counter.html(Number(counter.html()) + 1);
-
-                $('#like_' + article).attr('class', 'article__liked');
-
-                $.ajax({
-                    url: "{{ route('api.article.points') }}",
-                    method: "POST",
-                    dataType: 'json',
-                    data: {
-                        user_id: '{{ Auth::user()->id }}',
-                        article_id: article,
-                        type: 'like'
-                    },
-                    success: function (data) {
-                        if (data === 'error') {
-                            alert('О нет! Что-то не так!');
-                            window.location.reload()
-                        }
-                    }
-                });
-            }
-
-            function unlike(article) {
-                var counter = $('.point_count' + article);
-
-                counter.html(Number(counter.html()) - 1);
-
-                $('#like_' + article).attr('class', 'article__unliked');
-
-                $.ajax({
-                    url: "{{ route('api.article.points') }}",
-                    method: "POST",
-                    dataType: 'json',
-                    data: {
-                        user_id: '{{ Auth::user()->id }}',
-                        article_id: article,
-                        type: 'unlike'
-                    },
-                    success: function (data) {
-                        if (data === 'error') {
-                            alert('О нет! Что-то не так!');
-                            window.location.reload()
-                        }
-                    }
-                });
-            }
-        </script>
-    @endauth
-
     <script>
         $('blockquote').each(function () {
             $(this).addClass('pl-3 my-1 blockquote');

@@ -21,6 +21,12 @@ class Article extends Model implements HasMedia, Viewable
 
     protected $guarded = [];
 
+    protected $appends = [
+        'isLiked',
+        'views',
+        'url'
+    ];
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_likes');
@@ -32,7 +38,16 @@ class Article extends Model implements HasMedia, Viewable
     }
 
     public function getIsLikedAttribute() {
+        if (!\auth()->check()) {
+            return false;
+        }
+
         return UserLike::where([['article_id', $this->id], ['user_id', Auth::user()->id]])->exists();
+    }
+
+    public function getViewsAttribute()
+    {
+        return views($this)->count();
     }
 
 

@@ -1,43 +1,14 @@
 <div class="card shadow m-2">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+    <div class="card-header d-flex flex-grow-1 px-1">
         <h4 class="col-md-8 text-truncate d-block font-weight-bold text-primary">
             <a title="{{ $article->title }}" href="{{ $article->url }}">
                 {{ $article->title }}
             </a>
         </h4>
-        <div class="float-right row">
-            <a class="d-none d-md-block text-gray-400 mr-3" href="{{ $article->user->url }}">
-                {{ $article->user->name }}
-            </a>
-            <div class="dropdown no-gutters">
-                <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                    <div class="dropdown-header font-weight-bold">Дополнительно:</div>
-                    <a class="dropdown-item" href="{{ $article->user->url }}">{{ $article->user->name }}</a>
 
-                    @can('update', $article)
-                        <a class="dropdown-item" href="{{ route('article.edit', compact('article')) }}">
-                            Редактировать
-                        </a>
-                    @endcan
-
-                    @can('delete', $article)
-                        <div class="dropdown-divider"></div>
-
-                        <a style="cursor: pointer" class="text-danger dropdown-item" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $article->id }}').submit();">
-                            Удалить
-                        </a>
-
-                        <form method="POST" action="{{ route('article.destroy', compact('article')) }}" id="delete-form-{{ $article->id }}">
-                            @csrf
-                            @method("DELETE")
-                        </form>
-                    @endcan
-                </div>
-            </div>
-        </div>
+        <a class="d-none d-md-block ml-auto mr-2 text-muted" href="{{ $article->user->url }}">
+            {{ $article->user->name }}
+        </a>
     </div>
 
     <div class="card-body article__body">
@@ -63,7 +34,7 @@
     </div>
 
     <div class="card-footer p-1">
-        <h3 class="my-auto ml-2">
+        <div class="h3 my-auto mx-2 d-flex flex-grow-1">
             @if($article->is_published && !$article->is_blank)
 {{--                TODO: make this as vue component--}}
                 @auth
@@ -109,7 +80,7 @@
                 @endadmin
             @endif
 
-            <span class="font-weight-light text-gray-500 float-right mr-3">{{ $article->created_at->locale('ru')->isoFormat('D MMMM Y') }}</span>
-        </h3>
+            <span class="h5 my-auto text-muted ml-auto">{{ $article->created_at->locale('ru')->isoFormat('D MMMM Y') }}</span>
+        </div>
     </div>
 </div>

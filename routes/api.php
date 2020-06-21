@@ -29,7 +29,7 @@ Route::get('/user/{user}/stats/categories', 'Api\StatisticsController@categories
 Route::post('article/{article}/image', 'Api\ImageController@uploadArticleImage')->name('api.article.upload_image');
 Route::post('article/{article}/image/delete', 'Api\ImageController@deleteArticleImage')->name('api.article.delete_image');
 
-Route::post('/article/points', 'Api\ArticleController@points')->name('api.article.points');
+Route::post('/article/{article}/points', 'Api\ArticleController@points')->name('api.article.points');
 
 
 Route::post('/admin/code', 'Api\AdminController@code')->name('api.admin.get_code');

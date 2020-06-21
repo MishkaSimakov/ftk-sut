@@ -28,6 +28,7 @@ export default function () {
 
     // Vue.component('articles-list', require('./components/article/ArticleList.vue').default);
     // Vue.component('article-preview', require('./components/article/Article.vue').default);
+    Vue.component('article-actions', require('./components/article/Actions.vue').default);
 
     // home
     Vue.component('new-chat-button', require('./components/chat/NewChatButton.vue').default);

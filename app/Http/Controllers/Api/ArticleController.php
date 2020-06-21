@@ -13,25 +13,23 @@ use App\UserLike;
 
 class ArticleController extends Controller
 {
-    public function points(Request $request)
+    public function points(Request $request, Article $article)
     {
-        $article = Article::where('id', $request->article_id)->first();
-
-        if ($request->type == 'unlike' && UserLike::where([['user_id', $request->user_id], ['article_id', $request->article_id]])->exists()) {
+        if ($request->type == 'unlike' && $article->users->contains($request->user_id)) {
             $article->decrement('points');
 
             $article->users()->detach($request->user_id);
-        } elseif (!UserLike::where([['user_id', $request->user_id], ['article_id', $request->article_id]])->exists()) {
+        } elseif ($request->type == 'like' && !$article->users->contains($request->user_id)) {
             $article->increment('points');
 
             $article->users()->attach($request->user_id);
 
-            UserLikeArticle::dispatch(User::where('id', $request->user_id)->first(), $article);
+            UserLikeArticle::dispatch(User::find($request->user_id), $article);
         } else {
-            return json_encode('error');
+            return response()->json('error');
         }
 
-        return $article->points;
+        return response()->json($article->points);
     }
 
     public function tags()
