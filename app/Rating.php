@@ -35,13 +35,11 @@ class Rating extends Model
             return ($this->year - 1) . '-' . $this->year;
         }
 
-        if ($this->date->isoFormat('MM') <= 5) {
+        if ($this->date->isoFormat('MM') < 9) {
             return ($this->year - 1) . '-' . $this->year;
-        } else if ($this->date->isoFormat('MM') >= 9) {
+        } else {
             return $this->year . '-' . ($this->year + 1);
         }
-
-        return null;
     }
 
     public function getNameAttribute()

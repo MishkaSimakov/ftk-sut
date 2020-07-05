@@ -19,6 +19,8 @@
         <div class="mt-2">
             @component('components.card-lists.articles', ['articles' => $articles])@endcomponent
         </div>
+
+{{--        <article-list url="{{ route('api.articles.get') }}"></article-list>--}}
     </div>
 
     <div class="d-flex">
@@ -36,3 +38,9 @@
 {{--    <writers-top></writers-top>--}}
 {{--    <comments-top></comments-top>--}}
 {{--@endpush--}}
+<script>
+    import ArticleList from "../../js/components/article/ArticleList";
+    export default {
+        components: {ArticleList}
+    }
+</script>

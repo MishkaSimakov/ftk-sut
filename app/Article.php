@@ -38,7 +38,7 @@ class Article extends Model implements HasMedia, Viewable
     }
 
     public function getIsLikedAttribute() {
-        if (!\auth()->check()) {
+        if (!auth()->check()) {
             return false;
         }
 
@@ -48,6 +48,11 @@ class Article extends Model implements HasMedia, Viewable
     public function getViewsAttribute()
     {
         return views($this)->count();
+    }
+
+    public function getRatingAttribute()
+    {
+        return $this->views + $this->points;
     }
 
 

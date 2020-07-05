@@ -99,8 +99,6 @@
                                     onAction: function () {
                                         new Promise((resolve, reject) => {
                                             axios.get('/webapi/vote/all').then(function (response) {
-                                                let options = Object.values(response.data);
-
                                                 tinymce.activeEditor.windowManager.open({
                                                     title: 'Вставка опроса',
                                                     body: {
@@ -110,7 +108,7 @@
                                                                 type: 'selectbox',
                                                                 name: 'voting',
                                                                 label: 'Выберите голосование',
-                                                                items: options,
+                                                                items: Object.values(response.data.options),
                                                             }
                                                         ]
                                                     },
@@ -128,9 +126,10 @@
                                                         }
                                                     ],
                                                     onSubmit: function (api) {
-                                                        let data = api.getData();
+                                                        let id = api.getData().voting;
+                                                        let vote = response.data.votes[id][0];
 
-                                                        tinymce.activeEditor.execCommand('mceInsertContent', false, '<div class="embed-responsive embed-responsive-16by9 z-depth-2"><iframe class="embed-responsive-item" src="/vote/' + data.voting + '/widget"></iframe></div>');
+                                                        tinymce.activeEditor.execCommand('mceInsertContent', false, '<div class="embed-responsive embed-responsive-16by9 z-depth-2"><iframe class="embed-responsive-item" src="/vote/' + id + '/widget"></iframe></div>');
                                                         api.close();
                                                     }
                                                 });

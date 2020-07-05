@@ -7,13 +7,14 @@ Route::get('/', 'MainController@index')->name('main');
 
 Route::prefix('article')->name('article.')->group(function() {
     Route::get('/publish', 'ArticleController@notPublished')->name('notPublished')->middleware('admin');
+    Route::get('/statistics', 'ArticleController@statistics')->name('statistics');
+    Route::get('/draft', 'ArticleController@draft')->name('draft');
+
     Route::put('/{article}/publish', 'ArticleController@publish')->name('publish')->middleware('admin');
     Route::delete('/{article}', 'ArticleController@destroy')->name('destroy')->middleware('admin');
-    Route::get('/draft', 'ArticleController@draft')->name('draft');
 });
 
-//Route::get('webapi/articles', 'Api\ArticleController@articles')->name('api.articles.get');
-
+//Route::get('webapi/articles', 'Api\ArticleController@get')->name('api.articles.get');
 Route::resource('article', 'ArticleController');
 
 Route::resource('rating', 'RatingController')->only([
@@ -107,22 +108,12 @@ Route::group(['prefix' => 'webapi/comments', 'namespace' => 'Api'], function () 
     Route::put('/{comment}', 'CommentController@update');
 });
 
-Route::group(['prefix' => 'webapi/articles', 'namespace' => 'Api'], function () {
+Route::prefix('webapi/articles')->name('articles.statistics.')->namespace('Api')->group(function () {
     Route::get('/tags', 'ArticleController@tags');
 
-    Route::get('/top/writers', 'ArticleController@writersTop');
-    Route::get('/top/articles', 'ArticleController@articlesTop');
-    Route::get('/top/comments', 'ArticleController@commentsTop');
+    Route::get('/top/writers', 'ArticleController@writersTop')->name('writers');
+    Route::get('/top/articles', 'ArticleController@articlesTop')->name('articles');
+    Route::get('/top/actions', 'ArticleController@recentActions')->name('actions');
 });
 
-
-Route::group(['prefix' => 'lab'], function () {
-    Route::view('/', 'lab.main')->name('lab.main');
-    Route::view('/live', 'lab.live')->name('lab.live');
-    Route::view('/mandelbrot', 'lab.mandelbrot')->name('lab.mandelbrot');
-    Route::view('/place', 'lab.place')->name('lab.place');
-    Route::view('/shadow', 'lab.shadow')->name('lab.shadow');
-    Route::view('/primes', 'lab.primes')->name('lab.primes');
-    Route::view('/pendulum', 'lab.pendulum')->name('lab.pendulum');
-    Route::view('/earth', 'lab.earth')->name('lab.earth');
-});
+Route::view('/about', 'about')->name('about');

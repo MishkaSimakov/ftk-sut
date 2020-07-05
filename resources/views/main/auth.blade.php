@@ -1,6 +1,15 @@
 @extends('layouts.page')
 
 @section('content')
+    @guest
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            Информацию о клубе вы можете посмотреть по адресу <a href="https://ftk-sut.ru/about">ftk-sut.ru/about</a>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endguest
+
     @if($news->count())
         <h2 class="text-center my-2">Последние новости</h2>
         @component('components.card-lists.news', ['news' => $news])@endcomponent

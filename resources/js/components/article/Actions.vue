@@ -2,8 +2,8 @@
     <div>
         <div class="d-inline" :id='"article_like_" + article.id'>
             <span v-if="auth" :class="isLiked ? 'article__liked' : 'article__unliked'">
-                <a class="article__unlike_link" v-on:click="unlike" v-if="isLiked"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
-                <a class="article__like_link" v-on:click="like" v-else><i style="cursor: pointer;" class="far fa-heart"></i></a>
+                <a class="article__unlike_link" v-on:click="unlike" v-show="isLiked"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
+                <a class="article__like_link" v-on:click="like" v-show="!isLiked"><i style="cursor: pointer;" class="far fa-heart"></i></a>
 
 
                 <span class="article__like_counter" :id="'article_like_counter_' + article.id">{{ article.users.length }}</span>
@@ -16,7 +16,7 @@
         </div>
 
         <div class="ml-4 d-inline-block">
-            <a :href="article.url + '#comments'" class="article__comment_link">
+            <a :href="article.url + '#comments'" v-on:click="focusOnComment" class="article__comment_link">
                 <i style="cursor: pointer;" class="far fa-comment"></i>
             </a>
 
@@ -40,19 +40,16 @@
             'auth',
             'url'
         ],
-        computed: {
-            article: function() {
-                return JSON.parse(this.data)
-            },
-        },
         data() {
             return {
                 isLiked: false,
+                article: JSON.parse(this.data),
             }
         },
         methods: {
             like() {
                 this.article.users.unshift({
+                    id: window.Laravel.user.id,
                     name: window.Laravel.user.name
                 });
 
@@ -79,14 +76,16 @@
                     }
                 });
             },
+            focusOnComment() {
+                let input = $('#add_comment_input');
+                if (input.length) {
+                    input.focus();
+                }
+            },
             unlike() {
                 this.article.users = this.article.users.filter((u) => {
                    return u.id !== window.Laravel.user.id
                 });
-
-                console.log(this.article,  this.article.users.filter((u) => {
-                    return u.id !== window.Laravel.user.id
-                }));
 
                 this.updateUsers();
 
@@ -103,6 +102,7 @@
                             alert('Что-то пошло не так. Мы уже работаем над этим.');
 
                             this.article.users.unshift({
+                                id: window.Laravel.user.id,
                                 name: window.Laravel.user.name
                             });
 
@@ -121,8 +121,12 @@
                         title: this.article.users > 1 ? 'Оценили: ' : 'Оценил: ' + this.article.users.map((u) => {
                             return u.name
                         }).join(', '),
-                    })
+                    });
+                } else {
+                    $('#article_like_' + this.article.id).tooltip('dispose');
                 }
+
+                console.log(this.isLiked)
             }
         },
         mounted() {

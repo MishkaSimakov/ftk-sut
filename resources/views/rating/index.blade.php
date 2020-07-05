@@ -30,13 +30,20 @@
                     </div>
 
                     <ul class="list-unstyled mb-0">
-                        @foreach($year_ratings as $rating)
+                        @if($rating = $year_ratings->where('type', 'yearly')->first())
                             <li>
-                                @if ($rating->type === 'yearly')
-                                    <a class="font-weight-bolder h5" href="{{ $rating->url }}">{{ $rating->name }}</a>
-                                @else
-                                    <a href="{{ $rating->url }}">{{ $rating->name }}</a>
-                                @endif
+                                <a
+                                    class="font-weight-bolder h5"
+                                    href="{{ $rating->url }}"
+                                >
+                                    {{ $rating->name }}
+                                </a>
+                            </li>
+                        @endif
+
+                        @foreach($year_ratings->where('type', 'monthly') as $rating)
+                            <li>
+                                <a href="{{ $rating->url }}">{{ $rating->name }}</a>
                             </li>
                         @endforeach
                     </ul>

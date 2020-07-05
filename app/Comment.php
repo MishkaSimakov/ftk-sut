@@ -19,6 +19,11 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function article()
+    {
+        return $this->belongsTo(Article::class);
+    }
+
     public function getSelfOwnedAttribute()
     {
         return $this->user->id === optional(auth()->user())->id;

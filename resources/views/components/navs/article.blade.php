@@ -14,3 +14,11 @@
         </ul>
     </div>
 </div>
+
+<div class="card mt-2">
+    <div class="card-body">
+        <ul class="list-unstyled mb-0">
+            <li><a href="{{ route('article.statistics') }}"><i class="fas fa-chart-bar mr-2"></i>Статистика</a></li>
+        </ul>
+    </div>
+</div>

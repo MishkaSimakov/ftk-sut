@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Achievements\Events\UserWriteArticle;
 use App\Http\Requests\StoreArticle;
+use App\Notifications\NewArticle;
 use App\Tag;
 use App\User;
 use App\Vote;
@@ -154,5 +155,10 @@ class ArticleController extends Controller
         $articles = Article::draft()->where('user_id', auth()->user()->id)->get();
 
         return view('articles.draft', compact('articles'));
+    }
+
+    public function statistics()
+    {
+        return view('articles.statistics');
     }
 }

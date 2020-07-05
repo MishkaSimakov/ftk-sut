@@ -2,7 +2,7 @@
     <div class="card-body p-2">
         <div class="row no-gutters">
             <div class="col-md-2">
-                <p class="my-auto float-left text-muted">{{ $current_news->created_at->locale('ru')->isoFormat('D MMMM Y') }}</p>
+                <span class="my-auto float-left text-muted">{{ $current_news->created_at->locale('ru')->isoFormat('D MMMM Y') }}</span>
             </div>
 
             <div class="col-md-8 text-center">

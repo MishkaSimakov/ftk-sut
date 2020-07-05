@@ -12,20 +12,20 @@ class MainController extends Controller
 {
     public function index()
     {
-        if (auth()->check()) {
-            $news = News::all()->sortByDesc('created_at')->take(3);
-            $news->each(function ($news) {
-                views($news)->cooldown(now()->addHours(1))->record();
-            });
+//        if (auth()->check()) {
+        $news = News::all()->sortByDesc('created_at')->take(3);
+        $news->each(function ($news) {
+            views($news)->cooldown(now()->addHours(1))->record();
+        });
 
-            $articles = Article::published()->orderBy('created_at')->limit(3)->get();
+        $articles = Article::published()->orderByDesc('created_at')->limit(3)->get();
 
-            return view('main.auth', compact('news', 'articles'));
-        }
-
-        $teachers = Teacher::all();
-        $advantages = config('advantages');
-
-        return view('main.guest', compact('teachers', 'advantages'));
+        return view('main.auth', compact('news', 'articles'));
+//        }
+//
+//        $teachers = Teacher::all();
+//        $advantages = config('advantages');
+//
+//        return view('main.guest', compact('teachers', 'advantages'));
     }
 }

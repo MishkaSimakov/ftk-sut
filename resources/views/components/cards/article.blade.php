@@ -1,4 +1,4 @@
-<div class="card shadow m-2">
+<div class="card shadow my-2">
     <div class="card-header d-flex flex-grow-1 px-1">
         <h4 class="col-md-8 text-truncate d-block font-weight-bold text-primary">
             <a title="{{ $article->title }}" href="{{ $article->url }}">
@@ -36,37 +36,7 @@
     <div class="card-footer p-1">
         <div class="h3 my-auto mx-2 d-flex flex-grow-1">
             @if($article->is_published && !$article->is_blank)
-{{--                TODO: make this as vue component--}}
-                @auth
-                    <span class="{{ $article->is_liked ? 'article__liked' : 'article__unliked' }}" id="like_{{ $article->id }}">
-                        <a class="article__unlike_link" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>
-                        <a class="article__like_link" id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="far fa-heart"></i></a>
-
-                        <span class="article__like_counter point_count{{ $article->id }}">{{ $article->points }}</span>
-                    </span>
-                @else
-                    <span class="article__liked" id="like_{{ $article->id }}">
-                        <i class="article__unlike_link fas fa-heart"></i>
-
-                        <span class="article__like_counter">{{ $article->points }}</span>
-                    </span>
-                @endauth
-
-                <div class="ml-4 d-inline-block">
-                    <a href="{{ $article->url }}#comments" class="article__comment_link">
-                        <i style="cursor: pointer;" class="far fa-comment"></i>
-                    </a>
-
-                    <span class="article__comments_counter">{{ $article->comments->count() }}</span>
-                </div>
-
-                <div class="ml-4 d-inline-block">
-                    <a class="article__comment_link">
-                        <i class="far fa-eye"></i>
-                    </a>
-
-                    <span class="article__comments_counter">{{ views($article)->count() }}</span>
-                </div>
+                <article-actions url="{{ route('api.article.points', compact('article')) }}" auth="{{ auth()->check() }}" data="{{ $article->load(['comments', 'users'])->toJson() }}"></article-actions>
             @elseif($article->is_blank && $article->is_published)
                 <a href="{{ route('article.edit', compact('article')) }}" class="btn btn-primary">Редактировать</a>
             @else
@@ -80,7 +50,9 @@
                 @endadmin
             @endif
 
-            <span class="h5 my-auto text-muted ml-auto">{{ $article->created_at->locale('ru')->isoFormat('D MMMM Y') }}</span>
+            <span class="h5 my-auto text-muted ml-auto d-none d-sm-inline">
+                {{ $article->created_at->locale('ru')->isoFormat('D MMMM Y') }}
+            </span>
         </div>
     </div>
 </div>

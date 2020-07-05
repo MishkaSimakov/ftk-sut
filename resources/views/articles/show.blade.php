@@ -2,32 +2,30 @@
 
 @section('content')
     <div class="container">
-        <div class="h1 row no-gutters m-2">
-            <div class="mx-auto text-center">
-                {{ $article->title }}
-            </div>
-
-            <div class="d-none d-md-inline">
-                @can('update', $article)
-                    <a class="text-decoration-none" href="{{ route('article.edit', compact('article')) }}">
-                        <span class="fa-xs ml-2 fas fa-cog"></span>
-                    </a>
-                @endcan
-                @can('delete', $article)
-                    <a class="text-danger" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
-                        <span class="fa-xs ml-2 fas fa-trash"></span>
-                    </a>
-
-                    <form method="POST" action="{{ route('article.destroy', compact('article')) }}" id="delete-form">
-                        @csrf
-                        @method("DELETE")
-                    </form>
-                @endcan
-            </div>
-        </div>
+        <h1 class="mt-2 mx-auto text-center">
+            {{ $article->title }}
+        </h1>
 
         <div class="card mt-3">
             <div class="card-body">
+                <div class="float-right">
+                    @can('update', $article)
+                        <a class="text-decoration-none" href="{{ route('article.edit', compact('article')) }}">
+                            <span class="ml-2 fas fa-cog"></span>
+                        </a>
+                    @endcan
+                    @can('delete', $article)
+                        <a class="text-danger" style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
+                            <span class="ml-1 fas fa-trash"></span>
+                        </a>
+
+                        <form method="POST" action="{{ route('article.destroy', compact('article')) }}" id="delete-form">
+                            @csrf
+                            @method("DELETE")
+                        </form>
+                    @endcan
+                </div>
+
                 <div>
                     {!! $article->body !!}
                 </div>
@@ -43,56 +41,6 @@
                     </span>
                 @endif
             </div>
-
-{{--            <div class="card-footer p-1">--}}
-{{--                <h3 class="my-auto ml-2">--}}
-{{--                    @if($article->is_published && !$article->is_blank)--}}
-{{--                        @auth--}}
-{{--                            <span class="{{ $article->is_liked ? 'article__liked' : 'article__unliked' }}" id="like_{{ $article->id }}">--}}
-{{--                                <a class="article__unlike_link" id="link" onclick="unlike({{ $article->id }})"><i style="cursor: pointer;" class="fas fa-heart"></i></a>--}}
-{{--                                <a class="article__like_link" id="link" onclick="like({{ $article->id }})"><i style="cursor: pointer;" class="far fa-heart"></i></a>--}}
-
-{{--                                <span class="article__like_counter point_count{{ $article->id }}">{{ $article->points }}</span>--}}
-{{--                            </span>--}}
-{{--                        @else--}}
-{{--                            <span class="article__liked" id="like_{{ $article->id }}">--}}
-{{--                                <i class="article__unlike_link fas fa-heart"></i>--}}
-
-{{--                                <span class="article__like_counter">{{ $article->points }}</span>--}}
-{{--                            </span>--}}
-{{--                        @endauth--}}
-
-{{--                        <div class="ml-4 d-inline-block">--}}
-{{--                            <a href="{{ $article->url }}#comments" class="article__comment_link">--}}
-{{--                                <i style="cursor: pointer;" class="far fa-comment"></i>--}}
-{{--                            </a>--}}
-
-{{--                            <span class="article__comments_counter">{{ $article->comments->count() }}</span>--}}
-{{--                        </div>--}}
-
-{{--                        <div class="ml-4 d-inline-block">--}}
-{{--                            <a class="article__comment_link">--}}
-{{--                                <i class="far fa-eye"></i>--}}
-{{--                            </a>--}}
-
-{{--                            <span class="article__comments_counter">{{ views($article)->count() }}</span>--}}
-{{--                        </div>--}}
-{{--                    @elseif($article->is_blank && $article->is_published)--}}
-{{--                        <a href="{{ route('article.edit', compact('article')) }}" class="btn btn-primary">Редактировать</a>--}}
-{{--                    @else--}}
-{{--                        @admin--}}
-{{--                        <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form-{{ $article->id }}').submit();" class="btn btn-primary">Опубликовать</a>--}}
-
-{{--                        <form id="publish-form-{{ $article->id }}" action="{{ route('article.publish', compact('article')) }}" method="POST" class="d-none">--}}
-{{--                            @method('PUT')--}}
-{{--                            @csrf--}}
-{{--                        </form>--}}
-{{--                        @endadmin--}}
-{{--                    @endif--}}
-
-{{--                    <span class="font-weight-light text-gray-500 float-right mr-3">{{ $article->created_at->locale('ru')->isoFormat('D MMMM Y') }}</span>--}}
-{{--                </h3>--}}
-{{--            </div>--}}
         </div>
 
         <div class="card mt-2 p-1">
@@ -103,16 +51,18 @@
                     <a href="{{ route('article.edit', compact('article')) }}" class="btn btn-primary">Редактировать</a>
                 @else
                     @admin
-                    <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form-{{ $article->id }}').submit();" class="btn btn-primary">Опубликовать</a>
+                        <a href="#" onclick="event.preventDefault(); document.getElementById('publish-form-{{ $article->id }}').submit();" class="btn btn-primary">Опубликовать</a>
 
-                    <form id="publish-form-{{ $article->id }}" action="{{ route('article.publish', compact('article')) }}" method="POST" class="d-none">
-                        @method('PUT')
-                        @csrf
-                    </form>
+                        <form id="publish-form-{{ $article->id }}" action="{{ route('article.publish', compact('article')) }}" method="POST" class="d-none">
+                            @method('PUT')
+                            @csrf
+                        </form>
                     @endadmin
                 @endif
 
-                <span class="h5 my-auto text-muted ml-auto">{{ $article->created_at->locale('ru')->isoFormat('D MMMM Y') }}</span>
+                <span class="h5 my-auto text-muted ml-auto d-none d-sm-inline">
+                    {{ $article->created_at->locale('ru')->isoFormat('D MMMM Y') }}
+                </span>
             </div>
         </div>
 

@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Reset::class,
-        DeleteImages::class
+        DeleteImages::class,
     ];
 
     /**

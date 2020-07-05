@@ -1,6 +1,8 @@
 <div class="card mt-2">
     <div class="card-body">
         <ul class="list-unstyled mb-0">
+            <li><a href="{{ route('about') }}"><i class="fas fa-info-circle mr-2"></i>О нас</a></li>
+
             <li><a href="{{ route('news.index') }}"><i class="fas fa-newspaper mr-2"></i>Новости</a></li>
             <li><a href="{{ route('schedule.index') }}"><i class="fas fa-calendar-alt mr-2"></i>Расписание</a></li>
             <li><a href="{{ route('article.index') }}"><i class="fas fa-pen mr-2"></i>Статьи</a></li>

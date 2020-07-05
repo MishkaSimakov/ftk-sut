@@ -41,65 +41,77 @@ class ArticleController extends Controller
 
     public function writersTop()
     {
-        $users_sorted_array = [];
+        $users = User::has('articles')->with('articles')->get();
 
-        $users = User::all()->sortByDesc('articleCount')->take(10);
-
-        foreach ($users as $user) {
-            array_push($users_sorted_array, [
-                'name' => $user->name,
-                'articleCount' => $user->articleCount,
+        $bycount = $users->sortByDesc('articleCount')->take(10)->map(function($user) {
+            return [
                 'url' => $user->url,
-            ]);
-        }
+                'name' => $user->name,
+                'count' => $user->articleCount
+            ];
+        })->values();
 
-        return response()->json($users_sorted_array);
+        $bypoints = $users->sortByDesc('articlesPointSum')->take(10)->map(function($user) {
+            return [
+                'url' => $user->url,
+                'name' => $user->name,
+                'count' => $user->articlesPointSum
+            ];
+        })->values();
+
+        $byviews = $users->sortByDesc('articlesViewSum')->take(10)->map(function($user) {
+            return [
+                'url' => $user->url,
+                'name' => $user->name,
+                'count' => $user->articlesViewSum
+            ];
+        })->values();
+
+        return response()->json([
+            'count' => $bycount,
+            'points' => $bypoints,
+            'views' => $byviews,
+        ]);
     }
 
     public function articlesTop(Request $request)
     {
-        $articles_sorted_array = [];
+        $articles = Article::published()
+            ->get()
+            ->where('rating', '>', 0)
+            ->sortByDesc('rating')
+            ->take(10)
+            ->map(function ($article) {
+                return [
+                    'total' => $article->rating,
+                    'title' => $article->title,
+                    'points' => $article->points,
+                    'views' => $article->views,
+                    'url' => $article->url,
+                ];
+            })
+            ->values();
 
-        $articles = Article::published();
-
-        if ($request->tag) {
-            $articles = $articles->whereHas('tags', function ($q) use ($request) {
-                $q->where('name', $request->tag);
-            });
-        }
-
-        $articles = $articles->get()->sortByDesc('points')->take(10);
-
-        foreach ($articles as $article) {
-            array_push($articles_sorted_array, [
-                'title' => $article->title,
-                'points' => $article->points,
-                'views' => views($article)->count(),
-                'url' => $article->url,
-            ]);
-        }
-
-        return response()->json($articles_sorted_array);
+        return response()->json($articles);
     }
 
-    public function commentsTop()
+    public function recentActions()
     {
-        $articles_sorted_array = [];
-
-        $articles = Article::published()->get()
-            ->sortByDesc->recentCommentCount->take(10)->filter(function ($article) {
-                return $article->recentCommentCount;
-            });
-
-        foreach ($articles as $article) {
-            array_push($articles_sorted_array, [
+        $articles = Article::published()->where('created_at', '>', now()->subDays(3))->orderBy('created_at', 'desc')->limit(10)->get()->values();
+        $comments = Article::published()->get()->where('recentCommentCount', '>', 0)->sortByDesc('recentCommentCount')->take(10)->map(function ($article) {
+            return [
                 'url' => $article->url,
                 'title' => $article->title,
-                'comments' => $article->recentCommentCount
-            ]);
-        }
+                'comments' => $article->recentCommentCount,
+            ];
+        })
+        ->values();
 
-        return response()->json($articles_sorted_array);
+
+        return response()->json([
+            'articles' => $articles,
+            'comments' => $comments
+        ]);
     }
 
 //    public function articles(Request $request)

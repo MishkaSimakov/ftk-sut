@@ -19,13 +19,16 @@ class VoteController extends Controller
 
     public function all()
     {
-        $votes = Vote::all()->sortByDesc('created_at')->map(function ($vote) {
-            return [
-                'value' => strval($vote->id),
-                'text' => $vote->title,
-            ];
-        });
+        $votes = Vote::all()->sortByDesc('created_at');
 
-        return response()->json($votes);
+        return response()->json([
+            'options' => $votes->map(function ($vote) {
+                return [
+                    'value' => strval($vote->id),
+                    'text' => $vote->title,
+                ];
+            }),
+            'votes' => $votes->load('options')->groupBy('id'),
+        ]);
     }
 }

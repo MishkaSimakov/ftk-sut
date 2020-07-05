@@ -7,6 +7,7 @@ use App\Chat\ChatUser;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -75,10 +76,22 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsToMany(Article::class, UserLike::class);
     }
 
+
     public function getArticleCountAttribute()
     {
         return $this->articles()->where([['is_blank', false], ['is_published', true]])->count();
     }
+
+    public function getArticlesPointSumAttribute()
+    {
+        return $this->articles()->where([['is_blank', false], ['is_published', true]])->sum('points');
+    }
+
+    public function getArticlesViewSumAttribute()
+    {
+        return $this->articles()->where([['is_blank', false], ['is_published', true]])->get()->sum->views;
+    }
+
 
     public function votes()
     {

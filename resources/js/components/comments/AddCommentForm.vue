@@ -9,7 +9,7 @@
         </div>
 
         <div class="input-group">
-            <input placeholder="Написать комментарий..." v-bind:class="{ 'is-invalid': error }" type="text" @keydown="handleCommentInput" v-model="body" id="body" class="form-control">
+            <input placeholder="Написать комментарий..." v-bind:class="{ 'is-invalid': error }" type="text" @keydown="handleCommentInput" v-model="body" id="add_comment_input" class="form-control">
 
             <div class="input-group-append">
                <div v-if="sending" class="btn btn-outline-primary">

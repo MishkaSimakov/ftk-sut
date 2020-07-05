@@ -1,42 +1,76 @@
 <template>
     <div class="card mt-2">
-        <div class="card-header py-3">
-            <h4 class="font-weight-bold text-primary">
-                Топ статей
-            </h4>
-        </div>
-
         <div class="card-body">
-            <ol class="my-2">
-                <li v-for="article in articles">
-                    <div class="row">
-                        <div class="col-md-8 col-sm-8 text-truncate">
-                            <a v-bind:href="article.url" v-bind:title="article.title">{{ article.title }}</a>
-                        </div>
+            <h5 class="card-title">Лучшие статьи</h5>
+            <div v-if="loading" class="text-primary d-flex spinner-border my-4 mx-auto" role="status">
+                <span class="sr-only">Загрузка...</span>
+            </div>
+            <div v-else class="col">
+                <div v-for="(article, place) in articles" class="row">
+                    <div :class="['col-1', hiding]">
+                        {{ parseInt(place) + 1 }}
+                    </div>
 
-                        <div class="col-md-4 ml-auto px-0 text-primary">
-                            <i class="far fa-heart"></i> {{ article.points }}
-                            <i class="far fa-eye"></i> {{ article.views }}
+                    <div :class="['text-truncate', 'col-7', 'col-md-6']">
+                        <a :href="article.url">{{ article.title }}</a>
+                    </div>
+
+                    <div :class="['col-5']">
+                        <div
+                            class="progress my-2"
+                            :style="{ cursor: 'pointer', height: '40%', width: article.total / max * 100 + '%', position: 'relative' }"
+                        >
+                            <div
+                                class="progress-bar"
+                                :style="{ width: article.points / article.total * 100 + '%', backgroundColor: 'coral' }"
+
+                                :data-toggle="article.points > 0 ? 'tooltip' : ''"
+                                data-placement="top"
+                                :title="'Оценки: ' + article.points"
+                            ></div>
+                            <div
+                                class="progress-bar"
+                                :style="{ width: article.views / article.total * 100 + '%', backgroundColor: 'teal' }"
+
+                                :data-toggle="article.views > 0 ? 'tooltip' : ''"
+                                data-placement="top"
+                                :title="'Просмотры: ' + article.views"
+                            ></div>
                         </div>
                     </div>
-                </li>
-            </ol>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     export default {
+        props: [
+            'url'
+        ],
         data() {
             return {
-                articles: []
+                articles: [],
+                loading: true,
+                max: 0,
+
+                hiding: {
+                    'd-none': true,
+                    'd-lg-block': true
+                },
             }
         },
         mounted() {
             new Promise((resolve, reject) => {
-                let tag = new URLSearchParams(window.location.search).get('tag');
-                axios.get('/webapi/articles/top/articles' + (tag ? `?tag=${tag}` : '')).then((response) => {
+                axios.get(this.url).then((response) => {
                     this.articles = response.data;
+                    this.max = this.articles[0].total;
+                    this.loading = false;
+
+                    $(function () {
+                        $('[data-toggle="tooltip"]').tooltip()
+                    })
                 })
             })
         }
