@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Achievements\Events\UserLikeArticle;
-use App\Comment;
+use App\Http\Resources\Article\ArticleIndexResource;
 use App\Tag;
 use App\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Article;
-use App\UserLike;
 
 class ArticleController extends Controller
 {
@@ -34,7 +34,13 @@ class ArticleController extends Controller
 
     public function tags()
     {
-        $tags = Tag::all()->sortByDesc('articleCount')->pluck('name');
+        $tags = Tag::all()->sortByDesc('articleCount')->map(function($tag) {
+            return [
+                'id' => $tag->id,
+                'name' => $tag->name,
+                'article_count' => $tag->articleCount
+            ];
+        })->values();
 
         return response()->json($tags);
     }
@@ -105,7 +111,7 @@ class ArticleController extends Controller
                 'comments' => $article->recentCommentCount,
             ];
         })
-        ->values();
+            ->values();
 
 
         return response()->json([
@@ -114,10 +120,84 @@ class ArticleController extends Controller
         ]);
     }
 
-//    public function articles(Request $request)
-//    {
-//        $articles = Article::paginate(1, ['*'], null, $request->page);
-//
-//        return response()->json($articles);
-//    }
+    public function get(Request $request)
+    {
+        $articles = $this->prepareArticles($request)
+            ->paginate(10, ['*'], null, $request->page);
+
+        return response()->json([
+            'data' => ArticleIndexResource::collection($articles->items()),
+            'total' => $articles->lastPage()
+        ]);
+    }
+
+    public function getUserArticles(Request $request, User $user)
+    {
+        $articles = $this->prepareArticles($request, Article::published()->where('user_id', $user->id))
+            ->paginate(10, ['*'], null, $request->page);
+
+        return response()->json([
+            'data' => ArticleIndexResource::collection($articles->items()),
+            'total' => $articles->lastPage()
+        ]);
+    }
+
+    public function prepareArticles(Request $request, $articles=null)
+    {
+        $articles = $articles ?? Article::published();
+
+        if ($request->has('query')) {
+            $query = $request->get('query');
+
+            $articles = $articles->where(function($article) use ($query) {
+                $article->orWhere('title', 'like', "%" . $query . "%")
+                    ->orWhereHas('tags', function ($q) use ($query) {
+                        $q->where('name', 'like', "%" . $query . "%");
+                    })
+                    ->orWhereHas('user', function ($q) use ($query) {
+                        $q->where('name', 'like', "%" . $query . "%");
+                    });
+            });
+        }
+
+        if ($request->has('tag')) {
+            $tag = $request->tag;
+
+            $articles = $articles->whereHas('tags', function ($q) use ($tag) {
+                return $q->where('tags.id', $tag);
+            });
+        }
+        if ($request->has('length')) {
+            $length = explode('.', $request->length);
+
+            $length_range = [
+                'short' => [0, 100],
+                'medium' => [100, 500],
+                'long' => [500, 10000000]
+            ];
+
+            $articles = $articles->where(function ($q) use ($length, $length_range) {
+                foreach ($length as $len) {
+                    $q->orWhereBetween('length', $length_range[$len]);
+                }
+
+                return $q;
+            });
+        }
+        if ($request->has('sort')) {
+            $sort = explode('.', $request->sort);
+
+            if ($sort[0] == 'points') {
+                $articles = $articles->orderBy('points', $sort[1]);
+            } elseif ($sort[0] == 'views') {
+                $articles = $articles->orderByViews($sort[1]);
+            } elseif ($sort[0] == 'date') {
+                $articles = $articles->orderBy('created_at', $sort[1]);
+            }
+        } else {
+            $articles = $articles->orderBy('created_at', 'desc');
+        }
+
+        return $articles;
+    }
 }

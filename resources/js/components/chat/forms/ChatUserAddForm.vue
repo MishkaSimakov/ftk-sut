@@ -43,7 +43,6 @@
                 if (this.chat.users.find((u) => {
                     return user.id === u.id
                 }) === undefined) {
-                    console.log("here");
                     this.addChatUsers({
                         id: this.chat.id,
                         recipients: user.id

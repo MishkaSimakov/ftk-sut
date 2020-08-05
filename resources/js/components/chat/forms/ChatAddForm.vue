@@ -66,9 +66,7 @@
                 }
 
                 this.recipients.push(recipient);
-                console.log(this.value);
                 this.value = null;
-                console.log(this.value);
             },
             removeRecipient(recipient) {
                 this.recipients = this.recipients.filter((r) => {

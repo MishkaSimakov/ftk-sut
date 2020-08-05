@@ -14,7 +14,8 @@ Route::prefix('article')->name('article.')->group(function() {
     Route::delete('/{article}', 'ArticleController@destroy')->name('destroy')->middleware('admin');
 });
 
-//Route::get('webapi/articles', 'Api\ArticleController@get')->name('api.articles.get');
+Route::get('webapi/articles', 'Api\ArticleController@get')->name('api.articles.get');
+Route::get('webapi/user/{user}/articles', 'Api\ArticleController@getUserArticles')->name('api.user.articles');
 Route::resource('article', 'ArticleController');
 
 Route::resource('rating', 'RatingController')->only([

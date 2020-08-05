@@ -20,7 +20,7 @@
                 <i style="cursor: pointer;" class="far fa-comment"></i>
             </a>
 
-            <span class="article__comments_counter">{{ article.comments.length }}</span>
+            <span class="article__comments_counter">{{ typeof article.comments_count === "undefined" ? article.comments.length : article.comments_count }}</span>
         </div>
 
         <div class="ml-4 d-inline-block">
@@ -125,8 +125,6 @@
                 } else {
                     $('#article_like_' + this.article.id).tooltip('dispose');
                 }
-
-                console.log(this.isLiked)
             }
         },
         mounted() {

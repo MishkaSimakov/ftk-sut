@@ -21,8 +21,6 @@ export default {
         })
     },
     storeChatMessage(id, {body, images, reply_id}) {
-        // console.log(images.get('files'));
-
         return new Promise((resolve, reject) => {
             axios.post('/webapi/chats/' + id + '/message', {
                 body: body,

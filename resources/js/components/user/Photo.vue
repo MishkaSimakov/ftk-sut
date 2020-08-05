@@ -1,8 +1,8 @@
 <template>
     <div>
         <img data-lity style="cursor: pointer; object-fit: cover" v-bind:src="path" class="h-100 w-100 card-img" alt="Изображение пользователя">
-        <a v-if="editable" style="cursor: pointer;" class="text-gray-600" title="Загрузить изображение" data-toggle="modal" data-target="#image-upload">
-            <i class="fas fa-upload h3 upload_icon"></i>
+        <a v-if="editable" style="cursor: pointer;" class="text-gray-600 upload_icon" title="Загрузить изображение" data-toggle="modal" data-target="#image-upload">
+            <i class="fas fa-upload h3"></i>
         </a>
 
         <!-- Modal -->

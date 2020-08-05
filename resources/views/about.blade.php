@@ -34,7 +34,7 @@
                 <b>
                     Discord
                 </b>:
-                <a class="ml-2" href="https://discord.gg/BYptfm">
+                <a class="ml-2" href="https://discord.gg/KraXSVg">
                     ФТК
                     <i class="ml-1 fab fa-discord"></i>
                 </a><br>

@@ -1,110 +1,79 @@
 <template>
     <div class="articles">
-        <find-articles-form></find-articles-form>
+        <find-articles-form v-if="show_search != 'false'"></find-articles-form>
 
         <div class="mt-2">
             <article-preview v-for="article in articles" :key="article.id" :data="JSON.stringify(article)"></article-preview>
 
-            <div v-if="page < lastPage" class="spinner">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
+            <div v-observe-visibility="loadArticles" v-if="page <= total" class="my-3 d-flex flex-row justify-content-center">
+                <i v-if="random" class="text-info fas fa-robot fa-2x fa-spin"></i>
+
+                <div v-else class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
+            <div v-if="!loading && !articles.length">
+                <h2 class="text-center">Таких статей нет! 😯</h2>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import Bus from '../../bus'
+
     export default {
         props: [
-            'url'
+            'url',
+            'show_search'
         ],
         data() {
             return {
-                page: 0,
-                lastPage: 0,
+                page: 1,
+                total: 1,
                 articles: [],
-                loading: false,
 
-                sort: new URLSearchParams(window.location.search).get('sort'),
-                tag: new URLSearchParams(window.location.search).get('tag'),
-                search: new URLSearchParams(window.location.search).get('search')
+                loading: true,
+                random: Math.random() > 0.9
             }
         },
         methods: {
+            getParams() {
+                let params = {};
+                new URLSearchParams(window.location.search).forEach((value, key) => {
+                    params[key] = value
+                });
+                params.page = this.page;
+
+                return {
+                    params: params
+                }
+            },
             getArticles() {
+                this.loading = true;
+
                 new Promise((resolve, reject) => {
-                    axios.get(this.url, {
-                        params: {
-                            page: this.page
-                        }
-                    }).then((response) => {
-                        this.lastPage = response.data.last_page;
+                    axios.get(this.url, this.getParams()).then((response) => {
+                        this.total = response.data.total;
                         this.articles.push(...response.data.data);
+                        this.page += 1;
+
+                        this.loading = false;
                     })
                 })
             },
             loadArticles(isVisible) {
                 if (isVisible) {
-                    this.page++;
                     this.getArticles()
                 }
             }
         },
         mounted() {
-            this.getArticles();
-            this.page++;
+            Bus.$on('articles.search.apply', (url) => {
+                this.articles = [];
+                this.page = 1;
+            })
         }
     }
 </script>
-
-<style lang="scss">
-    .articles {
-        .spinner {
-            margin: 100px auto 0;
-            width: 70px;
-            text-align: center;
-        }
-
-        .spinner > div {
-            width: 18px;
-            height: 18px;
-            background-color: #333;
-
-            border-radius: 100%;
-            display: inline-block;
-            -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-            animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-        }
-
-        .spinner .bounce1 {
-            -webkit-animation-delay: -0.32s;
-            animation-delay: -0.32s;
-        }
-
-        .spinner .bounce2 {
-            -webkit-animation-delay: -0.16s;
-            animation-delay: -0.16s;
-        }
-
-        @-webkit-keyframes sk-bouncedelay {
-            0%, 80%, 100% {
-                -webkit-transform: scale(0)
-            }
-            40% {
-                -webkit-transform: scale(1.0)
-            }
-        }
-
-        @keyframes sk-bouncedelay {
-            0%, 80%, 100% {
-                -webkit-transform: scale(0);
-                transform: scale(0);
-            }
-            40% {
-                -webkit-transform: scale(1.0);
-                transform: scale(1.0);
-            }
-        }
-    }
-</style>

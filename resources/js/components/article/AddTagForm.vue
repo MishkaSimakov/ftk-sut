@@ -14,13 +14,11 @@
           'value'
         ],
         mounted() {
-            console.log(this.value);
-
             new Promise((resolve, reject) => {
                 axios.get('/webapi/articles/tags').then((response) => {
                     let input = document.querySelector('#tags');
                     new Tagify(input, {
-                        whitelist: response.data,
+                        whitelist: response.data.map((tag) => tag.name),
                         maxTags: 10,
                         dropdown: {
                             classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted

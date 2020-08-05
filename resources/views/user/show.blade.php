@@ -33,17 +33,33 @@
     </div>
 
     @if ($achievements)
-        <div id="achievements">
+        <div id="achievements" class="mt-4">
+            <h3 class="mb-2 text-muted">Достижения</h3>
+
             @component('components.card-lists.achievements', ['achievements' => $achievements])@endcomponent
         </div>
     @endif
 
     @if ($user->student)
-        <stat id="stat" user="{{ $user->id }}"></stat>
+        <div id="stat" class="mt-4">
+            <h3 class="mb-2 text-muted">Статистика</h3>
+
+            <stat user="{{ $user->id }}"></stat>
+        </div>
     @endif
 
-    @if ($user->articles->count())
-{{--        articles--}}
+    @if ($articles->count())
+        <div id="articles" class="mt-4">
+            <h3 class="mb-2 text-muted">Статьи</h3>
+
+            @component('components.card-lists.articles', ['articles' => $articles])@endcomponent
+        </div>
+
+        <div class="d-flex">
+            <div class="mx-auto">
+                {{ $articles->links() }}
+            </div>
+        </div>
     @endif
 @endsection
 

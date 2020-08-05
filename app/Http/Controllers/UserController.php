@@ -14,6 +14,8 @@ class UserController extends Controller
         }
 
         $achievements = optional($user->student)->achievements;
-        return view('user.show', compact('achievements', 'user'));
+        $articles = $user->articles()->paginate(5);
+
+        return view('user.show', compact('achievements', 'user', 'articles'));
     }
 }

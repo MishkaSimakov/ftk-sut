@@ -15,6 +15,6 @@ class Tag extends Model
 
     public function getArticleCountAttribute()
     {
-        return $this->articles->count();
+        return $this->articles()->where([['is_blank', false], ['is_published', true]])->count();
     }
 }

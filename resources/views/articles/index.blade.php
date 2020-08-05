@@ -14,33 +14,10 @@
             @endauth
         </div>
 
-        <find-articles-form></find-articles-form>
-
-        <div class="mt-2">
-            @component('components.card-lists.articles', ['articles' => $articles])@endcomponent
-        </div>
-
-{{--        <article-list url="{{ route('api.articles.get') }}"></article-list>--}}
-    </div>
-
-    <div class="d-flex">
-        <div class="mx-auto">
-            {{ $articles->withQueryString()->links() }}
-        </div>
+        <articles-list show_search="true" url="{{ route('api.articles.get') }}"></articles-list>
     </div>
 @endsection
 
 @push('side')
     @component('components.navs.article')@endcomponent
 @endpush
-{{--@push('side')--}}
-{{--    <articles-top></articles-top>--}}
-{{--    <writers-top></writers-top>--}}
-{{--    <comments-top></comments-top>--}}
-{{--@endpush--}}
-<script>
-    import ArticleList from "../../js/components/article/ArticleList";
-    export default {
-        components: {ArticleList}
-    }
-</script>

@@ -20,7 +20,6 @@ const actions = {
         commit('setRatingLoading', true);
 
         api.getRating(id).then((response) => {
-            console.log(response);
             commit('setRating', response.data);
             commit('setRatingLoading', false);
         })

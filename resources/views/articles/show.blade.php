@@ -46,7 +46,7 @@
         <div class="card mt-2 p-1">
             <div class="h3 my-auto mx-2 d-flex flex-grow-1">
                 @if($article->is_published && !$article->is_blank)
-                    <article-actions url="{{ route('api.article.points', compact('article')) }}" auth="{{ auth()->check() }}" data="{{ $article->load(['comments', 'users'])->toJson() }}"></article-actions>
+                    <article-actions url="{{ route('api.article.points', compact('article')) }}" auth="{{ auth()->check() }}" data="{{ $article->toJson() }}"></article-actions>
                 @elseif($article->is_blank && $article->is_published)
                     <a href="{{ route('article.edit', compact('article')) }}" class="btn btn-primary">Редактировать</a>
                 @else

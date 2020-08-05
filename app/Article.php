@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
 
 
 /**
@@ -26,6 +28,14 @@ class Article extends Model implements HasMedia, Viewable
         'views',
         'url'
     ];
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(750)
+            ->height(750)
+            ->sharpen(2);
+    }
 
     public function users()
     {
@@ -74,6 +84,19 @@ class Article extends Model implements HasMedia, Viewable
 
     public function getRecentCommentCountAttribute() {
         return $this->comments()->where('created_at', '>', now()->subDays(3))->get()->count();
+    }
+
+    public function getLengthAttribute()
+    {
+        $length = Str::words(strip_tags($this->body));
+
+        if ($length < 200) {
+            return 'short';
+        } elseif ($length < 1000) {
+            return 'medium';
+        } else {
+            return 'long';
+        }
     }
 
 

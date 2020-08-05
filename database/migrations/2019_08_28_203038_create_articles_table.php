@@ -17,6 +17,7 @@ class CreateArticlesTable extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->text('body')->nullable();
+            $table->integer('length')->nullable();
             $table->integer('user_id');
             $table->integer('points')->nullable();
             $table->boolean('is_published')->nullable();

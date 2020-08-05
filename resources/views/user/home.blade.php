@@ -36,17 +36,27 @@
     </div>
 
     @if ($achievements)
-        <div id="achievements">
+        <div id="achievements" class="mt-4">
+            <h3 class="mb-2 text-muted">Достижения</h3>
+
             @component('components.card-lists.achievements', ['achievements' => $achievements])@endcomponent
         </div>
     @endif
 
     @if ($user->student)
-        <stat id="stat" user="{{ $user->id }}"></stat>
+        <div id="stat" class="mt-4">
+            <h3 class="mb-2 text-muted">Статистика</h3>
+
+            <stat user="{{ $user->id }}"></stat>
+        </div>
     @endif
 
-    @if ($user->articles->count())
-{{--        articles--}}
+    @if ($articles->count())
+        <h3 class="mt-4 text-muted">Статьи</h3>
+
+        <div id="articles">
+            <articles-list show_search="false" url="{{ route('api.user.articles', compact('user')) }}"></articles-list>
+        </div>
     @endif
 @endsection
 
