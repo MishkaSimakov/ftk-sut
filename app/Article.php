@@ -101,23 +101,23 @@ class Article extends Model implements HasMedia, Viewable
 
 
 //    scopes
-    public function scopePublished()
+    public function scopePublished(Builder $builder)
     {
-        return Article::where([['is_blank', false], ['is_published', true]]);
+        return $builder->where([['is_blank', false], ['is_published', true]]);
     }
 
-    public function scopeNotPublished()
+    public function scopeNotPublished(Builder $builder)
     {
-        return Article::where([['is_blank', false], ['is_published', false]]);
+        return $builder->where([['is_blank', false], ['is_published', false]]);
     }
 
-    public function scopeDraft()
+    public function scopeDraft(Builder $builder)
     {
-        return Article::where([['is_blank', true], ['is_published', true]]);
+        return $builder->where([['is_blank', true], ['is_published', true]]);
     }
 
-    public function scopeBlank()
+    public function scopeBlank(Builder $builder)
     {
-        return Article::where([['is_blank', true], ['is_published', false]]);
+        return $builder->where([['is_blank', true], ['is_published', false]]);
     }
 }

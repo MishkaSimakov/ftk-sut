@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Http\Resources\Article\ArticleIndexResource;
 use App\News;
 use App\Schedule;
 use App\Teacher;
@@ -18,7 +19,7 @@ class MainController extends Controller
             views($news)->cooldown(now()->addHours(1))->record();
         });
 
-        $articles = Article::published()->orderByDesc('created_at')->limit(3)->get();
+        $articles = ArticleIndexResource::collection(Article::published()->orderByDesc('created_at')->limit(3)->get());
 
         return view('main.auth', compact('news', 'articles'));
 //        }

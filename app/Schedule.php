@@ -43,13 +43,24 @@ class Schedule extends Model implements HasMedia
             "https://pbs.twimg.com/profile_images/600060188872155136/st4Sp6Aw_400x400.jpg";
     }
 
-    public function scopeArchived()
+    public function travel()
     {
-        return Schedule::where('date_end', '<=', now());
+        return $this->hasOne(Travel::class);
     }
 
-    public function scopeFuture()
+
+    public function scopeArchived(Builder $builder)
     {
-        return Schedule::where('date_end', '>', now());
+        return $builder->where('date_end', '<=', now());
+    }
+
+    public function scopeFuture(Builder $builder)
+    {
+        return $builder->where('date_end', '>', now());
+    }
+
+    public function scopeTravels(Builder $builder)
+    {
+        return $builder->whereHas('travel');
     }
 }

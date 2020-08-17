@@ -51,13 +51,11 @@
         </div>
     @endif
 
-    @if ($articles->count())
-        <h3 class="mt-4 text-muted">Статьи</h3>
+    <h3 class="mt-4 text-muted">Статьи</h3>
 
-        <div id="articles">
-            <articles-list show_search="false" url="{{ route('api.user.articles', compact('user')) }}"></articles-list>
-        </div>
-    @endif
+    <div id="articles">
+        <articles-list show_search="false" url="{{ route('api.user.articles', compact('user')) }}"></articles-list>
+    </div>
 @endsection
 
 @push('side')

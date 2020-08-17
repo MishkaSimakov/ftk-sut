@@ -18,9 +18,12 @@ Route::get('webapi/articles', 'Api\ArticleController@get')->name('api.articles.g
 Route::get('webapi/user/{user}/articles', 'Api\ArticleController@getUserArticles')->name('api.user.articles');
 Route::resource('article', 'ArticleController');
 
+
 Route::resource('rating', 'RatingController')->only([
     'create', 'store', 'show', 'index'
 ]);
+Route::get('rating/travels', 'RatingController@travels')->name('rating.travels');
+
 
 Route::get('/user/{user}', 'UserController@show')->name('user.show');
 
@@ -49,6 +52,12 @@ Auth::routes([
     'confirm' => false,
     'verify' => false,
 ]);
+
+Route::get('/password/reset', 'Auth\ResetPasswordController@index')->name('password.index')->middleware('guest');
+Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.reset')->middleware(['throttle:5,1', 'guest']);
+
+Route::get('/password/change', 'Auth\ResetPasswordController@change')->name('password.change')->middleware('auth');
+Route::post('/password/change', 'Auth\ResetPasswordController@update')->name('password.update')->middleware(['throttle:5,1', 'auth']);
 
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 
@@ -118,3 +127,7 @@ Route::prefix('webapi/articles')->name('articles.statistics.')->namespace('Api')
 });
 
 Route::view('/about', 'about')->name('about');
+
+
+Route::get('/travels/import', 'TravelController@show_import_form')->name('travels.show_form');
+Route::post('/travels/import', 'TravelController@import')->name('travels.import');

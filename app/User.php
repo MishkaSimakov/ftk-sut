@@ -104,4 +104,9 @@ class User extends Authenticatable implements HasMedia
             $this->getMedia()->first()->getUrl() :
             'https://upload.wikimedia.org/wikipedia/commons/4/46/%D0%A1%D0%B5%D1%80%D1%8B%D0%B9_%D1%86%D0%B2%D0%B5%D1%82-_2014-03-15_18-16.jpg';
     }
+
+    public function travels()
+    {
+        return $this->belongsToMany(Travel::class, 'travel_users');
+    }
 }

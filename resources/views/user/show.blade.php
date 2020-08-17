@@ -48,19 +48,11 @@
         </div>
     @endif
 
-    @if ($articles->count())
-        <div id="articles" class="mt-4">
-            <h3 class="mb-2 text-muted">Статьи</h3>
+    <h3 class="mt-4 text-muted">Статьи</h3>
 
-            @component('components.card-lists.articles', ['articles' => $articles])@endcomponent
-        </div>
-
-        <div class="d-flex">
-            <div class="mx-auto">
-                {{ $articles->links() }}
-            </div>
-        </div>
-    @endif
+    <div id="articles">
+        <articles-list show_search="false" url="{{ route('api.user.articles', compact('user')) }}"></articles-list>
+    </div>
 @endsection
 
 @push('side')
