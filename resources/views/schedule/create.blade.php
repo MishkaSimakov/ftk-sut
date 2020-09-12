@@ -79,6 +79,8 @@
                 </div>
             </div>
 
+            <travel-settings old_is_travel="{{ old('is_travel') }}" old_travel_type="{{ old('travel_type') }}" old_distance="{{ old('distance') }}"></travel-settings>
+
             <div class="form-group row mb-0">
                 <div class="col-md-8 offset-md-4">
                     <button type="submit" class="btn btn-primary">

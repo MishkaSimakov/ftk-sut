@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Student;
 use App\Teacher;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use function view;
@@ -18,7 +19,7 @@ class AdminController extends Controller
             return !$schedule->isArchived;
         })->sortByDesc('date_start');
 
-        $students = Student::with('user')->get();
+        $students = User::whereDoesntHave('teacher')->get();
         $teachers = Teacher::with('user')->get();
 
         return view('admin.index', compact(['schedules', 'students', 'teachers']));

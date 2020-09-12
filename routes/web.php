@@ -63,6 +63,9 @@ Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->namespace('Admin')->group(function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
+
+    Route::get('/user/create', 'UserController@create')->name('admin.user.create');
+    Route::post('/user/store', 'UserController@store')->name('admin.user.store');
 });
 
 
@@ -129,5 +132,5 @@ Route::prefix('webapi/articles')->name('articles.statistics.')->namespace('Api')
 Route::view('/about', 'about')->name('about');
 
 
-Route::get('/travels/import', 'TravelController@show_import_form')->name('travels.show_form');
+Route::get('/travels/rating/{year}', 'TravelController@show_rating')->name('travels.rating');
 Route::post('/travels/import', 'TravelController@import')->name('travels.import');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSchedule;
 use App\Schedule;
+use App\Travel;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -29,8 +30,16 @@ class ScheduleController extends Controller
     }
 
     public function store(StoreSchedule $request) {
-        $schedule = Schedule::make(Arr::except($request->all(), 'file'));
+        $schedule = Schedule::make(Arr::except($request->all(), ['file', 'is_travel', 'distance', 'travel_type']));
         $schedule->save();
+
+        if ($request->is_travel === 'on') {
+            Travel::make([
+                'schedule_id' => $schedule->id,
+                'distance' => $request->distance,
+                'is_bike' => $request->travel_type === 'bike',
+            ])->save();
+        }
 
 //      add image
         $image = Arr::first($request->allFiles());
@@ -65,9 +74,28 @@ class ScheduleController extends Controller
             'subtitle' => 'max:100|string',
             'date_start' => 'required|date|after:now',
             'date_end' => 'required|date|after:date_start',
+
+            'is_travel' => 'in:on,off|nullable',
+            'distance' => 'required_if:is_travel,on|numeric',
+            'travel_type' => 'required_if:is_travel,on|in:bike,hiking',
         ]);
 
-        $schedule->update($validatedData);
+        $schedule->update(Arr::except($validatedData, ['is_travel', 'distance', 'travel_type']));
+
+        if ($schedule->travel && !key_exists('is_travel', $validatedData)) {
+            $schedule->travel()->delete();
+        } elseif (!$schedule->travel && key_exists('is_travel', $validatedData)) {
+            Travel::make([
+                'schedule_id' => $schedule->id,
+                'distance' => $validatedData['distance'],
+                'is_bike' => $validatedData['travel_type'] === 'bike',
+            ])->save();
+        } else {
+            $schedule->travel()->update([
+                'is_bike' => $validatedData['travel_type'] === 'bike',
+                'distance' => $validatedData['distance'],
+            ]);
+        }
 
         return redirect(route('schedule.index'));
     }

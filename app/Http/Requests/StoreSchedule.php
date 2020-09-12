@@ -29,7 +29,11 @@ class StoreSchedule extends FormRequest
             'subtitle' => 'max:100|string',
             'date_start' => 'required|date',
             'date_end' => 'required|date|after:date_start',
-            'file' => 'required|file|image'
+            'file' => 'required|file|image',
+
+            'is_travel' => 'in:on,off|nullable',
+            'distance' => 'required_if:is_travel,on|numeric',
+            'travel_type' => 'required_if:is_travel,on|in:bike,hiking',
         ];
     }
 
@@ -54,6 +58,8 @@ class StoreSchedule extends FormRequest
             'file.required' => 'Необходимо загрузить фотографию',
             'file.file' => 'Здесь должен быть файл',
             'file.image' => 'Здесь должно быть изображение',
+
+            'distance.numeric' => 'Здесь должно быть число!'
         ];
     }
 }

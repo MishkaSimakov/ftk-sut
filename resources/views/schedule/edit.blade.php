@@ -6,9 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-11">
                 <div class="card shadow mt-2">
-                    <div class="card-header">
-                        <h4 class="font-weight-bold text-primary">Редактировать мероприятие</h4>
-                    </div>
+                    <div class="card-header">Редактировать событие</div>
 
                     <div class="card-body">
                         <form id="form" enctype="multipart/form-data" method="POST" action="{{ route('schedule.update', compact('schedule')) }}">
@@ -70,6 +68,8 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <travel-settings old_is_travel="{{ old('is_travel') ?? !!$schedule->travel }}" old_travel_type="{{ old('travel_type') ?? optional($schedule->travel)->is_bike ? 'bike' : 'hiking' }}" old_distance="{{ old('distance') ?? optional($schedule->travel)->distance }}"></travel-settings>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">

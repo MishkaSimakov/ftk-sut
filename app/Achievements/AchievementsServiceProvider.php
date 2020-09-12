@@ -3,17 +3,16 @@
 namespace App\Achievements;
 
 use App\Achievements\Console\GenerateAchievementCommand;
-use App\Achievements\Types\Get10LikesOnSelfArticle;
 use App\Achievements\Types\GetLessThen0PointsInRating;
 use App\Achievements\Types\GetMoreThen1000PointsInRating;
 use App\Achievements\Types\GetLessThen250PointsInRating;
+use App\Achievements\Types\GoTo10Travels;
 use App\Achievements\Types\LikeSelfArticle;
 use App\Achievements\Types\Set10Like;
 use App\Achievements\Types\SetFirstLike;
 use App\Achievements\Types\Write10Articles;
 use App\Achievements\Types\WriteAboutSelf;
 use App\Achievements\Types\WriteFirstArticle;
-use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 
 class AchievementsServiceProvider extends ServiceProvider
@@ -37,6 +36,9 @@ class AchievementsServiceProvider extends ServiceProvider
         'account' => [
             WriteAboutSelf::class
         ],
+        'travels' => [
+            GoTo10Travels::class,
+        ]
     ];
 
     /**

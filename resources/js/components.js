@@ -48,6 +48,7 @@ export default function () {
     //schedule
     Vue.component('sign-button', require('./components/schedule/SignButton.vue').default);
     Vue.component('people-list', require('./components/schedule/PeopleList.vue').default);
+    Vue.component('travel-settings', require('./components/schedule/TravelSettings.vue').default);
 
     // user statistics
     Vue.component('stat', require('./components/user/Statistics/Main.vue').default);

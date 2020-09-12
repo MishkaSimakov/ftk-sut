@@ -30,6 +30,14 @@
 
                     <h5 class="font-weight-bold text-primary">
                         {{ $schedule->title }}
+
+                        @if($schedule->travel)
+                             @if ($schedule->travel->is_bike)
+                                <i class="ml-2 fas fa-biking" data-title="Это велосипедный поход" data-toggle="tooltip"></i>
+                            @else
+                                <i class="ml-2 fas fa-hiking" data-title="Это пеший поход" data-toggle="tooltip"></i>
+                             @endif
+                        @endif
                     </h5>
                 </div>
 

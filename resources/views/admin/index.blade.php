@@ -7,7 +7,12 @@
     <div class="container mt-2">
         <div class="card shadow mb-2">
             <div class="card-header">
-                <h6>Ученики</h6>
+                <h6>
+                    Ученики
+                    <a class="ml-2" title="Добавить пользователя" href="{{ route('admin.user.create') }}">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </h6>
             </div>
 
             <div class="card-body">
@@ -21,7 +26,7 @@
 
                         <datalist id="users">
                             @foreach($students as $student)
-                                <option>{{ $student->user->name}}</option>
+                                <option>{{ $student->name}}</option>
                             @endforeach
                         </datalist>
                     </div>
@@ -47,10 +52,10 @@
                     <tbody>
                         @foreach($students as $student)
                             <tr>
-                                <td><a href="{{ $student->user->url }}" title="Страница пользователя">{{ $student->name }}</a></td>
-                                <td>{{ $student->user->register_code }}</td>
-                                <td>{{ $student->user->email ? 'Да' : 'Нет' }}</td>
-                                <td class="text-center"><a href="{{ route('settings.show.admin', ['user' => $student->user]) }}"><i class="fas fa-user-cog"></i></a></td>
+                                <td><a href="{{ $student->url }}" title="Страница пользователя">{{ $student->name }}</a></td>
+                                <td>{{ $student->register_code }}</td>
+                                <td>{{ $student->email ? 'Да' : 'Нет' }}</td>
+                                <td class="text-center"><a href="{{ route('settings.show.admin', ['user' => $student]) }}"><i class="fas fa-user-cog"></i></a></td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -83,6 +88,42 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <div class="card shadow mb-2">
+            <div class="card-header">
+                <h6>Импорт походов</h6>
+            </div>
+
+            <div class="card-body">
+                <form method="POST" action="{{ route('travels.import') }}" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="form-group row">
+                        <label for="file" class="col-md-4 col-form-label text-md-right">Походы</label>
+
+                        <div class="col-md-6">
+                            <input id="file" type="file" class="form-control-file{{ $errors->has('file') ? ' is-invalid' : '' }}" accept=".xls" name="file" required>
+
+                            <small class="text-muted">Пример файла для импорта можно скачать по <a href="{{ asset('excel/travels.xls') }}">ссылке</a></small>
+
+                            @if ($errors->has('file'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('file') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-8 offset-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                Импортировать
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

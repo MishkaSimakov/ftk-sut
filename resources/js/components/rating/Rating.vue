@@ -43,8 +43,13 @@
                         <div :class="['col-12', 'col-md-3', 'font-weight-bolder']">
                             Фамилия, имя
                         </div>
-                        <div :class="['col-md-2', 'font-weight-bolder', hiding]">
+
+                        <div v-if="type === 'points'" :class="['col-md-2', 'font-weight-bolder', hiding]">
                             Очки
+                        </div>
+                        <div v-else :class="['col-md-2', 'font-weight-bolder', hiding]">
+                            <span class="d-xl-inline-block d-none">Километры</span>
+                            <span class="d-inline-block d-xl-none">Км</span>
                         </div>
                     </div>
                     <div v-if="rating.length" v-for="(user, place) in data" class="row">
@@ -73,7 +78,8 @@
 <script>
     export default {
         props: [
-            'id'
+            'url',
+            'type'
         ],
         data: function () {
             return {
@@ -138,7 +144,7 @@
         },
         mounted() {
             new Promise((resolve, reject) => {
-                axios.get('/api/rating/' + this.id).then((response) => {
+                axios.get(this.url).then((response) => {
                     this.prepareData(response.data[1]);
                     this.rating = this.data;
 

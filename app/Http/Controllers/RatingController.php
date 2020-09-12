@@ -8,6 +8,7 @@ use App\PointCategory;
 use App\Imports\RatingsImport;
 use App\Rating;
 use App\Student;
+use App\Travel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -25,9 +26,10 @@ class RatingController extends Controller
 
     public function index()
     {
+        $travels = Travel::all()->pluck('academicYear');
         $ratings = Rating::all()->sortByDesc('date')->groupBy('academicYear');
 
-        return view('rating.index', compact('ratings'));
+        return view('rating.index', compact('ratings', 'travels'));
     }
 
     public function show(Rating $rating)

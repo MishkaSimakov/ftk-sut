@@ -23,6 +23,8 @@ Route::get('/users', function () {
 
 Route::get('/rating/{rating}', 'Api\RatingController@show')->name('api.rating.show');
 
+Route::get('/travels/rating/{year}', 'TravelController@rating')->name('api.travels.rating.show');
+
 Route::get('/user/{user}/stats/points', 'Api\StatisticsController@points')->name('api.user.point_stats');
 Route::get('/user/{user}/stats/categories', 'Api\StatisticsController@categories')->name('api.user.categories_stats');
 

@@ -46,14 +46,17 @@
                                 <a href="{{ $rating->url }}">{{ $rating->name }}</a>
                             </li>
                         @endforeach
+
+                        @if ($travels->contains($year))
+                                <li>
+                                    <a href="{{ route('travels.rating', compact('year')) }}">Статистика по походам</a>
+                                </li>
+                        @endif
                     </ul>
                 </div>
             </div>
         @endforeach
     </div>
-
-
-{{--        <h2 class="ml-2"><a href="{{ $rating->url }}">{{ $rating->name }}</a></h2>--}}
 
 @endsection
 
