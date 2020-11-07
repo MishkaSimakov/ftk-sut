@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\RatingPointCategory;
 use Illuminate\Support\ServiceProvider;
+use Maatwebsite\Excel\Imports\HeadingRowFormatter;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        HeadingRowFormatter::extend('rating', function($value) {
+            return optional(RatingPointCategory::where('import_name', $value)->first())->slug;
+        });
+
+        HeadingRowFormatter::default('rating');
     }
 
     /**
