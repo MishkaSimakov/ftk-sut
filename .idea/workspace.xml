@@ -36,6 +36,9 @@
       <change beforePath="$PROJECT_DIR$/../ftk-sut-front/pages/articles/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../ftk-sut-front/pages/articles/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ftk-sut-front/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../ftk-sut-front/pages/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ftk-sut-front/pages/news/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../ftk-sut-front/pages/news/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +63,7 @@
         <entry key="$PROJECT_DIR$/../ftk-sut-front" value="master" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../ftk-sut-front" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/../ftk-sut-front/node_modules/vue/package.json" />
@@ -198,12 +201,12 @@
     <property name="vuejs.nuxt.types-notification-shown" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Sites\ftk-sut-front\pages\auth" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Sites\ftk-sut-front\components\global" />
       <recent name="D:\Sites\ftk-sut-front\pages\news" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Sites\ftk-sut-front\pages\auth" />
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.NewsTest.testItHasClubScope">
@@ -271,6 +274,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="674" y="163" key="#PHP" timestamp="1604401155789">

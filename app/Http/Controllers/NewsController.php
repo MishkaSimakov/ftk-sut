@@ -13,7 +13,7 @@ class NewsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin')->except('index');
+        $this->middleware('admin')->except('index', 'show');
     }
 
     public function index()
@@ -25,6 +25,13 @@ class NewsController extends Controller
         );
     }
 
+    public function show(News $news)
+    {
+        return response()->json(
+            NewsIndexResource::make($news)
+        );
+    }
+
     public function store(StoreNewsRequest $request)
     {
         $news = News::create(
@@ -32,6 +39,21 @@ class NewsController extends Controller
         );
         $news->clubs()->sync($request->get('clubs'));
 
-        return response();
+        return response('OK', 200);
+    }
+
+    public function destroy(News $news)
+    {
+        $news->delete();
+
+        return response('OK', 200);
+    }
+
+    public function update(StoreNewsRequest $request, News $news)
+    {
+        $news->update($request->except('clubs'));
+        $news->clubs()->sync($request->clubs);
+
+        return response('OK', 200);
     }
 }
