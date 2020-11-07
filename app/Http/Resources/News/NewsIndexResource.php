@@ -20,6 +20,7 @@ class NewsIndexResource extends JsonResource
             'title' => $this->title,
             'body' => $this->body,
             'date' => $this->date,
+            'views' => 100,
 
             'clubs' => ClubsIndexResource::collection($this->clubs)
         ];

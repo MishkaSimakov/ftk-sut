@@ -18,6 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('news', \App\Http\Controllers\NewsController::class)->except('show');
+Route::resource('news', \App\Http\Controllers\NewsController::class)->except('edit', 'create');
 
 Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);
