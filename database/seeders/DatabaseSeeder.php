@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
          \App\Models\User::factory()->admin()->create([
              'password' => Hash::make('secret'),
              'email' => 'msimakov661@gmail.com',
-             'name' => 'Михаил'
+             'name' => 'Симаков Михаил'
          ]);
 
          $this->call(NewsSeeder::class);

@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rating extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['is_monthly', 'date'];
+    protected $dates = ['date'];
 }

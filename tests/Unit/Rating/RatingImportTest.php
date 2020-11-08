@@ -3,6 +3,8 @@
 namespace Tests\Unit\Rating;
 
 use App\Imports\RatingImport;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -21,20 +23,15 @@ class RatingImportTest extends TestCase
     {
         $this->seed();
 
-        $count = 0;
-        DB::listen(function ($query) use (&$count) {
-            $count++;
-        });
-
         $this->importRating();
 
-        dd($count);
+        $this->assertCount(121, User::all());
     }
 
     public function importRating()
     {
         $rating = storage_path('app/rating_one_list.xls');
 
-        Excel::import(new RatingImport, $rating);
+        Excel::import(new RatingImport(Carbon::parse('2020-10'), true), $rating);
     }
 }

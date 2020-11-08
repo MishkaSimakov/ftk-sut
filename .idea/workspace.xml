@@ -24,11 +24,40 @@
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Imports/RatingImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/RatingImport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Rating.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Rating.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_07_171326_create_ratings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_07_171326_create_ratings_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-18i69JChNZmdZ5QZYE4xLB8GuzIpjTgi.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-56DjGUbfgTZPCAnCj2KqsEquCfU98lAQ.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-68xmSrYpk7FqQmaqZBQT4fimSFNGsTxk.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-6IOzGLkDy8vpAX7t7VcBLXByzorl092B.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-6JLbFzGdB7iCLZHHI4jwjruXhTcvsfoZ.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-93ffdq5DC5xcdjkHgTOgyPZJ1BLdllzx.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-CgMHHTeDBi7XeQqyYXf0Mg1V0vuWJz0k.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-EK96G8kX5ZwDNTQmNcOTb12QOB34trZ2.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-H4VBZF4MDdB0zKD2jX2Ur1ngiuvhZ8s8.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-HnQ3OKwEhP3TgCOESq0K5LHEvxcFsfBJ.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-IWsyoKi9HNyMITYx6hUQ7V5Y2R5X5Ivd.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-LQ7NFPSlQnUXMh3rNUDxozFBTv1UWTgr.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-NsXB1mTuSk98wQ03k9N79EXPVpW6tfYa.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-QYfJ5kfgYrVJggaNdvvYBPgLZmpRHNrR.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-R3jwDImwmpyz4hnH2LhyDbZeFVoRT7Zv.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-SnYl7IvtTh6L0PzzKY54EMoCBwnTSIBU.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-Tt1ABKihKVO8WzyMR2U7XFLa2iH6gWEm.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-VCqyJ73oyiNyCGvE12rrg8mHL394G8Ap.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-Y1y74GStVNgFFNcM5Dzs76fts07elPol.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-bfnpfRf9eXVKHbwbdsrQRGMjYJgC86e5.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-bzmUNJWWCVz9QlHhoPx2C7VG8H8JAR89.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-lwgosmVObURTd87Z5tioi5WDhS9VfUVA.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-pfkfI1m5rogUylq8M60sV1NDeu7E22PK.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-qEdSbSJZ3cVO8455YSQFETh2PNtepwWU.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-uMj30YROVhswk8XoEwhsWmarEJ6fiyi8.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-uXGHyWiSFRaNQyEObwgXCbRxVcH6zzwr.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-xjZFs819m0r4ujAvFTXuasP0LpncbmpN.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/Rating/RatingImportTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Rating/RatingImportTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +216,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JSON" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ftk-sut-old" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ftk-sut-front/pages/rating" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -198,21 +227,18 @@
     <property name="vuejs.nuxt.types-notification-shown" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Sites\ftk-sut-front\pages\auth" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Sites\ftk-sut-front\pages\rating" />
       <recent name="D:\Sites\ftk-sut-front\components\global" />
       <recent name="D:\Sites\ftk-sut-front\pages\news" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Sites\ftk-sut-front\pages\auth" />
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.RatingImportTest.test_it_create_students">
     <configuration name="NewsTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Unit\NewsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/NewsTest.php" scope="Class" />
-      <method v="2" />
-    </configuration>
-    <configuration name="NewsTest.testItHasBody" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\NewsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/NewsTest.php" method="testItHasBody" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="NewsTest.testItHasClubScope" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
@@ -221,6 +247,10 @@
     </configuration>
     <configuration name="NewsTest.testItHasClubs" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Unit\NewsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/NewsTest.php" method="testItHasClubs" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RatingImportTest.test_carbon_parse_date" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Rating\RatingImportTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Rating/RatingImportTest.php" method="test_carbon_parse_date" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="RatingImportTest.test_it_create_students" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
@@ -234,10 +264,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="PHPUnit.RatingImportTest.test_it_create_students" />
+        <item itemvalue="PHPUnit.RatingImportTest.test_carbon_parse_date" />
         <item itemvalue="PHPUnit.NewsTest.testItHasClubScope" />
         <item itemvalue="PHPUnit.NewsTest" />
         <item itemvalue="PHPUnit.NewsTest.testItHasClubs" />
-        <item itemvalue="PHPUnit.NewsTest.testItHasBody" />
       </list>
     </recent_temporary>
   </component>
@@ -255,6 +285,7 @@
       <workItem from="1604389077913" duration="15098000" />
       <workItem from="1604406449632" duration="23564000" />
       <workItem from="1604472576406" duration="4788000" />
+      <workItem from="1604815367709" duration="13252000" />
     </task>
     <servers />
   </component>
@@ -290,22 +321,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1604423581010" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1604770930208">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1604854455677">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604770930208" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1604770930208">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604854455677" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1604854455677">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604770930208" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1604770930207">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604854455677" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1604854455677">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604770930207" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1604770930208">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604854455677" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1604854455677">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604770930208" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604854455677" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1604401132696">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -314,9 +345,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604223195558" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1604770173481">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1604854322893">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604770173481" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604854322893" />
   </component>
 </project>

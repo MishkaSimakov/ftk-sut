@@ -21,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('news', \App\Http\Controllers\NewsController::class)->except('edit', 'create');
 
 Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);
+
+Route::prefix('/rating')->name('rating.')->group(function() {
+    Route::post('/precheck', [\App\Http\Controllers\RatingController::class, 'precheck'])->name('precheck')->middleware('admin');
+});

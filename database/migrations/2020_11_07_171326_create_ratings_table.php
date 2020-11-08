@@ -15,6 +15,10 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
+
+            $table->boolean('is_monthly')->nullable();
+            $table->date('date');
+
             $table->timestamps();
         });
     }
