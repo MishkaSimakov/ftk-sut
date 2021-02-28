@@ -11,4 +11,14 @@ class Rating extends Model
 
     protected $fillable = ['is_monthly', 'date'];
     protected $dates = ['date'];
+
+    public function points()
+    {
+        return $this->hasMany(RatingPoint::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'rating_points')->distinct();
+    }
 }

@@ -23,41 +23,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/ftk-sut.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ftk-sut.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Imports/RatingImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/RatingImport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RatingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Rating.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Rating.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/RatingPoint.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/RatingPoint.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_07_171326_create_ratings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_07_171326_create_ratings_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/cors.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/cors.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/sanctum.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_07_172828_create_rating_points_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_07_172828_create_rating_points_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/ClubSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/ClubSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/RatingPointCategorySeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/RatingPointCategorySeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/_variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-18i69JChNZmdZ5QZYE4xLB8GuzIpjTgi.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-56DjGUbfgTZPCAnCj2KqsEquCfU98lAQ.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-68xmSrYpk7FqQmaqZBQT4fimSFNGsTxk.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-6IOzGLkDy8vpAX7t7VcBLXByzorl092B.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-6JLbFzGdB7iCLZHHI4jwjruXhTcvsfoZ.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-93ffdq5DC5xcdjkHgTOgyPZJ1BLdllzx.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-CgMHHTeDBi7XeQqyYXf0Mg1V0vuWJz0k.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-EK96G8kX5ZwDNTQmNcOTb12QOB34trZ2.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-H4VBZF4MDdB0zKD2jX2Ur1ngiuvhZ8s8.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-HnQ3OKwEhP3TgCOESq0K5LHEvxcFsfBJ.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-IWsyoKi9HNyMITYx6hUQ7V5Y2R5X5Ivd.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-LQ7NFPSlQnUXMh3rNUDxozFBTv1UWTgr.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-NsXB1mTuSk98wQ03k9N79EXPVpW6tfYa.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-QYfJ5kfgYrVJggaNdvvYBPgLZmpRHNrR.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-R3jwDImwmpyz4hnH2LhyDbZeFVoRT7Zv.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-SnYl7IvtTh6L0PzzKY54EMoCBwnTSIBU.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-Tt1ABKihKVO8WzyMR2U7XFLa2iH6gWEm.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-VCqyJ73oyiNyCGvE12rrg8mHL394G8Ap.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-Y1y74GStVNgFFNcM5Dzs76fts07elPol.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-bfnpfRf9eXVKHbwbdsrQRGMjYJgC86e5.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-bzmUNJWWCVz9QlHhoPx2C7VG8H8JAR89.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-lwgosmVObURTd87Z5tioi5WDhS9VfUVA.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-pfkfI1m5rogUylq8M60sV1NDeu7E22PK.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-qEdSbSJZ3cVO8455YSQFETh2PNtepwWU.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-uMj30YROVhswk8XoEwhsWmarEJ6fiyi8.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-uXGHyWiSFRaNQyEObwgXCbRxVcH6zzwr.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-xjZFs819m0r4ujAvFTXuasP0LpncbmpN.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Unit/Rating/RatingImportTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Rating/RatingImportTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-BxzMFvQxh4SnTyuWrYfj3EJPztFLtRNQ.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-CWg7MGyi6o7VwvlbipeffPRtJ21K0MGy.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-H2s0MyqLdBQpEDfy80ypS7HaHEU2bnTz.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-KoV6FP78NTZ1nTsCxQFeYZ58sfl2OCqc.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-SdoFv5lT0l3WoAa0B0XO4uptCp3TUTc7.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-apXBjZI1xbIfM02cPLDFJL4jKFKN8Poz.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-hyW798DFgVoRcmoakLgbnCNdOyXxJF72.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-sRanbwYo8oGYT4onJtpInnoZ9nC3BvG9.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +76,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="composer.json" />
+        <option value="SCSS File" />
+        <option value="Vue Single File Component" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -83,6 +89,14 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/../ftk-sut-front/node_modules/vue/package.json" />
@@ -195,7 +209,6 @@
       <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
       <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
-      <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/vendor/myclabs/php-enum" />
       <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
@@ -214,22 +227,25 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JSON" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ftk-sut-front/pages/rating" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ftk-sut-old" />
+    <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="php.test.frameworks.configurable" />
-    <property name="ts.external.directory.path" value="C:\Users\msima\AppData\Local\JetBrains\Toolbox\apps\PhpStorm\ch-0\202.7660.42\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="ts.external.directory.path" value="D:\Program Files\JetBrains\PhpStorm 2020.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
     <property name="vuejs.nuxt.types-notification-shown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Sites\ftk-sut-front\pages\rating" />
+      <recent name="D:\Sites\ftk-sut-front\components\rating" />
       <recent name="D:\Sites\ftk-sut-front\components\global" />
+      <recent name="D:\Sites\ftk-sut-front\pages\rating" />
       <recent name="D:\Sites\ftk-sut-front\pages\news" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -285,7 +301,37 @@
       <workItem from="1604389077913" duration="15098000" />
       <workItem from="1604406449632" duration="23564000" />
       <workItem from="1604472576406" duration="4788000" />
-      <workItem from="1604815367709" duration="13252000" />
+      <workItem from="1604815367709" duration="18780000" />
+      <workItem from="1604900092590" duration="6126000" />
+      <workItem from="1604941367939" duration="44000" />
+      <workItem from="1607096684937" duration="631000" />
+      <workItem from="1607169700349" duration="588000" />
+      <workItem from="1607759511555" duration="3370000" />
+      <workItem from="1607797409942" duration="1337000" />
+      <workItem from="1607855978660" duration="10983000" />
+      <workItem from="1607966388920" duration="5050000" />
+      <workItem from="1608206993312" duration="4369000" />
+      <workItem from="1610450368767" duration="2349000" />
+      <workItem from="1610699746774" duration="3289000" />
+      <workItem from="1613132253362" duration="12000" />
+      <workItem from="1613396460254" duration="14000" />
+      <workItem from="1613562590542" duration="64000" />
+      <workItem from="1613894147338" duration="798000" />
+      <workItem from="1613896126114" duration="1395000" />
+      <workItem from="1613919281876" duration="13055000" />
+      <workItem from="1614007734724" duration="2925000" />
+      <workItem from="1614055168577" duration="10260000" />
+      <workItem from="1614073965456" duration="328000" />
+      <workItem from="1614083513450" duration="12014000" />
+      <workItem from="1614099192386" duration="495000" />
+      <workItem from="1614166439418" duration="7992000" />
+      <workItem from="1614249335110" duration="5235000" />
+      <workItem from="1614262251213" duration="648000" />
+      <workItem from="1614341290743" duration="996000" />
+      <workItem from="1614342828470" duration="2785000" />
+      <workItem from="1614410155822" duration="5253000" />
+      <workItem from="1614423616532" duration="3959000" />
+      <workItem from="1614493275181" duration="3802000" />
     </task>
     <servers />
   </component>
@@ -304,50 +350,8 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="674" y="163" key="#PHP" timestamp="1604401155789">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="674" y="163" key="#PHP/0.0.1920.1040@0.0.1920.1040" timestamp="1604401155789" />
-    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1604402398593">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604402398593" />
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604424149630">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604424149630" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1604423581010">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1604423581010" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1604854455677">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604854455677" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1604854455677">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604854455677" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1604854455677">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604854455677" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1604854455677">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604854455677" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1604401132696">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1604401132696" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1604223195558">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604223195558" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1604854322893">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604854322893" />
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

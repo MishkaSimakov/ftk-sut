@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::resource('news', \App\Http\Controllers\Api\NewsController::class)->only('index');
 
-Route::resource('news', \App\Http\Controllers\NewsController::class)->except('edit', 'create');
-
-Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);
-
-Route::prefix('/rating')->name('rating.')->group(function() {
-    Route::post('/precheck', [\App\Http\Controllers\RatingController::class, 'precheck'])->name('precheck')->middleware('admin');
-});
+//Route::resource('ratings', \App\Http\Controllers\RatingController::class)->except('edit', 'create', 'show');
+Route::get('ratings/show', [\App\Http\Controllers\Api\RatingController::class, 'show'])->name('ratings.show');
+//
+//Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);

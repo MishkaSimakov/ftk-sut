@@ -18,27 +18,22 @@ class ClubSeeder extends Seeder
             [
                 'name' => 'Робототехника',
                 'description' => '',
-                'color' => 'red'
             ],
             [
                 'name' => 'Электроника',
                 'description' => '',
-                'color' => 'yellow'
             ],
             [
                 'name' => 'Мастерская творчества',
                 'description' => '',
-                'color' => 'blue'
             ],
             [
                 'name' => 'Интеллект',
                 'description' => '',
-                'color' => 'pink'
             ],
             [
                 'name' => 'Архитектура и дизайн',
                 'description' => '',
-                'color' => 'purple'
             ],
         ];
 

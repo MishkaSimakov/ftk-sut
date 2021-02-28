@@ -22,6 +22,8 @@ class CreateRatingPointsTable extends Migration
 
             $table->integer('amount')->unsigned();
 
+            $table->date('date');
+
             $table->timestamps();
 
             $table->foreign('rating_id')->on('ratings')->references('id')->onDelete('cascade');

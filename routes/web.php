@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome')->name('main');
+
+# news
+Route::resource('news', \App\Http\Controllers\NewsController::class);
+
+# rating
+Route::resource('ratings', \App\Http\Controllers\RatingController::class)->except('edit', 'update', 'show');
+
+# other
+Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);
 
 Auth::routes();
 
