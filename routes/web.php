@@ -20,7 +20,13 @@ Route::view('/', 'welcome')->name('main');
 Route::resource('news', \App\Http\Controllers\NewsController::class);
 
 # rating
-Route::resource('ratings', \App\Http\Controllers\RatingController::class)->except('edit', 'update', 'show');
+Route::get('ratings/{date?}', [\App\Http\Controllers\RatingController::class, 'index'])
+    ->name('ratings.index')
+    ->where('date', '[0-9]{4}\.[0-9]{2}\-[0-9]{4}\.[0-9]{2}');  // regex for 'YYYY.MM-YYYY.MM' query
+
+
+Route::resource('ratings', \App\Http\Controllers\RatingController::class)
+    ->except('index', 'edit', 'update', 'show');
 
 # other
 Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);

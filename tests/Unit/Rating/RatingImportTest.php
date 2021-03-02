@@ -5,6 +5,7 @@ namespace Tests\Unit\Rating;
 use App\Imports\RatingImport;
 use App\Models\User;
 use Carbon\Carbon;
+use Database\Seeders\RatingPointCategorySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -21,7 +22,7 @@ class RatingImportTest extends TestCase
      */
     public function test_it_create_students()
     {
-        $this->seed();
+        $this->seed(RatingPointCategorySeeder::class);
 
         $this->importRating();
 
@@ -30,8 +31,8 @@ class RatingImportTest extends TestCase
 
     public function importRating()
     {
-        $rating = storage_path('app/rating_one_list.xls');
+        $rating = storage_path('app/rating_many_lists.xls');
 
-        Excel::import(new RatingImport(Carbon::parse('2020-10'), true), $rating);
+        Excel::import(new RatingImport(Carbon::parse('2020-01')), $rating);
     }
 }

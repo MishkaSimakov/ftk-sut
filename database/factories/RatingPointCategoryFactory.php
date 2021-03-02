@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\RatingPointCategory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RatingPointCategoryFactory extends Factory
@@ -21,8 +22,6 @@ class RatingPointCategoryFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

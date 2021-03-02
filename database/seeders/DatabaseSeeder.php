@@ -20,8 +20,12 @@ class DatabaseSeeder extends Seeder
              'name' => 'Симаков Михаил'
          ]);
 
+//         $this->call(UserSeeder::class);
+
          $this->call(NewsSeeder::class);
          $this->call(ClubSeeder::class);
          $this->call(RatingPointCategorySeeder::class);
+
+//         $this->call(RatingPointSeeder::class);
     }
 }

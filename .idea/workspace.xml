@@ -23,45 +23,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ftk-sut.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ftk-sut.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RatingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Rating.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Rating.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/Rating/RatingPointsIndexResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/Rating/RatingPointsIndexResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Imports/RatingImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/RatingImport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Rating.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/RatingPoint.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/RatingPoint.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/cors.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/cors.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/sanctum.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/RatingPointCategoryFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/RatingPointCategoryFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_07_171326_create_ratings_table.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_07_172828_create_rating_points_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_07_172828_create_rating_points_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/ClubSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/ClubSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/RatingPointCategorySeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/RatingPointCategorySeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-BxzMFvQxh4SnTyuWrYfj3EJPztFLtRNQ.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-CWg7MGyi6o7VwvlbipeffPRtJ21K0MGy.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-H2s0MyqLdBQpEDfy80ypS7HaHEU2bnTz.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-KoV6FP78NTZ1nTsCxQFeYZ58sfl2OCqc.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-SdoFv5lT0l3WoAa0B0XO4uptCp3TUTc7.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-apXBjZI1xbIfM02cPLDFJL4jKFKN8Poz.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-hyW798DFgVoRcmoakLgbnCNdOyXxJF72.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-sRanbwYo8oGYT4onJtpInnoZ9nC3BvG9.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/TestCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TestCase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/Rating/RatingImportTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Rating/RatingImportTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,8 +51,8 @@
       <list>
         <option value="composer.json" />
         <option value="SCSS File" />
-        <option value="Vue Single File Component" />
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -236,7 +210,7 @@
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="ts.external.directory.path" value="D:\Program Files\JetBrains\PhpStorm 2020.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
     <property name="vuejs.nuxt.types-notification-shown" value="true" />
@@ -253,24 +227,24 @@
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.RatingImportTest.test_it_create_students">
-    <configuration name="NewsTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\NewsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/NewsTest.php" scope="Class" />
-      <method v="2" />
-    </configuration>
-    <configuration name="NewsTest.testItHasClubScope" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\NewsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/NewsTest.php" method="testItHasClubScope" scope="Method" />
-      <method v="2" />
-    </configuration>
-    <configuration name="NewsTest.testItHasClubs" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\NewsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/NewsTest.php" method="testItHasClubs" scope="Method" />
-      <method v="2" />
-    </configuration>
     <configuration name="RatingImportTest.test_carbon_parse_date" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Unit\Rating\RatingImportTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Rating/RatingImportTest.php" method="test_carbon_parse_date" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="RatingImportTest.test_it_create_students" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Unit\Rating\RatingImportTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Rating/RatingImportTest.php" method="test_it_create_students" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RatingPointsTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Rating\Points\RatingPointsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Rating/Points/RatingPointsTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RatingPointsTest.testExample" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Rating\Points\RatingPointsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Rating/Points/RatingPointsTest.php" method="testExample" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RatingPointsTest.test_scope_from_time_works" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Rating\Points\RatingPointsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Rating/Points/RatingPointsTest.php" method="test_scope_from_time_works" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -280,10 +254,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="PHPUnit.RatingImportTest.test_it_create_students" />
+        <item itemvalue="PHPUnit.RatingPointsTest" />
+        <item itemvalue="PHPUnit.RatingPointsTest.test_scope_from_time_works" />
+        <item itemvalue="PHPUnit.RatingPointsTest.testExample" />
         <item itemvalue="PHPUnit.RatingImportTest.test_carbon_parse_date" />
-        <item itemvalue="PHPUnit.NewsTest.testItHasClubScope" />
-        <item itemvalue="PHPUnit.NewsTest" />
-        <item itemvalue="PHPUnit.NewsTest.testItHasClubs" />
       </list>
     </recent_temporary>
   </component>
@@ -331,7 +305,9 @@
       <workItem from="1614342828470" duration="2785000" />
       <workItem from="1614410155822" duration="5253000" />
       <workItem from="1614423616532" duration="3959000" />
-      <workItem from="1614493275181" duration="3802000" />
+      <workItem from="1614493275181" duration="5995000" />
+      <workItem from="1614626179323" duration="992000" />
+      <workItem from="1614687746271" duration="17501000" />
     </task>
     <servers />
   </component>

@@ -2,7 +2,6 @@
 
 namespace App\Imports;
 
-use App\Models\Rating;
 use App\Models\RatingPointCategory;
 use App\Models\User;
 use Carbon\Carbon;
@@ -17,18 +16,17 @@ class RatingImport implements ToCollection, WithHeadingRow, WithMultipleSheets
     public $date;
     public $is_monthly;
 
-    public function __construct(Carbon $date, bool $is_monthly)
+    public function __construct(Carbon $date)
     {
         $this->date = $date;
-        $this->is_monthly = $is_monthly;
     }
 
     public function sheets(): array
     {
-        $sheet_name = $this->is_monthly ? $this->date->isoFormat('MMMMYYYY') : '2019-2020'; // TODO: make normal yearly name
+        $sheet_name = $this->date->isoFormat('MMMMYYYY'); // TODO: make normal yearly name
 
         return [
-            $sheet_name => new RatingImport($this->date, $this->is_monthly)
+            $sheet_name => new RatingImport($this->date)
         ];
     }
 
@@ -38,39 +36,30 @@ class RatingImport implements ToCollection, WithHeadingRow, WithMultipleSheets
      */
     public function collection(Collection $rows)
     {
-        $rating = Rating::create([
-            'date' => $this->date,
-            'is_monthly' => $this->is_monthly
-        ]);
         $categories = RatingPointCategory::all();
         $users = User::all();
 
+        foreach ($rows as $row) {
+            $user = $this->findUser($row[0], $users);
 
-        try {
-            foreach ($rows as $row) {
-                $user = $this->findUser($row[0], $users);
+            $user_points = [];
 
-                $user_points = [];
+            foreach ($row->except(0) as $category => $amount) {
+                if ($category = $categories->where('slug', $category)->first() and $amount) {
+                    array_push(
+                        $user_points,
+                        [
+                            'rating_point_category_id' => $category->id,
+                            'user_id' => $user->id,
 
-                foreach ($row->except(0) as $category => $amount) {
-                    if ($category = $categories->where('slug', $category)->first() and $amount) {
-                        array_push(
-                            $user_points,
-                            [
-                                'rating_id' => $rating->id,
-                                'rating_point_category_id' => $category->id,
-                                'user_id' => $user->id,
-
-                                'amount' => $amount
-                            ]
-                        );
-                    }
+                            'amount' => $amount,
+                            'date' => $this->date,
+                        ]
+                    );
                 }
-
-                DB::table('rating_points')->insert($user_points);
             }
-        } catch (\Exception $exception) {
-            $rating->delete();
+
+            DB::table('rating_points')->insert($user_points);
         }
     }
 
