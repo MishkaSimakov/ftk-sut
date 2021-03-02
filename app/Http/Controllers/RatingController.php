@@ -16,24 +16,9 @@ class RatingController extends Controller
 //        $this->middleware('admin')->except('index');
     }
 
-    public function index($period = null)
+    public function index()
     {
-        if ($period) {
-            $period = preg_split('/(\.|\-)/', $period);
-
-            $points = RatingPoint::fromTime(
-                Carbon::create($period[0], $period[1]),
-                Carbon::create($period[2], $period[3])
-            );
-        } else {
-            $points = RatingPoint::lastPoints();
-        }
-
-        $points = new RatingPointsIndexResource($points->get()->groupBy('user_id'));
-
-        dd($points);
-
-        return view('ratings.index', compact($points));
+        return view('ratings.index');
     }
 
     public function create()

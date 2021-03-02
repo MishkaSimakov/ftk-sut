@@ -24,18 +24,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/RatingController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RatingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/Rating/RatingPointsIndexResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/Rating/RatingPointsIndexResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Imports/RatingImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/RatingImport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Rating.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/RatingPoint.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/RatingPoint.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/RatingPointCategoryFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/RatingPointCategoryFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_07_171326_create_ratings_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_07_172828_create_rating_points_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_07_172828_create_rating_points_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/TestCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TestCase.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Unit/Rating/RatingImportTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Rating/RatingImportTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/Rating/RatingPointsIndexResource.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,8 +199,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../ftk-sut-old" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="ts.external.directory.path" value="D:\Program Files\JetBrains\PhpStorm 2020.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
@@ -307,7 +302,8 @@
       <workItem from="1614423616532" duration="3959000" />
       <workItem from="1614493275181" duration="5995000" />
       <workItem from="1614626179323" duration="992000" />
-      <workItem from="1614687746271" duration="17501000" />
+      <workItem from="1614687746271" duration="17824000" />
+      <workItem from="1614709678187" duration="3316000" />
     </task>
     <servers />
   </component>

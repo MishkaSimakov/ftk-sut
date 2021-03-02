@@ -15,7 +15,14 @@ class RatingPointsIndexResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'user' => [
+                'id' => $this->first()->user->id,
+                'name' => $this->first()->user->name,
+                'url' => $this->first()->user->url,
+            ],
 
+            'points' => RatingPointResource::collection($this),
+            'total' => $this->pluck('amount')->sum(),
         ];
     }
 }
