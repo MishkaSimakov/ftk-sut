@@ -15,7 +15,9 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('news');
+
 import News from "./News";
 import NewsFilter from "./NewsFilter";
 
@@ -30,7 +32,7 @@ export default {
     },
     methods: {
         loadNews() {
-            this.$store.dispatch('loadNews', {sortType: this.sortType})
+            this.$store.dispatch('news/loadNews', {sortType: this.sortType})
         }
     }
 }

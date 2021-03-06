@@ -42,6 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getUrlAttribute()
+    {
+        return '#';  // TODO: сделать нормальную ссылку
+    }
+
     public function rating_points()
     {
         return $this->hasMany(RatingPoint::class);

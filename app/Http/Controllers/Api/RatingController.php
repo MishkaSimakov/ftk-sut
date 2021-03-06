@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Rating\RatingPointCategoryIndexResource;
 use App\Http\Resources\Rating\RatingPointsIndexResource;
 use App\Models\RatingPoint;
+use App\Models\RatingPointCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -23,8 +25,18 @@ class RatingController extends Controller
             $points = RatingPoint::lastPoints();
         }
 
-        return response()->json(
-            RatingPointsIndexResource::collection($points->get()->groupBy('user_id'))
-        );
+        return response()->json([
+            'rating' => RatingPointsIndexResource::collection(
+                $points->with(['user', 'category'])->get()->groupBy('user_id')
+            ),
+            'categories' => RatingPointCategoryIndexResource::collection(
+                RatingPointCategory::all()
+            ),
+            'meta' => [
+                'period' => [
+//                    'start' =>
+                ],
+            ]
+        ]);
     }
 }

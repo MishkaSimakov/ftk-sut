@@ -23,7 +23,7 @@ class RatingImport implements ToCollection, WithHeadingRow, WithMultipleSheets
 
     public function sheets(): array
     {
-        $sheet_name = $this->date->isoFormat('MMMMYYYY'); // TODO: make normal yearly name
+        $sheet_name = $this->date->isoFormat('MMMMYYYY');
 
         return [
             $sheet_name => new RatingImport($this->date)
@@ -40,10 +40,13 @@ class RatingImport implements ToCollection, WithHeadingRow, WithMultipleSheets
         $users = User::all();
 
         foreach ($rows as $row) {
+            if (!$row[0]) {
+                break;
+            }
+
             $user = $this->findUser($row[0], $users);
 
             $user_points = [];
-
             foreach ($row->except(0) as $category => $amount) {
                 if ($category = $categories->where('slug', $category)->first() and $amount) {
                     array_push(

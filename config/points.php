@@ -27,7 +27,7 @@ return [
             'name' => 'Интеллект - занятия',
             'import_name' => 'Интеллект - занятия (Бильченко Д. С.)',
             'slug' => 'intelligence_lessons',
-            'color' => '#ff00ff',
+            'color' => '#ff99cc',
             'order' => 4
         ],
         [

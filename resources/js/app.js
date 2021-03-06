@@ -13,13 +13,21 @@ window.Vue = require('vue');
 const infiniteScroll =  require('vue-infinite-scroll');
 Vue.use(infiniteScroll)
 
+
 // Moment js
 const moment = require('moment')
 require('moment/locale/ru')
-
 Vue.use(require('vue-moment'), {
     moment
 })
+
+// Vue calendar
+import VCalendar from 'v-calendar';
+Vue.use(VCalendar, {
+    componentPrefix: 'vc'
+});
+
+
 
 require('./components/imports')
 

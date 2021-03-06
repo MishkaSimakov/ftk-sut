@@ -17,7 +17,8 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters, mapActions } = createNamespacedHelpers('news');
 
 export default {
     computed: {
