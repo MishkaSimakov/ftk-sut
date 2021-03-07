@@ -3,6 +3,7 @@ import ratingApi from '../../api/rating'
 // initial state
 const state = () => ({
     rating: [],
+    period: {},
     categories: [],
     loading: false,
 })
@@ -11,6 +12,9 @@ const state = () => ({
 const getters = {
     getRatings: state => {
         return state.rating
+    },
+    getPeriod: state => {
+        return state.period
     },
     getCategories: state => {
         return state.categories
@@ -28,12 +32,20 @@ const getters = {
 
 // actions
 const actions = {
-    loadRating({state, dispatch}, period) {
+    loadRating({state, dispatch}, period = null) {
+        console.log(state.period, period)
+        if (period !== null) {
+            if (period.start === state.period.start && period.end === state.period.end) {
+                return
+            }
+        }
+
         state.loading = true
 
         ratingApi.loadRating({period: period}).then((response) => {
             state.rating = response.data.rating
             state.categories = response.data.categories
+            state.period = response.data.meta.period
 
             dispatch('recountRating', {
                 recountTotal: false,

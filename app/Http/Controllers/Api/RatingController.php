@@ -15,26 +15,30 @@ class RatingController extends Controller
     public function show($period = null)
     {
         if ($period) {
-            $period = preg_split('/(\.|\-)/', $period);
+            $period = preg_split('/([.\-])/', $period);
 
-            $points = RatingPoint::fromTime(
-                Carbon::create($period[0], $period[1]),
-                Carbon::create($period[2], $period[3])
-            );
+            $start = Carbon::create($period[0], $period[1]);
+            $end = Carbon::create($period[2], $period[3]);
         } else {
-            $points = RatingPoint::lastPoints();
+            $start = RatingPoint::orderBy('date', 'desc')->first()->date;
+
+            $end = $start;
         }
 
+        $points = RatingPoint::fromTime(
+            $start, $end
+        )->with(['user', 'category'])->get()->groupBy('user_id');
+
         return response()->json([
-            'rating' => RatingPointsIndexResource::collection(
-                $points->with(['user', 'category'])->get()->groupBy('user_id')
-            ),
+            'rating' => RatingPointsIndexResource::collection($points),
+
             'categories' => RatingPointCategoryIndexResource::collection(
                 RatingPointCategory::all()
             ),
             'meta' => [
                 'period' => [
-//                    'start' =>
+                    'start' => $start->isoFormat('YYYY-MM'),
+                    'end' => $end->isoFormat('YYYY-MM'),
                 ],
             ]
         ]);

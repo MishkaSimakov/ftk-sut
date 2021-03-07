@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('news', \App\Http\Controllers\Api\NewsController::class)->only('index');
 
-Route::get('ratings/show/{period}', [\App\Http\Controllers\Api\RatingController::class, 'show'])
+Route::get('ratings/show/{period?}', [\App\Http\Controllers\Api\RatingController::class, 'show'])
     ->name('ratings.show')
     ->where('period', '[0-9]{4}\.[0-9]{2}\-[0-9]{4}\.[0-9]{2}');  // regex for 'YYYY.MM-YYYY.MM' query
 

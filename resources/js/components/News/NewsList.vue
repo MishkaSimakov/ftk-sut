@@ -1,14 +1,12 @@
 <template>
     <div>
-        <news-filter></news-filter>
+<!--        <news-filter></news-filter>-->
 
         <div v-infinite-scroll="loadNews" infinite-scroll-disabled="isScrollDisabled" infinite-scroll-distance="20">
             <News v-for="n in news" :news="n" :key="n.id"></News>
 
             <div v-if="!isScrollDisabled" class="d-flex justify-content-center">
-                <div class="spinner-border text-secondary">
-                    <span class="sr-only">Loading...</span>
-                </div>
+                <div class="spinner-border text-secondary"></div>
             </div>
         </div>
     </div>

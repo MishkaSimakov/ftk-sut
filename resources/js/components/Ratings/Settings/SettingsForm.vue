@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-5 mb-2 mb-md-0" data-toggle="tooltip" title="Дата начала выборки">
                 <input
-                    v-model="period.start"
+                    v-model="periodInput.start"
                     type="month"
                     class="form-control"
                     name="date-start"
@@ -19,11 +19,11 @@
 
             <div class="col-md-5 mt-2 mt-md-0" data-toggle="tooltip" title="Дата конца выборки">
                 <input
-                    v-model="period.end"
+                    v-model="periodInput.end"
                     type="month"
                     class="form-control"
                     name="date-end"
-                    :min="period.start"
+                    :min="periodInput.start"
                     :max="$moment().format('YYYY-MM')"
                     required
                 >
@@ -62,26 +62,28 @@ export default {
     data() {
         return {
             isCategoriesExpanded: false,
-
-            period: {
-                start: this.$moment().format('YYYY-MM'),
-                end: this.$moment().format('YYYY-MM'),
-            }
+            periodInput: {},
         }
     },
     computed: {
         ...mapGetters({
-            categories: 'getCategories'
+            categories: 'getCategories',
+            period: 'getPeriod'
         }),
-        categoriesState: [true] * this.categories.length,
     },
     methods: {
         ...mapActions(['loadRating', 'setCategoriesFilter']),
         handleSubmit() {
-            this.loadRating(this.period)
-            this.setCategoriesFilter(this.categoriesState)
+            this.loadRating(this.periodInput)
+            // this.setCategoriesFilter(this.categoriesState)
 
             $('#ratingSettingsModal').modal('hide')
+        }
+    },
+    watch: {
+        period() {
+            this.periodInput.start = this.period.start
+            this.periodInput.end = this.period.end
         }
     }
 }

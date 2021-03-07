@@ -2,9 +2,7 @@
     <div>
         <div class="my-2 card w-100">
             <div class="card-body py-2">
-                <div v-if="isLoading" class="text-primary d-flex spinner-border my-4 mx-auto" role="status">
-                    <span class="sr-only">Загрузка...</span>
-                </div>
+                <div v-if="isLoading" class="text-secondary d-flex spinner-border my-4 mx-auto" role="status"></div>
                 <div v-else class="col">
                     <div class="row">
                         <div class="my-auto font-weight-bolder" :class="columnSizes.place">
@@ -103,10 +101,7 @@ export default {
         })
     },
     created() {
-        this.loadRating({  // TODO: сделать, чтобы дата была необязательным атрибутом
-            start: this.$moment().format('YYYY-MM'),
-            end: this.$moment().format('YYYY-MM'),
-        });
+        this.loadRating();
     }
 }
 </script>

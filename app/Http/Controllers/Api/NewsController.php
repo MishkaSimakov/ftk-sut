@@ -11,7 +11,8 @@ class NewsController extends Controller
 {
     public function index(Request $request)
     {
-        $news = News::orderBy('date', $request->query('sortType', 'fresh') == 'fresh' ? 'desc' : 'asc')->paginate(10)->items();
+        $news = News::orderBy('date', $request->query('sortType', 'fresh') == 'fresh' ? 'desc' : 'asc')
+            ->paginate(50)->items();
 
         return response()->json(
             NewsIndexResource::collection(

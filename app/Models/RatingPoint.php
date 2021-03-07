@@ -29,10 +29,8 @@ class RatingPoint extends Model
         return $this->belongsTo(RatingPointCategory::class, 'rating_point_category_id');
     }
 
-    public function scopeFromTime(Builder $builder, Carbon $start, Carbon $end = null)
+    public function scopeFromTime(Builder $builder, Carbon $start, Carbon $end)
     {
-        $end = $end ?: $start;
-
         return $builder->whereDate('date', '>=', $start)
             ->whereDate('date', '<=', $end);
     }

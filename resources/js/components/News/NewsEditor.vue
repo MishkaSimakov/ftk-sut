@@ -2,16 +2,15 @@
     <editor
         api-key="hnviucqus9116ko1nycfet8r4rlvw0akh6w27lord3o9nz15"
         :init="{
-            placeholder: 'Текст новости',
+            language: 'ru',
             menubar: false,
             elementpath: false,
             branding: false,
-            value: '<h1>Test</h1>',
-            plugins: 'codesample hr image link lists',
+            plugins: 'link lists',
             toolbar: 'h1 h2 | bold italic underline | link bullist'
         }"
+        :initial-value="value"
     >
-        <h1>Hello world!</h1>
     </editor>
 </template>
 
@@ -20,7 +19,7 @@ import Editor from '@tinymce/tinymce-vue'
 
 export default {
     props: [
-        'text'
+        'value', 'is-invalid-class'
     ],
     components: {
         'editor': Editor
@@ -28,6 +27,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+    .tox-tinymce {
+        border-radius: 0.25rem !important;
+        border: 1px solid #ced4da !important;
+    }
 
+    .tox-statusbar {
+        border-top: none !important;
+    }
 </style>
