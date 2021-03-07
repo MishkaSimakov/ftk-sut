@@ -25,13 +25,39 @@
                 </ul>
 
 
-                {{--            account buttons --}}
                 @guest
                     <a href="{{ route('login') }}" class="btn-outline-light btn mt-3 mt-lg-0">
                         Войти
                     </a>
                 @else
-                    Вы вошли!
+                    <div class="dropdown">
+                        <a class="text-white text-decoration-none" href="#" id="accountDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Симаков Михаил
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
+                            <a class="dropdown-item" href="{{ route('home') }}">
+                                Профиль
+                            </a>
+                            {{--  TODO: добавить сюда правильные ссылки--}}
+                            <a class="dropdown-item" href="#">
+                                Настройки
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                Оповещения
+                            </a>
+                            <div class="dropdown-divider"></div>
+
+
+                            <a class="dropdown-item text-danger" href="" onclick="$('#logout-form').submit();">
+                                Выйти
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
                 @endguest
             </div>
         </div>

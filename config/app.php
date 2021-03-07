@@ -177,6 +177,8 @@ return [
 
 
         Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        App\Providers\BladeServiceProvider::class,
     ],
 
     /*
