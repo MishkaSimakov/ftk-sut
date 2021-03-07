@@ -1,25 +1,36 @@
 <template>
-    <editor
-        api-key="hnviucqus9116ko1nycfet8r4rlvw0akh6w27lord3o9nz15"
-        :init="{
+    <div>
+        <editor
+            api-key="hnviucqus9116ko1nycfet8r4rlvw0akh6w27lord3o9nz15"
+            v-model="text"
+            :init="{
             language: 'ru',
             menubar: false,
             elementpath: false,
             branding: false,
             plugins: 'link lists',
-            toolbar: 'h1 h2 | bold italic underline | link bullist'
+            toolbar: 'h1 h2 | bold italic underline | link bullist',
+
+             content_style: '* { color: #495057 }'
         }"
-        :initial-value="value"
-    >
-    </editor>
+        >
+        </editor>
+
+        <input name="body" id="body" type="text" v-model="text" :class="`d-none`">
+    </div>
 </template>
 
 <script>
 import Editor from '@tinymce/tinymce-vue'
 
 export default {
+    data() {
+        return {
+            text: this.value
+        }
+    },
     props: [
-        'value', 'is-invalid-class'
+        'value', 'isInvalidClass'
     ],
     components: {
         'editor': Editor
@@ -28,12 +39,12 @@ export default {
 </script>
 
 <style>
-    .tox-tinymce {
-        border-radius: 0.25rem !important;
-        border: 1px solid #ced4da !important;
-    }
+.tox-tinymce {
+    border-radius: 0.25rem !important;
+    border: 1px solid #ced4da !important;
+}
 
-    .tox-statusbar {
-        border-top: none !important;
-    }
+.tox-statusbar {
+    border-top: none !important;
+}
 </style>

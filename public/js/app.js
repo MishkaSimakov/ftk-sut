@@ -7062,12 +7062,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      destroyFormId: "destroy_form_".concat(this.news.id),
+      csrf: window.Laravel.csrfToken
+    };
+  },
   props: {
     news: Object
   },
   methods: {
-    route: route
+    route: route,
+    deleteNews: function deleteNews() {
+      $("#".concat(this.destroyFormId)).submit();
+    }
   }
 });
 
@@ -7099,9 +7118,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['value', 'is-invalid-class'],
+  data: function data() {
+    return {
+      text: this.value
+    };
+  },
+  props: ['value', 'isInvalidClass'],
   components: {
     'editor': _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -66393,7 +66423,10 @@ var render = function() {
     _c("div", { staticClass: "card-body pb-2" }, [
       _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.news.title))]),
       _vm._v(" "),
-      _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.news.body))]),
+      _c("div", {
+        staticClass: "card-text",
+        domProps: { innerHTML: _vm._s(_vm.news.body) }
+      }),
       _vm._v(" "),
       _c("div", { staticClass: "row no-gutters" }, [
         _c("p", { staticClass: "card-text mb-0 mt-1" }, [
@@ -66425,9 +66458,41 @@ var render = function() {
                 "a",
                 {
                   staticClass: "dropdown-item text-danger",
-                  attrs: { href: "#" }
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.deleteNews($event)
+                    }
+                  }
                 },
-                [_vm._v("Удалить")]
+                [
+                  _vm._v(
+                    "\n                        Удалить\n                    "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  staticClass: "d-none",
+                  attrs: {
+                    id: _vm.destroyFormId,
+                    method: "POST",
+                    action: _vm.route("news.destroy", { news: _vm.news.id })
+                  }
+                },
+                [
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_token" },
+                    domProps: { value: _vm.csrf }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_method", value: "DELETE" }
+                  })
+                ]
               )
             ]
           )
@@ -66478,20 +66543,56 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("editor", {
-    attrs: {
-      "api-key": "hnviucqus9116ko1nycfet8r4rlvw0akh6w27lord3o9nz15",
-      init: {
-        language: "ru",
-        menubar: false,
-        elementpath: false,
-        branding: false,
-        plugins: "link lists",
-        toolbar: "h1 h2 | bold italic underline | link bullist"
-      },
-      "initial-value": _vm.value
-    }
-  })
+  return _c(
+    "div",
+    [
+      _c("editor", {
+        attrs: {
+          "api-key": "hnviucqus9116ko1nycfet8r4rlvw0akh6w27lord3o9nz15",
+          init: {
+            language: "ru",
+            menubar: false,
+            elementpath: false,
+            branding: false,
+            plugins: "link lists",
+            toolbar: "h1 h2 | bold italic underline | link bullist",
+
+            content_style: "* { color: #495057 }"
+          }
+        },
+        model: {
+          value: _vm.text,
+          callback: function($$v) {
+            _vm.text = $$v
+          },
+          expression: "text"
+        }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.text,
+            expression: "text"
+          }
+        ],
+        class: "d-none",
+        attrs: { name: "body", id: "body", type: "text" },
+        domProps: { value: _vm.text },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.text = $event.target.value
+          }
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
