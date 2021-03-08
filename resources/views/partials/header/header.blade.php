@@ -50,7 +50,7 @@
                             <div class="dropdown-divider"></div>
 
 
-                            <a class="dropdown-item text-danger" href="" onclick="$('#logout-form').submit();">
+                            <a class="dropdown-item text-danger" href="" onclick="event.preventDefault(); $('#logout-form').submit();">
                                 Выйти
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

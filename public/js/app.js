@@ -7076,7 +7076,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       destroyFormId: "destroy_form_".concat(this.news.id),
-      csrf: window.Laravel.csrfToken
+      csrf: window.Laravel.csrfToken,
+      isAdmin: window.Laravel.user.is_admin
     };
   },
   props: {
@@ -66435,68 +66436,76 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "dropdown ml-auto" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "dropdown-menu dropdown-menu-right",
-              attrs: { "aria-labelledby": "news-more-dropdown-button" }
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "dropdown-item",
-                  attrs: { href: _vm.route("news.edit", { news: _vm.news.id }) }
-                },
-                [_vm._v("Редактировать")]
-              ),
+        _vm.isAdmin
+          ? _c("div", { staticClass: "dropdown ml-auto" }, [
+              _vm._m(0),
               _vm._v(" "),
               _c(
-                "a",
+                "div",
                 {
-                  staticClass: "dropdown-item text-danger",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.deleteNews($event)
-                    }
-                  }
+                  staticClass: "dropdown-menu dropdown-menu-right",
+                  attrs: { "aria-labelledby": "news-more-dropdown-button" }
                 },
                 [
-                  _vm._v(
-                    "\n                        Удалить\n                    "
+                  _c(
+                    "a",
+                    {
+                      staticClass: "dropdown-item",
+                      attrs: {
+                        href: _vm.route("news.edit", { news: _vm.news.id })
+                      }
+                    },
+                    [_vm._v("Редактировать")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "dropdown-item text-danger",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.deleteNews($event)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Удалить\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      staticClass: "d-none",
+                      attrs: {
+                        id: _vm.destroyFormId,
+                        method: "POST",
+                        action: _vm.route("news.destroy", { news: _vm.news.id })
+                      }
+                    },
+                    [
+                      _c("input", {
+                        attrs: { type: "hidden", name: "_token" },
+                        domProps: { value: _vm.csrf }
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: {
+                          type: "hidden",
+                          name: "_method",
+                          value: "DELETE"
+                        }
+                      })
+                    ]
                   )
                 ]
-              ),
-              _vm._v(" "),
-              _c(
-                "form",
-                {
-                  staticClass: "d-none",
-                  attrs: {
-                    id: _vm.destroyFormId,
-                    method: "POST",
-                    action: _vm.route("news.destroy", { news: _vm.news.id })
-                  }
-                },
-                [
-                  _c("input", {
-                    attrs: { type: "hidden", name: "_token" },
-                    domProps: { value: _vm.csrf }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "hidden", name: "_method", value: "DELETE" }
-                  })
-                ]
               )
-            ]
-          )
-        ])
+            ])
+          : _vm._e()
       ])
     ])
   ])

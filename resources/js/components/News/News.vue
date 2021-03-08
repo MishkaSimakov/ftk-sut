@@ -9,7 +9,7 @@
                         $moment(news.date).format('DD.MM.YYYY')
                     }}</small></p>
 
-                <div class="dropdown ml-auto">
+                <div v-if="isAdmin" class="dropdown ml-auto">
                     <button class="d-inline btn rounded-pill" type="button" id="news-more-dropdown-button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-h fa-sm"></i>
@@ -36,7 +36,8 @@ export default {
     data() {
         return {
             destroyFormId: `destroy_form_${this.news.id}`,
-            csrf: window.Laravel.csrfToken
+            csrf: window.Laravel.csrfToken,
+            isAdmin: window.Laravel.user.is_admin
         }
     },
     props: {
