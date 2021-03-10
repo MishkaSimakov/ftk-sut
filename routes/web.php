@@ -19,6 +19,9 @@ Route::view('/', 'welcome')->name('main');
 # news
 Route::resource('news', \App\Http\Controllers\NewsController::class);
 
+# articles
+Route::resource('article', \App\Http\Controllers\ArticleController::class);
+
 # rating
 Route::get('ratings/{date?}', [\App\Http\Controllers\RatingController::class, 'index'])
     ->name('ratings.index')

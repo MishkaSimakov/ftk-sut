@@ -1,4 +1,4 @@
-@extends('layouts.head')
+@extends('layouts.app')
 
 @section('title', 'Личный кабинет')
 

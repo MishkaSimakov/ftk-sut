@@ -14,7 +14,7 @@
                         <a class="nav-link" href="{{ route('news.index') }}">Новости</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Статьи</a>
+                        <a class="nav-link" href="{{ route('article.index') }}">Статьи</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Расписание</a>
