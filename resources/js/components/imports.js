@@ -5,5 +5,10 @@
 Vue.component('news-list', require('./news/NewsList').default);
 Vue.component('news-editor', require('./news/NewsEditor').default);
 
+
+// articles
+Vue.component('articles-article', require('./articles/Article').default);
+
+
 // rating
 Vue.component('rating', require('./ratings/Rating').default);
