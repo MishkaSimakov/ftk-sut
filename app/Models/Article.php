@@ -34,12 +34,14 @@ class Article extends Model
         $tags = [];
 
         preg_match_all('/<[^>]+>([^<]*)/', $string, $tagMatches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
+
         foreach ($tagMatches as $tagMatch) {
             if ($tagMatch[0][1] - $i >= self::TRUNCATE_LIMIT) {
                 break;
             }
 
             $tag = substr(strtok($tagMatch[0][0], " \t\n\r\0\x0B>"), 1);
+
             if ($tag[0] != '/') {
                 $tags[] = $tag;
             } elseif (end($tags) == substr($tag, 1)) {

@@ -33,6 +33,6 @@ class RatingController extends Controller
     {
         Excel::import(new RatingImport(Carbon::parse($request->date)), $request->file('rating'));
 
-        return redirect(route('ratings.index'));
+        return redirect(route('rating.index'));
     }
 }

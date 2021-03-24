@@ -19,8 +19,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Расписание</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('ratings.index') }}">Рейтинг</a>
+                    <li class="nav-item {{ (auth()->user() and auth()->user()->is_admin) ? 'dropdown' : '' }}">
+                        <a class="nav-link" href="{{ route('rating.index') }}">Рейтинг</a>
+
+                        @admin
+                            <div class="hover-dropdown-menu dropdown-menu">
+                                <a class="dropdown-item" href="{{ route('rating.create') }}">
+                                    Загрузить
+                                </a>
+                            </div>
+                        @endadmin
                     </li>
                 </ul>
 
@@ -50,7 +58,8 @@
                             <div class="dropdown-divider"></div>
 
 
-                            <a class="dropdown-item text-danger" href="" onclick="event.preventDefault(); $('#logout-form').submit();">
+                            <a class="dropdown-item text-danger" href=""
+                               onclick="event.preventDefault(); $('#logout-form').submit();">
                                 Выйти
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

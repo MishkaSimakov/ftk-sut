@@ -8,7 +8,6 @@ use App\Http\Resources\Rating\RatingPointsIndexResource;
 use App\Models\RatingPoint;
 use App\Models\RatingPointCategory;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class RatingController extends Controller
 {

@@ -6935,6 +6935,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue_smooth_height__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-smooth-height */ "./node_modules/vue-smooth-height/src/index.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -6996,6 +6997,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 var _createNamespacedHelp = Object(vuex__WEBPACK_IMPORTED_MODULE_0__["createNamespacedHelpers"])('rating'),
@@ -7003,28 +7012,44 @@ var _createNamespacedHelp = Object(vuex__WEBPACK_IMPORTED_MODULE_0__["createName
     mapGetters = _createNamespacedHelp.mapGetters;
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [vue_smooth_height__WEBPACK_IMPORTED_MODULE_1__["default"]],
   data: function data() {
     return {
+      enteredCategories: [],
+      // TODO: сделать, чтобы, если выбраны все категории не была выбрана ни одна.
       isCategoriesExpanded: false,
-      periodInput: {}
+      enteredPeriod: {
+        start: null,
+        end: null
+      }
     };
   },
   computed: _objectSpread({}, mapGetters({
-    categories: 'getCategories',
-    period: 'getPeriod'
+    loadedCategories: 'getCategories',
+    loadedPeriod: 'getPeriod'
   })),
   methods: _objectSpread(_objectSpread({}, mapActions(['loadRating', 'setCategoriesFilter'])), {}, {
     handleSubmit: function handleSubmit() {
-      this.loadRating(this.periodInput); // this.setCategoriesFilter(this.categoriesState)
-
+      this.loadRating(this.enteredPeriod);
+      this.setCategoriesFilter(this.enteredCategories);
       $('#ratingSettingsModal').modal('hide');
-    }
+    },
+    toggleCategory: function toggleCategory(category) {}
   }),
   watch: {
-    period: function period() {
-      this.periodInput.start = this.period.start;
-      this.periodInput.end = this.period.end;
+    loadedPeriod: function loadedPeriod(period) {
+      this.enteredPeriod.start = period.start;
+      this.enteredPeriod.end = period.end;
+    },
+    loadedCategories: function loadedCategories(categories) {
+      this.enteredCategories = categories;
     }
+  },
+  mounted: function mounted() {
+    this.$smoothElement({
+      el: this.$refs.categories_list_container,
+      hideOverflow: true
+    });
   }
 });
 
@@ -7300,6 +7325,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _Ratings_RatingBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../Ratings/RatingBar */ "./resources/js/components/Ratings/RatingBar.vue");
 /* harmony import */ var _Ratings_Settings_SettingsForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../Ratings/Settings/SettingsForm */ "./resources/js/components/Ratings/Settings/SettingsForm.vue");
+/* harmony import */ var vue_smooth_height__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-smooth-height */ "./node_modules/vue-smooth-height/src/index.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -7384,7 +7410,9 @@ var _createNamespacedHelp = Object(vuex__WEBPACK_IMPORTED_MODULE_0__["createName
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [vue_smooth_height__WEBPACK_IMPORTED_MODULE_3__["default"]],
   components: {
     RatingBar: _Ratings_RatingBar__WEBPACK_IMPORTED_MODULE_1__["default"],
     RatingSettingsForm: _Ratings_Settings_SettingsForm__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -7409,6 +7437,12 @@ var _createNamespacedHelp = Object(vuex__WEBPACK_IMPORTED_MODULE_0__["createName
   })),
   created: function created() {
     this.loadRating();
+  },
+  mounted: function mounted() {
+    this.$smoothElement({
+      el: this.$refs.rating_container,
+      hideOverflow: true
+    });
   }
 });
 
@@ -61587,6 +61621,80 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 /***/ }),
 
+/***/ "./node_modules/parse-css-transition/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/parse-css-transition/index.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+const toMillies = __webpack_require__(/*! ./to-millies */ "./node_modules/parse-css-transition/to-millies.js");
+
+function isTime(value) {
+  return /^-?(0?\.)?\d+m?s$/.test(value);
+}
+
+function parseSingleTransition(transition) {
+  const [
+    name,
+    duration,
+    timingFunctionOrDelay,
+    delay,
+  ] = transition
+    .split(/\s+/)
+
+  if (isTime(timingFunctionOrDelay)) {
+    return {
+      delay: toMillies(timingFunctionOrDelay),
+      duration: toMillies(duration),
+      name,
+    };
+  }
+
+  return {
+    delay: toMillies(delay),
+    duration: toMillies(duration),
+    name,
+    timingFunction: timingFunctionOrDelay,
+  };
+}
+
+function parseCssTransition(transition) {
+  return transition
+    .split(',')
+    .map(value => value.trim())
+    .filter(value => value.length > 0)
+    .map(parseSingleTransition);
+}
+
+module.exports = parseCssTransition;
+
+
+/***/ }),
+
+/***/ "./node_modules/parse-css-transition/to-millies.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/parse-css-transition/to-millies.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+function toMillies(value) {
+  if (!value) {
+    return;
+  }
+
+  const isMillies = value.endsWith('ms');
+
+  return parseFloat(value) * (isMillies ? 1 : 1000);
+}
+
+module.exports = toMillies;
+
+
+/***/ }),
+
 /***/ "./node_modules/popper.js/dist/esm/popper.js":
 /*!***************************************************!*\
   !*** ./node_modules/popper.js/dist/esm/popper.js ***!
@@ -66321,10 +66429,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ratings/Settings/SettingsForm.vue?vue&type=template&id=de406882&scoped=true&":
-/*!********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Ratings/Settings/SettingsForm.vue?vue&type=template&id=de406882&scoped=true& ***!
-  \********************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ratings/Settings/SettingsForm.vue?vue&type=template&id=de406882&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Ratings/Settings/SettingsForm.vue?vue&type=template&id=de406882& ***!
+  \********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -66360,8 +66468,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.periodInput.start,
-                  expression: "periodInput.start"
+                  value: _vm.enteredPeriod.start,
+                  expression: "enteredPeriod.start"
                 }
               ],
               staticClass: "form-control",
@@ -66371,13 +66479,13 @@ var render = function() {
                 max: _vm.$moment().format("YYYY-MM"),
                 required: ""
               },
-              domProps: { value: _vm.periodInput.start },
+              domProps: { value: _vm.enteredPeriod.start },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.periodInput, "start", $event.target.value)
+                  _vm.$set(_vm.enteredPeriod, "start", $event.target.value)
                 }
               }
             })
@@ -66398,25 +66506,25 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.periodInput.end,
-                  expression: "periodInput.end"
+                  value: _vm.enteredPeriod.end,
+                  expression: "enteredPeriod.end"
                 }
               ],
               staticClass: "form-control",
               attrs: {
                 type: "month",
                 name: "date-end",
-                min: _vm.periodInput.start,
+                min: _vm.enteredPeriod.start,
                 max: _vm.$moment().format("YYYY-MM"),
                 required: ""
               },
-              domProps: { value: _vm.periodInput.end },
+              domProps: { value: _vm.enteredPeriod.end },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.periodInput, "end", $event.target.value)
+                  _vm.$set(_vm.enteredPeriod, "end", $event.target.value)
                 }
               }
             })
@@ -66426,18 +66534,26 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "list-group mt-4" },
+        { ref: "categories_list_container", staticClass: "list-group mt-4" },
         _vm._l(
           _vm.isCategoriesExpanded
-            ? _vm.categories
-            : _vm.categories.slice(0, 5),
+            ? _vm.enteredCategories
+            : _vm.enteredCategories.slice(0, 5),
           function(category) {
             return _c(
               "a",
               {
+                key: category.id,
                 staticClass:
                   "list-group-item list-group-item-action d-flex justify-content-between align-items-center",
-                attrs: { href: "#" }
+                class: category.disabled ? "" : "active",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.toggleCategory(category)
+                  }
+                }
               },
               [_vm._v("\n            " + _vm._s(category.name) + "\n        ")]
             )
@@ -66458,7 +66574,17 @@ var render = function() {
               }
             }
           },
-          [_vm._v("показать больше")]
+          [
+            _vm._v(
+              "\n            " +
+                _vm._s(
+                  _vm.isCategoriesExpanded
+                    ? "показать меньше"
+                    : "показать больше"
+                ) +
+                "\n        "
+            )
+          ]
         )
       ]),
       _vm._v(" "),
@@ -66925,7 +67051,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "my-2 card w-100" }, [
-      _c("div", { staticClass: "card-body py-2" }, [
+      _c("div", { ref: "rating_container", staticClass: "card-body py-2" }, [
         _vm.isLoading
           ? _c("div", {
               staticClass: "text-secondary d-flex spinner-border my-4 mx-auto",
@@ -66939,11 +67065,7 @@ var render = function() {
                     staticClass: "my-auto font-weight-bolder",
                     class: _vm.columnSizes.place
                   },
-                  [
-                    _vm._v(
-                      "\n                            №\n                        "
-                    )
-                  ]
+                  [_vm._v("\n                        №\n                    ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -66954,7 +67076,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                            Фамилия, имя\n                        "
+                      "\n                        Фамилия, имя\n                    "
                     )
                   ]
                 ),
@@ -66967,7 +67089,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                            Очки\n                        "
+                      "\n                        Очки\n                    "
                     )
                   ]
                 ),
@@ -67002,9 +67124,9 @@ var render = function() {
                         [
                           _c("div", { class: _vm.columnSizes.place }, [
                             _vm._v(
-                              "\n                                " +
+                              "\n                            " +
                                 _vm._s(place + 1) +
-                                "\n                            "
+                                "\n                        "
                             )
                           ]),
                           _vm._v(" "),
@@ -67034,9 +67156,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                                " +
+                                "\n                            " +
                                   _vm._s(points.total) +
-                                  "\n                            "
+                                  "\n                        "
                               )
                             ]
                           ),
@@ -72060,6 +72182,280 @@ Object.defineProperty(exports, '__esModule', { value: true });
 })));
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/vue-smooth-height/src/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/vue-smooth-height/src/index.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var parse_css_transition__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! parse-css-transition */ "./node_modules/parse-css-transition/index.js");
+/* harmony import */ var parse_css_transition__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(parse_css_transition__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const mixin = {
+    methods: {
+        $smoothElement(options) {
+            let _addElement = addElement.bind(this)
+            if (Array.isArray(options))
+                options.forEach(_addElement)
+            else
+                _addElement(options)
+        },
+        $unsmoothElement(options) {
+            let _removeElement = removeElement.bind(this)
+            if (Array.isArray(options))
+                options.forEach(_removeElement)
+            else
+                _removeElement(options)
+        },
+    },
+    created() {
+        this._smoothElements = []
+    },
+    beforeUpdate() {
+        if (!this._smoothElements || !this._smoothElements.length)
+            return
+        this._smoothElements.forEach(e => {
+            // Retrieve registered element on demand
+            // El could have been hidden by v-if/v-show
+            let $el = select(this.$el, e.options.el)
+            e.setBeforeHeight($el)
+        })
+    },
+    updated() {
+        if (!this._smoothElements || !this._smoothElements.length)
+            return
+        this.$nextTick(()=>{
+            this._smoothElements.forEach(e => {
+                // Retrieve registered element on demand
+                // El could have been hidden by v-if/v-show
+                let $el = select(this.$el, e.options.el)
+                e.doSmoothReflow($el)
+            })
+        })
+    }
+}
+
+// 'this' is vue component
+function addElement(option = {}) {
+    if (!option.hasOwnProperty('el')) {
+        option.el = this.$el
+    }
+    this._smoothElements.push(new SmoothElement(option))
+}
+
+// 'this' is vue component
+function removeElement(option) {
+    let root = this.$el
+    let index = this._smoothElements.findIndex(d => {
+        return select(root, d.el) === select(root, option.el)
+    })
+    if (index == -1) {
+        console.error("VSM_ERROR: $unsmoothElement failed due to invalid el option")
+        return
+    }
+    let smoothEl = this._smoothElements[index]
+    smoothEl.remove()
+    this._smoothElements.splice(index, 1)
+}
+
+function select(rootEl, el) {
+    if (typeof el === 'string')
+        return rootEl.matches(el) ? rootEl : rootEl.querySelector(el)
+    else
+        return el
+}
+
+let iota = 0
+const STATES = Object.freeze({
+    INACTIVE: iota++,
+    ACTIVE: iota++
+})
+
+class SmoothElement {
+    constructor(options) {
+        options = {
+            // Element or selector string.
+            el: null,
+            // User can specify a transition if they don't want to use CSS
+            transition: 'height .5s',
+            // Element or selector string that will emit a transitionend event.
+            childTransitions: null,
+            hideOverflow: false,
+            debug: false,
+            ...options
+        }
+        Object.assign(this, {
+            $el: null,// Resolved Element from el
+            hasExistingHeightTransition: false,
+            beforeHeight: null,
+            afterHeight: null,
+            state: STATES.INACTIVE,
+            options,
+        })
+        // transition end callback will call endListener, so it needs the correct context
+        this.endListener = this.endListener.bind(this)
+    }
+    transition(to) {
+        this.state = to
+    }
+    /**
+     * Indicates if the smooth transition increased or decreased the elements height
+     * A positive result means the height was increased
+     */
+    get heightDiff() {
+        let { beforeHeight, afterHeight } = this
+        if (beforeHeight == null || afterHeight == null) {
+            return 0
+        }
+        return afterHeight - beforeHeight
+    }
+    setBeforeHeight($el) {
+        // This property could be set by a previous update
+        // Reset it so it doesn't affect the current update
+        this.afterHeight = null
+
+        let height
+        if ($el) {
+            height = $el.offsetHeight
+        }
+
+        this.beforeHeight = height
+        if (this.state === STATES.ACTIVE) {
+            this.stopTransition()
+            this.log('Transition was interrupted.')
+        }
+    }
+    doSmoothReflow($el, triggeredBy = 'data update') {
+        if (!$el) {
+            this.log("Could not find registered el.")
+            return
+        }
+        this.$el = $el
+        this.transition(STATES.ACTIVE)
+        $el.addEventListener('transitionend', this.endListener, { passive: true })
+        this.log(`Height transition triggered by: ${triggeredBy}`)
+
+        let { beforeHeight, options } = this
+
+        // If this.afterHeight is set, that means doSmoothReflow() was called after
+        // a nested transition finished. This check is made to ensure that
+        // a height transition only occurs on a false conditional render,
+        // a.k.a. an element is being hidden rather than shown.
+        // VSM works normally on a true conditional render.
+        let afterHeight = $el.offsetHeight
+        if (this.afterHeight != null && this.afterHeight === afterHeight) {
+            this.log(`Element height did not change after nested transition. Height = ${afterHeight}`)
+            this.transition(STATES.INACTIVE)
+            return
+        }
+        if (beforeHeight === afterHeight) {
+            this.log(`Element height did not change. Height = ${afterHeight}`)
+            this.transition(STATES.INACTIVE)
+            return
+        }
+        this.afterHeight = afterHeight
+        this.log(`Previous height: ${beforeHeight} Current height: ${afterHeight}`)
+
+        let computedStyle = window.getComputedStyle($el)
+        let parsedTransition = parse_css_transition__WEBPACK_IMPORTED_MODULE_0___default()(computedStyle.transition)
+        if (this.hasHeightTransition(parsedTransition)) {
+            this.hasExistingHeightTransition = true
+        } else {
+            this.hasExistingHeightTransition = false
+            this.addHeightTransition(parsedTransition, options.transition)
+        }
+
+        if (options.hideOverflow) {
+            //save overflow properties before overwriting
+            let overflowY = computedStyle.overflowY,
+                overflowX = computedStyle.overflowX
+
+            this.overflowX = overflowX
+            this.overflowY = overflowY
+
+            $el.style.overflowX = 'hidden'
+            $el.style.overflowY = 'hidden'
+        }
+
+        $el.style['height'] = beforeHeight + 'px'
+        $el.offsetHeight // Force reflow
+        $el.style['height'] = afterHeight + 'px'
+    }
+    hasHeightTransition(parsedTransition) {
+        return parsedTransition.find(t => {
+            return ['all','height'].includes(t.name) && t.duration > 0
+        })
+    }
+    // Delay and Duration are in milliseconds
+    // Add height transition to existing transitions.
+    addHeightTransition(parsedTransition, heightTransition) {
+        let transitions = parsedTransition.map(t => {
+            return `${t.name} ${t.duration}ms ${t.timingFunction} ${t.delay}ms`
+        })
+        this.$el.style.transition = [...transitions, heightTransition].join(',')
+    }
+    endListener(e) {
+        // Transition on smooth element finished
+        if (e.currentTarget === e.target) {
+            if (e.propertyName === 'height') {
+                this.stopTransition()
+                // Record the height AFTER the data change, but potentially
+                // BEFORE any child transitions start.
+                // Useful for cases like transition mode="out-in"
+                this.setBeforeHeight(this.$el)
+            }
+        }
+        // Transition on element INSIDE smooth element finished
+        // heightDiff <= 0 prevents calling doSmoothReflow during a
+        // transition that increases height.
+        // solves the case where a nested transition duration is
+        // shorter than the height transition duration, causing doSmoothReflow
+        // to reflow in the middle of the height transition
+        else if (this.heightDiff <= 0 && this.isRegisteredChildTransition(e)) {
+            this.doSmoothReflow(this.$el, 'child transition')
+        }
+    }
+    isRegisteredChildTransition(e) {
+        let { childTransitions } = this.options
+        return e.target.matches(childTransitions)
+    }
+    stopTransition() {
+        let {
+            $el, options, overflowX, overflowY,
+            hasExistingHeightTransition,
+        } = this
+
+        $el.style['height'] = null // Change height back to auto
+        if (options.hideOverflow) {
+            // Restore original overflow properties
+            $el.style.overflowX = overflowX
+            $el.style.overflowY = overflowY
+        }
+        // Clean up inline transition
+        if (!hasExistingHeightTransition) {
+            $el.style.transition = null
+        }
+
+        this.transition(STATES.INACTIVE)
+    }
+    remove() {
+        this.$el.removeEventListener('transitionend', this.endListener)
+    }
+    log(text) {
+        if (this.options.debug)
+            console.log(`VSM_DEBUG: ${text}`, this.$el)
+    }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (mixin);
+
 
 /***/ }),
 
@@ -85653,7 +86049,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SettingsForm_vue_vue_type_template_id_de406882_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SettingsForm.vue?vue&type=template&id=de406882&scoped=true& */ "./resources/js/components/Ratings/Settings/SettingsForm.vue?vue&type=template&id=de406882&scoped=true&");
+/* harmony import */ var _SettingsForm_vue_vue_type_template_id_de406882___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SettingsForm.vue?vue&type=template&id=de406882& */ "./resources/js/components/Ratings/Settings/SettingsForm.vue?vue&type=template&id=de406882&");
 /* harmony import */ var _SettingsForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SettingsForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Ratings/Settings/SettingsForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -85665,11 +86061,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _SettingsForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _SettingsForm_vue_vue_type_template_id_de406882_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _SettingsForm_vue_vue_type_template_id_de406882_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SettingsForm_vue_vue_type_template_id_de406882___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SettingsForm_vue_vue_type_template_id_de406882___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "de406882",
+  null,
   null
   
 )
@@ -85695,19 +86091,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Ratings/Settings/SettingsForm.vue?vue&type=template&id=de406882&scoped=true&":
-/*!**************************************************************************************************************!*\
-  !*** ./resources/js/components/Ratings/Settings/SettingsForm.vue?vue&type=template&id=de406882&scoped=true& ***!
-  \**************************************************************************************************************/
+/***/ "./resources/js/components/Ratings/Settings/SettingsForm.vue?vue&type=template&id=de406882&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/Ratings/Settings/SettingsForm.vue?vue&type=template&id=de406882& ***!
+  \**************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsForm_vue_vue_type_template_id_de406882_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./SettingsForm.vue?vue&type=template&id=de406882&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ratings/Settings/SettingsForm.vue?vue&type=template&id=de406882&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsForm_vue_vue_type_template_id_de406882_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsForm_vue_vue_type_template_id_de406882___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./SettingsForm.vue?vue&type=template&id=de406882& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ratings/Settings/SettingsForm.vue?vue&type=template&id=de406882&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsForm_vue_vue_type_template_id_de406882___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsForm_vue_vue_type_template_id_de406882_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SettingsForm_vue_vue_type_template_id_de406882___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -86401,7 +86797,9 @@ var getters = {
     return state.period;
   },
   getCategories: function getCategories(state) {
-    return state.categories;
+    return state.categories.sort(function (a, b) {
+      return b.order - a.order;
+    });
   },
   getCategory: function getCategory(state) {
     return function (id) {
@@ -86425,7 +86823,6 @@ var actions = {
     var state = _ref.state,
         dispatch = _ref.dispatch;
     var period = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-    console.log(state.period, period);
 
     if (period !== null) {
       if (period.start === state.period.start && period.end === state.period.end) {
@@ -86438,7 +86835,11 @@ var actions = {
       period: period
     }).then(function (response) {
       state.rating = response.data.rating;
-      state.categories = response.data.categories;
+
+      if (!state.categories.length) {
+        state.categories = response.data.categories;
+      }
+
       state.period = response.data.meta.period;
       dispatch('recountRating', {
         recountTotal: false,
@@ -86484,15 +86885,16 @@ var actions = {
   },
   setCategoriesFilter: function setCategoriesFilter(_ref4, categories) {
     var state = _ref4.state,
-        dispatch = _ref4.dispatch;
-    state.categories = state.categories.map(function (c) {
-      c.disabled = categories[c.id];
-      return c;
-    });
-    dispatch('recountRating', {
-      recountTotal: true,
-      recountCategoryWidth: true
-    });
+        dispatch = _ref4.dispatch,
+        getters = _ref4.getters;
+
+    if (this.categories !== categories) {
+      this.categories = categories;
+      dispatch('recountRating', {
+        recountTotal: true,
+        recountCategoryWidth: true
+      });
+    }
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({

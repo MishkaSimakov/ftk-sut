@@ -23,12 +23,10 @@ Route::resource('news', \App\Http\Controllers\NewsController::class);
 Route::resource('article', \App\Http\Controllers\ArticleController::class);
 
 # rating
-Route::get('ratings/{date?}', [\App\Http\Controllers\RatingController::class, 'index'])
-    ->name('ratings.index')
+Route::get('rating/{date?}', [\App\Http\Controllers\RatingController::class, 'index'])
+    ->name('rating.index')
     ->where('date', '[0-9]{4}\.[0-9]{2}\-[0-9]{4}\.[0-9]{2}');  // regex for 'YYYY.MM-YYYY.MM' query
-
-
-Route::resource('ratings', \App\Http\Controllers\RatingController::class)
+Route::resource('rating', \App\Http\Controllers\RatingController::class)
     ->except('index', 'edit', 'update', 'show');
 
 # other

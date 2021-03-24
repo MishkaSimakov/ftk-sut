@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="my-2 card w-100">
-            <div class="card-body py-2">
+            <div class="card-body py-2" ref="rating_container">
                 <div v-if="isLoading" class="text-secondary d-flex spinner-border my-4 mx-auto" role="status"></div>
                 <div v-else class="col">
                     <div class="row">
@@ -39,9 +39,9 @@
                         </div>
                     </div>
                     <div v-else class="my-3 text-center h6 text-warning">
-<!--                        <i class="fas fa-exclamation"></i>-->
+                        <!--                        <i class="fas fa-exclamation"></i>-->
                         <span class="mx-3">Нет данных за этот период</span>
-<!--                        <i class="fas fa-exclamation"></i>-->
+                        <!--                        <i class="fas fa-exclamation"></i>-->
                     </div>
                 </div>
             </div>
@@ -75,8 +75,10 @@ const {mapActions, mapGetters} = createNamespacedHelpers('rating');
 
 import RatingBar from "./../Ratings/RatingBar";
 import RatingSettingsForm from "./../Ratings/Settings/SettingsForm";
+import smoothHeight from "vue-smooth-height";
 
 export default {
+    mixins: [smoothHeight],
     components: {RatingBar, RatingSettingsForm},
     data() {
         return {
@@ -102,6 +104,12 @@ export default {
     },
     created() {
         this.loadRating();
+    },
+    mounted() {
+        this.$smoothElement({
+            el: this.$refs.rating_container,
+            hideOverflow: true,
+        })
     }
 }
 </script>

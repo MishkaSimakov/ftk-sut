@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 
-@section('title', 'Новости')
+@section('title', 'Главная страница')
 
 @section('app')
     <main style="min-height: 5000px;">

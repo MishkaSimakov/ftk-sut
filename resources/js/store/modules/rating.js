@@ -17,7 +17,7 @@ const getters = {
         return state.period
     },
     getCategories: state => {
-        return state.categories
+        return state.categories.sort((a, b) => b.order - a.order)
     },
     getCategory: state => id => {
         return state.categories.filter((c) => c.id === id)[0]
@@ -33,7 +33,6 @@ const getters = {
 // actions
 const actions = {
     loadRating({state, dispatch}, period = null) {
-        console.log(state.period, period)
         if (period !== null) {
             if (period.start === state.period.start && period.end === state.period.end) {
                 return
@@ -44,7 +43,11 @@ const actions = {
 
         ratingApi.loadRating({period: period}).then((response) => {
             state.rating = response.data.rating
-            state.categories = response.data.categories
+
+            if (!state.categories.length) {
+                state.categories = response.data.categories
+            }
+
             state.period = response.data.meta.period
 
             dispatch('recountRating', {
@@ -53,7 +56,7 @@ const actions = {
             })
 
             state.loading = false
-        })
+        });
     },
     recountRating({state, commit, getters}, {recountTotal, recountCategoryWidth}) {
         state.loading = true
@@ -88,16 +91,15 @@ const actions = {
 
         state.loading = false
     },
-    setCategoriesFilter({state, dispatch}, categories) {
-        state.categories = state.categories.map((c) => {
-            c.disabled = categories[c.id]
-            return c
-        })
+    setCategoriesFilter({state, dispatch, getters}, categories) {
+        if (this.categories !== categories) {
+            this.categories = categories;
 
-        dispatch('recountRating', {
-            recountTotal: true,
-            recountCategoryWidth: true
-        })
+            dispatch('recountRating', {
+                recountTotal: true,
+                recountCategoryWidth: true
+            })
+        }
     },
 }
 
