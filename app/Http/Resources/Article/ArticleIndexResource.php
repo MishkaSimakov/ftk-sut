@@ -20,6 +20,11 @@ class ArticleIndexResource extends JsonResource
             'title' => $this->title,
             'body' => $this->truncatedBody,
 
+            'points' => rand(0, 25),
+            'views' => rand(0, 25),
+
+            'is_liked' => rand(0, 1) > 0,
+
             'author' => [
                 'id' => $this->author->id,
                 'name' => $this->author->name,

@@ -10,12 +10,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $appends = [
-        'truncatedBody'
-    ];
-
-
-    const TRUNCATE_LIMIT = 100;
+    const TRUNCATE_LIMIT = 250;
 
     public function author()
     {
@@ -32,6 +27,7 @@ class Article extends Model
         $string = trim($this->body);
         $i = 0;
         $tags = [];
+
 
         preg_match_all('/<[^>]+>([^<]*)/', $string, $tagMatches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
 

@@ -19,5 +19,5 @@ Route::get('ratings/show/{period?}', [\App\Http\Controllers\Api\RatingController
     ->name('ratings.show')
     ->where('period', '[0-9]{4}\.[0-9]{2}\-[0-9]{4}\.[0-9]{2}');  // regex for 'YYYY.MM-YYYY.MM' query
 
-Route::get('articles', [\App\Http\Controllers\Api\ArticleController::class, 'index']);
+Route::get('articles', [\App\Http\Controllers\Api\ArticleController::class, 'index'])->name('articles.index');
 //Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);

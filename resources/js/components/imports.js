@@ -7,7 +7,7 @@ Vue.component('news-editor', require('./news/NewsEditor').default);
 
 
 // articles
-Vue.component('articles-article', require('./articles/Article').default);
+Vue.component('articles-list', require('./articles/Lists/ArticlesList').default);
 
 
 // rating
