@@ -4,26 +4,34 @@
             <h5 class="card-title">{{ news.title }}</h5>
             <div class="card-text" v-html="news.body"></div>
 
-            <div class="row no-gutters">
-                <p class="card-text mb-0 mt-1"><small class="text-muted">{{
-                        $moment(news.date).format('DD.MM.YYYY')
-                    }}</small></p>
+            <div class="row no-gutters text-muted mt-1">
+                <div class="card-text align-self-center">
+                    {{ $moment(news.date).format('ll') }}
+                </div>
 
-                <div v-if="isAdmin" class="dropdown ml-auto">
-                    <button class="d-inline btn rounded-pill" type="button" id="news-more-dropdown-button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-h fa-sm"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="news-more-dropdown-button">
-                        <a class="dropdown-item" :href="route('news.edit', { news: news.id })">Редактировать</a>
-                        <a class="dropdown-item text-danger" href="#" v-on:click.prevent="deleteNews">
-                            Удалить
-                        </a>
+                <div class="ml-auto row no-gutters">
+                    <span class="align-self-center mr-sm-2" style="font-weight: 500;">
+                        <i class="far fa-eye"></i> {{ news.views }}
+                    </span>
 
-                        <form :id="destroyFormId" class="d-none" method="POST" :action="route('news.destroy', { news: news.id })">
-                            <input type="hidden" name="_token" :value="csrf">
-                            <input type="hidden" name="_method" value="DELETE">
-                        </form>
+                    <div v-if="isAdmin" class="dropdown">
+                        <button class="d-inline btn rounded-pill text-muted" type="button"
+                                id="news-more-dropdown-button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h fa-sm"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="news-more-dropdown-button">
+                            <a class="dropdown-item" :href="route('news.edit', { news: news.id })">Редактировать</a>
+                            <a class="dropdown-item text-danger" href="#" v-on:click.prevent="deleteNews">
+                                Удалить
+                            </a>
+
+                            <form :id="destroyFormId" class="d-none" method="POST"
+                                  :action="route('news.destroy', { news: news.id })">
+                                <input type="hidden" name="_token" :value="csrf">
+                                <input type="hidden" name="_method" value="DELETE">
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

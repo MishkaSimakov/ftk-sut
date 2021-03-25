@@ -4,7 +4,7 @@
             <Article v-for="a in articles" :article="a" :key="a.id" class="mb-3"></Article>
 
             <div v-if="!isScrollDisabled" class="d-flex justify-content-center">
-                <div class="spinner-border text-secondary"></div>
+                <div class="spinner-border text-secondary spinner-border-sm" role="status"></div>
             </div>
         </div>
     </div>
@@ -23,6 +23,9 @@ export default {
             articles: 'getArticles',
             isScrollDisabled: 'isScrollDisabled',
         })
+    },
+    mounted() {
+        this.loadArticles()
     },
     methods: {
         loadArticles() {

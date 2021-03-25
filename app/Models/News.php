@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class News extends Model implements Viewable
 {
-    use HasFactory;
+    use HasFactory, InteractsWithViews;
 
     protected $fillable = ['title', 'date', 'body'];
     protected $dates = ['date'];
+    protected $removeViewsOnDelete = true;
 
     const PAGINATION_LIMIT = 50;
 
@@ -29,5 +32,10 @@ class News extends Model
         return $builder->whereHas('clubs', function (Builder $builder) use ($club) {
             $builder->where('name', $club);
         });
+    }
+
+    public function getViewsAttribute()
+    {
+        return views($this)->unique()->count();
     }
 }

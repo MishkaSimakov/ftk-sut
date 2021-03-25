@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ArticleType;
 use App\Http\Requests\Articles\StoreArticleRequest;
 use App\Http\Resources\Article\ArticleIndexResource;
 use App\Models\Article;
@@ -57,7 +58,9 @@ class ArticleController extends Controller
         $article->body = $body;
 
         $article->author()->associate($request->user());
-        $article->date = now();
+
+        $article->date = $request->get('delayed_publication') == 'on' ? $request->get('date') : now();
+        $article->type = $request->user()->is_admin ? ArticleType::Published() : ArticleType::OnCheck();
 
         $article->save();
 

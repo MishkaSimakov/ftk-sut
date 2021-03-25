@@ -29,7 +29,7 @@ class ArticleFactory extends Factory
             'author_id' => User::factory()->create()->id,
 
             'type' => ArticleType::Published(),
-            'date' => now(),
+            'date' => $this->faker->date,
         ];
     }
 }

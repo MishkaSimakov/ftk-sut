@@ -32,7 +32,6 @@ import Autocomplete from '@trevoreyre/autocomplete-vue'
 Vue.use(Autocomplete)
 
 
-
 require('./components/imports')
 
 

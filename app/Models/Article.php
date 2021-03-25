@@ -13,6 +13,8 @@ class Article extends Model
     const TRUNCATE_LIMIT = 250;
     const PAGINATION_LIMIT = 50;
 
+    protected $dates = ['date'];
+
     public function author()
     {
         return $this->belongsTo(User::class);

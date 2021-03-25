@@ -4,7 +4,7 @@
 @section('title', 'Рейтинг')
 
 @section('content')
-    <h1 class="text-center">Новый рейтинг</h1>
+    <h1 class="text-center mb-4">Новый рейтинг</h1>
 
     <div class="card">
         <div class="card-body">

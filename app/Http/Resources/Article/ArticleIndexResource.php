@@ -29,7 +29,9 @@ class ArticleIndexResource extends JsonResource
                 'id' => $this->author->id,
                 'name' => $this->author->name,
                 'url' => $this->author->url
-            ]
+            ],
+
+            'date' => $this->date,
         ];
     }
 }

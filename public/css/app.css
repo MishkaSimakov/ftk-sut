@@ -11614,6 +11614,7 @@ a.text-dark:focus {
 }
 
 .autocomplete-input:focus {
+  box-shadow: none;
   color: #495057;
   background-color: #fff;
   border-color: #80bdff;

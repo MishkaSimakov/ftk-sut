@@ -6,7 +6,7 @@
             <News v-for="n in news" :news="n" :key="n.id"></News>
 
             <div v-if="!isScrollDisabled" class="d-flex justify-content-center">
-                <div class="spinner-border text-secondary"></div>
+                <div class="spinner-border text-secondary spinner-border-sm" role="status"></div>
             </div>
         </div>
     </div>
