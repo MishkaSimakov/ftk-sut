@@ -4,7 +4,7 @@
 @section('title', 'Новости')
 
 @section('content')
-    <h1 class="text-center mb-4">Редактировать новость</h1>
+    <h1 class="text-center mb-4">Создать новость</h1>
 
     <div class="card">
         <div class="card-body">
@@ -27,9 +27,9 @@
 
                 <div class="form-group">
                     <label for="body">Текст</label>
-                    <news-editor value="{{ old('body') }}"
+                    <news-body-editor value="{{ old('body') }}"
                                  isInvalidClass="@error('body') is-invalid @enderror"
-                    ></news-editor>
+                    ></news-body-editor>
 
                     @error('body')
                     <span class="invalid-feedback d-block" role="alert">
@@ -46,7 +46,7 @@
                     >
 
                     @error('date')
-                    <span class="invalid-feedback" role="alert">
+                        <span class="invalid-feedback" role="alert">
                              <strong>{{ $message }}</strong>
                          </span>
                     @enderror

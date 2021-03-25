@@ -1,46 +1,51 @@
 <template>
-    <div class="form-group">
-        <label for="tags">Теги</label>
-
-        <input v-bind:value="this.value" class="rounded" id="tags" name="tags">
-    </div>
+    <input id="tags" :value="this.value"
+           class="rounded" name="tags"
+    >
 </template>
 
 <script>
 import Tagify from '@yaireo/tagify'
+import {createNamespacedHelpers} from 'vuex'
+
+const {mapGetters, mapActions} = createNamespacedHelpers('articles');
 
 export default {
     props: [
-        'value'
+        'value',
     ],
+    data() {
+        return {
+            tagify: null,
+        }
+    },
+    computed: {
+        ...mapGetters({
+            tags: 'getTags'
+        })
+    },
+    methods: {
+        ...mapActions([
+            'loadTags'
+        ])
+    },
     mounted() {
-        new Promise((resolve, reject) => {
-            axios.get('/webapi/articles/tags').then((response) => {
-                let input = document.querySelector('#tags');
-                new Tagify(input, {
-                    whitelist: response.data.map((tag) => tag.name),
-                    maxTags: 10,
-                    dropdown: {
-                        classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted
-                        enabled: 0,             // <- show suggestions on focus
-                        closeOnSelect: true    // <- do not hide the suggestions dropdown once an item has been selected
-                    }
-                });
-            })
-        })
+        this.loadTags();
 
-        $('form').on('submit', (e) => {
-
-            $.each(this.tags, function(key, value) {
-                let $option = $("<option/>", {
-                    value: key,
-                    text: value,
-                });
-                $('select').append($option);
-            });
-
-            return true;
-        })
+        let input = document.querySelector('#tags');
+        this.tagify = new Tagify(input, {
+            whitelist: [],
+            maxTags: 5,
+            dropdown: {
+                enabled: 0,
+                closeOnSelect: true
+            }
+        });
+    },
+    watch: {
+        tags(tags) {
+            this.tagify.settings.whitelist = tags.map((t) => t.name);
+        }
     }
 }
 </script>

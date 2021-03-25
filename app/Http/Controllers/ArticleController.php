@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Articles\StoreArticleRequest;
 use App\Http\Resources\Article\ArticleIndexResource;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -31,12 +34,34 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param StoreArticleRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
-        //
+        $article = new Article;
+
+        $article->title = $request->get('title');
+
+        $body = $request->get('body');
+        preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?>/i', $body, $matches);
+        $images = $matches[1];
+
+        foreach ($images as $image) {
+            if (preg_match('/^data:image\/(\w+);base64,/', $image)) {
+                $body = str_replace($image, asset(
+                    'storage/' . save_base64($image, 'articles/', 'public')
+                ), $body);
+            }
+        }
+        $article->body = $body;
+
+        $article->author()->associate($request->user());
+        $article->date = now();
+
+        $article->save();
+
+        return redirect()->back();
     }
 
     /**

@@ -22,5 +22,6 @@ Route::get('rating/categories', [\App\Http\Controllers\Api\RatingController::cla
 
 Route::get('articles', [\App\Http\Controllers\Api\ArticleController::class, 'index'])->name('article.index');
 Route::get('article/tags', [\App\Http\Controllers\Api\ArticleController::class, 'tags'])->name('article.tags');
+Route::get('article/search', [\App\Http\Controllers\Api\ArticleController::class, 'search'])->name('article.search');
 
 //Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);

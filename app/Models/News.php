@@ -13,6 +13,8 @@ class News extends Model
     protected $fillable = ['title', 'date', 'body'];
     protected $dates = ['date'];
 
+    const PAGINATION_LIMIT = 50;
+
     public function clubs()
     {
         return $this->belongsToMany(Club::class, 'news_club');

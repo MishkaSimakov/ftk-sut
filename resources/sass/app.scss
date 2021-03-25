@@ -8,6 +8,14 @@ $enable-responsive-font-sizes: true;
 
 
 // Tinymce
-//@import "tinymce";
+@import "tinymce";
 
+// Tagify
+@import "~@yaireo/tagify/src/tagify";
+
+// Autocomplete-vue
+@import '~@trevoreyre/autocomplete-vue/dist/style.css';
+@import 'autocomplete';
+
+// Custom components
 @import "components/dropdown";

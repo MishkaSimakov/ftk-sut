@@ -5,5 +5,12 @@ export default {
                 resolve(response)
             })
         })
-    }
+    },
+    async loadTags() {
+        return new Promise((resolve, reject) => {
+            axios.get(route('api.article.tags')).then((response) => {
+                resolve(response)
+            })
+        })
+    },
 }

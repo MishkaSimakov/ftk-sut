@@ -69,13 +69,12 @@
 </template>
 
 <script>
-import {createNamespacedHelpers} from 'vuex'
-
-const {mapActions, mapGetters} = createNamespacedHelpers('rating');
-
 import RatingBar from "./../Ratings/RatingBar";
 import RatingSettingsForm from "./../Ratings/Settings/SettingsForm";
 import smoothHeight from "vue-smooth-height";
+import {createNamespacedHelpers} from 'vuex'
+
+const {mapActions, mapGetters} = createNamespacedHelpers('rating');
 
 export default {
     mixins: [smoothHeight],

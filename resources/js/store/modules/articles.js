@@ -3,6 +3,7 @@ import articlesApi from '../../api/articles'
 // initial state
 const state = () => ({
     articles: [],
+    tags: [],
     page: 1,
 
     isLoading: false,
@@ -13,6 +14,9 @@ const state = () => ({
 const getters = {
     getArticles: (state) => {
         return state.articles
+    },
+    getTags: (state) => {
+        return state.tags.sort((a, b) => { return b.articles_count - a.articles_count })
     },
     isScrollDisabled: (state) => {
         return state.isLoading || state.isEnded
@@ -39,6 +43,11 @@ const actions = {
 
         state.page += 1
     },
+    loadTags({ commit, state }) {
+        articlesApi.loadTags().then((response) => {
+            state.tags = response.data
+        })
+    }
 }
 
 export default {

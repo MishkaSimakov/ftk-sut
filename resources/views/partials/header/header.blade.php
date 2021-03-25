@@ -17,7 +17,7 @@
                         <a class="nav-link" href="{{ route('article.index') }}">Статьи</a>
 
                         <div class="hover-dropdown-menu dropdown-menu">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('article.create') }}">
                                 Написать
                             </a>
                             <a class="dropdown-item" href="#">

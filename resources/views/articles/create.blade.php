@@ -4,7 +4,7 @@
 @section('title', 'Новости')
 
 @section('content')
-    <h1 class="text-center mb-4">Редактировать новость</h1>
+    <h1 class="text-center mb-4">Написать статью</h1>
 
     <div class="card">
         <div class="card-body">
@@ -14,6 +14,7 @@
                 <div class="form-group">
                     <label for="title">Заголовок</label>
                     <input id="title" type="text"
+                           maxlength="75"
                            class="form-control @error('title') is-invalid @enderror" name="title"
                            value="{{ old('title') }}" required autofocus
                     >
@@ -27,9 +28,9 @@
 
                 <div class="form-group">
                     <label for="body">Текст</label>
-                    <articles-editor value="{{ old('body') }}"
-                                 isInvalidClass="@error('body') is-invalid @enderror"
-                    ></articles-editor>
+                    <articles-body-editor value="{{ old('body') }}"
+                                          is-invalid-class="@error('body') is-invalid @enderror"
+                    ></articles-body-editor>
 
                     @error('body')
                     <span class="invalid-feedback d-block" role="alert">
@@ -39,22 +40,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="date">Дата публикации</label>
-                    <input id="date" type="date"
-                           class="form-control @error('date') is-invalid @enderror" name="date"
-                           value="{{ old('date') }}" required autofocus
-                    >
+                    <label for="tags">Теги</label>
+                    <articles-tags-editor></articles-tags-editor>
 
-                    @error('date')
+                    @error('tags')
                     <span class="invalid-feedback" role="alert">
-                             <strong>{{ $message }}</strong>
-                         </span>
+                              <strong>{{ $message }}</strong>
+                          </span>
                     @enderror
                 </div>
 
-                {{--                <div class="alert alert-info" role="alert">--}}
-                {{--                    Новость будет опубликована 19 января 2020г. в 20:00--}}
-                {{--                </div>--}}
+                <articles-date-editor></articles-date-editor>
 
                 <button type="submit" class="btn btn-primary mr-2">Сохранить</button>
             </form>

@@ -11,10 +11,16 @@ class Article extends Model
     use HasFactory;
 
     const TRUNCATE_LIMIT = 250;
+    const PAGINATION_LIMIT = 50;
 
     public function author()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(ArticleTag::class, 'article_article_tag');
     }
 
     /**
