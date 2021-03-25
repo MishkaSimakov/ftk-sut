@@ -17,7 +17,7 @@ const getters = {
         return state.period
     },
     getCategories: state => {
-        return state.categories.sort((a, b) => b.order - a.order)
+        return state.categories.sort((a, b) => a.order - b.order)
     },
     getCategory: state => id => {
         return state.categories.filter((c) => c.id === id)[0]
@@ -41,14 +41,18 @@ const actions = {
 
         state.loading = true
 
-        ratingApi.loadRating({period: period}).then((response) => {
-            state.rating = response.data.rating
-
+        Promise.all([
+            ...(state.categories.length ? [] : [ratingApi.loadPointCategories()]),
+            ratingApi.loadRating({period: period}),
+        ]).then((response) => {
             if (!state.categories.length) {
-                state.categories = response.data.categories
+                state.categories = response[0].data
             }
 
-            state.period = response.data.meta.period
+            let rating_response = response.pop().data
+
+            state.rating = rating_response.rating
+            state.period = rating_response.meta.period
 
             dispatch('recountRating', {
                 recountTotal: false,

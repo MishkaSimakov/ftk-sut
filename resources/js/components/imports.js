@@ -8,6 +8,7 @@ Vue.component('news-editor', require('./news/NewsEditor').default);
 
 // articles
 Vue.component('articles-list', require('./articles/Lists/ArticlesList').default);
+Vue.component('articles-editor', require('./Articles/Form/ArticleBodyEditor').default);
 
 
 // rating

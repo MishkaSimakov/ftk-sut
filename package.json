@@ -25,6 +25,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.2",
         "@tinymce/tinymce-vue": "^3.2.8",
+        "@yaireo/tagify": "^3.23.1",
         "laravel-mix": "^5.0.1",
         "v-calendar": "^2.2.4",
         "vue-infinite-scroll": "^2.0.2",

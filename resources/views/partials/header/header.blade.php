@@ -13,8 +13,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('news.index') }}">Новости</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item dropdown">
                         <a class="nav-link" href="{{ route('article.index') }}">Статьи</a>
+
+                        <div class="hover-dropdown-menu dropdown-menu">
+                            <a class="dropdown-item" href="#">
+                                Написать
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                Требуют проверки
+                            </a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Расписание</a>

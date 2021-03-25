@@ -30,10 +30,6 @@ class RatingController extends Controller
 
         return response()->json([
             'rating' => RatingPointsIndexResource::collection($points),
-
-            'categories' => RatingPointCategoryIndexResource::collection(
-                RatingPointCategory::all()
-            ),
             'meta' => [
                 'period' => [
                     'start' => $start->isoFormat('YYYY-MM'),
@@ -41,5 +37,14 @@ class RatingController extends Controller
                 ],
             ]
         ]);
+    }
+
+    public function categories()
+    {
+        $categories = RatingPointCategory::all();
+
+        return response()->json(
+            RatingPointCategoryIndexResource::collection($categories)
+        );
     }
 }

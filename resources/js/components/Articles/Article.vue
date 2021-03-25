@@ -1,10 +1,10 @@
 <template>
-    <div class="card">
-        <div class="card-body pb-2">
+    <div class="card h-100">
+        <div class="card-body pb-2 d-flex flex-column">
             <h5 class="card-title">{{ article.title }}</h5>
             <div class="card-text" v-html="article.body"></div>
 
-            <div class="row no-gutters mt-3 text-muted">
+            <div class="row no-gutters mt-auto text-muted">
                 <div class="align-self-center">
                     <a class="text-muted" :href="article.author.url">{{ article.author.name }}</a>
                     <span class="d-none d-sm-inline">• 29 июня 2021</span>

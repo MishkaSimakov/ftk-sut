@@ -19,6 +19,7 @@
     <!-- Laravel routes and csrf token -->
     <script>
         window.Laravel = {!! json_encode([
+                'tinymce_api_key' => "hnviucqus9116ko1nycfet8r4rlvw0akh6w27lord3o9nz15",
                 'user' => auth()->check() ? auth()->user()->toArray() : null,
                 'csrfToken' => csrf_token(),
                 'routes' => collect(\Illuminate\Support\Facades\Route::getRoutes())->mapWithKeys(function ($route) { return [$route->getName() => $route->uri()]; })

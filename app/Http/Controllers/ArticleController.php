@@ -25,7 +25,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return response()->view('articles.create');
     }
 
     /**

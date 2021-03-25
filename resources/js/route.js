@@ -2,6 +2,7 @@ let routes = window.Laravel.routes
 
 module.exports = function () {
     let args = Array.prototype.slice.call(arguments);
+
     let name = args.shift();
     if (routes[name] === undefined) {
         console.error('Route not found ', name);
@@ -21,7 +22,11 @@ module.exports = function () {
                 return s
             })
             .join('/')}`
-        let query = Object.entries(args[0]).map(([key, arg]) => key + '=' + arg).join('&')
+
+        let query = ''
+        if (args[0]) {
+            query = Object.entries(args[0]).map(([key, arg]) => key + '=' + arg).join('&')
+        }
 
         return url + (query.length !== 0 ? '?' + query : '');
     }
