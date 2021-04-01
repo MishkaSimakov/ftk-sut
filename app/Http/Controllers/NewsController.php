@@ -13,9 +13,7 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = News::all()->sortByDesc('date');
-
-        return view('news.index', compact('news'));
+        return view('news.index');
     }
 
     public function edit(News $news)
@@ -37,7 +35,9 @@ class NewsController extends Controller
 
     public function store(StoreNewsRequest $request)
     {
-        $news = News::create($request->all());
+        $news = News::make($request->all());
+        $news->date = $request->delayed_publication == 'on' ? $request->get('date') : now();
+        $news->save();
 
         if ($request->get('notify_users') == 'on') { // TODO: предусмотреть отсроченную отправку новости (если статья публикуется не сразу)
             Mail::to(User::whereNotNull('email')->select('email')->get())

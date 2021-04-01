@@ -20,7 +20,11 @@ Route::view('/', 'welcome')->name('main');
 Route::resource('news', \App\Http\Controllers\NewsController::class);
 
 # articles
+Route::get('article/unpublished', [\App\Http\Controllers\ArticleController::class, 'unpublished'])->name('article.unpublished');
 Route::resource('article', \App\Http\Controllers\ArticleController::class);
+
+
+# events
 
 # rating
 Route::get('rating/{date?}', [\App\Http\Controllers\RatingController::class, 'index'])

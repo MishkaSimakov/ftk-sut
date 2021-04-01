@@ -34,8 +34,20 @@ class News extends Model implements Viewable
         });
     }
 
+    public function scopePublished(Builder $builder)
+    {
+        return $builder->whereDate('date', '<=', now());
+    }
+
     public function getViewsAttribute()
     {
         return views($this)->unique()->count();
+    }
+
+    public function recordView()
+    {
+        if (!$this->date->greaterThan(now())) {
+            views($this)->cooldown(now()->addHours(3))->record();
+        }
     }
 }

@@ -28,9 +28,7 @@
 
                 <div class="form-group">
                     <label for="body">Текст</label>
-                    <articles-body-editor value="{{ old('body') }}"
-                                          is-invalid-class="@error('body') is-invalid @enderror"
-                    ></articles-body-editor>
+                    <articles-body-editor value="{{ old('body') }}"></articles-body-editor>
 
                     @error('body')
                     <span class="invalid-feedback d-block" role="alert">

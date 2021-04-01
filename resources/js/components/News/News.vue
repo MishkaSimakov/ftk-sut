@@ -1,5 +1,5 @@
 <template>
-    <div class="card mb-3">
+    <div class="card mb-3" :class="{ 'text-secondary': !news.is_published }">
         <div class="card-body pb-2">
             <h5 class="card-title">{{ news.title }}</h5>
             <div class="card-text" v-html="news.body"></div>
@@ -7,6 +7,7 @@
             <div class="row no-gutters text-muted mt-1">
                 <div class="card-text align-self-center">
                     {{ $moment(news.date).format('ll') }}
+                    {{ news.is_published ? '' : '(ещё не опубликована)'}}
                 </div>
 
                 <div class="ml-auto row no-gutters">

@@ -22,6 +22,11 @@ class RatingPointCategoryFactory extends Factory
      */
     public function definition()
     {
-        return [];
+        return [
+            'name' => $name = $this->faker->word,
+            'import_name' => $name,
+            'slug' => $name,
+            'color' => $this->faker->hexColor,
+        ];
     }
 }

@@ -22,6 +22,8 @@ class NewsIndexResource extends JsonResource
             'views' => $this->views,
             'date' => $this->date,
 
+            'is_published' => !$this->date->greaterThan(now()),
+
             'clubs' => ClubsIndexResource::collection($this->clubs)
         ];
     }

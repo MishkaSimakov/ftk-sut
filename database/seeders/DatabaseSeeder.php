@@ -1,8 +1,6 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\Article;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,10 +22,12 @@ class DatabaseSeeder extends Seeder
 //         $this->call(UserSeeder::class);
 
          $this->call(NewsSeeder::class);
+         $this->call(ArticleTagSeeder::class);
          $this->call(ClubSeeder::class);
-         $this->call(RatingPointCategorySeeder::class);
+//         $this->call(RatingPointCategorySeeder::class);
+         $this->call(ArticleSeeder::class);
 
-         Article::factory(10)->create();
+
 
 //         $this->call(RatingPointSeeder::class);
     }

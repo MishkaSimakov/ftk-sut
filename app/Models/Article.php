@@ -10,7 +10,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    const TRUNCATE_LIMIT = 250;
+    const TRUNCATE_LIMIT = 500;
     const PAGINATION_LIMIT = 50;
 
     protected $dates = ['date'];
@@ -25,36 +25,9 @@ class Article extends Model
         return $this->belongsToMany(ArticleTag::class, 'article_article_tag');
     }
 
-    /**
-     * Return article body truncated by words and with repaired HTML tags. TODO: сделать обрезание не по длине, а по словам.
-     *
-     * @return string
-     */
+
     public function getTruncatedBodyAttribute(): string
     {
-        $string = trim($this->body);
-        $i = 0;
-        $tags = [];
-
-
-        preg_match_all('/<[^>]+>([^<]*)/', $string, $tagMatches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
-
-        foreach ($tagMatches as $tagMatch) {
-            if ($tagMatch[0][1] - $i >= self::TRUNCATE_LIMIT) {
-                break;
-            }
-
-            $tag = substr(strtok($tagMatch[0][0], " \t\n\r\0\x0B>"), 1);
-
-            if ($tag[0] != '/') {
-                $tags[] = $tag;
-            } elseif (end($tags) == substr($tag, 1)) {
-                array_pop($tags);
-            }
-
-            $i += $tagMatch[1][1] - $tagMatch[0][1];
-        }
-
-        return substr($string, 0, $length = min(strlen($string), self::TRUNCATE_LIMIT + $i)) . (count($tags = array_reverse($tags)) ? '</' . implode('></', $tags) . '>' : '') . '...';
+        return truncateHTML(self::TRUNCATE_LIMIT, strip_tags($this->body, ['p', 'b', 'i', 'ul', 'li', 'ol']));
     }
 }

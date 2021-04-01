@@ -24,9 +24,6 @@ export default {
             isScrollDisabled: 'isScrollDisabled',
         })
     },
-    mounted() {
-        this.loadArticles()
-    },
     methods: {
         loadArticles() {
             this.$store.dispatch('articles/loadArticles')

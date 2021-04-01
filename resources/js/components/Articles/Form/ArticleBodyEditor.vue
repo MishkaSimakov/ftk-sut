@@ -59,7 +59,7 @@ export default {
         }
     },
     props: [
-        'value', 'isInvalidClass'
+        'value'
     ],
     components: {
         'editor': Editor

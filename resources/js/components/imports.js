@@ -1,19 +1,27 @@
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-// news
-Vue.component('news-list', require('./news/NewsList').default);
-Vue.component('news-body-editor', require('./News/Form/NewsBodyEditor').default);
+const components = {
+    // news
+    'news-list':              'News/NewsList',
+    'news-body-editor':       'News/Form/NewsBodyEditor',
+    'news-date-editor':       'News/Form/NewsDateEditor',
 
+    // articles
+    'articles-article':       'Articles/Article',
+    'articles-list':          'Articles/Lists/ArticlesList',
+    'articles-top-tags-list': 'Articles/Lists/PopularArticleTagsList',
+    'articles-body-editor':   'Articles/Form/ArticleBodyEditor',
+    'articles-tags-editor':   'Articles/Form/ArticleTagsEditor',
+    'articles-date-editor':   'Articles/Form/ArticleDateEditor',
+    'articles-search':        'Articles/ArticlesSearch',
 
-// articles
-Vue.component('articles-list', require('./articles/Lists/ArticlesList').default);
-Vue.component('articles-top-tags-list', require('./articles/Lists/PopularArticleTagsList').default);
-Vue.component('articles-body-editor', require('./Articles/Form/ArticleBodyEditor').default);
-Vue.component('articles-tags-editor', require('./Articles/Form/ArticleTagsEditor').default);
-Vue.component('articles-date-editor', require('./Articles/Form/ArticleDateEditor').default);
-Vue.component('articles-search', require('./Articles/ArticlesSearch').default);
+    // events
 
+    // rating
+    'rating':                 'Ratings/Rating',
+}
 
-// rating
-Vue.component('rating', require('./ratings/Rating').default);
+for (const [name, path] of Object.entries(components)) {
+    Vue.component(name, require('./' + path).default);
+}

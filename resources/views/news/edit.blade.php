@@ -28,9 +28,9 @@
 
                 <div class="form-group">
                     <label for="body">Текст</label>
-                    <news-editor value="{{ old('body') ?? $news->body }}"
+                    <news-body-editor value="{{ old('body') ?? $news->body }}"
                                  is-invalid-class="@error('body') is-invalid @enderror"
-                    ></news-editor>
+                    ></news-body-editor>
 
                     @error('body')
                     <span class="invalid-feedback d-block" role="alert">

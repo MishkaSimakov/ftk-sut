@@ -13,13 +13,14 @@
         "cyrildewit/eloquent-viewable": "^6.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^7.3",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
         "maatwebsite/excel": "^3.1"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.9",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.2",
@@ -43,7 +44,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Helpers/images.php"
+            "app/Helpers/images.php",
+            "app/Helpers/text.php"
         ]
     },
     "autoload-dev": {

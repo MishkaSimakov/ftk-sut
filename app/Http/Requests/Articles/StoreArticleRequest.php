@@ -28,7 +28,9 @@ class StoreArticleRequest extends FormRequest
             'title' => 'required|string|max:75',
             'body' => 'required|string',
             'tags' => 'nullable|string',
+
             'delayed_publication' => 'string|in:on,off',
+            'date' => 'nullable|date',
         ];
     }
 }

@@ -10,8 +10,16 @@
 
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav mx-lg-auto mx-0">
-                    <li class="nav-item">
+                    <li class="nav-item {{ (auth()->user() and auth()->user()->is_admin) ? 'dropdown' : '' }}">
                         <a class="nav-link" href="{{ route('news.index') }}">Новости</a>
+
+                        @admin
+                        <div class="hover-dropdown-menu dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('news.create') }}">
+                                Написать
+                            </a>
+                        </div>
+                        @endadmin
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="{{ route('article.index') }}">Статьи</a>

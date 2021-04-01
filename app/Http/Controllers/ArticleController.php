@@ -64,7 +64,7 @@ class ArticleController extends Controller
 
         $article->save();
 
-        return redirect()->back();
+        return redirect()->route('article.index');
     }
 
     /**
@@ -110,5 +110,14 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function unpublished()
+    {
+        $articles = ArticleIndexResource::collection(
+            Article::where('type', ArticleType::OnCheck())->orderBy('date', 'desc')->get()
+        );
+
+        return view('articles.unpublished', compact('articles'));
     }
 }
