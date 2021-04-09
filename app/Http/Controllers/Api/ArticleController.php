@@ -42,14 +42,33 @@ class ArticleController extends Controller
     {
         $query = $request->get('query');
 
-        $tags = ArticleTag::where('name', 'like', "%{$query}%")->select('id', 'name')->get();
-        $authors = User::where('name', 'like', "%{$query}%")->select('id', 'name')->get();
-        $articles = Article::where('title', 'like', "%{$query}%")->orWhere('body', 'like', "%{$query}%")->select('id', 'title')->get();
+        $tags = ArticleTag::where('name', 'like', "%{$query}%")->select('id', 'name')->get()->map(function($tag) {
+            return [
+                'id' => $tag->id,
+                'name' => $tag->name,
+                'url' => '#',
+                'type' => 'tag'
+            ];
+        });
+        $authors = User::where('name', 'like', "%{$query}%")->select('id', 'name')->get()->map(function($author) {
+            return [
+                'id' => $author->id,
+                'name' => $author->name,
+                'url' => $author->url,
+                'type' => 'author'
+            ];
+        });
+        $articles = Article::where('title', 'like', "%{$query}%")->orWhere('body', 'like', "%{$query}%")->select('id', 'title')->get()->map(function($article) {
+            return [
+                'id' => $article->id,
+                'name' => $article->title,
+                'url' => '#',
+                'type' => 'article'
+            ];
+        });
 
         return response()->json([
-            'tags' => ArticleTagIndexResource::collection($tags),
-            'authors' => $authors,
-            'articles' => ArticleIndexResource::collection($articles),
+            $tags->concat($authors)->concat($articles)
         ]);
     }
 
