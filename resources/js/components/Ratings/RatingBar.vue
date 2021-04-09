@@ -5,7 +5,7 @@
     >
         <div
             v-for="point in sortedPoints"
-            v-if="!point.disabled"
+            v-if="!point.category.disabled"
 
             class="progress-bar"
             :style="{ width: `${point.width}%`, backgroundColor: point.category.color }"
@@ -18,29 +18,22 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import {createNamespacedHelpers} from 'vuex'
 
+const {mapGetters} = createNamespacedHelpers('rating');
 
 export default {
     props: [
         'points', 'width'
     ],
     computed: {
-        ...mapGetters({
-            getCategory: 'rating/getCategory'
-        }),
         sortedPoints() {
             return this.points
-                .map((p) => {
-                    p.category = this.getCategory(p.category)
-                    return p
-                })
-                .sort((a, b) => a.category.order - b.category.order)
         }
     },
     mounted() {
-        $('[data-toggle="tooltip"]').tooltip()
-    },
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 }
 </script>
 

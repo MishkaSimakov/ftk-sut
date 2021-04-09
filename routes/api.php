@@ -21,6 +21,9 @@ Route::get('rating/show/{period?}', [\App\Http\Controllers\Api\RatingController:
 Route::get('rating/categories', [\App\Http\Controllers\Api\RatingController::class, 'categories'])->name('rating.categories');
 
 Route::get('articles', [\App\Http\Controllers\Api\ArticleController::class, 'index'])->name('article.index');
+Route::get('article/best', [\App\Http\Controllers\Api\ArticleController::class, 'best'])->name('article.best');
+Route::post('article/{article}/points/toggle', [\App\Http\Controllers\Api\ArticleController::class, 'togglePoint'])->name('article.points.toggle')->middleware('web');
+
 Route::get('article/tags', [\App\Http\Controllers\Api\ArticleController::class, 'tags'])->name('article.tags');
 Route::get('article/search', [\App\Http\Controllers\Api\ArticleController::class, 'search'])->name('article.search');
 

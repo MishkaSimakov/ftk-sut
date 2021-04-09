@@ -11,9 +11,7 @@
                 </div>
 
                 <div class="ml-auto row no-gutters">
-                    <span :class="{ 'liked' : article.is_liked }" class="align-self-center mr-sm-2 mr-md-3" style="font-weight: 500; cursor: pointer">
-                        <i :class="article.is_liked ? 'fas' : 'far'" class="fa-heart"></i> {{ article.points }}
-                    </span>
+                    <article-like :article="article"></article-like>
 
                     <span class="align-self-center mr-sm-2 d-none d-md-inline" style="font-weight: 500;">
                         <i class="far fa-eye"></i> {{ article.views }}
@@ -39,15 +37,11 @@
 </template>
 
 <script>
+import ArticleLike from "./Parts/ArticleLike";
 export default {
+    components: {ArticleLike},
     props: {
         article: Object,
     }
 }
 </script>
-
-<style scoped>
-    .liked {
-        color: #ff3347 !important;
-    }
-</style>

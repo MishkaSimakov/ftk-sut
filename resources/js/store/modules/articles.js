@@ -47,6 +47,13 @@ const actions = {
         articlesApi.loadTags().then((response) => {
             state.tags = response.data
         })
+    },
+    togglePoint({ commit, state }, { article_id }) {
+        if (window.Laravel.user) {
+            articlesApi.togglePoint(article_id).then((response) => {
+
+            });
+        }
     }
 }
 

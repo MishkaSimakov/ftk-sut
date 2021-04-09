@@ -33,12 +33,13 @@
 
         <div class="list-group mt-4" ref="categories_list_container">
             <a
-                v-for="category in isCategoriesExpanded ? enteredCategories : enteredCategories.slice(0, 5)"
+                v-for="category in isCategoriesExpanded ? sortedCategories : sortedCategories.slice(0, 5)"
+                v-if="category"
                 :key="category.id"
                 href="#"
-                v-on:click.prevent="toggleCategory(category)"
+                v-on:click.prevent="toggleCategory(category.id)"
                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-                :class="category.disabled ? '' : 'active'"
+                :class="enteredCategories.includes(category.id) ? 'active' : ''"
             >
                 {{ category.name }}
             </a>
@@ -70,7 +71,7 @@ export default {
     mixins: [smoothHeight],
     data() {
         return {
-            enteredCategories: [], // TODO: сделать, чтобы, если выбраны все категории не была выбрана ни одна.
+            enteredCategories: [],
             isCategoriesExpanded: false,
             enteredPeriod: {
                 start: null,
@@ -83,26 +84,36 @@ export default {
             loadedCategories: 'getCategories',
             loadedPeriod: 'getPeriod'
         }),
+        sortedCategories() {
+            return this.loadedCategories.filter((c) => c !== undefined)
+                .sort((a, b) => a.order - b.order)
+        }
     },
     methods: {
         ...mapActions(['loadRating', 'setCategoriesFilter']),
         handleSubmit() {
-            this.loadRating(this.enteredPeriod)
-            this.setCategoriesFilter(this.enteredCategories)
-
             $('#ratingSettingsModal').modal('hide')
+
+            this.loadRating({
+                period: this.enteredPeriod,
+            }).then(() => {
+                this.setCategoriesFilter(this.enteredCategories)
+            })
         },
         toggleCategory(category) {
-
+            if (this.enteredCategories.includes(category)) {
+                this.enteredCategories = this.enteredCategories.filter((c) => {
+                    return c !== category
+                })
+            } else {
+                this.enteredCategories.push(category)
+            }
         }
     },
     watch: {
         loadedPeriod(period) {
             this.enteredPeriod.start = period.start
             this.enteredPeriod.end = period.end
-        },
-        loadedCategories(categories) {
-            this.enteredCategories = categories
         }
     },
     mounted() {

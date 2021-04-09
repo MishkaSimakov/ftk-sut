@@ -19,7 +19,8 @@ class RatingController extends Controller
             $start = Carbon::create($period[0], $period[1]);
             $end = Carbon::create($period[2], $period[3]);
         } else {
-            $start = RatingPoint::orderBy('date', 'desc')->first()->date;
+            $point = RatingPoint::orderBy('date', 'desc')->first();
+            $start = $point ? $point->date : now();
 
             $end = $start;
         }

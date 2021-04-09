@@ -16,16 +16,16 @@ class RatingPointCategorySeeder extends Seeder
      */
     public function run()
     {
-//        RatingPointCategory::factory()->createMany(config('points.categories'));
+        RatingPointCategory::factory()->createMany(config('points.categories'));
 
-        $categories = Http::get('http://ftk-sut.ru/api/imports/category')->json();
-
-        foreach ($categories as $category) {
-            RatingPointCategory::factory()->create([
-                'name' => $category['name'],
-                'import_name' => Str::slug($category['name']),
-                'slug' => Str::slug($category['name']),
-            ]);
-        }
+//        $categories = Http::get('http://ftk-sut.ru/api/imports/category')->json();
+//
+//        foreach ($categories as $category) {
+//            RatingPointCategory::factory()->create([
+//                'name' => $category['name'],
+//                'import_name' => Str::slug($category['name']),
+//                'slug' => Str::slug($category['name']),
+//            ]);
+//        }
     }
 }

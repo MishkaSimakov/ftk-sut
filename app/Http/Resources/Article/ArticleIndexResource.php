@@ -20,10 +20,9 @@ class ArticleIndexResource extends JsonResource
             'title' => $this->title,
             'body' => $this->truncatedBody,
 
-            'points' => rand(0, 25),
+            'points' => $this->pointsCount,
+            'is_liked' => auth()->check() ? $this->points->where([['user_id', auth()->user()->id], ['article_id', $this->id]])->exists() : false,
             'views' => rand(0, 25),
-
-            'is_liked' => rand(0, 1) > 0,
 
             'author' => [
                 'id' => $this->author->id,

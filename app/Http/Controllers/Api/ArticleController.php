@@ -24,6 +24,11 @@ class ArticleController extends Controller
         );
     }
 
+    public function best()
+    {
+//        $articles = Article::select('id', 'date')->
+    }
+
     public function tags()
     {
         $tags = ArticleTag::all();
@@ -37,14 +42,19 @@ class ArticleController extends Controller
     {
         $query = $request->get('query');
 
-        $tags = ArticleTag::where('name', 'like', "%{$query}%")->get();
-        $authors = User::where('name', 'like', "%{$query}%")->get();
-        $articles = Article::where('title', 'like', "%{$query}%")->orWhere('body', 'like', "%{$query}%")->get();
+        $tags = ArticleTag::where('name', 'like', "%{$query}%")->select('id', 'name')->get();
+        $authors = User::where('name', 'like', "%{$query}%")->select('id', 'name')->get();
+        $articles = Article::where('title', 'like', "%{$query}%")->orWhere('body', 'like', "%{$query}%")->select('id', 'title')->get();
 
         return response()->json([
             'tags' => ArticleTagIndexResource::collection($tags),
             'authors' => $authors,
             'articles' => ArticleIndexResource::collection($articles),
         ]);
+    }
+
+    public function togglePoint(Request $request, Article $article)
+    {
+        dd($request->get('user'));
     }
 }

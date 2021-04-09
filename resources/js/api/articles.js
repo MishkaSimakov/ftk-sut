@@ -13,4 +13,11 @@ export default {
             })
         })
     },
+    async togglePoint(article_id) {
+        return new Promise((resolve, reject) => {
+            axios.post(route('api.article.points.toggle', { article: article_id, user: window.Laravel.user.id })).then((response) => {
+                resolve(response)
+            })
+        })
+    },
 }

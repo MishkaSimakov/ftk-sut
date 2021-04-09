@@ -1,49 +1,18 @@
 import store from './store'
 
-// Fontawesome
-require('@fortawesome/fontawesome-free/js/all');
+// helpers
+require('./helpers/imports')
 
-window.route = require('./route');
-
+// Laravel and bootstrap stuff
 require('./bootstrap');
 
-window.Vue = require('vue');
+// Libraries
+require('./libraries')
 
-// infinite scroll for news and articles
-const infiniteScroll =  require('vue-infinite-scroll');
-Vue.use(infiniteScroll)
-
-
-// Moment js
-const moment = require('moment')
-require('moment/locale/ru')
-Vue.use(require('vue-moment'), {
-    moment
-})
-
-// Vue calendar
-import VCalendar from 'v-calendar';
-Vue.use(VCalendar, {
-    componentPrefix: 'vc'
-});
-
-// Autocomplete-vue
-import Autocomplete from '@trevoreyre/autocomplete-vue'
-Vue.use(Autocomplete)
-
-
+// Vue stuff
 require('./components/imports')
-
-
-// Tinymce rich text editor
-import Editor from '@tinymce/tinymce-vue'
-
 
 const app = new Vue({
     store,
     el: '#app',
-
-    components: {
-        'editor': Editor
-    }
 });
