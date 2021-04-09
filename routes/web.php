@@ -27,7 +27,7 @@ Route::resource('article', \App\Http\Controllers\ArticleController::class);
 # events
 
 # rating
-Route::get('rating/{date?}', [\App\Http\Controllers\RatingController::class, 'index'])
+Route::get('rating/{period?}', [\App\Http\Controllers\RatingController::class, 'index'])
     ->name('rating.index')
     ->where('date', '[0-9]{4}\.[0-9]{2}\-[0-9]{4}\.[0-9]{2}');  // regex for 'YYYY.MM-YYYY.MM' query
 Route::resource('rating', \App\Http\Controllers\RatingController::class)

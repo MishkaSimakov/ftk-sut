@@ -1,11 +1,7 @@
 export default {
     async loadRating({ period }) {
-        if (period) {
-            period = period.start.replace('-', '.') + '-' + period.end.replace('-', '.')
-        }
-
         return new Promise((resolve, reject) => {
-            axios.get(route('api.rating.show', { period: period })).then((response) => {
+            axios.get(route('api.rating.show', period)).then((response) => {
                 resolve(response)
             })
         })

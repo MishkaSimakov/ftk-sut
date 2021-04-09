@@ -1,5 +1,22 @@
 import ratingApi from '../../api/rating'
-import {isNumber} from "v-calendar/src/utils/_";
+
+
+function setPeriodUrl(period) {
+    period = period.start.replace('-', '.') + '-' + period.end.replace('-', '.')
+    history.pushState(null, '', route('rating.index', { period: period }));
+}
+function getPeriodFromUrl() {
+    let url = window.location.href.split('/').pop()
+    let period = {}
+
+    if (/[0-9]{4}\.[0-9]{2}\-[0-9]{4}\.[0-9]{2}/.test(url)) {
+        url = url.split('-')
+        period.start = url[0].replace('.', '-')
+        period.end = url[1].replace('.', '-')
+    }
+
+    return period
+}
 
 // initial state
 const state = () => ({
@@ -38,6 +55,10 @@ const actions = {
             if (period.start === state.period.start && period.end === state.period.end) {
                 return
             }
+
+            setPeriodUrl(period)
+        } else {
+            period = getPeriodFromUrl()
         }
 
         commit('setLoading', true)
@@ -56,6 +77,9 @@ const actions = {
             state.period = rating_response.meta.period
 
             commit('setLoading', false)
+        }).catch(() => {
+            alert('Что-то пошло не так!')
+            document.location.reload();
         });
     },
     recountRating({state, commit}) {

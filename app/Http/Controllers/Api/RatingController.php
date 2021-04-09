@@ -8,20 +8,23 @@ use App\Http\Resources\Rating\RatingPointsIndexResource;
 use App\Models\RatingPoint;
 use App\Models\RatingPointCategory;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class RatingController extends Controller
 {
-    public function show($period = null)
+    public function show(Request $request)
     {
-        if ($period) {
-            $period = preg_split('/([.\-])/', $period);
-
-            $start = Carbon::create($period[0], $period[1]);
-            $end = Carbon::create($period[2], $period[3]);
+        if ($request->has(['start', 'end'])) {
+            $start = Carbon::create(
+                explode('-', $request->get('start'))[0],
+                explode('-', $request->get('start'))[1]
+            );
+            $end = Carbon::create(
+                explode('-', $request->get('end'))[0],
+                explode('-', $request->get('end'))[1]
+            );
         } else {
-            $point = RatingPoint::orderBy('date', 'desc')->first();
-            $start = $point ? $point->date : now();
-
+            $start = ($point = RatingPoint::orderBy('date', 'desc')->first()) ? $point->date : now();
             $end = $start;
         }
 
