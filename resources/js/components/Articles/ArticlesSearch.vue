@@ -32,16 +32,32 @@
                             Ничего не нашлось.
                         </li>
                     </ul>
-                    <ul v-bind="resultListProps" v-on="resultListListeners" class="list-group">
-                        <li class="list-group-item">Статьи</li>
-                        <li
-                            v-for="(result, index) in results"
-                            :key="resultProps[index].id"
-                            class="list-group-item"
+                    <div v-bind="resultListProps" v-on="resultListListeners" class="list-group border-top">
+                        <template
+                            v-for="(title, searchType) in searchTypes"
+                            v-if="resultsOfType(results, searchType).length"
                         >
-                            {{ result.name }}
-                        </li>
-                    </ul>
+                            <div
+                                class="list-group-item border-top-0 border-left-0 border-right-0 font-weight-bold">
+                                {{ title }}
+                            </div>
+                            <a
+                                v-for="(result, index) in resultsOfType(results, searchType)"
+                                :key="searchType + resultProps[index].id"
+                                class="list-group-item list-group-item-action border-0 py-2"
+                                :href="result.url"
+                            >
+                                {{ result.name }}
+                            </a>
+                        </template>
+
+                        <a
+                            class="list-group-item mt-3 card-link font-weight-bold border-0"
+                            href="#"
+                        >
+                            Показать все результаты
+                        </a>
+                    </div>
                 </div>
             </template>
         </autocomplete>
@@ -52,11 +68,18 @@
 export default {
     data() {
         return {
+            searchTypes: {
+                'article': 'Статьи',
+                'tag': 'Теги',
+                'user': 'Авторы',
+            },
             noResults: false,
         }
     },
-
     methods: {
+        resultsOfType(results, type) {
+            return results.filter((r) => r.type === type)
+        },
         search(input) {
             return new Promise((resolve) => {
                 this.noResults = false

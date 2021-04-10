@@ -11598,6 +11598,7 @@ a.text-dark:focus {
 
 .autocomplete-input {
   background: none !important;
+  box-shadow: none !important;
 }
 
 .autocomplete-result-list {
