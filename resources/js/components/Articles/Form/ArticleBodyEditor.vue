@@ -29,7 +29,7 @@ export default {
                 plugins: 'link lists fullscreen hr image',
                 toolbar: 'h1 h2 | link bold italic blockquote | bullist numlist hr image | fullscreen',
 
-                content_style: '* { color: #495057 }',
+                content_style: '* { color: #212529; }',
 
                 file_picker_types: 'image',
                 file_picker_callback: function (cb, value, meta) {

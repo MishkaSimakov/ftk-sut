@@ -28,7 +28,7 @@
                             <a class="dropdown-item" href="{{ route('article.create') }}">
                                 Написать
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('article.unpublished') }}">
                                 Требуют проверки
                             </a>
                         </div>
@@ -66,7 +66,7 @@
                                 Профиль
                             </a>
                             {{--  TODO: добавить сюда правильные ссылки--}}
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('settings') }}">
                                 Настройки
                             </a>
                             <a class="dropdown-item" href="#">

@@ -41,7 +41,7 @@ class NewsController extends Controller
 
         if ($request->get('notify_users') == 'on') { // TODO: предусмотреть отсроченную отправку новости (если статья публикуется не сразу)
             Mail::to(User::whereNotNull('email')->select('email')->get())
-                ->queue(new NewsNotification($news));
+                ->later($request->get('date'), new NewsNotification($news));
         }
 
         return redirect()->route('news.index');

@@ -11623,3 +11623,10 @@ a.text-dark:focus {
 
 /* ============ desktop view .end// ============ */
 
+.article-body img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #dee2e6 !important;
+  border-radius: 0.25rem;
+}
+

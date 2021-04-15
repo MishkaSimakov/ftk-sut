@@ -3,16 +3,18 @@
 namespace App\Models;
 
 use App\Mail\ResetPasswordNotification;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
 
 // TODO: добавить свойства, которые не добавляются в JSON
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -32,6 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
+        'register_code',
         'password',
         'remember_token',
     ];
@@ -45,12 +48,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Send the password reset notification.
-     *
-     * @param  string  $token
-     * @return void
-     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function (User $user) {
+            $user->register_code = Str::random(6);
+        });
+    }
+
     public function sendPasswordResetNotification($token)
     {
         Mail::to($this)
@@ -65,5 +71,11 @@ class User extends Authenticatable
     public function rating_points()
     {
         return $this->hasMany(RatingPoint::class);
+    }
+
+
+    public function scopeSearch(Builder $builder, string $query)
+    {
+        return $builder->where('name', 'like', "%{$query}%");
     }
 }

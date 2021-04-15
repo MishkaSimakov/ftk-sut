@@ -38,7 +38,7 @@
                             </div>
                         </div>
                     </div>
-                    <div v-else class="my-3 text-center h6 text-warning">
+                    <div v-else class="my-3 text-center h6 text-info">
                         <!--                        <i class="fas fa-exclamation"></i>-->
                         <span class="mx-3">Нет данных за этот период</span>
                         <!--                        <i class="fas fa-exclamation"></i>-->

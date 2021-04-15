@@ -10,6 +10,7 @@ const components = {
     // articles
     'articles-article':       'Articles/Article',
     'articles-list':          'Articles/Lists/ArticlesList',
+    'articles-top-list':      'Articles/Lists/ArticlesTopList',
     'articles-top-tags-list': 'Articles/Lists/PopularArticleTagsList',
     'articles-body-editor':   'Articles/Form/ArticleBodyEditor',
     'articles-tags-editor':   'Articles/Form/ArticleTagsEditor',

@@ -3,6 +3,8 @@ import articlesApi from '../../api/articles'
 // initial state
 const state = () => ({
     articles: [],
+    best_articles: [],
+
     tags: [],
     page: 1,
 
@@ -14,6 +16,9 @@ const state = () => ({
 const getters = {
     getArticles: (state) => {
         return state.articles
+    },
+    getBestArticles: (state) => {
+        return state.best_articles
     },
     getTags: (state) => {
         return state.tags.sort((a, b) => { return b.articles_count - a.articles_count })
@@ -28,15 +33,18 @@ const actions = {
     loadArticles({ commit, state }) {
         state.loading = true
 
-        articlesApi.loadArticles({
-            page: state.page
-        }).then((response) => {
-            if (response.data.length === 0) {
-                state.isEnded = true
-                return
+        Promise.all([
+            ...(state.best_articles.length ? [] : [articlesApi.loadBestArticles()]),
+            articlesApi.loadArticles({
+                page: state.page
+            }),
+        ]).then((response) => {
+            if (state.best_articles.length === 0) {
+                commit('setBestArticles', response[0].data)
             }
 
-            state.articles.push(...response.data)
+            let articles = response.pop().data
+            commit('setArticles', articles)
 
             state.loading = false
         })
@@ -57,10 +65,24 @@ const actions = {
     }
 }
 
+const mutations = {
+    setBestArticles(state, best_articles) {
+        state.best_articles = best_articles
+    },
+    setArticles(state, articles) {
+        if (articles.length === 0) {
+            state.isEnded = true
+        } else {
+            state.articles.push(...articles)
+        }
+    }
+}
+
 export default {
     namespaced: true,
 
     state,
     getters,
-    actions
+    actions,
+    mutations
 }

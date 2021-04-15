@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->boolean('is_admin')->nullable();
             $table->boolean('is_student')->nullable();
 
+            $table->string('register_code')->unique();
+
             $table->rememberToken();
             $table->timestamps();
         });

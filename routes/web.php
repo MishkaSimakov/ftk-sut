@@ -27,11 +27,11 @@ Route::resource('article', \App\Http\Controllers\ArticleController::class);
 # events
 
 # rating
+Route::resource('rating', \App\Http\Controllers\RatingController::class)
+    ->except('index', 'edit', 'update', 'show');
 Route::get('rating/{period?}', [\App\Http\Controllers\RatingController::class, 'index'])
     ->name('rating.index')
     ->where('date', '[0-9]{4}\.[0-9]{2}\-[0-9]{4}\.[0-9]{2}');  // regex for 'YYYY.MM-YYYY.MM' query
-Route::resource('rating', \App\Http\Controllers\RatingController::class)
-    ->except('index', 'edit', 'update', 'show');
 
 # other
 Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);
@@ -39,3 +39,13 @@ Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/settings', [App\Http\Controllers\HomeController::class, 'settings'])->name('settings');
+Route::get('/notifications', [App\Http\Controllers\HomeController::class, 'notifications'])->name('notifications');
+
+
+
+Route::get('/tokens/create', function (\Illuminate\Http\Request $request) {
+    $token = $request->user()->createToken('Api token');
+
+    return ['token' => $token->plainTextToken];
+});

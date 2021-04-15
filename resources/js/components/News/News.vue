@@ -46,7 +46,7 @@ export default {
         return {
             destroyFormId: `destroy_form_${this.news.id}`,
             csrf: window.Laravel.csrfToken,
-            isAdmin: window.Laravel.user.is_admin
+            isAdmin: window.Laravel.user && window.Laravel.user.is_admin
         }
     },
     props: {

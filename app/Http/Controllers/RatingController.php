@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Rating\RatingPointsIndexResource;
 use App\Imports\RatingImport;
-use App\Mail\NewsNotification;
-use App\Models\RatingPoint;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RatingController extends Controller

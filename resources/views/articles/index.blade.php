@@ -10,19 +10,8 @@
     {{-- Best articles --}}
     <section class="mb-5 mt-4">
         <h3 class="text-left font-weight-bold">Лучшее на ftk-sut.ru</h3>
-        {{--                <articles-article class="mt-3" :article="{{ $articles->get(1)->toJson() }}"></articles-article>--}}
 
-        {{--                <div class="row">--}}
-        {{--                    <div class="col-md-6 mt-3">--}}
-        {{--                        <articles-article class="mt-3" :article="{{ $articles->get(2)->toJson() }}"></articles-article>--}}
-        {{--                    </div>--}}
-
-        {{--                    <div class="col-md-6 mt-3">--}}
-        {{--                        <articles-article class="mt-3" :article="{{ $articles->get(3)->toJson() }}"></articles-article>--}}
-        {{--                    </div>--}}
-        {{--                </div>--}}
-        {{--        TODO: заменить это всё на articles-top-list --}}
-                <p class="text-center text-muted my-5">Временно не работает...</p>
+        <articles-top-list></articles-top-list>
     </section>
 
     <section class="mb-5">

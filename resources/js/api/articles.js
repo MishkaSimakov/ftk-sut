@@ -6,6 +6,13 @@ export default {
             })
         })
     },
+    async loadBestArticles() {
+        return new Promise((resolve, reject) => {
+            axios.get(route('api.article.best')).then((response) => {
+                resolve(response)
+            })
+        })
+    },
     async loadTags() {
         return new Promise((resolve, reject) => {
             axios.get(route('api.article.tags')).then((response) => {

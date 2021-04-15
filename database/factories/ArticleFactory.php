@@ -26,7 +26,7 @@ class ArticleFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'body' => $this->faker->text,
-            'author_id' => User::factory()->create()->id,
+            'author_id' => 1,
 
             'type' => ArticleType::Published(),
             'date' => $this->faker->date,

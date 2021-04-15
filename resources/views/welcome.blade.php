@@ -5,17 +5,20 @@
 
 @section('app')
     <main style="min-height: 5000px;">
-        <img class="position-absolute img-fluid vw-100"
-             src="{{ asset('storage/Images/MainPageHeader.png') }}">
+        <img class="position-absolute img-fluid"
+             src="{{ asset('storage/pages/MainPageHeader.png') }}">
 
 
         <div class="w-75 mx-auto">
             <div style="height: calc(100vh - 56px - 0.25rem) !important;" class="d-flex flex-column" id="main-page-header">
 
-                <div class="col-7 h-auto my-auto d-flex flex-column">
-                    <h1 class="display-1 font-weight-normal">
+                <div class="px-0 col-md-7 h-auto my-auto d-flex flex-column">
+                    <h1 class="display-1 d-none d-md-inline font-weight-normal">
                         Фототехнический<br>
                         клуб СЮТ
+                    </h1>
+                    <h1 class="display-1 d-inline d-md-none font-weight-normal">
+                        ФТК СЮТ
                     </h1>
 
                     <p class="h2 font-weight-normal">
@@ -29,13 +32,13 @@
                         </button>
 
                         <a href="#" style="cursor: pointer" title="Discord" class="rounded ml-auto mr-2">
-                            <img alt="Discord" src="{{ asset('storage/Images/SocialLinks/Discord.png') }}" class="img-fluid">
+                            <img alt="Discord" src="{{ asset('storage/pages/SocialLinks/Discord.png') }}" class="img-fluid">
                         </a>
                         <a href="#" style="cursor: pointer" title="YouTube" class="rounded mr-2">
-                            <img alt="YouTube" src="{{ asset('storage/Images/SocialLinks/YouTube.png') }}" class="img-fluid">
+                            <img alt="YouTube" src="{{ asset('storage/pages/SocialLinks/YouTube.png') }}" class="img-fluid">
                         </a>
                         <a href="#" style="cursor: pointer" title="Вконтакте" class="rounded">
-                            <img alt="Вконтакте" src="{{ asset('storage/Images/SocialLinks/VK.png') }}" class="img-fluid">
+                            <img alt="Вконтакте" src="{{ asset('storage/pages/SocialLinks/VK.png') }}" class="img-fluid">
                         </a>
                     </div>
                 </div>

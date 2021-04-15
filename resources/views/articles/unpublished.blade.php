@@ -6,8 +6,10 @@
     <h1 class="text-center mb-4">Требуют проверки</h1>
 
     <div class="mb-5 mt-4">
-        @foreach($articles as $article)
+        @forelse($articles as $article)
            <articles-article :article="{{ $article->toJson() }}"></articles-article>
-        @endforeach
+        @empty
+            <p class="text-center h5 text-info">Нет статей для проверки.</p>
+        @endforelse
     </div>
 @endsection

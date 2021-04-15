@@ -23,15 +23,17 @@
                         v-on="inputListeners"
                         class="autocomplete-input form-control"
                     >
-                    <ul
-                        v-if="noResults"
-                        class="autocomplete-result-list"
+
+                    <div
+                        class="list-group border-top autocomplete-result-list" v-if="noResults"
                         style="position: absolute; z-index: 1; width: 100%; top: 100%;"
                     >
-                        <li class="autocomplete-result">
-                            Ничего не нашлось.
-                        </li>
-                    </ul>
+                            <div
+                                class="list-group-item border-0 font-weight-bold"
+                            >
+                                Ничего не нашлось.
+                            </div>
+                    </div>
                     <div v-bind="resultListProps" v-on="resultListListeners" class="list-group border-top">
                         <template
                             v-for="(title, searchType) in searchTypes"
@@ -89,11 +91,11 @@ export default {
                 }
 
                 axios.get(route('api.article.search', {query: input})).then((response) => {
-                    if (!response.data[0].length) {
+                    if (!response.data.length) {
                         this.noResults = true
                     }
 
-                    resolve(response.data[0])
+                    resolve(response.data)
                 })
             })
         },
