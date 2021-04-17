@@ -13,10 +13,10 @@ class ArticlePolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param User $user
+     * @param ?User $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(?User $user)
     {
         return true;
     }
@@ -24,11 +24,11 @@ class ArticlePolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param User $user
+     * @param ?User $user
      * @param Article $article
      * @return mixed
      */
-    public function view(User $user, Article $article)
+    public function view(?User $user, Article $article)
     {
         return true;
     }
@@ -66,5 +66,17 @@ class ArticlePolicy
     public function delete(User $user, Article $article)
     {
         return $user->id === $article->author->id or $user->is_admin;
+    }
+
+    /**
+     * Determine whether the user can publish the article.
+     *
+     * @param User $user
+     * @param Article $article
+     * @return mixed
+     */
+    public function publish(User $user)
+    {
+        return $user->is_admin;
     }
 }

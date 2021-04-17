@@ -23,12 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Policies/ArticlePolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/ArticlePolicy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/news/news-single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/news/news-single.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/partials/header/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/header/header.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -362,6 +360,7 @@
       <workItem from="1618646709835" duration="15000" />
       <workItem from="1618655872851" duration="9211000" />
       <workItem from="1618670087885" duration="7000" />
+      <workItem from="1618673856704" duration="861000" />
     </task>
     <task id="LOCAL-00001" summary="Some changes">
       <created>1618655936551</created>

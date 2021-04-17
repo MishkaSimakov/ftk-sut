@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 // TODO: добавить свойства, которые не добавляются в JSON
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
