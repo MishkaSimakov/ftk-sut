@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -39,4 +37,13 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+//    public function authenticated(Request $request, $user)
+//    {
+//        $token = $user->createToken('Api token')->plainTextToken;
+//
+//        return $request->wantsJson()
+//            ? new JsonResponse([], 204)
+//            : redirect()->intended($this->redirectPath())->withCookie('sanctum', $token, 2147483647);
+//    }
 }

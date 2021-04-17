@@ -33,6 +33,10 @@ Route::get('rating/{period?}', [\App\Http\Controllers\RatingController::class, '
     ->name('rating.index')
     ->where('date', '[0-9]{4}\.[0-9]{2}\-[0-9]{4}\.[0-9]{2}');  // regex for 'YYYY.MM-YYYY.MM' query
 
+Route::prefix('statistics')->name('statistics.')->group(function() {
+    Route::get('compare/{user}', [\App\Http\Controllers\Statistics\StatisticsController::class, 'compare'])->name('compare');
+});
+
 # other
 Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);
 
@@ -41,11 +45,3 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/settings', [App\Http\Controllers\HomeController::class, 'settings'])->name('settings');
 Route::get('/notifications', [App\Http\Controllers\HomeController::class, 'notifications'])->name('notifications');
-
-
-
-Route::get('/tokens/create', function (\Illuminate\Http\Request $request) {
-    $token = $request->user()->createToken('Api token');
-
-    return ['token' => $token->plainTextToken];
-});
