@@ -23,46 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ftk-sut.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ftk-sut.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RatingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/Article/ArticleIndexResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/Article/ArticleIndexResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Article.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/ArticleTag.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/ArticleTag.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/ArticleFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/ArticleFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/storage1/Images/MainPageHeader.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/storage1/Images/SocialLinks/Discord.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/storage1/Images/SocialLinks/VK.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/storage1/Images/SocialLinks/YouTube.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/api/articles.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/api/articles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Articles/Article.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Articles/Article.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Articles/ArticlesSearch.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Articles/ArticlesSearch.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Articles/Form/ArticleBodyEditor.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Articles/Form/ArticleBodyEditor.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Articles/Lists/ArticlesTopList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Articles/Lists/ArticlesTopList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/News/News.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/News/News.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Ratings/Rating.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Ratings/Rating.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/imports.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/imports.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/store/modules/articles.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store/modules/articles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/articles/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/articles/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/articles/unpublished.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/articles/unpublished.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/header/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/header/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/head.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/head.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -230,6 +193,9 @@
       <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
     </include_path>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
   <component name="ProjectId" id="1jeYh1949bivSqAZj8ZtFP1pRJF" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -241,7 +207,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JSON" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/database/migrations" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -264,11 +230,11 @@
       <recent name="D:\Sites\ftk-sut-front\components\rating" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programs\PhpStormProjects\ftk-sut\app\Http\Controllers\Statistics" />
       <recent name="D:\Programs\PhpStormProjects\ftk-sut\public\storage\pages" />
       <recent name="D:\Programs\PhpStormProjects\ftk-sut\resources\views\user" />
       <recent name="D:\Programs\PhpStormProjects\ftk-sut\resources\js\helpers" />
       <recent name="D:\Programs\PhpStormProjects\ftk-sut\resources\js\components\Articles\Parts" />
-      <recent name="D:\Programs\PhpStormProjects\ftk-sut\resources\js\components\News\Form" />
     </key>
   </component>
   <component name="RunManager" selected="PHPUnit.RatingImportTest.test_it_create_students">
@@ -390,7 +356,9 @@
       <workItem from="1618133611940" duration="272000" />
       <workItem from="1618240608515" duration="1567000" />
       <workItem from="1618401471392" duration="6564000" />
-      <workItem from="1618498843653" duration="4501000" />
+      <workItem from="1618498843653" duration="5306000" />
+      <workItem from="1618570024576" duration="11279000" />
+      <workItem from="1618646709835" duration="15000" />
     </task>
     <servers />
   </component>
