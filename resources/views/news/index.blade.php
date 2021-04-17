@@ -6,5 +6,6 @@
 @section('content')
     <h1 class="text-center mb-4">Новости</h1>
 
-    <news-list></news-list>
+{{--    <news-list></news-list>--}}
+    <livewire:news.news-list/>
 @endsection

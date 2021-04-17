@@ -9,4 +9,8 @@
     </option>
     <option name="userClassName" value="App\Models\User" />
   </component>
+  <component name="LivewireSettings">
+    <option name="enabledCheckType" value="manual" />
+    <option name="manualEnabled" value="true" />
+  </component>
 </project>
