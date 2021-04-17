@@ -13,7 +13,7 @@ class ArticlePolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\Models\User  $user
+     * @param User $user
      * @return mixed
      */
     public function viewAny(User $user)
@@ -24,8 +24,8 @@ class ArticlePolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Article  $article
+     * @param User $user
+     * @param Article $article
      * @return mixed
      */
     public function view(User $user, Article $article)
@@ -36,7 +36,7 @@ class ArticlePolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
+     * @param User $user
      * @return mixed
      */
     public function create(User $user)
@@ -47,8 +47,8 @@ class ArticlePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Article  $article
+     * @param User $user
+     * @param Article $article
      * @return mixed
      */
     public function update(User $user, Article $article)
@@ -59,8 +59,8 @@ class ArticlePolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Article  $article
+     * @param User $user
+     * @param Article $article
      * @return mixed
      */
     public function delete(User $user, Article $article)

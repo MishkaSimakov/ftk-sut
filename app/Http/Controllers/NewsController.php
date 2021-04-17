@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Mail;
 
 class NewsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(News::class, 'news');
+    }
+
     public function index()
     {
         return view('news.index');
@@ -35,13 +40,13 @@ class NewsController extends Controller
 
     public function store(StoreNewsRequest $request)
     {
-        $news = News::make($request->all());
+        $news = News::make($request->except('date'));
         $news->date = $request->delayed_publication == 'on' ? $request->get('date') : now();
         $news->save();
 
-        if ($request->get('notify_users') == 'on') { // TODO: предусмотреть отсроченную отправку новости (если статья публикуется не сразу)
+        if ($request->get('notify_users') == 'on') {
             Mail::to(User::whereNotNull('email')->select('email')->get())
-                ->later($request->get('date'), new NewsNotification($news));
+                ->later(now()->addMinutes(5), new NewsNotification($news));
         }
 
         return redirect()->route('news.index');

@@ -14,19 +14,26 @@
                     <i class="far fa-eye"></i> {{ $news->views }}
                 </span>
 
-                <div class="dropdown">
-                    <button class="d-inline btn rounded-pill text-muted" type="button"
-                            id="news-more-dropdown-button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-h fa-sm"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="news-more-dropdown-button">
-                        <a class="dropdown-item" href="{{ route('news.edit', $news) }}">Редактировать</a>
-                        <a class="dropdown-item text-danger" href="#" wire:click.prevent="deleteNews">
-                            Удалить
-                        </a>
+                @canany(['update', 'delete'], $news)
+                    <div class="dropdown">
+                        <button class="d-inline btn rounded-pill text-muted" type="button"
+                                id="news-more-dropdown-button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h fa-sm"></i>
+                        </button>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="news-more-dropdown-button">
+                            @can('update', $news)
+                                <a class="dropdown-item" href="{{ route('news.edit', $news) }}">Редактировать</a>
+                            @endcan
+                            @can('delete', $news)
+                                <a class="dropdown-item text-danger" href="#" wire:click.prevent="deleteNews">
+                                    Удалить
+                                </a>
+                            @endcan
+                        </div>
                     </div>
-                </div>
+                @endcanany
             </div>
         </div>
     </div>

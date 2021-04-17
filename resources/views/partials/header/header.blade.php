@@ -10,16 +10,16 @@
 
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav mx-lg-auto mx-0">
-                    <li class="nav-item {{ (auth()->user() and auth()->user()->is_admin) ? 'dropdown' : '' }}">
+                    <li class="nav-item  @can('create', \App\Models\News::class) dropdown @endcan">
                         <a class="nav-link" href="{{ route('news.index') }}">Новости</a>
 
-                        @admin
-                        <div class="hover-dropdown-menu dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('news.create') }}">
-                                Написать
-                            </a>
-                        </div>
-                        @endadmin
+                        @can('create', \App\Models\News::class)
+                            <div class="hover-dropdown-menu dropdown-menu">
+                                <a class="dropdown-item" href="{{ route('news.create') }}">
+                                    Написать
+                                </a>
+                            </div>
+                        @endcan
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="{{ route('article.index') }}">Статьи</a>
@@ -40,11 +40,11 @@
                         <a class="nav-link" href="{{ route('rating.index') }}">Рейтинг</a>
 
                         @admin
-                            <div class="hover-dropdown-menu dropdown-menu">
-                                <a class="dropdown-item" href="{{ route('rating.create') }}">
-                                    Загрузить
-                                </a>
-                            </div>
+                        <div class="hover-dropdown-menu dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('rating.create') }}">
+                                Загрузить
+                            </a>
+                        </div>
                         @endadmin
                     </li>
                 </ul>
