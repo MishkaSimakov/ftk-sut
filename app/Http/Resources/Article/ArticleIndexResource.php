@@ -21,9 +21,9 @@ class ArticleIndexResource extends JsonResource
             'body' => $this->truncatedBody,
             'url' => $this->url,
 
-            'points' => $this->pointsCount,
-            'is_liked' => auth()->check() ? $this->points->where([['user_id', auth()->user()->id], ['article_id', $this->id]])->exists() : false,
-            'views' => rand(0, 25),
+            'points' => $this->points()->count(),
+            'is_liked' => auth()->check() ? $this->isLikedBy(auth()->user()) : false,
+            'views' => views($this)->count(),
 
             'author' => [
                 'id' => $this->author->id,

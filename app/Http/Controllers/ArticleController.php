@@ -81,6 +81,8 @@ class ArticleController extends Controller
 
     public function unpublished()
     {
+        $this->authorize('viewUnpublished', Article::class);
+
         $articles = ArticleIndexResource::collection(
             Article::where('type', ArticleType::OnCheck())->orderBy('date', 'desc')->get()
         );

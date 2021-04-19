@@ -3,7 +3,6 @@
 
 const components = {
     // news
-    'news-list':              'News/NewsList',
     'news-body-editor':       'News/Form/NewsBodyEditor',
     'news-date-editor':       'News/Form/NewsDateEditor',
 

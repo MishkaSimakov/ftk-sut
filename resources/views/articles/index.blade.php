@@ -23,6 +23,7 @@
     <section>
         <h3 class="text-left font-weight-bold">Все статьи</h3>
 
-        <articles-list></articles-list>
+{{--        <articles-list></articles-list>--}}
+        <livewire:articles.lists.articles-list/>
     </section>
 @endsection

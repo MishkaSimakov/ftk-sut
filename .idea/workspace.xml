@@ -23,11 +23,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/ArticleActions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/ArticleSingle.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/ArticlesList.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/livewire/articles/article-actions.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/livewire/articles/article-single.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/livewire/articles/lists/articles-list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/RatingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/ratings/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ratings/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/News/NewsSingle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/News/NewsSingle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/Article/ArticleIndexResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/Article/ArticleIndexResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Article.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/ArticlePoint.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/ArticlePoint.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Policies/ArticlePolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/ArticlePolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/News/News.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/News/NewsFilter.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/News/NewsList.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/imports.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/imports.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/components/article.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/components/article.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/articles/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/articles/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/header/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/header/header.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +213,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1jeYh1949bivSqAZj8ZtFP1pRJF" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -206,7 +225,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JSON" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ftk-sut-old" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -361,6 +380,7 @@
       <workItem from="1618655872851" duration="9211000" />
       <workItem from="1618670087885" duration="7000" />
       <workItem from="1618673856704" duration="8947000" />
+      <workItem from="1618839351506" duration="8205000" />
     </task>
     <task id="LOCAL-00001" summary="Some changes">
       <created>1618655936551</created>

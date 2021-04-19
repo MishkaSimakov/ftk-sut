@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\ArticleType;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -69,14 +70,37 @@ class ArticlePolicy
     }
 
     /**
+     * Determine whether the user can view unpublished articles.
+     *
+     * @param User $user
+     * @return mixed
+     */
+    public function viewUnpublished(User $user)
+    {
+        return $user->is_admin;
+    }
+
+    /**
      * Determine whether the user can publish the article.
      *
      * @param User $user
      * @param Article $article
      * @return mixed
      */
-    public function publish(User $user)
+    public function publish(User $user, Article $article)
     {
-        return $user->is_admin;
+        return $user->is_admin and $article->type === ArticleType::OnCheck();
+    }
+
+    /**
+     * Determine whether the user can like the article.
+     *
+     * @param User $user
+     * @param Article $article
+     * @return mixed
+     */
+    public function like(User $user, Article $article)
+    {
+        return $article->type == ArticleType::Published();
     }
 }

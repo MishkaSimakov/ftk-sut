@@ -24,14 +24,14 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="{{ route('article.index') }}">Статьи</a>
 
-                        @canany(['create', 'publish'], \App\Models\Article::class)
+                        @canany(['create', 'viewUnpublished'], \App\Models\Article::class)
                             <div class="hover-dropdown-menu dropdown-menu">
                                 @can('create', \App\Models\Article::class)
                                     <a class="dropdown-item" href="{{ route('article.create') }}">
                                         Написать
                                     </a>
                                 @endcan
-                                @can('publish', \App\Models\Article::class)
+                                @can('viewUnpublished', \App\Models\Article::class)
                                     <a class="dropdown-item" href="{{ route('article.unpublished') }}">
                                         Требуют проверки
                                     </a>
