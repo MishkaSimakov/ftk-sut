@@ -7,6 +7,7 @@ use App\Http\Resources\Rating\RatingPointCategoryIndexResource;
 use App\Http\Resources\Rating\RatingPointsIndexResource;
 use App\Models\RatingPoint;
 use App\Models\RatingPointCategory;
+use App\Traits\InteractsWithRating;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
