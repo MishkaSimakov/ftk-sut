@@ -23,21 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/ArticleTagsList.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/livewire/articles/lists/article-tags-list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Articles/ArticleActions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/ArticleActions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/ArticlesList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/ArticlesList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/Article/ArticleTagIndexResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/Article/ArticleTagIndexResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/Tag/TagSearchResource.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/ArticleTag.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/ArticleTag.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/components/article.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/components/article.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/articles/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/articles/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/articles/article-actions.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/articles/article-actions.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/articles/article-single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/articles/article-single.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/livewire/news/news-single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/news/news-single.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -374,7 +360,7 @@
       <workItem from="1618670087885" duration="7000" />
       <workItem from="1618673856704" duration="8947000" />
       <workItem from="1618839351506" duration="9330000" />
-      <workItem from="1619001480714" duration="7889000" />
+      <workItem from="1619001480714" duration="8290000" />
     </task>
     <task id="LOCAL-00001" summary="Some changes">
       <created>1618655936551</created>
