@@ -10,8 +10,8 @@
             </div>
         </div>
 
-        <div class="row no-gutters mt-auto text-muted">
-            <div class="align-self-center">
+        <div class="row no-gutters mt-auto text-muted align-items-center">
+            <div class="mr-auto">
                 <a class="text-muted" href="{{ $article->author->url }}">{{ $article->author->name }}</a>
                 <span class="d-none d-sm-inline">• {{ $article->date->isoFormat('ll') }}</span>
             </div>

@@ -51,14 +51,14 @@ class ArticleController extends Controller
     {
         $query = $request->get('query');
 
-        $tags = TagSearchResource::collection(
-            ArticleTag::search($query)->select('id', 'name')->get()
+        $tags = ArticleTagIndexResource::collection(
+            ArticleTag::search($query)->select(['id', 'name'])->get()
         );
         $authors = UserSearchResource::collection(
-            User::search($query)->select('id', 'name')->get()
+            User::search($query)->select(['id', 'name'])->get()
         );
         $articles = ArticleSearchResource::collection(
-            Article::search($query)->select('id', 'title')->get()
+            Article::search($query)->select(['id', 'title'])->get()
         );
 
         return response()->json(

@@ -8,7 +8,6 @@ use Livewire\Component;
 class ArticleActions extends Component
 {
     public Article $article;
-    public bool $isLiked = true;
 
     public function toggleLike()
     {
@@ -16,13 +15,11 @@ class ArticleActions extends Component
             abort(403);
         }
 
-        $this->isLiked = $this->article->points()->toggle(auth()->user())['attached'] === [auth()->id()];
+        $this->article->points()->toggle(auth()->user());
     }
 
     public function render()
     {
-//        $this->isLiked = auth()->check() ? $this->article->isLikedBy(auth()->user()) : false;
-
         return view('livewire.articles.article-actions');
     }
 }

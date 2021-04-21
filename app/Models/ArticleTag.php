@@ -15,6 +15,16 @@ class ArticleTag extends Model
         return $this->belongsToMany(Article::class, 'article_article_tag');
     }
 
+    public function getArticlesCountAttribute()
+    {
+        return $this->articles()->count();
+    }
+
+    public function getUrlAttribute()
+    {
+        return '#';
+    }
+
     public function scopeSearch(Builder $builder, string $query)
     {
         return $builder->where('name', 'like', "%{$query}%");

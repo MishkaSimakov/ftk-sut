@@ -17,7 +17,8 @@
     <section class="mb-5">
         <h3 class="text-left font-weight-bold">Популярные категории</h3>
 
-        <articles-top-tags-list></articles-top-tags-list>
+{{--        <articles-top-tags-list></articles-top-tags-list>--}}
+        <livewire:articles.lists.article-tags-list/>
     </section>
 
     <section>

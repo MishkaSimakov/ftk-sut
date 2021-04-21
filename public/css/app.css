@@ -11634,3 +11634,38 @@ a.text-dark:focus {
   color: inherit !important;
 }
 
+@media (max-width: 767px) {
+  .article-tag {
+    border-right: none !important;
+  }
+}
+
+.article-tag {
+  text-decoration: none;
+}
+
+.article-tag:last-child {
+  border-right: none !important;
+}
+
+.article-like-button {
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.article-views {
+  font-weight: 500;
+}
+
+.liked {
+  color: #ff3347 !important;
+}
+

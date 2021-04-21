@@ -1,41 +1,67 @@
-<div class="ml-auto row no-gutters">
-    @can('like', $article)
-        <div
-            wire:click="$toggle('isLiked')"
-            class="align-self-center mr-sm-2 mr-md-3"
-            style="font-weight: 500; cursor: pointer"
-        >
-            @if($isLiked)
-                <i class="fas fa-heart"></i>
-            @else
-                <i class="far fa-heart"></i>
-            @endif
+@can('like', $article)
+    <div
+        id="article_{{ $article->id }}_like_button"
+        onclick="@this.toggleLike(); toggleLikeDebounced({{ $article->id }})"
+        class="mr-sm-2 mr-md-3 article-like-button {{ $article->isLikedBy(auth()->user()) ? 'liked' : '' }}"
+    >
+        <i class="{{ $article->isLikedBy(auth()->user()) ? 'fas' : 'far' }} fa-heart"></i>
+        <span> {{ $article->points()->count() }}</span>
+    </div>
+@endcan
 
-            {{ $article->points()->count() }}
+<span class="mr-sm-2 d-none d-md-inline article-views">
+    <i class="far fa-eye"></i> {{ views($article)->count() }}
+</span>
+
+@canany(['update', 'delete'], $article)
+    <div class="dropdown">
+        <button class="d-inline btn rounded-pill text-muted" type="button"
+                id="article-more-dropdown-button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-h fa-sm"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="article-more-dropdown-button">
+            @can('update', $article)
+                <a class="dropdown-item" href="{{ route('article.edit', $article) }}">Редактировать</a>
+            @endcan
+            @can('delete', $article)
+                <a class="dropdown-item text-danger" href="#" wire:click.prevent="deleteArticle">
+                    Удалить
+                </a>
+            @endcan
         </div>
-    @endcan
+    </div>
+@endcanany
 
-    <span class="align-self-center mr-sm-2 d-none d-md-inline" style="font-weight: 500;">
-        <i class="far fa-eye"></i> {{ views($article)->count() }}
-    </span>
+@once
+    @push('scripts')
+        <script>
+            function toggleLike(article_id) {
+                let element = document.getElementById(`article_${article_id}_like_button`);
+                element.classList.toggle("liked");
 
-    @canany(['update', 'delete'], $article)
-        <div class="dropdown">
-            <button class="d-inline btn rounded-pill text-muted" type="button"
-                    id="article-more-dropdown-button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-h fa-sm"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="article-more-dropdown-button">
-                @can('update', $article)
-                    <a class="dropdown-item" href="{{ route('article.edit', $article) }}">Редактировать</a>
-                @endcan
-                @can('delete', $article)
-                    <a class="dropdown-item text-danger" href="#" wire:click.prevent="deleteArticle">
-                        Удалить
-                    </a>
-                @endcan
-            </div>
-        </div>
-    @endcanany
-</div>
+                if (element.classList.contains('liked')) {
+                    element.children[0].classList.add('fas')
+                    element.children[1].innerText = parseInt(element.innerText) + 1
+                } else {
+                    element.children[0].classList.add('far')
+                    element.children[1].innerText = parseInt(element.innerText) - 1
+                }
+            }
+
+            function debounce(f, ms) {
+                let isCooldown = false;
+
+                return function () {
+                    if (isCooldown) return;
+
+                    f.apply(this, arguments);
+                    isCooldown = true;
+                    setTimeout(() => isCooldown = false, ms);
+                };
+            }
+
+            let toggleLikeDebounced = debounce(toggleLike, 1000);
+        </script>
+    @endpush
+@endonce
