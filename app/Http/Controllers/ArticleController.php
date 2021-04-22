@@ -23,7 +23,12 @@ class ArticleController extends Controller
         if ($request->has('query')) {
             $results = $this->articleSearchService->getQueryResults($request->get('query'), false);
 
-            return view('articles.search', $results);
+            return view('articles.search', [
+                'articles' => $results['articles'],
+                'users' => $results['users'],
+                'tags' => $results['tags'],
+                'query' => $request->get('query')
+            ]);
         }
 
         return view('articles.index');

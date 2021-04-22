@@ -19,6 +19,7 @@
                 <div v-bind="rootProps">
                     <input
                         type="text"
+                        v-model="query"
                         v-bind="inputProps"
                         v-on="inputListeners"
                         class="autocomplete-input form-control"
@@ -55,7 +56,7 @@
 
                         <a
                             class="list-group-item mt-3 card-link font-weight-bold border-0"
-                            href="#"
+                            :href="route('article.index', { query: query })"
                         >
                             Показать все результаты
                         </a>
@@ -68,6 +69,9 @@
 
 <script>
 export default {
+    props: [
+        'query'
+    ],
     data() {
         return {
             searchTypes: {
@@ -79,6 +83,7 @@ export default {
         }
     },
     methods: {
+        route: route,
         resultsOfType(results, type) {
             return results.filter((r) => r.type === type)
         },

@@ -16,7 +16,6 @@ class ArticleSearchService
         $tags = $this->getTagsFromQuery($query);
         $users = $this->getUsersFromQuery($query);
 
-
         if (!$wantsJson) return collect([
             'articles' => $articles,
             'tags' => $tags,

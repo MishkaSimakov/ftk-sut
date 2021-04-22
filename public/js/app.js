@@ -7661,7 +7661,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['query'],
   data: function data() {
     return {
       searchTypes: {
@@ -7673,6 +7675,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    route: route,
     resultsOfType: function resultsOfType(results, type) {
       return results.filter(function (r) {
         return r.type === type;
@@ -66345,8 +66348,25 @@ var render = function() {
                     _vm._g(
                       _vm._b(
                         {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.query,
+                              expression: "query"
+                            }
+                          ],
                           staticClass: "autocomplete-input form-control",
-                          attrs: { type: "text" }
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.query },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.query = $event.target.value
+                            }
+                          }
                         },
                         "input",
                         inputProps,
@@ -66446,7 +66466,11 @@ var render = function() {
                         {
                           staticClass:
                             "list-group-item mt-3 card-link font-weight-bold border-0",
-                          attrs: { href: "#" }
+                          attrs: {
+                            href: _vm.route("article.index", {
+                              query: _vm.query
+                            })
+                          }
                         },
                         [
                           _vm._v(
