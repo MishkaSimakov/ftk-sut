@@ -6,8 +6,8 @@ require('@fortawesome/fontawesome-free/js/all');
 
 
 // infinite scroll for news and articles
-const infiniteScroll =  require('vue-infinite-scroll');
-Vue.use(infiniteScroll)
+// const infiniteScroll =  require('vue-infinite-scroll');
+// Vue.use(infiniteScroll)
 
 
 // Moment js
@@ -19,10 +19,10 @@ Vue.use(require('vue-moment'), {
 
 
 // Vue calendar
-import VCalendar from 'v-calendar';
-Vue.use(VCalendar, {
-    componentPrefix: 'vc'
-});
+// import VCalendar from 'v-calendar';
+// Vue.use(VCalendar, {
+//     componentPrefix: 'vc'
+// });
 
 
 // Autocomplete-vue

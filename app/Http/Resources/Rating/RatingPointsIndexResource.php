@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources\Rating;
 
+use App\Models\RatingPoint;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Collection;
 
 class RatingPointsIndexResource extends JsonResource
 {
@@ -17,22 +19,17 @@ class RatingPointsIndexResource extends JsonResource
         $total = $this->pluck('amount')->sum();
 
         return [
-            'user' => [
-                'id' => $this->first()->user->id,
-                'name' => $this->first()->user->name,
-                'url' => $this->first()->user->url,
-            ],
+            'user' => $this->first()->get('user'),
 
-            'points' => $this->map(function ($point) use ($total) {
+            'points' => $this->map(function (Collection $point, int $category_id) use ($total) {
                 return [
-                    'id' => $point->id,
+                    'id' => 1,
+                    'category' => $category_id,
 
-                    'category' => $point->category->id,
-
-                    'amount' => $point->amount,
-                    'width' => abs($point->amount / $total * 100),
+                    'amount' => $point->get('amount'),
+                    'width' => abs($point->get('amount') / $total * 100),
                 ];
-            }),
+            })->values(),
             'total' => $total,
         ];
     }

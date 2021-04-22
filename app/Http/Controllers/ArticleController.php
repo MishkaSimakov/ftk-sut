@@ -6,25 +6,32 @@ use App\Enums\ArticleType;
 use App\Http\Requests\Articles\StoreArticleRequest;
 use App\Http\Resources\Article\ArticleIndexResource;
 use App\Models\Article;
+use App\Services\ArticleSearchService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
-    public function __construct()
+    public ArticleSearchService $articleSearchService;
+    public function __construct(ArticleSearchService $articleSearchService)
     {
+        $this->articleSearchService = $articleSearchService;
         $this->authorizeResource(Article::class, 'article');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return response()->view('articles.index');
+        if ($request->has('query')) {
+            $results = $this->articleSearchService->getQueryResults($request->get('query'), false);
+
+            return view('articles.search', $results);
+        }
+
+        return view('articles.index');
     }
 
     public function create()
     {
-        return response()->view('articles.create');
+        return view('articles.create');
     }
 
     public function store(StoreArticleRequest $request)

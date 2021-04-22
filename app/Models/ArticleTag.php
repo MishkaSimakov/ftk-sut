@@ -24,9 +24,4 @@ class ArticleTag extends Model
     {
         return '#';
     }
-
-    public function scopeSearch(Builder $builder, string $query)
-    {
-        return $builder->where('name', 'like', "%{$query}%");
-    }
 }

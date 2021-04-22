@@ -73,10 +73,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(RatingPoint::class);
     }
-
-
-    public function scopeSearch(Builder $builder, string $query)
-    {
-        return $builder->where('name', 'like', "%{$query}%");
-    }
 }

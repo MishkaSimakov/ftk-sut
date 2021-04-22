@@ -5,8 +5,7 @@
                 <a href="{{ $article->url }}" class="stretched-link article-title-link">{{ $article->title }}</a>
             </h5>
             <div class="card-text">
-{{--                {!! $article->body !!}--}}
-                hello!
+                {!! $article->truncated_body !!}
             </div>
         </div>
 

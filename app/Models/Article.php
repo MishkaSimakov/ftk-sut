@@ -54,10 +54,4 @@ class Article extends Model implements Viewable
     {
         return $this->points()->count() + views($this)->count() * 0.25 - now()->diffInDays($this->date) * 2;
     }
-
-    public function scopeSearch(Builder $builder, string $query): Builder
-    {
-        return $builder->where('title', 'like', "%{$query}%")
-            ->orWhere('body', 'like', "%{$query}%");
-    }
 }

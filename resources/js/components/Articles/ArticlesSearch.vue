@@ -72,7 +72,7 @@ export default {
         return {
             searchTypes: {
                 'article': 'Статьи',
-                'tag': 'Теги',
+                'articletag': 'Теги',
                 'user': 'Авторы',
             },
             noResults: false,

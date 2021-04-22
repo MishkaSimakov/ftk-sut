@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class RatingPoint extends Model
 {
@@ -19,26 +21,19 @@ class RatingPoint extends Model
 
     protected $fillable = ['rating_id', 'rating_point_category_id', 'amount'];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(RatingPointCategory::class, 'rating_point_category_id');
     }
 
-    public function scopeFromTime(Builder $builder, Carbon $start, Carbon $end)
+    public function scopeFromPeriod(Builder $builder, CarbonPeriod $period): Builder
     {
-        return $builder->whereDate('date', '>=', $start)
-            ->whereDate('date', '<=', $end);
-    }
-
-    public function scopeLastPoints(Builder $builder)
-    {
-        $last_date = RatingPoint::orderBy('date', 'desc')->first()->date;
-
-        return $builder->fromTime($last_date);
+        return $builder->whereDate('date', '>=', $period->start)
+            ->whereDate('date', '<=', $period->end);
     }
 }
