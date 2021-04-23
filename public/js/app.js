@@ -7747,7 +7747,16 @@ __webpack_require__.r(__webpack_exports__);
         image_upload_url: '#',
         plugins: 'link lists fullscreen hr image',
         toolbar: 'h1 h2 | link bold italic blockquote | bullist numlist hr image | fullscreen',
+        formats: {
+          h1: {
+            block: 'h2'
+          },
+          h2: {
+            block: 'h3'
+          }
+        },
         content_style: '* { color: #212529; }',
+        force_p_newlines: false,
         file_picker_types: 'image',
         file_picker_callback: function file_picker_callback(cb, value, meta) {
           var input = document.createElement('input');
@@ -7777,7 +7786,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  props: ['value'],
+  props: ['value', 'error'],
   components: {
     'editor': _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -7819,9 +7828,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [vue_smooth_height__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  props: ['value_checkbox', 'value_date'],
   data: function data() {
     return {
-      is_delayed_publication: ''
+      is_delayed_publication: this.value_checkbox
     };
   },
   mounted: function mounted() {
@@ -7866,7 +7876,7 @@ var _createNamespacedHelp = Object(vuex__WEBPACK_IMPORTED_MODULE_1__["createName
     mapActions = _createNamespacedHelp.mapActions;
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['value'],
+  props: ['value', 'error'],
   data: function data() {
     return {
       tagify: null
@@ -66642,7 +66652,11 @@ var render = function() {
               required: "",
               autofocus: ""
             },
-            domProps: { value: _vm.$moment().format("YYYY-MM-DD[T]HH:mm") }
+            domProps: {
+              value: this.value_date
+                ? _vm.$moment(this.value_date).format("YYYY-MM-DD[T]HH:mm")
+                : _vm.$moment().format("YYYY-MM-DD[T]HH:mm")
+            }
           })
         ])
       : _vm._e()
@@ -66671,7 +66685,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("input", {
-    staticClass: "rounded",
+    staticClass: "rounded form-control h-auto",
+    class: { "is-invalid": this.error.length },
     attrs: { id: "tags", name: "tags" },
     domProps: { value: this.value }
   })
@@ -66710,7 +66725,7 @@ var render = function() {
             elementpath: false,
             branding: false,
             plugins: "link lists fullscreen",
-            toolbar: "h1 h2 | bold italic link | bullist numlist | fullscreen",
+            toolbar: "bold italic link | bullist numlist | fullscreen",
 
             content_style: "* { color: #495057 }"
           }

@@ -39,11 +39,4 @@ class News extends Model implements Viewable
     {
         return views($this)->unique()->count();
     }
-
-    public function recordView()
-    {
-        if (!$this->date->greaterThan(now())) {
-            views($this)->cooldown(now()->addHours(3))->record();
-        }
-    }
 }

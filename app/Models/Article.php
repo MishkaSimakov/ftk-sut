@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Publishable;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,12 +13,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Article extends Model implements Viewable
 {
-    use HasFactory, InteractsWithViews;
+    use HasFactory, InteractsWithViews, Publishable;
 
     const TRUNCATE_LIMIT = 500;
     const PAGINATION_LIMIT = 50;
 
     protected $dates = ['date'];
+    protected $fillable = ['title', 'body', 'date'];
 
     public function author(): BelongsTo
     {

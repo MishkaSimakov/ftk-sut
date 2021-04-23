@@ -26,9 +26,18 @@
                             <a class="dropdown-item" href="{{ route('news.edit', $news) }}">Редактировать</a>
                         @endcan
                         @can('delete', $news)
-                            <a class="dropdown-item text-danger" href="#" wire:click.prevent="deleteNews">
+                            <a
+                                class="dropdown-item text-danger"
+                                onclick="event.preventDefault(); document.getElementById('delete-form-{{ $news->id }}').submit();"
+                                href="#"
+                            >
                                 Удалить
                             </a>
+                            <form method="POST" id="delete-form-{{ $news->id }}"
+                                  action="{{ route('news.destroy', $news) }}">
+                                @csrf
+                                @method('DELETE')
+                            </form>
                         @endcan
                     </div>
                 </div>

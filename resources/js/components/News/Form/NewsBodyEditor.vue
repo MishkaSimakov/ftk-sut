@@ -9,7 +9,7 @@
             elementpath: false,
             branding: false,
             plugins: 'link lists fullscreen',
-            toolbar: 'h1 h2 | bold italic link | bullist numlist | fullscreen',
+            toolbar: 'bold italic link | bullist numlist | fullscreen',
 
              content_style: '* { color: #495057 }'
         }"

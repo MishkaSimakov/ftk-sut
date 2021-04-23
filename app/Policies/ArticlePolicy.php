@@ -89,7 +89,7 @@ class ArticlePolicy
      */
     public function publish(User $user, Article $article)
     {
-        return $user->is_admin and $article->type === ArticleType::OnCheck();
+        return $user->is_admin and $article->type == ArticleType::OnCheck();
     }
 
     /**

@@ -12,7 +12,7 @@
         <div class="form-group" v-if="is_delayed_publication">
             <input id="date" type="datetime-local"
                    class="form-control" name="date"
-                   :value="$moment().format('YYYY-MM-DD[T]HH:mm')"
+                   :value="this.value_date ? $moment(this.value_date).format('YYYY-MM-DD[T]HH:mm') : $moment().format('YYYY-MM-DD[T]HH:mm')"
                    :min="$moment().format('YYYY-MM-DD[T]HH:mm')" required autofocus
             >
         </div>
@@ -24,9 +24,13 @@ import smoothHeight from "vue-smooth-height";
 
 export default {
     mixins: [smoothHeight],
+    props: [
+        'value_checkbox',
+        'value_date',
+    ],
     data() {
         return {
-            is_delayed_publication: '',
+            is_delayed_publication: this.value_checkbox,
         }
     },
     mounted() {

@@ -8,9 +8,7 @@ use Livewire\Component;
 class ArticlesList extends Component
 {
     public function getArticles() {
-        $articles = Article::paginate(Article::PAGINATION_LIMIT)->load(['author', 'points']);
-
-        return $articles;
+        return Article::paginate(Article::PAGINATION_LIMIT)->load(['author', 'points']);
     }
 
     public function render()

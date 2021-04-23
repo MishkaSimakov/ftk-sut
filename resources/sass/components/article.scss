@@ -7,6 +7,10 @@
             border: 1px solid #dee2e6 !important;
             border-radius: 0.25rem;
         }
+
+        p {
+            overflow-wrap: anywhere;
+        }
     }
 
     &-title-link {
@@ -38,6 +42,11 @@
     }
 
     &-views {
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard */
+
         font-weight: 500;
     }
 }

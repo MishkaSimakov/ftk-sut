@@ -10,6 +10,8 @@ class ArticleTag extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     public function articles()
     {
         return $this->belongsToMany(Article::class, 'article_article_tag');

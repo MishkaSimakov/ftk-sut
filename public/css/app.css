@@ -11630,6 +11630,10 @@ a.text-dark:focus {
   border-radius: 0.25rem;
 }
 
+.article-body p {
+  overflow-wrap: anywhere;
+}
+
 .article-title-link {
   color: inherit !important;
 }
@@ -11662,6 +11666,14 @@ a.text-dark:focus {
 }
 
 .article-views {
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
   font-weight: 500;
 }
 
