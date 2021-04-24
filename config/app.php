@@ -179,6 +179,8 @@ return [
         CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
 
         App\Providers\BladeServiceProvider::class,
+
+        Assada\Achievements\AchievementsServiceProvider::class,
     ],
 
     /*

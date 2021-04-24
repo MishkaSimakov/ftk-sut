@@ -9,6 +9,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.4|^8.0",
+        "ext-json": "*",
+        "assada/laravel-achievements": "^2.3",
         "bensampo/laravel-enum": "^3.3",
         "cyrildewit/eloquent-viewable": "^6.0",
         "fideloper/proxy": "^4.4",
@@ -19,8 +21,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
         "livewire/livewire": "^2.4",
-        "maatwebsite/excel": "^3.1",
-      "ext-json": "*"
+        "maatwebsite/excel": "^3.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

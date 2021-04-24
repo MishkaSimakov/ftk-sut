@@ -124,6 +124,7 @@
       <path value="$PROJECT_DIR$/vendor/cyrildewit/eloquent-viewable" />
       <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
       <path value="$PROJECT_DIR$/vendor/livewire/livewire" />
+      <path value="$PROJECT_DIR$/vendor/assada/laravel-achievements" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
