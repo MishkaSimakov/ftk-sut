@@ -18,7 +18,10 @@ class ArticleTagIndexResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
 
-            'articles_count' => $this->articles()->count()
+            'articles_count' => $this->articles()->count(),
+            'url' => $this->url,
+
+            'type' => 'tag'
         ];
     }
 }

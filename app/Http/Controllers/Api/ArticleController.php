@@ -3,38 +3,27 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Article\ArticleIndexResource;
-use App\Http\Resources\Article\ArticleSearchResource;
 use App\Http\Resources\Article\ArticleTagIndexResource;
-use App\Http\Resources\Tag\TagSearchResource;
-use App\Http\Resources\User\UserSearchResource;
-use App\Models\Article;
 use App\Models\ArticleTag;
-use App\Models\User;
+use App\Services\ArticleSearchService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 
 class ArticleController extends Controller
 {
-    public function index(Request $request)
+    public ArticleSearchService $articleSearchService;
+    public function __construct(ArticleSearchService $articleSearchService)
     {
-        $articles = Article::paginate(Article::PAGINATION_LIMIT)->items();
-
-        return response()->json(
-            ArticleIndexResource::collection(
-                $articles
-            )
-        );
+        $this->articleSearchService = $articleSearchService;
     }
 
-    public function best()
+    public function search(Request $request): JsonResponse
     {
-        $articles = Article::all()->sortByDesc('relevance')->take(3);
+        $query = $request->get('query');
 
         return response()->json(
-            ArticleIndexResource::collection(
-                $articles
-            )
+            $this->articleSearchService->getQueryResults($query)
         );
     }
 
@@ -45,29 +34,5 @@ class ArticleController extends Controller
         return response()->json(
             ArticleTagIndexResource::collection($tags)
         );
-    }
-
-    public function search(Request $request)
-    {
-        $query = $request->get('query');
-
-        $tags = TagSearchResource::collection(
-            ArticleTag::search($query)->select('id', 'name')->get()
-        );
-        $authors = UserSearchResource::collection(
-            User::search($query)->select('id', 'name')->get()
-        );
-        $articles = ArticleSearchResource::collection(
-            Article::search($query)->select('id', 'title')->get()
-        );
-
-        return response()->json(
-            $tags->concat($authors)->concat($articles)
-        );
-    }
-
-    public function togglePoint(Request $request, Article $article)
-    {
-        dd($request->get('user'));
     }
 }

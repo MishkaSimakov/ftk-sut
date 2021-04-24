@@ -21,6 +21,7 @@ Route::resource('news', \App\Http\Controllers\NewsController::class);
 
 # articles
 Route::get('article/unpublished', [\App\Http\Controllers\ArticleController::class, 'unpublished'])->name('article.unpublished');
+Route::get('article/{article}/publish', [\App\Http\Controllers\ArticleController::class, 'publish'])->name('article.publish');
 Route::resource('article', \App\Http\Controllers\ArticleController::class);
 
 

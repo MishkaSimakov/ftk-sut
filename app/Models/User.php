@@ -3,18 +3,18 @@
 namespace App\Models;
 
 use App\Mail\ResetPasswordNotification;
-use Illuminate\Database\Eloquent\Builder;
+use Assada\Achievements\Achiever;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
-// TODO: добавить свойства, которые не добавляются в JSON
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens, Achiever;
 
     /**
      * The attributes that are mass assignable.
@@ -63,19 +63,13 @@ class User extends Authenticatable
             ->send(new ResetPasswordNotification($token));
     }
 
-    public function getUrlAttribute()
+    public function getUrlAttribute(): string
     {
         return '#';  // TODO: сделать нормальную ссылку
     }
 
-    public function rating_points()
+    public function rating_points(): HasMany
     {
         return $this->hasMany(RatingPoint::class);
-    }
-
-
-    public function scopeSearch(Builder $builder, string $query)
-    {
-        return $builder->where('name', 'like', "%{$query}%");
     }
 }

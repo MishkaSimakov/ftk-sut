@@ -77,7 +77,7 @@ const actions = {
             state.period = rating_response.meta.period
 
             commit('setLoading', false)
-        }).catch(() => {
+        }).catch((e) => {
             alert('Что-то пошло не так!')
             document.location.reload();
         });

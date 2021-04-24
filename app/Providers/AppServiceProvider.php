@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\RatingPointCategory;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Maatwebsite\Excel\Imports\HeadingRowFormatter;
 
@@ -29,6 +30,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Paginator::useBootstrap();
     }
 }

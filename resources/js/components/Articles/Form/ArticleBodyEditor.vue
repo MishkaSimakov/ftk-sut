@@ -28,8 +28,13 @@ export default {
                 image_upload_url: '#',
                 plugins: 'link lists fullscreen hr image',
                 toolbar: 'h1 h2 | link bold italic blockquote | bullist numlist hr image | fullscreen',
+                formats: {
+                    h1: { block: 'h2' },
+                    h2: { block: 'h3' },
+                },
 
                 content_style: '* { color: #212529; }',
+                force_p_newlines : false,
 
                 file_picker_types: 'image',
                 file_picker_callback: function (cb, value, meta) {
@@ -59,7 +64,7 @@ export default {
         }
     },
     props: [
-        'value'
+        'value', 'error',
     ],
     components: {
         'editor': Editor

@@ -1,9 +1,56 @@
-.article-body {
-    img {
-        width: 100%;
-        height: auto;
+.article {
+    &-body {
+        img {
+            width: 100%;
+            height: auto;
 
-        border: 1px solid #dee2e6 !important;
-        border-radius: 0.25rem;
+            border: 1px solid #dee2e6 !important;
+            border-radius: 0.25rem;
+        }
+
+        p {
+            overflow-wrap: anywhere;
+        }
     }
+
+    &-title-link {
+        color: inherit !important;
+    }
+
+    @media (max-width: 767px) {
+        &-tag {
+            border-right: none !important;
+        }
+    }
+
+    &-tag {
+        text-decoration: none;
+
+        &:last-child {
+            border-right: none !important;
+        }
+    }
+
+    &-like-button {
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard */
+
+        font-weight: 500;
+        cursor: pointer
+    }
+
+    &-views {
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard */
+
+        font-weight: 500;
+    }
+}
+
+.liked {
+    color: #ff3347 !important;
 }

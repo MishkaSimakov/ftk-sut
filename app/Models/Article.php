@@ -2,39 +2,49 @@
 
 namespace App\Models;
 
+use App\Traits\Publishable;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Article extends Model
+class Article extends Model implements Viewable
 {
-    use HasFactory;
+    use HasFactory, InteractsWithViews, Publishable;
 
     const TRUNCATE_LIMIT = 500;
     const PAGINATION_LIMIT = 50;
 
     protected $dates = ['date'];
+    protected $fillable = ['title', 'body', 'date'];
 
-    public function author()
+    public function author(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function points()
+    public function points(): BelongsToMany
     {
-        return $this->hasMany(ArticlePoint::class);
+        return $this->belongsToMany(User::class, 'article_points');
     }
 
-    public function tags()
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(ArticleTag::class, 'article_article_tag');
     }
 
 
-    public function getUrlAttribute()
+    public function getUrlAttribute(): string
     {
         return route('article.show', $this);
+    }
+
+    public function isLikedBy(User $user): bool
+    {
+        return $this->points()->where('user_id', $user->id)->exists();
     }
 
     public function getTruncatedBodyAttribute(): string
@@ -42,24 +52,8 @@ class Article extends Model
         return truncateHTML(self::TRUNCATE_LIMIT, strip_tags($this->body, ['p', 'b', 'i', 'ul', 'li', 'ol']));
     }
 
-    public function getPointsCountAttribute()
+    public function getRelevanceAttribute(): int
     {
-        return $this->points->count();
-    }
-
-    public function getViewsAttribute()
-    {
-        return 0; // TODO: сделать подсчёт просмотров.
-    }
-
-    public function getRelevanceAttribute()
-    {
-        return $this->pointsCount + $this->views * 0.25 - now()->diffInDays($this->date) * 2;
-    }
-
-    public function scopeSearch(Builder $builder, string $query)
-    {
-        return $builder->where('title', 'like', "%{$query}%")
-            ->orWhere('body', 'like', "%{$query}%");
+        return $this->points()->count() + views($this)->count() * 0.25 - now()->diffInDays($this->date) * 2;
     }
 }

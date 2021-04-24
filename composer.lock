@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7bce093051f9b179c0e4f49a1fffbe79",
+    "content-hash": "44fc460e7ad9d5cfb9105d9e650c0cb9",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,65 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.0.2"
             },
             "time": "2020-10-29T16:03:21+00:00"
+        },
+        {
+            "name": "assada/laravel-achievements",
+            "version": "v2.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/assada/laravel-achievements.git",
+                "reference": "e3bd23e744ea694f42d95f1f9a28af562a6f41e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/assada/laravel-achievements/zipball/e3bd23e744ea694f42d95f1f9a28af562a6f41e6",
+                "reference": "e3bd23e744ea694f42d95f1f9a28af562a6f41e6",
+                "shasum": ""
+            },
+            "require": {
+                "ramsey/uuid": "^3 || ^4"
+            },
+            "require-dev": {
+                "laravel/laravel": "^6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^8"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Assada\\Achievements\\AchievementsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/Migrations"
+                ],
+                "psr-4": {
+                    "Assada\\Achievements\\": "src/",
+                    "Assada\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gabriel Simonetti",
+                    "email": "simonettigo@gmail.com"
+                },
+                {
+                    "name": "Alex Ilyenko",
+                    "email": "assada.ua@gmail.com"
+                }
+            ],
+            "description": "Achievements for Laravel 6+",
+            "support": {
+                "issues": "https://github.com/assada/laravel-achievements/issues",
+                "source": "https://github.com/assada/laravel-achievements/tree/master"
+            },
+            "time": "2020-08-19T12:48:11+00:00"
         },
         {
             "name": "bensampo/laravel-enum",
@@ -1948,6 +2007,78 @@
                 }
             ],
             "time": "2020-10-18T11:50:25+00:00"
+        },
+        {
+            "name": "livewire/livewire",
+            "version": "v2.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/livewire/livewire.git",
+                "reference": "69575f50bb7f8a49a41f9bd6bd16c73a6ef4fda3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/69575f50bb7f8a49a41f9bd6bd16c73a6ef4fda3",
+                "reference": "69575f50bb7f8a49a41f9bd6bd16c73a6ef4fda3",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^7.0|^8.0",
+                "illuminate/support": "^7.0|^8.0",
+                "illuminate/validation": "^7.0|^8.0",
+                "php": "^7.2.5|^8.0",
+                "symfony/http-kernel": "^5.0"
+            },
+            "require-dev": {
+                "calebporzio/sushi": "^2.1",
+                "laravel/framework": "^7.0|^8.0",
+                "mockery/mockery": "^1.3.1",
+                "orchestra/testbench": "^5.0|^6.0",
+                "orchestra/testbench-dusk": "^5.2|^6.0",
+                "phpunit/phpunit": "^8.4|^9.0",
+                "psy/psysh": "@stable"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Livewire\\LivewireServiceProvider"
+                    ],
+                    "aliases": {
+                        "Livewire": "Livewire\\Livewire"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Livewire\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Porzio",
+                    "email": "calebporzio@gmail.com"
+                }
+            ],
+            "description": "A front-end framework for Laravel.",
+            "support": {
+                "issues": "https://github.com/livewire/livewire/issues",
+                "source": "https://github.com/livewire/livewire/tree/v2.4.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/calebporzio",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-04-16T14:27:45+00:00"
         },
         {
             "name": "maatwebsite/excel",
@@ -8363,7 +8494,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3|^8.0"
+        "php": "^7.4|^8.0",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

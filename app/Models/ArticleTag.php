@@ -10,13 +10,20 @@ class ArticleTag extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     public function articles()
     {
         return $this->belongsToMany(Article::class, 'article_article_tag');
     }
 
-    public function scopeSearch(Builder $builder, string $query)
+    public function getArticlesCountAttribute()
     {
-        return $builder->where('name', 'like', "%{$query}%");
+        return $this->articles()->count();
+    }
+
+    public function getUrlAttribute()
+    {
+        return '#';
     }
 }

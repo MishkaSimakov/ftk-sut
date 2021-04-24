@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Publishable;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Builder;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class News extends Model implements Viewable
 {
-    use HasFactory, InteractsWithViews;
+    use HasFactory, InteractsWithViews, Publishable;
 
     protected $fillable = ['title', 'date', 'body'];
     protected $dates = ['date'];
@@ -34,20 +35,8 @@ class News extends Model implements Viewable
         });
     }
 
-    public function scopePublished(Builder $builder)
-    {
-        return $builder->whereDate('date', '<=', now());
-    }
-
     public function getViewsAttribute()
     {
         return views($this)->unique()->count();
-    }
-
-    public function recordView()
-    {
-        if (!$this->date->greaterThan(now())) {
-            views($this)->cooldown(now()->addHours(3))->record();
-        }
     }
 }

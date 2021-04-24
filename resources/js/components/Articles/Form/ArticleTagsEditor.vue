@@ -1,6 +1,6 @@
 <template>
     <input id="tags" :value="this.value"
-           class="rounded" name="tags"
+           class="rounded form-control h-auto" name="tags" :class="{ 'is-invalid': this.error.length }"
     >
 </template>
 
@@ -12,7 +12,7 @@ const {mapGetters, mapActions} = createNamespacedHelpers('articles');
 
 export default {
     props: [
-        'value',
+        'value', 'error'
     ],
     data() {
         return {

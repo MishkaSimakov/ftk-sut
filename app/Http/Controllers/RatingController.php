@@ -26,7 +26,7 @@ class RatingController extends Controller
 
     public function store(Request $request)
     {
-        Excel::import(new RatingImport(Carbon::parse($request->date)), $request->file('rating'));
+        Excel::import(new RatingImport(Carbon::parse($request->get('date'))), $request->file('rating'));
 
         return redirect(route('rating.index'));
     }

@@ -7,7 +7,7 @@
                     type="month"
                     class="form-control"
                     name="date-start"
-                    :max="$moment().format('YYYY-MM')"
+                    :max="enteredPeriod.end"
                     required
                 >
             </div>

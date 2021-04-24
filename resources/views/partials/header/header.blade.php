@@ -10,41 +10,47 @@
 
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav mx-lg-auto mx-0">
-                    <li class="nav-item {{ (auth()->user() and auth()->user()->is_admin) ? 'dropdown' : '' }}">
+                    <li class="nav-item dropdown">
                         <a class="nav-link" href="{{ route('news.index') }}">Новости</a>
 
-                        @admin
-                        <div class="hover-dropdown-menu dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('news.create') }}">
-                                Написать
-                            </a>
-                        </div>
-                        @endadmin
+                        @can('create', \App\Models\News::class)
+                            <div class="hover-dropdown-menu dropdown-menu">
+                                <a class="dropdown-item" href="{{ route('news.create') }}">
+                                    Написать
+                                </a>
+                            </div>
+                        @endcan
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="{{ route('article.index') }}">Статьи</a>
 
-                        <div class="hover-dropdown-menu dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('article.create') }}">
-                                Написать
-                            </a>
-                            <a class="dropdown-item" href="{{ route('article.unpublished') }}">
-                                Требуют проверки
-                            </a>
-                        </div>
+                        @canany(['create', 'viewUnpublished'], \App\Models\Article::class)
+                            <div class="hover-dropdown-menu dropdown-menu">
+                                @can('create', \App\Models\Article::class)
+                                    <a class="dropdown-item" href="{{ route('article.create') }}">
+                                        Написать
+                                    </a>
+                                @endcan
+                                @can('viewUnpublished', \App\Models\Article::class)
+                                    <a class="dropdown-item" href="{{ route('article.unpublished') }}">
+                                        Требуют проверки
+                                    </a>
+                                @endcan
+                            </div>
+                        @endcanany
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Расписание</a>
                     </li>
-                    <li class="nav-item {{ (auth()->user() and auth()->user()->is_admin) ? 'dropdown' : '' }}">
+                    <li class="nav-item dropdown">
                         <a class="nav-link" href="{{ route('rating.index') }}">Рейтинг</a>
 
                         @admin
-                            <div class="hover-dropdown-menu dropdown-menu">
-                                <a class="dropdown-item" href="{{ route('rating.create') }}">
-                                    Загрузить
-                                </a>
-                            </div>
+                        <div class="hover-dropdown-menu dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('rating.create') }}">
+                                Загрузить
+                            </a>
+                        </div>
                         @endadmin
                     </li>
                 </ul>

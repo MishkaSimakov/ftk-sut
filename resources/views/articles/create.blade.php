@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-
-@section('title', 'Новости')
+@section('title', 'Статьи')
 
 @section('content')
     <h1 class="text-center mb-4">Написать статью</h1>
@@ -28,7 +27,7 @@
 
                 <div class="form-group">
                     <label for="body">Текст</label>
-                    <articles-body-editor value="{{ old('body') }}"></articles-body-editor>
+                    <articles-body-editor error="{{ $errors->first('body') }}" value="{{ old('body') }}"></articles-body-editor>
 
                     @error('body')
                     <span class="invalid-feedback d-block" role="alert">
@@ -39,7 +38,7 @@
 
                 <div class="form-group">
                     <label for="tags">Теги</label>
-                    <articles-tags-editor></articles-tags-editor>
+                    <articles-tags-editor error="{{ $errors->first('tags') }}" value="{{ old('tags') }}"></articles-tags-editor>
 
                     @error('tags')
                     <span class="invalid-feedback" role="alert">
@@ -48,7 +47,7 @@
                     @enderror
                 </div>
 
-                <articles-date-editor></articles-date-editor>
+                <articles-date-editor value_checkbox="{{ old('delayed_publication') }}" value_date="{{ old('date') }}"></articles-date-editor>
 
                 <button type="submit" class="btn btn-primary mr-2">Сохранить</button>
             </form>
