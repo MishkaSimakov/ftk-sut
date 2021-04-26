@@ -1,6 +1,6 @@
 <div class="card mb-3 {{ $news->isPublished ? '' : 'text-secondary' }}">
     <div class="card-body pb-2">
-        <h5 class="card-title">{{ $news->title }}</h5>
+        <p class="h5 card-title">{{ $news->title }}</p>
         <div class="card-text">{!! $news->body !!}</div>
 
         <div class="row no-gutters text-muted mt-1 align-items-center">
@@ -16,12 +16,12 @@
             @canany(['update', 'delete'], $news)
                 <div class="dropdown">
                     <button class="d-inline btn rounded-pill text-muted" type="button"
-                            id="news-more-dropdown-button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            id="news-more-dropdown-button-{{ $news->id }}"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Дополнительно">
                         <i class="fas fa-ellipsis-h fa-sm"></i>
                     </button>
 
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="news-more-dropdown-button">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="news-more-dropdown-button-{{ $news->id }}">
                         @can('update', $news)
                             <a class="dropdown-item" href="{{ route('news.edit', $news) }}">Редактировать</a>
                         @endcan

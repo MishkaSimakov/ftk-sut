@@ -37,7 +37,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    @livewireStyles
+    @if(!isset($includeLivewire) || $includeLivewire)
+        @livewireStyles
+    @endif
 </head>
 <body>
 <div id="app">
@@ -51,6 +53,9 @@
 </div>
 
 @stack('scripts')
-@livewireScripts
+
+@if(!isset($includeLivewire) || $includeLivewire)
+    @livewireScripts
+@endif
 </body>
 </html>
