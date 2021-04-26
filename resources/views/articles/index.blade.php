@@ -8,19 +8,19 @@
     <articles-search></articles-search>
 
     <section class="mb-5 mt-4">
-        <h3 class="text-left font-weight-bold">Лучшее на ftk-sut.ru</h3>
+        <h2 class="h3 text-left font-weight-bold">Лучшее на ftk-sut.ru</h2>
 
-{{--        <articles-top-list></articles-top-list>--}}
+        <livewire:articles.lists.best-articles-list/>
     </section>
 
     <section class="mb-5">
-        <h3 class="text-left font-weight-bold">Популярные категории</h3>
+        <h2 class="h3 text-left font-weight-bold">Популярные категории</h2>
 
         <livewire:articles.lists.article-tags-list/>
     </section>
 
     <section>
-        <h3 class="text-left font-weight-bold">Все статьи</h3>
+        <h2 class="h3 text-left font-weight-bold">Все статьи</h2>
 
         <livewire:articles.lists.articles-list/>
     </section>

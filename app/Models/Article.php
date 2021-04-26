@@ -18,6 +18,12 @@ class Article extends Model implements Viewable
     const TRUNCATE_LIMIT = 500;
     const PAGINATION_LIMIT = 50;
 
+    const RELEVANCE_COEFFICIENTS = [
+        'points' => 1,
+        'views' => 0.25,
+        'days' => -2
+    ];
+
     protected $dates = ['date'];
     protected $fillable = ['title', 'body', 'date'];
 
@@ -54,6 +60,8 @@ class Article extends Model implements Viewable
 
     public function getRelevanceAttribute(): int
     {
-        return $this->points()->count() + views($this)->count() * 0.25 - now()->diffInDays($this->date) * 2;
+        return $this->points()->count() * self::RELEVANCE_COEFFICIENTS['points']
+            + views($this)->count() * self::RELEVANCE_COEFFICIENTS['views']
+            + now()->diffInDays($this->date) * self::RELEVANCE_COEFFICIENTS['days'];
     }
 }

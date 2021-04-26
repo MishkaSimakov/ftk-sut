@@ -19,11 +19,11 @@
     @canany(['update', 'delete'], $article)
         <div class="dropdown">
             <button class="d-inline btn rounded-pill text-muted" type="button"
-                    id="article-more-dropdown-button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    id="article-more-dropdown-button-{{ $article->id }}"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Дополнительно">
                 <i class="fas fa-ellipsis-h fa-sm"></i>
             </button>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="article-more-dropdown-button">
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="article-more-dropdown-button-{{ $article->id }}">
                 @can('publish', $article)
                     <a class="dropdown-item" href="{{ route('article.publish', $article) }}">Опубликовать</a>
                 @endcan

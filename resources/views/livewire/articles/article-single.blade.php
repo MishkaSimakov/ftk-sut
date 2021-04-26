@@ -1,9 +1,9 @@
 <div class="card h-100 mb-3 {{ $article->isPublished ? '' : 'text-secondary' }}">
     <div class="card-body pb-2 d-flex flex-column">
         <div style="transform: translate(0)">
-            <h5 class="card-title">
+            <p class="h5 card-title">
                 <a href="{{ $article->url }}" class="stretched-link article-title-link">{{ $article->title }}</a>
-            </h5>
+            </p>
             <div class="card-text">
                 {!! $article->truncated_body !!}
             </div>
