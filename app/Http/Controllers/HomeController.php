@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Achievements\Articles\LikeSelfArticle;
+use App\Achievements\Articles\Set10Likes;
+use App\Achievements\Articles\SetFirstLike;
+use App\Achievements\Articles\Write10Articles;
+use App\Achievements\Travels\GoTo10Travels;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,7 +28,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('user.home');
+        $achievements = auth()->user()->unlockedAchievements()->sortByDesc('created_at');
+
+        return view('user.home', compact('achievements'));
     }
 
     public function settings()

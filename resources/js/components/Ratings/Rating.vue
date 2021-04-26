@@ -34,14 +34,32 @@
                                 {{ points.total }}
                             </div>
                             <div :class="columnSizes.categories">
-                                <rating-bar :points="points.points" :width="points.width"></rating-bar>
+                                <div
+                                    class="progress my-2"
+                                    :style="{
+                                        width: `${points.width}%`,
+                                        cursor: 'pointer',
+                                        height: '40%',
+                                        position: 'relative'
+                                    }"
+                                >
+                                    <div
+                                        v-for="point in points.points"
+                                        v-if="!point.category.disabled"
+
+                                        class="progress-bar"
+                                        :style="{ width: `${point.width}%`, backgroundColor: point.category.color }"
+
+                                        data-toggle="tooltip"
+                                        data-placement="top"
+                                        :title="point.category.name + ': ' + point.amount"
+                                    ></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div v-else class="my-3 text-center h6 text-info">
-                        <!--                        <i class="fas fa-exclamation"></i>-->
                         <span class="mx-3">Нет данных за этот период</span>
-                        <!--                        <i class="fas fa-exclamation"></i>-->
                     </div>
                 </div>
             </div>
@@ -69,7 +87,6 @@
 </template>
 
 <script>
-import RatingBar from "./../Ratings/RatingBar";
 import RatingSettingsForm from "./../Ratings/Settings/SettingsForm";
 import smoothHeight from "vue-smooth-height";
 import {createNamespacedHelpers} from 'vuex'
@@ -78,7 +95,7 @@ const {mapActions, mapGetters} = createNamespacedHelpers('rating');
 
 export default {
     mixins: [smoothHeight],
-    components: {RatingBar, RatingSettingsForm},
+    components: {RatingSettingsForm},
     data() {
         return {
             columnSizes: {
@@ -109,6 +126,11 @@ export default {
             el: this.$refs.rating_container,
             hideOverflow: true,
         })
+    },
+    updated() {
+        if (this.rating.length && !this.isLoading) {
+            $('[data-toggle="tooltip"]').tooltip('dispose').tooltip();
+        }
     }
 }
 </script>

@@ -63,28 +63,18 @@ const actions = {
 
         commit('setLoading', true)
 
-        Promise.all([
-            ...(state.categories.length ? [] : [ratingApi.loadPointCategories()]),
-            ratingApi.loadRating({period: period}),
-        ]).then((response) => {
+        ratingApi.loadRating({period: period}).then((response) => {
             if (state.categories.length === 0) {
-                commit('setRatingCategories', response[0].data)
+                commit('setRatingCategories', response.data.categories)
             }
 
-            let rating_response = response.pop().data
-
-            commit('setRatingPoints', rating_response.rating)
-            state.period = rating_response.meta.period
+            commit('setRatingPoints', response.data.rating)
+            state.period = response.data.meta.period
 
             commit('setLoading', false)
-        }).catch((e) => {
-            alert('Что-то пошло не так!')
-            document.location.reload();
         });
     },
     recountRating({state, commit}) {
-        commit('setLoading', true)
-
         // recount total of each user
         let max = 0
         state.rating = state.rating.map((user) => {
@@ -106,8 +96,6 @@ const actions = {
             user.width = user.total / max * 100
             return user
         })
-
-        commit('setLoading', false)
     },
     setCategoriesFilter({state, dispatch, getters}, categories) {
         state.categories = state.categories.map((c) => {

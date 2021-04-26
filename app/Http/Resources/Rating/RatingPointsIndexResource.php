@@ -19,17 +19,17 @@ class RatingPointsIndexResource extends JsonResource
         $total = $this->pluck('amount')->sum();
 
         return [
-            'user' => $this->first()->get('user'),
+            'user' => $this->first()->user->only('id', 'name', 'url'),
 
-            'points' => $this->map(function (Collection $point, int $category_id) use ($total) {
+            'points' => $this->map(function (RatingPoint $point) use ($total) {
                 return [
-                    'id' => 1,
-                    'category' => $category_id,
+                    'id' => $point->id,
+                    'category' => $point->rating_point_category_id,
 
-                    'amount' => $point->get('amount'),
-                    'width' => abs($point->get('amount') / $total * 100),
+                    'amount' => $point->amount,
+                    'width' => abs($point->amount / $total * 100),
                 ];
-            })->values(),
+            }),
             'total' => $total,
         ];
     }

@@ -2,8 +2,9 @@
 window.Vue = require('vue');
 
 // Fontawesome
-require('@fortawesome/fontawesome-free/js/all');
-
+// require('@fortawesome/fontawesome-free/js/solid');
+// require('@fortawesome/fontawesome-free/js/regular');
+require('@fortawesome/fontawesome-free/js/all')
 
 // infinite scroll for news and articles
 // const infiniteScroll =  require('vue-infinite-scroll');

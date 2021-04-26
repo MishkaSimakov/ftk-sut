@@ -9,12 +9,26 @@
         Достижения
     </h2>
 
-    <div class="card">
-        <div class="card-img col-2 p-0">
-            <img
-                src="https://i.pinimg.com/originals/c7/80/5e/c7805ee9aa1a16baaa33a7b1be2f220e.png"
-                class="img-fluid mw-100 rounded-left"
-            >
-        </div>
+    <div class="row">
+        @foreach($achievements as $achievement)
+            <div class="col-md-3 mt-2">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div>{{ $achievement->name }}</div>
+                        <div class="text-muted">{{ $achievement->description }}</div>
+
+                        <div class="progress mt-auto">
+                            <div class="progress-bar bg-success"
+                                 role="progressbar"
+                                 style="width: 100%"
+                                 aria-valuenow="100"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 @endsection

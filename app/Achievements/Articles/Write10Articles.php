@@ -21,4 +21,9 @@ class Write10Articles extends Achievement
      * A small description for the achievement
      */
     public $description = 'Написать 10 статей.';
+
+    /*
+     * The amount of "points" this user need to obtain in order to complete this achievement
+     */
+    public $points = 10;
 }

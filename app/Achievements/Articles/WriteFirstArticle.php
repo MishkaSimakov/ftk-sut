@@ -21,4 +21,9 @@ class WriteFirstArticle extends Achievement
      * A small description for the achievement
      */
     public $description = 'Написать первую статью.';
+
+    /*
+     * The amount of "points" this user need to obtain in order to complete this achievement
+     */
+    public $points = 1;
 }

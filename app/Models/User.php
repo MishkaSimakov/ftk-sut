@@ -72,4 +72,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(RatingPoint::class);
     }
+
+    public function articles(): HasMany
+    {
+        return $this->hasMany(Article::class);
+    }
 }

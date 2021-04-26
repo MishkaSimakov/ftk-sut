@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ArticleType;
+use App\Events\Article\ArticlePublished;
 use App\Http\Requests\Articles\StoreArticleRequest;
 use App\Http\Resources\Article\ArticleIndexResource;
 use App\Models\Article;
@@ -71,6 +72,8 @@ class ArticleController extends Controller
                 $article->tags()->syncWithoutDetaching($tag_id);
             }
         }
+
+
 
         return redirect()->route('article.index');
     }

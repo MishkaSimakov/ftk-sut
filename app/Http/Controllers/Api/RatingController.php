@@ -29,9 +29,11 @@ class RatingController extends Controller
         }
 
         $points = $this->ratingService->getRating($period);
+        $categories = RatingPointCategory::all();
 
         return response()->json([
             'rating' => RatingPointsIndexResource::collection($points),
+            'categories' => RatingPointCategoryIndexResource::collection($categories),
             'meta' => [
                 'period' => [
                     'start' => $period->start->isoFormat('YYYY-MM'),
