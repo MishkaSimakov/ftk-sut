@@ -18,7 +18,7 @@ class NewsList extends Component
 
     public function render()
     {
-        $news = News::orderBy('date', 'desc')->paginate(News::PAGINATION_LIMIT);
+        $news = News::withViewsCount()->orderBy('date', 'desc')->paginate(News::PAGINATION_LIMIT);
         $news->each(function ($news) {
             views($news)->cooldown(now()->addYear())->record();
         });

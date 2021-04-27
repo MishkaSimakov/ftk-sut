@@ -1,4 +1,4 @@
-<div wire:init="$set('canLoadArticles', true)">
+<div wire:init="loadMore">
     @foreach($this->articles as $article)
         <livewire:articles.article-single :article="$article" :key="$article->id"/>
     @endforeach

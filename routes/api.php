@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\ArticleController;
-use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\RatingController;
 
 use Illuminate\Support\Facades\Route;
@@ -23,5 +22,10 @@ Route::get('rating/categories', [RatingController::class, 'categories'])->name('
 
 Route::get('article/search', [ArticleController::class, 'search'])->name('article.search');
 Route::get('article/tags', [ArticleController::class, 'tags'])->name('article.tags');
+
+Route::prefix('statistics/')->name('stat.')->group(function() {
+    Route::get('points/{user}', [\App\Http\Controllers\Statistics\RatingPointsStatisticsController::class, 'getPointsByMonth'])->name('points');
+
+});
 
 //Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);

@@ -10,7 +10,7 @@
             </div>
 
             <div class="mr-sm-2" style="font-weight: 500;">
-                <i class="far fa-eye"></i> {{ $news->views }}
+                <i class="far fa-eye"></i> {{ $news->views_count }}
             </div>
 
             @canany(['update', 'delete'], $news)

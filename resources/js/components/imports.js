@@ -3,19 +3,22 @@
 
 const components = {
     // news
-    'news-body-editor':       'News/Form/NewsBodyEditor',
-    'news-date-editor':       'News/Form/NewsDateEditor',
+    'news-body-editor':         'News/Form/NewsBodyEditor',
+    'news-date-editor':         'News/Form/NewsDateEditor',
 
     // articles
-    'articles-body-editor':   'Articles/Form/ArticleBodyEditor',
-    'articles-tags-editor':   'Articles/Form/ArticleTagsEditor',
-    'articles-date-editor':   'Articles/Form/ArticleDateEditor',
-    'articles-search':        'Articles/ArticlesSearch',
+    'articles-body-editor':     'Articles/Form/ArticleBodyEditor',
+    'articles-tags-editor':     'Articles/Form/ArticleTagsEditor',
+    'articles-date-editor':     'Articles/Form/ArticleDateEditor',
+    'articles-search':          'Articles/ArticlesSearch',
 
     // events
 
     // rating
-    'rating':                 'Ratings/Rating',
+    'rating':                   'Ratings/Rating',
+
+    // statistics
+    'rating-points-statistics':  'Statistics/RatingPointsStatistics'
 }
 
 for (const [name, path] of Object.entries(components)) {

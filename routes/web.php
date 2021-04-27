@@ -34,7 +34,7 @@ Route::get('rating/{period?}', [\App\Http\Controllers\RatingController::class, '
     ->name('rating.index')
     ->where('date', '[0-9]{4}\.[0-9]{2}\-[0-9]{4}\.[0-9]{2}');  // regex for 'YYYY.MM-YYYY.MM' query
 
-Route::prefix('statistics')->name('statistics.')->group(function() {
+Route::prefix('statistics')->name('statistics.')->group(function () {
     Route::get('compare/{user}', [\App\Http\Controllers\Statistics\StatisticsController::class, 'compare'])->name('compare');
 });
 

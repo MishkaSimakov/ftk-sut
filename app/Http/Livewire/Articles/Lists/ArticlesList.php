@@ -9,19 +9,20 @@ use Livewire\Component;
 class ArticlesList extends Component
 {
     public Collection $articles;
+    public int $skip = 0;
 
     public function loadMore()
     {
+        $this->articles = $this->articles->concat(
+            Article::with('author', 'points')->withViewsCount()->skip($this->skip)->take(Article::PAGINATION_LIMIT)->get()
+        );
 
+        $this->skip += Article::PAGINATION_LIMIT;
     }
 
-    public function getArticlesProperty()
+    public function mount()
     {
-        if (!$this->canLoadArticles) {
-            return [];
-        }
-
-        return Article::with('author', 'points')->skip($this->skip)->take(Article::PAGINATION_LIMIT)->get();
+        $this->articles = collect();
     }
 
     public function render()

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\RatingPointCategory;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Maatwebsite\Excel\Imports\HeadingRowFormatter;
 
@@ -16,6 +17,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Blade::if('admin', function () {
+            return auth()->check() and auth()->user()->is_admin;
+        });
+
+
         if ($this->app->environment('local')) {
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(TelescopeServiceProvider::class);

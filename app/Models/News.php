@@ -34,9 +34,4 @@ class News extends Model implements Viewable
             $builder->where('name', $club);
         });
     }
-
-    public function getViewsAttribute()
-    {
-        return views($this)->unique()->count();
-    }
 }

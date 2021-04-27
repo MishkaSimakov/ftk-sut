@@ -6,7 +6,7 @@
 @section('content')
     <h1 class="text-center mb-4">Рейтинг ФТК</h1>
 
-    <ul class="nav nav-pills row text-center">
+    <ul class="nav nav-pills row text-center" role="tablist">
         <li class="nav-item col-md-4" role="presentation">
             <a class="nav-link active" id="points-rating-tab" data-toggle="tab" href="#points-rating" role="tab"
                aria-selected="false">Очки</a>

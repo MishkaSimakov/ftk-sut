@@ -9,7 +9,7 @@ class ArticleTagsList extends Component
 {
     public function loadTags()
     {
-        return ArticleTag::all()->sortByDesc('articles_count')->take(4);
+        return ArticleTag::withCount('articles')->orderByDesc('articles_count')->take(4)->get();
     }
 
     public function render()
