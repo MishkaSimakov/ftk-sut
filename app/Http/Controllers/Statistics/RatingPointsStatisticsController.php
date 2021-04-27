@@ -12,7 +12,7 @@ class RatingPointsStatisticsController extends Controller
 {
     public function getPointsByMonth(User $user): JsonResponse
     {
-        $ratingPoints = RatingPoint::where('user_id', $user->id)->selectRaw('sum(amount) as amount, date')->groupBy('date')->get();
+        $ratingPoints = RatingPoint::where('user_id', $user->id)->selectRaw('sum(amount) as amount, date')->groupBy('date')->orderBy('date')->get();
 
         return response()->json($ratingPoints);
     }
