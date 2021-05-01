@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Article;
 use App\Models\ArticleTag;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -32,8 +33,10 @@ class ArticleSearchService
     protected function getArticlesFromQuery(string $query): Collection
     {
         return Article::where('title', 'like', "%{$query}%")
-            ->orWhere('body', 'like', "%{$query}%")->get()
-            ->map(function (Article $article) {
+            ->orWhere('body', 'like', "%{$query}%")
+            ->orWhereHas('tags', function (Builder $builder) use ($query) {
+                return $builder->where('name', 'like', "%{$query}%");
+            })->get()->map(function (Article $article) {
                 $article->name = $article->title;
 
                 return $article;

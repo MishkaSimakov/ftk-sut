@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['includeLivewire' => false])
 
 @section('title', 'Регистрация')
 

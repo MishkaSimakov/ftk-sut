@@ -97,5 +97,14 @@ return [
             'color' => '#ff8080',
             'order' => 10
         ],
+        [
+            'name' => 'Занятия (кружок неизвестен)',
+            'import_names' => [
+                'Посещение занятий'
+            ],
+            'slug' => 'unknown_lessons',
+            'color' => '#808080',
+            'order' => 11
+        ],
     ]
 ];

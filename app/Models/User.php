@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Mail\ResetPasswordNotification;
 use Assada\Achievements\Achiever;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -64,12 +65,19 @@ class User extends Authenticatable
 
     public function getUrlAttribute(): string
     {
-        return '#';  // TODO: сделать нормальную ссылку
+        return route('user.show', [
+            'user' => $this
+        ]);
     }
 
     public function rating_points(): HasMany
     {
         return $this->hasMany(RatingPoint::class);
+    }
+
+    public function events(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class);
     }
 
     public function articles(): HasMany

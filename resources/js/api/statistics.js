@@ -6,4 +6,11 @@ export default {
             })
         })
     },
+    async loadArticlesStatistics({user}) {
+        return new Promise((resolve, reject) => {
+            axios.get(route('api.stat.articles', {user: user})).then((response) => {
+                resolve(response)
+            })
+        })
+    },
 }

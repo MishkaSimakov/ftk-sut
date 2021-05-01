@@ -49,7 +49,7 @@ class RatingIndexTest extends TestCase
         $this->loadRating();
 
         $this->json('GET', route('api.rating.show'))
-            ->assertJson([
+            ->assertJsonFragment([
                 'name' => 'Абольянин Павел'
             ]);
     }

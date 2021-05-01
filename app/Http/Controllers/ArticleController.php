@@ -84,6 +84,8 @@ class ArticleController extends Controller
             views($article)->cooldown(now()->addDay())->record();
         }
 
+        $article->load('author', 'tags')->loadCount('points');
+
         return view('articles.show', compact('article'));
     }
 

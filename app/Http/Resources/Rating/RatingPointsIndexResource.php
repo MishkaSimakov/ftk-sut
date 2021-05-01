@@ -16,7 +16,7 @@ class RatingPointsIndexResource extends JsonResource
      */
     public function toArray($request)
     {
-        $total = $this->pluck('amount')->sum();
+        $total = $this->sum('amount');
 
         return [
             'user' => $this->first()->user->only('id', 'name', 'url'),

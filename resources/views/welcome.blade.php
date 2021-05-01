@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.app', ['includeLivewire' => false])
 
 
 @section('title', 'Главная страница')
 
-@section('app')
+@section('content')
     <main style="min-height: 5000px;">
         <img class="position-absolute img-fluid"
              src="{{ asset('storage/pages/MainPageHeader.png') }}">

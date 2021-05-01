@@ -39,18 +39,29 @@
                             </div>
                         @endcanany
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Расписание</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="{{ route('events.index') }}">Расписание</a>
+
+                        <div class="hover-dropdown-menu dropdown-menu">
+                            <a class="dropdown-item" href="#">
+                                Прошедшие
+                            </a>
+                            @can('create', \App\Models\Event::class)
+                                <a class="dropdown-item" href="{{ route('events.create') }}">
+                                    Создать
+                                </a>
+                            @endcan
+                        </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="{{ route('rating.index') }}">Рейтинг</a>
 
                         @admin
-                        <div class="hover-dropdown-menu dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('rating.create') }}">
-                                Загрузить
-                            </a>
-                        </div>
+                            <div class="hover-dropdown-menu dropdown-menu">
+                                <a class="dropdown-item" href="{{ route('rating.create') }}">
+                                    Загрузить
+                                </a>
+                            </div>
                         @endadmin
                     </li>
                 </ul>

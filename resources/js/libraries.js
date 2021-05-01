@@ -14,7 +14,6 @@ require('@fortawesome/fontawesome-free/js/all')
 import Lity from 'lity'
 
 
-
 // Moment js
 const moment = require('moment')
 require('moment/locale/ru')

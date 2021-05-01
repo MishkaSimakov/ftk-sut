@@ -8112,6 +8112,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -8318,6 +8320,7 @@ var _createNamespacedHelp = Object(vuex__WEBPACK_IMPORTED_MODULE_0__["createName
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_statistics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api/statistics */ "./resources/js/api/statistics.js");
 //
 //
 //
@@ -8343,8 +8346,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "ArticlesStatistics"
+  props: ['user'],
+  data: function data() {
+    return {
+      loading: true,
+      articles: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    _api_statistics__WEBPACK_IMPORTED_MODULE_0__["default"].loadArticlesStatistics({
+      user: this.user
+    }).then(function (response) {
+      _this.loading = false;
+      _this.articles = response.data;
+    });
+  }
 });
 
 /***/ }),
@@ -8373,6 +8398,14 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -63672,6 +63705,7 @@ var render = function() {
                               _vm._l(points.points, function(point) {
                                 return !point.category.disabled
                                   ? _c("div", {
+                                      key: point.id,
                                       staticClass: "progress-bar",
                                       style: {
                                         width: point.width + "%",
@@ -63990,44 +64024,79 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h2", { staticClass: "h5 mt-5 mb-1" }, [_vm._v("Статьи")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card mt-3" }, [
-        _c("ul", { staticClass: "list-group list-group-flush" }, [
-          _c("li", { staticClass: "list-group-item d-flex" }, [
-            _c("a", [_vm._v("Фантастический ФТК-СЮТ и где он обитает...")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "ml-auto text-muted" }, [
-              _c("span", { staticClass: "mr-1" }, [
-                _c("i", { staticClass: "fas fa-heart" }),
-                _vm._v(" 1\n                    ")
-              ]),
-              _vm._v(" "),
-              _c("span", [
-                _c("i", { staticClass: "fas fa-eye" }),
-                _vm._v(" 10\n                    ")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [_vm._v("Самолётики")]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _vm._v("Роллинг-шаттер")
+  return _c("div", [
+    _c("h2", { staticClass: "h5 mt-5 mb-1" }, [_vm._v("Статьи")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card mt-3" }, [
+      _vm.loading
+        ? _c("div", {
+            staticClass:
+              "spinner-border spinner-border-sm mx-auto my-3 text-secondary",
+            attrs: { role: "status" }
+          })
+        : !_vm.articles.length
+        ? _c("div", { staticClass: "text-center my-3 text-secondary" }, [
+            _vm._v("\n            Нет статей\n        ")
           ])
-        ])
-      ])
+        : _c(
+            "ul",
+            { staticClass: "list-group list-group-flush" },
+            _vm._l(_vm.articles, function(article) {
+              return _c(
+                "li",
+                { key: article.id, staticClass: "list-group-item d-flex" },
+                [
+                  _c("a", { attrs: { href: article.url } }, [
+                    _vm._v(_vm._s(article.title))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "ml-auto text-muted row align-items-center"
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "mr-sm-2 mr-md-3 article-like-button",
+                          staticStyle: { cursor: "default !important" }
+                        },
+                        [
+                          _c("i", { staticClass: "far fa-heart" }),
+                          _vm._v(" "),
+                          _c("span", [
+                            _vm._v(" " + _vm._s(article.points_count))
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          staticClass:
+                            "mr-sm-2 d-none d-md-inline article-views"
+                        },
+                        [
+                          _c("i", { staticClass: "far fa-eye" }),
+                          _vm._v(
+                            " " +
+                              _vm._s(article.views_count) +
+                              "\n                    "
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ]
+              )
+            }),
+            0
+          )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -64050,67 +64119,74 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-md-4" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-body p-3" }, [
-          _c("div", { staticClass: "text-center" }, [
-            _vm.loading
-              ? _c("div", {
-                  staticClass: "spinner-border text-primary spinner-border-sm",
-                  attrs: { role: "status" }
-                })
-              : _c(
-                  "div",
-                  { staticClass: "mb-0 font-weight-bold text-primary h2" },
-                  [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.totalPoints) +
-                        "\n                    "
-                    )
-                  ]
-                ),
-            _vm._v(" "),
-            _c("div", { staticClass: "small text-secondary mb-1" }, [
-              _vm._v(
-                "\n                        очков за всё время\n                    "
-              )
+    _c("div", { staticClass: "col-xl-4 col-12" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-12 col-md-6 col-xl-12" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body p-3" }, [
+              _c("div", { staticClass: "text-center" }, [
+                _vm.loading
+                  ? _c("div", {
+                      staticClass:
+                        "spinner-border text-primary spinner-border-sm",
+                      attrs: { role: "status" }
+                    })
+                  : _c(
+                      "div",
+                      { staticClass: "mb-0 font-weight-bold text-primary h2" },
+                      [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(_vm.totalPoints) +
+                            "\n                            "
+                        )
+                      ]
+                    ),
+                _vm._v(" "),
+                _c("div", { staticClass: "small text-secondary mb-1" }, [
+                  _vm._v(
+                    "\n                                очков за всё время\n                            "
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card mt-3" }, [
+            _c("div", { staticClass: "card-body p-3" }, [
+              _c("div", { staticClass: "text-center" }, [
+                _vm.loading
+                  ? _c("div", {
+                      staticClass:
+                        "spinner-border text-secondary spinner-border-sm",
+                      attrs: { role: "status" }
+                    })
+                  : _c(
+                      "div",
+                      {
+                        staticClass: "mb-0 font-weight-bold text-secondary h2"
+                      },
+                      [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(_vm.lastMonthPoints) +
+                            "\n                            "
+                        )
+                      ]
+                    ),
+                _vm._v(" "),
+                _c("div", { staticClass: "small text-secondary mb-1" }, [
+                  _vm._v(
+                    "\n                                очков за последний месяц\n                            "
+                  )
+                ])
+              ])
             ])
           ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card mt-3" }, [
-        _c("div", { staticClass: "card-body p-3" }, [
-          _c("div", { staticClass: "text-center" }, [
-            _vm.loading
-              ? _c("div", {
-                  staticClass:
-                    "spinner-border text-secondary spinner-border-sm",
-                  attrs: { role: "status" }
-                })
-              : _c(
-                  "div",
-                  { staticClass: "mb-0 font-weight-bold text-secondary h2" },
-                  [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.lastMonthPoints) +
-                        "\n                    "
-                    )
-                  ]
-                ),
-            _vm._v(" "),
-            _c("div", { staticClass: "small text-secondary mb-1" }, [
-              _vm._v(
-                "\n                        очков за последний месяц\n                    "
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _vm._m(0)
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
     ]),
     _vm._v(" "),
     _vm._m(1)
@@ -64121,28 +64197,34 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card mt-3" }, [
-      _c("div", { staticClass: "card-body p-3" }, [
-        _c("div", { staticClass: "text-center" }, [
-          _c("canvas", {
-            staticClass: "h-100 w-100",
-            attrs: { id: "categoriesChart" }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "small text-secondary mb-1" }, [
-            _vm._v(
-              "\n                        категории очков\n                    "
-            )
+    return _c(
+      "div",
+      { staticClass: "mt-3 mt-md-0 mt-xl-3 col-12 col-md-6 col-xl-12" },
+      [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body p-3" }, [
+            _c("div", { staticClass: "text-center" }, [
+              _c("canvas", {
+                staticClass: "h-100 w-100",
+                attrs: { id: "categoriesChart" }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "small text-secondary mb-1" }, [
+                _vm._v(
+                  "\n                                категории очков\n                            "
+                )
+              ])
+            ])
           ])
         ])
-      ])
-    ])
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
+    return _c("div", { staticClass: "col-xl-8 col-12 mt-3 mt-xl-0" }, [
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-body p-3" }, [
           _c("div", { staticClass: "text-center" }, [
@@ -82937,6 +83019,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee);
     }))();
+  },
+  loadArticlesStatistics: function loadArticlesStatistics(_ref2) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var user;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              user = _ref2.user;
+              return _context2.abrupt("return", new Promise(function (resolve, reject) {
+                axios.get(route('api.stat.articles', {
+                  user: user
+                })).then(function (response) {
+                  resolve(response);
+                });
+              }));
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
   }
 });
 
@@ -84282,13 +84388,12 @@ var actions = {
     });
   },
   recountRating: function recountRating(_ref3) {
-    var state = _ref3.state,
-        commit = _ref3.commit;
+    var state = _ref3.state;
     // recount total of each user
     var max = 0;
     state.rating = state.rating.map(function (user) {
       user.total = user.points.reduce(function (accumulator, point) {
-        return accumulator + (point.category.disabled ? 0 : point.amount);
+        return accumulator + (point.category.disabled ? 0 : parseInt(point.amount));
       }, 0);
       user.points = user.points.map(function (point) {
         point.width = point.category.disabled ? 0 : point.amount / user.total * 100;

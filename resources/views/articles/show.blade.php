@@ -11,22 +11,26 @@
         <hr>
 
         <div class="row no-gutters text-muted align-items-center">
-            <ul class="list-inline mr-auto col-9 overflow-hidden">
-                @if($article->tags()->count())
-                    <li class="list-inline-item">Теги:</li>
-
-                    @foreach($article->tags as $tag)
-                        <li class="list-inline-item">
-                            <a href="{{ $tag->url }}" title="{{ $tag->name }}">
-                                {{ $tag->name }}
-                            </a>
-                        </li>
-                    @endforeach
-                @endif
-            </ul>
+            <div class="mr-auto col-9 overflow-hidden">
+                <a href="{{ $article->author->url }}">{{ $article->author->name }}</a>
+            </div>
 
             <livewire:articles.article-actions :article="$article"/>
         </div>
+
+        @if($article->tags->count())
+            <ul class="list-inline mt-2 text-muted">
+                <li class="list-inline-item">Теги:</li>
+
+                @foreach($article->tags as $tag)
+                    <li class="list-inline-item">
+                        <a href="{{ $tag->url }}" title="{{ $tag->name }}">
+                            {{ $tag->name }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
     </div>
 @endsection
 

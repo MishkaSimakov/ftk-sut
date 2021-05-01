@@ -47,6 +47,8 @@
                                         v-for="point in points.points"
                                         v-if="!point.category.disabled"
 
+                                        :key="point.id"
+
                                         class="progress-bar"
                                         :style="{ width: `${point.width}%`, backgroundColor: point.category.color }"
 

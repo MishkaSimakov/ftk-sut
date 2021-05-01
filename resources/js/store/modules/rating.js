@@ -74,12 +74,12 @@ const actions = {
             commit('setLoading', false)
         });
     },
-    recountRating({state, commit}) {
+    recountRating({state}) {
         // recount total of each user
         let max = 0
         state.rating = state.rating.map((user) => {
             user.total = user.points.reduce((accumulator, point) => {
-                return accumulator + (point.category.disabled ? 0 : point.amount)
+                return accumulator + (point.category.disabled ? 0 : parseInt(point.amount))
             }, 0)
             user.points = user.points.map((point) => {
                 point.width = point.category.disabled ? 0 : point.amount / user.total * 100

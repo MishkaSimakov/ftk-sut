@@ -95,7 +95,7 @@ export default {
             $('#ratingSettingsModal').modal('hide')
 
             this.loadRating({
-                period: this.enteredPeriod,
+                period: this.enteredPeriod
             }).then(() => {
                 this.setCategoriesFilter(this.enteredCategories)
             })
