@@ -13,8 +13,7 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
 class RatingImport implements ToCollection, WithHeadingRow, WithMultipleSheets
 {
-    public $date;
-    public $is_monthly;
+    public Carbon $date;
 
     public function __construct(Carbon $date)
     {
@@ -47,7 +46,8 @@ class RatingImport implements ToCollection, WithHeadingRow, WithMultipleSheets
             $user = $this->findUser($row[0], $users);
 
             $user_points = [];
-            foreach ($row->except(0) as $category => $amount) {
+
+            foreach ($row->except(0, 1) as $category => $amount) {
                 if ($category = $categories->where('slug', $category)->first() and $amount) {
                     array_push(
                         $user_points,
@@ -71,7 +71,7 @@ class RatingImport implements ToCollection, WithHeadingRow, WithMultipleSheets
         return 1;
     }
 
-    public function findUser($name, $users)
+    public function findUser($name, $users): User
     {
         if ($users->pluck('name')->contains($name)) {
             $user = $users->where('name', $name)->first();

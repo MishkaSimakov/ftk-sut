@@ -10,6 +10,10 @@ require('@fortawesome/fontawesome-free/js/all')
 // const infiniteScroll =  require('vue-infinite-scroll');
 // Vue.use(infiniteScroll)
 
+// lity for lightbox
+import Lity from 'lity'
+
+
 
 // Moment js
 const moment = require('moment')

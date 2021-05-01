@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +20,11 @@ class RatingPoint extends Model
     protected $dates = ['date', 'created_at', 'updated_at'];
 
     protected $fillable = ['rating_id', 'rating_point_category_id', 'amount'];
+
+    protected function serializeDate(DateTimeInterface $date): string
+    {
+        return $date->format('Y-m');
+    }
 
     public function user(): BelongsTo
     {

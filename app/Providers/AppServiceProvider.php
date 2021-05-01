@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\RatingPointCategory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -28,7 +29,9 @@ class AppServiceProvider extends ServiceProvider
         }
 
         HeadingRowFormatter::extend('rating', function($value) {
-            return optional(RatingPointCategory::where('import_name', $value)->first())->slug;
+            return optional(RatingPointCategory::whereHas('importNames', function (Builder $builder) use ($value) {
+                $builder->where('import_name', $value);
+            })->first())->slug;
         });
 
         HeadingRowFormatter::default('rating');

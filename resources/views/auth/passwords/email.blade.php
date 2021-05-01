@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Восстановление пароля')
+
 @section('content')
     <h1 class="text-center h1 mb-4">Восстановление пароля</h1>
 

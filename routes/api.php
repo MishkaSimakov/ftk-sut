@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\RatingController;
+use App\Http\Controllers\Statistics\RatingPointsStatisticsController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,7 @@ Route::get('article/search', [ArticleController::class, 'search'])->name('articl
 Route::get('article/tags', [ArticleController::class, 'tags'])->name('article.tags');
 
 Route::prefix('statistics/')->name('stat.')->group(function() {
-    Route::get('points/{user}', [\App\Http\Controllers\Statistics\RatingPointsStatisticsController::class, 'getPointsByMonth'])->name('points');
+    Route::get('points/{user}', [RatingPointsStatisticsController::class, 'getShortPointsStatistics'])->name('points');
 
 });
 

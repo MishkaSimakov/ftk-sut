@@ -18,7 +18,8 @@ const components = {
     'rating':                   'Ratings/Rating',
 
     // statistics
-    'rating-points-statistics':  'Statistics/RatingPointsStatistics'
+    'rating-points-statistics':  'Statistics/RatingPointsStatistics',
+    'articles-statistics':  'Statistics/ArticlesStatistics'
 }
 
 for (const [name, path] of Object.entries(components)) {

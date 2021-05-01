@@ -6,4 +6,6 @@
     <h1 class="text-center mb-4">{{ auth()->user()->name }}</h1>
 
     <rating-points-statistics user="{{ auth()->id() }}"></rating-points-statistics>
+
+    <articles-statistics user="{{ auth()->id() }}"></articles-statistics>
 @endsection

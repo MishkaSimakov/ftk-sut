@@ -37,13 +37,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
-//    public function authenticated(Request $request, $user)
-//    {
-//        $token = $user->createToken('Api token')->plainTextToken;
-//
-//        return $request->wantsJson()
-//            ? new JsonResponse([], 204)
-//            : redirect()->intended($this->redirectPath())->withCookie('sanctum', $token, 2147483647);
-//    }
 }

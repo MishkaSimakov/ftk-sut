@@ -17,7 +17,6 @@ class CreateRatingPointCategoriesTable extends Migration
             $table->id();
 
             $table->string('name')->unique();
-            $table->string('import_name')->unique();
             $table->string('slug')->unique();
             $table->string('color');
             $table->integer('order')->unique()->unsigned();
