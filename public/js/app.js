@@ -8466,6 +8466,25 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8487,6 +8506,11 @@ chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"].register.apply(chart_js__WEBPACK_
     },
     lastMonthPoints: function lastMonthPoints() {
       return this.pointsByMonth.length ? this.pointsByMonth[this.pointsByMonth.length - 1].amount : 0;
+    },
+    averageMonthPoints: function averageMonthPoints() {
+      return this.pointsByMonth.length ? Math.floor(this.pointsByMonth.reduce(function (a, b) {
+        return a + parseInt(b.amount);
+      }, 0) / this.pointsByMonth.length) : 0;
     }
   },
   created: function created() {
@@ -64118,78 +64142,106 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-xl-4 col-12" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12 col-md-6 col-xl-12" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-body p-3" }, [
-              _c("div", { staticClass: "text-center" }, [
-                _vm.loading
-                  ? _c("div", {
-                      staticClass:
-                        "spinner-border text-primary spinner-border-sm",
-                      attrs: { role: "status" }
-                    })
-                  : _c(
-                      "div",
-                      { staticClass: "mb-0 font-weight-bold text-primary h2" },
-                      [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(_vm.totalPoints) +
-                            "\n                            "
-                        )
-                      ]
-                    ),
-                _vm._v(" "),
-                _c("div", { staticClass: "small text-secondary mb-1" }, [
-                  _vm._v(
-                    "\n                                очков за всё время\n                            "
-                  )
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card mt-3" }, [
-            _c("div", { staticClass: "card-body p-3" }, [
-              _c("div", { staticClass: "text-center" }, [
-                _vm.loading
-                  ? _c("div", {
-                      staticClass:
-                        "spinner-border text-secondary spinner-border-sm",
-                      attrs: { role: "status" }
-                    })
-                  : _c(
-                      "div",
-                      {
-                        staticClass: "mb-0 font-weight-bold text-secondary h2"
-                      },
-                      [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(_vm.lastMonthPoints) +
-                            "\n                            "
-                        )
-                      ]
-                    ),
-                _vm._v(" "),
-                _c("div", { staticClass: "small text-secondary mb-1" }, [
-                  _vm._v(
-                    "\n                                очков за последний месяц\n                            "
-                  )
-                ])
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body p-3" }, [
+            _c("div", { staticClass: "text-center" }, [
+              _vm.loading
+                ? _c("div", {
+                    staticClass:
+                      "spinner-border text-primary spinner-border-sm my-2",
+                    attrs: { role: "status" }
+                  })
+                : _c(
+                    "div",
+                    { staticClass: "mb-0 font-weight-bold text-primary h2" },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.totalPoints) +
+                          "\n                        "
+                      )
+                    ]
+                  ),
+              _vm._v(" "),
+              _c("div", { staticClass: "small text-secondary mb-1" }, [
+                _vm._v(
+                  "\n                            очков за всё время\n                        "
+                )
               ])
             ])
           ])
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4 mt-3 mt-md-0" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body p-3" }, [
+            _c("div", { staticClass: "text-center" }, [
+              _vm.loading
+                ? _c("div", {
+                    staticClass:
+                      "spinner-border text-info spinner-border-sm my-2",
+                    attrs: { role: "status" }
+                  })
+                : _c(
+                    "div",
+                    { staticClass: "mb-0 font-weight-bold text-info h2" },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.lastMonthPoints) +
+                          "\n                        "
+                      )
+                    ]
+                  ),
+              _vm._v(" "),
+              _c("div", { staticClass: "small text-info mb-1" }, [
+                _vm._v(
+                  "\n                            очков за последний месяц\n                        "
+                )
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4 mt-3 mt-md-0" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body p-3" }, [
+            _c("div", { staticClass: "text-center" }, [
+              _vm.loading
+                ? _c("div", {
+                    staticClass:
+                      "spinner-border text-secondary spinner-border-sm my-2",
+                    attrs: { role: "status" }
+                  })
+                : _c(
+                    "div",
+                    { staticClass: "mb-0 font-weight-bold text-secondary h2" },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.averageMonthPoints) +
+                          "\n                        "
+                      )
+                    ]
+                  ),
+              _vm._v(" "),
+              _c("div", { staticClass: "small text-secondary mb-1" }, [
+                _vm._v(
+                  "\n                            очков в среднем за месяц\n                        "
+                )
+              ])
+            ])
+          ])
+        ])
       ])
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(0)
   ])
 }
 var staticRenderFns = [
@@ -64197,46 +64249,40 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "mt-3 mt-md-0 mt-xl-3 col-12 col-md-6 col-xl-12" },
-      [
-        _c("div", { staticClass: "card" }, [
+    return _c("div", { staticClass: "row mt-3" }, [
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "card h-100" }, [
           _c("div", { staticClass: "card-body p-3" }, [
-            _c("div", { staticClass: "text-center" }, [
+            _c("div", { staticClass: "h-100 text-center d-flex flex-column" }, [
               _c("canvas", {
-                staticClass: "h-100 w-100",
+                staticClass: "w-100",
                 attrs: { id: "categoriesChart" }
               }),
               _vm._v(" "),
-              _c("div", { staticClass: "small text-secondary mb-1" }, [
+              _c("div", { staticClass: "small text-secondary mb-1 mt-auto" }, [
                 _vm._v(
-                  "\n                                категории очков\n                            "
+                  "\n                            категории очков\n                        "
                 )
               ])
             ])
           ])
         ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xl-8 col-12 mt-3 mt-xl-0" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-body p-3" }, [
-          _c("div", { staticClass: "text-center" }, [
-            _c("canvas", {
-              staticClass: "h-100 w-100",
-              attrs: { id: "pointsChart" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "small text-secondary mb-1" }, [
-              _vm._v(
-                "\n                        очков за месяцы\n                    "
-              )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-8 mt-3 mt-md-0" }, [
+        _c("div", { staticClass: "card h-100" }, [
+          _c("div", { staticClass: "card-body p-3" }, [
+            _c("div", { staticClass: "h-100 text-center d-flex flex-column" }, [
+              _c("canvas", {
+                staticClass: "w-100",
+                attrs: { id: "pointsChart" }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "small text-secondary mb-1 mt-auto" }, [
+                _vm._v(
+                  "\n                            очков за месяцы\n                        "
+                )
+              ])
             ])
           ])
         ])

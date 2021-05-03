@@ -1,48 +1,51 @@
 <template>
-    <div class="row">
-        <div class="col-xl-4 col-12">
-            <div class="row">
-                <div class="col-12 col-md-6 col-xl-12">
-                    <div class="card">
-                        <div class="card-body p-3">
-                            <div class="text-center">
-                                <div class="spinner-border text-primary spinner-border-sm" role="status"
-                                     v-if="loading"></div>
-                                <div class="mb-0 font-weight-bold text-primary h2" v-else>
-                                    {{ totalPoints }}
-                                </div>
-                                <div class="small text-secondary mb-1">
-                                    очков за всё время
-                                </div>
+    <div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="text-center">
+                            <div class="spinner-border text-primary spinner-border-sm my-2" role="status"
+                                 v-if="loading"></div>
+                            <div class="mb-0 font-weight-bold text-primary h2" v-else>
+                                {{ totalPoints }}
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="card mt-3">
-                        <div class="card-body p-3">
-                            <div class="text-center">
-                                <div class="spinner-border text-secondary spinner-border-sm" role="status"
-                                     v-if="loading"></div>
-                                <div class="mb-0 font-weight-bold text-secondary h2" v-else>
-                                    {{ lastMonthPoints }}
-                                </div>
-                                <div class="small text-secondary mb-1">
-                                    очков за последний месяц
-                                </div>
+                            <div class="small text-secondary mb-1">
+                                очков за всё время
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="mt-3 mt-md-0 mt-xl-3 col-12 col-md-6 col-xl-12">
-                    <div class="card">
-                        <div class="card-body p-3">
-                            <div class="text-center">
-                                <canvas id="categoriesChart" class="h-100 w-100"></canvas>
+            <div class="col-md-4 mt-3 mt-md-0">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="text-center">
+                            <div class="spinner-border text-info spinner-border-sm my-2" role="status"
+                                 v-if="loading"></div>
+                            <div class="mb-0 font-weight-bold text-info h2" v-else>
+                                {{ lastMonthPoints }}
+                            </div>
+                            <div class="small text-info mb-1">
+                                очков за последний месяц
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                <div class="small text-secondary mb-1">
-                                    категории очков
-                                </div>
+            <div class="col-md-4 mt-3 mt-md-0">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="text-center">
+                            <div class="spinner-border text-secondary spinner-border-sm my-2" role="status"
+                                 v-if="loading"></div>
+                            <div class="mb-0 font-weight-bold text-secondary h2" v-else>
+                                {{ averageMonthPoints }}
+                            </div>
+                            <div class="small text-secondary mb-1">
+                                очков в среднем за месяц
                             </div>
                         </div>
                     </div>
@@ -50,14 +53,30 @@
             </div>
         </div>
 
-        <div class="col-xl-8 col-12 mt-3 mt-xl-0">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="text-center">
-                        <canvas id="pointsChart" class="h-100 w-100"></canvas>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body p-3">
+                        <div class="h-100 text-center d-flex flex-column">
+                            <canvas id="categoriesChart" class="w-100"></canvas>
 
-                        <div class="small text-secondary mb-1">
-                            очков за месяцы
+                            <div class="small text-secondary mb-1 mt-auto">
+                                категории очков
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 mt-3 mt-md-0">
+                <div class="card h-100">
+                    <div class="card-body p-3">
+                        <div class="h-100 text-center d-flex flex-column">
+                            <canvas id="pointsChart" class="w-100"></canvas>
+
+                            <div class="small text-secondary mb-1 mt-auto">
+                                очков за месяцы
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,6 +110,9 @@ export default {
         },
         lastMonthPoints: function () {
             return this.pointsByMonth.length ? this.pointsByMonth[this.pointsByMonth.length - 1].amount : 0
+        },
+        averageMonthPoints: function () {
+            return this.pointsByMonth.length ? Math.floor(this.pointsByMonth.reduce((a, b) => a + parseInt(b.amount), 0) / this.pointsByMonth.length) : 0
         },
     },
     created() {

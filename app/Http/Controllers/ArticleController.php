@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ArticleType;
-use App\Events\Article\ArticlePublished;
 use App\Http\Requests\Articles\StoreArticleRequest;
-use App\Http\Resources\Article\ArticleIndexResource;
 use App\Models\Article;
 use App\Models\ArticleTag;
 use App\Services\ArticleBodyPrepareService;

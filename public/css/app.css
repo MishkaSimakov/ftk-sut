@@ -11168,6 +11168,10 @@ a.text-dark:focus {
   display: none;
 }
 
+*[data-lity] {
+  cursor: pointer;
+}
+
 .tox-tinymce {
   border-radius: 0.25rem !important;
   border: 1px solid #ced4da !important;

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Storage;
 
 class Event extends Model
 {
@@ -12,7 +13,8 @@ class Event extends Model
         'name',
         'description',
         'date_start',
-        'date_end'
+        'date_end',
+        'image_url'
     ];
 
     protected $dates = [
@@ -26,7 +28,7 @@ class Event extends Model
 
     public function imageUrl(): string
     {
-        return $this->image_url;
+        return Storage::url($this->image_url);
     }
 
     public function scopePast(Builder $builder): Builder
@@ -47,5 +49,10 @@ class Event extends Model
     public function isFuture(): bool
     {
         return !$this->isPast();
+    }
+
+    public function isUserSignedUp(User $user)
+    {
+        return $this->users()->where('id', $user->id)->exists();
     }
 }

@@ -9,6 +9,9 @@ $enable-responsive-font-sizes: true;
 
 // Lity
 @import "~lity/dist/lity";
+*[data-lity] {
+    cursor: pointer;
+}
 
 // Tinymce
 @import "tinymce";

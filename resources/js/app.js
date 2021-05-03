@@ -16,3 +16,4 @@ const app = new Vue({
     store,
     el: '#app',
 });
+

@@ -36,6 +36,13 @@
 
 @push('scripts')
     <script>
-
+        document.addEventListener("DOMContentLoaded", function (event) {
+            let img = document.body.getElementsByTagName("img");
+            let i = 0;
+            while (i < img.length) {
+                img[i].setAttribute("data-lity", '');
+                i++;
+            }
+        })
     </script>
 @endpush

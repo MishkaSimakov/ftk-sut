@@ -8,6 +8,7 @@ use Livewire\Component;
 class EventSingle extends Component
 {
     public Event $event;
+    public string $modal_id;
 
     public function signUp()
     {
@@ -18,7 +19,24 @@ class EventSingle extends Component
             return;
         }
 
-        $this->event->users()->syncWithoutDetaching(auth()->user());
+        $this->event->users()->attach(auth()->user());
+    }
+
+    public function signOut()
+    {
+        if (auth()->user()->cannot('signUp', $this->event)) {
+            abort(403);
+        }
+        if (!$this->event->users()->where('id', auth()->id())->exists()) {
+            return;
+        }
+
+        $this->event->users()->detach(auth()->user());
+    }
+
+    public function mount()
+    {
+        $this->modal_id = "event_{$this->event->id}_users_list_modal";
     }
 
     public function render()

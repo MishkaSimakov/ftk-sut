@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Мероприятия')
+@section('title', 'Расписание')
 
 @section('content')
-    <h1 class="text-center mb-4">Мероприятия</h1>
+    <h1 class="text-center mb-4">Расписание</h1>
 
     @forelse($events as $event)
         <livewire:events.event-single :event="$event" />

@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Events\StoreEventRequest;
+use App\Images\Filters\OptimizeFilter;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+use Str;
+
 
 class EventsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Event::class, 'event');
+    }
+
     public function index()
     {
         $events = Event::future()->with('users')->orderBy('date_start')->get();
@@ -14,25 +24,25 @@ class EventsController extends Controller
         return view('events.index', compact('events'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return view('events.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreEventRequest $request)
     {
-        //
+        $image_name = Str::random(6);
+        $path = '\\events\\' . $image_name . '.' . $request->file('image')->extension();
+        $name = Image::make($request->file('image'))
+            ->filter(new OptimizeFilter())
+            ->save(public_path('storage' . $path));
+
+        $event = Event::create(
+            array_merge($request->except('image'), [
+                'image_url' => $path
+            ])
+        );
     }
 
     /**

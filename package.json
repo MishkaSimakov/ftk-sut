@@ -27,6 +27,7 @@
         "@tinymce/tinymce-vue": "^3.2.8",
         "@trevoreyre/autocomplete-vue": "^2.2.0",
         "@yaireo/tagify": "^3.23.1",
+        "basiclightbox": "^5.0.4",
         "chart.js": "^3.2.0",
         "chartjs-adapter-moment": "^1.0.0",
         "laravel-mix": "^5.0.1",
