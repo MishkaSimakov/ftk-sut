@@ -43,7 +43,7 @@ class Event extends Model
 
     public function isPast(): bool
     {
-        return $this->date_end->lessThanOrEqualTo(now());
+        return $this->date_end->isFuture();
     }
 
     public function isFuture(): bool

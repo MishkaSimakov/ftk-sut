@@ -23,28 +23,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/libraries/ChartjsDayjsAdapter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/utils/sizing.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Livewire/Events/ChangeUsersListForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Livewire/Events/EventActions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Events/UpdateEventRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/events/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/events/users/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/livewire/events/change-users-list-form.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/livewire/events/event-actions.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EventsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EventsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/ArticlesList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/ArticlesList.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Events/EventSingle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Events/EventSingle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Images/Filters/OptimizeFilter.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Event.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Policies/EventPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/EventPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js.LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js.LICENSE.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Articles/Form/ArticleDateEditor.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Articles/Form/ArticleDateEditor.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/News/Form/NewsDateEditor.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/News/Form/NewsDateEditor.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Ratings/Settings/SettingsForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Ratings/Settings/SettingsForm.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Statistics/RatingPointsStatistics.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Statistics/RatingPointsStatistics.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/libraries.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/libraries.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/events/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/events/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/articles/lists/articles-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/articles/lists/articles-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/events/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/events/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/livewire/events/event-single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/events/event-single.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -409,7 +407,8 @@
       <workItem from="1620019013749" duration="15749000" />
       <workItem from="1620064472512" duration="1882000" />
       <workItem from="1620107989816" duration="1870000" />
-      <workItem from="1620200859849" duration="13753000" />
+      <workItem from="1620200859849" duration="14845000" />
+      <workItem from="1620229974896" duration="10165000" />
     </task>
     <task id="LOCAL-00001" summary="Some changes">
       <created>1618655936551</created>

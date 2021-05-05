@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md">
                         <label for="date_start">Дата начала</label>
                         <input id="date_start" type="datetime-local"
                                class="form-control @error('date_start') is-invalid @enderror" name="date_start"
@@ -56,7 +56,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md">
                         <label for="date_end">Дата конца</label>
                         <input id="date_end" type="datetime-local"
                                class="form-control @error('date_end') is-invalid @enderror" name="date_end"

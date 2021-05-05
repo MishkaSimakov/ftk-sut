@@ -25,6 +25,7 @@ Route::get('article/{article}/publish', [\App\Http\Controllers\ArticleController
 Route::resource('article', \App\Http\Controllers\ArticleController::class);
 
 # events
+Route::get('events/{event}/users/edit', [\App\Http\Controllers\EventsController::class, 'editUsersList'])->name('events.users.edit');
 Route::resource('events', \App\Http\Controllers\EventsController::class);
 
 # rating
@@ -46,5 +47,5 @@ Auth::routes();
 Route::get('/user/{user}', [\App\Http\Controllers\UserController::class, 'show'])->name('user.show');
 
 Route::get('/home', [App\Http\Controllers\UserController::class, 'home'])->name('home');
-Route::get('/settings', [App\Http\Controllers\HomeController::class, 'settings'])->name('settings');
-Route::get('/notifications', [App\Http\Controllers\HomeController::class, 'notifications'])->name('notifications');
+Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('settings');
+Route::get('/notifications', [App\Http\Controllers\UserController::class, 'notifications'])->name('notifications');

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Events\StoreEventRequest;
+use App\Http\Requests\Events\UpdateEventRequest;
 use App\Models\Event;
-use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
+use Storage;
 use Str;
 
 
@@ -31,11 +33,7 @@ class EventsController extends Controller
 
     public function store(StoreEventRequest $request)
     {
-        $image_name = Str::random(6);
-        $path = '\\events\\' . $image_name . '.' . $request->file('image')->extension();
-        Image::make($request->file('image'))
-            ->widen(750)
-            ->save(public_path('storage' . $path));
+        $path = $this->storeEventImage($request->file('image'));
 
         Event::create(
             array_merge($request->except('image'), [
@@ -46,37 +44,54 @@ class EventsController extends Controller
         return redirect()->route('events.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Event $event
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Event $event)
     {
-        //
+        return view('events.edit', compact('event'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Event $event
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Event $event)
+
+    public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+        if ($request->hasFile('image')) {
+            Storage::disk('public')->delete($event->image_url);
+
+            $path = $this->storeEventImage($request->file('image'));
+
+            $event->update(['image_url' => $path]);
+        }
+
+        $event->update($request->except('image'));
+
+        return redirect()->route('events.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Event $event
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Event $event)
     {
-        //
+        Storage::disk('public')->delete($event->image_url);
+        $event->delete();
+
+        return redirect()->back();
+    }
+
+    public function editUsersList(Event $event)
+    {
+        $this->authorize('changeUsersList', $event);
+
+        $event->loadMissing('users');
+
+        return view('events.users.edit', compact('event'));
+    }
+
+
+    protected function storeEventImage(UploadedFile $file): string
+    {
+        $image_name = Str::random(6);
+        $path = '\\events\\' . $image_name . '.' . $file->extension();
+        Image::make($file)
+            ->widen(750)
+            ->save(public_path('storage' . $path));
+
+        return $path;
     }
 }

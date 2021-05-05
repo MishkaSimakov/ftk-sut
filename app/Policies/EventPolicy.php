@@ -77,6 +77,18 @@ class EventPolicy
      */
     public function signUp(User $user, Event $event)
     {
-        return $event->date_start->gt(now());
+        return $event->date_start->isFuture();
+    }
+
+    /**
+     * Determine whether the user can update event users list.
+     *
+     * @param User $user
+     * @param Event $event
+     * @return bool
+     */
+    public function changeUsersList(User $user, Event $event)
+    {
+        return $user->is_admin;
     }
 }

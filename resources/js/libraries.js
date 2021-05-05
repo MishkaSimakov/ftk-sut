@@ -10,11 +10,11 @@ import Lity from 'lity'
 
 // fontawesome
 import {library, dom} from '@fortawesome/fontawesome-svg-core'
-import {faHeart as solidHeart, faEllipsisH, faArrowDown, faCog, faLongArrowAltRight} from '@fortawesome/free-solid-svg-icons'
+import {faHeart as solidHeart, faEllipsisH, faArrowDown, faCog, faLongArrowAltRight, faTimes} from '@fortawesome/free-solid-svg-icons'
 import {faHeart as regularHeart, faEye, faQuestionCircle} from '@fortawesome/free-regular-svg-icons'
 
 library.add(
-    faEllipsisH, faArrowDown, faCog, faLongArrowAltRight, solidHeart,
+    faEllipsisH, faArrowDown, faCog, faLongArrowAltRight, solidHeart, faTimes,
     regularHeart, faEye, faQuestionCircle
 )
 dom.watch()
