@@ -25,6 +25,13 @@ class EventsController extends Controller
         return view('events.index', compact('events'));
     }
 
+    public function past()
+    {
+        $events = Event::past()->with('users')->orderBy('date_start')->paginate(Event::PAGINATION_LIMIT);
+
+        return view('events.index', compact('events'));
+    }
+
 
     public function create()
     {

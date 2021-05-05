@@ -65,7 +65,7 @@ class User extends Authenticatable
 
     public function getUrlAttribute(): string
     {
-        return route('user.show', [
+        return route('users.show', [
             'user' => $this
         ]);
     }

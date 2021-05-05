@@ -25,6 +25,7 @@ Route::get('article/{article}/publish', [\App\Http\Controllers\ArticleController
 Route::resource('article', \App\Http\Controllers\ArticleController::class);
 
 # events
+Route::get('events/past', [\App\Http\Controllers\EventsController::class, 'past'])->name('events.past');
 Route::get('events/{event}/users/edit', [\App\Http\Controllers\EventsController::class, 'editUsersList'])->name('events.users.edit');
 Route::resource('events', \App\Http\Controllers\EventsController::class);
 
@@ -39,12 +40,11 @@ Route::get('rating/{period?}', [\App\Http\Controllers\RatingController::class, '
 //    Route::get('compare/{user}', [\App\Http\Controllers\Statistics\StatisticsController::class, 'compare'])->name('compare');
 //});
 
-# other
-Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);
-
 Auth::routes();
 
-Route::get('/user/{user}', [\App\Http\Controllers\UserController::class, 'show'])->name('user.show');
+Route::get('/admin', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.index');
+
+Route::resource('users', \App\Http\Controllers\UserController::class);
 
 Route::get('/home', [App\Http\Controllers\UserController::class, 'home'])->name('home');
 Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('settings');

@@ -43,7 +43,7 @@
                         <a class="nav-link" href="{{ route('events.index') }}">Расписание</a>
 
                         <div class="hover-dropdown-menu dropdown-menu">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('events.past') }}">
                                 Прошедшие
                             </a>
                             @can('create', \App\Models\Event::class)
@@ -57,11 +57,11 @@
                         <a class="nav-link" href="{{ route('rating.index') }}">Рейтинг</a>
 
                         @admin
-                            <div class="hover-dropdown-menu dropdown-menu">
-                                <a class="dropdown-item" href="{{ route('rating.create') }}">
-                                    Загрузить
-                                </a>
-                            </div>
+                        <div class="hover-dropdown-menu dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('rating.create') }}">
+                                Загрузить
+                            </a>
+                        </div>
                         @endadmin
                     </li>
                 </ul>
@@ -89,8 +89,14 @@
                             <a class="dropdown-item" href="#">
                                 Оповещения
                             </a>
-                            <div class="dropdown-divider"></div>
 
+                            @admin
+                                <a class="dropdown-item" href="{{ route('admin.index') }}">
+                                    Управление
+                                </a>
+                            @endadmin
+
+                            <div class="dropdown-divider"></div>
 
                             <a class="dropdown-item text-danger" href=""
                                onclick="event.preventDefault(); $('#logout-form').submit();">

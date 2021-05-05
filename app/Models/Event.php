@@ -9,6 +9,8 @@ use Storage;
 
 class Event extends Model
 {
+    public const PAGINATION_LIMIT = 50;
+
     protected $fillable = [
         'name',
         'description',

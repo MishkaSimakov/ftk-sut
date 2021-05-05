@@ -3,7 +3,7 @@
 return [
     'accepted' => 'The :attribute must be accepted.',
     'active_url' => 'The :attribute is not a valid URL.',
-    'after' => 'The :attribute must be a date after :date.',
+    'after' => 'Эта дата должна быть после :date.',
     'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
     'alpha' => 'The :attribute may only contain letters.',
     'alpha_dash' => 'The :attribute may only contain letters, numbers, dashes and underscores.',
@@ -106,4 +106,14 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
+
+    'attributes' => [
+        'date-start' => 'Дата начала',
+        'date-end' => 'Дата окончания',
+        'password' => 'Пароль',
+        'name' => 'Название',
+        'image' => 'Изображение',
+        'title' => 'Заголовок',
+        'description' => 'Описание',
+    ],
 ];
