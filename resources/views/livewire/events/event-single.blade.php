@@ -5,7 +5,7 @@
                 <img alt="Изображение мероприятия" data-lity src="{{ $event->imageUrl() }}"
                      class="h-100 w-100 card-img" style="object-fit: cover">
             </div>
-            <div class="d-flex flex-column col-md-9 py-2 px-3">
+            <div class="d-flex flex-column col-md-9 col-xl-10 py-2 px-3">
                 <div class="card-title h5">
                     {{ $event->name }}
                 </div>
@@ -76,10 +76,21 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="font-weight-bold">Список пользователей:</p>
-                    @foreach($event->users as $user)
-                        <a href="{{ $user->url }}">{{ $user->name }}</a>
-                    @endforeach
+                    @if($event->users->count())
+                        <p class="h6">Список пользователей:</p>
+
+                        <ul>
+                            @foreach($event->users as $user)
+                                <li class="list-unstyled">
+                                    <a href="{{ $user->url }}">{{ $user->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <div class="my-3 text-center h6 text-info">
+                            <span>Ещё никто не записывался на это мероприятие.</span>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

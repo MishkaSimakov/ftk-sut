@@ -88,7 +88,7 @@
 <script>
 import statisticsApi from '../../api/statistics'
 import {Chart, registerables} from 'chart.js'
-import 'chartjs-adapter-moment';
+import '../../libraries/ChartjsDayjsAdapter'
 
 Chart.register(...registerables);
 
@@ -188,9 +188,8 @@ export default {
                             bodyAlign: 'center',
                             displayColors: false,
                             callbacks: {
-                                title: function (context) {
-                                    console.log(context)
-                                    return Vue.moment(context[0].parsed.x).format('MMMM YYYY')
+                                title: (context) => {
+                                    return this.$date(context[0].parsed.x).format('MMMM YYYY')
                                 },
                                 label: function (context) {
                                     return context.formattedValue + ' очков'

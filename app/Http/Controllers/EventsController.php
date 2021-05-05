@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Events\StoreEventRequest;
-use App\Images\Filters\OptimizeFilter;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -34,26 +33,17 @@ class EventsController extends Controller
     {
         $image_name = Str::random(6);
         $path = '\\events\\' . $image_name . '.' . $request->file('image')->extension();
-        $name = Image::make($request->file('image'))
-            ->filter(new OptimizeFilter())
+        Image::make($request->file('image'))
+            ->widen(750)
             ->save(public_path('storage' . $path));
 
-        $event = Event::create(
+        Event::create(
             array_merge($request->except('image'), [
                 'image_url' => $path
             ])
         );
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param Event $event
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Event $event)
-    {
-        //
+        return redirect()->route('events.index');
     }
 
     /**

@@ -1,11 +1,6 @@
 // Vue (must be imported first!)
 window.Vue = require('vue');
 
-// Fontawesome
-// require('@fortawesome/fontawesome-free/js/solid');
-// require('@fortawesome/fontawesome-free/js/regular');
-require('@fortawesome/fontawesome-free/js/all')
-
 // infinite scroll for news and articles
 // const infiniteScroll =  require('vue-infinite-scroll');
 // Vue.use(infiniteScroll)
@@ -13,13 +8,16 @@ require('@fortawesome/fontawesome-free/js/all')
 // lity for lightbox
 import Lity from 'lity'
 
+// fontawesome
+import {library, dom} from '@fortawesome/fontawesome-svg-core'
+import {faHeart as solidHeart, faEllipsisH, faArrowDown, faCog, faLongArrowAltRight} from '@fortawesome/free-solid-svg-icons'
+import {faHeart as regularHeart, faEye, faQuestionCircle} from '@fortawesome/free-regular-svg-icons'
 
-// Moment js
-const moment = require('moment')
-require('moment/locale/ru')
-Vue.use(require('vue-moment'), {
-    moment
-})
+library.add(
+    faEllipsisH, faArrowDown, faCog, faLongArrowAltRight, solidHeart,
+    regularHeart, faEye, faQuestionCircle
+)
+dom.watch()
 
 
 // Vue calendar
@@ -27,6 +25,20 @@ Vue.use(require('vue-moment'), {
 // Vue.use(VCalendar, {
 //     componentPrefix: 'vc'
 // });
+
+// Dayjs
+let dayjs = require('dayjs')
+import 'dayjs/locale/ru' // load on demand
+
+dayjs.locale('ru')
+
+Object.defineProperties(Vue.prototype, {
+    $date: {
+        get() {
+            return dayjs
+        }
+    }
+});
 
 
 // Autocomplete-vue

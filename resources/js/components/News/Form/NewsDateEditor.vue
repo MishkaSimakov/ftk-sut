@@ -12,8 +12,8 @@
         <div class="form-group" v-if="is_delayed_publication">
             <input id="date" type="date"
                    class="form-control" name="date"
-                   :value="$moment().format('YYYY-MM-DD')"
-                   :min="$moment().format('YYYY-MM-DD')" required autofocus
+                   :value="$date().format('YYYY-MM-DD')"
+                   :min="$date().format('YYYY-MM-DD')" required autofocus
             >
         </div>
     </div>

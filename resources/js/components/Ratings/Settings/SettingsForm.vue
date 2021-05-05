@@ -24,7 +24,7 @@
                     class="form-control"
                     name="date-end"
                     :min="enteredPeriod.start"
-                    :max="$moment().format('YYYY-MM')"
+                    :max="$date().format('YYYY-MM')"
                     required
                 >
             </div>

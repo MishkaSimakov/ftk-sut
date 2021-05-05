@@ -20,6 +20,7 @@ class EventSingle extends Component
         }
 
         $this->event->users()->attach(auth()->user());
+        $this->event->refresh();
     }
 
     public function signOut()
@@ -32,6 +33,7 @@ class EventSingle extends Component
         }
 
         $this->event->users()->detach(auth()->user());
+        $this->event->refresh();
     }
 
     public function mount()

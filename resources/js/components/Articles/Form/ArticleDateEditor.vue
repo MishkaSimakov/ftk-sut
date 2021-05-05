@@ -12,8 +12,8 @@
         <div class="form-group" v-if="is_delayed_publication">
             <input id="date" type="datetime-local"
                    class="form-control" name="date"
-                   :value="this.value_date ? $moment(this.value_date).format('YYYY-MM-DD[T]HH:mm') : $moment().format('YYYY-MM-DD[T]HH:mm')"
-                   :min="$moment().format('YYYY-MM-DD[T]HH:mm')" required autofocus
+                   :value="this.value_date ? $date(this.value_date).format('YYYY-MM-DD[T]HH:mm') : $date().format('YYYY-MM-DD[T]HH:mm')"
+                   :min="$date().format('YYYY-MM-DD[T]HH:mm')" required autofocus
             >
         </div>
     </div>
@@ -31,6 +31,7 @@ export default {
     data() {
         return {
             is_delayed_publication: this.value_checkbox,
+
         }
     },
     mounted() {
