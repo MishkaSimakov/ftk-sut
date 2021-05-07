@@ -9,6 +9,7 @@ use Livewire\Component;
 class ArticleActions extends Component
 {
     public Article $article;
+    public string $unique;
 
     public function toggleLike()
     {
@@ -17,6 +18,12 @@ class ArticleActions extends Component
         }
 
         $this->article->points()->toggle(auth()->user());
+        $this->article->refresh();
+    }
+
+    public function mount()
+    {
+        $this->unique = uniqid();
     }
 
     public function render()

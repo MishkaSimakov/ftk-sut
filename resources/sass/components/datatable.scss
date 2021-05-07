@@ -1,0 +1,12 @@
+dataTable-dropdown {
+    @extend .form-group;
+}
+
+.dataTable-selector {
+    @extend .form-control, .custom-select;
+}
+
+
+.dataTable-search .dataTable-input {
+    @extend .form-control
+}

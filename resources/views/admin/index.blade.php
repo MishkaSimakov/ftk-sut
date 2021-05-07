@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Статьи')
+@section('title', 'Панель администратора')
 
 @section('content')
     <h1 class="text-center mb-4">Панель администратора</h1>
@@ -43,11 +43,7 @@
     <section class="mb-5">
         <h2 class="h3 text-left font-weight-bold">Управление пользователями</h2>
 
-        <div class="card">
-            <div class="card-body">
-
-            </div>
-        </div>
+        <admin-users-datatable users="{{ $users }}"></admin-users-datatable>
     </section>
 
     <section class="mb-5">

@@ -7,7 +7,7 @@
 
     @auth
         @if(auth()->id() !== $user->id)
-            <a class="btn btn-primary btn-block">Сравнение</a>
+            <a class="btn btn-primary btn-block mb-3">Сравнить</a>
         @endif
     @endauth
 

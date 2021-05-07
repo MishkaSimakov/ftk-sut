@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Storage;
 
 class Event extends Model
@@ -25,7 +27,7 @@ class Event extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot('distance_traveled');
     }
 
     public function imageUrl(): string
@@ -56,5 +58,16 @@ class Event extends Model
     public function isUserSignedUp(User $user)
     {
         return $this->users()->where('id', $user->id)->exists();
+    }
+
+
+    public function travel(): HasOne
+    {
+        return $this->hasOne(Travel::class);
+    }
+
+    public function isTravel(): bool
+    {
+        return (bool) $this->loadMissing('travel')->travel;
     }
 }

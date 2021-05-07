@@ -23,7 +23,12 @@ $enable-responsive-font-sizes: true;
 @import '~@trevoreyre/autocomplete-vue/dist/style.css';
 @import 'autocomplete';
 
+// Datatables
+@import "~simple-datatables/src/style.css";
+
 // Custom components
 @import "components/dropdown";
 @import "components/article";
+@import "components/table";
+//@import "components/datatable";
 //@import "utils/sizing";

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Events\StoreEventRequest;
 use App\Http\Requests\Events\UpdateEventRequest;
 use App\Models\Event;
+use App\Models\Travel;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
 use Storage;
@@ -20,14 +21,14 @@ class EventsController extends Controller
 
     public function index()
     {
-        $events = Event::future()->with('users')->orderBy('date_start')->get();
+        $events = Event::future()->with(['users', 'travel'])->orderBy('date_start')->get();
 
         return view('events.index', compact('events'));
     }
 
     public function past()
     {
-        $events = Event::past()->with('users')->orderBy('date_start')->paginate(Event::PAGINATION_LIMIT);
+        $events = Event::past()->with(['users', 'travel'])->orderBy('date_start')->paginate(Event::PAGINATION_LIMIT);
 
         return view('events.index', compact('events'));
     }
@@ -42,11 +43,20 @@ class EventsController extends Controller
     {
         $path = $this->storeEventImage($request->file('image'));
 
-        Event::create(
+        $event = Event::create(
             array_merge($request->except('image'), [
                 'image_url' => $path
             ])
         );
+
+        if ($request->get('is_travel') === 'on') {
+            $event->travel()->save(
+                Travel::make([
+                    'distance' => $request->get('travel_distance'),
+                    'type' => $request->get('travel_type'),
+                ])
+            );
+        }
 
         return redirect()->route('events.index');
     }
@@ -54,6 +64,8 @@ class EventsController extends Controller
 
     public function edit(Event $event)
     {
+        $event->loadMissing('travel');
+
         return view('events.edit', compact('event'));
     }
 
@@ -69,6 +81,15 @@ class EventsController extends Controller
         }
 
         $event->update($request->except('image'));
+
+        if ($request->get('is_travel') === 'on') {
+            $event->travel()->updateOrCreate([
+                'distance' => $request->get('travel_distance'),
+                'type' => $request->get('travel_type'),
+            ]);
+        } elseif ($event->isTravel()) {
+            $event->travel->delete();
+        }
 
         return redirect()->route('events.index');
     }

@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="form-group col-md">
-                        <label for="date_end">Дата конца</label>
+                        <label for="date_end">Дата окончания</label>
                         <input id="date_end" type="datetime-local"
                                class="form-control @error('date_end') is-invalid @enderror" name="date_end"
                                min="{{ now()->isoFormat('YYYY-MM-DD[T]HH:mm') }}"
@@ -86,8 +86,75 @@
                     @enderror
                 </div>
 
+                <div class="form-group form-check">
+                    <input
+                        type="checkbox" name="is_travel" class="form-check-input" id="is_travel" onclick="toggleTravelSettings()"
+                        @if(old('is_travel') === 'on') checked @endif
+                    >
+                    <label class="form-check-label" for="is_travel">Это поход</label>
+                </div>
+
+                <div id="travelSettings" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group col-md">
+                            <label for="travel_type">Тип</label>
+                            <select id="travel_type"
+                                    class="custom-select @error('travel_type') is-invalid @enderror" name="travel_type"
+                                    autofocus
+                            >
+                                @foreach(\App\Enums\TravelType::getInstances() as $type)
+                                    <option
+                                        value="{{ $type->value }}"
+                                        @if ($type->value == old('travel_type')) selected @endif
+                                    >
+                                        {{ $type->description }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            @error('travel_type')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md">
+                            <label for="travel_distance">Длина маршрута (км)</label>
+                            <input id="travel_distance" type="number"
+                                   step="0.1" min="0"
+                                   class="form-control @error('travel_distance') is-invalid @enderror" name="travel_distance"
+                                   value="{{ old('travel_distance') }}" autofocus
+                            >
+
+                            @error('travel_distance')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary mr-2">Сохранить</button>
             </form>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        function toggleTravelSettings() {
+            let checkBox = document.getElementById("is_travel");
+            let text = document.getElementById("travelSettings");
+
+            if (checkBox.checked) {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", toggleTravelSettings);
+    </script>
+@endpush

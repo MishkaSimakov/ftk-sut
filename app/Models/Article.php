@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Traits\Publishable;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,7 +15,7 @@ class Article extends Model implements Viewable
     use HasFactory, InteractsWithViews, Publishable;
 
     const TRUNCATE_LIMIT = 500;
-    const PAGINATION_LIMIT = 50;
+    const PAGINATION_LIMIT = 10;
 
     const RELEVANCE_COEFFICIENTS = [
         'points' => 1,
@@ -50,7 +49,7 @@ class Article extends Model implements Viewable
 
     public function isLikedBy(User $user): bool
     {
-        return $this->points()->where('user_id', $user->id)->exists();
+        return $this->loadMissing('points')->points->contains('id', $user->id);
     }
 
     public function getTruncatedBodyAttribute(): string

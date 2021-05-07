@@ -108,12 +108,12 @@ return [
     'uuid' => 'The :attribute must be a valid UUID.',
 
     'attributes' => [
-        'date-start' => 'Дата начала',
-        'date-end' => 'Дата окончания',
-        'password' => 'Пароль',
-        'name' => 'Название',
-        'image' => 'Изображение',
-        'title' => 'Заголовок',
-        'description' => 'Описание',
+        'date_start' => '"Дата начала"',
+        'date_end' => '"Дата окончания"',
+        'password' => '"Пароль"',
+        'name' => '"Название"',
+        'image' => '"Изображение"',
+        'title' => '"Заголовок"',
+        'description' => '"Описание"',
     ],
 ];

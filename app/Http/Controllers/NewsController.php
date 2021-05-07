@@ -56,6 +56,6 @@ class NewsController extends Controller
     {
         $news->delete();
 
-        return redirect()->route('news.index');
+        return redirect()->back();
     }
 }

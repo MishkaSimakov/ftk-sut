@@ -32,11 +32,16 @@ class UserController extends Controller
 
     public function create()
     {
-        //
+        return view('user.create');
     }
 
     public function store(StoreUserRequest $request)
     {
-        //
+        $user = User::create($request->only('name', 'is_admin', 'type'));
+    }
+
+    public function edit()
+    {
+        return view('user.edit');
     }
 }

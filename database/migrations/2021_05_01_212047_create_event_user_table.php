@@ -9,10 +9,13 @@ class CreateEventUserTable extends Migration
     public function up()
     {
         Schema::create('event_user', function (Blueprint $table) {
+            $table->primary(['event_id', 'user_id']);
+
             $table->foreignId('event_id');
             $table->foreignId('user_id');
 
-            $table->primary(['event_id', 'user_id']);
+            $table->float('distance_traveled')->nullable();
+
             $table->foreign('event_id')->on('events')->references('id')->onDelete('cascade');
             $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
 

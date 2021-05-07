@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('password')->nullable();
 
+            $table->enum('type', \App\Enums\UserType::getValues());
             $table->boolean('is_admin')->nullable();
-            $table->boolean('is_student')->nullable();
 
             $table->string('register_code')->unique();
 

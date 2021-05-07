@@ -10,11 +10,22 @@ import Lity from 'lity'
 
 // fontawesome
 import {library, dom} from '@fortawesome/fontawesome-svg-core'
-import {faHeart as solidHeart, faEllipsisH, faArrowDown, faCog, faLongArrowAltRight, faTimes} from '@fortawesome/free-solid-svg-icons'
+import {
+    faHeart as solidHeart,
+    faEllipsisH,
+    faArrowDown,
+    faCog,
+    faLongArrowAltRight,
+    faTimes,
+    faHiking,
+    faBiking,
+    faArrowRight,
+    faArrowLeft
+} from '@fortawesome/free-solid-svg-icons'
 import {faHeart as regularHeart, faEye, faQuestionCircle} from '@fortawesome/free-regular-svg-icons'
 
 library.add(
-    faEllipsisH, faArrowDown, faCog, faLongArrowAltRight, solidHeart, faTimes,
+    faEllipsisH, faArrowDown, faCog, faLongArrowAltRight, solidHeart, faTimes, faHiking, faBiking, faArrowRight, faArrowLeft,
     regularHeart, faEye, faQuestionCircle
 )
 dom.watch()
@@ -43,9 +54,15 @@ Object.defineProperties(Vue.prototype, {
 
 // Autocomplete-vue
 import Autocomplete from '@trevoreyre/autocomplete-vue'
+
 Vue.use(Autocomplete)
 
 
 // Tinymce rich text editor
 import Editor from '@tinymce/tinymce-vue'
+
 Vue.use(Editor)
+
+// Datatables
+// import {DataTable} from "simple-datatables"
+// window.DataTable = DataTable

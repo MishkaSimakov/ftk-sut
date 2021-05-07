@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\User\UserPrivateResource;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -13,6 +15,10 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.index');
+        $users = UserPrivateResource::collection(
+            User::select(['id', 'name', 'register_code', 'email'])->orderBy('name')->get()
+        )->toJson();
+
+        return view('admin.index', compact('users'));
     }
 }

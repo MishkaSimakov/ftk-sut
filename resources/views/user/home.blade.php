@@ -8,4 +8,6 @@
     <rating-points-statistics user="{{ auth()->id() }}"></rating-points-statistics>
 
     <articles-statistics user="{{ auth()->id() }}"></articles-statistics>
+
+    <event-statistics user="{{ auth()->id() }}"></event-statistics>
 @endsection

@@ -11,7 +11,7 @@
         <hr>
 
         <div class="row no-gutters text-muted align-items-center">
-            <div class="mr-auto col-9 overflow-hidden">
+            <div class="mr-auto col text-nowrap overflow-hidden">
                 <a href="{{ $article->author->url }}">{{ $article->author->name }}</a>
             </div>
 
