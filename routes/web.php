@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::view('/', 'welcome')->name('main');
+# info
+Route::get('/', [\App\Http\Controllers\PageController::class, 'welcome'])->name('main');
+Route::get('/about', [\App\Http\Controllers\PageController::class, 'about'])->name('about');
+Route::get('/site-map', [\App\Http\Controllers\PageController::class, 'sitemap'])->name('sitemap');
 
 # news
 Route::resource('news', \App\Http\Controllers\NewsController::class);
@@ -25,6 +28,8 @@ Route::get('article/{article}/publish', [\App\Http\Controllers\ArticleController
 Route::resource('article', \App\Http\Controllers\ArticleController::class);
 
 # events
+Route::permanentRedirect('/schedule ', '/events');
+
 Route::get('events/past', [\App\Http\Controllers\EventsController::class, 'past'])->name('events.past');
 Route::get('events/{event}/users/edit', [\App\Http\Controllers\EventsController::class, 'editUsersList'])->name('events.users.edit');
 Route::resource('events', \App\Http\Controllers\EventsController::class);
@@ -39,6 +44,9 @@ Route::get('rating/{period?}', [\App\Http\Controllers\RatingController::class, '
 //Route::prefix('statistics')->name('statistics.')->group(function () {
 //    Route::get('compare/{user}', [\App\Http\Controllers\Statistics\StatisticsController::class, 'compare'])->name('compare');
 //});
+
+# achievements
+Route::get('/achievements', [\App\Http\Controllers\AchievementController::class, 'index'])->name('achievements.index');
 
 Auth::routes();
 

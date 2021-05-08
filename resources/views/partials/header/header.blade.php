@@ -82,12 +82,8 @@
                             <a class="dropdown-item" href="{{ route('home') }}">
                                 Профиль
                             </a>
-                            {{--  TODO: добавить сюда правильные ссылки--}}
                             <a class="dropdown-item" href="{{ route('settings') }}">
                                 Настройки
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                Оповещения
                             </a>
 
                             @admin

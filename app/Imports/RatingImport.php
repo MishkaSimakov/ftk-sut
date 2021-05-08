@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Enums\UserType;
 use App\Models\RatingPointCategory;
 use App\Models\User;
 use Carbon\Carbon;
@@ -78,7 +79,7 @@ class RatingImport implements ToCollection, WithHeadingRow, WithMultipleSheets
         } else {
             $user = User::create([
                 'name' => $name,
-                'is_student' => true,
+                'type' => UserType::Pupil(),
             ]);
         }
 

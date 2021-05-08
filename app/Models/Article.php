@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Traits\Publishable;
+use App\Achievements\WriteArticleChain;
+use App\Models\Traits\Publishable;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,6 +26,15 @@ class Article extends Model implements Viewable
 
     protected $dates = ['date'];
     protected $fillable = ['title', 'body', 'date'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::saved(function (Article $article) {
+            $article->author->addProgress(new WriteArticleChain());
+        });
+    }
 
     public function author(): BelongsTo
     {

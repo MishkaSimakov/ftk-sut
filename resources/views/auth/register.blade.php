@@ -3,7 +3,7 @@
 @section('title', 'Регистрация')
 
 @section('content')
-    <h1 class="text-center h1 mb-4">Создайте свой аккаунт</h1>
+    <h1 class="text-center mb-4">Создайте свой аккаунт</h1>
 
     <div class="mx-auto col-xl-6 col-md-9">
         <div class="card">

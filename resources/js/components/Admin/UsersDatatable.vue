@@ -25,7 +25,7 @@
 
 
             <div class="table-responsive">
-                <table class="table table-bordered border-top border-bottom" style="border-style: hidden;">
+                <table class="table table-bordered border-top border-bottom mb-0" style="border-style: hidden;">
                     <thead>
                     <tr>
                         <th>Имя</th>
@@ -55,7 +55,7 @@
             </div>
 
             <nav>
-                <ul class="pagination justify-content-end mr-3">
+                <ul class="pagination justify-content-end m-3">
                     <li class="page-item" :class="paginationData.page <= 1 ? 'disabled' : ''">
                         <button class="page-link" aria-label="Previous" v-on:click="setPage(paginationData.page - 1)">
                             <span aria-hidden="true">&laquo;</span>

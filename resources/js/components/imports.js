@@ -20,7 +20,7 @@ const components = {
     // statistics
     'rating-points-statistics': 'Statistics/RatingPointsStatistics',
     'articles-statistics':      'Statistics/ArticlesStatistics',
-    'event-statistics':         'Statistics/EventStatistics',
+    'events-statistics':         'Statistics/EventsStatistics',
 
     // admin
     'admin-users-datatable':    'Admin/UsersDatatable'

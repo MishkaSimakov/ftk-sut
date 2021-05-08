@@ -5,12 +5,5 @@ export default {
                 resolve(response)
             })
         })
-    },
-    async loadPointCategories() {
-        return new Promise((resolve, reject) => {
-            axios.get(route('api.rating.categories')).then((response) => {
-                resolve(response)
-            })
-        })
     }
 }

@@ -45,6 +45,8 @@
 <div id="app">
     @include('partials.header.header')
 
+    @yield('masthead')
+
     <main class="py-4 container">
         @yield('content')
     </main>

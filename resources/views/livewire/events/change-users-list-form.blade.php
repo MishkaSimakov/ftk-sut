@@ -1,7 +1,7 @@
 <div>
     <p class="mb-4 h6">Список пользователей:</p>
 
-    <form action="">
+    <form action="" wire:submit.prevent="addUser">
         <div class="form-row">
             <div class="col">
                 <select class="form-control custom-select" wire:model.defer="selected_user">
@@ -43,6 +43,7 @@
                                 </td>
                                 @if($event->isTravel())
                                     <td>
+                                        <label class="sr-only">Пройденное расстояние</label>
                                         <input type="number" step="0.1" min="0"
                                                wire:model.defer="users_distances.{{ $user->id }}">
                                     </td>

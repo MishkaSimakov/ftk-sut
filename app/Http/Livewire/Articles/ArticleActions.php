@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Articles;
 
 use App\Models\Article;
-use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
 
 class ArticleActions extends Component

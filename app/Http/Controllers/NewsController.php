@@ -18,7 +18,15 @@ class NewsController extends Controller
 
     public function index()
     {
-        return view('news.index');
+        $news = News::withViewsCount(null, null, true)
+            ->orderBy('date', 'desc')
+            ->paginate(News::PAGINATION_LIMIT);
+
+        foreach ($news as $single) {
+            views($single)->record();
+        }
+
+        return view('news.index', compact('news'));
     }
 
     public function edit(News $news)

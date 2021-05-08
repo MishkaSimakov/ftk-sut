@@ -3,8 +3,6 @@
 namespace Tests\Feature\Rating;
 
 use App\Imports\RatingImport;
-use App\Models\User;
-use App\Services\RatingService;
 use Carbon\Carbon;
 use Database\Seeders\RatingPointCategorySeeder;
 use Maatwebsite\Excel\Facades\Excel;
@@ -12,19 +10,21 @@ use Tests\TestCase;
 
 class RatingIndexTest extends TestCase
 {
-    protected $seed = true;
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed(RatingPointCategorySeeder::class);
+        $this->loadRating();
+    }
 
     public function test_it_create_students()
     {
-        $this->loadRating();
-
         $this->assertDatabaseCount('users', 140);
     }
 
     public function test_it_get_last_points_period_correctly()
     {
-        $this->loadRating();
-
         $this->json('GET', route('api.rating.show'))
             ->assertJsonFragment([
                 'start' => '2020-01',
@@ -34,8 +34,6 @@ class RatingIndexTest extends TestCase
 
     public function test_it_returns_rating_in_right_format()
     {
-        $this->loadRating();
-
         $this->json('GET', route('api.rating.show'))
             ->assertJsonStructure([
                 'rating',
@@ -46,8 +44,6 @@ class RatingIndexTest extends TestCase
 
     public function test_it_count_rating_total_right()
     {
-        $this->loadRating();
-
         $this->json('GET', route('api.rating.show'))
             ->assertJsonFragment([
                 'name' => 'Абольянин Павел'

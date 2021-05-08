@@ -14,14 +14,14 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('user.show', compact('user'));
+        $achievements = $user->achievements;
+
+        return view('user.show', compact('user', 'achievements'));
     }
 
     public function home()
     {
-        $achievements = auth()->user()->unlockedAchievements()->sortByDesc('created_at');
-
-        return view('user.home', compact('achievements'));
+        return $this->show(auth()->user());
     }
 
     public function settings()
@@ -37,11 +37,13 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        $user = User::create($request->only('name', 'is_admin', 'type'));
+        $user = User::create($request->validated());
+
+        return redirect()->route('users.show', $user);
     }
 
-    public function edit()
+    public function edit(User $user)
     {
-        return view('user.edit');
+        return view('user.edit', compact('user'));
     }
 }

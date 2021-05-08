@@ -31,7 +31,6 @@ class ArticlesList extends Component
         $articles = Article::take(Article::PAGINATION_LIMIT)
             ->skip(Article::PAGINATION_LIMIT * $page)
             ->with(['author', 'points'])
-            ->withViewsCount()
             ->get();
 
         if ($articles->count() < Article::PAGINATION_LIMIT) {

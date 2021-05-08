@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('rating/show', [RatingController::class, 'show'])->name('rating.show');
-Route::get('rating/categories', [RatingController::class, 'categories'])->name('rating.categories');
 
 Route::get('article/search', [ArticleController::class, 'search'])->name('article.search');
 Route::get('article/tags', [ArticleController::class, 'tags'])->name('article.tags');

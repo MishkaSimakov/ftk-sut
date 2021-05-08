@@ -3,70 +3,154 @@
 
 @section('title', 'Главная страница')
 
-@section('content')
-    <main style="min-height: 5000px;">
-        <img class="position-absolute img-fluid"
-             src="{{ asset('storage/pages/MainPageHeader.png') }}">
+@section('masthead')
+    <header class="masthead">
+        <div class="container">
+            <div class="text-left">
+                <h1 class="display-3" style="max-width: 75%">
+                    Фототехнический клуб СЮТ
+                </h1>
 
+                <p class="lead">
+                    Клуб для самых активных и любознательных детей Волгодонска
+                </p>
+            </div>
 
-        <div class="w-75 mx-auto">
-            <div style="height: calc(100vh - 56px - 0.25rem) !important;" class="d-flex flex-column" id="main-page-header">
-
-                <div class="px-0 col-md-7 h-auto my-auto d-flex flex-column">
-                    <h1 class="display-1 d-none d-md-inline font-weight-normal">
-                        Фототехнический<br>
-                        клуб СЮТ
-                    </h1>
-                    <h1 class="display-1 d-inline d-md-none font-weight-normal">
-                        ФТК СЮТ
-                    </h1>
-
-                    <p class="h2 font-weight-normal">
-                        Клуб для самых активных и любознательных<br>
-                        детей Волгодонска
-                    </p>
-
-                    <div class="row no-gutters mt-auto">
-                        <button class="btn btn-primary py-3 px-4">
-                             <span class="h1">Подробнее</span>
-                        </button>
-
-                        <a href="#" style="cursor: pointer" title="Discord" class="rounded ml-auto mr-2">
-                            <img alt="Discord" src="{{ asset('storage/pages/SocialLinks/Discord.png') }}" class="img-fluid">
-                        </a>
-                        <a href="#" style="cursor: pointer" title="YouTube" class="rounded mr-2">
-                            <img alt="YouTube" src="{{ asset('storage/pages/SocialLinks/YouTube.png') }}" class="img-fluid">
-                        </a>
-                        <a href="#" style="cursor: pointer" title="Вконтакте" class="rounded">
-                            <img alt="Вконтакте" src="{{ asset('storage/pages/SocialLinks/VK.png') }}" class="img-fluid">
-                        </a>
-                    </div>
+            <div class="row no-gutters mt-5 w-100">
+                <div>
+                    <a class="btn btn-primary btn-lg" href="{{ route('about') }}">
+                        Подробнее
+                    </a>
                 </div>
 
-
-                <section class="w-100">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4 border-right d-flex flex-column text-center">
-                                    <span class="display-4 font-weight-bolder">452</span>
-                                    <span class="h2 font-weight-normal">Ученика</span>
-                                </div>
-
-                                <div class="col-md-4 border-right d-flex flex-column text-center">
-                                    <span class="display-4 font-weight-bolder">55</span>
-                                    <span class="h2 font-weight-normal">Мероприятий</span>
-                                </div>
-
-                                <div class="col-md-4 d-flex flex-column text-center">
-                                    <span class="display-4 font-weight-bolder">125</span>
-                                    <span class="h2 font-weight-normal">Статей</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                {{--                <div class="ml-auto">--}}
+                {{--                    <a href="#" style="cursor: pointer;" title="Discord" class="rounded mr-2">--}}
+                {{--                        <img alt="Discord" style="" src="{{ asset('storage/pages/SocialLinks/Discord.png') }}"--}}
+                {{--                             class="img-fluid">--}}
+                {{--                    </a>--}}
+                {{--                </div>--}}
+                {{--                    <a href="#" style="cursor: pointer" title="YouTube" class="rounded mr-2">--}}
+                {{--                        <img alt="YouTube" src="{{ asset('storage/pages/SocialLinks/YouTube.png') }}"--}}
+                {{--                             class="img-fluid">--}}
+                {{--                    </a>--}}
+                {{--                    <a href="#" style="cursor: pointer" title="Вконтакте" class="rounded">--}}
+                {{--                        <img alt="Вконтакте" src="{{ asset('storage/pages/SocialLinks/VK.png') }}"--}}
+                {{--                             class="img-fluid">--}}
+                {{--                    </a>--}}
             </div>
         </div>
-    </main>
+    </header>
+@endsection
+
+@section('content')
+    <section class="w-100">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div
+                        class="col-md-4 border-md-right border-bottom border-md-bottom-0 d-flex flex-column text-center">
+                                        <span
+                                            class="h2 font-weight-bolder">{{ $statistics['users_count'] }}</span>
+                        <span class="h4 font-weight-normal">Пользователей</span>
+                    </div>
+
+                    <div
+                        class="col-md-4 border-md-right border-bottom border-md-bottom-0 d-flex flex-column text-center">
+                                        <span
+                                            class="h2 font-weight-bolder">{{ $statistics['articles_count'] }}</span>
+                        <span class="h4 font-weight-normal">Статей</span>
+                    </div>
+
+                    <div class="col-md-4 d-flex flex-column text-center">
+                                        <span
+                                            class="h2 font-weight-bolder">{{ $statistics['events_count'] }}</span>
+                        <span class="h4 font-weight-normal">Мероприятий</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section style="margin-top: 6rem;">
+        <div class="row">
+            <div class="col-md-6 d-flex flex-column">
+                <h2 class="display-4">Новости</h2>
+
+                <p class="lead">Все последние новости ФТК на одной странице с возможностью оповещения
+                    по электронной почте.</p>
+
+                <div class="mt-auto">
+                    <a href="{{ route('news.index') }}" class="btn btn-primary">
+                        Подробнее
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 d-none d-md-block">
+                <img alt="Новости" class="img-fluid rounded" src="https://via.placeholder.com/720x480">
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-6 d-none d-md-block">
+                <img alt="Статьи" class="img-fluid rounded" src="https://via.placeholder.com/720x480">
+            </div>
+
+            <div class="col-md-6 d-flex flex-column">
+                <h2 class="display-4">Статьи</h2>
+
+                <p class="lead">Более 100 статей от учеников и преподавателей ФТК всего в одном клике от вас.</p>
+
+                <div class="mt-auto">
+                    <a href="{{ route('article.index') }}" class="btn btn-primary">
+                        Подробнее
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-6 d-flex flex-column">
+                <h2 class="display-4">Расписание</h2>
+
+                <p class="lead">Ближайшие мероприятия ФТК со списком участников и подробной
+                    информацией, специально для вас.</p>
+
+                <div class="mt-auto">
+                    <a href="{{ route('events.index') }}" class="btn btn-primary">
+                        Подробнее
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 d-none d-md-block">
+                <img alt="Новости" class="img-fluid rounded" src="https://via.placeholder.com/720x480">
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-6 d-none d-md-block">
+                <img alt="Рейтинг" class="img-fluid rounded" src="https://via.placeholder.com/720x480">
+            </div>
+
+            <div class="col-md-6 d-flex flex-column">
+                <h2 class="display-4">Рейтинг</h2>
+
+                <p class="lead">Возможность сравнить себя с сотнями других учеников по различным параметрам за выбранный
+                    промежуток времени.</p>
+
+                <div class="mt-auto">
+                    <a href="{{ route('rating.index') }}" class="btn btn-primary">
+                        Подробнее
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center w-100 mt-5 text-muted">
+            <div>И ещё много всего интересного...</div>
+            <a href="#">Карта сайта</a>
+        </div>
+    </section>
 @endsection

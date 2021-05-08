@@ -13,4 +13,11 @@ export default {
             })
         })
     },
+    async loadEventsStatistics({user}) {
+        return new Promise((resolve, reject) => {
+            axios.get(route('api.stat.events', {user: user})).then((response) => {
+                resolve(response)
+            })
+        })
+    },
 }

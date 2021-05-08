@@ -12,9 +12,8 @@
 @endcomponent
 
 
-{{-- TODO: сделать правильные ссылки на разделы --}}
 ## На сайте вы также можете посмотреть:
-- <a href="{{ route('main') }}" target="_blank">статьи</a>
-- <a href="{{ route('main') }}" target="_blank">рейтинг</a>
-- <a href="{{ route('main') }}" target="_blank">расписание</a>
+- <a href="{{ route('article.index') }}" target="_blank">статьи</a>
+- <a href="{{ route('rating.index') }}" target="_blank">рейтинг</a>
+- <a href="{{ route('events.index') }}" target="_blank">расписание</a>
 @endcomponent

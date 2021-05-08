@@ -50,8 +50,12 @@
         <h2 class="h3 text-left font-weight-bold">Управление достижениями</h2>
 
         <div class="card">
-            <div class="card-body">
-
+            <div class="list-group-flush">
+                @foreach(\Assada\Achievements\Achievement::all() as $achievement)
+                    <div class="list-group-item">
+                        {{ $achievement->name }} <span class="text-muted">({{ $achievement->description }})</span>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

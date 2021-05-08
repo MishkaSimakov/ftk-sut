@@ -3,7 +3,7 @@
 @section('title', 'Вход в аккаунт')
 
 @section('content')
-    <h1 class="text-center h1 mb-4">Войти</h1>
+    <h1 class="text-center mb-4">Войти</h1>
 
     <div class="mx-auto" style="max-width: 350px;">
         <div class="card">

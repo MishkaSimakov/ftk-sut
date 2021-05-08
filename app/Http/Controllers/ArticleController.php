@@ -71,8 +71,6 @@ class ArticleController extends Controller
             }
         }
 
-
-
         return redirect()->route('article.index');
     }
 
@@ -82,7 +80,7 @@ class ArticleController extends Controller
             views($article)->cooldown(now()->addDay())->record();
         }
 
-        $article->load('author', 'tags')->loadCount('points');
+        $article->load(['author', 'tags', 'points']);
 
         return view('articles.show', compact('article'));
     }

@@ -11,8 +11,8 @@ class BestArticlesList extends Component
     {
         $sql = '`points_count` * ' . Article::RELEVANCE_COEFFICIENTS['points'] . ' + `views_count` * ' . Article::RELEVANCE_COEFFICIENTS['views'] . ' + datediff(now(), `date`) * ' . Article::RELEVANCE_COEFFICIENTS['days'];
         $articles = Article::with(['author', 'points'])
-            ->withViewsCount()
             ->withCount('points')
+            ->withViewsCount()
             ->orderByRaw($sql . ' desc')->limit(3)
             ->get();
 

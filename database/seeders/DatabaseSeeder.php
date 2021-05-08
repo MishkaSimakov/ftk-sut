@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use App\Enums\UserType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
          \App\Models\User::factory()->admin()->create([
              'password' => Hash::make('secret'),
+             'type' => UserType::Pupil(),
              'email' => 'msimakov661@gmail.com',
              'name' => 'Симаков Михаил'
          ]);
@@ -23,11 +25,8 @@ class DatabaseSeeder extends Seeder
 
          $this->call(NewsSeeder::class);
          $this->call(ArticleTagSeeder::class);
-         $this->call(ClubSeeder::class);
          $this->call(RatingPointCategorySeeder::class);
          $this->call(ArticleSeeder::class);
-
-
 
 //         $this->call(RatingPointSeeder::class);
     }

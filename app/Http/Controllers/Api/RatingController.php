@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Rating\RatingPointCategoryIndexResource;
 use App\Http\Resources\Rating\RatingPointsIndexResource;
-use App\Models\RatingPoint;
 use App\Models\RatingPointCategory;
 use App\Services\RatingService;
-use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 
@@ -41,14 +39,5 @@ class RatingController extends Controller
                 ],
             ]
         ]);
-    }
-
-    public function categories()
-    {
-        $categories = RatingPointCategory::all();
-
-        return response()->json(
-            RatingPointCategoryIndexResource::collection($categories)
-        );
     }
 }
