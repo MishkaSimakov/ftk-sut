@@ -23,72 +23,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/AchievementController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/PageController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/components/borders.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/components/masthead.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/about.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Events/ArticleFirstTimePublished.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Events/ArticleLiked.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Events/EventCreated.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Events/NewsCreated.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Events/RatingCreated.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Listeners/Articles/AwardWriteArticleAchievements.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Listeners/Articles/SendArticleNotificationEmail.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Listeners/News/SendNewsNotificationEmail.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Unit/Achievements/ArticleAchievementsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/laravel-idea-personal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-idea-personal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/laravel-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-idea.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/RatingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ClubController.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Statistics/EventStatisticsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Statistics/EventStatisticsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Statistics/RatingPointsStatisticsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Statistics/RatingPointsStatisticsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Articles/ArticleActions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/ArticleActions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/ArticlesList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/ArticlesList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/BestArticlesList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/BestArticlesList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Events/EventSingle.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/News/NewsList.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/News/NewsSingle.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Users/StoreUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Users/StoreUserRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Imports/RatingImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/RatingImport.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Article.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Club.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/News.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/News.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Observers/ArticleObserver.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Traits/Publishable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Traits/Publishable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/ClubFactory.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_03_102133_create_clubs_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_03_102909_create_news_club_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_12_181707_create_notifications_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/ClubSeeder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/ArticleFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/ArticleFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_22_210053_create_articles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_03_22_210053_create_articles_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/RatingPointSeeder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/UserSeeder.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/api/rating.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/api/rating.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/api/statistics.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/api/statistics.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Admin/UsersDatatable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Admin/UsersDatatable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Statistics/EventStatistics.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Statistics/EventsStatistics.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/imports.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/imports.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/_variables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/components/datatable.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/components/dropdown.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/components/dropdown.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/utils/sizing.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/emails/news/notification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/news/notification.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/articles/article-actions.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/articles/article-actions.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/events/change-users-list-form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/events/change-users-list-form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/events/event-single.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/news/news-list.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/news/news-single.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/news/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/news/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/header/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/header/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/home.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Statistics/ArticlesStatistics.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Statistics/ArticlesStatistics.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/Rating/RatingIndexTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Rating/RatingIndexTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -271,7 +232,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JSON" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ftk-sut-old" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -280,7 +241,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="com.laravel_idea.plugin.extension.a.j" />
     <property name="ts.external.directory.path" value="D:\Program Files\JetBrains\PhpStorm 2020.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
     <property name="vuejs.nuxt.types-notification-shown" value="true" />
@@ -294,11 +255,11 @@
       <recent name="D:\Programs\PhpStormProjects\ftk-sut\public\storage" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programs\PhpStormProjects\ftk-sut\app\Listeners\News" />
       <recent name="D:\Programs\PhpStormProjects\ftk-sut\app\Models" />
       <recent name="D:\Programs\PhpStormProjects\ftk-sut\app\Images" />
       <recent name="D:\Programs\PhpStormProjects\ftk-sut\storage\app\testing" />
       <recent name="D:\Programs\PhpStormProjects\ftk-sut\app\Http\Controllers\Statistics" />
-      <recent name="D:\Programs\PhpStormProjects\ftk-sut\public\storage\pages" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -309,7 +270,15 @@
       <command value="npm run watch" />
     </option>
   </component>
-  <component name="RunManager" selected="PHPUnit.phpunit.xml">
+  <component name="RunManager" selected="PHPUnit.ArticleAchievementsTest">
+    <configuration name="ArticleAchievementsTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Achievements\ArticleAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/ArticleAchievementsTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ArticleAchievementsTest.test_it_award_article_write_achievement_when_article_is_published" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Achievements\ArticleAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/ArticleAchievementsTest.php" method="test_it_award_article_write_achievement_when_article_is_published" scope="Method" />
+      <method v="2" />
+    </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <CommandLine>
         <PhpTestInterpreterSettings>
@@ -331,6 +300,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.ArticleAchievementsTest" />
+        <item itemvalue="PHPUnit.ArticleAchievementsTest.test_it_award_article_write_achievement_when_article_is_published" />
         <item itemvalue="npm.watch" />
       </list>
     </recent_temporary>
@@ -460,7 +431,8 @@
       <workItem from="1620321676895" duration="10908000" />
       <workItem from="1620371932683" duration="19140000" />
       <workItem from="1620452981745" duration="21867000" />
-      <workItem from="1620490133396" duration="2154000" />
+      <workItem from="1620490133396" duration="5895000" />
+      <workItem from="1620496146178" duration="3968000" />
     </task>
     <task id="LOCAL-00001" summary="Some changes">
       <created>1618655936551</created>

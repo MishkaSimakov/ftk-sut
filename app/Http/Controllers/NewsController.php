@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Events\NewsCreated;
 use App\Http\Requests\News\StoreNewsRequest;
 use App\Mail\NewsNotification;
 use App\Models\News;
@@ -52,10 +53,7 @@ class NewsController extends Controller
         $news->date = $request->delayed_publication == 'on' ? $request->get('date') : now();
         $news->save();
 
-        if ($request->get('notify_users') == 'on') {
-            Mail::to(User::whereNotNull('email')->select('email')->get())
-                ->later(now()->addMinutes(5), new NewsNotification($news));
-        }
+        NewsCreated::dispatch($news, $request->get('notify_users') == 'on');
 
         return redirect()->route('news.index');
     }

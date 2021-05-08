@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use App\Achievements\WriteArticleChain;
+use App\Enums\ArticleType;
+use App\Events\ArticleFirstTimePublished;
 use App\Models\Traits\Publishable;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,15 +29,6 @@ class Article extends Model implements Viewable
 
     protected $dates = ['date'];
     protected $fillable = ['title', 'body', 'date'];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        self::saved(function (Article $article) {
-            $article->author->addProgress(new WriteArticleChain());
-        });
-    }
 
     public function author(): BelongsTo
     {
@@ -72,5 +66,15 @@ class Article extends Model implements Viewable
         return $this->points()->count() * self::RELEVANCE_COEFFICIENTS['points']
             + views($this)->count() * self::RELEVANCE_COEFFICIENTS['views']
             + now()->diffInDays($this->date) * self::RELEVANCE_COEFFICIENTS['days'];
+    }
+
+    public function publish()
+    {
+        ArticleFirstTimePublished::dispatchIf(is_null($this->published_at), $this);
+
+        $this->update([
+            'type' => ArticleType::Published(),
+            'published_at' => now()
+        ]);
     }
 }

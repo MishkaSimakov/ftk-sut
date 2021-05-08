@@ -22,7 +22,7 @@
 
         <div class="card mt-3">
             @if(!$achievements->count())
-                <div class="text-center my-3 text-secondary">
+                <div class="text-center my-3 text-info">
                     Нет достижений
                 </div>
             @endif
@@ -49,7 +49,7 @@
             </ul>
 
             <a class="text-secondary my-2 mx-auto" href="{{ route('achievements.index') }}">
-                Все достижения
+                Список достижений
             </a>
         </div>
     </div>

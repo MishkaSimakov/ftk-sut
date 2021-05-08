@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ArticleType;
+use App\Events\ArticleFirstTimePublished;
 use App\Http\Requests\Articles\StoreArticleRequest;
 use App\Models\Article;
 use App\Models\ArticleTag;
@@ -127,8 +128,7 @@ class ArticleController extends Controller
     {
         $this->authorize('publish', $article);
 
-        $article->type = ArticleType::Published();
-        $article->save();
+        $article->publish();
 
         return redirect()->route('article.show', $article);
     }

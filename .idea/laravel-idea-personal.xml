@@ -3,6 +3,7 @@
   <component name="LaravelIdeaPersonalSettings">
     <option name="generationStringOptionValues">
       <map>
+        <entry key="createEvent.private" value="" />
         <entry key="createFormRequest.generateAuthorize" value="" />
         <entry key="createModel.createMigration" value="1" />
       </map>

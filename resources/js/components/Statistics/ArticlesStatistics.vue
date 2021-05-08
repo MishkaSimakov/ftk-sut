@@ -5,7 +5,7 @@
         <div class="card mt-3">
             <div class="spinner-border spinner-border-sm mx-auto my-3 text-secondary" role="status"
                  v-if="loading"></div>
-            <div class="text-center my-3 text-secondary" v-else-if="!articles.length">
+            <div class="text-center my-3 text-info" v-else-if="!articles.length">
                 Нет статей
             </div>
             <ul class="list-group list-group-flush" v-else>

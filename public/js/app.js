@@ -49127,7 +49127,7 @@ var render = function() {
             attrs: { role: "status" }
           })
         : !_vm.articles.length
-        ? _c("div", { staticClass: "text-center my-3 text-secondary" }, [
+        ? _c("div", { staticClass: "text-center my-3 text-info" }, [
             _vm._v("\n            Нет статей\n        ")
           ])
         : _c(
