@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Achievements\WriteArticleChain;
 use App\Enums\ArticleType;
 use App\Events\ArticleFirstTimePublished;
+use App\Events\ArticleLiked;
 use App\Models\Traits\Publishable;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
@@ -68,6 +69,7 @@ class Article extends Model implements Viewable
             + now()->diffInDays($this->date) * self::RELEVANCE_COEFFICIENTS['days'];
     }
 
+
     public function publish()
     {
         ArticleFirstTimePublished::dispatchIf(is_null($this->published_at), $this);
@@ -76,5 +78,12 @@ class Article extends Model implements Viewable
             'type' => ArticleType::Published(),
             'published_at' => now()
         ]);
+    }
+
+    public function toggleLikeBy(User $user)
+    {
+        $this->points()->toggle($user);
+
+        ArticleLiked::dispatch($this, $user);
     }
 }

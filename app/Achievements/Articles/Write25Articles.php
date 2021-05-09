@@ -10,15 +10,20 @@ use Assada\Achievements\Achievement;
  *
  * @package App\Achievements\Articles
  */
-class SetFirstLike extends Achievement
+class Write25Articles extends Achievement
 {
     /*
      * The achievement name
      */
-    public $name = 'Первые шаги';
+    public $name = 'Нечем заняться';
 
     /*
      * A small description for the achievement
      */
-    public $description = 'Оценить одну статью.';
+    public $description = 'Написать 25 статей';
+
+    /*
+    * The amount of "points" this user need to obtain in order to complete this achievement
+    */
+    public $points = 25;
 }

@@ -10,15 +10,20 @@ use Assada\Achievements\Achievement;
  *
  * @package App\Achievements\Articles
  */
-class LikeSelfArticle extends Achievement
+class Write50Articles extends Achievement
 {
     /*
      * The achievement name
      */
-    public $name = 'Самолайк - залог успеха!';
+    public $name = 'Юный писатель';
 
     /*
      * A small description for the achievement
      */
-    public $description = 'Оценить свою же статью.';
+    public $description = 'Написать 50 статей';
+
+    /*
+    * The amount of "points" this user need to obtain in order to complete this achievement
+    */
+    public $points = 50;
 }

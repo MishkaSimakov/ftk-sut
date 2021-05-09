@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Achievements\Rating;
+namespace App\Achievements\Rating\Monthly;
 
 use Assada\Achievements\Achievement;
 
@@ -20,5 +20,5 @@ class GetLessThat0RatingPoints extends Achievement
     /*
      * A small description for the achievement
      */
-    public $description = 'Получить отрицательное количество очков в рейтинге.';
+    public $description = 'Получить отрицательное количество очков в ежемесячном рейтинге';
 }

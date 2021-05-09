@@ -26,7 +26,7 @@ class RatingController extends Controller
             $period = $this->ratingService->getLastPointsPeriod();
         }
 
-        $points = $this->ratingService->getRating($period);
+        $points = $this->ratingService->getRatingFromPeriod($period);
         $categories = RatingPointCategory::all();
 
         return response()->json([

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Users\StoreUserRequest;
 use App\Models\User;
+use Assada\Achievements\Model\AchievementProgress;
 
 class UserController extends Controller
 {
@@ -14,7 +15,11 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        $achievements = $user->achievements;
+        $achievements = $user->inProgressAchievements()
+            ->concat($user->unlockedAchievements())
+            ->sortByDesc(function (AchievementProgress $progress) {
+            return $progress->points / $progress->details->points;
+        });
 
         return view('user.show', compact('user', 'achievements'));
     }

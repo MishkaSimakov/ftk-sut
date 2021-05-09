@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Achievements\Rating;
+namespace App\Achievements\Rating\Monthly;
 
 use Assada\Achievements\Achievement;
 
@@ -20,5 +20,10 @@ class GetMoreThan1000RatingPoints extends Achievement
     /*
      * A small description for the achievement
      */
-    public $description = 'Получить больше 1000 очков в рейтинге.';
+    public $description = 'Получить больше 1000 очков в ежемесячном рейтинге';
+
+    /*
+     * The amount of "points" this user need to obtain in order to complete this achievement
+     */
+    public $points = 1000;
 }

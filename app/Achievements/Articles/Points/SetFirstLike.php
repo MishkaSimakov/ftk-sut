@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Achievements\Articles;
+namespace App\Achievements\Articles\Points;
 
 use Assada\Achievements\Achievement;
 
@@ -10,20 +10,20 @@ use Assada\Achievements\Achievement;
  *
  * @package App\Achievements\Articles
  */
-class Write10Articles extends Achievement
+class SetFirstLike extends Achievement
 {
     /*
      * The achievement name
      */
-    public $name = 'Походы и факты';
+    public $name = 'Первые шаги';
 
     /*
      * A small description for the achievement
      */
-    public $description = 'Написать 10 статей';
+    public $description = 'Оценить одну статью';
 
     /*
      * The amount of "points" this user need to obtain in order to complete this achievement
      */
-    public $points = 10;
+    public $points = 1;
 }

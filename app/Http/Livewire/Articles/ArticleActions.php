@@ -16,7 +16,7 @@ class ArticleActions extends Component
             abort(403);
         }
 
-        $this->article->points()->toggle(auth()->user());
+        $this->article->toggleLikeBy(auth()->user());
         $this->article->refresh();
     }
 

@@ -10,20 +10,20 @@ use Assada\Achievements\Achievement;
  *
  * @package App\Achievements\Articles
  */
-class Write10Articles extends Achievement
+class Write100Articles extends Achievement
 {
     /*
      * The achievement name
      */
-    public $name = 'Походы и факты';
+    public $name = 'Толкин отдыхает';
 
     /*
      * A small description for the achievement
      */
-    public $description = 'Написать 10 статей';
+    public $description = 'Написать 100 статей';
 
     /*
-     * The amount of "points" this user need to obtain in order to complete this achievement
-     */
-    public $points = 10;
+    * The amount of "points" this user need to obtain in order to complete this achievement
+    */
+    public $points = 100;
 }

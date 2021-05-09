@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Achievements;
+namespace App\Achievements\Chains;
 
-use App\Achievements\Travels\GoTo10Travels;
+use App\Achievements\Articles\Points\Set10Likes;
+use App\Achievements\Articles\Points\SetFirstLike;
 use Assada\Achievements\AchievementChain;
 
 /**
@@ -11,7 +12,7 @@ use Assada\Achievements\AchievementChain;
  *
  * @package App\Achievements
  */
-class TravelChain extends AchievementChain
+class ArticlePointChain extends AchievementChain
 {
     /*
      * Returns a list of instances of Achievements
@@ -19,7 +20,8 @@ class TravelChain extends AchievementChain
     public function chain(): array
     {
         return [
-            new GoTo10Travels(),
+            new SetFirstLike(),
+            new Set10Likes()
         ];
     }
 }

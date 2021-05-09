@@ -22,7 +22,7 @@
 
         <div class="card mt-3">
             @if(!$achievements->count())
-                <div class="text-center my-3 text-info">
+                <div class  ="text-center my-3 text-info">
                     Нет достижений
                 </div>
             @endif
@@ -31,7 +31,7 @@
                     <li class="list-group-item d-md-flex align-items-center">
                         <div class="col-md-6">
                             <div class="text-nowrap">{{ $achievement->name }}</div>
-                            <div class="text-muted">({{ $achievement->description }})</div>
+                            <div class="text-muted">{{ $achievement->description }}</div>
                         </div>
 
                         <div class="col-md-6 ml-auto mt-2 mt-md-0">

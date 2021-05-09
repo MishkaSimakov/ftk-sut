@@ -20,5 +20,5 @@ class GoTo10Travels extends Achievement
     /*
      * A small description for the achievement
      */
-    public $description = 'Сходите в 10 походов.';
+    public $description = 'Сходите в 10 походов';
 }

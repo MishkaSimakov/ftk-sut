@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\RatingImport;
+use App\Services\RatingService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
 class RatingController extends Controller
 {
-    public function __construct()
+    protected RatingService $ratingService;
+
+    public function __construct(RatingService $ratingService)
     {
         $this->middleware('admin')->except('index');
+
+        $this->ratingService = $ratingService;
     }
 
     public function index()
@@ -26,8 +29,11 @@ class RatingController extends Controller
 
     public function store(Request $request)
     {
-        Excel::import(new RatingImport(Carbon::parse($request->get('date'))), $request->file('rating'));
+        $this->ratingService->storeRating(
+            Carbon::parse($request->get('date')),
+            $request->file('rating')
+        );
 
-        return redirect(route('rating.index'));
+        return redirect()->route('rating.index');
     }
 }

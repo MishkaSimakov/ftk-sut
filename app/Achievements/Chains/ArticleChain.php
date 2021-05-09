@@ -1,9 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Achievements;
+namespace App\Achievements\Chains;
 
+use App\Achievements\Articles\Write100Articles;
 use App\Achievements\Articles\Write10Articles;
+use App\Achievements\Articles\Write25Articles;
+use App\Achievements\Articles\Write50Articles;
+use App\Achievements\Articles\Write5Articles;
 use App\Achievements\Articles\WriteFirstArticle;
 use Assada\Achievements\AchievementChain;
 
@@ -12,7 +16,7 @@ use Assada\Achievements\AchievementChain;
  *
  * @package App\Achievements
  */
-class WriteArticleChain extends AchievementChain
+class ArticleChain extends AchievementChain
 {
     /*
      * Returns a list of instances of Achievements
@@ -21,7 +25,11 @@ class WriteArticleChain extends AchievementChain
     {
         return [
             new WriteFirstArticle(),
+            new Write5Articles(),
             new Write10Articles(),
+            new Write25Articles(),
+            new Write50Articles(),
+            new Write100Articles(),
         ];
     }
 }

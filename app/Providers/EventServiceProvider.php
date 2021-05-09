@@ -3,10 +3,14 @@
 namespace App\Providers;
 
 use App\Events\ArticleFirstTimePublished;
+use App\Events\ArticleLiked;
 use App\Events\NewsCreated;
+use App\Events\RatingCreated;
+use App\Listeners\Articles\AwardArticlePointAchievements;
 use App\Listeners\Articles\AwardWriteArticleAchievements;
 use App\Listeners\Articles\SendArticleNotificationEmail;
 use App\Listeners\News\SendNewsNotificationEmail;
+use App\Listeners\RatingPoints\AwardRatingPointAchievements;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -29,6 +33,12 @@ class EventServiceProvider extends ServiceProvider
         ArticleFirstTimePublished::class => [
             SendArticleNotificationEmail::class,
             AwardWriteArticleAchievements::class,
+        ],
+        ArticleLiked::class => [
+            AwardArticlePointAchievements::class,
+        ],
+        RatingCreated::class => [
+            AwardRatingPointAchievements::class,
         ],
     ];
 
