@@ -23,38 +23,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Achievements/Achievements.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Listeners/Articles/AwardArticlePointAchievements.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Listeners/RatingPoints/AwardRatingPointAchievements.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/achievements/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Unit/Achievements/ArticlePointAchievementsTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Achievements/Articles/LikeSelfArticle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievements/Articles/Points/LikeSelfArticle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Achievements/Articles/Set10Likes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievements/Articles/Points/Set10Likes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Achievements/Articles/SetFirstLike.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievements/Articles/Points/SetFirstLike.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Achievements/Articles/Write10Articles.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievements/Articles/Write10Articles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Achievements/Articles/WriteFirstArticle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievements/Articles/WriteFirstArticle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Achievements/Rating/GetLessThat0RatingPoints.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievements/Rating/Monthly/GetLessThat0RatingPoints.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Achievements/Rating/GetLessThat250RatingPoints.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievements/Rating/Monthly/GetLessThat250RatingPoints.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Achievements/Rating/GetMoreThan1000RatingPoints.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievements/Rating/Monthly/GetMoreThan1000RatingPoints.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Achievements/TravelChain.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievements/Chains/TravelChain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Achievements/Travels/GoTo10Travels.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievements/Travels/GoTo10Travels.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Achievements/WriteArticleChain.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievements/Chains/ArticleChain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Events/ArticleLiked.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/ArticleLiked.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Events/RatingCreated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/RatingCreated.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AchievementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AchievementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/RatingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RatingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Articles/ArticleActions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/ArticleActions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Listeners/Articles/AwardWriteArticleAchievements.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/Articles/AwardWriteArticleAchievements.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Article.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Achievements/Achievements.md" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievements/Achievements.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Listeners/RatingPoints/AwardRatingPointAchievements.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/RatingPoints/AwardMonthlyRatingPointAchievements.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/RatingService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/RatingService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,21 +248,25 @@
       <command value="npm run watch" />
     </option>
   </component>
-  <component name="RunManager" selected="PHPUnit.phpunit.xml">
-    <configuration name="ArticleAchievementsTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\Achievements\ArticleAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/ArticleAchievementsTest.php" scope="Class" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ArticleAchievementsTest.test_it_award_article_write_achievement_when_article_is_published" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\Achievements\ArticleAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/ArticleAchievementsTest.php" method="test_it_award_article_write_achievement_when_article_is_published" scope="Method" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="PHPUnit.RatingPointAchievementsTest.test_it_award_place_achievements_correctly">
     <configuration name="ArticlePointAchievementsTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Unit\Achievements\ArticlePointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/ArticlePointAchievementsTest.php" scope="Class" />
       <method v="2" />
     </configuration>
+    <configuration name="RatingPointAchievementsTest.test_it_award_place_achievements_correctly" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Achievements\RatingPointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" method="test_it_award_place_achievements_correctly" scope="Method" />
+      <method v="2" />
+    </configuration>
     <configuration name="RatingPointAchievementsTest.test_it_award_points_achievements" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Unit\Achievements\RatingPointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" method="test_it_award_points_achievements" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RatingPointAchievementsTest.test_it_dont_award_achievements_when_rating_loaded_many_times" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Achievements\RatingPointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" method="test_it_dont_award_achievements_when_rating_loaded_many_times" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RatingPointAchievementsTest.test_it_dont_award_unnecessary_achievements" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Achievements\RatingPointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" method="test_it_dont_award_unnecessary_achievements" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -301,23 +278,13 @@
       <TestRunner bootstrap_file="$PROJECT_DIR$/bootstrap/app.php" configuration_file="$PROJECT_DIR$/phpunit.xml" scope="XML" use_alternative_bootstrap_file="true" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
-    <configuration name="watch" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="watch" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.RatingPointAchievementsTest.test_it_award_place_achievements_correctly" />
+        <item itemvalue="PHPUnit.RatingPointAchievementsTest.test_it_dont_award_achievements_when_rating_loaded_many_times" />
+        <item itemvalue="PHPUnit.RatingPointAchievementsTest.test_it_dont_award_unnecessary_achievements" />
         <item itemvalue="PHPUnit.RatingPointAchievementsTest.test_it_award_points_achievements" />
         <item itemvalue="PHPUnit.ArticlePointAchievementsTest" />
-        <item itemvalue="PHPUnit.ArticleAchievementsTest" />
-        <item itemvalue="PHPUnit.ArticleAchievementsTest.test_it_award_article_write_achievement_when_article_is_published" />
-        <item itemvalue="npm.watch" />
       </list>
     </recent_temporary>
   </component>
@@ -449,7 +416,8 @@
       <workItem from="1620490133396" duration="5895000" />
       <workItem from="1620496146178" duration="8316000" />
       <workItem from="1620540273928" duration="384000" />
-      <workItem from="1620545823237" duration="11249000" />
+      <workItem from="1620545823237" duration="11883000" />
+      <workItem from="1620639990454" duration="3035000" />
     </task>
     <task id="LOCAL-00001" summary="Some changes">
       <created>1618655936551</created>
