@@ -3,23 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ArticleType;
-use App\Events\ArticleFirstTimePublished;
 use App\Http\Requests\Articles\StoreArticleRequest;
 use App\Models\Article;
 use App\Models\ArticleTag;
-use App\Services\ArticleBodyPrepareService;
 use App\Services\ArticleSearchService;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    public ArticleBodyPrepareService $articleBodyPrepareService;
     public ArticleSearchService $articleSearchService;
 
-    public function __construct(ArticleSearchService $articleSearchService, ArticleBodyPrepareService $articleBodyPrepareService)
+    public function __construct(ArticleSearchService $articleSearchService)
     {
         $this->articleSearchService = $articleSearchService;
-        $this->articleBodyPrepareService = $articleBodyPrepareService;
 
         $this->authorizeResource(Article::class, 'article');
     }
@@ -47,22 +43,14 @@ class ArticleController extends Controller
 
     public function store(StoreArticleRequest $request)
     {
-        $article = new Article;
-
-        $article->title = $request->get('title');
+        $article = new Article([
+            'title' => $request->get('title'),
+            'body' => $request->get('body'),
+            'date' => $request->get('delayed_publication') == 'on' ? $request->get('date') : now()
+        ]);
 
         $article->author()->associate($request->user());
-
-        $article->date = $request->get('delayed_publication') == 'on' ? $request->get('date') : now();
-        $article->type = $request->user()->is_admin ? ArticleType::Published() : ArticleType::OnCheck();
-
         $article->save();
-
-        $article->update([
-            'body' => $this->articleBodyPrepareService->getPreparedBody(
-                $request->get('body'), $article
-            )
-        ]);
 
         if ($tags = $request->get('tags')) {
             foreach (json_decode($tags) as $tag) {
@@ -70,6 +58,10 @@ class ArticleController extends Controller
 
                 $article->tags()->syncWithoutDetaching($tag_id);
             }
+        }
+
+        if ($request->user()->is_admin) {
+            $article->publish();
         }
 
         return redirect()->route('article.index');
@@ -95,13 +87,14 @@ class ArticleController extends Controller
     {
         $article->title = $request->get('title');
 
-        $this->articleBodyPrepareService->deleteSavedImages($article);
-        $article->body = $this->articleBodyPrepareService->getPreparedBody($request->get('body'), $article);
-
+        if (!$request->user()->is_admin) {
+            $article->type = ArticleType::OnCheck();
+        }
         if ($article->isNotPublished) {
             $article->date = $request->get('delayed_publication') == 'on' ? $request->get('date') : now();
         }
-        $article->type = $request->user()->is_admin ? ArticleType::Published() : ArticleType::OnCheck();
+
+        // TODO: добавить обновление тегов
 
         $article->save();
 

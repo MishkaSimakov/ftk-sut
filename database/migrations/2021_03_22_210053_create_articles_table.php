@@ -16,10 +16,11 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
 
-            $table->string('title')->nullable();
+            $table->string('title');
             $table->text('body')->nullable();
             $table->foreignId('author_id');
-            $table->enum('type', \App\Enums\ArticleType::getValues());
+            $table->enum('type', \App\Enums\ArticleType::getValues())
+                ->default(\App\Enums\ArticleType::OnCheck());
             $table->date('date');
 
             $table->timestamp('published_at')->nullable();

@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Achievements\WriteArticleChain;
 use App\Enums\ArticleType;
 use App\Events\ArticleFirstTimePublished;
 use App\Events\ArticleLiked;
 use App\Models\Traits\Publishable;
+use App\Services\ArticleBodyPrepareService;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
-use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,6 +29,18 @@ class Article extends Model implements Viewable
 
     protected $dates = ['date'];
     protected $fillable = ['title', 'body', 'date'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::saved(function (Article $article) {
+            $article->body = (new ArticleBodyPrepareService())->getPreparedBody($article);
+        });
+        self::deleting(function (Article $article) {
+            (new ArticleBodyPrepareService())->deleteSavedImages($article);
+        });
+    }
 
     public function author(): BelongsTo
     {

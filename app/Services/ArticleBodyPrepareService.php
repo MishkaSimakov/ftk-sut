@@ -7,8 +7,12 @@ use Storage;
 
 class ArticleBodyPrepareService
 {
-    public function getPreparedBody(string $body, Article $article): string
+    public function getPreparedBody(Article $article): string
     {
+        $this->deleteSavedImages($article);
+
+        $body = $article->body;
+
         preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?>/i', $body, $matches);
         $images = $matches[1];
 

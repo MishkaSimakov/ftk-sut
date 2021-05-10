@@ -24,10 +24,12 @@
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Achievements/Achievements.md" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievements/Achievements.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Listeners/RatingPoints/AwardRatingPointAchievements.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/RatingPoints/AwardMonthlyRatingPointAchievements.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/ArticlesList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/ArticlesList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/BestArticlesList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/BestArticlesList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Article.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/ArticleBodyPrepareService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/ArticleBodyPrepareService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_22_210053_create_articles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_03_22_210053_create_articles_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -417,7 +419,7 @@
       <workItem from="1620496146178" duration="8316000" />
       <workItem from="1620540273928" duration="384000" />
       <workItem from="1620545823237" duration="11883000" />
-      <workItem from="1620639990454" duration="3035000" />
+      <workItem from="1620639990454" duration="5343000" />
     </task>
     <task id="LOCAL-00001" summary="Some changes">
       <created>1618655936551</created>
