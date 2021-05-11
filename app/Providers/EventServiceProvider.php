@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\ArticleFirstTimePublished;
+use App\Events\ArticleFirstTimeChecked;
 use App\Events\ArticleLiked;
 use App\Events\NewsCreated;
 use App\Events\RatingCreated;
@@ -30,7 +30,7 @@ class EventServiceProvider extends ServiceProvider
         NewsCreated::class => [
             SendNewsNotificationEmail::class,
         ],
-        ArticleFirstTimePublished::class => [
+        ArticleFirstTimeChecked::class => [
             SendArticleNotificationEmail::class,
             AwardWriteArticleAchievements::class,
         ],

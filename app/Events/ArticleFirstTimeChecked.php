@@ -5,7 +5,7 @@ namespace App\Events;
 use App\Models\Article;
 use Illuminate\Foundation\Events\Dispatchable;
 
-class ArticleFirstTimePublished
+class ArticleFirstTimeChecked
 {
     use Dispatchable;
 

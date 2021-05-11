@@ -27,8 +27,9 @@
                     <div class="form-group">
                         <div class="row no-gutters">
                             <label for="password">Пароль</label>
-                            <a class="text-muted text-decoration-none ml-auto" href="{{ route('password.request') }}">Забыли
-                                пароль?</a>
+                            <a class="text-muted ml-auto" href="{{ route('password.request') }}">
+                                Забыли пароль?
+                            </a>
                         </div>
                         <input id="password" type="password"
                                class="form-control @error('password') is-invalid @enderror"

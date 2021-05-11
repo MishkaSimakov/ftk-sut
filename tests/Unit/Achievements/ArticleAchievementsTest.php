@@ -19,13 +19,13 @@ class ArticleAchievementsTest extends TestCase
         auth()->login($user);
     }
 
-    public function test_it_award_article_write_achievement_when_article_is_published()
+    public function test_it_award_article_write_achievement_when_article_is_checked()
     {
         auth()->user()->articles()->saveMany(
             Article::factory()->count(10)->make([
                 'type' => ArticleType::OnCheck()
             ])
-        )->each->publish();
+        )->each->check();
 
         $this->assertEquals(true, auth()->user()->achievementStatus(new Write10Articles())->isUnlocked());
         $this->assertEquals(true, auth()->user()->achievementStatus(new WriteFirstArticle())->isUnlocked());
@@ -37,13 +37,13 @@ class ArticleAchievementsTest extends TestCase
             Article::factory()->count(9)->make([
                 'type' => ArticleType::OnCheck()
             ])
-        )->each->publish();
+        )->each->check();
 
         $this->assertEquals(false, auth()->user()->achievementStatus(new Write10Articles())->isUnlocked());
         $this->assertEquals(true, auth()->user()->achievementStatus(new WriteFirstArticle())->isUnlocked());
     }
 
-    public function test_it_doest_award_write_achievement_when_article_published_many_times()
+    public function test_it_doest_award_write_achievement_when_article_checked_many_times()
     {
         $article = auth()->user()->articles()->save(
             Article::factory()->make([
@@ -52,14 +52,14 @@ class ArticleAchievementsTest extends TestCase
         );
 
         for ($i = 0; $i <= 10; $i++) {
-            $article->publish();
+            $article->check();
         }
 
         $this->assertEquals(false, auth()->user()->achievementStatus(new Write10Articles())->isUnlocked());
         $this->assertEquals(true, auth()->user()->achievementStatus(new WriteFirstArticle())->isUnlocked());
     }
 
-    public function test_it_dont_count_unpublished_articles()
+    public function test_it_dont_count_unchecked_articles()
     {
         auth()->user()->articles()->saveMany(
             Article::factory()->count(10)->make([

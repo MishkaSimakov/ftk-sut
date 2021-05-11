@@ -10,7 +10,7 @@
         </div>
     @endcan
 
-    @if($article->type == \App\Enums\ArticleType::Published())
+    @if($article->type == \App\Enums\ArticleType::Checked())
         <span class="mr-sm-2 d-none d-md-inline article-views">
             <i class="far fa-eye"></i> {{ views($article)->count() }}
         </span>
@@ -25,8 +25,8 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right"
                  aria-labelledby="article-more-dropdown-button-{{ $unique }}">
-                @can('publish', $article)
-                    <a class="dropdown-item" href="{{ route('article.publish', $article) }}">Опубликовать</a>
+                @can('check', $article)
+                    <a class="dropdown-item" href="{{ route('article.check', $article) }}">Опубликовать</a>
                 @endcan
                 @can('update', $article)
                     <a class="dropdown-item" href="{{ route('article.edit', $article) }}">Редактировать</a>

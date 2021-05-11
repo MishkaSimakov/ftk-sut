@@ -24,15 +24,15 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="{{ route('article.index') }}">Статьи</a>
 
-                        @canany(['create', 'viewUnpublished'], \App\Models\Article::class)
+                        @canany(['create', 'viewUnchecked'], \App\Models\Article::class)
                             <div class="hover-dropdown-menu dropdown-menu">
                                 @can('create', \App\Models\Article::class)
                                     <a class="dropdown-item" href="{{ route('article.create') }}">
                                         Написать
                                     </a>
                                 @endcan
-                                @can('viewUnpublished', \App\Models\Article::class)
-                                    <a class="dropdown-item" href="{{ route('article.unpublished') }}">
+                                @can('viewUnchecked', \App\Models\Article::class)
+                                    <a class="dropdown-item" href="{{ route('article.unchecked') }}">
                                         Требуют проверки
                                     </a>
                                 @endcan
@@ -66,7 +66,6 @@
                     </li>
                 </ul>
 
-
                 @guest
                     <a href="{{ route('login') }}" class="btn-outline-light btn mt-3 mt-lg-0">
                         Войти
@@ -75,7 +74,7 @@
                     <div class="dropdown">
                         <a class="text-white text-decoration-none" href="#" id="accountDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Симаков Михаил
+                            {{ auth()->user()->name }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">

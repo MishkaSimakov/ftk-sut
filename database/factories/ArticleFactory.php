@@ -27,7 +27,7 @@ class ArticleFactory extends Factory
             'body' => $this->faker->text,
             'author_id' => 1,
 
-            'type' => ArticleType::Published(),
+            'type' => ArticleType::Checked(),
             'date' => $this->faker->date,
         ];
     }

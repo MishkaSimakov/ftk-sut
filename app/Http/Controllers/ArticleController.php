@@ -61,7 +61,7 @@ class ArticleController extends Controller
         }
 
         if ($request->user()->is_admin) {
-            $article->publish();
+            $article->check();
         }
 
         return redirect()->route('article.index');
@@ -69,7 +69,7 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
-        if ($article->type == ArticleType::Published()) {
+        if ($article->type == ArticleType::Checked()) {
             views($article)->cooldown(now()->addDay())->record();
         }
 
@@ -108,20 +108,24 @@ class ArticleController extends Controller
         return redirect()->route('article.index');
     }
 
-    public function unpublished()
+    public function unchecked()
     {
-        $this->authorize('viewUnpublished', Article::class);
+        $this->authorize('viewUnchecked', Article::class);
 
-        $articles = Article::where('type', ArticleType::OnCheck())->orderBy('date', 'desc')->get();
+        if (auth()->user()->is_admin) {
+            $articles = Article::where('type', ArticleType::OnCheck())->orderBy('date', 'desc')->get();
+        } else {
+            $articles = auth()->user()->articles()->where('type', ArticleType::OnCheck())->orderBy('date', 'desc')->get();
+        }
 
-        return view('articles.unpublished', compact('articles'));
+        return view('articles.unchecked', compact('articles'));
     }
 
-    public function publish(Article $article)
+    public function check(Article $article)
     {
-        $this->authorize('publish', $article);
+        $this->authorize('check', $article);
 
-        $article->publish();
+        $article->check();
 
         return redirect()->route('article.show', $article);
     }

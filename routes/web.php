@@ -16,15 +16,16 @@ use Illuminate\Support\Facades\Auth;
 
 # info
 Route::get('/', [\App\Http\Controllers\PageController::class, 'welcome'])->name('main');
-Route::get('/about', [\App\Http\Controllers\PageController::class, 'about'])->name('about');
-Route::get('/site-map', [\App\Http\Controllers\PageController::class, 'sitemap'])->name('sitemap');
+Route::view('/about', 'about')->name('about');
+Route::view('/site-map', 'sitemap')->name('sitemap');
+Route::view('/help/register', 'help.register')->name('help.register');
 
 # news
 Route::resource('news', \App\Http\Controllers\NewsController::class);
 
 # articles
-Route::get('article/unpublished', [\App\Http\Controllers\ArticleController::class, 'unpublished'])->name('article.unpublished');
-Route::get('article/{article}/publish', [\App\Http\Controllers\ArticleController::class, 'publish'])->name('article.publish');
+Route::get('article/unchecked', [\App\Http\Controllers\ArticleController::class, 'unchecked'])->name('article.unchecked');
+Route::get('article/{article}/check', [\App\Http\Controllers\ArticleController::class, 'check'])->name('article.check');
 Route::resource('article', \App\Http\Controllers\ArticleController::class);
 
 # events

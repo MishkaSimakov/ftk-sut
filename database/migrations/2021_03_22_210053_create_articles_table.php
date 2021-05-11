@@ -23,7 +23,7 @@ class CreateArticlesTable extends Migration
                 ->default(\App\Enums\ArticleType::OnCheck());
             $table->date('date');
 
-            $table->timestamp('published_at')->nullable();
+            $table->timestamp('checked_at')->nullable();
             $table->timestamps();
 
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');

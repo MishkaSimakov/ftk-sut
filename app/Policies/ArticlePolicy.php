@@ -31,7 +31,7 @@ class ArticlePolicy
      */
     public function view(?User $user, Article $article)
     {
-        return true;
+        return $article->isAvailable() or $user->is_admin or $user->id === $article->author->id;
     }
 
     /**
@@ -70,24 +70,24 @@ class ArticlePolicy
     }
 
     /**
-     * Determine whether the user can view unpublished articles.
+     * Determine whether the user can view unchecked articles.
      *
      * @param User $user
      * @return mixed
      */
-    public function viewUnpublished(User $user)
+    public function viewUnchecked(User $user)
     {
-        return $user->is_admin;
+        return true;
     }
 
     /**
-     * Determine whether the user can publish the article.
+     * Determine whether the user can check the article.
      *
      * @param User $user
      * @param Article $article
      * @return mixed
      */
-    public function publish(User $user, Article $article)
+    public function check(User $user, Article $article)
     {
         return $user->is_admin and $article->type == ArticleType::OnCheck();
     }
@@ -101,6 +101,6 @@ class ArticlePolicy
      */
     public function like(User $user, Article $article)
     {
-        return $article->type == ArticleType::Published();
+        return $article->type == ArticleType::Checked();
     }
 }

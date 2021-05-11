@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
+
 @section('title', 'Восстановление пароля')
 
 @section('content')
     <h1 class="text-center h1 mb-4">Восстановление пароля</h1>
 
-    <div class="mx-auto" style="max-width: 350px;">
+    <div class="mx-auto col-xl-6 col-md-9">
         @if (session('status'))
             <div class="alert alert-success mb-2" role="alert">
                 {{ session('status') }}

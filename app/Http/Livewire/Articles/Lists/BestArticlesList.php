@@ -10,7 +10,7 @@ class BestArticlesList extends Component
     public function render()
     {
         $sql = '`points_count` * ' . Article::RELEVANCE_COEFFICIENTS['points'] . ' + `views_count` * ' . Article::RELEVANCE_COEFFICIENTS['views'] . ' + datediff(now(), `date`) * ' . Article::RELEVANCE_COEFFICIENTS['days'];
-        $articles = Article::published()
+        $articles = Article::checked()->published()
             ->with(['author', 'points'])->withCount('points')->withViewsCount()
             ->orderByRaw($sql . ' desc')->limit(3)
             ->get();

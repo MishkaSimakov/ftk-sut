@@ -18,7 +18,7 @@ class ArticleStatisticsResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
 
-            'isPublished' => $this->type == ArticleType::Published() and $this->is_published,
+            'isAvailable' => $this->isAvailable(),
 
             'views_count' => $this->views_count,
             'points_count' => $this->points_count,

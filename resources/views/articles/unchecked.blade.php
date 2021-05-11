@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Неопубликованные статьи')
+@section('title', 'Непроверенные статьи')
 
 @section('content')
     <h1 class="text-center mb-4">Требуют проверки</h1>

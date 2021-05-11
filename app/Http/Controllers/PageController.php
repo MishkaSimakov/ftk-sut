@@ -18,14 +18,4 @@ class PageController extends Controller
 
         return view('welcome', compact('statistics'));
     }
-
-    public function about()
-    {
-        return view('about');
-    }
-
-    public function sitemap()
-    {
-        return view('sitemap');
-    }
 }

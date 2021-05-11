@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Enums\ArticleType;
-use App\Events\ArticleFirstTimePublished;
+use App\Events\ArticleFirstTimeChecked;
 use App\Events\ArticleLiked;
 use App\Models\Traits\Publishable;
 use App\Services\ArticleBodyPrepareService;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,7 +29,7 @@ class Article extends Model implements Viewable
     ];
 
     protected $dates = ['date'];
-    protected $fillable = ['title', 'body', 'date'];
+    protected $fillable = ['title', 'body', 'date', 'type', 'checked_at'];
 
     protected static function boot()
     {
@@ -63,11 +64,6 @@ class Article extends Model implements Viewable
         return route('article.show', $this);
     }
 
-    public function isLikedBy(User $user): bool
-    {
-        return $this->loadMissing('points')->points->contains('id', $user->id);
-    }
-
     public function getTruncatedBodyAttribute(): string
     {
         return truncateHTML(self::TRUNCATE_LIMIT, strip_tags($this->body, ['p', 'b', 'i', 'ul', 'li', 'ol']));
@@ -81,20 +77,41 @@ class Article extends Model implements Viewable
     }
 
 
-    public function publish()
+// TODO: вынести это в отдельный trait, если возможно.
+    public function check()
     {
-        ArticleFirstTimePublished::dispatchIf(is_null($this->published_at), $this);
+        $isFirstTimeChecked = is_null($this->checked_at);
 
         $this->update([
-            'type' => ArticleType::Published(),
-            'published_at' => now()
+            'type' => ArticleType::Checked(),
+            'checked_at' => now()
         ]);
+
+        ArticleFirstTimeChecked::dispatchIf($isFirstTimeChecked, $this);
     }
 
+    public function scopeChecked(Builder $builder): Builder
+    {
+        return $builder->where('type', ArticleType::Checked());
+    }
+
+    /* Эта функция показывает, отображается ли статья у всех пользователей */
+    public function isAvailable(): bool
+    {
+        return $this->is_published and $this->type == ArticleType::Checked();
+    }
+
+
+// TODO: вынести это в отдельный trait, если возможно.
     public function toggleLikeBy(User $user)
     {
         $this->points()->toggle($user);
 
         ArticleLiked::dispatch($this, $user);
+    }
+
+    public function isLikedBy(User $user): bool
+    {
+        return $this->loadMissing('points')->points->contains('id', $user->id);
     }
 }

@@ -1,5 +1,6 @@
 @extends('layouts.app', ['includeLivewire' => false])
 
+
 @section('title', 'Регистрация')
 
 @section('content')
@@ -15,10 +16,9 @@
                         <div class="row no-gutters">
                             <label for="register_code">Регистрационный код</label>
 
-                            <a class="d-none d-sm-inline text-muted text-decoration-none ml-auto" href="{{ route('password.request') }}">Что
-                                это такое?</a>
-                            <a class="d-inline d-sm-none text-muted text-decoration-none ml-auto" href="{{ route('password.request') }}">
-                                <i class="far fa-question-circle"></i>
+                            <a class="text-muted ml-auto" href="{{ route('help.register') }}">
+                                <span class="d-none d-sm-inline">Что это такое?</span>
+                                <i class="d-inline d-sm-none far fa-question-circle"></i>
                             </a>
                         </div>
 

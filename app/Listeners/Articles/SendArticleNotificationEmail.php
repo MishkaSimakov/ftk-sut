@@ -2,11 +2,11 @@
 
 namespace App\Listeners\Articles;
 
-use App\Events\ArticleFirstTimePublished;
+use App\Events\ArticleFirstTimeChecked;
 
 class SendArticleNotificationEmail
 {
-    public function handle(ArticleFirstTimePublished $event)
+    public function handle(ArticleFirstTimeChecked $event)
     {
         // TODO: отправка email c оповещением о новой статье.
     }
