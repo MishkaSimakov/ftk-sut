@@ -28,10 +28,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/Feature/News/NewsStoreTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Unit/News/NewsTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enums/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/UserType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/ru/enums.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ru/enums.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,6 +203,7 @@
       <path value="$PROJECT_DIR$/vendor/assada/laravel-achievements" />
       <path value="$PROJECT_DIR$/vendor/laravel/telescope" />
       <path value="$PROJECT_DIR$/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
     </include_path>
   </component>
   <component name="ProjectId" id="1jeYh1949bivSqAZj8ZtFP1pRJF" />
@@ -252,25 +257,25 @@
       <command value="npm run watch" />
     </option>
   </component>
-  <component name="RunManager" selected="PHPUnit.phpunit.xml">
-    <configuration name="ArticlePointAchievementsTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\Achievements\ArticlePointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/ArticlePointAchievementsTest.php" scope="Class" />
+  <component name="RunManager" selected="PHPUnit.NewsStoreTest.test_it_store_news_with_correct_date_if_delayed_publication">
+    <configuration name="NewsStoreTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\News\NewsStoreTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/News/NewsStoreTest.php" scope="Class" />
       <method v="2" />
     </configuration>
-    <configuration name="RatingPointAchievementsTest.test_it_award_place_achievements_correctly" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\Achievements\RatingPointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" method="test_it_award_place_achievements_correctly" scope="Method" />
+    <configuration name="NewsStoreTest.test_it_dont_store_news_if_not_admin" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\News\NewsStoreTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/News/NewsStoreTest.php" method="test_it_dont_store_news_if_not_admin" scope="Method" />
       <method v="2" />
     </configuration>
-    <configuration name="RatingPointAchievementsTest.test_it_award_points_achievements" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\Achievements\RatingPointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" method="test_it_award_points_achievements" scope="Method" />
+    <configuration name="NewsStoreTest.test_it_dont_store_news_if_unauthenticated" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\News\NewsStoreTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/News/NewsStoreTest.php" method="test_it_dont_store_news_if_unauthenticated" scope="Method" />
       <method v="2" />
     </configuration>
-    <configuration name="RatingPointAchievementsTest.test_it_dont_award_achievements_when_rating_loaded_many_times" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\Achievements\RatingPointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" method="test_it_dont_award_achievements_when_rating_loaded_many_times" scope="Method" />
+    <configuration name="NewsStoreTest.test_it_store_news" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\News\NewsStoreTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/News/NewsStoreTest.php" method="test_it_store_news" scope="Method" />
       <method v="2" />
     </configuration>
-    <configuration name="RatingPointAchievementsTest.test_it_dont_award_unnecessary_achievements" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\Achievements\RatingPointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" method="test_it_dont_award_unnecessary_achievements" scope="Method" />
+    <configuration name="NewsStoreTest.test_it_store_news_with_correct_date_if_delayed_publication" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\News\NewsStoreTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/News/NewsStoreTest.php" method="test_it_store_news_with_correct_date_if_delayed_publication" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -284,11 +289,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="PHPUnit.RatingPointAchievementsTest.test_it_award_place_achievements_correctly" />
-        <item itemvalue="PHPUnit.RatingPointAchievementsTest.test_it_dont_award_achievements_when_rating_loaded_many_times" />
-        <item itemvalue="PHPUnit.RatingPointAchievementsTest.test_it_dont_award_unnecessary_achievements" />
-        <item itemvalue="PHPUnit.RatingPointAchievementsTest.test_it_award_points_achievements" />
-        <item itemvalue="PHPUnit.ArticlePointAchievementsTest" />
+        <item itemvalue="PHPUnit.NewsStoreTest.test_it_store_news_with_correct_date_if_delayed_publication" />
+        <item itemvalue="PHPUnit.NewsStoreTest.test_it_store_news" />
+        <item itemvalue="PHPUnit.NewsStoreTest" />
+        <item itemvalue="PHPUnit.NewsStoreTest.test_it_dont_store_news_if_not_admin" />
+        <item itemvalue="PHPUnit.NewsStoreTest.test_it_dont_store_news_if_unauthenticated" />
       </list>
     </recent_temporary>
   </component>

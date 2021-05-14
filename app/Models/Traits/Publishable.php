@@ -13,7 +13,7 @@ trait Publishable
 
     public function getIsPublishedAttribute(): bool
     {
-        return $this->date->lessThanOrEqualTo(now());
+        return $this->date->isPast();
     }
 
     public function getIsNotPublishedAttribute(): bool

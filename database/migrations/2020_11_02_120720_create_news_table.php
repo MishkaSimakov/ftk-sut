@@ -18,7 +18,7 @@ class CreateNewsTable extends Migration
 
             $table->string('title');
             $table->text('body');
-            $table->date('date');
+            $table->date('date'); // TODO: change this to datetime
 
             $table->timestamps();
         });

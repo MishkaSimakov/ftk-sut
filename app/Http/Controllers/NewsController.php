@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Events\NewsCreated;
 use App\Http\Requests\News\StoreNewsRequest;
-use App\Mail\NewsNotification;
+use App\Http\Resources\News\NewsIndexResource;
 use App\Models\News;
-use App\Models\User;
-use Illuminate\Support\Facades\Mail;
 
 class NewsController extends Controller
 {
@@ -56,8 +54,10 @@ class NewsController extends Controller
 
     public function store(StoreNewsRequest $request)
     {
-        $news = News::make($request->except('date'));
-        $news->date = $request->delayed_publication == 'on' ? $request->get('date') : now();
+        dd($request->get('date'));
+
+        $news = News::make($request->validated());
+        $news->date = $request->get('delayed_publication') === 'on' ? $request->get('date') : now();
         $news->save();
 
         NewsCreated::dispatch($news, $request->get('notify_users') == 'on');

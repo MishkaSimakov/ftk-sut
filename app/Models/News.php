@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class News extends Model implements Viewable
 {
-    use HasFactory, InteractsWithViews, Publishable;
+    use HasFactory;
+    use InteractsWithViews;
+    use Publishable;
 
     protected $fillable = ['title', 'date', 'body'];
     protected $dates = ['date'];
