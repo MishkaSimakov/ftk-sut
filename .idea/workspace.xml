@@ -23,36 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/help/register.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enums/ArticleType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/ArticleType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Events/ArticleFirstTimePublished.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/ArticleFirstTimeChecked.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/ArticlesList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/ArticlesList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/BestArticlesList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Articles/Lists/BestArticlesList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/Article/ArticleStatisticsResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/Article/ArticleStatisticsResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/Clubs/ClubsIndexResource.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/News/NewsIndexResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/News/NewsIndexResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Listeners/Articles/AwardWriteArticleAchievements.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/Articles/AwardWriteArticleAchievements.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Listeners/Articles/SendArticleNotificationEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/Articles/SendArticleNotificationEmail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Article.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/ArticlePoint.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/ArticlePoint.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Traits/Publishable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Traits/Publishable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Policies/ArticlePolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/ArticlePolicy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/ArticleFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/ArticleFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_22_210053_create_articles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_03_22_210053_create_articles_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/ru/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ru/validation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/articles/unpublished.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/articles/unchecked.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/articles/article-actions.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/articles/article-actions.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/header/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/header/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Unit/Achievements/ArticleAchievementsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Achievements/ArticleAchievementsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enums/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/UserType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/ru/enums.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ru/enums.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +209,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JSON" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cart/cart" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -443,7 +417,8 @@
       <workItem from="1620540273928" duration="384000" />
       <workItem from="1620545823237" duration="11883000" />
       <workItem from="1620639990454" duration="5466000" />
-      <workItem from="1620736517707" duration="8168000" />
+      <workItem from="1620736517707" duration="8694000" />
+      <workItem from="1620746172033" duration="498000" />
     </task>
     <task id="LOCAL-00001" summary="Some changes">
       <created>1618655936551</created>
