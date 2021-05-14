@@ -1,8 +1,28 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
-@import 'variables';
-
 // Bootstrap
+$enable-responsive-font-sizes: true;
+
 @import '~bootstrap/scss/bootstrap';
+
+
+// Lity
+@import "~lity/dist/lity";
+*[data-lity] {
+    cursor: pointer;
+}
+
+// Tinymce
+@import "tinymce";
+
+// Tagify
+@import "~@yaireo/tagify/src/tagify";
+
+// Autocomplete-vue
+@import '~@trevoreyre/autocomplete-vue/dist/style.css';
+@import 'autocomplete';
+
+// Custom components
+@import "components/dropdown";
+@import "components/article";
+@import "components/table";
+@import "components/masthead";
+@import "components/borders";

@@ -25,9 +25,11 @@ class StoreNewsRequest extends FormRequest
     {
         return [
             'title' => 'required|max:75',
-            'body' => 'required',
-            'date' => 'required|date',
-            'clubs' => 'nullable|array|distinct|exists:clubs,id'
+            'body' => 'required|string',
+            'notify_users' => 'string|in:on,off',
+
+            'delayed_publication' => 'string|in:on,off',
+            'date' => 'nullable|date',
         ];
     }
 }

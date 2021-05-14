@@ -1,6 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\ArticleController;
+use App\Http\Controllers\Api\RatingController;
+use App\Http\Controllers\Statistics\ArticleStatisticsController;
+use App\Http\Controllers\Statistics\EventStatisticsController;
+use App\Http\Controllers\Statistics\RatingPointsStatisticsController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +19,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('rating/show', [RatingController::class, 'show'])->name('rating.show');
+
+Route::get('article/search', [ArticleController::class, 'search'])->name('article.search');
+Route::get('article/tags', [ArticleController::class, 'tags'])->name('article.tags');
+
+Route::prefix('statistics/')->name('stat.')->group(function () {
+    Route::get('points/{user}', [RatingPointsStatisticsController::class, 'getShortPointsStatistics'])->name('points');
+    Route::get('articles/{user}', [ArticleStatisticsController::class, 'getShortArticlesStatistics'])->name('articles');
+    Route::get('events/{user}', [EventStatisticsController::class, 'getShortEventsStatistics'])->name('events');
 });
 
-Route::resource('news', \App\Http\Controllers\NewsController::class)->except('edit', 'create');
-
-Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);
+//Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);

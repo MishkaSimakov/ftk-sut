@@ -1,7 +1,8 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Enums\UserType;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,13 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::factory()->admin()->create([
+         User::factory()->admin()->create([
              'password' => Hash::make('secret'),
+             'type' => UserType::Pupil(),
              'email' => 'msimakov661@gmail.com',
-             'name' => 'Михаил'
+             'name' => 'Симаков Михаил'
          ]);
 
          $this->call(NewsSeeder::class);
-         $this->call(ClubSeeder::class);
+         $this->call(ArticleTagSeeder::class);
+         $this->call(RatingPointCategorySeeder::class);
+         $this->call(ArticleSeeder::class);
     }
 }

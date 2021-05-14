@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\News;
 
-use App\Http\Resources\Clubs\ClubsIndexResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class NewsIndexResource extends JsonResource
@@ -19,10 +18,11 @@ class NewsIndexResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'body' => $this->body,
+            'views' => $this->views,
             'date' => $this->date,
             'views' => 100,
 
-            'clubs' => ClubsIndexResource::collection($this->clubs)
+            'is_published' => $this->isPublished,
         ];
     }
 }

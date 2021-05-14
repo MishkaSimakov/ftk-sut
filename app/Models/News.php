@@ -2,30 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Traits\Publishable;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class News extends Model implements Viewable
 {
-    use HasFactory;
+    use HasFactory, InteractsWithViews, Publishable;
 
     protected $fillable = ['title', 'date', 'body'];
     protected $dates = ['date'];
+    protected $removeViewsOnDelete = true;
 
-    public function clubs()
-    {
-        return $this->belongsToMany(Club::class, 'news_club');
-    }
-
-    public function scopeClub(Builder $builder, $club)
-    {
-        if ($club instanceof Club) {
-            $club = $club->name;
-        }
-
-        return $builder->whereHas('clubs', function (Builder $builder) use ($club) {
-            $builder->where('name', $club);
-        });
-    }
+    const PAGINATION_LIMIT = 50;
 }

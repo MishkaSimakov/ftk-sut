@@ -10,16 +10,32 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "axios": "^0.19",
+        "axios": "^0.21.1",
         "bootstrap": "^4.0.0",
         "cross-env": "^7.0",
         "jquery": "^3.2",
-        "laravel-mix": "^5.0.1",
-        "lodash": "^4.17.19",
+        "lodash": "^4.17.20",
         "popper.js": "^1.12",
-        "resolve-url-loader": "^3.1.0",
-        "sass": "^1.15.2",
-        "sass-loader": "^8.0.0"
+        "resolve-url-loader": "^3.1.2",
+        "sass": "^1.20.1",
+        "sass-loader": "^8.0.0",
+        "vue": "^2.5.17",
+        "vue-template-compiler": "^2.6.10"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.35",
+        "@fortawesome/free-regular-svg-icons": "^5.15.3",
+        "@fortawesome/free-solid-svg-icons": "^5.15.3",
+        "@tinymce/tinymce-vue": "^3.2.8",
+        "@trevoreyre/autocomplete-vue": "^2.2.0",
+        "@yaireo/tagify": "^3.23.1",
+        "chart.js": "^3.2.0",
+        "dayjs": "^1.10.4",
+        "laravel-mix": "^5.0.1",
+        "lity": "^2.4.1",
+        "skeleton-loader-vue": "^1.0.8",
+        "v-calendar": "^2.2.4",
+        "vue-smooth-height": "^1.6.4",
+        "vuex": "^3.6.2"
+    }
 }

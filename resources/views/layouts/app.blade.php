@@ -4,77 +4,60 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
+    <!-- favion.ico -->
+{{--        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">--}}
+{{--        <link rel="icon" type="image/png" href="{{ asset('favicon.ico') }}">--}}
+{{--        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">--}}
+{{--        <link rel="manifest" href="/site.webmanifest">--}}
+{{--        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">--}}
+{{--        <meta name="msapplication-TileColor" content="#da532c">--}}
+{{--        <meta name="theme-color" content="#ffffff">--}}
+
+<!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Laravel routes and csrf token -->
+    <script>
+        window.Laravel = {!! json_encode([
+                'tinymce_api_key' => "hnviucqus9116ko1nycfet8r4rlvw0akh6w27lord3o9nz15",
+                'user' => auth()->check() ? auth()->user()->toArray() : null,
+                'csrfToken' => csrf_token(),
+                'routes' => collect(\Illuminate\Support\Facades\Route::getRoutes())->mapWithKeys(function ($route) { return [$route->getName() => $route->uri()]; })
+            ]) !!}
+    </script>
+
+    <title>{{ config('app.name') }} - @yield('title')</title>
+    <meta name="Description"
+          content="Сайт Фототехнического клуба СЮТ. Здесь есть всё, чтобы не сачковать и быть активным кружковцем!">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @if(!isset($includeLivewire) || $includeLivewire)
+        @livewireStyles
+    @endif
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<div id="app">
+    @include('partials.header.header')
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+    @yield('masthead')
 
-                    </ul>
+    <main class="py-4 container">
+        @yield('content')
+    </main>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+    {{--    @include('partials.footer.footer')--}}
+</div>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+@stack('scripts')
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+@if(!isset($includeLivewire) || $includeLivewire)
+    @livewireScripts
+@endif
 </body>
 </html>

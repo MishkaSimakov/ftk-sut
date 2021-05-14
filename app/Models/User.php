@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Mail\ResetPasswordNotification;
+use Assada\Achievements\Achiever;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Achiever;
 
     /**
      * The attributes that are mass assignable.
@@ -18,8 +22,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'type',
         'email',
         'password',
+        'is_student'
     ];
 
     /**
@@ -28,6 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
+        'register_code',
         'password',
         'remember_token',
     ];
@@ -40,4 +47,46 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function (User $user) {
+            $user->register_code = Str::random(6);
+        });
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        Mail::to($this)
+            ->send(new ResetPasswordNotification($token));
+    }
+
+    public function getUrlAttribute(): string
+    {
+        return route('users.show', [
+            'user' => $this
+        ]);
+    }
+
+    public function rating_points(): HasMany
+    {
+        return $this->hasMany(RatingPoint::class);
+    }
+
+    public function events(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class);
+    }
+
+    public function articles(): HasMany
+    {
+        return $this->hasMany(Article::class, 'author_id');
+    }
+
+    public function liked_articles(): BelongsToMany
+    {
+        return $this->belongsToMany(Article::class, 'article_points');
+    }
 }

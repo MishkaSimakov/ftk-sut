@@ -1,0 +1,25 @@
+.tox-tinymce {
+    border-radius: 0.25rem !important;
+    border: 1px solid #ced4da !important;
+}
+
+.tox-statusbar {
+    border-top: none !important;
+}
+
+.tox-tinymce {
+    border-radius: 0.25rem !important;
+    border: 1px solid #ced4da !important;
+}
+
+.tox-statusbar {
+    border-top: none !important;
+}
+
+.tox-toolbar__group:nth-last-child(2) {
+    border-right: none !important;
+}
+
+.tox-toolbar__group:last-child {
+    margin-left: auto !important;
+}

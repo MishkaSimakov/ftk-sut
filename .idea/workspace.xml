@@ -28,16 +28,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1efd4885-cfda-4c71-ab6a-3ad5124a2054" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ftk-sut-front/components/global/Footer/ThingsModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../ftk-sut-front/components/global/Footer/ThingsModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ftk-sut-front/layouts/error.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../ftk-sut-front/layouts/error.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ftk-sut-front/pages/news/_id/edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../ftk-sut-front/pages/news/_id/edit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ftk-sut-front/pages/news/create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../ftk-sut-front/pages/news/create.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/News/NewsIndexResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/News/NewsIndexResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enums/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/UserType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/ru/enums.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ru/enums.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +47,7 @@
       <list>
         <option value="composer.json" />
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
         <option value="SCSS File" />
       </list>
     </option>
@@ -60,16 +55,25 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
         <entry key="$PROJECT_DIR$/../ftk-sut-front" value="master" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../ftk-sut-front" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/../ftk-sut-front/node_modules/vue/package.json" />
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.3">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
@@ -176,77 +180,115 @@
       <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
       <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
-      <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/php-enum" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/vendor/hanneskod/classtools" />
+      <path value="$PROJECT_DIR$/vendor/bensampo/laravel-enum" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-code" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-zendframework-bridge" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-eventmanager" />
+      <path value="$PROJECT_DIR$/vendor/jaybizzle/crawler-detect" />
+      <path value="$PROJECT_DIR$/vendor/cyrildewit/eloquent-viewable" />
+      <path value="$PROJECT_DIR$/vendor/livewire/livewire" />
+      <path value="$PROJECT_DIR$/vendor/assada/laravel-achievements" />
+      <path value="$PROJECT_DIR$/vendor/laravel/telescope" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
     </include_path>
   </component>
   <component name="ProjectId" id="1jeYh1949bivSqAZj8ZtFP1pRJF" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JSON" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ftk-sut-front/components/global/Footer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cart/cart" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.startup.tasks" />
-    <property name="ts.external.directory.path" value="C:\Users\msima\AppData\Local\JetBrains\Toolbox\apps\PhpStorm\ch-0\202.7660.42\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="ts.external.directory.path" value="D:\Program Files\JetBrains\PhpStorm 2020.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
     <property name="vuejs.nuxt.types-notification-shown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Sites\ftk-sut-front\components\global\Footer" />
-      <recent name="D:\Sites\ftk-sut-front\components\global" />
-      <recent name="D:\Sites\ftk-sut-front\pages\news" />
-      <recent name="D:\Sites\ftk-sut-front\static" />
-      <recent name="D:\Sites\ftk-sut-front\layouts" />
+      <recent name="D:\Programs\PhpStormProjects\ftk-sut\resources\lang\ru" />
+      <recent name="D:\Programs\PhpStormProjects\ftk-sut\database\migrations" />
+      <recent name="D:\Programs\PhpStormProjects\ftk-sut\public\storage\Images\SocialLinks" />
+      <recent name="D:\Programs\PhpStormProjects\ftk-sut\public\storage\Images" />
+      <recent name="D:\Programs\PhpStormProjects\ftk-sut\public\storage" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Sites\ftk-sut-front\components\global\Footer" />
-      <recent name="D:\Sites\ftk-sut-front\pages\news\_id" />
-      <recent name="D:\Sites\ftk-sut-front\pages\auth" />
+      <recent name="D:\Programs\PhpStormProjects\ftk-sut\app\Achievements\Rating\Monthly" />
+      <recent name="D:\Programs\PhpStormProjects\ftk-sut\app\Achievements\Chains" />
+      <recent name="D:\Programs\PhpStormProjects\ftk-sut\app\Achievements\Articles\Points" />
+      <recent name="D:\Programs\PhpStormProjects\ftk-sut\app\Listeners\News" />
+      <recent name="D:\Programs\PhpStormProjects\ftk-sut\app\Models" />
     </key>
   </component>
-  <component name="RunManager" selected="PHPUnit.NewsTest.testItHasClubScope">
-    <configuration name="NewsTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\NewsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/NewsTest.php" scope="Class" />
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="npm install basiclightbox" />
+      <command value="artisan serve" />
+      <command value="php artisan serve" />
+      <command value="npm run watch" />
+    </option>
+  </component>
+  <component name="RunManager" selected="PHPUnit.phpunit.xml">
+    <configuration name="ArticlePointAchievementsTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Achievements\ArticlePointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/ArticlePointAchievementsTest.php" scope="Class" />
       <method v="2" />
     </configuration>
-    <configuration name="NewsTest.testItHasBody" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\NewsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/NewsTest.php" method="testItHasBody" scope="Method" />
+    <configuration name="RatingPointAchievementsTest.test_it_award_place_achievements_correctly" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Achievements\RatingPointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" method="test_it_award_place_achievements_correctly" scope="Method" />
       <method v="2" />
     </configuration>
-    <configuration name="NewsTest.testItHasClubScope" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\NewsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/NewsTest.php" method="testItHasClubScope" scope="Method" />
+    <configuration name="RatingPointAchievementsTest.test_it_award_points_achievements" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Achievements\RatingPointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" method="test_it_award_points_achievements" scope="Method" />
       <method v="2" />
     </configuration>
-    <configuration name="NewsTest.testItHasClubs" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\NewsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/NewsTest.php" method="testItHasClubs" scope="Method" />
+    <configuration name="RatingPointAchievementsTest.test_it_dont_award_achievements_when_rating_loaded_many_times" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Achievements\RatingPointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" method="test_it_dont_award_achievements_when_rating_loaded_many_times" scope="Method" />
       <method v="2" />
     </configuration>
-    <configuration name="NewsTest.testItHasTitle" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Unit\NewsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/NewsTest.php" method="testItHasTitle" scope="Method" />
+    <configuration name="RatingPointAchievementsTest.test_it_dont_award_unnecessary_achievements" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\Achievements\RatingPointAchievementsTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Unit/Achievements/RatingPointAchievementsTest.php" method="test_it_dont_award_unnecessary_achievements" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
-      <TestRunner scope="XML" />
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="PHP 7.4" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <TestRunner bootstrap_file="$PROJECT_DIR$/bootstrap/app.php" configuration_file="$PROJECT_DIR$/phpunit.xml" scope="XML" use_alternative_bootstrap_file="true" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="PHPUnit.NewsTest.testItHasClubScope" />
-        <item itemvalue="PHPUnit.NewsTest" />
-        <item itemvalue="PHPUnit.NewsTest.testItHasClubs" />
-        <item itemvalue="PHPUnit.NewsTest.testItHasBody" />
-        <item itemvalue="PHPUnit.NewsTest.testItHasTitle" />
+        <item itemvalue="PHPUnit.RatingPointAchievementsTest.test_it_award_place_achievements_correctly" />
+        <item itemvalue="PHPUnit.RatingPointAchievementsTest.test_it_dont_award_achievements_when_rating_loaded_many_times" />
+        <item itemvalue="PHPUnit.RatingPointAchievementsTest.test_it_dont_award_unnecessary_achievements" />
+        <item itemvalue="PHPUnit.RatingPointAchievementsTest.test_it_award_points_achievements" />
+        <item itemvalue="PHPUnit.ArticlePointAchievementsTest" />
       </list>
     </recent_temporary>
   </component>
@@ -263,12 +305,134 @@
       <workItem from="1604309444145" duration="24235000" />
       <workItem from="1604389077913" duration="15098000" />
       <workItem from="1604406449632" duration="23564000" />
-      <workItem from="1604472576406" duration="14000000" />
-      <workItem from="1604506913129" duration="9508000" />
-      <workItem from="1604574481737" duration="48000" />
-      <workItem from="1604686032836" duration="4515000" />
-      <workItem from="1604749857373" duration="9279000" />
+      <workItem from="1604472576406" duration="4788000" />
+      <workItem from="1604815367709" duration="18780000" />
+      <workItem from="1604900092590" duration="6126000" />
+      <workItem from="1604941367939" duration="44000" />
+      <workItem from="1607096684937" duration="631000" />
+      <workItem from="1607169700349" duration="588000" />
+      <workItem from="1607759511555" duration="3370000" />
+      <workItem from="1607797409942" duration="1337000" />
+      <workItem from="1607855978660" duration="10983000" />
+      <workItem from="1607966388920" duration="5050000" />
+      <workItem from="1608206993312" duration="4369000" />
+      <workItem from="1610450368767" duration="2349000" />
+      <workItem from="1610699746774" duration="3289000" />
+      <workItem from="1613132253362" duration="12000" />
+      <workItem from="1613396460254" duration="14000" />
+      <workItem from="1613562590542" duration="64000" />
+      <workItem from="1613894147338" duration="798000" />
+      <workItem from="1613896126114" duration="1395000" />
+      <workItem from="1613919281876" duration="13055000" />
+      <workItem from="1614007734724" duration="2925000" />
+      <workItem from="1614055168577" duration="10260000" />
+      <workItem from="1614073965456" duration="328000" />
+      <workItem from="1614083513450" duration="12014000" />
+      <workItem from="1614099192386" duration="495000" />
+      <workItem from="1614166439418" duration="7992000" />
+      <workItem from="1614249335110" duration="5235000" />
+      <workItem from="1614262251213" duration="648000" />
+      <workItem from="1614341290743" duration="996000" />
+      <workItem from="1614342828470" duration="2785000" />
+      <workItem from="1614410155822" duration="5253000" />
+      <workItem from="1614423616532" duration="3959000" />
+      <workItem from="1614493275181" duration="5995000" />
+      <workItem from="1614626179323" duration="992000" />
+      <workItem from="1614687746271" duration="17824000" />
+      <workItem from="1614709678187" duration="3710000" />
+      <workItem from="1614768447329" duration="12291000" />
+      <workItem from="1614862156661" duration="7652000" />
+      <workItem from="1614885977744" duration="3885000" />
+      <workItem from="1614924035835" duration="328000" />
+      <workItem from="1614924388688" duration="20455000" />
+      <workItem from="1614960191029" duration="1076000" />
+      <workItem from="1615015270084" duration="11574000" />
+      <workItem from="1615043072277" duration="4671000" />
+      <workItem from="1615102996085" duration="20434000" />
+      <workItem from="1615130213503" duration="13622000" />
+      <workItem from="1615184790433" duration="11821000" />
+      <workItem from="1615216526387" duration="77000" />
+      <workItem from="1615389254847" duration="1390000" />
+      <workItem from="1615406331856" duration="1006000" />
+      <workItem from="1615442868879" duration="6147000" />
+      <workItem from="1616139541281" duration="2700000" />
+      <workItem from="1616253950176" duration="4635000" />
+      <workItem from="1616337867066" duration="662000" />
+      <workItem from="1616435697066" duration="2798000" />
+      <workItem from="1616439181959" duration="2457000" />
+      <workItem from="1616476688274" duration="7881000" />
+      <workItem from="1616593766067" duration="13023000" />
+      <workItem from="1616652021172" duration="37574000" />
+      <workItem from="1616751883235" duration="11345000" />
+      <workItem from="1616837091986" duration="5928000" />
+      <workItem from="1616939933818" duration="2678000" />
+      <workItem from="1617023495196" duration="4785000" />
+      <workItem from="1617277051816" duration="4471000" />
+      <workItem from="1617282329813" duration="4112000" />
+      <workItem from="1617881945751" duration="4542000" />
+      <workItem from="1617893440977" duration="6449000" />
+      <workItem from="1617946943385" duration="24933000" />
+      <workItem from="1618034826450" duration="16758000" />
+      <workItem from="1618133611940" duration="272000" />
+      <workItem from="1618240608515" duration="1567000" />
+      <workItem from="1618401471392" duration="6564000" />
+      <workItem from="1618498843653" duration="5306000" />
+      <workItem from="1618570024576" duration="11279000" />
+      <workItem from="1618646709835" duration="15000" />
+      <workItem from="1618655872851" duration="9211000" />
+      <workItem from="1618670087885" duration="7000" />
+      <workItem from="1618673856704" duration="8947000" />
+      <workItem from="1618839351506" duration="9330000" />
+      <workItem from="1619001480714" duration="8444000" />
+      <workItem from="1619010949382" duration="2167000" />
+      <workItem from="1619090780316" duration="9511000" />
+      <workItem from="1619107327338" duration="7155000" />
+      <workItem from="1619173027748" duration="18959000" />
+      <workItem from="1619248421845" duration="653000" />
+      <workItem from="1619249216569" duration="309000" />
+      <workItem from="1619249583047" duration="2403000" />
+      <workItem from="1619275182574" duration="29000" />
+      <workItem from="1619442361489" duration="10372000" />
+      <workItem from="1619462485436" duration="3208000" />
+      <workItem from="1619527087451" duration="5153000" />
+      <workItem from="1619534050076" duration="13168000" />
+      <workItem from="1619550239514" duration="34000" />
+      <workItem from="1619603467425" duration="1476000" />
+      <workItem from="1619613119187" duration="2154000" />
+      <workItem from="1619697012075" duration="6664000" />
+      <workItem from="1619706853961" duration="870000" />
+      <workItem from="1619717188620" duration="918000" />
+      <workItem from="1619719022554" duration="10000" />
+      <workItem from="1619794287861" duration="7801000" />
+      <workItem from="1619850435424" duration="4958000" />
+      <workItem from="1619874335590" duration="15288000" />
+      <workItem from="1619966297757" duration="5234000" />
+      <workItem from="1620019013749" duration="15749000" />
+      <workItem from="1620064472512" duration="1882000" />
+      <workItem from="1620107989816" duration="1870000" />
+      <workItem from="1620200859849" duration="14845000" />
+      <workItem from="1620229974896" duration="13481000" />
+      <workItem from="1620280048022" duration="20353000" />
+      <workItem from="1620312846068" duration="5044000" />
+      <workItem from="1620321676895" duration="10908000" />
+      <workItem from="1620371932683" duration="19140000" />
+      <workItem from="1620452981745" duration="21867000" />
+      <workItem from="1620490133396" duration="5895000" />
+      <workItem from="1620496146178" duration="8316000" />
+      <workItem from="1620540273928" duration="384000" />
+      <workItem from="1620545823237" duration="11883000" />
+      <workItem from="1620639990454" duration="5466000" />
+      <workItem from="1620736517707" duration="8694000" />
+      <workItem from="1620746172033" duration="498000" />
     </task>
+    <task id="LOCAL-00001" summary="Some changes">
+      <created>1618655936551</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1618655936551</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,61 +443,34 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Livewire-development" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="674" y="163" key="#PHP" timestamp="1604401155789">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="674" y="163" key="#PHP/0.0.1920.1040@0.0.1920.1040" timestamp="1604401155789" />
-    <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604507172630">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604507172630" />
-    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1604402398593">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604402398593" />
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604424149630">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604424149630" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1604574532616">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1604574532616" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1604402702531">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604402702531" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1604402702530">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604402702530" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1604402702530">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604402702530" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1604402702530">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604402702530" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1604507173531">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1604507173531" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1604223195558">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604223195558" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1604512992890">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604512992890" />
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Some changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some changes" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ftk_sut@phpunit_xml.xml" NAME="phpunit.xml Coverage Results" MODIFIED="1620743856879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="PhpCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

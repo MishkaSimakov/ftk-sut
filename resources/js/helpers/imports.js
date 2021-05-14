@@ -1,0 +1,1 @@
+window.route = require('./route');
