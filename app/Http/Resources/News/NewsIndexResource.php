@@ -20,6 +20,7 @@ class NewsIndexResource extends JsonResource
             'body' => $this->body,
             'views' => $this->views,
             'date' => $this->date,
+            'views' => 100,
 
             'is_published' => $this->isPublished,
         ];

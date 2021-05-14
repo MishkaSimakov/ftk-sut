@@ -47,6 +47,13 @@ class NewsController extends Controller
         return view('news.create');
     }
 
+    public function show(News $news)
+    {
+        return response()->json(
+            NewsIndexResource::make($news)
+        );
+    }
+
     public function store(StoreNewsRequest $request)
     {
         $news = News::make($request->except('date'));

@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('rating/show', [RatingController::class, 'show'])->name('rating.show');
 
 Route::get('article/search', [ArticleController::class, 'search'])->name('article.search');
