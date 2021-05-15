@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -35,6 +37,17 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Route::pattern('period', '[0-9]{4}\.[0-9]{2}\-[0-9]{4}\.[0-9]{2}'); // regex for 'YYYY.MM-YYYY.MM' query
+        Route::bind('period', function ($value) {
+            [$start, $end] = explode('-', $value);
+
+            return CarbonPeriod::since(
+                Carbon::createFromIsoFormat('YYYY.MM', $start)
+            )->until(
+                Carbon::createFromIsoFormat('YYYY.MM', $end)
+            );
+        });
+
         $this->configureRateLimiting();
 
         $this->routes(function () {

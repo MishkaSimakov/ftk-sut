@@ -15,7 +15,7 @@ use Illuminate\Support\Collection;
 
 class AwardMonthlyRatingPointAchievements implements ShouldQueue
 {
-    public function handle(RatingCreated $event)
+    public function handle($event)
     {
         $rating = (new Rating())->setPeriod($event->date->toPeriod($event->date))
             ->get()

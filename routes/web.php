@@ -37,10 +37,12 @@ Route::resource('events', \App\Http\Controllers\EventsController::class);
 
 # rating
 Route::resource('rating', \App\Http\Controllers\RatingController::class)
-    ->except('index', 'edit', 'update', 'show');
-Route::get('rating/{period?}', [\App\Http\Controllers\RatingController::class, 'index'])
-    ->name('rating.index')
-    ->where('date', '[0-9]{4}\.[0-9]{2}\-[0-9]{4}\.[0-9]{2}');  // regex for 'YYYY.MM-YYYY.MM' query
+    ->only(['create', 'store']);
+
+Route::get('rating/destroy', [\App\Http\Controllers\RatingController::class, 'showDestroyPage'])->name('rating.destroyPage');
+Route::delete('rating/destroy', [\App\Http\Controllers\RatingController::class, 'destroy'])->name('rating.destroy');
+
+Route::get('rating/{period?}', [\App\Http\Controllers\RatingController::class, 'index'])->name('rating.index');
 
 //Route::prefix('statistics')->name('statistics.')->group(function () {
 //    Route::get('compare/{user}', [\App\Http\Controllers\Statistics\StatisticsController::class, 'compare'])->name('compare');
@@ -49,12 +51,15 @@ Route::get('rating/{period?}', [\App\Http\Controllers\RatingController::class, '
 # achievements
 Route::get('/achievements', [\App\Http\Controllers\AchievementController::class, 'index'])->name('achievements.index');
 
-Auth::routes();
-
+# admin
 Route::get('/admin', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.index');
 
+# users
 Route::resource('users', \App\Http\Controllers\UserController::class);
+
+
+# auth routes
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\UserController::class, 'home'])->name('home');
 Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('settings');
-Route::get('/notifications', [App\Http\Controllers\UserController::class, 'notifications'])->name('notifications');

@@ -40,8 +40,11 @@
 
                 <div class="form-group">
                     <label for="tags">Теги</label>
-                    <articles-tags-editor error="{{ $errors->first('tags') }}"
-                                          value="{{ old('tags') ?? $article->tags->map(function ($tag) { return ['value' => $tag->name]; })->toJson() }}"></articles-tags-editor>
+                    <articles-tags-editor
+                        tags="{{ $tags->toJson() }}"
+                        error="{{ $errors->first('tags') }}"
+                        value="{{ old('tags') ?? $article->tags->map(function ($tag) { return ['value' => $tag->name]; })->toJson() }}"
+                    ></articles-tags-editor>
 
                     @error('tags')
                     <span class="invalid-feedback" role="alert">
@@ -50,10 +53,9 @@
                     @enderror
                 </div>
 
-                @if($article->isNotPublished)
-                    <articles-date-editor value_checkbox="{{ old('delayed_publication') ?? true }}"
-                                          value_date="{{ old('date') ?? $article->date }}"></articles-date-editor>
-                @endif
+                <articles-date-editor value_checkbox="{{ old('delayed_publication') ?? $article->is_not_published }}"
+                                      value_date="{{ old('date') ?? $article->date }}"></articles-date-editor>
+
                 <button type="submit" class="btn btn-primary mr-2">Сохранить</button>
             </form>
         </div>

@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Event;
+use App\Models\RatingPoint;
 use App\Policies\EventPolicy;
+use App\Policies\RatingPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -18,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Article' => 'App\Policies\ArticlePolicy',
         'App\Models\News' => 'App\Policies\NewsPolicy',
         Event::class => EventPolicy::class,
+        RatingPoint::class => RatingPolicy::class,
     ];
 
     /**

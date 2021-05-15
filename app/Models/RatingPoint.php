@@ -38,7 +38,7 @@ class RatingPoint extends Model
 
     public function scopeFromPeriod(Builder $builder, CarbonPeriod $period): Builder
     {
-        return $builder->whereDate('date', '>=', $period->start)
-            ->whereDate('date', '<=', $period->end);
+        return $builder->whereDate('date', '>=', $period->start->startOfMonth())
+            ->whereDate('date', '<=', $period->end->endOfMonth());
     }
 }

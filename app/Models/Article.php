@@ -115,4 +115,14 @@ class Article extends Model implements Viewable
     {
         return $this->loadMissing('points')->points->contains('id', $user->id);
     }
+
+
+    public function attachTagsFromString(string $tags)
+    {
+        foreach (json_decode($tags) as $tag) {
+            $tag_id = ArticleTag::firstOrCreate(['name' => $tag->value]);
+
+            $this->tags()->syncWithoutDetaching($tag_id);
+        }
+    }
 }

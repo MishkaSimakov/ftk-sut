@@ -103,11 +103,7 @@ export default {
                     resolve(response.data)
                 })
             })
-        },
-
-        // submit(value) {
-        //     alert(value);
-        // }
+        }
     }
 }
 </script>

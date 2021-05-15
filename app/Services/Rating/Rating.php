@@ -5,11 +5,13 @@ namespace App\Services\Rating;
 
 
 use App\Events\RatingCreated;
+use App\Events\RatingDeleted;
 use App\Imports\RatingImport;
 use App\Models\RatingPoint;
 use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +21,11 @@ class Rating
 {
     public CarbonPeriod $period;
     public User $user;
+
+    public function __construct()
+    {
+        $this->period = new CarbonPeriod();
+    }
 
     public function setPeriod(CarbonPeriod $period): self
     {
@@ -34,9 +41,27 @@ class Rating
         return $this;
     }
 
+    public function setPeriodStartFromString(string $start): self
+    {
+        $this->setPeriodStart(
+            Carbon::parse($start)
+        );
+
+        return $this;
+    }
+
     public function setPeriodEnd(Carbon $end): self
     {
         $this->period->setEndDate($end);
+
+        return $this;
+    }
+
+    public function setPeriodEndFromString(string $end): self
+    {
+        $this->setPeriodEnd(
+            Carbon::parse($end)
+        );
 
         return $this;
     }
@@ -57,13 +82,7 @@ class Rating
 
     public function get(): Collection
     {
-        $query = RatingPoint::query();
-
-        if ($this->period) {
-            $query = $query->fromPeriod($this->period);
-        }
-
-        return $query->select([
+        return $this->getQueryWithPeriod()->select([
             'id',
             'rating_point_category_id',
             'user_id',
@@ -79,11 +98,27 @@ class Rating
         RatingCreated::dispatch($date);
     }
 
+    public function destroy()
+    {
+        $this->getQueryWithPeriod()->delete();
+
+//        RatingDeleted::dispatch();
+    }
+
 
     protected function getLastPointsPeriod(): CarbonPeriod
     {
         $start = ($point = RatingPoint::orderBy('date', 'desc')->first()) ? $point->date : now();
 
         return CarbonPeriod::since($start)->until($start);
+    }
+
+    protected function getQueryWithPeriod(): Builder
+    {
+        if ($this->period) {
+            return RatingPoint::fromPeriod($this->period);
+        }
+
+        return RatingPoint::query();
     }
 }

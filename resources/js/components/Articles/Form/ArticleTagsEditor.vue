@@ -6,50 +6,21 @@
 
 <script>
 import Tagify from '@yaireo/tagify'
-import {createNamespacedHelpers} from 'vuex'
-
-const {mapGetters, mapActions} = createNamespacedHelpers('articles');
 
 export default {
     props: [
-        'value', 'error'
+        'value', 'error', 'tags'
     ],
-    data() {
-        return {
-            tagify: null,
-        }
-    },
-    computed: {
-        ...mapGetters({
-            tags: 'getTags'
-        })
-    },
-    methods: {
-        ...mapActions([
-            'loadTags'
-        ])
-    },
     mounted() {
-        this.loadTags();
-
         let input = document.querySelector('#tags');
-        this.tagify = new Tagify(input, {
-            whitelist: [],
+        new Tagify(input, {
+            whitelist: JSON.parse(this.tags).map((t) => t.name),
             maxTags: 5,
             dropdown: {
                 enabled: 0,
                 closeOnSelect: true
             }
         });
-    },
-    watch: {
-        tags(tags) {
-            this.tagify.settings.whitelist = tags.map((t) => t.name);
-        }
     }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -22,12 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('rating/show', [RatingController::class, 'show'])->name('rating.show');
 
 Route::get('article/search', [ArticleController::class, 'search'])->name('article.search');
-Route::get('article/tags', [ArticleController::class, 'tags'])->name('article.tags');
 
 Route::prefix('statistics/')->name('stat.')->group(function () {
     Route::get('points/{user}', [RatingPointsStatisticsController::class, 'getShortPointsStatistics'])->name('points');
     Route::get('articles/{user}', [ArticleStatisticsController::class, 'getShortArticlesStatistics'])->name('articles');
     Route::get('events/{user}', [EventStatisticsController::class, 'getShortEventsStatistics'])->name('events');
 });
-
-//Route::get('/clubs', [\App\Http\Controllers\ClubController::class, 'index']);

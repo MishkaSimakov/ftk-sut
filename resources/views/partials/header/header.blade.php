@@ -56,13 +56,20 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="{{ route('rating.index') }}">Рейтинг</a>
 
-                        @admin
-                        <div class="hover-dropdown-menu dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('rating.create') }}">
-                                Загрузить
-                            </a>
-                        </div>
-                        @endadmin
+                        @canany(['create', 'delete'], \App\Models\RatingPoint::class)
+                            <div class="hover-dropdown-menu dropdown-menu">
+                                @can('create', \App\Models\RatingPoint::class)
+                                    <a class="dropdown-item" href="{{ route('rating.create') }}">
+                                        Загрузить
+                                    </a>
+                                @endcan
+                                @can('delete', \App\Models\RatingPoint::class)
+                                    <a class="dropdown-item" href="{{ route('rating.destroyPage') }}">
+                                        Удалить
+                                    </a>
+                                @endcan
+                            </div>
+                        @endcanany
                     </li>
                 </ul>
 
@@ -86,9 +93,9 @@
                             </a>
 
                             @admin
-                                <a class="dropdown-item" href="{{ route('admin.index') }}">
-                                    Управление
-                                </a>
+                            <a class="dropdown-item" href="{{ route('admin.index') }}">
+                                Управление
+                            </a>
                             @endadmin
 
                             <div class="dropdown-divider"></div>

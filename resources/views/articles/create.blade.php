@@ -38,7 +38,11 @@
 
                 <div class="form-group">
                     <label for="tags">Теги</label>
-                    <articles-tags-editor error="{{ $errors->first('tags') }}" value="{{ old('tags') }}"></articles-tags-editor>
+                    <articles-tags-editor
+                        error="{{ $errors->first('tags') }}"
+                        value="{{ old('tags') }}"
+                        tags="{{ $tags->toJson() }}"
+                    ></articles-tags-editor>
 
                     @error('tags')
                     <span class="invalid-feedback" role="alert">

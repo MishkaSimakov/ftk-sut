@@ -6,6 +6,7 @@ use App\Events\ArticleFirstTimeChecked;
 use App\Events\ArticleLiked;
 use App\Events\NewsCreated;
 use App\Events\RatingCreated;
+use App\Events\RatingDeleted;
 use App\Listeners\Articles\AwardArticlePointAchievements;
 use App\Listeners\Articles\AwardWriteArticleAchievements;
 use App\Listeners\Articles\SendArticleNotificationEmail;
@@ -38,6 +39,9 @@ class EventServiceProvider extends ServiceProvider
             AwardArticlePointAchievements::class,
         ],
         RatingCreated::class => [
+            AwardMonthlyRatingPointAchievements::class,
+        ],
+        RatingDeleted::class => [
             AwardMonthlyRatingPointAchievements::class,
         ],
     ];

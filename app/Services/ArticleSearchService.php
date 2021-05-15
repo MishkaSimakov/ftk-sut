@@ -11,17 +11,19 @@ use Illuminate\Support\Str;
 
 class ArticleSearchService
 {
-    public function getQueryResults(string $query, bool $wantsJson = true): Collection
+    public function getQueryResults(string $query, bool $wantsJson = true)
     {
         $articles = $this->getArticlesFromQuery($query);
         $tags = $this->getTagsFromQuery($query);
         $users = $this->getUsersFromQuery($query);
 
-        if (!$wantsJson) return collect([
-            'articles' => $articles,
-            'tags' => $tags,
-            'users' => $users
-        ]);
+        if (!$wantsJson) {
+            return [
+                'articles' => $articles,
+                'tags' => $tags,
+                'users' => $users
+            ];
+        }
 
         return $articles->concat($tags)->concat($users)->map(function ($result) {
             $result->type = Str::lower(class_basename($result));
@@ -30,7 +32,8 @@ class ArticleSearchService
         });
     }
 
-    protected function getArticlesFromQuery(string $query): Collection
+    protected
+    function getArticlesFromQuery(string $query): Collection
     {
         return Article::where('title', 'like', "%{$query}%")
             ->orWhere('body', 'like', "%{$query}%")
@@ -43,12 +46,14 @@ class ArticleSearchService
             });
     }
 
-    protected function getTagsFromQuery(string $query): Collection
+    protected
+    function getTagsFromQuery(string $query): Collection
     {
         return ArticleTag::where('name', 'like', "%{$query}%")->get();
     }
 
-    protected function getUsersFromQuery(string $query): Collection
+    protected
+    function getUsersFromQuery(string $query): Collection
     {
         return User::where('name', 'like', "%{$query}%")->get();
     }

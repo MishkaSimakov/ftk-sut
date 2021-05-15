@@ -64,7 +64,7 @@ return [
     | by JayBizzle called CrawlerDetect.
     |
     */
-    'ignore_bots' => true, // TODO: разобраться с этим
+    'ignore_bots' => true,
 
     /*
     |--------------------------------------------------------------------------

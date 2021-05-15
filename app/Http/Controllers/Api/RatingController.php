@@ -14,8 +14,8 @@ class RatingController extends Controller
     public function show(Request $request)
     {
         if ($request->has(['start', 'end'])) {
-            $rating = (new Rating())->setPeriodStart($request->get('start'))
-                ->setPeriodEnd($request->get('end'));
+            $rating = (new Rating())->setPeriodStartFromString($request->get('start'))
+                ->setPeriodEndFromString($request->get('end'));
         } else {
             $rating = (new Rating())->last();
         }
