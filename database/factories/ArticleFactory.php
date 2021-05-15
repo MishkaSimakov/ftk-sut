@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\ArticleType;
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ArticleFactory extends Factory
@@ -25,7 +26,7 @@ class ArticleFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'body' => $this->faker->text,
-            'author_id' => 1,
+            'author_id' => User::factory()->create()->id,
 
             'type' => ArticleType::Checked(),
             'date' => $this->faker->date,

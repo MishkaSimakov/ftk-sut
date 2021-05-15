@@ -46,10 +46,10 @@ class NewsStoreTest extends TestCase
             'title' => 'Title',
             'body' => '123',
             'delayed_publication' => 'on',
-            'date' => $date = now()->addDay()
+            'date' => $date = now()->addDay()->isoFormat('YYYY-MM-DD[T]HH:mm')
         ])
             ->assertRedirect(route('news.index'));
 
-        $this->assertEquals($date, News::first()->date);
+        $this->assertEquals($date, News::first()->date->isoFormat('YYYY-MM-DD[T]HH:mm'));
     }
 }

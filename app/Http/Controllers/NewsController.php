@@ -54,8 +54,6 @@ class NewsController extends Controller
 
     public function store(StoreNewsRequest $request)
     {
-        dd($request->get('date'));
-
         $news = News::make($request->validated());
         $news->date = $request->get('delayed_publication') === 'on' ? $request->get('date') : now();
         $news->save();

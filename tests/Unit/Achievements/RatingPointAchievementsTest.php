@@ -8,7 +8,7 @@ use App\Achievements\Rating\Monthly\TakeFirstPlace;
 use App\Achievements\Rating\Monthly\TakeSecondPlace;
 use App\Achievements\Rating\Monthly\TakeThirdPlace;
 use App\Models\User;
-use App\Services\RatingService;
+use App\Services\Rating\Rating;
 use Carbon\Carbon;
 use Database\Seeders\RatingPointCategorySeeder;
 use Illuminate\Http\UploadedFile;
@@ -65,7 +65,7 @@ class RatingPointAchievementsTest extends TestCase
     protected function storeRating(Carbon $date)
     {
         $path = storage_path('app/testing/rating_many_lists.xls');
-        (new RatingService())->storeRating(
+        (new Rating())->store(
             $date,
             new UploadedFile($path, 'rating.xls', 'application/vnd.ms-excel', null, true)
         );

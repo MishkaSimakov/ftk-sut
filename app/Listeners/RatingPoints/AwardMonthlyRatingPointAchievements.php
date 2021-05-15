@@ -8,7 +8,7 @@ use App\Achievements\Rating\Monthly\TakeSecondPlace;
 use App\Achievements\Rating\Monthly\TakeThirdPlace;
 use App\Events\RatingCreated;
 use App\Models\User;
-use App\Services\RatingService;
+use App\Services\Rating\Rating;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -17,7 +17,8 @@ class AwardMonthlyRatingPointAchievements implements ShouldQueue
 {
     public function handle(RatingCreated $event)
     {
-        $rating = (new RatingService())->getRatingFromPeriod($event->date->toPeriod($event->date))
+        $rating = (new Rating())->setPeriod($event->date->toPeriod($event->date))
+            ->get()
             ->sortByDesc(function (Collection $categories) {
                 return $categories->sum('amount');
             });

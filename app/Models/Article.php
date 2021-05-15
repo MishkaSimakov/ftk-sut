@@ -30,6 +30,7 @@ class Article extends Model implements Viewable
 
     protected $dates = ['date'];
     protected $fillable = ['title', 'body', 'date', 'type', 'checked_at'];
+    protected $removeViewsOnDelete = true;
 
     protected static function boot()
     {

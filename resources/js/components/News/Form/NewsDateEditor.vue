@@ -10,10 +10,10 @@
         </div>
 
         <div class="form-group" v-if="is_delayed_publication">
-            <input id="date" type="date"
+            <input id="date" type="datetime-local"
                    class="form-control" name="date"
-                   :value="$date().format('YYYY-MM-DD')"
-                   :min="$date().format('YYYY-MM-DD')" required autofocus
+                   :value="$date().format('YYYY-MM-DD[T]HH-mm')"
+                   :min="$date().format('YYYY-MM-DD[T]HH-mm')" required autofocus
             >
         </div>
     </div>
@@ -37,7 +37,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\RatingService;
+use App\Services\Rating\Rating;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RatingController extends Controller
 {
-    protected RatingService $ratingService;
-
-    public function __construct(RatingService $ratingService)
+    public function __construct()
     {
         $this->middleware('admin')->except('index');
-
-        $this->ratingService = $ratingService;
     }
 
     public function index()
@@ -29,7 +25,7 @@ class RatingController extends Controller
 
     public function store(Request $request)
     {
-        $this->ratingService->storeRating(
+        (new Rating())->store(
             Carbon::parse($request->get('date')),
             $request->file('rating')
         );

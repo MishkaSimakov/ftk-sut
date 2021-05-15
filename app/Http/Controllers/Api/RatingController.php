@@ -6,27 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Rating\RatingPointCategoryIndexResource;
 use App\Http\Resources\Rating\RatingPointsIndexResource;
 use App\Models\RatingPointCategory;
-use App\Services\RatingService;
-use Carbon\CarbonPeriod;
+use App\Services\Rating\Rating;
 use Illuminate\Http\Request;
 
 class RatingController extends Controller
 {
-    public RatingService $ratingService;
-    public function __construct(RatingService $ratingService)
-    {
-        $this->ratingService = $ratingService;
-    }
-
     public function show(Request $request)
     {
         if ($request->has(['start', 'end'])) {
-            $period = CarbonPeriod::since($request->get('start'))->until($request->get('end'));
+            $rating = (new Rating())->setPeriodStart($request->get('start'))
+                ->setPeriodEnd($request->get('end'));
         } else {
-            $period = $this->ratingService->getLastPointsPeriod();
+            $rating = (new Rating())->last();
         }
 
-        $points = $this->ratingService->getRatingFromPeriod($period);
+        $points = $rating->get();
         $categories = RatingPointCategory::all();
 
         return response()->json([
@@ -34,8 +28,8 @@ class RatingController extends Controller
             'categories' => RatingPointCategoryIndexResource::collection($categories),
             'meta' => [
                 'period' => [
-                    'start' => $period->start->isoFormat('YYYY-MM'),
-                    'end' => $period->end->isoFormat('YYYY-MM'),
+                    'start' => $rating->period->start->isoFormat('YYYY-MM'),
+                    'end' => $rating->period->end->isoFormat('YYYY-MM'),
                 ],
             ]
         ]);
