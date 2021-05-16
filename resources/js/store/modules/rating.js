@@ -63,7 +63,7 @@ const actions = {
 
         commit('setLoading', true)
 
-        ratingApi.loadRating({period: period}).then((response) => {
+        return ratingApi.loadRating({period: period}).then((response) => {
             if (state.categories.length === 0) {
                 commit('setRatingCategories', response.data.categories)
             }

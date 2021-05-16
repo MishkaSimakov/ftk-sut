@@ -64762,7 +64762,7 @@ var actions = {
     }
 
     commit('setLoading', true);
-    _api_rating__WEBPACK_IMPORTED_MODULE_0__["default"].loadRating({
+    return _api_rating__WEBPACK_IMPORTED_MODULE_0__["default"].loadRating({
       period: period
     }).then(function (response) {
       if (state.categories.length === 0) {
