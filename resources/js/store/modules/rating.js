@@ -82,7 +82,7 @@ const actions = {
                 return accumulator + (point.category.disabled ? 0 : parseInt(point.amount))
             }, 0)
             user.points = user.points.map((point) => {
-                point.width = point.category.disabled ? 0 : point.amount / user.total * 100
+                point.width = point.category.disabled ? 0 : Math.abs(point.amount / user.total * 100)
                 return point
             })
 
@@ -93,7 +93,7 @@ const actions = {
 
         // recount width of bars
         state.rating = state.rating.map((user) => {
-            user.width = user.total / max * 100
+            user.width = Math.abs(user.total / max * 100)
             return user
         })
     },
@@ -121,7 +121,7 @@ const mutations = {
         let max = Math.max(...points.map((u) => u.total))
 
         state.rating = points.map((user) => {
-            user.width = user.total / max * 100
+            user.width = Math.abs(user.total / max * 100)
             user.points = user.points.map((point) => {
                 point.category = state.categories[point.category]
                 return point

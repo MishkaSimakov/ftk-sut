@@ -40,7 +40,9 @@
                                         width: `${points.width}%`,
                                         cursor: 'pointer',
                                         height: '40%',
-                                        position: 'relative'
+                                        position: 'relative',
+                                        direction: points.total > 0 ? 'ltr' : 'rtl',
+                                        right:  points.total > 0 ? '' : `${points.width}%`
                                     }"
                                 >
                                     <div

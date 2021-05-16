@@ -14362,6 +14362,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -48760,7 +48762,10 @@ var render = function() {
                                   width: points.width + "%",
                                   cursor: "pointer",
                                   height: "40%",
-                                  position: "relative"
+                                  position: "relative",
+                                  direction: points.total > 0 ? "ltr" : "rtl",
+                                  right:
+                                    points.total > 0 ? "" : points.width + "%"
                                 }
                               },
                               _vm._l(points.points, function(point) {
@@ -64778,7 +64783,7 @@ var actions = {
         return accumulator + (point.category.disabled ? 0 : parseInt(point.amount));
       }, 0);
       user.points = user.points.map(function (point) {
-        point.width = point.category.disabled ? 0 : point.amount / user.total * 100;
+        point.width = point.category.disabled ? 0 : Math.abs(point.amount / user.total * 100);
         return point;
       });
       if (user.total > max) max = user.total;
@@ -64786,7 +64791,7 @@ var actions = {
     }); // recount width of bars
 
     state.rating = state.rating.map(function (user) {
-      user.width = user.total / max * 100;
+      user.width = Math.abs(user.total / max * 100);
       return user;
     });
   },
@@ -64815,7 +64820,7 @@ var mutations = {
       return u.total;
     })));
     state.rating = points.map(function (user) {
-      user.width = user.total / max * 100;
+      user.width = Math.abs(user.total / max * 100);
       user.points = user.points.map(function (point) {
         point.category = state.categories[point.category];
         return point;
