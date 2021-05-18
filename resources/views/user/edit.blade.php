@@ -7,15 +7,16 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('article.store') }}" method="POST">
+            <form action="{{ route('users.update', $user) }}" method="POST">
                 @csrf
+                @method('PUT')
 
                 <p class="card-title h6">Общая информация</p>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input id="email" type="email"
                            class="form-control @error('email') is-invalid @enderror" name="email"
-                           value="{{ old('email') ?? auth()->user()->email }}"
+                           value="{{ old('email') ?? $user->email }}"
                     >
 
                     @error('email')
@@ -27,19 +28,34 @@
 
                 <p class="card-title h6 mt-5">Уведомления</p>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="noticeNews">
+                    <input type="checkbox" class="form-check-input" id="noticeNews" name="noticeNews"
+                       value="{{ old('noticeNews') }}"
+                    >
                     <label class="form-check-label" for="noticeNews">Уведомлять по email о новостях</label>
                 </div>
 
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="noticeEvents">
+                    <input type="checkbox" class="form-check-input" id="noticeArticles" name="noticeArticles"
+                       value="{{ old('noticeArticles') }}"
+                    >
+                    <label class="form-check-label" for="noticeArticles">Уведомлять по email о статьях</label>
+                </div>
+
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="noticeEvents" name="noticeEvents"
+                       value="{{ old('noticeEvents') }}"
+                    >
                     <label class="form-check-label" for="noticeEvents">Уведомлять по email о мероприятиях</label>
                 </div>
 
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="noticeRating">
+                    <input type="checkbox" class="form-check-input" id="noticeRating" name="noticeRating"
+                        value="{{ old('noticeRating') }}"
+                    >
                     <label class="form-check-label" for="noticeRating">Уведомлять по email о новом рейтинге</label>
                 </div>
+
+                <button type="submit" class="btn btn-primary mr-2 mt-3">Сохранить</button>
             </form>
         </div>
     </div>
