@@ -3,6 +3,7 @@
 namespace Tests\Unit\Users;
 
 use App\Enums\UserNotificationSubscriptions;
+use App\Enums\UserType;
 use App\Models\User;
 use Tests\TestCase;
 
@@ -15,5 +16,14 @@ class UserTest extends TestCase
         ]);
 
         $this->assertInstanceOf(UserNotificationSubscriptions::class, $user->notification_subscriptions);
+    }
+
+    public function test_it_has_type()
+    {
+        $user = User::factory()->create([
+            'type' => UserType::Pupil()
+        ]);
+
+        $this->assertInstanceOf(UserType::class, $user->type);
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Enums\UserNotificationSubscriptions;
+use App\Enums\UserType;
 use App\Mail\ResetPasswordNotification;
+use App\Models\Traits\HasRegisterCode;
 use Assada\Achievements\Achiever;
 use BenSampo\Enum\Traits\CastsEnums;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,11 +13,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use HasFactory, Achiever, CastsEnums;
+    use HasFactory;
+    use Achiever;
+    use CastsEnums;
+    use HasRegisterCode;
 
     /**
      * The attributes that are mass assignable.
@@ -49,19 +53,9 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'notification_subscriptions' => UserNotificationSubscriptions::class
+        'notification_subscriptions' => UserNotificationSubscriptions::class,
+        'type' => UserType::class,
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::saving(function (User $user) {
-            if (!$user->register_code) {
-                $user->register_code = Str::random(6);
-            }
-        });
-    }
 
     public function sendPasswordResetNotification($token)
     {

@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->string('register_code')->unique();
 
-            $table->enum('type', UserType::getValues());
+            $table->integer('type')->default(UserType::Stranger());
             $table->integer('notification_subscriptions')
                 ->default(UserNotificationSubscriptions::flags(UserNotificationSubscriptions::getValues()));
             $table->boolean('is_admin')->nullable();
