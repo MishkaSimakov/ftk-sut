@@ -17,10 +17,9 @@ class CreateArticlesTable extends Migration
             $table->id();
 
             $table->string('title');
-            $table->text('body')->nullable();
+            $table->text('body');
             $table->foreignId('author_id');
-            $table->enum('type', \App\Enums\ArticleType::getValues())
-                ->default(\App\Enums\ArticleType::OnCheck());
+            $table->integer('type')->default(\App\Enums\ArticleType::OnCheck());
             $table->date('date');
 
             $table->timestamp('checked_at')->nullable();

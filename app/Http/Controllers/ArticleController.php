@@ -63,7 +63,7 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
-        if ($article->type == ArticleType::Checked()) {
+        if ($article->type->is(ArticleType::Checked())) {
             views($article)->cooldown(now()->addDay())->record();
         }
 

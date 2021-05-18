@@ -10,7 +10,7 @@
         </div>
     @endcan
 
-    @if($article->type == \App\Enums\ArticleType::Checked())
+    @if($article->type->is(\App\Enums\ArticleType::Checked()))
         <span class="mr-sm-2 d-none d-md-inline article-views">
             <i class="far fa-eye"></i> {{ views($article)->count() }}
         </span>

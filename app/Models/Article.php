@@ -7,6 +7,7 @@ use App\Events\ArticleFirstTimeChecked;
 use App\Events\ArticleLiked;
 use App\Models\Traits\Publishable;
 use App\Services\ArticleBodyPrepareService;
+use BenSampo\Enum\Traits\CastsEnums;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Builder;
@@ -17,7 +18,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Article extends Model implements Viewable
 {
-    use HasFactory, InteractsWithViews, Publishable;
+    use HasFactory;
+    use InteractsWithViews;
+    use Publishable;
+    use CastsEnums;
 
     const TRUNCATE_LIMIT = 500;
     const PAGINATION_LIMIT = 10;
@@ -31,6 +35,10 @@ class Article extends Model implements Viewable
     protected $dates = ['date'];
     protected $fillable = ['title', 'body', 'date', 'type', 'checked_at'];
     protected $removeViewsOnDelete = true;
+
+    protected $casts = [
+        'type' => ArticleType::class
+    ];
 
     protected static function boot()
     {

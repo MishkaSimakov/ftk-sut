@@ -89,7 +89,7 @@ class ArticlePolicy
      */
     public function check(User $user, Article $article)
     {
-        return $user->is_admin and $article->type == ArticleType::OnCheck();
+        return $user->is_admin and $article->type->is(ArticleType::OnCheck());
     }
 
     /**
@@ -101,6 +101,6 @@ class ArticlePolicy
      */
     public function like(User $user, Article $article)
     {
-        return $article->type == ArticleType::Checked();
+        return $article->type->is(ArticleType::Checked());
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Articles;
 
+use App\Enums\ArticleType;
 use App\Models\Article;
 use App\Models\ArticlePoint;
 use App\Models\User;
@@ -76,5 +77,23 @@ class ArticlesTest extends TestCase
         $article->toggleLikeBy($user);
 
         $this->assertInstanceOf(User::class, $article->points->first());
+    }
+
+    public function test_it_has_type()
+    {
+        $article = Article::factory()->create();
+
+        $this->assertInstanceOf(ArticleType::class, $article->type);
+    }
+
+    public function it_can_be_checked()
+    {
+        $article = Article::factory()->create([
+            'type' => ArticleType::OnCheck()
+        ]);
+
+        $article->check();
+
+        $this->assertEquals(ArticleType::Checked(), $article->type);
     }
 }
