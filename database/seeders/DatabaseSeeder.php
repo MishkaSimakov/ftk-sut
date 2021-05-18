@@ -23,8 +23,7 @@ class DatabaseSeeder extends Seeder
          ]);
 
          $this->call(NewsSeeder::class);
-         $this->call(ArticleTagSeeder::class);
          $this->call(RatingPointCategorySeeder::class);
-         $this->call(ArticleSeeder::class);
+//         $this->call(ArticleSeeder::class);
     }
 }

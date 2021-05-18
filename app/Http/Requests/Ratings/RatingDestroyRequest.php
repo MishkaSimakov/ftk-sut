@@ -10,7 +10,7 @@ class RatingDestroyRequest extends FormRequest
     {
         return [
             'date_start' => ['required', 'date'],
-            'date_end' => ['required', 'date', 'after:date_start']
+            'date_end' => ['required', 'date', 'after_or_equal:date_start']
         ];
     }
 }

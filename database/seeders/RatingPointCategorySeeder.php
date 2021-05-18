@@ -5,13 +5,12 @@ namespace Database\Seeders;
 use App\Models\RatingPointCategory;
 use Illuminate\Database\Seeder;
 
+
+/**
+ * Загружает категории для рейтинга из config в базу данных.
+ */
 class RatingPointCategorySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         foreach (config('points.categories') as $point_category) {
