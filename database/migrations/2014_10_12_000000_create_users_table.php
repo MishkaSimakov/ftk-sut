@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\UserNotificationSubscriptions;
+use App\Enums\UserType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,11 +21,12 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->string('password')->nullable();
-
-            $table->enum('type', \App\Enums\UserType::getValues());
-            $table->boolean('is_admin')->nullable();
-
             $table->string('register_code')->unique();
+
+            $table->enum('type', UserType::getValues());
+            $table->integer('notification_subscriptions')
+                ->default(UserNotificationSubscriptions::flags(UserNotificationSubscriptions::getValues()));
+            $table->boolean('is_admin')->nullable();
 
             $table->rememberToken();
             $table->timestamps();

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\UserNotificationSubscriptions;
 use App\Mail\ResetPasswordNotification;
 use Assada\Achievements\Achiever;
+use BenSampo\Enum\Traits\CastsEnums;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +15,7 @@ use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use HasFactory, Achiever;
+    use HasFactory, Achiever, CastsEnums;
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +27,8 @@ class User extends Authenticatable
         'type',
         'email',
         'password',
-        'is_student'
+        'is_student',
+        'notification_subscriptions'
     ];
 
     /**
@@ -46,6 +49,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'notification_subscriptions' => UserNotificationSubscriptions::class
     ];
 
     protected static function boot()
@@ -53,7 +57,9 @@ class User extends Authenticatable
         parent::boot();
 
         static::saving(function (User $user) {
-            $user->register_code = Str::random(6);
+            if (!$user->register_code) {
+                $user->register_code = Str::random(6);
+            }
         });
     }
 
@@ -65,9 +71,7 @@ class User extends Authenticatable
 
     public function getUrlAttribute(): string
     {
-        return route('users.show', [
-            'user' => $this
-        ]);
+        return route('users.show', $this);
     }
 
     public function rating_points(): HasMany
