@@ -20,7 +20,7 @@
                     >
 
                     @error('email')
-                        <span class="invalid-feedback" role="alert">
+                    <span class="invalid-feedback" role="alert">
                              <strong>{{ $message }}</strong>
                         </span>
                     @enderror
@@ -29,28 +29,36 @@
                 <p class="card-title h6 mt-5">Уведомления</p>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="noticeNews" name="noticeNews"
-                       value="{{ old('noticeNews') }}"
+                           @if($user->notification_subscriptions->hasFlag(\App\Enums\UserNotificationSubscriptions::NewsNotifications()))
+                           checked
+                        @endif
                     >
                     <label class="form-check-label" for="noticeNews">Уведомлять по email о новостях</label>
                 </div>
 
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="noticeArticles" name="noticeArticles"
-                       value="{{ old('noticeArticles') }}"
+                           @if($user->notification_subscriptions->hasFlag(\App\Enums\UserNotificationSubscriptions::ArticleNotifications()))
+                           checked
+                        @endif
                     >
                     <label class="form-check-label" for="noticeArticles">Уведомлять по email о статьях</label>
                 </div>
 
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="noticeEvents" name="noticeEvents"
-                       value="{{ old('noticeEvents') }}"
+                           @if($user->notification_subscriptions->hasFlag(\App\Enums\UserNotificationSubscriptions::EventNotifications()))
+                           checked
+                        @endif
                     >
                     <label class="form-check-label" for="noticeEvents">Уведомлять по email о мероприятиях</label>
                 </div>
 
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="noticeRating" name="noticeRating"
-                        value="{{ old('noticeRating') }}"
+                           @if($user->notification_subscriptions->hasFlag(\App\Enums\UserNotificationSubscriptions::RatingNotifications()))
+                           checked
+                        @endif
                     >
                     <label class="form-check-label" for="noticeRating">Уведомлять по email о новом рейтинге</label>
                 </div>
