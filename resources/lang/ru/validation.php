@@ -1,5 +1,7 @@
 <?php
 
+// TODO: возможно заменить на это: https://github.com/Laravel-Lang/lang/blob/master/locales/ru/validation.php
+
 return [
     'accepted' => 'The :attribute must be accepted.',
     'active_url' => 'The :attribute is not a valid URL.',
