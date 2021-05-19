@@ -44,9 +44,10 @@ Route::delete('rating/destroy', [\App\Http\Controllers\RatingController::class, 
 
 Route::get('rating/{period?}', [\App\Http\Controllers\RatingController::class, 'index'])->name('rating.index');
 
-//Route::prefix('statistics')->name('statistics.')->group(function () {
+Route::prefix('statistics')->name('statistics.')->group(function () {
+    Route::get('/points/{user}', [\App\Http\Controllers\Statistics\RatingPointsStatisticsController::class, 'show'])->name('points');
 //    Route::get('compare/{user}', [\App\Http\Controllers\Statistics\StatisticsController::class, 'compare'])->name('compare');
-//});
+});
 
 # achievements
 Route::get('/achievements', [\App\Http\Controllers\AchievementController::class, 'index'])->name('achievements.index');

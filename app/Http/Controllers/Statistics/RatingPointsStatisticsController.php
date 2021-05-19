@@ -32,4 +32,9 @@ class RatingPointsStatisticsController extends Controller
             'pointsByCategories' => $this->getPointsByCategories($user)
         ]);
     }
+
+    public function show(User $user)
+    {
+        return view('statistics.points', compact('user'));
+    }
 }

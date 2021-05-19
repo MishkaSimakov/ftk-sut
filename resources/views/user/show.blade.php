@@ -13,6 +13,10 @@
 
     <rating-points-statistics user="{{ $user->id }}"></rating-points-statistics>
 
+    <div class="text-center my-2">
+        <a href="{{ route('statistics.points', $user) }}" class="text-secondary">Подробнее</a>
+    </div>
+
     <articles-statistics user="{{ $user->id }}"></articles-statistics>
 
     <events-statistics user="{{ $user->id }}"></events-statistics>
@@ -22,7 +26,7 @@
 
         <div class="card mt-3">
             @if(!$achievements->count())
-                <div class  ="text-center my-3 text-info">
+                <div class="text-center my-3 text-info">
                     Нет достижений
                 </div>
             @endif
@@ -37,7 +41,8 @@
                         <div class="col-md-6 ml-auto mt-2 mt-md-0">
                             <div class="progress">
                                 <div
-                                    class="progress-bar {{ $achievement->isUnlocked() ? 'bg-success' : 'bg-secondary' }}" role="progressbar"
+                                    class="progress-bar {{ $achievement->isUnlocked() ? 'bg-success' : 'bg-secondary' }}"
+                                    role="progressbar"
                                     style="width: {{ $achievement->points / $achievement->details->points * 100 }}%;"
                                 >
                                     {{ $achievement->points }}/{{ $achievement->details->points }}
