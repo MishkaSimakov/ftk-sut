@@ -33,7 +33,7 @@ class Article extends Model implements Viewable
     ];
 
     protected $dates = ['date'];
-    protected $fillable = ['title', 'body', 'date', 'type', 'checked_at'];
+    protected $fillable = ['title', 'body', 'date', 'type', 'author_id', 'checked_at'];
     protected $removeViewsOnDelete = true;
 
     protected $casts = [
@@ -125,8 +125,12 @@ class Article extends Model implements Viewable
     }
 
 
-    public function attachTagsFromString(string $tags)
+    public function attachTagsFromString(?string $tags)
     {
+        if (!$tags) {
+            return;
+        }
+
         foreach (json_decode($tags) as $tag) {
             $tag_id = ArticleTag::firstOrCreate(['name' => $tag->value]);
 
