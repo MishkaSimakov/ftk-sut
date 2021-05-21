@@ -4,7 +4,7 @@ import store from './store'
 require('./helpers/imports')
 
 // Laravel and bootstrap stuff
-require('./bootstrap');
+require('./bootstrap')
 
 // Libraries
 require('./libraries')
