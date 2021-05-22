@@ -46,7 +46,7 @@ Route::get('rating/{period?}', [\App\Http\Controllers\RatingController::class, '
 
 Route::prefix('statistics')->name('statistics.')->group(function () {
     Route::get('/points/{user}', [\App\Http\Controllers\Statistics\RatingPointsStatisticsController::class, 'show'])->name('points');
-//    Route::get('compare/{user}', [\App\Http\Controllers\Statistics\StatisticsController::class, 'compare'])->name('compare');
+    Route::get('/compare/{user}', [\App\Http\Controllers\Statistics\CompareController::class, 'index'])->name('compare');
 });
 
 # achievements

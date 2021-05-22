@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Statistics\ArticleStatisticsController;
+use App\Http\Controllers\Statistics\CompareController;
 use App\Http\Controllers\Statistics\EventStatisticsController;
 use App\Http\Controllers\Statistics\RatingPointsStatisticsController;
 
@@ -27,4 +28,6 @@ Route::prefix('statistics/')->name('stat.')->group(function () {
     Route::get('points/{user}', [RatingPointsStatisticsController::class, 'getShortPointsStatistics'])->name('points');
     Route::get('articles/{user}', [ArticleStatisticsController::class, 'getShortArticlesStatistics'])->name('articles');
     Route::get('events/{user}', [EventStatisticsController::class, 'getShortEventsStatistics'])->name('events');
+
+    Route::get('compare/{first}/{second}', [CompareController::class, 'getCompareData'])->name('compare');
 });

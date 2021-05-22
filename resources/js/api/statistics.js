@@ -20,4 +20,12 @@ export default {
             })
         })
     },
+
+    async loadCompareData({first, second}) {
+        return new Promise((resolve, reject) => {
+            axios.get(route('api.stat.compare', {first: first, second: second})).then((response) => {
+                resolve(response)
+            })
+        })
+    }
 }

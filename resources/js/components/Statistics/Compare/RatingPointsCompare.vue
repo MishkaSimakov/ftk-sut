@@ -35,8 +35,6 @@ export default {
             first: this.first,
             second: this.second
         }).then((response) => {
-            this.loading = false
-
             this.points = response.data.points
             this.names = response.data.names
 
@@ -55,7 +53,7 @@ export default {
                         label: this.names[0],
                         data: this.points[0],
                         fill: false,
-                        borderColor: '#ffc107',
+                        borderColor: '#0275d8',
                         tension: 0.1
                     }, {
                         label: this.names[1],

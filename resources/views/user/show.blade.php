@@ -7,7 +7,9 @@
 
     @auth
         @if(auth()->id() !== $user->id)
-            <a class="btn btn-primary btn-block mb-3">Сравнить</a>
+            <div class="mb-3">
+                <a href="{{ route('statistics.compare', $user) }}">Сравнить с собой</a>
+            </div>
         @endif
     @endauth
 

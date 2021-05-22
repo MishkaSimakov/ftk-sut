@@ -61,7 +61,7 @@
                             <canvas id="categoriesChart" class="w-100"></canvas>
 
                             <div class="small text-secondary mb-1 mt-auto">
-                                категории очков
+                                очков за категории
                             </div>
                         </div>
                     </div>
