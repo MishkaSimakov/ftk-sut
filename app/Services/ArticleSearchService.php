@@ -32,8 +32,7 @@ class ArticleSearchService
         });
     }
 
-    protected
-    function getArticlesFromQuery(string $query): Collection
+    protected function getArticlesFromQuery(string $query): Collection
     {
         return Article::where('title', 'like', "%{$query}%")
             ->orWhere('body', 'like', "%{$query}%")
@@ -46,14 +45,12 @@ class ArticleSearchService
             });
     }
 
-    protected
-    function getTagsFromQuery(string $query): Collection
+    protected function getTagsFromQuery(string $query): Collection
     {
         return ArticleTag::where('name', 'like', "%{$query}%")->get();
     }
 
-    protected
-    function getUsersFromQuery(string $query): Collection
+    protected function getUsersFromQuery(string $query): Collection
     {
         return User::where('name', 'like', "%{$query}%")->get();
     }

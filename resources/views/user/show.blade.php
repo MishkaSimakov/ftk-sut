@@ -32,24 +32,7 @@
             @endif
             <ul class="list-group list-group-flush">
                 @foreach($achievements as $achievement)
-                    <li class="list-group-item d-md-flex align-items-center">
-                        <div class="col-md-6">
-                            <div class="text-nowrap">{{ $achievement->name }}</div>
-                            <div class="text-muted">{{ $achievement->description }}</div>
-                        </div>
-
-                        <div class="col-md-6 ml-auto mt-2 mt-md-0">
-                            <div class="progress">
-                                <div
-                                    class="progress-bar {{ $achievement->isUnlocked() ? 'bg-success' : 'bg-secondary' }}"
-                                    role="progressbar"
-                                    style="width: {{ $achievement->points / $achievement->details->points * 100 }}%;"
-                                >
-                                    {{ $achievement->points }}/{{ $achievement->details->points }}
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    @include('partials.cards.achievement', compact('achievement'))
                 @endforeach
             </ul>
 

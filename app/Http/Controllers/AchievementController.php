@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Assada\Achievements\Achievement;
-use Assada\Achievements\Model\AchievementDetails;
+use App\Services\AchievementsService;
 
 class AchievementController extends Controller
 {
-    public function index()
+    public function index(AchievementsService $achievementsService)
     {
-        $achievements = Achievement::all();
+        $achievements = $achievementsService->getAll();
 
         if (auth()->check()) {
-            $achievements = $achievements->sortByDesc(function (AchievementDetails $achievement) {
-                return auth()->user()->achievementStatus($achievement->getClass())->points / $achievement->points;
-            });
+            $achievements = $achievementsService->orderByProgress($achievements);
         }
 
         return view('achievements.index', compact('achievements'));

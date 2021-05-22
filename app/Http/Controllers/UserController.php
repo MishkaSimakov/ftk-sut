@@ -6,6 +6,7 @@ use App\Enums\UserNotificationSubscriptions;
 use App\Http\Requests\Users\StoreUserRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
 use App\Models\User;
+use App\Services\AchievementsService;
 use Assada\Achievements\Model\AchievementProgress;
 
 class UserController extends Controller
@@ -17,11 +18,9 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        $achievements = $user->inProgressAchievements()
-            ->concat($user->unlockedAchievements())
-            ->sortByDesc(function (AchievementProgress $progress) {
-                return $progress->points / $progress->details->points;
-            });
+        $achievements = (new AchievementsService())->orderByProgress(
+            $user->achievements()->where('points', '>', 0)->get()->map->details
+        );
 
         return view('user.show', compact('user', 'achievements'));
     }
