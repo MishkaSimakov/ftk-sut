@@ -43,7 +43,6 @@
                                 </td>
                                 @if($event->isTravel())
                                     <td>
-                                        <label class="sr-only">Пройденное расстояние</label>
                                         <input type="number" step="0.1" min="0"
                                                wire:model.defer="users_distances.{{ $user->id }}">
                                     </td>

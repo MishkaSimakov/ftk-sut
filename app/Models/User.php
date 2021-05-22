@@ -75,7 +75,7 @@ class User extends Authenticatable
 
     public function events(): BelongsToMany
     {
-        return $this->belongsToMany(Event::class);
+        return $this->belongsToMany(Event::class)->withPivot('distance_traveled');
     }
 
     public function articles(): HasMany

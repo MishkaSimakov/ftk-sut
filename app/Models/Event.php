@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Storage;
@@ -69,5 +68,10 @@ class Event extends Model
     public function isTravel(): bool
     {
         return (bool) $this->loadMissing('travel')->travel;
+    }
+
+    public function scopeTravels(Builder $builder): Builder
+    {
+        return $builder->whereHas('travel');
     }
 }

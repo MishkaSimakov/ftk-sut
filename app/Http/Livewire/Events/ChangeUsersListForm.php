@@ -70,10 +70,8 @@ class ChangeUsersListForm extends Component
 
     public function changeUserDistance(User $user)
     {
-        $this->event->users()->syncWithoutDetaching([
-            $user->id => [
-                'distance_traveled' => $this->users_distances[$user->id]
-            ]
+        $this->event->users()->updateExistingPivot($user->id, [
+            'distance_traveled' => $this->users_distances[$user->id]
         ]);
     }
 
