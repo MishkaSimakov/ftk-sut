@@ -13,7 +13,14 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
+        $this->middleware('auth')->except('show', 'index');
+    }
+
+    public function index()
+    {
+        $users = User::orderBy('name')->get();
+
+        return view('user.index', compact('users'));
     }
 
     public function show(User $user)
@@ -76,5 +83,12 @@ class UserController extends Controller
         $user = User::create($request->validated());
 
         return redirect()->route('users.show', $user);
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+
+        return redirect()->back();
     }
 }

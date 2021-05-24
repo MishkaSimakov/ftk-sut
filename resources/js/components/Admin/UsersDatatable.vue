@@ -43,11 +43,25 @@
                         <td>{{ user.email ? 'Да' : 'Нет' }}</td>
                         <td class="text-center">
                             <a
-                                title="Редактировать"
                                 :href="route('users.edit', {'user': user.id})"
                             >
-                                <i class="fas fa-cog"></i>
+                                Редактировать
                             </a>
+
+
+                            <a
+                                class="text-danger ml-3"
+                                href="#"
+                                v-on:click.prevent="deleteUser(user)"
+                            >
+                                Удалить
+                            </a>
+
+                            <form :id="`delete-user-form-${user.id}`"
+                                  :action="route('users.destroy', {'user': user.id})" method="POST" class="d-none">
+                                <input type="hidden" name="_token" :value="csrf">
+                                <input type="hidden" name="_method" value="DELETE">
+                            </form>
                         </td>
                     </tr>
                     </tbody>
@@ -92,6 +106,8 @@ export default {
     },
     data() {
         return {
+            csrf: window.Laravel.csrfToken,
+
             query: '',
             perPageOptions: [10, 50, 100],
 
@@ -170,6 +186,10 @@ export default {
             } else {
                 this.paginationData.pages = [1, 2, 3, 4, 5, 6, 7].slice(0, count)
             }
+        },
+
+        deleteUser(user) {
+            document.getElementById(`delete-user-form-${user.id}`).submit();
         }
     }
 }

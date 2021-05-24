@@ -13787,12 +13787,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     users: String
   },
   data: function data() {
     return {
+      csrf: window.Laravel.csrfToken,
       query: '',
       perPageOptions: [10, 50, 100],
       paginationData: {
@@ -13857,6 +13872,9 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.paginationData.pages = [1, 2, 3, 4, 5, 6, 7].slice(0, count);
       }
+    },
+    deleteUser: function deleteUser(user) {
+      document.getElementById("delete-user-form-".concat(user.id)).submit();
     }
   }
 });
@@ -48111,11 +48129,59 @@ var render = function() {
                       "a",
                       {
                         attrs: {
-                          title: "Редактировать",
                           href: _vm.route("users.edit", { user: user.id })
                         }
                       },
-                      [_c("i", { staticClass: "fas fa-cog" })]
+                      [
+                        _vm._v(
+                          "\n                            Редактировать\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "text-danger ml-3",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.deleteUser(user)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Удалить\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        staticClass: "d-none",
+                        attrs: {
+                          id: "delete-user-form-" + user.id,
+                          action: _vm.route("users.destroy", { user: user.id }),
+                          method: "POST"
+                        }
+                      },
+                      [
+                        _c("input", {
+                          attrs: { type: "hidden", name: "_token" },
+                          domProps: { value: _vm.csrf }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          attrs: {
+                            type: "hidden",
+                            name: "_method",
+                            value: "DELETE"
+                          }
+                        })
+                      ]
                     )
                   ])
                 ])
