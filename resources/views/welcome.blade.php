@@ -150,7 +150,21 @@
 
         <div class="text-center w-100 mt-5 text-muted">
             <div>И ещё много всего интересного...</div>
-            <a href="#">Карта сайта</a>
+            <a href="{{ route('sitemap') }}">Карта сайта</a>
+        </div>
+    </section>
+
+    <section style="margin-top: 6rem;">
+        <h2 class="display-4 text-center">Преподаватели</h2>
+
+        <div class="row">
+            <div class="col-md-3">
+                <img src="https://via.placeholder.com/150" alt="" class="rounded img-fluid w-100">
+
+                <p class="mt-3 text-center h4 font-weight-normal">Бильченко Александр Константинович</p>
+
+                <p>Преподаватель в секции "Робототехника"</p>
+            </div>
         </div>
     </section>
 @endsection
