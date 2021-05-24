@@ -104,6 +104,11 @@ class Article extends Model implements Viewable
         return $builder->where('type', ArticleType::Checked());
     }
 
+    public function scopeUnchecked(Builder $builder): Builder
+    {
+        return $builder->where('type', ArticleType::OnCheck());
+    }
+
     /* Эта функция показывает, отображается ли статья у всех пользователей */
     public function isAvailable(): bool
     {

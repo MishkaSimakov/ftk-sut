@@ -110,10 +110,12 @@ class ArticleController extends Controller
         $this->authorize('viewUnchecked', Article::class);
 
         if (auth()->user()->is_admin) {
-            $articles = Article::where('type', ArticleType::OnCheck())->orderBy('date', 'desc')->get();
+            $articles = Article::unchecked();
         } else {
-            $articles = auth()->user()->articles()->where('type', ArticleType::OnCheck())->orderBy('date', 'desc')->get();
+            $articles = auth()->user()->articles()->unchecked();
         }
+
+        $articles = $articles->orderBy('date', 'desc')->get();
 
         return view('articles.unchecked', compact('articles'));
     }
