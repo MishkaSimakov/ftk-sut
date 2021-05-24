@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ArticleType;
-use App\Http\Requests\Articles\StoreArticleRequest;
-use App\Http\Resources\Article\ArticleTagIndexResource;
+use App\Http\Requests\Articles\ArticleRequest;
 use App\Models\Article;
 use App\Models\ArticleTag;
+use App\Models\User;
 use App\Services\ArticleSearchService;
 use Illuminate\Http\Request;
 
@@ -36,18 +36,18 @@ class ArticleController extends Controller
 
     public function create()
     {
-        $tags = ArticleTag::select(['name'])->get();
+        [$tags, $users] = $this->getDataForChangingArticle();
 
-        return view('articles.create', compact('tags'));
+        return view('articles.create', compact('tags', 'users'));
     }
 
-    public function store(StoreArticleRequest $request)
+    public function store(ArticleRequest $request)
     {
         $article = new Article([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
             'date' => $request->get('delayed_publication') == 'on' ? $request->get('date') : now(),
-            'author_id' => $request->user()->id
+            'author_id' => $request->user()->is_admin ? $request->get('author') : $request->user()->id
         ]);
 
         $article->save();
@@ -74,23 +74,23 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        $tags = ArticleTag::select(['name'])->get();
+        [$tags, $users] = $this->getDataForChangingArticle();
 
-        return view('articles.edit', compact('article', 'tags'));
+        return view('articles.edit', compact('article', 'tags', 'users'));
     }
 
-    public function update(StoreArticleRequest $request, Article $article)
+    public function update(ArticleRequest $request, Article $article)
     {
-        $article->body = $request->get('body');
-        $article->title = $request->get('title');
+        $article->update([
+            'title' => $request->get('title'),
+            'body' => $request->get('body'),
+            'date' => $request->get('delayed_publication') == 'on' ? $request->get('date') : now(),
+            'author_id' => $request->user()->is_admin ? $request->get('author') : $request->user()->id
+        ]);
 
         if (!$request->user()->is_admin) {
-            $article->type = ArticleType::OnCheck();
+            $article->update(['type' => ArticleType::OnCheck()]);
         }
-
-        $article->date = $request->get('delayed_publication') == 'on' ? $request->get('date') : now();
-
-        $article->save();
 
         $article->tags()->delete();
         $article->attachTagsFromString($request->get('tags'));
@@ -127,5 +127,13 @@ class ArticleController extends Controller
         $article->check();
 
         return redirect()->route('article.show', $article);
+    }
+
+    protected function getDataForChangingArticle(): array
+    {
+        $tags = ArticleTag::select(['name'])->get();
+        $users = User::select(['id', 'name'])->orderBy('name')->get();
+
+        return [$tags, $users];
     }
 }

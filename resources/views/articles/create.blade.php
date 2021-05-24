@@ -27,7 +27,8 @@
 
                 <div class="form-group">
                     <label for="body">Текст</label>
-                    <articles-body-editor error="{{ $errors->first('body') }}" value="{{ old('body') }}"></articles-body-editor>
+                    <articles-body-editor error="{{ $errors->first('body') }}"
+                                          value="{{ old('body') }}"></articles-body-editor>
 
                     @error('body')
                     <span class="invalid-feedback d-block" role="alert">
@@ -51,7 +52,33 @@
                     @enderror
                 </div>
 
-                <articles-date-editor value_checkbox="{{ old('delayed_publication') }}" value_date="{{ old('date') }}"></articles-date-editor>
+                @admin
+                    <div class="form-group">
+                        <label for="author">Автор</label>
+                        <select id="author"
+                                class="custom-select @error('author') is-invalid @enderror" name="author"
+                                required autofocus
+                        >
+                            @foreach($users as $user)
+                                <option
+                                    value="{{ $user->id }}"
+                                    @if ((old('author') ?? auth()->id()) === $user->id) selected @endif
+                                >
+                                    {{ $user->name }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        @error('author')
+                        <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                @endadmin
+
+                <articles-date-editor value_checkbox="{{ old('delayed_publication') }}"
+                                      value_date="{{ old('date') }}"></articles-date-editor>
 
                 <button type="submit" class="btn btn-primary mr-2">Сохранить</button>
             </form>

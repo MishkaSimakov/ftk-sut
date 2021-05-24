@@ -5,7 +5,7 @@ namespace App\Http\Requests\Articles;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreArticleRequest extends FormRequest
+class ArticleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,16 @@ class StoreArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:75',
-            'body' => 'required|string',
-            'tags' => 'nullable|string',
+            'title' => ['required', 'string', 'max:75'],
+            'body' => ['required', 'string'],
+            'tags' => ['nullable', 'string'],
 
-            'delayed_publication' => 'string|in:on,off',
-            'date' => 'nullable|date',
+            'delayed_publication' => ['string', 'in:on,off'],
+            'date' => ['nullable', 'date'],
+            'author' => [
+                Rule::requiredIf(auth()->user()->is_admin),
+                'exists:users,id'
+            ]
         ];
     }
 }

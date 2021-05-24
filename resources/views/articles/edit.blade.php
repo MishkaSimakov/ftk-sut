@@ -53,6 +53,31 @@
                     @enderror
                 </div>
 
+                @admin
+                    <div class="form-group">
+                        <label for="author">Автор</label>
+                        <select id="author"
+                                class="custom-select @error('author') is-invalid @enderror" name="author"
+                                required autofocus
+                        >
+                            @foreach($users as $user)
+                                <option
+                                    value="{{ $user->id }}"
+                                    @if ((old('author') ?? $article->author_id) === $user->id) selected @endif
+                                >
+                                    {{ $user->name }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        @error('author')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                @endadmin
+
                 <articles-date-editor value_checkbox="{{ old('delayed_publication') ?? $article->is_not_published }}"
                                       value_date="{{ old('date') ?? $article->date }}"></articles-date-editor>
 
