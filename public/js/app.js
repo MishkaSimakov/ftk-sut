@@ -14662,6 +14662,24 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -14671,6 +14689,7 @@ chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"].register.apply(chart_js__WEBPACK_
   data: function data() {
     return {
       points: [],
+      categories: [],
       names: []
     };
   },
@@ -14682,10 +14701,13 @@ chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"].register.apply(chart_js__WEBPACK_
       second: this.second
     }).then(function (response) {
       _this.points = response.data.points;
+      _this.categories = response.data.categories;
       _this.names = response.data.names;
 
-      if (_this.points.length) {
+      if (_this.points) {
         _this.drawPointsChart();
+
+        _this.drawCategoriesChart();
       }
     });
   },
@@ -14698,14 +14720,14 @@ chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"].register.apply(chart_js__WEBPACK_
         type: 'line',
         data: {
           datasets: [{
-            label: this.names[0],
-            data: this.points[0],
+            label: this.names[this.first],
+            data: this.points[this.first],
             fill: false,
             borderColor: '#0275d8',
             tension: 0.1
           }, {
-            label: this.names[1],
-            data: this.points[1],
+            label: this.names[this.second],
+            data: this.points[this.second],
             fill: false,
             borderColor: '#ffc107',
             tension: 0.1
@@ -14739,6 +14761,41 @@ chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"].register.apply(chart_js__WEBPACK_
               time: {
                 unit: 'month'
               }
+            }
+          }
+        }
+      });
+    },
+    drawCategoriesChart: function drawCategoriesChart() {
+      var _this3 = this;
+
+      var ctx = document.getElementById('categoriesChart').getContext('2d');
+      var categoriesChart = new chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"](ctx, {
+        type: 'bar',
+        data: {
+          labels: [this.names[this.first], this.names[this.second]],
+          datasets: this.categories.map(function (c) {
+            return {
+              label: c.category.name,
+              data: [_this3.first in c.data ? c.data[_this3.first] : 0, _this3.second in c.data ? c.data[_this3.second] : 0],
+              backgroundColor: c.category.color
+            };
+          })
+        },
+        options: {
+          responsive: true,
+          aspectRatio: 1,
+          scales: {
+            xAxes: {
+              stacked: true
+            },
+            yAxes: {
+              stacked: true
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
             }
           }
         }
@@ -49321,13 +49378,38 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body p-3" }, [
-        _c("div", { staticClass: "h-100 text-center d-flex flex-column" }, [
-          _c("canvas", { staticClass: "w-100", attrs: { id: "pointsChart" } }),
-          _vm._v(" "),
-          _c("div", { staticClass: "small text-secondary mb-1 mt-auto" }, [
-            _vm._v("\n                очков за месяцы\n            ")
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-4" }, [
+        _c("div", { staticClass: "card h-100" }, [
+          _c("div", { staticClass: "card-body h-100 p-3" }, [
+            _c("div", { staticClass: "h-100 text-center d-flex flex-column" }, [
+              _c("canvas", { attrs: { id: "categoriesChart" } }),
+              _vm._v(" "),
+              _c("div", { staticClass: "small text-secondary mb-1 mt-auto" }, [
+                _vm._v(
+                  "\n                        очков за категории\n                    "
+                )
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-8 mt-3 mt-lg-0 mh-100" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body p-3" }, [
+            _c("div", { staticClass: "text-center d-flex flex-column" }, [
+              _c("canvas", {
+                staticClass: "w-100",
+                attrs: { id: "pointsChart" }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "small text-secondary mb-1 mt-auto" }, [
+                _vm._v(
+                  "\n                        очков за месяцы\n                    "
+                )
+              ])
+            ])
           ])
         ])
       ])

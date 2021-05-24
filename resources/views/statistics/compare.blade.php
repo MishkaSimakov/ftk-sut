@@ -10,8 +10,14 @@
     <div class="row mt-4">
         @foreach([$first, $second] as $user)
             <div class="col-6">
-                <h2 class="text-center">{{ $user->name }}</h2>
+                <h2 class="text-center mb-0">{{ $user->name }}</h2>
+            </div>
+        @endforeach
+    </div>
 
+    <div class="row">
+        @foreach([$first, $second] as $user)
+            <div class="col-6">
                 <div class="card mt-3">
                     <div class="card-body p-3">
                         <div class="text-center">
