@@ -144,9 +144,22 @@ export default {
                         xAxes: {stacked: true},
                         yAxes: {stacked: true}
                     },
+
                     plugins: {
                         legend: {
-                            display: false
+                            display: false,
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    let category = context.dataset.label
+
+                                    if (category.length > 35) {
+                                        category = category.substr(0, 35) + '...'
+                                    }
+                                    return `${category}: ${context.formattedValue}`
+                                }
+                            }
                         }
                     }
                 }

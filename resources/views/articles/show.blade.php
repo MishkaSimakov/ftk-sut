@@ -31,6 +31,8 @@
                 @endforeach
             </ul>
         @endif
+
+        <livewire:articles.article-comments :article="$article"/>
     </div>
 @endsection
 

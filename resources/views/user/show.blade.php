@@ -15,10 +15,6 @@
 
     <rating-points-statistics user="{{ $user->id }}"></rating-points-statistics>
 
-    <div class="text-center my-2">
-        <a href="{{ route('statistics.points', $user) }}" class="text-secondary">Подробнее</a>
-    </div>
-
     <articles-statistics user="{{ $user->id }}"></articles-statistics>
 
     <events-statistics user="{{ $user->id }}"></events-statistics>

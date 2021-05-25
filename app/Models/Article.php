@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Article extends Model implements Viewable
 {
@@ -141,5 +142,11 @@ class Article extends Model implements Viewable
 
             $this->tags()->syncWithoutDetaching($tag_id);
         }
+    }
+
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(ArticleComment::class);
     }
 }

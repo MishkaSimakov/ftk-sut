@@ -14814,6 +14814,19 @@ chart_js__WEBPACK_IMPORTED_MODULE_1__["Chart"].register.apply(chart_js__WEBPACK_
           plugins: {
             legend: {
               display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function label(context) {
+                  var category = context.dataset.label;
+
+                  if (category.length > 35) {
+                    category = category.substr(0, 35) + '...';
+                  }
+
+                  return "".concat(category, ": ").concat(context.formattedValue);
+                }
+              }
             }
           }
         }
