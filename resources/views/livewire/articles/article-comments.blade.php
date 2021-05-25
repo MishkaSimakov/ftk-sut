@@ -20,7 +20,7 @@
     @endauth
 
     <div>
-        @foreach($comments as $comment)
+        @forelse($comments as $comment)
             <div class="d-flex flex-row mt-3">
                 <div class="w-100">
                     <div class="row no-gutters">
@@ -35,6 +35,8 @@
                     </p>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <p class="text-center text-info mt-3">Нет комментариев</p>
+        @endforelse
     </div>
 </div>
