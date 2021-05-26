@@ -14,7 +14,7 @@ class ReviewsController extends Controller
 
     public function index()
     {
-        $reviews = Review::orderByDesc('created_at')->get();
+        $reviews = Review::latest()->get();
 
         return view('reviews.index', compact('reviews'));
     }

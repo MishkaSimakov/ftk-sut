@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Enums\ArticleType;
-use App\Events\ArticleFirstTimeChecked;
-use App\Events\ArticleLiked;
+use App\Events\Article\ArticleFirstTimeChecked;
+use App\Events\Article\ArticleLiked;
 use App\Models\Traits\Publishable;
 use App\Services\ArticleBodyPrepareService;
 use BenSampo\Enum\Traits\CastsEnums;

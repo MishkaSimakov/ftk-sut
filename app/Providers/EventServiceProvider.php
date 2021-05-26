@@ -2,16 +2,16 @@
 
 namespace App\Providers;
 
-use App\Events\ArticleFirstTimeChecked;
-use App\Events\ArticleLiked;
-use App\Events\NewsCreated;
-use App\Events\RatingCreated;
-use App\Events\RatingDeleted;
-use App\Listeners\Articles\AwardArticlePointAchievements;
-use App\Listeners\Articles\AwardWriteArticleAchievements;
-use App\Listeners\Articles\SendArticleNotificationEmail;
+use App\Events\Article\ArticleFirstTimeChecked;
+use App\Events\Article\ArticleLiked;
+use App\Events\News\NewsCreated;
+use App\Events\Rating\RatingCreated;
+use App\Events\Rating\RatingDeleted;
+use App\Listeners\Article\AwardArticlePointAchievements;
+use App\Listeners\Article\AwardWriteArticleAchievements;
+use App\Listeners\Article\SendArticleNotificationEmail;
 use App\Listeners\News\SendNewsNotificationEmail;
-use App\Listeners\RatingPoints\AwardMonthlyRatingPointAchievements;
+use App\Listeners\Rating\AwardMonthlyRatingPointAchievements;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;

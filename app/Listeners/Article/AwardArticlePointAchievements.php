@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Listeners\Articles;
+namespace App\Listeners\Article;
 
 use App\Achievements\Chains\ArticlePointChain;
 use App\Achievements\Articles\Points\LikeSelfArticle;
-use App\Events\ArticleLiked;
+use App\Events\Article\ArticleLiked;
 
 class AwardArticlePointAchievements
 {

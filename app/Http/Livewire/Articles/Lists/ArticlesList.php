@@ -28,7 +28,7 @@ class ArticlesList extends Component
 
     protected function getArticles(int $page): Collection
     {
-        $articles = Article::checked()->published()->orderByDesc('date')
+        $articles = Article::checked()->published()->latest('date')
             ->take(Article::PAGINATION_LIMIT)
             ->skip(Article::PAGINATION_LIMIT * $page)
             ->with(['author', 'points'])

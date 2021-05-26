@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Article;
 
 use App\Models\Article;
 use Illuminate\Foundation\Events\Dispatchable;

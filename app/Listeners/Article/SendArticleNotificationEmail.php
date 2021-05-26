@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Listeners\Articles;
+namespace App\Listeners\Article;
 
-use App\Events\ArticleFirstTimeChecked;
+use App\Events\Article\ArticleFirstTimeChecked;
 
 class SendArticleNotificationEmail
 {

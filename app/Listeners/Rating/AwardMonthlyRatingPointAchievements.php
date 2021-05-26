@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners\RatingPoints;
+namespace App\Listeners\Rating;
 
 use App\Achievements\Chains\RatingPointChain;
 use App\Achievements\Rating\Monthly\TakeFirstPlace;
 use App\Achievements\Rating\Monthly\TakeSecondPlace;
 use App\Achievements\Rating\Monthly\TakeThirdPlace;
-use App\Events\RatingCreated;
+use App\Events\Rating\RatingCreated;
 use App\Models\User;
 use App\Services\Rating\Rating;
 use Illuminate\Contracts\Queue\ShouldQueue;

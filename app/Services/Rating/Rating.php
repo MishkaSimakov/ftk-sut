@@ -4,8 +4,8 @@
 namespace App\Services\Rating;
 
 
-use App\Events\RatingCreated;
-use App\Events\RatingDeleted;
+use App\Events\Rating\RatingCreated;
+use App\Events\Rating\RatingDeleted;
 use App\Imports\RatingImport;
 use App\Models\RatingPoint;
 use App\Models\User;

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Rating;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Events\Dispatchable;
 
-class RatingCreated
+class RatingDeleted
 {
     use Dispatchable;
 

@@ -2,7 +2,7 @@
 
 namespace App\Listeners\News;
 
-use App\Events\NewsCreated;
+use App\Events\News\NewsCreated;
 use App\Mail\NewsNotification;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;

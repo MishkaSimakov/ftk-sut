@@ -27,14 +27,17 @@
                         Создать мероприятие
                     </a>
                 @endcan
-                @admin
+
                 <a class="list-group-item list-group-item-action" href="{{ route('rating.create') }}">
                     Загрузить рейтинг
                 </a>
-                @endadmin
 
                 <a class="list-group-item list-group-item-action" href="{{ route('users.create') }}">
                     Добавить пользователя
+                </a>
+
+                <a class="list-group-item list-group-item-action" href="{{ route('reviews.index') }}">
+                    Посмотреть отзывы
                 </a>
             </div>
         </div>
@@ -46,5 +49,5 @@
         <admin-users-datatable users="{{ $users }}"></admin-users-datatable>
     </section>
 
-{{--    TODO: добавить управление достижениями. --}}
+    {{--    TODO: добавить управление достижениями. --}}
 @endsection

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Listeners\Articles;
+namespace App\Listeners\Article;
 
 use App\Achievements\Chains\ArticleChain;
-use App\Events\ArticleFirstTimeChecked;
+use App\Events\Article\ArticleFirstTimeChecked;
 
 class AwardWriteArticleAchievements
 {

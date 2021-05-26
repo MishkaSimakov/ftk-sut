@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Events\NewsCreated;
+use App\Events\News\NewsCreated;
 use App\Http\Requests\News\StoreNewsRequest;
 use App\Http\Resources\News\NewsIndexResource;
 use App\Models\News;
@@ -18,7 +18,7 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::withViewsCount(null, null, true)
-            ->orderBy('date', 'desc')
+            ->latest('date')
             ->paginate(News::PAGINATION_LIMIT);
 
         foreach ($news as $single) {
