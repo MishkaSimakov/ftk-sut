@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -11,7 +10,7 @@ class ResetPasswordNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $token;
+    public string $token;
 
     /**
      * Create a new message instance.
@@ -30,8 +29,8 @@ class ResetPasswordNotification extends Mailable
      */
     public function build()
     {
-        return $this->subject('Привет всем!')->markdown('emails.user.passwords.reset', [
-            'news' => $this->token,
+        return $this->subject('Ссылка для сброса пароля на сайте ftk-sut.ru')->markdown('emails.user.passwords.reset', [
+            'token' => $this->token,
         ]);
     }
 }
