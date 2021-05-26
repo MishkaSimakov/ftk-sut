@@ -17,10 +17,11 @@ class CreateArticlesTable extends Migration
             $table->id();
 
             $table->string('title');
-            $table->text('body');
+            $table->longText('body');
             $table->foreignId('author_id');
             $table->integer('type')->default(\App\Enums\ArticleType::OnCheck());
-            $table->date('date');
+
+            $table->dateTime('date');
 
             $table->timestamp('checked_at')->nullable();
             $table->timestamps();

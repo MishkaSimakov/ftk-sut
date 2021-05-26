@@ -35,7 +35,7 @@ class Article extends Model implements Viewable
 
     protected $dates = ['date'];
     protected $fillable = ['title', 'body', 'date', 'type', 'author_id', 'checked_at'];
-    protected $removeViewsOnDelete = true;
+    protected bool $removeViewsOnDelete = true;
 
     protected $casts = [
         'type' => ArticleType::class
@@ -84,6 +84,13 @@ class Article extends Model implements Viewable
         return $this->points()->count() * self::RELEVANCE_COEFFICIENTS['points']
             + views($this)->count() * self::RELEVANCE_COEFFICIENTS['views']
             + now()->diffInDays($this->date) * self::RELEVANCE_COEFFICIENTS['days'];
+    }
+
+    public function scopeOrderByRelevance(Builder $builder): Builder
+    {
+        $sql = '`points_count` * ' . Article::RELEVANCE_COEFFICIENTS['points'] . ' + `views_count` * ' . Article::RELEVANCE_COEFFICIENTS['views'] . ' + datediff(now(), `date`) * ' . Article::RELEVANCE_COEFFICIENTS['days'];
+
+        return $builder->orderByRaw($sql, 'desc');
     }
 
 
