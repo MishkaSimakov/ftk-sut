@@ -44,13 +44,24 @@
 <div id="app">
     @include('partials.header.header')
 
+
+    @if(session('message'))
+        <div class="container mt-3">
+            <div class="alert alert-primary mb-2" role="alert">
+                {{ session('message') }}
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    @endif
+
     @yield('masthead')
 
     <main class="py-4 container">
         @yield('content')
     </main>
-
-    {{--    @include('partials.footer.footer')--}}
 </div>
 
 @stack('scripts')

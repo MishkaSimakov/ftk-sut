@@ -155,16 +155,28 @@
     </section>
 
     <section style="margin-top: 6rem;">
-        <h2 class="display-4 text-center">Преподаватели</h2>
+        <h2 class="display-4 text-center">Хотите что-то предложить?</h2>
 
-        <div class="row">
-            <div class="col-md-3">
-                <img src="https://via.placeholder.com/150" alt="" class="rounded img-fluid w-100">
+        <div class="row justify-content-center mt-3">
+            <form class="col-md-8" method="POST" action="{{ route('reviews.store') }}">
+                @csrf
 
-                <p class="mt-3 text-center h4 font-weight-normal">Бильченко Александр Константинович</p>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="body">Ваши идеи и предложения</label>
+                    <textarea
+                        class="form-control" id="body" name="body" rows="10"
+                        placeholder="Опишите как можно подробнее, что вы хотели бы изменить или добавить"
+                        required
+                    >
+                </textarea>
+                </div>
 
-                <p>Преподаватель в секции "Робототехника"</p>
-            </div>
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </form>
         </div>
     </section>
 @endsection

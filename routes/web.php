@@ -20,6 +20,10 @@ Route::view('/about', 'about')->name('about');
 Route::view('/site-map', 'sitemap')->name('sitemap');
 Route::view('/help/register', 'help.register')->name('help.register');
 
+# feedback
+Route::get('/reviews', [\App\Http\Controllers\ReviewsController::class, 'index'])->name('reviews.index');
+Route::post('/reviews', [\App\Http\Controllers\ReviewsController::class, 'store'])->name('reviews.store');
+
 # news
 Route::resource('news', \App\Http\Controllers\NewsController::class);
 
