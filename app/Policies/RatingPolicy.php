@@ -2,13 +2,23 @@
 
 namespace App\Policies;
 
-use App\Models\RatingPoint;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class RatingPolicy
 {
     use HandlesAuthorization;
+
+    /**
+     * Determine whether the user can view any models.
+     *
+     * @param ?User $user
+     * @return mixed
+     */
+    public function viewAny(?User $user)
+    {
+        return true;
+    }
 
     /**
      * Determine whether the user can create rating points.
@@ -31,6 +41,4 @@ class RatingPolicy
     {
         return $user->is_admin;
     }
-
-
 }

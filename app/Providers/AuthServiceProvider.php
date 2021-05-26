@@ -2,12 +2,15 @@
 
 namespace App\Providers;
 
+use App\Models\Article;
 use App\Models\Event;
+use App\Models\News;
 use App\Models\RatingPoint;
+use App\Policies\ArticlePolicy;
 use App\Policies\EventPolicy;
+use App\Policies\NewsPolicy;
 use App\Policies\RatingPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -17,8 +20,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Models\Article' => 'App\Policies\ArticlePolicy',
-        'App\Models\News' => 'App\Policies\NewsPolicy',
+        Article::class => ArticlePolicy::class,
+        News::class => NewsPolicy::class,
         Event::class => EventPolicy::class,
         RatingPoint::class => RatingPolicy::class,
     ];
@@ -31,7 +34,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
     }
 }

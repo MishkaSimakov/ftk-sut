@@ -9,7 +9,7 @@ class ReviewsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'admin'])->only('index');
+        $this->middleware('admin')->only('index');
     }
 
     public function index()

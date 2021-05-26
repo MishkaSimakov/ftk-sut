@@ -6,14 +6,13 @@ use App\Http\Requests\Ratings\RatingDestroyRequest;
 use App\Models\RatingPoint;
 use App\Services\Rating\Rating;
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 
 class RatingController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin')->except('index');
+        $this->authorizeResource(RatingPoint::class, 'rating');
     }
 
     public function index()
