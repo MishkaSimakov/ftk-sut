@@ -115,9 +115,22 @@ class ArticleController extends Controller
             $articles = auth()->user()->articles()->unchecked();
         }
 
-        $articles = $articles->orderBy('date', 'desc')->get();
+        $articles = $articles->latest('date')->get();
 
         return view('articles.unchecked', compact('articles'));
+    }
+
+    public function unpublished()
+    {
+        $this->authorize('viewUnpublished', Article::class);
+
+        if (auth()->user()->is_admin) {
+            $articles = Article::unpublished()->latest('date')->get();
+        } else {
+            $articles = auth()->user()->articles()->unpublished()->latest()->get();
+        }
+
+        return view('articles.unpublished', compact('articles'));
     }
 
     public function check(Article $article)

@@ -17,7 +17,7 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         if (!$request->user() or !$request->user()->is_admin) {
-            return response()->json(['You do not access to this module.'], 403);
+            return response('', 403);
         }
 
         return $next($request);

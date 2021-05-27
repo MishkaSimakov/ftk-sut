@@ -31,6 +31,11 @@
                                         Написать
                                     </a>
                                 @endcan
+                                @can('viewUnpublished', \App\Models\Article::class)
+                                    <a class="dropdown-item" href="{{ route('article.unpublished') }}">
+                                        Отложенные
+                                    </a>
+                                @endcan
                                 @can('viewUnchecked', \App\Models\Article::class)
                                     <a class="dropdown-item" href="{{ route('article.unchecked') }}">
                                         Требуют проверки

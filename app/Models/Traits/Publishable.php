@@ -8,7 +8,12 @@ trait Publishable
 {
     public function scopePublished(Builder $builder): Builder
     {
-        return $builder->whereDate('date', '<=', now());
+        return $builder->where('date', '<=', now());
+    }
+
+    public function scopeUnpublished(Builder $builder): Builder
+    {
+        return $builder->where('date', '>', now());
     }
 
     public function getIsPublishedAttribute(): bool

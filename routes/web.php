@@ -28,6 +28,7 @@ Route::post('/reviews', [\App\Http\Controllers\ReviewsController::class, 'store'
 Route::resource('news', \App\Http\Controllers\NewsController::class);
 
 # articles
+Route::get('article/unpublished', [\App\Http\Controllers\ArticleController::class, 'unpublished'])->name('article.unpublished');
 Route::get('article/unchecked', [\App\Http\Controllers\ArticleController::class, 'unchecked'])->name('article.unchecked');
 Route::get('article/{article}/check', [\App\Http\Controllers\ArticleController::class, 'check'])->name('article.check');
 Route::resource('article', \App\Http\Controllers\ArticleController::class);

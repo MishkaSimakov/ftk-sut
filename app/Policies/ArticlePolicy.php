@@ -103,4 +103,15 @@ class ArticlePolicy
     {
         return $article->type->is(ArticleType::Checked());
     }
+
+    /**
+     * Determine whether the user can view unpublished articles.
+     *
+     * @param User $user
+     * @return mixed
+     */
+    public function viewUnpublished(User $user)
+    {
+        return true;
+    }
 }
