@@ -88,13 +88,13 @@
             </div>
 
             <div class="col-md-6 d-none d-md-block">
-                <img alt="Новости" class="img-fluid rounded" src="https://via.placeholder.com/720x480">
+                <img alt="Новости" class="img-fluid rounded" src="{{ asset('storage/pages/welcome/news.png') }}">
             </div>
         </div>
 
         <div class="row mt-5">
             <div class="col-md-6 d-none d-md-block">
-                <img alt="Статьи" class="img-fluid rounded" src="https://via.placeholder.com/720x480">
+                <img alt="Статьи" class="img-fluid rounded" src="{{ asset('storage/pages/welcome/articles.png') }}">
             </div>
 
             <div class="col-md-6 d-flex flex-column">
@@ -125,13 +125,13 @@
             </div>
 
             <div class="col-md-6 d-none d-md-block">
-                <img alt="Расписание" class="img-fluid rounded" src="https://via.placeholder.com/720x480">
+                <img alt="Расписание" class="img-fluid rounded" src="{{ asset('storage/pages/welcome/events.png') }}">
             </div>
         </div>
 
         <div class="row mt-5">
             <div class="col-md-6 d-none d-md-block">
-                <img alt="Рейтинг" class="img-fluid rounded" src="{{ asset('storage/pages/welcome/Rating.png') }}">
+                <img alt="Рейтинг" class="img-fluid rounded" src="{{ asset('storage/pages/welcome/rating.png') }}">
             </div>
 
             <div class="col-md-6 d-flex flex-column">

@@ -21,22 +21,25 @@
                             </div>
 
                             @if($event->isTravel())
-                                @if($event->travel->type == \App\Enums\TravelType::Bike())
-                                    <div class="ml-3" title="Это велосипедный поход" data-toggle="tooltip">
-                                        <i class="fas fa-biking"></i>
-                                    </div>
-                                @elseif($event->travel->type == \App\Enums\TravelType::Hiking())
-                                    <div class="ml-3" title="Это пеший поход" data-toggle="tooltip">
-                                        <i class="fas fa-hiking"></i>
-                                    </div>
-                                @endif
+                                <div class="text-muted">
+                                    @if($event->travel->type == \App\Enums\TravelType::Bike())
+                                        <div class="ml-3" title="Это велосипедный поход" data-toggle="tooltip">
+                                            <i class="fas fa-biking"></i>
+                                        </div>
+                                    @elseif($event->travel->type == \App\Enums\TravelType::Hiking())
+                                        <div class="ml-3" title="Это пеший поход" data-toggle="tooltip">
+                                            <i class="fas fa-hiking"></i>
+                                        </div>
+                                    @endif
+                                </div>
                             @endif
                         </div>
 
                         <h6 class="card-subtitle mb-2 text-muted">{{ $event->description }}</h6>
                         <p class="card-text mb-0"><b>Начало:</b> {{ $event->date_start->isoFormat('Do MMMM HH:mm') }}
                         </p>
-                        <p class="card-text mb-0"><b>Окончание:</b> {{ $event->date_end->isoFormat('Do MMMM HH:mm') }}</p>
+                        <p class="card-text mb-0"><b>Окончание:</b> {{ $event->date_end->isoFormat('Do MMMM HH:mm') }}
+                        </p>
 
                         @if($event->isTravel())
                             <p class="card-text mb-2"><b>Длина маршрута:</b> {{ $event->travel->distance }} км</p>

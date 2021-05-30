@@ -33,8 +33,8 @@ class StoreEventRequest extends FormRequest
             'image' => 'required|image',
 
             'is_travel' => 'nullable|in:on,off',
-            'travel_type' => 'required_if:is_travel,on',
-            'travel_distance' => 'required_if:is_travel,on|min:0|numeric'
+            'travel_type' => 'nullable|required_if:is_travel,on',
+            'travel_distance' => 'nullable|required_if:is_travel,on|min:0|numeric'
         ];
     }
 }

@@ -4,7 +4,7 @@
 @section('title', 'Рейтинг')
 
 @section('content')
-    <h1 class="text-center mb-4">Рейтинг ФТК</h1>
+    <h1 class="text-center mb-4">Рейтинг</h1>
 
     <ul class="nav nav-pills row text-center" role="tablist">
         <li class="nav-item col-md-4" role="presentation">
