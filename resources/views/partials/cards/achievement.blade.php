@@ -14,7 +14,7 @@
                         style="width: {{ $progress->points / $achievement->points * 100 }}%;"
                     ></div>
 
-                    <div class="position-absolute" style="top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);">
+                    <div class="position-absolute {{ ($progress->points / $achievement->points) > 0.6 ? 'text-white' : '' }}" style="top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);">
                         {{ $progress->points }}/{{ $achievement->points }}
                     </div>
                 @endif

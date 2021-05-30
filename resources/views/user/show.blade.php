@@ -24,18 +24,19 @@
 
         <div class="card mt-3">
             @if(!$achievements->count())
-                <div class="text-center my-3 text-info">
+                <div class="text-center py-3 text-info border-bottom">
                     Нет достижений
                 </div>
+            @else
+                <ul class="list-group list-group-flush">
+                    @foreach($achievements as $achievement)
+                        @include('partials.cards.achievement', compact('achievement'))
+                    @endforeach
+                </ul>
             @endif
-            <ul class="list-group list-group-flush">
-                @foreach($achievements as $achievement)
-                    @include('partials.cards.achievement', compact('achievement'))
-                @endforeach
-            </ul>
 
             <a class="text-secondary my-2 mx-auto" href="{{ route('achievements.index') }}">
-                Список достижений
+                Все достижения
             </a>
         </div>
     </div>

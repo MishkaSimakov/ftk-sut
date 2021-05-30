@@ -14672,6 +14672,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user'],
@@ -14681,6 +14687,9 @@ __webpack_require__.r(__webpack_exports__);
       articles: [],
       count: {}
     };
+  },
+  methods: {
+    route: route
   },
   created: function created() {
     var _this = this;
@@ -49507,78 +49516,97 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "card mt-3" }, [
-      _vm.loading
-        ? _c("div", {
-            staticClass:
-              "spinner-border spinner-border-sm mx-auto my-3 text-secondary",
-            attrs: { role: "status" }
-          })
-        : !_vm.articles.length
-        ? _c("div", { staticClass: "text-center my-3 text-info" }, [
-            _vm._v("\n            Нет статей\n        ")
-          ])
-        : _c(
-            "ul",
-            { staticClass: "list-group list-group-flush" },
-            _vm._l(_vm.articles, function(article) {
-              return _c(
-                "li",
-                { key: article.id, staticClass: "list-group-item d-flex" },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "text-nowrap text-truncate col-9",
-                      attrs: { href: article.url }
-                    },
-                    [_vm._v(_vm._s(article.title))]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "ml-auto text-muted row align-items-center flex-nowrap"
-                    },
+    _c(
+      "div",
+      { staticClass: "card mt-3" },
+      [
+        _vm.loading
+          ? _c("div", {
+              staticClass:
+                "spinner-border spinner-border-sm mx-auto my-3 text-secondary",
+              attrs: { role: "status" }
+            })
+          : !_vm.articles.length
+          ? _c("div", { staticClass: "text-center my-3 text-info" }, [
+              _vm._v("\n            Нет статей\n        ")
+            ])
+          : [
+              _c(
+                "ul",
+                { staticClass: "list-group list-group-flush" },
+                _vm._l(_vm.articles, function(article) {
+                  return _c(
+                    "li",
+                    { key: article.id, staticClass: "list-group-item d-flex" },
                     [
                       _c(
-                        "div",
+                        "a",
                         {
-                          staticClass: "mr-2 mr-md-3 article-like-button",
-                          staticStyle: { cursor: "default !important" }
+                          staticClass: "text-nowrap text-truncate col-9",
+                          attrs: { href: article.url }
                         },
-                        [
-                          _c("i", { staticClass: "far fa-heart" }),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v(" " + _vm._s(article.points_count))
-                          ])
-                        ]
+                        [_vm._v(_vm._s(article.title))]
                       ),
                       _vm._v(" "),
                       _c(
-                        "span",
+                        "div",
                         {
-                          staticClass: "mr-2 d-none d-md-inline article-views"
+                          staticClass:
+                            "ml-auto text-muted row align-items-center flex-nowrap"
                         },
                         [
-                          _c("i", { staticClass: "far fa-eye" }),
-                          _vm._v(
-                            " " +
-                              _vm._s(article.views_count) +
-                              "\n                    "
+                          _c(
+                            "div",
+                            {
+                              staticClass: "mr-2 mr-md-3 article-like-button",
+                              staticStyle: { cursor: "default !important" }
+                            },
+                            [
+                              _c("i", { staticClass: "far fa-heart" }),
+                              _vm._v(" "),
+                              _c("span", [
+                                _vm._v(" " + _vm._s(article.points_count))
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass:
+                                "mr-2 d-none d-md-inline article-views"
+                            },
+                            [
+                              _c("i", { staticClass: "far fa-eye" }),
+                              _vm._v(
+                                " " +
+                                  _vm._s(article.views_count) +
+                                  "\n                    "
+                              )
+                            ]
                           )
                         ]
                       )
                     ]
                   )
-                ]
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "text-secondary my-2 mx-auto",
+                  attrs: {
+                    href: _vm.route("users.articles", { user: _vm.user })
+                  }
+                },
+                [_vm._v("\n                Все статьи\n            ")]
               )
-            }),
-            0
-          )
-    ])
+            ]
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = []

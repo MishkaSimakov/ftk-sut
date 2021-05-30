@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\UserNotificationSubscriptions;
 use App\Http\Requests\Users\StoreUserRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
+use App\Models\Article;
 use App\Models\User;
 use App\Services\AchievementsService;
 use Assada\Achievements\Model\AchievementProgress;
@@ -90,5 +91,15 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->back();
+    }
+
+    public function articles(User $user)
+    {
+        $articles = $user->articles()
+            ->withCount('points')->withViewsCount()
+            ->latest('date')
+            ->get();
+
+        return view('user.articles', compact('articles', 'user'));
     }
 }

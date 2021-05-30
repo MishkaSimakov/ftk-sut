@@ -61,22 +61,28 @@
             <div class="text-center my-3 text-info" v-else-if="!articles.length">
                 Нет статей
             </div>
-            <ul class="list-group list-group-flush" v-else>
-                <li class="list-group-item d-flex" v-for="article in articles" :key="article.id">
-                    <a :href="article.url" class="text-nowrap text-truncate col-9">{{ article.title }}</a>
+            <template v-else>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex" v-for="article in articles" :key="article.id">
+                        <a :href="article.url" class="text-nowrap text-truncate col-9">{{ article.title }}</a>
 
-                    <div class="ml-auto text-muted row align-items-center flex-nowrap">
-                        <div class="mr-2 mr-md-3 article-like-button" style="cursor: default !important;">
-                            <i class="far fa-heart"></i>
-                            <span> {{ article.points_count }}</span>
-                        </div>
+                        <div class="ml-auto text-muted row align-items-center flex-nowrap">
+                            <div class="mr-2 mr-md-3 article-like-button" style="cursor: default !important;">
+                                <i class="far fa-heart"></i>
+                                <span> {{ article.points_count }}</span>
+                            </div>
 
-                        <span class="mr-2 d-none d-md-inline article-views">
+                            <span class="mr-2 d-none d-md-inline article-views">
                             <i class="far fa-eye"></i> {{ article.views_count }}
                         </span>
-                    </div>
-                </li>
-            </ul>
+                        </div>
+                    </li>
+                </ul>
+
+                <a class="text-secondary my-2 mx-auto" :href="route('users.articles', {'user': user})">
+                    Все статьи
+                </a>
+            </template>
         </div>
     </div>
 </template>
@@ -95,6 +101,9 @@ export default {
             articles: [],
             count: {}
         }
+    },
+    methods: {
+        route: route
     },
     created() {
         statisticsApi.loadArticlesStatistics({

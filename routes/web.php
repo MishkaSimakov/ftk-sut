@@ -61,7 +61,7 @@ Route::get('/admin', [\App\Http\Controllers\Admin\AdminController::class, 'index
 
 # users
 Route::resource('users', \App\Http\Controllers\UserController::class);
-
+Route::get('users/{user}/articles', [\App\Http\Controllers\UserController::class, 'articles'])->name('users.articles');
 
 # auth routes
 Auth::routes();

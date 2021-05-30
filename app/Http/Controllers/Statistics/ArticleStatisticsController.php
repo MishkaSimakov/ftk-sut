@@ -13,7 +13,7 @@ class ArticleStatisticsController extends Controller
     {
         $articles = Article::where('author_id', $user->id)
             ->withCount('points')->withViewsCount()
-            ->orderBy('date', 'desc')
+            ->latest('date')
             ->limit(10)->get();
 
         return response()->json([
