@@ -21,16 +21,14 @@ class UserController extends Controller
     {
         $users = User::orderBy('name')->get();
 
-        return view('user.index', compact('users'));
+        return view('users.index', compact('users'));
     }
 
     public function show(User $user)
     {
-        $achievements = (new AchievementsService())->orderByProgress(
-            $user->achievements()->where('points', '>', 0)->get()->map->details
-        );
+        $achievements = $user->achievements()->where('points', '>', 0)->get()->map->details;
 
-        return view('user.show', compact('user', 'achievements'));
+        return view('users.show', compact('user', 'achievements'));
     }
 
     public function home()
@@ -41,7 +39,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('user.edit', compact('user'));
+        return view('users.edit', compact('user'));
     }
 
     public function settings()
@@ -76,7 +74,7 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('user.create');
+        return view('users.create');
     }
 
     public function store(StoreUserRequest $request)
@@ -100,6 +98,6 @@ class UserController extends Controller
             ->latest('date')
             ->get();
 
-        return view('user.articles', compact('articles', 'user'));
+        return view('users.articles', compact('articles', 'user'));
     }
 }

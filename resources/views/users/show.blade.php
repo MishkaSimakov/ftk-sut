@@ -36,7 +36,7 @@
                 </ul>
             @endif
 
-            <a class="text-secondary my-2 mx-auto" href="{{ route('achievements.index') }}">
+            <a class="text-secondary my-2 mx-auto" href="{{ route('users.achievements', $user) }}">
                 Все достижения
             </a>
         </div>

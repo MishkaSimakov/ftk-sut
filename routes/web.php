@@ -53,15 +53,13 @@ Route::prefix('statistics')->name('statistics.')->group(function () {
     Route::get('/compare/{user}', [\App\Http\Controllers\Statistics\CompareController::class, 'index'])->name('compare');
 });
 
-# achievements
-Route::get('/achievements', [\App\Http\Controllers\AchievementController::class, 'index'])->name('achievements.index');
-
 # admin
 Route::get('/admin', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.index');
 
 # users
 Route::resource('users', \App\Http\Controllers\UserController::class);
 Route::get('users/{user}/articles', [\App\Http\Controllers\UserController::class, 'articles'])->name('users.articles');
+Route::get('users/{user}/achievements', [\App\Http\Controllers\AchievementController::class, 'index'])->name('users.achievements');
 
 # auth routes
 Auth::routes();

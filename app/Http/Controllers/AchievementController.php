@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Services\AchievementsService;
 
 class AchievementController extends Controller
 {
-    public function index(AchievementsService $achievementsService)
+    public function index(User $user, AchievementsService $achievementsService)
     {
         $achievements = $achievementsService->getAll();
 
-        if (auth()->check()) {
-            $achievements = $achievementsService->orderByProgress($achievements);
-        }
-
-        return view('achievements.index', compact('achievements'));
+        return view('users.achievements', compact('achievements', 'user'));
     }
 }
