@@ -69,7 +69,5 @@ Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings']
 
 
 Route::get('/mailable', function () {
-    $article = \App\Models\Article::find(1);
-
-    return new App\Mail\ArticleNotification($article);
+    return new App\Mail\RatingNotification(now());
 });
