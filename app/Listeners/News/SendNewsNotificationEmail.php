@@ -2,12 +2,14 @@
 
 namespace App\Listeners\News;
 
+use App\Enums\UserNotificationSubscriptions;
 use App\Events\News\NewsCreated;
 use App\Mail\NewsNotification;
 use App\Models\User;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
-class SendNewsNotificationEmail
+class SendNewsNotificationEmail implements ShouldQueue
 {
     public function handle(NewsCreated $event)
     {
@@ -15,7 +17,10 @@ class SendNewsNotificationEmail
             return;
         }
 
-        Mail::to(User::whereNotNull('email')->select('email')->get())
-            ->later(now()->addMinutes(5), new NewsNotification($event->news));
+        Mail::to(
+            User::hasFlag('notification_subscriptions', UserNotificationSubscriptions::NewsNotifications)
+            ->whereNotNull('email')->select('email')->get()
+        )
+            ->later($event->news->date, new NewsNotification($event->news));
     }
 }

@@ -66,3 +66,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\UserController::class, 'home'])->name('home');
 Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('settings');
+
+
+Route::get('/mailable', function () {
+    $article = \App\Models\Article::find(1);
+
+    return new App\Mail\ArticleNotification($article);
+});

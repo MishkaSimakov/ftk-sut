@@ -14,10 +14,11 @@ class CreateArticlePointsTable extends Migration
     public function up()
     {
         Schema::create('article_points', function (Blueprint $table) {
+            $table->primary(['article_id', 'user_id']);
+
             $table->foreignId('article_id');
             $table->foreignId('user_id');
 
-            $table->primary(['article_id', 'user_id']);
             $table->foreign('article_id')->on('articles')->references('id')->onDelete('cascade');
             $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
 

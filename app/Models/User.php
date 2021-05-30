@@ -8,6 +8,7 @@ use App\Mail\ResetPasswordNotification;
 use App\Models\Traits\HasRegisterCode;
 use Assada\Achievements\Achiever;
 use BenSampo\Enum\Traits\CastsEnums;
+use BenSampo\Enum\Traits\QueriesFlaggedEnums;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -20,6 +21,7 @@ class User extends Authenticatable
     use Achiever;
     use CastsEnums;
     use HasRegisterCode;
+    use QueriesFlaggedEnums;
 
     /**
      * The attributes that are mass assignable.

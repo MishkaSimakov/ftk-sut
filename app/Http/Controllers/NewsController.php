@@ -58,7 +58,7 @@ class NewsController extends Controller
         $news->date = $request->get('delayed_publication') === 'on' ? $request->get('date') : now();
         $news->save();
 
-        NewsCreated::dispatch($news, $request->get('notify_users') == 'on');
+        NewsCreated::dispatch($news, $request->get('notify_users') === 'on');
 
         return redirect()->route('news.index');
     }

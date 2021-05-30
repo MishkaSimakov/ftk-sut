@@ -21,7 +21,7 @@
 {{-- Footer --}}
 @slot('footer')
 @component('mail::footer')
-{{ date('Y') }} {{ config('app.name') }}.
+{{-- Keep this component for spacing--}}
 @endcomponent
 @endslot
 @endcomponent

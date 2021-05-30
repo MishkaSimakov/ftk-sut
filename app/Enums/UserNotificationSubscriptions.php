@@ -16,4 +16,13 @@ final class UserNotificationSubscriptions extends FlaggedEnum
     const ArticleNotifications =    1 << 1;
     const RatingNotifications =     1 << 2;
     const EventNotifications  =     1 << 3;
+
+    public static function defaultFlags()
+    {
+        return self::flags([
+            self::NewsNotifications,
+            self::RatingNotifications,
+            self::EventNotifications
+        ]);
+    }
 }
