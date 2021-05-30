@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -50,8 +51,19 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'register_code' => ['required', 'string', 'size:6', 'exists:users,register_code'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'register_code' => [
+                'required',
+                'string',
+                'size:6',
+                'exists:users,register_code'
+                // TODO: добавить проверку, были ли зарегистрирован пользователь ранее
+            ],
+            'email' => [
+                'required', 'string', 'email', 'max:255',
+                Rule::unique('users', 'email')->ignoreModel(
+                    User::where('register_code', $data['register_code'])->first()
+                )
+            ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ], [
             'register_code.in' => __('auth.failed')
@@ -68,10 +80,10 @@ class RegisterController extends Controller
     {
         $user = User::where('register_code', $data['register_code'])->first();
 
-        $user->email = $data['email'];
-        $user->password = Hash::make($data['password']);
-
-        $user->save();
+        $user->update([
+            'email' => $data['email'],
+            'password' => Hash::make($data['password'])
+        ]);
 
         return $user;
     }

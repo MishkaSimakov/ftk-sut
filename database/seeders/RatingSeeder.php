@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 /**
  * Загружает категории для рейтинга из config в базу данных.
  */
-class RatingPointCategorySeeder extends Seeder
+class RatingSeeder extends Seeder
 {
     public function run()
     {

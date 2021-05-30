@@ -10,7 +10,7 @@ use App\Achievements\Rating\Monthly\TakeThirdPlace;
 use App\Models\User;
 use App\Services\Rating\Rating;
 use Carbon\Carbon;
-use Database\Seeders\RatingPointCategorySeeder;
+use Database\Seeders\RatingSeeder;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
@@ -19,7 +19,7 @@ class RatingPointAchievementsTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->seed(RatingPointCategorySeeder::class);
+        $this->seed(RatingSeeder::class);
 
         $this->storeRating(
             Carbon::parse('2020-01')

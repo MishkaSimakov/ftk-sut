@@ -18,5 +18,5 @@ class News extends Model implements Viewable
     protected $dates = ['date'];
     protected bool $removeViewsOnDelete = true;
 
-    const PAGINATION_LIMIT = 50;
+    const PAGINATION_LIMIT = 25;
 }

@@ -4,7 +4,7 @@ namespace Tests\Feature\Rating;
 
 use App\Imports\RatingImport;
 use Carbon\Carbon;
-use Database\Seeders\RatingPointCategorySeeder;
+use Database\Seeders\RatingSeeder;
 use Maatwebsite\Excel\Facades\Excel;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class RatingIndexTest extends TestCase
     {
         parent::setUp();
 
-        $this->seed(RatingPointCategorySeeder::class);
+        $this->seed(RatingSeeder::class);
         $this->loadRating();
     }
 

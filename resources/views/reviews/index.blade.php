@@ -15,10 +15,22 @@
             <div class="card-footer">
                 <div class="row no-gutters text-secondary">
                     <div>
-                    {{ $review->email }}
+                        {{ $review->email }} • {{ $review->created_at->isoFormat('ll HH:mm') }}
                     </div>
+
                     <div class="ml-auto">
-                        {{ $review->created_at->isoFormat('ll HH:mm') }}
+                        <a
+                            class="text-danger"
+                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $review->id }}').submit();"
+                            href="#"
+                        >
+                            Удалить
+                        </a>
+                        <form method="POST" id="delete-form-{{ $review->id }}"
+                              action="{{ route('reviews.destroy', $review) }}">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                     </div>
                 </div>
             </div>

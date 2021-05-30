@@ -14619,13 +14619,67 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user'],
   data: function data() {
     return {
       loading: true,
-      articles: []
+      articles: [],
+      count: {}
     };
   },
   created: function created() {
@@ -14635,7 +14689,8 @@ __webpack_require__.r(__webpack_exports__);
       user: this.user
     }).then(function (response) {
       _this.loading = false;
-      _this.articles = response.data;
+      _this.articles = response.data.articles;
+      _this.count = response.data.count;
     });
   }
 });
@@ -49353,6 +49408,104 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("h2", { staticClass: "h5 mt-5 mb-1" }, [_vm._v("Статьи")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body p-3" }, [
+            _c("div", { staticClass: "text-center" }, [
+              _vm.loading
+                ? _c("div", {
+                    staticClass:
+                      "spinner-border text-primary spinner-border-sm my-2",
+                    attrs: { role: "status" }
+                  })
+                : _c(
+                    "div",
+                    { staticClass: "mb-0 font-weight-bold text-primary h2" },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.count.articles) +
+                          "\n                        "
+                      )
+                    ]
+                  ),
+              _vm._v(" "),
+              _c("div", { staticClass: "small text-secondary mb-1" }, [
+                _vm._v(
+                  "\n                            статей\n                        "
+                )
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4 mt-3 mt-md-0" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body p-3" }, [
+            _c("div", { staticClass: "text-center" }, [
+              _vm.loading
+                ? _c("div", {
+                    staticClass:
+                      "spinner-border text-info spinner-border-sm my-2",
+                    attrs: { role: "status" }
+                  })
+                : _c(
+                    "div",
+                    { staticClass: "mb-0 font-weight-bold text-info h2" },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.count.points) +
+                          "\n                        "
+                      )
+                    ]
+                  ),
+              _vm._v(" "),
+              _c("div", { staticClass: "small text-info mb-1" }, [
+                _vm._v(
+                  "\n                            оценок на статьях\n                        "
+                )
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4 mt-3 mt-md-0" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body p-3" }, [
+            _c("div", { staticClass: "text-center" }, [
+              _vm.loading
+                ? _c("div", {
+                    staticClass:
+                      "spinner-border text-secondary spinner-border-sm my-2",
+                    attrs: { role: "status" }
+                  })
+                : _c(
+                    "div",
+                    { staticClass: "mb-0 font-weight-bold text-secondary h2" },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.count.views) +
+                          "\n                        "
+                      )
+                    ]
+                  ),
+              _vm._v(" "),
+              _c("div", { staticClass: "small text-secondary mb-1" }, [
+                _vm._v(
+                  "\n                            просмотров на статьях\n                        "
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card mt-3" }, [
       _vm.loading

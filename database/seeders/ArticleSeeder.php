@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Enums\ArticleType;
 use App\Enums\UserType;
 use App\Models\Article;
+use App\Models\ArticleTag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
@@ -19,7 +20,12 @@ class ArticleSeeder extends Seeder
         $articles = Http::get('http://ftk-sut.ru/api/imports/articles')->json();
 
         foreach ($articles as $article) {
+            if (!$article['title']) {
+                return;
+            }
+
             $storedArticle = Article::create([
+                'id' => $article['id'],
                 'title' => $article['title'],
                 'body' => $article['body'],
                 'author_id' => $this->getUserId($article['user']),
@@ -32,17 +38,40 @@ class ArticleSeeder extends Seeder
                     $this->getUserId($user)
                 );
             }
+
+            foreach ($article['tags'] as $tag) {
+                $storedArticle->tags()->attach(
+                    $this->getTagId($tag)
+                );
+            }
         }
     }
 
     protected function getUserId($user): int
     {
-        return User::firstOrCreate([
-            'name' => $user['name'],
-            'is_admin' => $user['is_admin'],
-            'email' => $user['email'],
-            'register_code' => $user['register_code'],
-            'type' => UserType::Pupil()
-        ])->id;
+        if (!($foundUser = User::where('name', $user['name'])->first())) {
+            $foundUser = User::create([
+                'id' => $user['id'],
+                'name' => $user['name'],
+                'is_admin' => $user['is_admin'],
+                'email' => $user['email'],
+                'register_code' => $user['register_code'],
+                'type' => UserType::Pupil()
+            ]);
+        }
+
+        return $foundUser->id;
+    }
+
+    protected function getTagId($tag): int
+    {
+        if (!($foundTag = ArticleTag::where('name', $tag['name'])->first())) {
+            $foundTag = ArticleTag::create([
+                'id' => $tag['id'],
+                'name' => $tag['name']
+            ]);
+        }
+
+        return $foundTag->id;
     }
 }

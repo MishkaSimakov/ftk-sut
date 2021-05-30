@@ -16,8 +16,13 @@ class ArticleStatisticsController extends Controller
             ->orderBy('date', 'desc')
             ->limit(10)->get();
 
-        return response()->json(
-            ArticleStatisticsResource::collection($articles)
-        );
+        return response()->json([
+            'articles' => ArticleStatisticsResource::collection($articles),
+            'count' => [
+                'articles' => $user->articles()->count(),
+                'points' => $user->articles()->withCount('points')->get()->sum('points_count'),
+                'views' => $user->articles()->withViewsCount()->get()->sum('views_count')
+            ]
+        ]);
     }
 }
