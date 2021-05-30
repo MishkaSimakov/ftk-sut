@@ -1,6 +1,7 @@
 @extends('layouts.app', ['includeLivewire' => false])
 
-@section('title', 'Мероприятия')
+
+@section('title', 'Расписание')
 
 @section('content')
     <h1 class="text-center mb-4">Создать мероприятие</h1>

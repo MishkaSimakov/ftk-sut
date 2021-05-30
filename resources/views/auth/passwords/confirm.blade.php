@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app', ['includeLivewire' => false])
+
+
+@section('title', 'Сброс пароля')
 
 @section('content')
 <div class="container">

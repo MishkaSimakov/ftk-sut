@@ -1,5 +1,6 @@
 @extends('layouts.app', ['includeLivewire' => false])
 
+
 @section('title', $user->name)
 
 @section('content')
