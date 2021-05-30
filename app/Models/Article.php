@@ -88,7 +88,7 @@ class Article extends Model implements Viewable
 
     public function scopeOrderByRelevance(Builder $builder): Builder
     {
-        $sql = '`points_count` * ' . Article::RELEVANCE_COEFFICIENTS['points'] . ' + `views_count` * ' . Article::RELEVANCE_COEFFICIENTS['views'] . ' + datediff(now(), `date`) * ' . Article::RELEVANCE_COEFFICIENTS['days'];
+        $sql = '`points_count` * ' . Article::RELEVANCE_COEFFICIENTS['points'] . ' + `views_count` * ' . Article::RELEVANCE_COEFFICIENTS['views'] . ' + datediff(now(), `date`) * ' . Article::RELEVANCE_COEFFICIENTS['days'] . ' DESC';
 
         return $builder->orderByRaw($sql, 'desc');
     }
