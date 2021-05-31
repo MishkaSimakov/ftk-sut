@@ -12,7 +12,7 @@
                 <a href="{{ route('statistics.compare', $user) }}">Сравнить с собой</a>
             </div>
         @else
-            @if($event = $user->events()->where('date_start', '>=', now()->subDay())->first())
+            @if($event = $user->events()->whereBetween('date_start', [now(), now()->addDay()])->first())
                 <div class="alert alert-info" role="alert">
                     {{ Str::ucfirst($event->date_start->diffForHumans()) }} {{ $event->name }}. Не проспите!
                 </div>

@@ -36,12 +36,12 @@ class Event extends Model
 
     public function scopePast(Builder $builder): Builder
     {
-        return $builder->whereDate('date_end', '<=', now());
+        return $builder->where('date_end', '<=', now());
     }
 
     public function scopeFuture(Builder $builder): Builder
     {
-        return $builder->whereDate('date_end', '>', now());
+        return $builder->where('date_end', '>', now());
     }
 
     public function isPast(): bool
