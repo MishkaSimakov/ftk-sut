@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Achievements\Chains\RatingPointChain;
 use App\Enums\UserNotificationSubscriptions;
 use App\Enums\UserType;
 use App\Mail\ResetPasswordNotification;
 use App\Models\Traits\HasRegisterCode;
+use Assada\Achievements\AchievementChain;
 use Assada\Achievements\Achiever;
 use BenSampo\Enum\Traits\CastsEnums;
 use BenSampo\Enum\Traits\QueriesFlaggedEnums;
@@ -13,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 
 class User extends Authenticatable
@@ -90,8 +93,15 @@ class User extends Authenticatable
         return $this->belongsToMany(Article::class, 'article_points');
     }
 
-    public function showPointsStatistics()
+    public function showPointsStatistics(): bool
     {
         return $this->type->in([\App\Enums\UserType::Pupil, \App\Enums\UserType::TeachingGraduate]);
+    }
+
+    public function lastAchievementInChainProgress(AchievementChain $chain): int
+    {
+        return optional(
+                $this->achievementStatus(Arr::last($chain->chain()))
+            )->points ?? 0;
     }
 }

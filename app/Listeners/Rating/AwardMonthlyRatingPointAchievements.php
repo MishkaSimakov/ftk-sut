@@ -6,11 +6,9 @@ use App\Achievements\Chains\RatingPointChain;
 use App\Achievements\Rating\Monthly\TakeFirstPlace;
 use App\Achievements\Rating\Monthly\TakeSecondPlace;
 use App\Achievements\Rating\Monthly\TakeThirdPlace;
-use App\Events\Rating\RatingCreated;
 use App\Models\User;
 use App\Services\Rating\Rating;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class AwardMonthlyRatingPointAchievements implements ShouldQueue
@@ -48,8 +46,7 @@ class AwardMonthlyRatingPointAchievements implements ShouldQueue
         $current_sum = $categories->sum('amount');
 
         if (
-            $current_sum > 0 and
-            (optional($user->achievementStatus(Arr::last((new RatingPointChain())->chain())))->points ?? 0) < $current_sum
+            $current_sum > 0 and $user->lastAchievementInChainProgress(new RatingPointChain()) < $current_sum
         ) {
             $user->setProgress(new RatingPointChain(), $current_sum);
         }
