@@ -43,9 +43,11 @@ Route::resource('events', \App\Http\Controllers\EventsController::class);
 Route::resource('rating', \App\Http\Controllers\RatingController::class)
     ->only(['create', 'store']);
 
+
 Route::get('rating/destroy', [\App\Http\Controllers\RatingController::class, 'showDestroyPage'])->name('rating.destroyPage');
 Route::delete('rating/destroy', [\App\Http\Controllers\RatingController::class, 'destroy'])->name('rating.destroy');
 
+Route::get('rating/export/{period}', [\App\Http\Controllers\RatingController::class, 'export'])->name('rating.export');
 Route::get('rating/{period?}', [\App\Http\Controllers\RatingController::class, 'index'])->name('rating.index');
 
 Route::prefix('statistics')->name('statistics.')->group(function () {

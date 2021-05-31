@@ -42,9 +42,9 @@ class RouteServiceProvider extends ServiceProvider
             [$start, $end] = explode('-', $value);
 
             return CarbonPeriod::since(
-                Carbon::createFromIsoFormat('YYYY.MM', $start)
+                Carbon::parse(str_replace('.', '-', $start))
             )->until(
-                Carbon::createFromIsoFormat('YYYY.MM', $end)
+                Carbon::parse(str_replace('.', '-', $end))
             );
         });
 

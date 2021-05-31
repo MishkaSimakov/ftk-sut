@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Enums\UserNotificationSubscriptions;
 use App\Http\Requests\Users\StoreUserRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
-use App\Models\Article;
 use App\Models\User;
-use App\Services\AchievementsService;
-use Assada\Achievements\Model\AchievementProgress;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -49,24 +47,22 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        $flags = [
-            'noticeNews' => UserNotificationSubscriptions::NewsNotifications(),
-            'noticeArticles' => UserNotificationSubscriptions::ArticleNotifications(),
-            'noticeEvents' => UserNotificationSubscriptions::EventNotifications(),
-            'noticeRating' => UserNotificationSubscriptions::RatingNotifications(),
-        ];
+        $this->updateUserNotificationSubscriptions($user, $request);
 
-        $appliedFlags = [];
-        foreach ($flags as $name => $class) {
-            if ($request->get($name) === 'on') {
-                $appliedFlags[] = $class;
-            }
+        $user->update(
+            $request->only('email')
+        );
+
+        if ($request->user()->is_admin) {
+            $user->update(
+                array_merge(
+                    $request->only('name', 'type'),
+                    [
+                        'is_admin' => $request->get('is_admin') === 'on'
+                    ]
+                )
+            );
         }
-
-        $user->update([
-            'email' => $request->get('email'),
-            'notification_subscriptions' => UserNotificationSubscriptions::flags($appliedFlags)
-        ]);
 
         return redirect()->back();
     }
@@ -99,5 +95,26 @@ class UserController extends Controller
             ->get();
 
         return view('users.articles', compact('articles', 'user'));
+    }
+
+    protected function updateUserNotificationSubscriptions(User $user, Request $request)
+    {
+        $flags = [
+            'noticeNews' => UserNotificationSubscriptions::NewsNotifications,
+            'noticeArticles' => UserNotificationSubscriptions::ArticleNotifications,
+            'noticeEvents' => UserNotificationSubscriptions::EventNotifications,
+            'noticeRating' => UserNotificationSubscriptions::RatingNotifications,
+        ];
+
+        $appliedFlags = [];
+        foreach ($flags as $name => $class) {
+            if ($request->get($name) === 'on') {
+                $appliedFlags[] = $class;
+            }
+        }
+
+        $user->update([
+            'notification_subscriptions' => UserNotificationSubscriptions::flags($appliedFlags)
+        ]);
     }
 }

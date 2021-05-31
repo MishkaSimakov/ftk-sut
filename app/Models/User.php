@@ -33,7 +33,7 @@ class User extends Authenticatable
         'type',
         'email',
         'password',
-        'is_student',
+        'is_admin',
         'notification_subscriptions'
     ];
 
@@ -88,5 +88,10 @@ class User extends Authenticatable
     public function liked_articles(): BelongsToMany
     {
         return $this->belongsToMany(Article::class, 'article_points');
+    }
+
+    public function showPointsStatistics()
+    {
+        return $this->type->in([\App\Enums\UserType::Pupil, \App\Enums\UserType::TeachingGraduate]);
     }
 }

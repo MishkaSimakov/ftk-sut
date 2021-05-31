@@ -11,6 +11,7 @@ return [
     UserType::class => [
         UserType::Pupil => 'Ученик',
         UserType::Teacher => 'Преподаватель',
+        UserType::TeachingGraduate => 'Преподающий выпускник клуба',
         UserType::Stranger => 'Другое',
     ],
 ];

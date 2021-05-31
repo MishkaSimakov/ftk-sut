@@ -8,9 +8,11 @@
 
     @auth
         @if(auth()->id() !== $user->id)
-            <div class="mb-3">
-                <a href="{{ route('statistics.compare', $user) }}">Сравнить с собой</a>
-            </div>
+            @if($user->showPointsStatistics())
+                <div class="mb-3">
+                    <a href="{{ route('statistics.compare', $user) }}">Сравнить с собой</a>
+                </div>
+            @endif
         @else
             @if($event = $user->events()->whereBetween('date_start', [now(), now()->addDay()])->first())
                 <div class="alert alert-info" role="alert">
@@ -20,7 +22,9 @@
         @endif
     @endauth
 
-    <rating-points-statistics user="{{ $user->id }}"></rating-points-statistics>
+    @if($user->showPointsStatistics())
+        <rating-points-statistics user="{{ $user->id }}"></rating-points-statistics>
+    @endif
 
     <articles-statistics user="{{ $user->id }}"></articles-statistics>
 

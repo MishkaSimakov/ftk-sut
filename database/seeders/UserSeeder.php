@@ -18,7 +18,13 @@ class UserSeeder extends Seeder
     {
         $users = Http::get('http://ftk-sut.ru/api/imports/users')->json();
 
+        $existingUsers = User::all();
+
         foreach ($users as $user) {
+            if ($existingUsers->contains('name', $user['name'])) {
+                continue;
+            }
+
             User::create(
                 Arr::only($user, [
                     'id',

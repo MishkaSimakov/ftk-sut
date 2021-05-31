@@ -113,7 +113,7 @@ class Rating
         return CarbonPeriod::since($start)->until($start);
     }
 
-    protected function getQueryWithPeriod(): Builder
+    public function getQueryWithPeriod(): Builder
     {
         if ($this->period) {
             return RatingPoint::fromPeriod($this->period);
