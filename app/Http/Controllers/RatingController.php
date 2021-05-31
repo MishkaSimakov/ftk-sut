@@ -14,7 +14,12 @@ class RatingController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(RatingPoint::class, 'rating');
+        $this->authorizeResource(RatingPoint::class);
+    }
+
+    protected function resourceMethodsWithoutModels(): array
+    {
+        return ['index', 'create', 'store', 'destroy'];
     }
 
     public function index()

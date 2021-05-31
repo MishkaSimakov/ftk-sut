@@ -12,6 +12,10 @@ class SendRatingNotificationEmail
 {
     public function handle(RatingCreated $event)
     {
+        if (!config('mail.enabled')) {
+            return;
+        }
+
         Mail::to(
             User::hasFlag('notification_subscriptions', UserNotificationSubscriptions::RatingNotifications)
                 ->whereNotNull('email')->select('email')->get()

@@ -11,6 +11,7 @@ use App\Listeners\Article\AwardArticlePointAchievements;
 use App\Listeners\Article\AwardWriteArticleAchievements;
 use App\Listeners\Article\SendArticleNotificationEmail;
 use App\Listeners\News\SendNewsNotificationEmail;
+use App\Listeners\Rating\AwardDurationAchievements;
 use App\Listeners\Rating\AwardMonthlyRatingPointAchievements;
 use App\Listeners\Rating\SendRatingNotificationEmail;
 use Illuminate\Auth\Events\Registered;
@@ -42,6 +43,7 @@ class EventServiceProvider extends ServiceProvider
         RatingCreated::class => [
             AwardMonthlyRatingPointAchievements::class,
             SendRatingNotificationEmail::class,
+            AwardDurationAchievements::class,
         ],
         RatingDeleted::class => [
             AwardMonthlyRatingPointAchievements::class,

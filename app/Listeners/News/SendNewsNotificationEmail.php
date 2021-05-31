@@ -13,6 +13,10 @@ class SendNewsNotificationEmail implements ShouldQueue
 {
     public function handle(NewsCreated $event)
     {
+        if (!config('mail.enabled')) {
+            return;
+        }
+
         if (!$event->notify_users) {
             return;
         }

@@ -13,6 +13,10 @@ class SendArticleNotificationEmail implements ShouldQueue
 {
     public function handle(ArticleFirstTimeChecked $event)
     {
+        if (!config('mail.enabled')) {
+            return;
+        }
+
         Mail::to(
             User::hasFlag('notification_subscriptions', UserNotificationSubscriptions::ArticleNotifications)
                 ->whereNotNull('email')->select('email')->get()

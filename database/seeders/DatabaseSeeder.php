@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
              'name' => 'Симаков Михаил'
          ]);
 
-        $this->call(UserSeeder::class);
+//        $this->call(UserSeeder::class);
 //        $this->call(NewsSeeder::class);
 //        $this->call(ArticleSeeder::class);
 

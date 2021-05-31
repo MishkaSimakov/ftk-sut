@@ -49,7 +49,7 @@ class AwardMonthlyRatingPointAchievements implements ShouldQueue
 
         if (
             $current_sum > 0 and
-            $user->achievementStatus(Arr::last((new RatingPointChain())->chain()))->points < $current_sum
+            (optional($user->achievementStatus(Arr::last((new RatingPointChain())->chain())))->points ?? 0) < $current_sum
         ) {
             $user->setProgress(new RatingPointChain(), $current_sum);
         }
