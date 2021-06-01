@@ -62,7 +62,3 @@ Vue.use(Autocomplete)
 import Editor from '@tinymce/tinymce-vue'
 
 Vue.use(Editor)
-
-// Datatables
-// import {DataTable} from "simple-datatables"
-// window.DataTable = DataTable

@@ -33,6 +33,7 @@
         "dayjs": "^1.10.4",
         "laravel-mix": "^5.0.1",
         "lity": "^2.4.1",
+        "resize-base64": "github:hendrik-scholz/resize-base64#master",
         "skeleton-loader-vue": "^1.0.8",
         "v-calendar": "^2.2.4",
         "vue-smooth-height": "^1.6.4",

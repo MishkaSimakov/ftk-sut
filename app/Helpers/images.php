@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
-function save_base64(string $base64, string $path, string $disk = 'public'): string
+function save_base64(string $base64, string $path): string
 {
     $extension = explode('/', explode(':', substr($base64, 0, strpos($base64, ';')))[1])[1];
 
@@ -11,9 +12,15 @@ function save_base64(string $base64, string $path, string $disk = 'public'): str
     $base64 = str_replace($replace, '', $base64);
     $base64 = str_replace(' ', '+', $base64);
 
-    $imageName = Str::random(10) . '.' . $extension;
+    $image_name = Str::random(10) . '.' . $extension;
 
-    Storage::disk('public')->put($path . $imageName, base64_decode($base64));
+//    $path = '\\articles\\' . $image_name . '.' . $extension;
 
-    return $path . $imageName;
+    Image::make(base64_decode($base64))
+        ->widen(1024)
+        ->save(public_path('storage' . '\\' . $path . '\\' . $path . '.' . $extension));
+
+//    Storage::disk('public')->put($path . $image_name, base64_decode($base64));
+
+    return $path . $image_name;
 }

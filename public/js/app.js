@@ -14014,6 +14014,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tinymce/tinymce-vue */ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/index.js");
+/* harmony import */ var resize_base64__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! resize-base64 */ "./node_modules/resize-base64/index.js");
 //
 //
 //
@@ -14027,6 +14028,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -14051,6 +14053,11 @@ __webpack_require__.r(__webpack_exports__);
         },
         content_style: '* { color: #212529; }',
         force_p_newlines: false,
+        setup: function setup(editor) {
+          editor.on('OpenWindow', function (eventDetails) {
+            document.topLevelWindow = eventDetails.dialog; // document.tinymceEditor is where I keep track of my editor instance. You can probably accomplish this without using that
+          });
+        },
         file_picker_types: 'image',
         file_picker_callback: function file_picker_callback(cb, value, meta) {
           var input = document.createElement('input');
@@ -14058,17 +14065,19 @@ __webpack_require__.r(__webpack_exports__);
           input.setAttribute('accept', 'image/*');
 
           input.onchange = function () {
+            document.topLevelWindow.block('Загрузка файла...');
             var file = this.files[0];
             var reader = new FileReader();
 
             reader.onload = function () {
-              var id = 'blobid' + new Date().getTime();
-              var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-              var base64 = reader.result.split(',')[1];
-              var blobInfo = blobCache.create(id, file, base64);
-              blobCache.add(blobInfo);
-              cb(blobInfo.blobUri(), {
-                title: file.name
+              Object(resize_base64__WEBPACK_IMPORTED_MODULE_1__["resizeBase64ForMaxWidth"])(reader.result, 1280, 720, function (base64) {
+                document.topLevelWindow.unblock();
+                cb(base64, {
+                  title: file.name
+                });
+              }, function () {
+                document.topLevelWindow.unblock();
+                alert('Что-то пошло не так во время загрузки изображения. Попробуйте ещё раз или обратитесь к администрации.');
               });
             };
 
@@ -47783,6 +47792,164 @@ try {
 
 /***/ }),
 
+/***/ "./node_modules/resize-base64/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/resize-base64/index.js ***!
+  \*********************************************/
+/*! exports provided: resizeBase64ForMaxWidth, resizeBase64ForMaxHeight, resizeBase64ForMaxWidthAndMaxHeight */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resizeBase64ForMaxWidth", function() { return resizeBase64ForMaxWidth; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resizeBase64ForMaxHeight", function() { return resizeBase64ForMaxHeight; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resizeBase64ForMaxWidthAndMaxHeight", function() { return resizeBase64ForMaxWidthAndMaxHeight; });
+if (!String.prototype.startsWith) {
+  String.prototype.startsWith = function(search, pos) {
+	  return this.substr(!pos || pos < 0 ? 0 : +pos, search.length) === search;
+  };
+}
+
+const DEFAULT_RATIO = 1;
+
+function validateInput(base64String, maxWidth, maxHeight) {
+	let validationResult = {
+		isValid: false,
+		errorMessage: 'An error occurred.'
+	};
+
+	if(!base64String) {
+		validationResult.errorMessage = 'The input parameter base64String is ' + base64String + '.';
+	} else if(typeof(base64String) != 'string') {
+		validationResult.errorMessage = 'The input parameter base64String is not of type \'string\'.';
+	} else if(!base64String.startsWith('data:image')) {
+		validationResult.errorMessage = 'The input parameter base64String does not start with \'data:image\'.';
+	} else if(!maxWidth) {
+		validationResult.errorMessage = 'The input parameter maxWidth is ' + maxWidth + '.';
+	} else if(typeof(maxWidth) != 'number') {
+		validationResult.errorMessage = 'The input parameter maxWidth is not of type \'number\'.';
+	} else if(maxWidth < 2) {
+		validationResult.errorMessage = 'The input parameter maxWidth must be at least 2 pixel.';
+	} else if(!maxHeight) {
+		validationResult.errorMessage = 'The input parameter maxHeight is ' + maxHeight + '.';
+	} else if(typeof(maxHeight) != 'number') {
+		validationResult.errorMessage = 'The input parameter maxHeight is not of type \'number\'.';
+	} else if(maxHeight < 2) {
+		validationResult.errorMessage = 'The input parameter maxHeight must be at least 2 pixel.';
+	} else {
+		validationResult.isValid = true;
+		validationResult.errorMessage = null;
+	}
+
+	return validationResult;
+}
+
+function maxWidthRatioFunction(imageWidth, imageHeight, targetWidth, targetHeight) {
+	let ratio = DEFAULT_RATIO;
+
+	if(imageWidth > targetWidth) {
+		ratio = targetWidth / imageWidth;
+	}
+
+	return {
+		width: ratio,
+		height: ratio
+	};
+}
+
+function maxHeightRatioFunction(imageWidth, imageHeight, targetWidth, targetHeight) {
+	let ratio = DEFAULT_RATIO;
+
+	if(imageHeight > targetHeight) {
+		ratio = targetHeight / imageHeight;
+	}
+
+	return {
+		width: ratio,
+		height: ratio
+	};
+}
+
+function maxWidthMaxHeightRatioFunction(imageWidth, imageHeight, targetWidth, targetHeight) {
+	let widthRatio = targetWidth / imageWidth;
+	let heightRatio = targetHeight / imageHeight;
+
+	return {
+		width: widthRatio,
+		height: heightRatio
+	};
+}
+
+function resizeBase64ForMaxWidth(base64String, maxWidth, maxHeight, successCallback, errorCallback) {
+	let validationResult = validateInput(base64String, maxWidth, maxHeight);
+
+	if(validationResult.isValid === true) {
+		resizeBase64(base64String, maxWidth, maxHeight, maxWidthRatioFunction, successCallback, errorCallback);
+	} else {
+		errorCallback(validationResult.errorMessage);
+	}
+}
+
+function resizeBase64ForMaxHeight(base64String, maxWidth, maxHeight, successCallback, errorCallback) {
+	let validationResult = validateInput(base64String, maxWidth, maxHeight);
+
+	if(validationResult.isValid === true) {
+		resizeBase64(base64String, maxWidth, maxHeight, maxHeightRatioFunction, successCallback, errorCallback);
+	} else {
+		errorCallback(validationResult.errorMessage);
+	}
+}
+
+function resizeBase64ForMaxWidthAndMaxHeight(base64String, maxWidth, maxHeight, successCallback, errorCallback) {
+	let validationResult = validateInput(base64String, maxWidth, maxHeight);
+
+	if(validationResult.isValid === true) {
+		resizeBase64(base64String, maxWidth, maxHeight, maxWidthMaxHeightRatioFunction, successCallback, errorCallback);
+	} else {
+		errorCallback(validationResult.errorMessage);
+	}
+}
+
+function resizeBase64(base64String, maxWidth, maxHeight, ratioFunction, successCallback, errorCallback) {
+	// Create and initialize two canvas
+	let canvas = document.createElement("canvas");
+	let ctx = canvas.getContext("2d");
+	let canvasCopy = document.createElement("canvas");
+	let copyContext = canvasCopy.getContext("2d");
+
+	// Create original image
+	let img = new Image();
+	img.src = base64String;
+
+	img.onload = function() {
+		let ratioResult = ratioFunction(img.width, img.height, maxWidth, maxHeight);
+		let widthRatio = ratioResult.width;
+		let heightRatio = ratioResult.height;
+
+		// Draw original image in second canvas
+		canvasCopy.width = img.width;
+		canvasCopy.height = img.height;
+		copyContext.drawImage(img, 0, 0);
+
+		// Copy and resize second canvas to first canvas
+		canvas.width = img.width * widthRatio;
+		canvas.height = img.height * heightRatio;
+		ctx.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, canvas.width, canvas.height);
+
+		successCallback(canvas.toDataURL());
+	};
+
+	img.onerror = function() {
+		errorCallback('Error while loading image.');
+	};
+};
+
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/setimmediate/setImmediate.js":
 /*!***************************************************!*\
   !*** ./node_modules/setimmediate/setImmediate.js ***!
@@ -48056,10 +48223,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/UsersDatatable.vue?vue&type=template&id=7bcec707&scoped=true&":
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/UsersDatatable.vue?vue&type=template&id=7bcec707&scoped=true& ***!
-  \***********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/UsersDatatable.vue?vue&type=template&id=7bcec707&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/UsersDatatable.vue?vue&type=template&id=7bcec707& ***!
+  \***********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -63951,7 +64118,7 @@ webpackContext.id = "./resources/js/components sync recursive ^\\.\\/.*$";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _UsersDatatable_vue_vue_type_template_id_7bcec707_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UsersDatatable.vue?vue&type=template&id=7bcec707&scoped=true& */ "./resources/js/components/Admin/UsersDatatable.vue?vue&type=template&id=7bcec707&scoped=true&");
+/* harmony import */ var _UsersDatatable_vue_vue_type_template_id_7bcec707___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UsersDatatable.vue?vue&type=template&id=7bcec707& */ "./resources/js/components/Admin/UsersDatatable.vue?vue&type=template&id=7bcec707&");
 /* harmony import */ var _UsersDatatable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UsersDatatable.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/UsersDatatable.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -63963,11 +64130,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _UsersDatatable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _UsersDatatable_vue_vue_type_template_id_7bcec707_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _UsersDatatable_vue_vue_type_template_id_7bcec707_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _UsersDatatable_vue_vue_type_template_id_7bcec707___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UsersDatatable_vue_vue_type_template_id_7bcec707___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "7bcec707",
+  null,
   null
   
 )
@@ -63993,19 +64160,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/UsersDatatable.vue?vue&type=template&id=7bcec707&scoped=true&":
-/*!*****************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/UsersDatatable.vue?vue&type=template&id=7bcec707&scoped=true& ***!
-  \*****************************************************************************************************/
+/***/ "./resources/js/components/Admin/UsersDatatable.vue?vue&type=template&id=7bcec707&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Admin/UsersDatatable.vue?vue&type=template&id=7bcec707& ***!
+  \*****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UsersDatatable_vue_vue_type_template_id_7bcec707_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./UsersDatatable.vue?vue&type=template&id=7bcec707&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/UsersDatatable.vue?vue&type=template&id=7bcec707&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UsersDatatable_vue_vue_type_template_id_7bcec707_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UsersDatatable_vue_vue_type_template_id_7bcec707___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./UsersDatatable.vue?vue&type=template&id=7bcec707& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/UsersDatatable.vue?vue&type=template&id=7bcec707&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UsersDatatable_vue_vue_type_template_id_7bcec707___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UsersDatatable_vue_vue_type_template_id_7bcec707_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UsersDatatable_vue_vue_type_template_id_7bcec707___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -65012,9 +65179,7 @@ Object.defineProperties(Vue.prototype, {
 Vue.use(_trevoreyre_autocomplete_vue__WEBPACK_IMPORTED_MODULE_5__["default"]); // Tinymce rich text editor
 
 
-Vue.use(_tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_6__["default"]); // Datatables
-// import {DataTable} from "simple-datatables"
-// window.DataTable = DataTable
+Vue.use(_tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
 
 /***/ }),
 

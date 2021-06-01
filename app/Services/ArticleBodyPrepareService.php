@@ -13,13 +13,14 @@ class ArticleBodyPrepareService
 
         $body = $article->body;
 
-        preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?>/i', $body, $matches);
+        preg_match_all("/(<([\w]+)[^>]*>)(.*?)(<\/\\2>)/", $body, $matches);
+
         $images = $matches[1];
 
         foreach ($images as $image) {
             if (preg_match('/^data:image\/(\w+);base64,/', $image)) {
                 $body = str_replace($image, asset(
-                    'storage/' . save_base64($image, "articles/{$article->id}/", 'public')
+                    'storage/' . save_base64($image, "articles/{$article->id}")
                 ), $body);
             }
         }
