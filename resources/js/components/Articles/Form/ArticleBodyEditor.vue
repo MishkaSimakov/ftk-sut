@@ -13,7 +13,6 @@
 
 <script>
 import Editor from '@tinymce/tinymce-vue'
-import {resizeBase64ForMaxWidth} from 'resize-base64'
 
 export default {
     data() {
@@ -43,6 +42,9 @@ export default {
                     });
                 },
 
+                relative_urls : false,
+                remove_script_host : false,
+
                 file_picker_types: 'image',
                 file_picker_callback: function (cb, value, meta) {
                     let input = document.createElement('input');
@@ -52,23 +54,18 @@ export default {
                     input.onchange = function () {
                         document.topLevelWindow.block('Загрузка файла...');
 
-                        let file = this.files[0];
+                        let file = new Blob([this.files[0]]); // kind of works and choses stream as content type of file (not request)
 
-                        let reader = new FileReader();
-                        reader.onload = function () {
-                            resizeBase64ForMaxWidth(
-                                reader.result, 1280, 720,
-                                (base64) => {
-                                    document.topLevelWindow.unblock()
-                                    cb(base64, {title: file.name});
-                                },
-                                () => {
-                                    document.topLevelWindow.unblock()
-                                    alert('Что-то пошло не так во время загрузки изображения. Попробуйте ещё раз или обратитесь к администрации.')
-                                }
-                            );
-                        };
-                        reader.readAsDataURL(file);
+                        let formData = new FormData();
+                        formData.append('image', file, file.filename);
+
+                        axios.post(route('api.articles.images.store'), formData).then((response) => {
+                            document.topLevelWindow.unblock()
+                            cb(response.data, {title: file.name});
+                        }).catch((e) => {
+                            document.topLevelWindow.unblock()
+                            alert('Что-то пошло не так во время загрузки изображения. Попробуйте ещё раз или обратитесь к администрации.')
+                        });
                     };
 
                     input.click();

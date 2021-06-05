@@ -22,7 +22,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('rating/show', [RatingController::class, 'show'])->name('rating.show');
 
-Route::get('article/search', [ArticleController::class, 'search'])->name('article.search');
+Route::prefix('articles')->name('articles.')->group(function () {
+    Route::get('search', [ArticleController::class, 'search'])->name('search');
+    Route::post('images/store', [ArticleController::class, 'storeImage'])->name('images.store');
+});
+
 
 Route::prefix('statistics/')->name('stat.')->group(function () {
     Route::get('points/{user}', [RatingPointsStatisticsController::class, 'getShortPointsStatistics'])->name('points');

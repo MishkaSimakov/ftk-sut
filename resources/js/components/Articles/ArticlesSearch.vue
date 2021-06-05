@@ -95,7 +95,7 @@ export default {
                     return resolve([])
                 }
 
-                axios.get(route('api.article.search', {query: input})).then((response) => {
+                axios.get(route('api.articles.search', {query: input})).then((response) => {
                     if (!response.data.length) {
                         this.noResults = true
                     }

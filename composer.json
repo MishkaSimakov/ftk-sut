@@ -50,7 +50,6 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Helpers/images.php",
             "app/Helpers/text.php"
         ]
     },

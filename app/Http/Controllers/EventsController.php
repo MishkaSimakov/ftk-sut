@@ -6,11 +6,10 @@ use App\Http\Requests\Events\StoreEventRequest;
 use App\Http\Requests\Events\UpdateEventRequest;
 use App\Models\Event;
 use App\Models\Travel;
-use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Storage;
-use Str;
 
 
 class EventsController extends Controller
@@ -115,11 +114,18 @@ class EventsController extends Controller
 
     protected function storeEventImage(UploadedFile $file): string
     {
-        $image_name = Str::random(6);
-        $path = '\\events\\' . $image_name . '.' . $file->extension();
-        Image::make($file)
-            ->widen(750)
-            ->save(public_path('storage' . $path));
+        $name = Str::random(40);
+        $extension = $file->extension();
+        $path = "/events/{$name}.{$extension}";
+
+        $image = Image::make($file);
+        if ($image->width() > 720) {
+            $image = $image->widen(720);
+        }
+
+        $image->save(
+            config('filesystems.disks.public.root') . $path
+        );
 
         return $path;
     }

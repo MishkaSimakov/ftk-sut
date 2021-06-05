@@ -13988,7 +13988,7 @@ __webpack_require__.r(__webpack_exports__);
           return resolve([]);
         }
 
-        axios.get(route('api.article.search', {
+        axios.get(route('api.articles.search', {
           query: input
         })).then(function (response) {
           if (!response.data.length) {
@@ -14014,7 +14014,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tinymce/tinymce-vue */ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/index.js");
-/* harmony import */ var resize_base64__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! resize-base64 */ "./node_modules/resize-base64/index.js");
 //
 //
 //
@@ -14028,7 +14027,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -14058,6 +14056,8 @@ __webpack_require__.r(__webpack_exports__);
             document.topLevelWindow = eventDetails.dialog; // document.tinymceEditor is where I keep track of my editor instance. You can probably accomplish this without using that
           });
         },
+        relative_urls: false,
+        remove_script_host: false,
         file_picker_types: 'image',
         file_picker_callback: function file_picker_callback(cb, value, meta) {
           var input = document.createElement('input');
@@ -14066,22 +14066,19 @@ __webpack_require__.r(__webpack_exports__);
 
           input.onchange = function () {
             document.topLevelWindow.block('Загрузка файла...');
-            var file = this.files[0];
-            var reader = new FileReader();
+            var file = new Blob([this.files[0]]); // kind of works and choses stream as content type of file (not request)
 
-            reader.onload = function () {
-              Object(resize_base64__WEBPACK_IMPORTED_MODULE_1__["resizeBase64ForMaxWidth"])(reader.result, 1280, 720, function (base64) {
-                document.topLevelWindow.unblock();
-                cb(base64, {
-                  title: file.name
-                });
-              }, function () {
-                document.topLevelWindow.unblock();
-                alert('Что-то пошло не так во время загрузки изображения. Попробуйте ещё раз или обратитесь к администрации.');
+            var formData = new FormData();
+            formData.append('image', file, file.filename);
+            axios.post(route('api.articles.images.store'), formData).then(function (response) {
+              document.topLevelWindow.unblock();
+              cb(response.data, {
+                title: file.name
               });
-            };
-
-            reader.readAsDataURL(file);
+            })["catch"](function (e) {
+              document.topLevelWindow.unblock();
+              alert('Что-то пошло не так во время загрузки изображения. Попробуйте ещё раз или обратитесь к администрации.');
+            });
           };
 
           input.click();
@@ -47788,164 +47785,6 @@ try {
   // problems, please detail your unique predicament in a GitHub issue.
   Function("r", "regeneratorRuntime = r")(runtime);
 }
-
-
-/***/ }),
-
-/***/ "./node_modules/resize-base64/index.js":
-/*!*********************************************!*\
-  !*** ./node_modules/resize-base64/index.js ***!
-  \*********************************************/
-/*! exports provided: resizeBase64ForMaxWidth, resizeBase64ForMaxHeight, resizeBase64ForMaxWidthAndMaxHeight */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resizeBase64ForMaxWidth", function() { return resizeBase64ForMaxWidth; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resizeBase64ForMaxHeight", function() { return resizeBase64ForMaxHeight; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resizeBase64ForMaxWidthAndMaxHeight", function() { return resizeBase64ForMaxWidthAndMaxHeight; });
-if (!String.prototype.startsWith) {
-  String.prototype.startsWith = function(search, pos) {
-	  return this.substr(!pos || pos < 0 ? 0 : +pos, search.length) === search;
-  };
-}
-
-const DEFAULT_RATIO = 1;
-
-function validateInput(base64String, maxWidth, maxHeight) {
-	let validationResult = {
-		isValid: false,
-		errorMessage: 'An error occurred.'
-	};
-
-	if(!base64String) {
-		validationResult.errorMessage = 'The input parameter base64String is ' + base64String + '.';
-	} else if(typeof(base64String) != 'string') {
-		validationResult.errorMessage = 'The input parameter base64String is not of type \'string\'.';
-	} else if(!base64String.startsWith('data:image')) {
-		validationResult.errorMessage = 'The input parameter base64String does not start with \'data:image\'.';
-	} else if(!maxWidth) {
-		validationResult.errorMessage = 'The input parameter maxWidth is ' + maxWidth + '.';
-	} else if(typeof(maxWidth) != 'number') {
-		validationResult.errorMessage = 'The input parameter maxWidth is not of type \'number\'.';
-	} else if(maxWidth < 2) {
-		validationResult.errorMessage = 'The input parameter maxWidth must be at least 2 pixel.';
-	} else if(!maxHeight) {
-		validationResult.errorMessage = 'The input parameter maxHeight is ' + maxHeight + '.';
-	} else if(typeof(maxHeight) != 'number') {
-		validationResult.errorMessage = 'The input parameter maxHeight is not of type \'number\'.';
-	} else if(maxHeight < 2) {
-		validationResult.errorMessage = 'The input parameter maxHeight must be at least 2 pixel.';
-	} else {
-		validationResult.isValid = true;
-		validationResult.errorMessage = null;
-	}
-
-	return validationResult;
-}
-
-function maxWidthRatioFunction(imageWidth, imageHeight, targetWidth, targetHeight) {
-	let ratio = DEFAULT_RATIO;
-
-	if(imageWidth > targetWidth) {
-		ratio = targetWidth / imageWidth;
-	}
-
-	return {
-		width: ratio,
-		height: ratio
-	};
-}
-
-function maxHeightRatioFunction(imageWidth, imageHeight, targetWidth, targetHeight) {
-	let ratio = DEFAULT_RATIO;
-
-	if(imageHeight > targetHeight) {
-		ratio = targetHeight / imageHeight;
-	}
-
-	return {
-		width: ratio,
-		height: ratio
-	};
-}
-
-function maxWidthMaxHeightRatioFunction(imageWidth, imageHeight, targetWidth, targetHeight) {
-	let widthRatio = targetWidth / imageWidth;
-	let heightRatio = targetHeight / imageHeight;
-
-	return {
-		width: widthRatio,
-		height: heightRatio
-	};
-}
-
-function resizeBase64ForMaxWidth(base64String, maxWidth, maxHeight, successCallback, errorCallback) {
-	let validationResult = validateInput(base64String, maxWidth, maxHeight);
-
-	if(validationResult.isValid === true) {
-		resizeBase64(base64String, maxWidth, maxHeight, maxWidthRatioFunction, successCallback, errorCallback);
-	} else {
-		errorCallback(validationResult.errorMessage);
-	}
-}
-
-function resizeBase64ForMaxHeight(base64String, maxWidth, maxHeight, successCallback, errorCallback) {
-	let validationResult = validateInput(base64String, maxWidth, maxHeight);
-
-	if(validationResult.isValid === true) {
-		resizeBase64(base64String, maxWidth, maxHeight, maxHeightRatioFunction, successCallback, errorCallback);
-	} else {
-		errorCallback(validationResult.errorMessage);
-	}
-}
-
-function resizeBase64ForMaxWidthAndMaxHeight(base64String, maxWidth, maxHeight, successCallback, errorCallback) {
-	let validationResult = validateInput(base64String, maxWidth, maxHeight);
-
-	if(validationResult.isValid === true) {
-		resizeBase64(base64String, maxWidth, maxHeight, maxWidthMaxHeightRatioFunction, successCallback, errorCallback);
-	} else {
-		errorCallback(validationResult.errorMessage);
-	}
-}
-
-function resizeBase64(base64String, maxWidth, maxHeight, ratioFunction, successCallback, errorCallback) {
-	// Create and initialize two canvas
-	let canvas = document.createElement("canvas");
-	let ctx = canvas.getContext("2d");
-	let canvasCopy = document.createElement("canvas");
-	let copyContext = canvasCopy.getContext("2d");
-
-	// Create original image
-	let img = new Image();
-	img.src = base64String;
-
-	img.onload = function() {
-		let ratioResult = ratioFunction(img.width, img.height, maxWidth, maxHeight);
-		let widthRatio = ratioResult.width;
-		let heightRatio = ratioResult.height;
-
-		// Draw original image in second canvas
-		canvasCopy.width = img.width;
-		canvasCopy.height = img.height;
-		copyContext.drawImage(img, 0, 0);
-
-		// Copy and resize second canvas to first canvas
-		canvas.width = img.width * widthRatio;
-		canvas.height = img.height * heightRatio;
-		ctx.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, canvas.width, canvas.height);
-
-		successCallback(canvas.toDataURL());
-	};
-
-	img.onerror = function() {
-		errorCallback('Error while loading image.');
-	};
-};
-
-
-
 
 
 /***/ }),

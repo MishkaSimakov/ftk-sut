@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Services\ArticleSearchService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 
 class ArticleController extends Controller
@@ -17,5 +20,25 @@ class ArticleController extends Controller
         return response()->json(
             (new ArticleSearchService())->getQueryResults($query)
         );
+    }
+
+    public function storeImage(Request $request)
+    {
+        $file = $request->file('image');
+
+        $name = Str::random(40);
+        $extension = $file->extension();
+        $path = "/articles/temp/{$name}.{$extension}";
+
+        $image = Image::make($file);
+        if ($image->width() > 1280) {
+            $image = $image->widen(1280);
+        }
+
+        $image->save(
+            config('filesystems.disks.public.root') . $path
+        );
+
+        return Storage::disk('public')->url($path);
     }
 }
