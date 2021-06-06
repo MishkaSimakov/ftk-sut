@@ -60,6 +60,7 @@ return [
             'root' => storage_path('app/temp'),
             'url' => env('APP_URL').'/storage/temp',
             'visibility' => 'public',
+            'lifetime' => 60 * 60 * 24 * 7 // 1 неделя
         ],
 
         's3' => [

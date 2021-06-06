@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\Achievements\LoadAllAchievementsCommand;
+use App\Console\Commands\DeleteTemporaryFiles;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,6 +17,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
         LoadAllAchievementsCommand::class,
+        DeleteTemporaryFiles::class,
     ];
 
     /**
