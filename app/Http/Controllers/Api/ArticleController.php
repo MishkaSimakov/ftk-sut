@@ -28,7 +28,7 @@ class ArticleController extends Controller
 
         $name = Str::random(40);
         $extension = $file->extension();
-        $path = "/articles/temp/{$name}.{$extension}";
+        $path = "/articles/{$name}.{$extension}";
 
         $image = Image::make($file);
         if ($image->width() > 1280) {
@@ -36,9 +36,9 @@ class ArticleController extends Controller
         }
 
         $image->save(
-            config('filesystems.disks.public.root') . $path
+            config('filesystems.disks.temp.root') . $path
         );
 
-        return Storage::disk('public')->url($path);
+        return Storage::disk('temp')->url($path);
     }
 }
