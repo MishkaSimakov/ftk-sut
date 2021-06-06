@@ -12,6 +12,8 @@
             </div>
         </div>
     @else
-        <p class="text-info text-center">Недостаточно статей</p>
+        <div class="my-3 text-center h6 text-info">
+            Недостаточно статей
+        </div>
     @endif
 </div>

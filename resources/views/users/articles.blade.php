@@ -10,7 +10,7 @@
 
     <div class="card">
         @if(!$articles->count())
-            <div class="text-center my-3 text-info">
+            <div class="my-3 text-center h6 text-info">
                 Нет статей
             </div>
         @else

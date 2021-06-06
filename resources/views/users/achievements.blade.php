@@ -12,7 +12,7 @@
 
     <div class="card">
         @if(!$achievements->count())
-            <div class="text-center my-3 text-info">
+            <div class="my-3 text-center h6 text-info">
                 Нет достижений
             </div>
         @else

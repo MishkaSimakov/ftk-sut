@@ -36,7 +36,9 @@
                 </div>
             </div>
         @empty
-            <p class="text-center text-info mt-3">Нет комментариев</p>
+            <div class="my-3 text-center h6 text-info">
+                Нет комментариев
+            </div>
         @endforelse
     </div>
 </div>

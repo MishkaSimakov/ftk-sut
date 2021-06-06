@@ -10,7 +10,9 @@
         @forelse($articles as $article)
            <livewire:articles.article-single :article="$article" :key="$article->id"/>
         @empty
-            <p class="text-center h5 text-info">Нет статей с отложенной публикацией.</p>
+            <div class="my-3 text-center h6 text-info">
+                Нет статей с отложенной публикацией
+            </div>
         @endforelse
     </div>
 @endsection

@@ -107,7 +107,7 @@
                         </ol>
                     @else
                         <div class="my-3 text-center h6 text-info">
-                            <span>Ещё никто не записывался на это мероприятие.</span>
+                            Ещё никто не записывался на это мероприятие
                         </div>
                     @endif
                 </div>

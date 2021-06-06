@@ -54,7 +54,7 @@
         </div>
     @empty
         <div class="my-3 text-center h6 text-info">
-            <span>Нет мероприятий</span>
+            Нет мероприятий
         </div>
     @endforelse
 @endsection
