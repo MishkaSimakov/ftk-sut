@@ -35,9 +35,7 @@ class ArticleController extends Controller
             $image = $image->widen(1280);
         }
 
-        $image->save(
-            config('filesystems.disks.temp.root') . $path
-        );
+        Storage::disk('temp')->put($path, $image->encode());
 
         return Storage::disk('temp')->url($path);
     }

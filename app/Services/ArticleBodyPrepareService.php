@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Article;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Storage;
 
 class ArticleBodyPrepareService
@@ -25,12 +26,14 @@ class ArticleBodyPrepareService
 
         foreach ($images as $image) {
             if (preg_match("/http[s]?:\/\/{$domain}\/storage\/temp\//", $image)) {
-                $body = str_replace(
-                    $image,
-                    Storage::disk('public')->url($this->storeTemporaryArticleImage($image, $article)),
-                    $body
-                );
+                $path = $this->storeTemporaryArticleImage($image, $article);
+            } else {
+                $path = $this->storeExternalArticleImage($image, $article);
             }
+
+            $body = str_replace(
+                $image, Storage::disk('public')->url($path), $body
+            );
         }
 
         return $body;
@@ -53,6 +56,23 @@ class ArticleBodyPrepareService
         );
 
         return $newPath;
+    }
+
+    protected function storeExternalArticleImage(string $url, Article $article): string
+    {
+        $image = Image::make($url);
+
+        $name = Str::random(40);
+        $extension = Arr::last(explode('/', $image->mime()));
+        $path = "/articles/{$article->id}/{$name}.{$extension}";
+
+        if ($image->width() > 1280) {
+            $image = $image->widen(1280);
+        }
+
+        Storage::disk('public')->put($path, $image->encode());
+
+        return $path;
     }
 
     protected function getImageStoreDirectoryPath(Article $article): string
