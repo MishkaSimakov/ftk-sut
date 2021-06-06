@@ -12,19 +12,15 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    public ArticleSearchService $articleSearchService;
-
-    public function __construct(ArticleSearchService $articleSearchService)
+    public function __construct()
     {
-        $this->articleSearchService = $articleSearchService;
-
         $this->authorizeResource(Article::class, 'article');
     }
 
     public function index(Request $request)
     {
         if ($request->has('query')) {
-            $results = $this->articleSearchService->getQueryResults($request->get('query'), false);
+            $results = (new ArticleSearchService())->getQueryResults($request->get('query'), false);
 
             return view('articles.search', array_merge($results, [
                 'query' => $request->get('query')
@@ -53,6 +49,7 @@ class ArticleController extends Controller
         $article->save();
 
         $article->attachTagsFromString($request->get('tags'));
+        $article->storeImagesFromBody();
 
         if ($request->user()->is_admin) {
             $article->check();
@@ -92,8 +89,9 @@ class ArticleController extends Controller
             $article->update(['type' => ArticleType::OnCheck()]);
         }
 
-        $article->tags()->delete();
         $article->attachTagsFromString($request->get('tags'));
+
+        $article->storeImagesFromBody();
 
         return redirect()->route('article.show', $article);
     }

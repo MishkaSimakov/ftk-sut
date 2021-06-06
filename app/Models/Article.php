@@ -45,11 +45,8 @@ class Article extends Model implements Viewable
     {
         parent::boot();
 
-        self::saved(function (Article $article) {
-            $article->body = (new ArticleBodyPrepareService())->getPreparedBody($article);
-        });
         self::deleting(function (Article $article) {
-            (new ArticleBodyPrepareService())->deleteSavedImages($article);
+            (new ArticleBodyPrepareService())->deleteSavedArticleImages($article);
         });
     }
 
@@ -149,6 +146,13 @@ class Article extends Model implements Viewable
 
             $this->tags()->syncWithoutDetaching($tag_id);
         }
+    }
+
+    public function storeImagesFromBody()
+    {
+        $this->update([
+            'body' => (new ArticleBodyPrepareService())->getPreparedBody($this)
+        ]);
     }
 
 

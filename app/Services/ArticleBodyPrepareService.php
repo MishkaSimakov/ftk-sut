@@ -11,7 +11,7 @@ class ArticleBodyPrepareService
 {
     public function getPreparedBody(Article $article): string
     {
-        $this->deleteSavedImages($article);
+        $this->deleteSavedArticleImages($article);
 
         $body = $article->body;
 
@@ -24,10 +24,10 @@ class ArticleBodyPrepareService
         );
 
         foreach ($images as $image) {
-            if (preg_match("/http[s]?:\/\/{$domain}\//", $image)) {
+            if (preg_match("/http[s]?:\/\/{$domain}\/storage\/temp\//", $image)) {
                 $body = str_replace(
                     $image,
-                    Storage::disk('public')->path($this->storeTemporaryArticleImage($image, $article)),
+                    Storage::disk('public')->url($this->storeTemporaryArticleImage($image, $article)),
                     $body
                 );
             }
@@ -36,7 +36,7 @@ class ArticleBodyPrepareService
         return $body;
     }
 
-    public function deleteSavedImages(Article $article)
+    public function deleteSavedArticleImages(Article $article)
     {
         $images = Storage::disk('public')->allFiles($this->getImageStoreDirectoryPath($article));
 
@@ -53,24 +53,6 @@ class ArticleBodyPrepareService
         );
 
         return $newPath;
-    }
-
-    protected function storeArticleImage(string $base64, Article $article): string
-    {
-        $extension = explode('/', explode(':', substr($base64, 0, strpos($base64, ';')))[1])[1];
-
-        $replace = substr($base64, 0, strpos($base64, ',') + 1);
-        $base64 = str_replace($replace, '', $base64);
-        $base64 = str_replace(' ', '+', $base64);
-
-        $imageName = Str::random(10) . '.' . $extension;
-
-        Storage::disk('public')->put(
-            $path = $this->getImageStoreDirectoryPath($article) . $imageName,
-            base64_decode($base64)
-        );
-
-        return $path;
     }
 
     protected function getImageStoreDirectoryPath(Article $article): string
