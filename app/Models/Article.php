@@ -148,10 +148,10 @@ class Article extends Model implements Viewable
         }
     }
 
-    public function storeImagesFromBody()
+    public function storeImagesFromBody($deletePrevious = false)
     {
         $this->update([
-            'body' => (new ArticleBodyPrepareService())->getPreparedBody($this)
+            'body' => (new ArticleBodyPrepareService())->getPreparedBody($this, $deletePrevious)
         ]);
     }
 

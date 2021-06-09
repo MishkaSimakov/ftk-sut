@@ -21,13 +21,13 @@ class ArticleSeeder extends Seeder
 
         foreach ($articles as $article) {
             if (!$article['title']) {
-                return;
+                continue;
             }
 
             $storedArticle = Article::create([
                 'id' => $article['id'],
                 'title' => $article['title'],
-                'body' => $article['body'],
+                'body' => str_replace('"../../', '"https://ftk-sut.ru/', $article['body']),
                 'author_id' => $this->getUserId($article['user']),
                 'type' => ArticleType::Checked(),
                 'date' => $article['created_at']
@@ -43,6 +43,12 @@ class ArticleSeeder extends Seeder
                 $storedArticle->tags()->attach(
                     $this->getTagId($tag)
                 );
+            }
+
+            try {
+                $storedArticle->storeImagesFromBody();
+            } catch (\Exception $e) {
+                var_dump($storedArticle->id, $article['url'], $storedArticle->body);
             }
         }
     }

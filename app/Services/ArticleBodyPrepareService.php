@@ -10,9 +10,11 @@ use Storage;
 
 class ArticleBodyPrepareService
 {
-    public function getPreparedBody(Article $article): string
+    public function getPreparedBody(Article $article, $deletePrevious): string
     {
-        $this->deleteSavedArticleImages($article);
+        if ($deletePrevious) {
+            $this->deleteSavedArticleImages($article);
+        }
 
         $body = $article->body;
 
@@ -26,9 +28,14 @@ class ArticleBodyPrepareService
 
         foreach ($images as $image) {
             if (preg_match("/http[s]?:\/\/{$domain}\/storage\/temp\//", $image)) {
+                // изображение сохранено на сайте ФТК СЮТ, но во временной папке
                 $path = $this->storeTemporaryArticleImage($image, $article);
-            } else {
+            } else if (!preg_match("/http[s]?:\/\/{$domain}/", $image)) {
+                // изображение сохранено не на сайте ФТК СЮТ
                 $path = $this->storeExternalArticleImage($image, $article);
+            } else {
+                // изображение уже сохранено на сайте ФТК СЮТ в папке соответствующей статьи
+                continue;
             }
 
             $body = str_replace(

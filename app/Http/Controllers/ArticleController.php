@@ -49,7 +49,7 @@ class ArticleController extends Controller
         $article->save();
 
         $article->attachTagsFromString($request->get('tags'));
-        $article->storeImagesFromBody();
+        $article->storeImagesFromBody(true);
 
         if ($request->user()->is_admin) {
             $article->check();
@@ -91,7 +91,7 @@ class ArticleController extends Controller
 
         $article->attachTagsFromString($request->get('tags'));
 
-        $article->storeImagesFromBody();
+        $article->storeImagesFromBody(false);
 
         return redirect()->route('article.show', $article);
     }
