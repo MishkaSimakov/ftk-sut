@@ -7,9 +7,10 @@ use App\Http\Requests\Events\UpdateEventRequest;
 use App\Models\Event;
 use App\Models\Travel;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
-use Storage;
 
 
 class EventsController extends Controller
@@ -41,13 +42,11 @@ class EventsController extends Controller
 
     public function store(StoreEventRequest $request)
     {
-        $path = $this->storeEventImage($request->file('image'));
+        $event = Event::create($request->except('image'));
 
-        $event = Event::create(
-            array_merge($request->except('image'), [
-                'image_url' => $path
-            ])
-        );
+        $event->update([
+            'image_url' => $this->storeEventImage($request->file('image'), $event)
+        ]);
 
         if ($request->get('is_travel') === 'on') {
             $event->travel()->save(
@@ -73,11 +72,11 @@ class EventsController extends Controller
     public function update(UpdateEventRequest $request, Event $event)
     {
         if ($request->hasFile('image')) {
-            Storage::disk('public')->delete($event->image_url);
+            $this->destroyEventImage($event);
 
-            $path = $this->storeEventImage($request->file('image'));
-
-            $event->update(['image_url' => $path]);
+            $event->update([
+                'image_url' => $this->storeEventImage($request->file('image'), $event)
+            ]);
         }
 
         $event->update($request->except('image'));
@@ -96,7 +95,8 @@ class EventsController extends Controller
 
     public function destroy(Event $event)
     {
-        Storage::disk('public')->delete($event->image_url);
+        $this->destroyEventImage($event);
+
         $event->delete();
 
         return redirect()->back();
@@ -112,21 +112,26 @@ class EventsController extends Controller
     }
 
 
-    protected function storeEventImage(UploadedFile $file): string
-    {
-        $name = Str::random(40);
-        $extension = $file->extension();
-        $path = "/events/{$name}.{$extension}";
 
+    protected function storeEventImage(UploadedFile $file, Event $event): string
+    {
         $image = Image::make($file);
+
+        $name = Str::random(40);
+        $extension = Arr::last(explode('/', $image->mime()));
+        $path = "/events/{$event->id}/{$name}.{$extension}";
+
         if ($image->width() > 720) {
             $image = $image->widen(720);
         }
 
-        $image->save(
-            config('filesystems.disks.public.root') . $path
-        );
+        Storage::disk('public')->put($path, $image->encode());
 
         return $path;
+    }
+
+    protected function destroyEventImage(Event $event)
+    {
+        Storage::disk('public')->delete($event->image_url);
     }
 }

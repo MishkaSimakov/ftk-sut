@@ -17,7 +17,7 @@ class CreateEventsTable extends Migration
             $table->dateTime('date_start');
             $table->dateTime('date_end');
 
-            $table->string('image_url');
+            $table->string('image_url')->nullable();
 
             $table->timestamps();
         });
