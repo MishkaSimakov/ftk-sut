@@ -8,6 +8,14 @@
             <i class="{{ $article->isLikedBy(auth()->user()) ? 'fas' : 'far' }} fa-heart"></i>
             <span> {{ $article->points->count() }}</span>
         </div>
+    @else
+        <div
+            id="article_{{ $unique }}_like_button"
+            class="mr-sm-2 mr-md-3 article-like-button" style="cursor: default !important;"
+        >
+            <i class="far fa-heart"></i>
+            <span> {{ $article->points->count() }}</span>
+        </div>
     @endcan
 
     @if($article->type->is(\App\Enums\ArticleType::Checked()))

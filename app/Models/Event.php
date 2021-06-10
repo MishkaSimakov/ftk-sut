@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -46,7 +47,7 @@ class Event extends Model
 
     public function isPast(): bool
     {
-        return $this->date_end->isFuture();
+        return $this->date_end->isPast();
     }
 
     public function isFuture(): bool
@@ -73,5 +74,25 @@ class Event extends Model
     public function scopeTravels(Builder $builder): Builder
     {
         return $builder->whereHas('travel');
+    }
+
+
+    public function dateStartForPage()
+    {
+        return $this->transformDateForPage($this->date_start);
+    }
+
+    public function dateEndForPage()
+    {
+        return $this->transformDateForPage($this->date_end);
+    }
+
+    protected function transformDateForPage(Carbon $date)
+    {
+        if ($date->year === now()->year) {
+            return $date->isoFormat('Do MMMM HH:mm');
+        }
+
+        return $date->isoFormat('Do MMMM HH:mm YYYY');
     }
 }

@@ -1,4 +1,4 @@
-<div class="row no-gutters align-items-center">
+<div class="mt-3 row no-gutters align-items-center">
     <div>
         @can('signUp', $event)
             @if($event->isUserSignedUp(auth()->user()))
@@ -46,7 +46,11 @@
         @else
             <button type="button" class="btn btn-info" data-toggle="modal"
                     data-target="#{{ $modal_id }}">
-                Кто пойдёт?
+                @if($event->isPast())
+                    Список участников
+                @else
+                    Кто пойдёт?
+                @endif
             </button>
         @endcan
     </div>
@@ -62,7 +66,8 @@
             <div class="dropdown-menu dropdown-menu-right"
                  aria-labelledby="event-more-dropdown-button-{{ $event->id }}">
                 @can('changeUsersList', $event)
-                    <a class="dropdown-item" href="{{ route('events.users.edit', $event) }}">Редактировать список пользователей</a>
+                    <a class="dropdown-item" href="{{ route('events.users.edit', $event) }}">Редактировать список
+                        пользователей</a>
                 @endcan
                 @can('update', $event)
                     <a class="dropdown-item" href="{{ route('events.edit', $event) }}">Редактировать</a>
@@ -96,7 +101,7 @@
                 </div>
                 <div class="modal-body">
                     @if($event->users->count())
-                        <p class="h6">Список пользователей:</p>
+                        <p class="h6">Список участников:</p>
 
                         <ol>
                             @foreach($event->users as $user)

@@ -29,7 +29,7 @@ class EventsController extends Controller
 
     public function past()
     {
-        $events = Event::past()->with(['users', 'travel'])->orderBy('date_start')->paginate(Event::PAGINATION_LIMIT);
+        $events = Event::past()->with(['users', 'travel'])->latest('date_start')->paginate(Event::PAGINATION_LIMIT);
 
         return view('events.index', compact('events'));
     }

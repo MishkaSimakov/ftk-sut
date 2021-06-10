@@ -36,10 +36,8 @@
                         </div>
 
                         <h6 class="card-subtitle mb-2 text-muted">{{ $event->description }}</h6>
-                        <p class="card-text mb-0"><b>Начало:</b> {{ $event->date_start->isoFormat('Do MMMM HH:mm') }}
-                        </p>
-                        <p class="card-text mb-0"><b>Окончание:</b> {{ $event->date_end->isoFormat('Do MMMM HH:mm') }}
-                        </p>
+                        <p class="card-text mb-0"><b>Начало:</b> {{ $event->dateStartForPage() }}</p>
+                        <p class="card-text mb-0"><b>Окончание:</b> {{ $event->dateStartForPage() }}</p>
 
                         @if($event->isTravel())
                             <p class="card-text mb-2"><b>Длина маршрута:</b> {{ $event->travel->distance }} км</p>

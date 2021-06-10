@@ -19,7 +19,7 @@ class EventSeeder extends Seeder
         $events = Http::get('http://ftk-sut.ru/api/imports/events')->json();
 
         foreach ($events as $event) {
-            if (!$event['title']) {
+            if (!$event['title'] or $event['imageUrl'] === 'https://pbs.twimg.com/profile_images/600060188872155136/st4Sp6Aw_400x400.jpg') {
                 continue;
             }
 
@@ -41,7 +41,7 @@ class EventSeeder extends Seeder
 
             try {
                 $storedEvent->update([
-                    'image_url' => $this->storeExternalEventImage($event['imageUrl'], $storedEvent)
+                    'image_url' => $this->storeExternalEventImage('https://ftk-sut.ru' . $event['imageUrl'], $storedEvent)
                 ]);
             } catch (\Exception $e) {
                 var_dump($storedEvent->id);
