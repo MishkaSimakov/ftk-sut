@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\TravelType;
 use App\Enums\UserType;
 use App\Models\Event;
 use App\Models\User;
@@ -37,6 +38,14 @@ class EventSeeder extends Seeder
                 $storedEvent->users()->attach(
                     $this->getUserId($user)
                 );
+            }
+
+            if ($travel = $event['travel']) {
+                $storedEvent->travel()->create([
+                    'id' => $travel['id'],
+                    'distance' => $travel['distance'],
+                    'type' => $travel['is_bike'] ? TravelType::Bike : TravelType::Hiking
+                ]);
             }
 
             try {

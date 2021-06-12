@@ -56,7 +56,7 @@
 
                         <a
                             class="list-group-item mt-3 card-link font-weight-bold border-0"
-                            :href="route('article.index', { query: query })"
+                            :href="route('articles.index', { query: query })"
                         >
                             Показать все результаты
                         </a>

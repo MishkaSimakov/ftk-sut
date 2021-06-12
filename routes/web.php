@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Auth;
 # info
 Route::get('/', [\App\Http\Controllers\PageController::class, 'welcome'])->name('main');
 Route::view('/about', 'about')->name('about');
-Route::view('/site-map', 'sitemap')->name('sitemap');
 Route::view('/help/register', 'help.register')->name('help.register');
 
 # reviews
@@ -27,10 +26,10 @@ Route::resource('reviews', \App\Http\Controllers\ReviewController::class)->only(
 Route::resource('news', \App\Http\Controllers\NewsController::class);
 
 # articles
-Route::get('article/unpublished', [\App\Http\Controllers\ArticleController::class, 'unpublished'])->name('article.unpublished');
-Route::get('article/unchecked', [\App\Http\Controllers\ArticleController::class, 'unchecked'])->name('article.unchecked');
-Route::get('article/{article}/check', [\App\Http\Controllers\ArticleController::class, 'check'])->name('article.check');
-Route::resource('article', \App\Http\Controllers\ArticleController::class);
+Route::get('articles/unpublished', [\App\Http\Controllers\ArticleController::class, 'unpublished'])->name('articles.unpublished');
+Route::get('articles/unchecked', [\App\Http\Controllers\ArticleController::class, 'unchecked'])->name('articles.unchecked');
+Route::get('articles/{article}/check', [\App\Http\Controllers\ArticleController::class, 'check'])->name('articles.check');
+Route::resource('articles', \App\Http\Controllers\ArticleController::class);
 
 # events
 Route::permanentRedirect('/schedule ', '/events');

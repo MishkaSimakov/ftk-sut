@@ -103,7 +103,7 @@
                 <p class="lead">Более 100 статей от учеников и преподавателей ФТК всего в одном клике от вас.</p>
 
                 <div class="mt-auto">
-                    <a href="{{ route('article.index') }}" class="btn btn-primary">
+                    <a href="{{ route('articles.index') }}" class="btn btn-primary">
                         Подробнее
                     </a>
                 </div>
@@ -149,8 +149,7 @@
         </div>
 
         <div class="text-center w-100 mt-5 text-muted">
-            <div>И ещё много всего интересного...</div>
-            <a href="{{ route('sitemap') }}">Карта сайта</a>
+            И ещё много всего интересного...
         </div>
     </section>
 

@@ -55,7 +55,7 @@ class ArticleController extends Controller
             $article->check();
         }
 
-        return redirect()->route('article.index');
+        return redirect()->route('articles.index');
     }
 
     public function show(Article $article)
@@ -93,14 +93,14 @@ class ArticleController extends Controller
 
         $article->storeImagesFromBody(false);
 
-        return redirect()->route('article.show', $article);
+        return redirect()->route('articles.show', $article);
     }
 
     public function destroy(Article $article)
     {
         $article->delete();
 
-        return redirect()->route('article.index');
+        return redirect()->route('articles.index');
     }
 
     public function unchecked()
@@ -137,7 +137,7 @@ class ArticleController extends Controller
 
         $article->check();
 
-        return redirect()->route('article.show', $article);
+        return redirect()->route('articles.show', $article);
     }
 
     protected function getDataForChangingArticle(): array

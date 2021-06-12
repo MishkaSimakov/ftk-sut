@@ -24,6 +24,6 @@ class ArticleTag extends Model
 
     public function getUrlAttribute(): string
     {
-        return route('article.index', ['query' => $this->name]);
+        return route('articles.index', ['query' => $this->name]);
     }
 }

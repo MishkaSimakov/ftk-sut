@@ -7,7 +7,7 @@
 _Автор - <a href="{{ route('users.show', $article->author) }}" target="_blank">{{ $article->author->name }}</a>_
 @endcomponent
 
-@component('mail::button', ['url' => route('article.index'), 'color' => 'success'])
+@component('mail::button', ['url' => route('articles.index'), 'color' => 'success'])
 Посмотреть все статьи
 @endcomponent
 @endcomponent

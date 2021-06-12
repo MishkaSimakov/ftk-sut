@@ -8,7 +8,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('article.update', $article) }}" method="POST">
+            <form action="{{ route('articles.update', $article) }}" method="POST">
                 @csrf
                 @method('PUT')
 

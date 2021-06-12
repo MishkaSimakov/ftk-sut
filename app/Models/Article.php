@@ -68,7 +68,7 @@ class Article extends Model implements Viewable
 
     public function getUrlAttribute(): string
     {
-        return route('article.show', $this);
+        return route('articles.show', $this);
     }
 
     public function getTruncatedBodyAttribute(): string

@@ -37,6 +37,11 @@ class AppServiceProvider extends ServiceProvider
         });
 
         HeadingRowFormatter::default('rating');
+
+
+        $this->app->bind('path.public', function() {
+            return base_path('public_html');
+        });
     }
 
     /**

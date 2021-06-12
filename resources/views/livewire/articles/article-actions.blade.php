@@ -34,10 +34,10 @@
             <div class="dropdown-menu dropdown-menu-right"
                  aria-labelledby="article-more-dropdown-button-{{ $unique }}">
                 @can('check', $article)
-                    <a class="dropdown-item" href="{{ route('article.check', $article) }}">Опубликовать</a>
+                    <a class="dropdown-item" href="{{ route('articles.check', $article) }}">Опубликовать</a>
                 @endcan
                 @can('update', $article)
-                    <a class="dropdown-item" href="{{ route('article.edit', $article) }}">Редактировать</a>
+                    <a class="dropdown-item" href="{{ route('articles.edit', $article) }}">Редактировать</a>
                 @endcan
                 @can('delete', $article)
                     <a
@@ -48,7 +48,7 @@
                         Удалить
                     </a>
                     <form method="POST" id="delete-form-{{ $unique }}"
-                          action="{{ route('article.destroy', $article) }}">
+                          action="{{ route('articles.destroy', $article) }}">
                         @csrf
                         @method('DELETE')
                     </form>

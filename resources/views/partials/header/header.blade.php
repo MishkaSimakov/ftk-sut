@@ -22,22 +22,22 @@
                         @endcan
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="{{ route('article.index') }}">Статьи</a>
+                        <a class="nav-link" href="{{ route('articles.index') }}">Статьи</a>
 
                         @canany(['create', 'viewUnchecked'], \App\Models\Article::class)
                             <div class="hover-dropdown-menu dropdown-menu">
                                 @can('create', \App\Models\Article::class)
-                                    <a class="dropdown-item" href="{{ route('article.create') }}">
+                                    <a class="dropdown-item" href="{{ route('articles.create') }}">
                                         Написать
                                     </a>
                                 @endcan
                                 @can('viewUnpublished', \App\Models\Article::class)
-                                    <a class="dropdown-item" href="{{ route('article.unpublished') }}">
+                                    <a class="dropdown-item" href="{{ route('articles.unpublished') }}">
                                         Отложенные
                                     </a>
                                 @endcan
                                 @can('viewUnchecked', \App\Models\Article::class)
-                                    <a class="dropdown-item" href="{{ route('article.unchecked') }}">
+                                    <a class="dropdown-item" href="{{ route('articles.unchecked') }}">
                                         Требуют проверки
                                     </a>
                                 @endcan

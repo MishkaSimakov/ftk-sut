@@ -18,7 +18,7 @@
                 @endcan
 
                 @can('create', \App\Models\Article::class)
-                    <a class="list-group-item list-group-item-action" href="{{ route('article.create') }}">
+                    <a class="list-group-item list-group-item-action" href="{{ route('articles.create') }}">
                         Написать статью
                     </a>
                 @endcan
