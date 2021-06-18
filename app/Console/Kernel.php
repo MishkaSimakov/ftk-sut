@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\Achievements\LoadAllAchievementsCommand;
 use App\Console\Commands\DeleteTemporaryFiles;
+use App\Console\Commands\Deployment\LoadAllFilesToHosting;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -18,6 +19,7 @@ class Kernel extends ConsoleKernel
         //
         LoadAllAchievementsCommand::class,
         DeleteTemporaryFiles::class,
+        LoadAllFilesToHosting::class,
     ];
 
     /**
