@@ -26,15 +26,19 @@ class ArticleSearchService
         }
 
         return $articles->concat($tags)->concat($users)->map(function ($result) {
-            $result->type = Str::lower(class_basename($result));
-
-            return $result->only('id', 'name', 'type', 'url');
+            return array_merge(
+                $result->only('id', 'name', 'url'),
+                [
+                    'type' => Str::lower(class_basename($result))
+                ]
+            );
         });
     }
 
     protected function getArticlesFromQuery(string $query): Collection
     {
-        return Article::where('title', 'like', "%{$query}%")
+        return Article::published()->checked()
+            ->where('title', 'like', "%{$query}%")
             ->orWhere('body', 'like', "%{$query}%")
             ->orWhereHas('tags', function (Builder $builder) use ($query) {
                 return $builder->where('name', 'like', "%{$query}%");
