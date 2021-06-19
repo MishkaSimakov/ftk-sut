@@ -79,7 +79,7 @@ class RatingImport implements ToCollection, WithHeadingRow, WithMultipleSheets
         } else {
             $user = User::create([
                 'name' => $name,
-                'type' => UserType::Pupil(),
+                'type' => UserType::Pupil,
             ]);
         }
 

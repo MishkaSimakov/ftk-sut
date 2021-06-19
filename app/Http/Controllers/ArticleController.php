@@ -81,7 +81,7 @@ class ArticleController extends Controller
         $article->update([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
-            'date' => $request->get('delayed_publication') == 'on' ? $request->get('date') : now(),
+            'date' => $request->get('delayed_publication') == 'on' ? $request->get('date') : $article->date,
             'author_id' => $request->user()->is_admin ? $request->get('author') : $request->user()->id
         ]);
 

@@ -9,16 +9,77 @@ use ZipArchive;
 
 class LoadAllFilesToHosting extends Command
 {
-    protected $signature = 'hosting:load';
+    protected $signature = 'project:deploy';
 
-    protected $description = 'Load whole project to hosting and change env for production';
+    protected string $zippedProjectDestination = "/_website.zip";
+
+    protected $description = 'Load whole project to hosting, run optimization command and change env for production';
 
     public function handle()
     {
+        $this->callSilent('optimize:clear');
+
+        // меняю файл окружения для загрузки на хостинг
         $this->changeEnvironmentToProduction();
+
 
         $this->info('Начинаю архивировать файлы...');
 
+        if (!$this->zipProject()) {
+            $this->error('Не удалось архивировать файлы.');
+            exit;
+        }
+        $this->info('Архивация файлов завершена успешно.');
+
+
+        $this->info('');
+
+
+        $this->info('Устанавливаю соединение с сервером...');
+
+        if (($ftp = $this->connectToFtpServer()) === false) {
+            $this->alert('Не удалось подключиться к серверу.');
+            exit;
+        }
+        $this->info('Соединение с сервером установлено.');
+
+
+        $this->info('');
+
+
+        $this->info('Начинаю загрузку файлов на сервер...');
+
+        if (!$this->loadFilesViaFtp($ftp)) {
+            $this->info('Не удалось загрузить файлы на сервер.');
+            exit;
+        }
+        $this->info('Файлы успешно загружены на сервер.');
+
+        // закрытие ftp соединения
+        ftp_close($ftp);
+
+        $this->changeEnvironmentToDevelopment();
+    }
+
+    protected function loadFilesViaFtp($ftp): bool
+    {
+        return ftp_put($ftp, $this->zippedProjectDestination, base_path($this->zippedProjectDestination));
+    }
+
+    protected function connectToFtpServer()
+    {
+        $conn_id = ftp_connect(config('ftp.server'));
+        $login_result = ftp_login($conn_id, config('ftp.username'), config('ftp.password'));
+
+        if ((!$conn_id) || (!$login_result)) {
+            return false;
+        }
+
+        return $conn_id;
+    }
+
+    protected function zipProject()
+    {
         $files = scandir(base_path());
 
         $exclude = [
@@ -27,62 +88,10 @@ class LoadAllFilesToHosting extends Command
 
         $files = array_diff($files, $exclude);
 
-        $result = $this->zipFiles($files, base_path('_website.zip'));
-
-        if (!$result) {
-            $this->error('Не удалось архивировать файлы.');
-            return false;
-        }
-        $this->info('Архивация файлов завершена успешно.');
-
-        $this->info('');
-
-
-
-
-
-        // установка соединения
-        $conn_id = ftp_connect(config('ftp.server'));
-
-        // вход с именем пользователя и паролем
-        $login_result = ftp_login($conn_id, config('ftp.username'), config('ftp.password'));
-
-        // проверка соединения
-        if ((!$conn_id) || (!$login_result)) {
-            $this->alert('Не удалось подключиться к серверу.');
-            exit;
-        } else {
-            $this->info('Соединение с сервером установлено.');
-        }
-
-
-
-        //
-        $this->info('Начинаю загрузку файлов на сервер...');
-        $status = ftp_put($conn_id, '/_website.zip', base_path('_website.zip'));
-
-        if (!$status) {
-            $this->info('Не удалось загрузить файлы на сервер.');
-            return false;
-        }
-        $this->info('Файлы успешно загружены на сервер.');
-
-        unlink(base_path('_website.zip'));
-
-
-
-        // закрытие соединения
-        ftp_close($conn_id);
-
-        $this->changeEnvironmentToDevelopment();
+        return $this->zipDirectories($files, base_path('_website.zip'));
     }
 
-    protected function loadFiles($ftp): bool
-    {
-        return true;
-    }
-
-    protected function zipFiles(array $sources, $destination)
+    protected function zipDirectories(array $sources, $destination)
     {
         if (!extension_loaded('zip')) {
             return false;

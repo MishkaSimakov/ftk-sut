@@ -179,7 +179,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
 
-        Assada\Achievements\AchievementsServiceProvider::class,
+        Assada\Achievements\AchievementsServiceProvider::class
     ],
 
     /*

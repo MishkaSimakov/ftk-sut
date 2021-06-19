@@ -67,8 +67,3 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\UserController::class, 'home'])->name('home');
 Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('settings');
-
-
-Route::get('/mailable', function () {
-    return new App\Mail\RatingNotification(now());
-});
