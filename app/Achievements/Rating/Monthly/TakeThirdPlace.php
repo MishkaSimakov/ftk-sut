@@ -15,10 +15,10 @@ class TakeThirdPlace extends Achievement
     /*
      * The achievement name
      */
-    public $name = 'Золото';
+    public $name = 'Бронза';
 
     /*
      * A small description for the achievement
      */
-    public $description = 'Стать 1 по рейтингу за месяц';
+    public $description = 'Стать 3 по рейтингу за месяц';
 }
