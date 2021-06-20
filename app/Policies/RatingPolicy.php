@@ -45,11 +45,11 @@ class RatingPolicy
     /**
      * Determine whether the user can export the rating.
      *
-     * @param User $user
+     * @param ?User $user
      * @return bool
      */
-    public function export(User $user)
+    public function export(?User $user)
     {
-        return $user->is_admin;
+        return true;
     }
 }

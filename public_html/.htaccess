@@ -18,4 +18,9 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    # redirect all traffic to https (enable only on production)
+#    RewriteEngine On
+#    RewriteCond %{SERVER_PORT} 80
+#    RewriteRule ^(.*)$ https://ftk-sut.ru/$1 [R,L]
 </IfModule>
