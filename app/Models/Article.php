@@ -29,8 +29,8 @@ class Article extends Model implements Viewable
 
     const RELEVANCE_COEFFICIENTS = [
         'points' => 1,
-        'views' => 0.25,
-        'days' => -0.075
+        'views' => 0.1,
+        'days' => -0.06
     ];
 
     protected $dates = ['date'];
