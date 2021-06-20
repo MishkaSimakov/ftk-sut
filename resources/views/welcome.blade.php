@@ -22,21 +22,6 @@
                         Подробнее
                     </a>
                 </div>
-
-                {{--                <div class="ml-auto">--}}
-                {{--                    <a href="#" style="cursor: pointer;" title="Discord" class="rounded mr-2">--}}
-                {{--                        <img alt="Discord" style="" src="{{ asset('storage/pages/SocialLinks/Discord.png') }}"--}}
-                {{--                             class="img-fluid">--}}
-                {{--                    </a>--}}
-                {{--                </div>--}}
-                {{--                    <a href="#" style="cursor: pointer" title="YouTube" class="rounded mr-2">--}}
-                {{--                        <img alt="YouTube" src="{{ asset('storage/pages/SocialLinks/YouTube.png') }}"--}}
-                {{--                             class="img-fluid">--}}
-                {{--                    </a>--}}
-                {{--                    <a href="#" style="cursor: pointer" title="Вконтакте" class="rounded">--}}
-                {{--                        <img alt="Вконтакте" src="{{ asset('storage/pages/SocialLinks/VK.png') }}"--}}
-                {{--                             class="img-fluid">--}}
-                {{--                    </a>--}}
             </div>
         </div>
     </header>

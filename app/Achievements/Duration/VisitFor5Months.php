@@ -20,7 +20,7 @@ class VisitFor5Months extends Achievement
     /*
      * A small description for the achievement
      */
-    public $description = 'Посещать клуб полгода';
+    public $description = 'Посещать клуб 5 месяцев';
 
     /*
     * The amount of "points" this user need to obtain in order to complete this achievement
