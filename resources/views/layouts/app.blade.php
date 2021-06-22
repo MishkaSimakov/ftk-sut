@@ -13,7 +13,7 @@
 {{--        <meta name="msapplication-TileColor" content="#da532c">--}}
 {{--        <meta name="theme-color" content="#ffffff">--}}
 
-<!-- CSRF Token -->
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Laravel routes and csrf token -->
@@ -25,9 +25,15 @@
             ]) !!}
     </script>
 
-    <title>{{ config('app.name') }} - @yield('title')</title>
-    <meta name="Description"
-          content="Сайт Фототехнического клуба СЮТ. Здесь есть всё, чтобы не сачковать и быть активным кружковцем!">
+
+    <!-- Some SEO -->
+    <title>@yield('title') - {{ config('app.name') }}</title>
+    <meta name="description" content="@yield('description', 'Сайт Фототехнического клуба СЮТ. Здесь есть всё, чтобы быть активным кружковцем и не сачковать! Новости, расписание, статьи, рейтинг - и всё это на одном сайте.')">
+    <meta name="keywords" content="@yield('keywords', 'ФТК СЮТ, Фототехнический клуб, ФТК, Дополнительное образование')"/>
+    <meta name="robots" content="@yield('robots', 'index, follow')"/>
+
+    <meta http-equiv="Content-Language" content="ru">
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

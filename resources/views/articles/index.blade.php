@@ -2,6 +2,8 @@
 
 
 @section('title', 'Статьи')
+@section('description', 'Множество увлекательных статей на различные темы от ребят, выпускников и преподавателей ФТК СЮТ. Каждый найдёт здесь что-нибудь интересное для себя.')
+@section('robots', 'index, follow, noarchive')
 
 @section('content')
     <h1 class="text-center mb-4">Статьи</h1>

@@ -2,6 +2,8 @@
 
 
 @section('title', 'Расписание')
+@section('description', '')
+@section('robots', 'noindex, follow')
 
 @section('content')
     <h1 class="text-center mb-4">Создать мероприятие</h1>

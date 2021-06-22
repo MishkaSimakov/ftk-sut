@@ -37,7 +37,7 @@ class ArticleSearchService
 
     protected function getArticlesFromQuery(string $query): Collection
     {
-        return Article::published()->checked()
+        return Article::published()->checked()->latest('date')
             ->where('title', 'like', "%{$query}%")
             ->orWhere('body', 'like', "%{$query}%")
             ->orWhereHas('tags', function (Builder $builder) use ($query) {

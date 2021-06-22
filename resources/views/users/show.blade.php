@@ -2,6 +2,8 @@
 
 
 @section('title', $user->name)
+@section('description', '')
+@section('robots', 'noindex, follow')
 
 @section('content')
     <h1 class="text-center mb-4">{{ $user->name }}</h1>

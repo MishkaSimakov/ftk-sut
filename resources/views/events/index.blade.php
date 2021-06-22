@@ -2,6 +2,8 @@
 
 
 @section('title', 'Расписание')
+@section('description', 'Ближайшие мероприятия ФТК со списком участников и подробной информацией.')
+@section('robots', 'index, follow, noarchive')
 
 @section('content')
     <h1 class="text-center mb-4">Расписание</h1>

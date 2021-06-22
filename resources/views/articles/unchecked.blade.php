@@ -2,6 +2,8 @@
 
 
 @section('title', 'Непроверенные статьи')
+@section('description', '')
+@section('robots', 'noindex, follow')
 
 @section('content')
     <h1 class="text-center mb-4">Требуют проверки</h1>

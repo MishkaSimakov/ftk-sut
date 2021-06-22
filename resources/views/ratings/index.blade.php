@@ -2,6 +2,8 @@
 
 
 @section('title', 'Рейтинг')
+@section('description', 'Возможность сравнить себя с сотнями других учеников по различным параметрам за выбранный промежуток времени.')
+@section('robots', 'index, follow')
 
 @section('content')
     <h1 class="text-center mb-4">Рейтинг</h1>

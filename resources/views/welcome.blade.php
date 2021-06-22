@@ -2,6 +2,8 @@
 
 
 @section('title', 'Главная страница')
+@section('description', 'Сайт Фототехнического клуба СЮТ. Здесь есть всё, чтобы быть активным кружковцем и не сачковать! Новости, расписание, статьи, рейтинг - и всё это на одном сайте.')
+@section('robots', 'index, follow')
 
 @section('masthead')
     <header class="masthead">

@@ -2,6 +2,8 @@
 
 
 @section('title', 'Настройки аккаунта')
+@section('description', '')
+@section('robots', 'noindex, follow')
 
 @section('content')
     <h1 class="text-center mb-4">Настройки аккаунта</h1>

@@ -2,6 +2,8 @@
 
 
 @section('title', 'О нас')
+@section('description', 'Контакты, местоположение и история ФТК.')
+@section('robots', 'index, follow')
 
 @section('content')
     <h1 class="text-center mb-4">О нас</h1>

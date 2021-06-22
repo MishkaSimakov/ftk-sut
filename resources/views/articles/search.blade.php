@@ -2,6 +2,8 @@
 
 
 @section('title', 'Статьи')
+@section('description', '')
+@section('robots', 'noindex, follow')
 
 @section('content')
     <h1 class="h1 text-center mb-4 d-none d-md-block">Результаты по запросу "{{ $query }}"</h1>
