@@ -84,7 +84,21 @@
                 <articles-date-editor value_checkbox="{{ old('delayed_publication') ?? $article->is_not_published }}"
                                       value_date="{{ old('date') ?? $article->date }}"></articles-date-editor>
 
-                <button type="submit" class="btn btn-primary mr-2">Сохранить</button>
+                <div class="d-flex flex-md-row flex-column">
+                    <button type="submit" class="btn btn-primary mr-md-3">
+                        @admin
+                            Опубликовать
+                        @elseadmin
+                            Отправить на проверку
+                        @endadmin
+                    </button>
+
+                    @can('saveToDrafts', \App\Models\Article::class)
+                        <button name="is_draft" value="true" type="submit" class="btn btn-secondary mt-2 mt-md-0">
+                            Сохранить в черновики
+                        </button>
+                    @endcan
+                </div>
             </form>
         </div>
     </div>

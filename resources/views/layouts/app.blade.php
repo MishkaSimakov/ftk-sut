@@ -32,9 +32,6 @@
     <meta name="keywords" content="@yield('keywords', 'ФТК СЮТ, Фототехнический клуб, ФТК, Дополнительное образование')"/>
     <meta name="robots" content="@yield('robots', 'index, follow')"/>
 
-    <meta http-equiv="Content-Language" content="ru">
-
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 

@@ -1,24 +1,24 @@
 <div class="row no-gutters align-items-center">
-    @can('like', $article)
-        <div
-            id="article_{{ $unique }}_like_button"
-            onclick="@this.toggleLike(); toggleLikeDebounced('{{ $unique }}')"
-            class="mr-sm-2 mr-md-3 article-like-button {{ $article->isLikedBy(auth()->user()) ? 'liked' : '' }}"
-        >
-            <i class="{{ $article->isLikedBy(auth()->user()) ? 'fas' : 'far' }} fa-heart"></i>
-            <span> {{ $article->points->count() }}</span>
-        </div>
-    @else
-        <div
-            id="article_{{ $unique }}_like_button"
-            class="mr-sm-2 mr-md-3 article-like-button" style="cursor: default !important;"
-        >
-            <i class="far fa-heart"></i>
-            <span> {{ $article->points->count() }}</span>
-        </div>
-    @endcan
+    @if($article->type->is(\App\Enums\ArticleType::Checked))
+        @can('like', $article)
+            <div
+                id="article_{{ $unique }}_like_button"
+                onclick="@this.toggleLike(); toggleLikeDebounced('{{ $unique }}')"
+                class="mr-sm-2 mr-md-3 article-like-button {{ $article->isLikedBy(auth()->user()) ? 'liked' : '' }}"
+            >
+                <i class="{{ $article->isLikedBy(auth()->user()) ? 'fas' : 'far' }} fa-heart"></i>
+                <span> {{ $article->points->count() }}</span>
+            </div>
+        @else
+            <div
+                id="article_{{ $unique }}_like_button"
+                class="mr-sm-2 mr-md-3 article-like-button" style="cursor: default !important;"
+            >
+                <i class="far fa-heart"></i>
+                <span> {{ $article->points->count() }}</span>
+            </div>
+        @endcan
 
-    @if($article->type->is(\App\Enums\ArticleType::Checked()))
         <span class="mr-sm-2 d-none d-md-inline article-views">
             <i class="far fa-eye"></i> {{ views($article)->count() }}
         </span>

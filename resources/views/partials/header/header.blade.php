@@ -24,11 +24,16 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="{{ route('articles.index') }}">Статьи</a>
 
-                        @canany(['create', 'viewUnchecked'], \App\Models\Article::class)
+                        @canany(['create', 'viewDrafts', 'viewUnpublished', 'viewUnchecked'], \App\Models\Article::class)
                             <div class="hover-dropdown-menu dropdown-menu">
                                 @can('create', \App\Models\Article::class)
                                     <a class="dropdown-item" href="{{ route('articles.create') }}">
                                         Написать
+                                    </a>
+                                @endcan
+                                @can('viewDrafts', \App\Models\Article::class)
+                                    <a class="dropdown-item" href="{{ route('articles.drafts') }}">
+                                        Черновики
                                     </a>
                                 @endcan
                                 @can('viewUnpublished', \App\Models\Article::class)

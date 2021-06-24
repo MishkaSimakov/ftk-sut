@@ -35,7 +35,9 @@
             </ul>
         @endif
 
-        <livewire:articles.article-comments :article="$article"/>
+        @if($article->type->is(\App\Enums\ArticleType::Checked))
+            <livewire:articles.article-comments :article="$article"/>
+        @endif
     </div>
 @endsection
 

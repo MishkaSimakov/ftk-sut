@@ -39,28 +39,27 @@ class ArticleController extends Controller
 
     public function store(ArticleRequest $request)
     {
-        $article = new Article([
+        $article = Article::create([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
             'date' => $request->get('delayed_publication') == 'on' ? $request->get('date') : now(),
-            'author_id' => $request->user()->is_admin ? $request->get('author') : $request->user()->id
+            'author_id' => $request->user()->is_admin ? $request->get('author') : $request->user()->id,
+            'type' => $request->get('is_draft') == true ? ArticleType::Draft : ArticleType::OnCheck,
         ]);
-
-        $article->save();
 
         $article->attachTagsFromString($request->get('tags'));
         $article->storeImagesFromBody(true);
 
-        if ($request->user()->is_admin) {
+        if ($request->user()->is_admin && $article->type->isNot(ArticleType::Draft)) {
             $article->check();
         }
 
-        return redirect()->route('articles.index');
+        return redirect()->route('articles.show', $article);
     }
 
     public function show(Article $article)
     {
-        if ($article->type->is(ArticleType::Checked())) {
+        if ($article->type->is(ArticleType::Checked)) {
             views($article)->cooldown(now()->addDay())->record();
         }
 
@@ -86,7 +85,11 @@ class ArticleController extends Controller
         ]);
 
         if (!$request->user()->is_admin) {
-            $article->update(['type' => ArticleType::OnCheck()]);
+            $article->update([
+                'type' => $request->get('is_draft') == true ? ArticleType::Draft : ArticleType::OnCheck
+            ]);
+        } else {
+            $article->check();
         }
 
         $article->attachTagsFromString($request->get('tags'));
@@ -129,6 +132,15 @@ class ArticleController extends Controller
         }
 
         return view('articles.unpublished', compact('articles'));
+    }
+
+    public function drafts()
+    {
+        $this->authorize('viewDrafts', Article::class);
+
+        $articles = auth()->user()->articles()->drafts()->latest()->get();
+
+        return view('articles.drafts', compact('articles'));
     }
 
     public function check(Article $article)

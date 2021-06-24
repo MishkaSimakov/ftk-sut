@@ -30,34 +30,26 @@
 @endsection
 
 @section('content')
-    <section class="w-100">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div
-                        class="col-md-4 border-md-right border-bottom border-md-bottom-0 d-flex flex-column text-center">
-                                        <span
-                                            class="h2 font-weight-bolder">{{ $statistics['users_count'] }}</span>
-                        <span class="h4 font-weight-normal">Пользователей</span>
-                    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 border-md-right border-bottom border-md-bottom-0 d-flex flex-column text-center">
+                    <span class="h2 font-weight-bolder">{{ $statistics['users_count'] }}</span>
+                    <span class="h4 font-weight-normal">Пользователей</span>
+                </div>
 
-                    <div
-                        class="col-md-4 border-md-right border-bottom border-md-bottom-0 d-flex flex-column text-center">
-                                        <span
-                                            class="h2 font-weight-bolder">{{ $statistics['articles_count'] }}</span>
-                        <span class="h4 font-weight-normal">Статей</span>
-                    </div>
+                <div class="col-md-4 border-md-right border-bottom border-md-bottom-0 d-flex flex-column text-center">
+                    <span class="h2 font-weight-bolder">{{ $statistics['articles_count'] }}</span>
+                    <span class="h4 font-weight-normal">Статей</span>
+                </div>
 
-                    <div class="col-md-4 d-flex flex-column text-center">
-                                        <span
-                                            class="h2 font-weight-bolder">{{ $statistics['events_count'] }}</span>
-                        <span class="h4 font-weight-normal">Мероприятий</span>
-                    </div>
+                <div class="col-md-4 d-flex flex-column text-center">
+                    <span class="h2 font-weight-bolder">{{ $statistics['events_count'] }}</span>
+                    <span class="h4 font-weight-normal">Мероприятий</span>
                 </div>
             </div>
         </div>
-    </section>
-
+    </div>
 
     <section style="margin-top: 6rem;">
         <div class="row">

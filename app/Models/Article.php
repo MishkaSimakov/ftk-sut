@@ -27,6 +27,8 @@ class Article extends Model implements Viewable
     const TRUNCATE_LIMIT = 500;
     const PAGINATION_LIMIT = 10;
 
+    const MAX_DRAFTS_COUNT = 100;
+
     const RELEVANCE_COEFFICIENTS = [
         'points' => 1,
         'views' => 0.1,
@@ -106,18 +108,23 @@ class Article extends Model implements Viewable
 
     public function scopeChecked(Builder $builder): Builder
     {
-        return $builder->where('type', ArticleType::Checked());
+        return $builder->where('type', ArticleType::Checked);
     }
 
     public function scopeUnchecked(Builder $builder): Builder
     {
-        return $builder->where('type', ArticleType::OnCheck());
+        return $builder->where('type', ArticleType::OnCheck);
     }
 
     /* Эта функция показывает, отображается ли статья у всех пользователей */
     public function isAvailable(): bool
     {
-        return $this->is_published and $this->type == ArticleType::Checked();
+        return $this->is_published and $this->type->is(ArticleType::Checked);
+    }
+
+    public function scopeDrafts(Builder $builder): Builder
+    {
+        return $builder->where('type', ArticleType::Draft);
     }
 
 

@@ -101,7 +101,7 @@ class ArticlePolicy
      */
     public function like(User $user, Article $article)
     {
-        return $article->type->is(ArticleType::Checked());
+        return $article->type->is(ArticleType::Checked);
     }
 
     /**
@@ -113,5 +113,32 @@ class ArticlePolicy
     public function viewUnpublished(User $user)
     {
         return true;
+    }
+
+    /**
+     * Determine whether the user can view drafts.
+     *
+     * @param ?User $user
+     * @return mixed
+     */
+    public function viewDrafts(?User $user)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can save article to drafts.
+     *
+     * @param User $user
+     * @param ?Article $article
+     * @return mixed
+     */
+    public function saveToDrafts(User $user, ?Article $article = null)
+    {
+        if ($article && $article->type->is(ArticleType::Checked)) {
+            return false;
+        }
+
+        return $user->articles()->count() < Article::MAX_DRAFTS_COUNT;
     }
 }
