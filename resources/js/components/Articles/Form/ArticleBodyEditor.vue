@@ -26,7 +26,7 @@ export default {
                 elementpath: false,
                 branding: false,
                 image_upload_url: '#',
-                plugins: 'link lists fullscreen hr image',
+                plugins: 'link lists fullscreen hr image paste',
                 toolbar: 'h1 h2 | link bold italic blockquote | bullist numlist hr image | fullscreen',
                 formats: {
                     h1: {block: 'h2'},
