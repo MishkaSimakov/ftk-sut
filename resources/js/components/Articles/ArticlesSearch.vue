@@ -1,6 +1,7 @@
 <template>
     <div>
         <autocomplete
+            @keydown.enter="enter"
             :search="search"
             :debounce-time="500"
             placeholder="Искать статьи"
@@ -18,6 +19,7 @@
             >
                 <div v-bind="rootProps">
                     <input
+                        @keydown.enter="enter"
                         type="text"
                         v-model="query"
                         v-bind="inputProps"
@@ -29,34 +31,26 @@
                         class="list-group border-top autocomplete-result-list" v-if="noResults"
                         style="position: absolute; z-index: 1; width: 100%; top: 100%;"
                     >
-                            <div
-                                class="list-group-item border-0 font-weight-bold"
-                            >
-                                Ничего не нашлось.
-                            </div>
+                        <div
+                            class="list-group-item border-0 font-weight-bold"
+                        >
+                            Ничего не нашлось.
+                        </div>
                     </div>
                     <div v-bind="resultListProps" v-on="resultListListeners" class="list-group border-top">
-                        <template
-                            v-for="(title, searchType) in searchTypes"
-                            v-if="resultsOfType(results, searchType).length"
+                        <a
+                            v-for="(result, index) in results"
+                            :key="index"
+                            class="list-group-item list-group-item-action border-0 py-2"
+                            :href="result.url"
                         >
-                            <div
-                                class="list-group-item border-top-0 border-left-0 border-right-0 font-weight-bold">
-                                {{ title }}
-                            </div>
-                            <a
-                                v-for="(result, index) in resultsOfType(results, searchType)"
-                                :key="searchType + resultProps[index].id"
-                                class="list-group-item list-group-item-action border-0 py-2"
-                                :href="result.url"
-                            >
-                                {{ result.name }}
-                            </a>
-                        </template>
+                            {{ result.title }}
+                        </a>
 
                         <a
                             class="list-group-item mt-3 card-link font-weight-bold border-0"
-                            :href="route('articles.index', { query: query })"
+                            id="all-results-link"
+                            :href="route('articles.search', { query: query })"
                         >
                             Показать все результаты
                         </a>
@@ -69,33 +63,26 @@
 
 <script>
 export default {
-    props: [
-        'query'
-    ],
     data() {
         return {
-            searchTypes: {
-                'article': 'Статьи',
-                'articletag': 'Теги',
-                'user': 'Авторы',
-            },
             noResults: false,
+
+            query: '',
+
+            minQueryLength: 3
         }
     },
     methods: {
         route: route,
-        resultsOfType(results, type) {
-            return results.filter((r) => r.type === type)
-        },
         search(input) {
             return new Promise((resolve) => {
                 this.noResults = false
 
-                if (input.length < 3) {
+                if (input.length < this.minQueryLength) {
                     return resolve([])
                 }
 
-                axios.get(route('api.articles.search', {query: input})).then((response) => {
+                axios.get(route('articles.search', {query: input})).then((response) => {
                     if (!response.data.length) {
                         this.noResults = true
                     }
@@ -103,6 +90,13 @@ export default {
                     resolve(response.data)
                 })
             })
+        },
+        enter() {
+            if (this.query.length < this.minQueryLength || this.noResults) {
+                return
+            }
+
+            document.getElementById('all-results-link').click()
         }
     }
 }

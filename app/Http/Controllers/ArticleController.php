@@ -7,7 +7,9 @@ use App\Http\Requests\Articles\ArticleRequest;
 use App\Models\Article;
 use App\Models\ArticleTag;
 use App\Models\User;
-use App\Services\ArticleSearchService;
+use App\Scoping\Scopes\Articles\AuthorScope;
+use App\Scoping\Scopes\Articles\QueryScope;
+use App\Scoping\Scopes\Articles\TagScope;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -17,16 +19,8 @@ class ArticleController extends Controller
         $this->authorizeResource(Article::class, 'article');
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->has('query')) {
-            $results = (new ArticleSearchService())->getQueryResults($request->get('query'), false);
-
-            return view('articles.search', array_merge($results, [
-                'query' => $request->get('query')
-            ]));
-        }
-
         return view('articles.index');
     }
 
@@ -150,6 +144,13 @@ class ArticleController extends Controller
         $article->check();
 
         return redirect()->route('articles.show', $article);
+    }
+
+    public function tags()
+    {
+        $tags = ArticleTag::withCount('articles')->orderByDesc('articles_count')->get();
+
+        return view('articles.tags', compact('tags'));
     }
 
     protected function getDataForChangingArticle(): array

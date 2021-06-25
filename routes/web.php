@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +26,15 @@ Route::resource('reviews', \App\Http\Controllers\ReviewController::class)->only(
 Route::resource('news', \App\Http\Controllers\NewsController::class);
 
 // articles
-Route::get('articles/unpublished', [\App\Http\Controllers\ArticleController::class, 'unpublished'])->name('articles.unpublished');
-Route::get('articles/unchecked', [\App\Http\Controllers\ArticleController::class, 'unchecked'])->name('articles.unchecked');
-Route::get('articles/drafts', [\App\Http\Controllers\ArticleController::class, 'drafts'])->name('articles.drafts');
-Route::get('articles/{article}/check', [\App\Http\Controllers\ArticleController::class, 'check'])->name('articles.check');
+Route::prefix('articles')->name('articles.')->group(function () {
+    Route::get('tags', [\App\Http\Controllers\ArticleController::class, 'tags'])->name('tags.index');
+
+    Route::get('search', \App\Http\Controllers\ArticleSearchController::class)->name('search');
+    Route::get('unpublished', [\App\Http\Controllers\ArticleController::class, 'unpublished'])->name('unpublished');
+    Route::get('unchecked', [\App\Http\Controllers\ArticleController::class, 'unchecked'])->name('unchecked');
+    Route::get('drafts', [\App\Http\Controllers\ArticleController::class, 'drafts'])->name('drafts');
+    Route::get('{article}/check', [\App\Http\Controllers\ArticleController::class, 'check'])->name('check');
+});
 Route::resource('articles', \App\Http\Controllers\ArticleController::class);
 
 // events

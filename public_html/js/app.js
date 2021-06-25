@@ -13953,42 +13953,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['query'],
   data: function data() {
     return {
-      searchTypes: {
-        'article': 'Статьи',
-        'articletag': 'Теги',
-        'user': 'Авторы'
-      },
-      noResults: false
+      noResults: false,
+      query: '',
+      minQueryLength: 3
     };
   },
   methods: {
     route: route,
-    resultsOfType: function resultsOfType(results, type) {
-      return results.filter(function (r) {
-        return r.type === type;
-      });
-    },
     search: function search(input) {
       var _this = this;
 
       return new Promise(function (resolve) {
         _this.noResults = false;
 
-        if (input.length < 3) {
+        if (input.length < _this.minQueryLength) {
           return resolve([]);
         }
 
-        axios.get(route('api.articles.search', {
+        axios.get(route('articles.search', {
           query: input
         })).then(function (response) {
           if (!response.data.length) {
@@ -13998,6 +13983,13 @@ __webpack_require__.r(__webpack_exports__);
           resolve(response.data);
         });
       });
+    },
+    enter: function enter() {
+      if (this.query.length < this.minQueryLength || this.noResults) {
+        return;
+      }
+
+      document.getElementById('all-results-link').click();
     }
   }
 });
@@ -48428,6 +48420,17 @@ var render = function() {
           "debounce-time": 500,
           placeholder: "Искать статьи"
         },
+        on: {
+          keydown: function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.enter($event)
+          }
+        },
         scopedSlots: _vm._u([
           {
             key: "default",
@@ -48458,6 +48461,21 @@ var render = function() {
                           attrs: { type: "text" },
                           domProps: { value: _vm.query },
                           on: {
+                            keydown: function($event) {
+                              if (
+                                !$event.type.indexOf("key") &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.enter($event)
+                            },
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
@@ -48496,7 +48514,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                            Ничего не нашлось.\n                        "
+                                "\n                        Ничего не нашлось.\n                    "
                               )
                             ]
                           )
@@ -48516,47 +48534,23 @@ var render = function() {
                       resultListListeners
                     ),
                     [
-                      _vm._l(_vm.searchTypes, function(title, searchType) {
-                        return _vm.resultsOfType(results, searchType).length
-                          ? [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "list-group-item border-top-0 border-left-0 border-right-0 font-weight-bold"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(title) +
-                                      "\n                        "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _vm._l(
-                                _vm.resultsOfType(results, searchType),
-                                function(result, index) {
-                                  return _c(
-                                    "a",
-                                    {
-                                      key: searchType + resultProps[index].id,
-                                      staticClass:
-                                        "list-group-item list-group-item-action border-0 py-2",
-                                      attrs: { href: result.url }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                            " +
-                                          _vm._s(result.name) +
-                                          "\n                        "
-                                      )
-                                    ]
-                                  )
-                                }
-                              )
-                            ]
-                          : _vm._e()
+                      _vm._l(results, function(result, index) {
+                        return _c(
+                          "a",
+                          {
+                            key: index,
+                            staticClass:
+                              "list-group-item list-group-item-action border-0 py-2",
+                            attrs: { href: result.url }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(result.title) +
+                                "\n                    "
+                            )
+                          ]
+                        )
                       }),
                       _vm._v(" "),
                       _c(
@@ -48565,7 +48559,8 @@ var render = function() {
                           staticClass:
                             "list-group-item mt-3 card-link font-weight-bold border-0",
                           attrs: {
-                            href: _vm.route("articles.index", {
+                            id: "all-results-link",
+                            href: _vm.route("articles.search", {
                               query: _vm.query
                             })
                           }

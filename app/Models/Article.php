@@ -5,7 +5,9 @@ namespace App\Models;
 use App\Enums\ArticleType;
 use App\Events\Article\ArticleFirstTimeChecked;
 use App\Events\Article\ArticleLiked;
+use App\Models\Traits\Checkable;
 use App\Models\Traits\Publishable;
+use App\Scoping\Traits\CanBeScoped;
 use App\Services\ArticleBodyPrepareService;
 use BenSampo\Enum\Traits\CastsEnums;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
@@ -23,6 +25,8 @@ class Article extends Model implements Viewable
     use InteractsWithViews;
     use Publishable;
     use CastsEnums;
+    use CanBeScoped;
+    use Checkable;
 
     const TRUNCATE_LIMIT = 500;
     const PAGINATION_LIMIT = 10;
@@ -78,13 +82,6 @@ class Article extends Model implements Viewable
         return truncateHTML(self::TRUNCATE_LIMIT, strip_tags($this->body, ['p', 'b', 'i', 'ul', 'li', 'ol']));
     }
 
-    public function getRelevanceAttribute(): int
-    {
-        return $this->points()->count() * self::RELEVANCE_COEFFICIENTS['points']
-            + views($this)->count() * self::RELEVANCE_COEFFICIENTS['views']
-            + now()->diffInDays($this->date) * self::RELEVANCE_COEFFICIENTS['days'];
-    }
-
     public function scopeOrderByRelevance(Builder $builder): Builder
     {
         $sql = '`points_count` * ' . Article::RELEVANCE_COEFFICIENTS['points'] . ' + `views_count` * ' . Article::RELEVANCE_COEFFICIENTS['views'] . ' + datediff(now(), `date`) * ' . Article::RELEVANCE_COEFFICIENTS['days'] . ' DESC';
@@ -92,28 +89,19 @@ class Article extends Model implements Viewable
         return $builder->orderByRaw($sql, 'desc');
     }
 
-
-// TODO: вынести это в отдельный trait, если возможно.
-    public function check()
+    protected function getCheckedStateEnum()
     {
-        $isFirstTimeChecked = is_null($this->checked_at);
+        return ArticleType::Checked;
+    }
 
-        $this->update([
-            'type' => ArticleType::Checked(),
-            'checked_at' => now()
-        ]);
+    protected function getUncheckedStateEnum()
+    {
+        return ArticleType::OnCheck;
+    }
 
+    protected function checkedEvent(bool $isFirstTimeChecked)
+    {
         ArticleFirstTimeChecked::dispatchIf($isFirstTimeChecked, $this);
-    }
-
-    public function scopeChecked(Builder $builder): Builder
-    {
-        return $builder->where('type', ArticleType::Checked);
-    }
-
-    public function scopeUnchecked(Builder $builder): Builder
-    {
-        return $builder->where('type', ArticleType::OnCheck);
     }
 
     /* Эта функция показывает, отображается ли статья у всех пользователей */
@@ -128,7 +116,6 @@ class Article extends Model implements Viewable
     }
 
 
-// TODO: вынести это в отдельный trait, если возможно.
     public function toggleLikeBy(User $user)
     {
         $this->points()->toggle($user);
@@ -161,7 +148,6 @@ class Article extends Model implements Viewable
             'body' => (new ArticleBodyPrepareService())->getPreparedBody($this, $deletePrevious)
         ]);
     }
-
 
     public function comments(): HasMany
     {

@@ -17,7 +17,10 @@
     </section>
 
     <section class="mb-5">
-        <h2 class="h3 text-left font-weight-bold">Популярные категории</h2>
+        <div class="row no-gutters">
+            <h2 class="h3 text-left font-weight-bold">Популярные категории</h2>
+            <a href="{{ route('articles.tags.index') }}" class="text-muted ml-auto my-auto small d-none d-md-block">посмотреть все</a>
+        </div>
 
         <livewire:articles.lists.article-tags-list/>
     </section>

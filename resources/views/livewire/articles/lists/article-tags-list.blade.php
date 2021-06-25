@@ -1,4 +1,4 @@
-<div class="card mt-3">
+<div class="card">
     <div class="card-body py-2">
         <div class="row">
             @foreach($tags as $tag)
