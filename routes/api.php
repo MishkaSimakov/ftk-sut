@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\RatingController;
+use App\Http\Controllers\ArticlesRatingController;
 use App\Http\Controllers\Statistics\ArticleStatisticsController;
 use App\Http\Controllers\Statistics\CompareController;
 use App\Http\Controllers\Statistics\EventStatisticsController;
 use App\Http\Controllers\Statistics\RatingPointsStatisticsController;
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,12 +20,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('rating/articles/show', [ArticlesRatingController::class, 'show'])->name('rating.articles.show');
 Route::get('rating/show', [RatingController::class, 'show'])->name('rating.show');
 
-Route::prefix('articles')->name('articles.')->group(function () {
-    Route::get('search', [ArticleController::class, 'search'])->name('search');
-    Route::post('images/store', [ArticleController::class, 'storeImage'])->name('images.store');
-});
+
+Route::post('articles/images/store', [ArticleController::class, 'storeImage'])
+    ->name('articles.images.store');
 
 
 Route::prefix('statistics/')->name('stat.')->group(function () {

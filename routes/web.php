@@ -43,6 +43,8 @@ Route::get('events/{event}/users/edit', [\App\Http\Controllers\EventsController:
 Route::resource('events', \App\Http\Controllers\EventsController::class);
 
 // rating
+Route::get('rating/articles', [\App\Http\Controllers\ArticlesRatingController::class, 'index'])->name('ratings.articles.index');
+
 Route::resource('rating', \App\Http\Controllers\RatingController::class)
     ->only(['create', 'store']);
 

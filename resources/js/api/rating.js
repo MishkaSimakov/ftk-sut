@@ -1,7 +1,7 @@
 export default {
-    async loadRating({ period }) {
+    async loadRating({period}, loadingRouteName) {
         return new Promise((resolve, reject) => {
-            axios.get(route('api.rating.show', period)).then((response) => {
+            axios.get(route(loadingRouteName, period)).then((response) => {
                 resolve(response)
             })
         })

@@ -13,7 +13,7 @@
                         </div>
 
                         <div class="my-auto font-weight-bolder" :class="columnSizes.points">
-                            Очки
+                            {{ pointsColumnTitle }}
                         </div>
 
                         <button class="btn text-primary text-right font-weight-bold" :class="columnSizes.categories"
@@ -95,9 +95,14 @@ import RatingSettingsForm from "./../Ratings/Settings/SettingsForm";
 import smoothHeight from "vue-smooth-height";
 import {createNamespacedHelpers} from 'vuex'
 
-const {mapActions, mapGetters} = createNamespacedHelpers('rating');
+const {mapActions, mapGetters, mapMutations} = createNamespacedHelpers('rating');
 
 export default {
+    props: [
+        'routeName',
+        'loadingRouteName',
+        'pointsColumnTitle'
+    ],
     mixins: [smoothHeight],
     components: {RatingSettingsForm},
     data() {
@@ -113,6 +118,10 @@ export default {
     methods: {
         ...mapActions({
             loadRating: 'loadRating'
+        }),
+        ...mapMutations({
+            setLoadingRouteName: 'setLoadingRouteName',
+            setRouteName: 'setRouteName'
         })
     },
     computed: {
@@ -123,6 +132,9 @@ export default {
         })
     },
     created() {
+        this.setRouteName(this.routeName)
+        this.setLoadingRouteName(this.loadingRouteName)
+
         this.loadRating();
     },
     mounted() {

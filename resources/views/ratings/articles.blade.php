@@ -10,17 +10,17 @@
 
     <ul class="nav nav-pills row text-center">
         <li class="nav-item col-md-4">
-            <span class="nav-link active">Очки</span>
+            <a class="nav-link" href="{{ route('rating.index') }}">Очки</a>
         </li>
         <li class="nav-item col-md-4">
             <a class="nav-link" href="#">Походы</a>
         </li>
         <li class="nav-item col-md-4">
-            <a class="nav-link" href="{{ route('ratings.articles.index') }}">Статьи</a>
+            <a class="nav-link active" href="#">Статьи</a>
         </li>
     </ul>
 
     <div class="mt-3">
-        <points-rating></points-rating>
+        <articles-rating></articles-rating>
     </div>
 @endsection

@@ -1,9 +1,10 @@
 import ratingApi from '../../api/rating'
 
 
-function setPeriodUrl(period) {
+function setPeriodUrl(period, routeName) {
     period = period.start.replace('-', '.') + '-' + period.end.replace('-', '.')
-    history.pushState(null, '', route('rating.index', { period: period }));
+
+    history.pushState(null, '', route(routeName, { period: period }));
 }
 function getPeriodFromUrl() {
     let url = window.location.href.split('/').pop()
@@ -24,6 +25,9 @@ const state = () => ({
     period: {},
     categories: [],
     loading: true,
+
+    loadingRouteName: null,
+    routeName: null
 })
 
 // getters
@@ -45,7 +49,7 @@ const getters = {
     },
     isLoading: state => {
         return state.loading
-    }
+    },
 }
 
 // actions
@@ -56,14 +60,14 @@ const actions = {
                 return
             }
 
-            setPeriodUrl(period)
+            setPeriodUrl(period, state.routeName)
         } else {
             period = getPeriodFromUrl()
         }
 
         commit('setLoading', true)
 
-        return ratingApi.loadRating({period: period}).then((response) => {
+        return ratingApi.loadRating({period: period}, state.loadingRouteName).then((response) => {
             if (state.categories.length === 0) {
                 commit('setRatingCategories', response.data.categories)
             }
@@ -97,7 +101,7 @@ const actions = {
             return user
         })
     },
-    setCategoriesFilter({state, dispatch, getters}, categories) {
+    setCategoriesFilter({state, dispatch}, categories) {
         state.categories = state.categories.map((c) => {
             c.disabled = !(categories.includes(c.id) || categories.length === 0)
 
@@ -129,6 +133,12 @@ const mutations = {
 
             return user
         })
+    },
+    setLoadingRouteName(state, name) {
+        state.loadingRouteName = name;
+    },
+    setRouteName(state, name) {
+        state.routeName = name;
     }
 }
 

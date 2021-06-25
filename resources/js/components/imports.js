@@ -15,7 +15,8 @@ const components = {
     // events
 
     // rating
-    'rating':                   'Ratings/Rating',
+    'points-rating':            'Ratings/PointsRating',
+    'articles-rating':          'Ratings/ArticlesRating',
 
     // statistics
     'rating-points-statistics': 'Statistics/RatingPointsStatistics',

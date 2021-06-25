@@ -11,6 +11,7 @@ use Assada\Achievements\AchievementChain;
 use Assada\Achievements\Achiever;
 use BenSampo\Enum\Traits\CastsEnums;
 use BenSampo\Enum\Traits\QueriesFlaggedEnums;
+use CyrildeWit\EloquentViewable\View;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -103,5 +104,15 @@ class User extends Authenticatable
         return optional(
                 $this->achievementStatus(Arr::last($chain->chain()))
             )->points ?? 0;
+    }
+
+    public function availableArticles()
+    {
+        return $this->hasMany(Article::class, 'author_id')->published()->checked();
+    }
+
+    public function pointsOnArticles()
+    {
+        return $this->hasManyThrough(ArticlePoint::class, Article::class, 'author_id');
     }
 }
