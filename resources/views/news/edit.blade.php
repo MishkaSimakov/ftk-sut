@@ -55,10 +55,6 @@
                     @enderror
                 </div>
 
-                {{--                <div class="alert alert-info" role="alert">--}}
-                {{--                    Новость будет опубликована 19 января 2020г. в 20:00--}}
-                {{--                </div>--}}
-
                 <button type="submit" class="btn btn-primary mr-2">Сохранить</button>
             </form>
         </div>

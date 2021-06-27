@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Events\News\NewsCreated;
+use App\Events\News\NewsPublished;
 use App\Http\Requests\News\StoreNewsRequest;
 use App\Http\Resources\News\NewsIndexResource;
 use App\Models\News;
@@ -35,7 +35,7 @@ class NewsController extends Controller
 
     public function update(StoreNewsRequest $request, News $news)
     {
-        $news->update($request->all());
+        $news->update($request->validated());
 
         return redirect()->back();
     }
@@ -55,10 +55,10 @@ class NewsController extends Controller
     public function store(StoreNewsRequest $request)
     {
         $news = News::make($request->validated());
-        $news->date = $request->get('delayed_publication') === 'on' ? $request->get('date') : now();
+        $news->date = $request->has('delayed_publication') ? $request->get('date') : now();
         $news->save();
 
-        NewsCreated::dispatch($news, $request->get('notify_users') === 'on');
+        // TODO: добавить вызов события (что-то по типу NewsCreated или NewsPublished)
 
         return redirect()->route('news.index');
     }

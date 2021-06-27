@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Events\StoreEventRequest;
 use App\Http\Requests\Events\UpdateEventRequest;
 use App\Models\Event;
-use App\Models\Travel;
+use App\Notifications\EventCreatedNotification;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -48,14 +49,17 @@ class EventsController extends Controller
             'image_url' => $this->storeEventImage($request->file('image'), $event)
         ]);
 
-        if ($request->get('is_travel') === 'on') {
-            $event->travel()->save(
-                Travel::make([
-                    'distance' => $request->get('travel_distance'),
-                    'type' => $request->get('travel_type'),
-                ])
-            );
+        if ($request->has('is_travel')) {
+            $event->travel()->create([
+                'distance' => $request->get('travel_distance'),
+                'type' => $request->get('travel_type'),
+            ]);
         }
+
+        Notification::route('telegram', config('services.telegram-bot-api.channel_id'))
+            ->notify(
+                (new EventCreatedNotification($event))->delay(now()->addMinute())
+            );
 
         return redirect()->route('events.index');
     }
@@ -110,7 +114,6 @@ class EventsController extends Controller
 
         return view('events.users.edit', compact('event'));
     }
-
 
 
     protected function storeEventImage(UploadedFile $file, Event $event): string

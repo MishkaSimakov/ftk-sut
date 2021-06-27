@@ -38,20 +38,6 @@
                     @enderror
                 </div>
 
-{{--                <div class="form-check">--}}
-{{--                    <input id="notify_users" type="checkbox"--}}
-{{--                           class="form-check-input @error('notify_users') is-invalid @enderror" name="notify_users"--}}
-{{--                           {{ old('notify_users') == 'on' ? 'checked' : '' }} autofocus--}}
-{{--                    >--}}
-{{--                    <label for="notify_users" class="form-check-label">Оповестить пользователей</label>--}}
-
-{{--                    @error('notify_users')--}}
-{{--                    <span class="invalid-feedback" role="alert">--}}
-{{--                             <strong>{{ $message }}</strong>--}}
-{{--                         </span>--}}
-{{--                    @enderror--}}
-{{--                </div>--}}
-
                 <news-date-editor is-invalid=""></news-date-editor>
 
                 <button type="submit" class="btn btn-primary mr-2">Сохранить</button>

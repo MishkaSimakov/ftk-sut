@@ -76,3 +76,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\UserController::class, 'home'])->name('home');
 Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('settings');
+
+
+Route::get('/notification', function () {
+    $event = \App\Models\Event::first();
+
+
+});

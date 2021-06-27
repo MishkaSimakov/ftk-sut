@@ -12,4 +12,9 @@ class Travel extends Model
     protected $fillable = [
         'distance', 'type'
     ];
+
+    public function isHiking(): bool
+    {
+        return $this->type == TravelType::Hiking;
+    }
 }
