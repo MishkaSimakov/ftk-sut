@@ -77,43 +77,6 @@
                     </div>
                 @endadmin
 
-{{--                <p class="card-title h6 mt-5">Уведомления</p>--}}
-{{--                <div class="form-check">--}}
-{{--                    <input type="checkbox" class="form-check-input" id="noticeNews" name="noticeNews"--}}
-{{--                           @if($user->notification_subscriptions->hasFlag(\App\Enums\UserNotificationSubscriptions::NewsNotifications()))--}}
-{{--                           checked--}}
-{{--                        @endif--}}
-{{--                    >--}}
-{{--                    <label class="form-check-label" for="noticeNews">Уведомлять по email о новостях</label>--}}
-{{--                </div>--}}
-
-{{--                <div class="form-check">--}}
-{{--                    <input type="checkbox" class="form-check-input" id="noticeArticles" name="noticeArticles"--}}
-{{--                           @if($user->notification_subscriptions->hasFlag(\App\Enums\UserNotificationSubscriptions::ArticleNotifications()))--}}
-{{--                           checked--}}
-{{--                        @endif--}}
-{{--                    >--}}
-{{--                    <label class="form-check-label" for="noticeArticles">Уведомлять по email о статьях</label>--}}
-{{--                </div>--}}
-
-{{--                <div class="form-check">--}}
-{{--                    <input type="checkbox" class="form-check-input" id="noticeEvents" name="noticeEvents"--}}
-{{--                           @if($user->notification_subscriptions->hasFlag(\App\Enums\UserNotificationSubscriptions::EventNotifications()))--}}
-{{--                           checked--}}
-{{--                        @endif--}}
-{{--                    >--}}
-{{--                    <label class="form-check-label" for="noticeEvents">Уведомлять по email о мероприятиях</label>--}}
-{{--                </div>--}}
-
-{{--                <div class="form-check">--}}
-{{--                    <input type="checkbox" class="form-check-input" id="noticeRating" name="noticeRating"--}}
-{{--                           @if($user->notification_subscriptions->hasFlag(\App\Enums\UserNotificationSubscriptions::RatingNotifications()))--}}
-{{--                           checked--}}
-{{--                        @endif--}}
-{{--                    >--}}
-{{--                    <label class="form-check-label" for="noticeRating">Уведомлять по email о новом рейтинге</label>--}}
-{{--                </div>--}}
-
                 <button type="submit" class="btn btn-primary mr-2 mt-3">Сохранить</button>
             </form>
         </div>

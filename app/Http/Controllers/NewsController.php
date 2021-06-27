@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 
-use App\Events\News\NewsPublished;
 use App\Http\Requests\News\StoreNewsRequest;
 use App\Http\Resources\News\NewsIndexResource;
 use App\Models\News;
+use App\Notifications\NewsPublishedNotification;
+use Illuminate\Support\Facades\Notification;
 
 class NewsController extends Controller
 {
@@ -37,19 +38,12 @@ class NewsController extends Controller
     {
         $news->update($request->validated());
 
-        return redirect()->back();
+        return redirect()->route('news.index');
     }
 
     public function create()
     {
         return view('news.create');
-    }
-
-    public function show(News $news)
-    {
-        return response()->json(
-            NewsIndexResource::make($news)
-        );
     }
 
     public function store(StoreNewsRequest $request)
@@ -58,7 +52,10 @@ class NewsController extends Controller
         $news->date = $request->has('delayed_publication') ? $request->get('date') : now();
         $news->save();
 
-        // TODO: добавить вызов события (что-то по типу NewsCreated или NewsPublished)
+        Notification::route('telegram', config('services.telegram-bot-api.channel_id'))
+            ->notify(
+                (new NewsPublishedNotification($news))->delay($news->date)
+            );
 
         return redirect()->route('news.index');
     }

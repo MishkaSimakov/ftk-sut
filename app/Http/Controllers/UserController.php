@@ -47,8 +47,6 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        $this->updateUserNotificationSubscriptions($user, $request);
-
         $user->update(
             $request->only('email')
         );
@@ -95,26 +93,5 @@ class UserController extends Controller
             ->get();
 
         return view('users.articles', compact('articles', 'user'));
-    }
-
-    protected function updateUserNotificationSubscriptions(User $user, Request $request)
-    {
-        $flags = [
-            'noticeNews' => UserNotificationSubscriptions::NewsNotifications,
-            'noticeArticles' => UserNotificationSubscriptions::ArticleNotifications,
-            'noticeEvents' => UserNotificationSubscriptions::EventNotifications,
-            'noticeRating' => UserNotificationSubscriptions::RatingNotifications,
-        ];
-
-        $appliedFlags = [];
-        foreach ($flags as $name => $class) {
-            if ($request->get($name) === 'on') {
-                $appliedFlags[] = $class;
-            }
-        }
-
-        $user->update([
-            'notification_subscriptions' => UserNotificationSubscriptions::flags($appliedFlags)
-        ]);
     }
 }

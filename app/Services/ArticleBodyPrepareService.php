@@ -67,6 +67,8 @@ class ArticleBodyPrepareService
 
     protected function storeExternalArticleImage(string $url, Article $article): string
     {
+        // TODO: переместить это в ImageUploadService
+
         $image = Image::make($url);
 
         $name = Str::random(40);

@@ -38,7 +38,6 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
-        'notification_subscriptions'
     ];
 
     /**
@@ -59,7 +58,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'notification_subscriptions' => UserNotificationSubscriptions::class,
         'type' => UserType::class,
     ];
 

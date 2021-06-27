@@ -24,8 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('register_code')->unique();
 
             $table->integer('type')->default(UserType::Stranger());
-            $table->integer('notification_subscriptions')
-                ->default(UserNotificationSubscriptions::defaultFlags());
             $table->boolean('is_admin')->nullable();
 
             $table->rememberToken();

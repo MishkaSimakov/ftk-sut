@@ -4,12 +4,10 @@ namespace App\Providers;
 
 use App\Events\Article\ArticleFirstTimeChecked;
 use App\Events\Article\ArticleLiked;
-use App\Events\News\NewsPublished;
 use App\Events\Rating\RatingCreated;
 use App\Events\Rating\RatingDeleted;
 use App\Listeners\Article\AwardArticlePointAchievements;
 use App\Listeners\Article\AwardWriteArticleAchievements;
-use App\Listeners\News\SendNewsPublishedNotificationListener;
 use App\Listeners\Rating\AwardDurationAchievements;
 use App\Listeners\Rating\AwardMonthlyRatingPointAchievements;
 use Illuminate\Auth\Events\Registered;
@@ -28,9 +26,6 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-        NewsPublished::class => [
-            SendNewsPublishedNotificationListener::class,
-        ],
         ArticleFirstTimeChecked::class => [
             AwardWriteArticleAchievements::class,
         ],
