@@ -6,12 +6,10 @@ use App\Http\Requests\Events\StoreEventRequest;
 use App\Http\Requests\Events\UpdateEventRequest;
 use App\Models\Event;
 use App\Notifications\EventCreatedNotification;
+use App\Services\ImageUploadService;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 
 
 class EventsController extends Controller
@@ -35,7 +33,6 @@ class EventsController extends Controller
         return view('events.index', compact('events'));
     }
 
-
     public function create()
     {
         return view('events.create');
@@ -57,13 +54,10 @@ class EventsController extends Controller
         }
 
         Notification::route('telegram', config('services.telegram-bot-api.channel_id'))
-            ->notify(
-                (new EventCreatedNotification($event))->delay(now()->addMinute())
-            );
+            ->notify(new EventCreatedNotification($event));
 
         return redirect()->route('events.index');
     }
-
 
     public function edit(Event $event)
     {
@@ -85,7 +79,7 @@ class EventsController extends Controller
 
         $event->update($request->except('image'));
 
-        if ($request->get('is_travel') === 'on') {
+        if ($request->has('is_travel')) {
             $event->travel()->updateOrCreate([
                 'distance' => $request->get('travel_distance'),
                 'type' => $request->get('travel_type'),
@@ -118,19 +112,8 @@ class EventsController extends Controller
 
     protected function storeEventImage(UploadedFile $file, Event $event): string
     {
-        $image = Image::make($file);
-
-        $name = Str::random(40);
-        $extension = Arr::last(explode('/', $image->mime()));
-        $path = "/events/{$event->id}/{$name}.{$extension}";
-
-        if ($image->width() > 720) {
-            $image = $image->widen(720);
-        }
-
-        Storage::disk('public')->put($path, $image->encode());
-
-        return $path;
+        return (new ImageUploadService())->setMaxWidth(720)->setDisk('public')
+            ->store($file, "/events/{$event->id}");
     }
 
     protected function destroyEventImage(Event $event)

@@ -32,7 +32,7 @@ class Event extends Model
 
     public function imageUrl(): string
     {
-        return Storage::url($this->image_url);
+        return Storage::disk('public')->url($this->image_url);
     }
 
     public function scopePast(Builder $builder): Builder
