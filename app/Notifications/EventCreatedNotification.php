@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\Event;
+use App\Notifications\Traits\CanSendSelf;
 use App\Notifications\Traits\SendMultilinesTelegramMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -14,6 +15,7 @@ class EventCreatedNotification extends Notification implements ShouldQueue
 {
     use SendMultilinesTelegramMessage;
     use Queueable;
+    use CanSendSelf;
 
     protected Event $event;
 

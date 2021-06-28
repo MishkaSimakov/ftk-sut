@@ -29,7 +29,7 @@ class ImageUploadService
         return $this;
     }
 
-    public function store(UploadedFile $image, string $directory)
+    public function store($image, string $directory)
     {
         $image = Image::make($image);
 
@@ -42,7 +42,7 @@ class ImageUploadService
             $image = $image->widen($this->max_width);
         }
 
-        if (!Storage::disk('public')->put($path, $image->encode())) {
+        if (!Storage::disk($this->disk)->put($path, $image->encode())) {
             return false;
         }
 

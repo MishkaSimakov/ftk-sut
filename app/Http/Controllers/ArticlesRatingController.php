@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -18,6 +18,14 @@ class ArticlesRatingController extends Controller
 
     public function show(Request $request): JsonResponse
     {
+        if ($request->has(['start', 'end'])) {
+            $start = Carbon::parse($request->get('start'));
+            $end = Carbon::parse($request->get('end'));
+        } else {
+            $start = Article::oldest('date')->first()->date;
+            $end = now();
+        }
+
         $users = User::whereHas('availableArticles')->select(['id', 'name'])
             ->withCount(['availableArticles', 'pointsOnArticles'])
             ->with('availableArticles.views:id')->get()->map(function (User $user) {
@@ -49,8 +57,8 @@ class ArticlesRatingController extends Controller
             'categories' => $this->getCategories()->toArray(),
             'meta' => [
                 'period' => [
-                    'start' => '2019-05',
-                    'end' => '2019-05',
+                    'start' => $start->format('Y-m'),
+                    'end' => $end->format('Y-m'),
                 ],
             ]
         ]);
@@ -87,10 +95,5 @@ class ArticlesRatingController extends Controller
                 'attribute' => 'views_on_articles_count'
             ]
         ]);
-    }
-
-    protected function articlesForRating(Builder $builder): Builder
-    {
-        return $builder->published()->checked();
     }
 }

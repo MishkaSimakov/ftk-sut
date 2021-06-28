@@ -20,6 +20,8 @@ class CreateNewsTable extends Migration
             $table->text('body');
             $table->dateTime('date');
 
+            $table->boolean('notification_sent')->default(false);
+
             $table->timestamps();
         });
     }

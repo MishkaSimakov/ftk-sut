@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Article;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 use Storage;
 
 class ArticleBodyPrepareService
@@ -67,21 +66,8 @@ class ArticleBodyPrepareService
 
     protected function storeExternalArticleImage(string $url, Article $article): string
     {
-        // TODO: переместить это в ImageUploadService
-
-        $image = Image::make($url);
-
-        $name = Str::random(40);
-        $extension = Arr::last(explode('/', $image->mime()));
-        $path = "/articles/{$article->id}/{$name}.{$extension}";
-
-        if ($image->width() > 1280) {
-            $image = $image->widen(1280);
-        }
-
-        Storage::disk('public')->put($path, $image->encode());
-
-        return $path;
+        return (new ImageUploadService())->setMaxWidth(1280)->setDisk('public')
+            ->store($url, $this->getImageStoreDirectoryPath($article));
     }
 
     protected function getImageStoreDirectoryPath(Article $article): string

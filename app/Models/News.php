@@ -14,7 +14,7 @@ class News extends Model implements Viewable
     use InteractsWithViews;
     use Publishable;
 
-    protected $fillable = ['title', 'date', 'body'];
+    protected $fillable = ['title', 'date', 'body', 'notification_sent'];
     protected $dates = ['date'];
     protected bool $removeViewsOnDelete = true;
 

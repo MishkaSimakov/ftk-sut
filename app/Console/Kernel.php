@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\Achievements\LoadAllAchievementsCommand;
 use App\Console\Commands\DeleteTemporaryFiles;
 use App\Console\Commands\Deployment\LoadAllFilesToHosting;
+use App\Jobs\SendPublishedNewsNotificationJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -30,7 +31,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('temp:clean')->weekly();
+
+        $schedule->job(new SendPublishedNewsNotificationJob())
+            ->hourly()->between('11:00', '19:00');
     }
 
     /**

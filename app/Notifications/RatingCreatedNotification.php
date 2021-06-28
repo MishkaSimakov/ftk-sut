@@ -2,26 +2,24 @@
 
 namespace App\Notifications;
 
-use App\Models\News;
 use App\Notifications\Traits\CanSendSelf;
-use App\Notifications\Traits\SendMultilinesTelegramMessage;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Telegram\TelegramChannel;
 use NotificationChannels\Telegram\TelegramMessage;
 
-class NewsPublishedNotification extends Notification implements ShouldQueue
+class RatingCreatedNotification extends Notification implements ShouldQueue
 {
-    use SendMultilinesTelegramMessage;
     use Queueable;
     use CanSendSelf;
 
-    protected News $news;
+    protected Carbon $date;
 
-    public function __construct(News $news)
+    public function __construct(Carbon $date)
     {
-        $this->news = $news;
+        $this->date = $date;
     }
 
     public function via($notifiable)
@@ -32,21 +30,13 @@ class NewsPublishedNotification extends Notification implements ShouldQueue
     public function toTelegram($notifiable)
     {
         return TelegramMessage::create()
-            ->content($this->getParsedMessage())
+            ->content(
+                "На сайте ftk-sut.ru опубликован рейтинг за " . $this->date->isoFormat('MMMM YYYY')
+            )
             ->options([
                 'parse_mode' => 'html'
             ])
             ->button('Сайт ФТК', 'https://ftk-sut.ru')
-            ->button('Все новости', 'https://ftk-sut.ru/news');
-    }
-
-    protected function getMessageLines(): array
-    {
-        return [
-            "Новая новость на сайте ftk-sut.ru:",
-            "",
-            "<b>{$this->news->title}</b>",
-            $this->news->body
-        ];
+            ->button('Рейтинг', 'https://ftk-sut.ru/rating');
     }
 }

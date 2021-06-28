@@ -53,8 +53,7 @@ class EventsController extends Controller
             ]);
         }
 
-        Notification::route('telegram', config('services.telegram-bot-api.channel_id'))
-            ->notify(new EventCreatedNotification($event));
+        (new EventCreatedNotification($event))->notify();
 
         return redirect()->route('events.index');
     }
