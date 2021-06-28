@@ -13,7 +13,7 @@
             <a class="nav-link" href="{{ route('rating.index') }}">Очки</a>
         </li>
         <li class="nav-item col-md-4">
-            <a class="nav-link active">Походы</a>
+            <span class="nav-link active">Походы</span>
         </li>
         <li class="nav-item col-md-4">
             <a class="nav-link" href="{{ route('ratings.articles.index') }}">Статьи</a>

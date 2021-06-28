@@ -9,12 +9,8 @@ use Storage;
 
 class ArticleBodyPrepareService
 {
-    public function getPreparedBody(Article $article, $deletePrevious): string
+    public function getPreparedBody(Article $article): string
     {
-        if ($deletePrevious) {
-            $this->deleteSavedArticleImages($article);
-        }
-
         $body = $article->body;
 
         preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?>/i', $body, $matches);

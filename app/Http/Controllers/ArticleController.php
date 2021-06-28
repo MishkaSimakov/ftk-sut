@@ -42,7 +42,7 @@ class ArticleController extends Controller
         ]);
 
         $article->attachTagsFromString($request->get('tags'));
-        $article->storeImagesFromBody(true);
+        $article->storeImagesFromBody();
 
         if ($request->user()->is_admin && $article->type->isNot(ArticleType::Draft)) {
             $article->check();
@@ -88,7 +88,7 @@ class ArticleController extends Controller
 
         $article->attachTagsFromString($request->get('tags'));
 
-        $article->storeImagesFromBody(false);
+        $article->storeImagesFromBody();
 
         return redirect()->route('articles.show', $article);
     }
@@ -122,7 +122,7 @@ class ArticleController extends Controller
         if (auth()->user()->is_admin) {
             $articles = Article::unpublished()->latest('date')->get();
         } else {
-            $articles = auth()->user()->articles()->unpublished()->latest()->get();
+            $articles = auth()->user()->articles()->unpublished()->latest('date')->get();
         }
 
         return view('articles.unpublished', compact('articles'));
@@ -132,7 +132,7 @@ class ArticleController extends Controller
     {
         $this->authorize('viewDrafts', Article::class);
 
-        $articles = auth()->user()->articles()->drafts()->latest()->get();
+        $articles = auth()->user()->articles()->drafts()->latest('date')->get();
 
         return view('articles.drafts', compact('articles'));
     }
