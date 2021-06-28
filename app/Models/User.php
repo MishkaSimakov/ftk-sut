@@ -103,14 +103,4 @@ class User extends Authenticatable
                 $this->achievementStatus(Arr::last($chain->chain()))
             )->points ?? 0;
     }
-
-    public function availableArticles()
-    {
-        return $this->hasMany(Article::class, 'author_id')->published()->checked();
-    }
-
-    public function pointsOnArticles()
-    {
-        return $this->hasManyThrough(ArticlePoint::class, Article::class, 'author_id');
-    }
 }
