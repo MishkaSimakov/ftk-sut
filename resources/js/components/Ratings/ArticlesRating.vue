@@ -6,12 +6,7 @@
 import Rating from "./Rating";
 
 export default {
-    components: {Rating},
-    data() {
-        return {
-
-        }
-    }
+    components: {Rating}
 }
 </script>
 

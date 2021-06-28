@@ -16,6 +16,7 @@ const components = {
 
     // rating
     'points-rating':            'Ratings/PointsRating',
+    'travels-rating':           'Ratings/TravelsRating',
     'articles-rating':          'Ratings/ArticlesRating',
 
     // statistics

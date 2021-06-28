@@ -7,6 +7,7 @@ use App\Http\Controllers\Statistics\ArticleStatisticsController;
 use App\Http\Controllers\Statistics\CompareController;
 use App\Http\Controllers\Statistics\EventStatisticsController;
 use App\Http\Controllers\Statistics\RatingPointsStatisticsController;
+use App\Http\Controllers\TravelsRatingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('rating/articles/show', [ArticlesRatingController::class, 'show'])->name('rating.articles.show');
+Route::get('rating/travels/show', [TravelsRatingController::class, 'show'])->name('rating.travels.show');
 Route::get('rating/show', [RatingController::class, 'show'])->name('rating.show');
 
 

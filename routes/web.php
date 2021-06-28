@@ -43,6 +43,7 @@ Route::get('events/{event}/users/edit', [\App\Http\Controllers\EventsController:
 Route::resource('events', \App\Http\Controllers\EventsController::class);
 
 // rating
+Route::get('rating/travels', [\App\Http\Controllers\TravelsRatingController::class, 'index'])->name('rating.travels.index');
 Route::get('rating/articles', [\App\Http\Controllers\ArticlesRatingController::class, 'index'])->name('ratings.articles.index');
 
 Route::resource('rating', \App\Http\Controllers\RatingController::class)
@@ -76,10 +77,3 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\UserController::class, 'home'])->name('home');
 Route::get('/settings', [App\Http\Controllers\UserController::class, 'settings'])->name('settings');
-
-
-Route::get('/notification', function () {
-    $event = \App\Models\Event::first();
-
-
-});

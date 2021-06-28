@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,41 +18,40 @@ class ArticlesRatingController extends Controller
     public function show(Request $request): JsonResponse
     {
         if ($request->has(['start', 'end'])) {
-            $start = Carbon::parse($request->get('start'));
-            $end = Carbon::parse($request->get('end'));
+            $start = Carbon::parse($request->get('start'))->startOfMonth();
+            $end = Carbon::parse($request->get('end'))->endOfMonth();
         } else {
             $start = Article::oldest('date')->first()->date;
             $end = now();
         }
 
-        $users = User::whereHas('availableArticles')->select(['id', 'name'])
-            ->withCount(['availableArticles', 'pointsOnArticles'])
-            ->with('availableArticles.views:id')->get()->map(function (User $user) {
-                $user->views_on_articles_count = $user->articles->sum(function (Article $article) {
-                    return (int) $article->views->count() / 10;
-                });
-
-                return $user;
-            });
+        $users = Article::published()->checked()
+            ->whereBetween('date', [$start, $end])
+            ->select(['id', 'author_id'])
+            ->withViewsCount()->withCount('points')->with('author')
+            ->get()
+            ->groupBy('author_id');
 
         return response()->json([
-            'rating' => $users->map(function ($user) {
-                $total = $user->articles_count + $user->points_on_articles_count;
+            'rating' => $users->map(function (Collection $articles) {
+                $total = $this->getCategories()->sum(function ($category) use ($articles) {
+                    return $this->{$category['method']}($articles);
+                });
 
                 return [
-                    'user' => $user->only('id', 'name', 'url'),
+                    'user' => $articles->first()->author->only('id', 'name', 'url'),
 
-                    'points' => $this->getCategories()->map(function ($category) use ($user, $total) {
+                    'points' => $this->getCategories()->map(function ($category) use ($articles, $total) {
                         return [
                             'category' => $category['id'],
 
-                            'amount' => $amount = $user->{$category['attribute']},
-                            'width' => abs($amount / $total * 100),
+                            'amount' => $amount = $this->{$category['method']}($articles),
+                            'width' => $amount / $total * 100,
                         ];
                     }),
                     'total' => $total
                 ];
-            }),
+            })->values(),
             'categories' => $this->getCategories()->toArray(),
             'meta' => [
                 'period' => [
@@ -62,6 +60,21 @@ class ArticlesRatingController extends Controller
                 ],
             ]
         ]);
+    }
+
+    protected function getTotalArticlesCount(Collection $articles): int
+    {
+        return $articles->count();
+    }
+
+    protected function getTotalPointsCount(Collection $articles): int
+    {
+        return $articles->sum('points_count');
+    }
+
+    protected function getTotalViewsCount(Collection $articles): int
+    {
+        return (int)$articles->sum('views_count') / 10;
     }
 
     protected function getCategories(): Collection
@@ -74,7 +87,7 @@ class ArticlesRatingController extends Controller
                 'order' => 1,
                 'disabled' => false,
 
-                'attribute' => 'available_articles_count'
+                'method' => 'getTotalArticlesCount'
             ],
             [
                 'id' => 1,
@@ -83,7 +96,7 @@ class ArticlesRatingController extends Controller
                 'order' => 2,
                 'disabled' => false,
 
-                'attribute' => 'points_on_articles_count'
+                'method' => 'getTotalPointsCount',
             ],
             [
                 'id' => 2,
@@ -92,7 +105,7 @@ class ArticlesRatingController extends Controller
                 'order' => 3,
                 'disabled' => false,
 
-                'attribute' => 'views_on_articles_count'
+                'method' => 'getTotalViewsCount',
             ]
         ]);
     }
