@@ -31,8 +31,16 @@ return [
     ],
 
     'telegram-bot-api' => [
+        // token of @ftk_sut telegram bot
         'token' => env('TELEGRAM_BOT_TOKEN'),
-        'channel_id' => (int) env('TELEGRAM_CHANNEL_ID'),
-        'allowed_tags' => ['b', 'strong', 'i', 'em', 'u', 'ins', 's', 'strike', 'del', 'a', 'code', 'pre']
+
+        // tags, that can be used in telegram message
+        'allowed_tags' => ['b', 'strong', 'i', 'em', 'u', 'ins', 's', 'strike', 'del', 'a', 'code', 'pre'],
+
+        // @ftk_sut notifications channel id
+        'channel_id' => env('TELEGRAM_CHANNEL_ID'),
+
+        // admin chat id (admin username - @Simakovkin)
+        'admin_id' => env('TELEGRAM_ADMIN_ID')
     ],
 ];
