@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class RatingImport implements ToCollection, WithHeadingRow, WithMultipleSheets
+class PointsRatingImport implements ToCollection, WithHeadingRow, WithMultipleSheets
 {
     public Carbon $date;
 
@@ -26,20 +26,20 @@ class RatingImport implements ToCollection, WithHeadingRow, WithMultipleSheets
         $sheet_name = $this->date->isoFormat('MMMMYYYY');
 
         return [
-            $sheet_name => new RatingImport($this->date)
+            $sheet_name => new PointsRatingImport($this->date)
         ];
     }
 
 
     /**
-     * @param Collection $rows
+     * @param Collection $collection
      */
-    public function collection(Collection $rows)
+    public function collection(Collection $collection)
     {
         $categories = RatingPointCategory::all();
         $users = User::all();
 
-        foreach ($rows as $row) {
+        foreach ($collection as $row) {
             if (!$row[0]) {
                 break;
             }
@@ -50,16 +50,13 @@ class RatingImport implements ToCollection, WithHeadingRow, WithMultipleSheets
 
             foreach ($row->except(0, 1) as $category => $amount) {
                 if ($category = $categories->where('slug', $category)->first() and $amount) {
-                    array_push(
-                        $user_points,
-                        [
-                            'rating_point_category_id' => $category->id,
-                            'user_id' => $user->id,
+                    $user_points[] = [
+                        'rating_point_category_id' => $category->id,
+                        'user_id' => $user->id,
 
-                            'amount' => $amount,
-                            'date' => $this->date,
-                        ]
-                    );
+                        'amount' => $amount,
+                        'date' => $this->date,
+                    ];
                 }
             }
 

@@ -23,7 +23,7 @@ class ArticleAchievementsTest extends TestCase
     {
         auth()->user()->articles()->saveMany(
             Article::factory()->count(10)->make([
-                'type' => ArticleType::OnCheck()
+                'type' => ArticleType::OnCheck
             ])
         )->each->check();
 

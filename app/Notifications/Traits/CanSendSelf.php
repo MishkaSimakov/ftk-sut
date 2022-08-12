@@ -10,7 +10,16 @@ trait CanSendSelf
 {
     public function notify()
     {
-        Notification::route('telegram', config('services.telegram-bot-api.channel_id'))
+        if (config('app.env') === 'testing') {
+            return;
+        }
+
+        Notification::route('telegram', $this->getChannelId())
             ->notify($this);
+    }
+
+    protected function getChannelId()
+    {
+        return config('services.telegram-bot-api.channel_id');
     }
 }

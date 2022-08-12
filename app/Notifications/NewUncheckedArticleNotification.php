@@ -3,9 +3,9 @@
 namespace App\Notifications;
 
 use App\Models\Article;
+use App\Notifications\Traits\CanSendSelf;
 use App\Notifications\Traits\SendMultilinesTelegramMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\Telegram\TelegramChannel;
@@ -15,6 +15,7 @@ class NewUncheckedArticleNotification extends Notification implements ShouldQueu
 {
     use Queueable;
     use SendMultilinesTelegramMessage;
+    use CanSendSelf;
 
     protected Article $article;
 
@@ -37,6 +38,11 @@ class NewUncheckedArticleNotification extends Notification implements ShouldQueu
             ])
             ->button('Сайт ФТК', 'https://ftk-sut.ru')
             ->button('Непроверенные статьи', 'https://ftk-sut.ru/articles/unchecked');
+    }
+
+    protected function getChannelId()
+    {
+        return config('services.telegram-bot-api.admin_id');
     }
 
     protected function getMessageLines(): array

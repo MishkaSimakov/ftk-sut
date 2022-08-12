@@ -20,13 +20,14 @@ import {
     faHiking,
     faBiking,
     faArrowRight,
-    faArrowLeft
+    faArrowLeft,
+    faClock
 } from '@fortawesome/free-solid-svg-icons'
 import {faHeart as regularHeart, faEye, faQuestionCircle} from '@fortawesome/free-regular-svg-icons'
 
 library.add(
     faEllipsisH, faArrowDown, faCog, faLongArrowAltRight, solidHeart, faTimes, faHiking, faBiking, faArrowRight, faArrowLeft,
-    regularHeart, faEye, faQuestionCircle
+    regularHeart, faEye, faQuestionCircle, faClock
 )
 dom.watch()
 

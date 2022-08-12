@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(TelescopeServiceProvider::class);
         }
 
-        HeadingRowFormatter::extend('rating', function($value) {
+        HeadingRowFormatter::extend('rating', function ($value) {
             return optional(RatingPointCategory::whereHas('importNames', function (Builder $builder) use ($value) {
                 $builder->where('import_name', $value);
             })->first())->slug;

@@ -15,9 +15,9 @@ class ArticlePolicy
      * Determine whether the user can view any models.
      *
      * @param ?User $user
-     * @return mixed
+     * @return bool
      */
-    public function viewAny(?User $user)
+    public function viewAny(?User $user): bool
     {
         return true;
     }
@@ -27,9 +27,9 @@ class ArticlePolicy
      *
      * @param ?User $user
      * @param Article $article
-     * @return mixed
+     * @return bool
      */
-    public function view(?User $user, Article $article)
+    public function view(?User $user, Article $article): bool
     {
         return $article->isAvailable() or $user->is_admin or $user->id === $article->author->id;
     }
@@ -38,9 +38,9 @@ class ArticlePolicy
      * Determine whether the user can create models.
      *
      * @param User $user
-     * @return mixed
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return true;
     }
@@ -50,9 +50,9 @@ class ArticlePolicy
      *
      * @param User $user
      * @param Article $article
-     * @return mixed
+     * @return bool
      */
-    public function update(User $user, Article $article)
+    public function update(User $user, Article $article): bool
     {
         return $user->id === $article->author->id or $user->is_admin;
     }
@@ -62,9 +62,9 @@ class ArticlePolicy
      *
      * @param User $user
      * @param Article $article
-     * @return mixed
+     * @return bool
      */
-    public function delete(User $user, Article $article)
+    public function delete(User $user, Article $article): bool
     {
         return $user->id === $article->author->id or $user->is_admin;
     }
@@ -73,9 +73,9 @@ class ArticlePolicy
      * Determine whether the user can view unchecked articles.
      *
      * @param User $user
-     * @return mixed
+     * @return bool
      */
-    public function viewUnchecked(User $user)
+    public function viewUnchecked(User $user): bool
     {
         return true;
     }
@@ -85,9 +85,9 @@ class ArticlePolicy
      *
      * @param User $user
      * @param Article $article
-     * @return mixed
+     * @return bool
      */
-    public function check(User $user, Article $article)
+    public function check(User $user, Article $article): bool
     {
         return $user->is_admin and $article->type->is(ArticleType::OnCheck());
     }
@@ -97,9 +97,9 @@ class ArticlePolicy
      *
      * @param User $user
      * @param Article $article
-     * @return mixed
+     * @return bool
      */
-    public function like(User $user, Article $article)
+    public function like(User $user, Article $article): bool
     {
         return $article->type->is(ArticleType::Checked);
     }
@@ -108,9 +108,9 @@ class ArticlePolicy
      * Determine whether the user can view unpublished articles.
      *
      * @param User $user
-     * @return mixed
+     * @return bool
      */
-    public function viewUnpublished(User $user)
+    public function viewUnpublished(User $user): bool
     {
         return true;
     }
@@ -118,10 +118,10 @@ class ArticlePolicy
     /**
      * Determine whether the user can view drafts.
      *
-     * @param ?User $user
-     * @return mixed
+     * @param User $user
+     * @return bool
      */
-    public function viewDrafts(?User $user)
+    public function viewDrafts(User $user): bool
     {
         return true;
     }
@@ -131,9 +131,9 @@ class ArticlePolicy
      *
      * @param User $user
      * @param ?Article $article
-     * @return mixed
+     * @return bool
      */
-    public function saveToDrafts(User $user, ?Article $article = null)
+    public function saveToDrafts(User $user, ?Article $article = null): bool
     {
         if ($article && $article->type->is(ArticleType::Checked)) {
             return false;

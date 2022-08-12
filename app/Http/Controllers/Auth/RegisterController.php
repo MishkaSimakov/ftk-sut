@@ -55,8 +55,12 @@ class RegisterController extends Controller
                 'required',
                 'string',
                 'size:6',
-                'exists:users,register_code'
-                // TODO: добавить проверку, были ли зарегистрирован пользователь ранее
+                'exists:users,register_code',
+                function ($attribute, $value, $fail) {
+                    if (User::whereRegisterCode($value)->whereNotNull('email')->exists()) {
+                        $fail('Этот пользователь уже зарегистрирован.');
+                    }
+                },
             ],
             'email' => [
                 'required', 'string', 'email', 'max:255',

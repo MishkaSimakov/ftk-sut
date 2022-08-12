@@ -91,4 +91,15 @@ class EventPolicy
     {
         return $user->is_admin;
     }
+
+    /**
+     * Determine whether the user can import events from excel file.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function import(User $user)
+    {
+        return $user->is_admin;
+    }
 }

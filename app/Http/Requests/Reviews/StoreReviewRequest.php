@@ -11,6 +11,7 @@ class StoreReviewRequest extends FormRequest
         return [
             'email' => 'required|email',
             'body' => 'required',
+            'g-recaptcha-response' => 'recaptcha',
         ];
     }
 }

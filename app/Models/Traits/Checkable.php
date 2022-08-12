@@ -20,7 +20,7 @@ trait Checkable
             'checked_at' => now()
         ]);
 
-        $this->checked($isFirstTimeChecked);
+        $this->checkedEvent($isFirstTimeChecked);
     }
 
     protected function checkedEvent(bool $isFirstTimeChecked)

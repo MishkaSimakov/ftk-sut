@@ -45,8 +45,7 @@
             </a>
         </div>
 
-
-        <div class="text-center">
+        <div class="text-center" v-if="sortedCategories.length > 5">
             <a href="#" v-on:click.prevent="isCategoriesExpanded = !isCategoriesExpanded">
                 {{ isCategoriesExpanded ? 'показать меньше' : 'показать больше' }}
             </a>

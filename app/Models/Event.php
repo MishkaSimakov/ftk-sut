@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -94,5 +95,11 @@ class Event extends Model
         }
 
         return $date->isoFormat('Do MMMM HH:mm YYYY');
+    }
+
+    public function scopeFromPeriod(Builder $builder, CarbonPeriod $period): Builder
+    {
+        return $builder->whereDate('date_start', '>=', $period->start->startOfMonth())
+            ->whereDate('date_end', '<=', $period->end->endOfMonth());
     }
 }

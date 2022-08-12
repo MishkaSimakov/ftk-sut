@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Events\StoreEventRequest;
 use App\Http\Requests\Events\UpdateEventRequest;
+use App\Imports\TravelsImport;
 use App\Models\Event;
 use App\Notifications\EventCreatedNotification;
 use App\Services\ImageUploadService;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class EventsController extends Controller
@@ -97,6 +101,18 @@ class EventsController extends Controller
         $event->delete();
 
         return redirect()->back();
+    }
+
+    public function import()
+    {
+        return view('events.import');
+    }
+
+    public function storeImported(Request $request)
+    {
+        Excel::import(new TravelsImport(), $request->file('travels'));
+
+        return redirect()->route('events.index');
     }
 
     public function editUsersList(Event $event)

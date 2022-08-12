@@ -25,7 +25,6 @@
             ]) !!}
     </script>
 
-
     <!-- Some SEO -->
     <title>@yield('title') - {{ config('app.name') }}</title>
     <meta name="description" content="@yield('description', 'Сайт Фототехнического клуба СЮТ. Здесь есть всё, чтобы быть активным кружковцем и не сачковать! Новости, расписание, статьи, рейтинг - и всё это на одном сайте.')">
