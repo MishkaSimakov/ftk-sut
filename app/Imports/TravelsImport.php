@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
@@ -62,12 +63,19 @@ class TravelsImport implements ToCollection, WithMultipleSheets
             if (!$travels[$index]) {
                 $travels[$index] = Event::create([
                     'name' => ($travel->isHiking() ? 'Пеший' : 'Велосипедный') . ' поход ' . $carbonDateStart->isoFormat('LL'),
+                    'image_url' => '/events/hike.jpeg',
                     'date_start' => $carbonDateStart->setHour(8),
                     'date_end' => $carbonDateEnd->setHour(16)
                 ]);
 
                 $travels[$index]->travel()->save($travel);
+            } else if ($travels[$index]->distance !== $travel->distance) {
+                $travels[$index]->travel()->update([
+                    'distance' => $travel->distance
+                ]);
             }
+
+            $travels[$index]->users()->detach();
         }
 
         $users = User::select('id', 'name')->get();

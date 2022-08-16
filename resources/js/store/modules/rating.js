@@ -126,6 +126,7 @@ const mutations = {
 
         state.rating = points.map((user) => {
             user.width = Math.abs(user.total / max * 100)
+
             user.points = user.points.map((point) => {
                 point.category = state.categories[point.category]
                 return point

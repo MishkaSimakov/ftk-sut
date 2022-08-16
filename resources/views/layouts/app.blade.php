@@ -32,11 +32,11 @@
     <meta name="robots" content="@yield('robots', 'index, follow')"/>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     @if(!isset($includeLivewire) || $includeLivewire)
         @livewireStyles

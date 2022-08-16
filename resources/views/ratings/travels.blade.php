@@ -15,8 +15,8 @@
         <li class="nav-item col-md-4">
             <span class="nav-link active">Походы</span>
         </li>
-        <li class="nav-item col-md-4">
-            <a class="nav-link" href="{{ route('ratings.articles.index') }}">Статьи</a>
+        <li class="nav-item col-md-4" role="presentation" data-toggle="tooltip" title="Этот раздел ещё в разработке">
+            <a class="nav-link disabled" id="articles-rating-tab" href="#">Статьи</a>
         </li>
     </ul>
 
