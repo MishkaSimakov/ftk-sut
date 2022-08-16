@@ -6,7 +6,24 @@
 @section('robots', 'noindex, follow')
 
 @section('content')
-    <h1 class="text-center mb-4">{{ $article->title }}</h1>
+    <h1 class="text-center mb-1">{{ $article->title }}</h1>
+
+    <div class="text-center mb-4">
+        <span class="text-secondary">
+            @if($article->type->isNot(\App\Enums\ArticleType::Checked))
+                {{ Str::lower(\App\Enums\ArticleType::getDescription($article->type)) }}
+            @endif
+
+            @if($article->type->isNot(\App\Enums\ArticleType::Checked) && $article->isNotPublished)
+                    •
+            @endif
+
+            @if($article->isNotPublished)
+                <span data-toggle="tooltip" title="Статья будет опубликована {{ $article->date->isoFormat('LLL') }}">
+                    отложена</span>
+            @endif
+        </span>
+    </div>
 
     <div class="col-xl-9 article-body mx-auto container text-wrap">
         {!! $article->body !!}
@@ -43,7 +60,9 @@
 
 @push('scripts')
     <script>
-        document.addEventListener("DOMContentLoaded", function (event) {
+        document.addEventListener("DOMContentLoaded", function () {
+            $('[data-toggle="tooltip"]').tooltip()
+
             let img = document.body.getElementsByTagName("img");
             let i = 0;
             while (i < img.length) {

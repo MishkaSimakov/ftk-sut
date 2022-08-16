@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ArticleController;
+use App\Http\Controllers\Api\DiscordController;
 use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\ArticlesRatingController;
 use App\Http\Controllers\Statistics\ArticleStatisticsController;
@@ -36,4 +37,8 @@ Route::prefix('statistics/')->name('stat.')->group(function () {
     Route::get('events/{user}', [EventStatisticsController::class, 'getShortEventsStatistics'])->name('events');
 
     Route::get('compare/{first}/{second}', [CompareController::class, 'getCompareData'])->name('compare');
+});
+
+Route::prefix('discord/')->name('discord.')->group(function () {
+    Route::get('invite', [DiscordController::class, 'invite'])->name('invite')->middleware('signed');
 });

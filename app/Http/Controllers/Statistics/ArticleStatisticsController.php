@@ -12,16 +12,17 @@ class ArticleStatisticsController extends Controller
     public function getShortArticlesStatistics(User $user)
     {
         $articles = Article::where('author_id', $user->id)
+            ->checked()->published()
             ->withCount('points')->withViewsCount()
             ->latest('date')
-            ->limit(10)->get();
+            ->get();
 
         return response()->json([
-            'articles' => ArticleStatisticsResource::collection($articles),
+            'articles' => ArticleStatisticsResource::collection($articles->take(10)),
             'count' => [
-                'articles' => $user->articles()->count(),
-                'points' => $user->articles()->withCount('points')->get()->sum('points_count'),
-                'views' => $user->articles()->withViewsCount()->get()->sum('views_count')
+                'articles' => $articles->count(),
+                'points' => $articles->sum('points_count'),
+                'views' => $articles->sum('views_count')
             ]
         ]);
     }

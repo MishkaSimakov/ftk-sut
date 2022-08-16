@@ -5,7 +5,7 @@ namespace App\Services\Rating;
 
 
 use App\Events\Rating\RatingCreated;
-use App\Imports\RatingImport;
+use App\Imports\PointsRatingImport;
 use App\Models\RatingPoint;
 use App\Models\User;
 use Carbon\Carbon;
@@ -92,7 +92,7 @@ class Rating
 
     public function store(Carbon $date, UploadedFile $rating)
     {
-        Excel::import(new RatingImport($date), $rating);
+        Excel::import(new PointsRatingImport($date), $rating);
 
         RatingCreated::dispatch($date);
     }

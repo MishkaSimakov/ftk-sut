@@ -13,7 +13,7 @@ class PageController extends Controller
         $statistics = [
             'users_count' => User::count(),
             'events_count' => Event::count(),
-            'articles_count' => Article::count()
+            'articles_count' => Article::checked()->published()->count()
         ];
 
         return view('welcome', compact('statistics'));

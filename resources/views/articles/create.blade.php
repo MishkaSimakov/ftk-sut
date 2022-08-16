@@ -87,7 +87,7 @@
                     <button type="submit" class="btn btn-primary mr-md-3">
                         @admin
                             Опубликовать
-                        @elseadmin
+                        @else
                             Отправить на проверку
                         @endadmin
                     </button>

@@ -25,7 +25,6 @@
             ]) !!}
     </script>
 
-
     <!-- Some SEO -->
     <title>@yield('title') - {{ config('app.name') }}</title>
     <meta name="description" content="@yield('description', 'Сайт Фототехнического клуба СЮТ. Здесь есть всё, чтобы быть активным кружковцем и не сачковать! Новости, расписание, статьи, рейтинг - и всё это на одном сайте.')">
@@ -33,11 +32,11 @@
     <meta name="robots" content="@yield('robots', 'index, follow')"/>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     @if(!isset($includeLivewire) || $includeLivewire)
         @livewireStyles

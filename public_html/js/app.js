@@ -14288,9 +14288,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Rating: _Rating__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  data: function data() {
-    return {};
   }
 });
 
@@ -14564,7 +14561,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -14628,6 +14624,29 @@ var _createNamespacedHelp = Object(vuex__WEBPACK_IMPORTED_MODULE_0__["createName
       el: this.$refs.categories_list_container,
       hideOverflow: true
     });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ratings/TravelsRating.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Ratings/TravelsRating.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Rating__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Rating */ "./resources/js/components/Ratings/Rating.vue");
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Rating: _Rating__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -49083,170 +49102,184 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "my-2 card w-100" }, [
-      _c("div", { ref: "rating_container", staticClass: "card-body py-2" }, [
-        _vm.isLoading
-          ? _c("div", {
-              staticClass: "text-secondary d-flex spinner-border my-4 mx-auto",
-              attrs: { role: "status" }
-            })
-          : _c("div", { staticClass: "col" }, [
-              _c("div", { staticClass: "row" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "my-auto font-weight-bolder",
-                    class: _vm.columnSizes.place
-                  },
-                  [_vm._v("\n                        №\n                    ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "my-auto font-weight-bolder",
-                    class: _vm.columnSizes.name
-                  },
-                  [
-                    _vm._v(
-                      "\n                        Фамилия, имя\n                    "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "my-auto font-weight-bolder",
-                    class: _vm.columnSizes.points
-                  },
-                  [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.pointsColumnTitle) +
-                        "\n                    "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn text-primary text-right font-weight-bold",
-                    class: _vm.columnSizes.categories,
-                    attrs: {
-                      "data-toggle": "modal",
-                      "data-target": "#ratingSettingsModal"
-                    }
-                  },
-                  [
-                    _c("span", { staticClass: "d-none d-md-inline" }, [
-                      _vm._v("Настроить")
-                    ]),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "fas fa-cog ml-2" })
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm.rating.length
-                ? _c(
+      _c(
+        "div",
+        { ref: "rating_container", staticClass: "card-body py-2 px-0 px-md-2" },
+        [
+          _vm.isLoading
+            ? _c("div", {
+                staticClass:
+                  "text-secondary d-flex spinner-border my-4 mx-auto",
+                attrs: { role: "status" }
+              })
+            : _c("div", { staticClass: "col" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
                     "div",
-                    _vm._l(_vm.rating, function(points, place) {
-                      return _c(
-                        "div",
-                        { key: points.user.id, staticClass: "row" },
-                        [
-                          _c("div", { class: _vm.columnSizes.place }, [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(place + 1) +
-                                "\n                        "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "text-truncate",
-                              class: _vm.columnSizes.name
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "text-decoration-none",
-                                  attrs: { href: points.user.url }
-                                },
-                                [_vm._v(_vm._s(points.user.name))]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "text-truncate",
-                              class: _vm.columnSizes.points
-                            },
-                            [
+                    {
+                      staticClass: "my-auto font-weight-bolder",
+                      class: _vm.columnSizes.place
+                    },
+                    [
+                      _vm._v(
+                        "\n                        №\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "my-auto font-weight-bolder",
+                      class: _vm.columnSizes.name
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Фамилия, имя\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "my-auto font-weight-bolder",
+                      class: _vm.columnSizes.points
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(_vm.pointsColumnTitle) +
+                          "\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn text-primary text-right font-weight-bold",
+                      class: _vm.columnSizes.categories,
+                      attrs: {
+                        "data-toggle": "modal",
+                        "data-target": "#ratingSettingsModal"
+                      }
+                    },
+                    [
+                      _c("span", { staticClass: "d-none d-md-inline" }, [
+                        _vm._v("Настроить")
+                      ]),
+                      _vm._v(" "),
+                      _c("i", { staticClass: "fas fa-cog ml-2" })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.rating.length
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.rating, function(points, place) {
+                        return _c(
+                          "div",
+                          { key: points.user.id, staticClass: "row" },
+                          [
+                            _c("div", { class: _vm.columnSizes.place }, [
                               _vm._v(
                                 "\n                            " +
-                                  _vm._s(points.total) +
+                                  _vm._s(place + 1) +
                                   "\n                        "
                               )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { class: _vm.columnSizes.categories }, [
+                            ]),
+                            _vm._v(" "),
                             _c(
                               "div",
                               {
-                                staticClass: "progress my-2",
-                                style: {
-                                  width: points.width + "%",
-                                  cursor: "pointer",
-                                  height: "40%",
-                                  position: "relative",
-                                  direction: points.total > 0 ? "ltr" : "rtl",
-                                  right:
-                                    points.total > 0 ? "" : points.width + "%"
-                                }
+                                staticClass: "text-truncate",
+                                class: _vm.columnSizes.name
                               },
-                              _vm._l(points.points, function(point) {
-                                return !point.category.disabled
-                                  ? _c("div", {
-                                      key: point.id,
-                                      staticClass: "progress-bar",
-                                      style: {
-                                        width: point.width + "%",
-                                        backgroundColor: point.category.color
-                                      },
-                                      attrs: {
-                                        "data-toggle": "tooltip",
-                                        "data-placement": "top",
-                                        title:
-                                          point.category.name +
-                                          ": " +
-                                          point.amount
-                                      }
-                                    })
-                                  : _vm._e()
-                              }),
-                              0
-                            )
-                          ])
-                        ]
-                      )
-                    }),
-                    0
-                  )
-                : _c("div", { staticClass: "my-3 text-center h6 text-info" }, [
-                    _c("span", { staticClass: "mx-3" }, [
-                      _vm._v("Нет данных за этот период")
-                    ])
-                  ])
-            ])
-      ])
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "text-decoration-none",
+                                    attrs: { href: points.user.url }
+                                  },
+                                  [_vm._v(_vm._s(points.user.name))]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "text-truncate",
+                                class: _vm.columnSizes.points
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(points.total) +
+                                    "\n                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { class: _vm.columnSizes.categories }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "progress my-2",
+                                  style: {
+                                    width: points.width + "%",
+                                    cursor: "pointer",
+                                    height: "40%",
+                                    position: "relative",
+                                    direction: points.total > 0 ? "ltr" : "rtl",
+                                    right:
+                                      points.total > 0 ? "" : points.width + "%"
+                                  }
+                                },
+                                _vm._l(points.points, function(point) {
+                                  return !point.category.disabled
+                                    ? _c("div", {
+                                        key: point.id,
+                                        staticClass: "progress-bar",
+                                        style: {
+                                          width: point.width + "%",
+                                          backgroundColor: point.category.color
+                                        },
+                                        attrs: {
+                                          "data-toggle": "tooltip",
+                                          "data-placement": "top",
+                                          title:
+                                            point.category.name +
+                                            ": " +
+                                            point.amount
+                                        }
+                                      })
+                                    : _vm._e()
+                                }),
+                                0
+                              )
+                            ])
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  : _c(
+                      "div",
+                      { staticClass: "my-3 text-center h6 text-info" },
+                      [
+                        _c("span", { staticClass: "mx-3" }, [
+                          _vm._v("Нет данных за этот период")
+                        ])
+                      ]
+                    )
+              ])
+        ]
+      )
     ]),
     _vm._v(" "),
     _c(
@@ -49462,31 +49495,33 @@ var render = function() {
         0
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "text-center" }, [
-        _c(
-          "a",
-          {
-            attrs: { href: "#" },
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                _vm.isCategoriesExpanded = !_vm.isCategoriesExpanded
-              }
-            }
-          },
-          [
-            _vm._v(
-              "\n            " +
-                _vm._s(
-                  _vm.isCategoriesExpanded
-                    ? "показать меньше"
-                    : "показать больше"
-                ) +
-                "\n        "
+      _vm.sortedCategories.length > 5
+        ? _c("div", { staticClass: "text-center" }, [
+            _c(
+              "a",
+              {
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.isCategoriesExpanded = !_vm.isCategoriesExpanded
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n            " +
+                    _vm._s(
+                      _vm.isCategoriesExpanded
+                        ? "показать меньше"
+                        : "показать больше"
+                    ) +
+                    "\n        "
+                )
+              ]
             )
-          ]
-        )
-      ]),
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "button",
@@ -49513,6 +49548,36 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ratings/TravelsRating.vue?vue&type=template&id=1c2343c2&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Ratings/TravelsRating.vue?vue&type=template&id=1c2343c2&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("rating", {
+    attrs: {
+      "route-name": "rating.travels.index",
+      "loading-route-name": "api.rating.travels.show",
+      "points-column-name": "Расстояние, км"
+    }
+  })
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -64031,6 +64096,8 @@ var map = {
 	"./Ratings/Rating.vue": "./resources/js/components/Ratings/Rating.vue",
 	"./Ratings/Settings/SettingsForm": "./resources/js/components/Ratings/Settings/SettingsForm.vue",
 	"./Ratings/Settings/SettingsForm.vue": "./resources/js/components/Ratings/Settings/SettingsForm.vue",
+	"./Ratings/TravelsRating": "./resources/js/components/Ratings/TravelsRating.vue",
+	"./Ratings/TravelsRating.vue": "./resources/js/components/Ratings/TravelsRating.vue",
 	"./Statistics/ArticlesStatistics": "./resources/js/components/Statistics/ArticlesStatistics.vue",
 	"./Statistics/ArticlesStatistics.vue": "./resources/js/components/Statistics/ArticlesStatistics.vue",
 	"./Statistics/Compare/RatingPointsCompare": "./resources/js/components/Statistics/Compare/RatingPointsCompare.vue",
@@ -64824,6 +64891,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Ratings/TravelsRating.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/Ratings/TravelsRating.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TravelsRating_vue_vue_type_template_id_1c2343c2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TravelsRating.vue?vue&type=template&id=1c2343c2&scoped=true& */ "./resources/js/components/Ratings/TravelsRating.vue?vue&type=template&id=1c2343c2&scoped=true&");
+/* harmony import */ var _TravelsRating_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TravelsRating.vue?vue&type=script&lang=js& */ "./resources/js/components/Ratings/TravelsRating.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TravelsRating_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TravelsRating_vue_vue_type_template_id_1c2343c2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TravelsRating_vue_vue_type_template_id_1c2343c2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "1c2343c2",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Ratings/TravelsRating.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Ratings/TravelsRating.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/Ratings/TravelsRating.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TravelsRating_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TravelsRating.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ratings/TravelsRating.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TravelsRating_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Ratings/TravelsRating.vue?vue&type=template&id=1c2343c2&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/Ratings/TravelsRating.vue?vue&type=template&id=1c2343c2&scoped=true& ***!
+  \******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TravelsRating_vue_vue_type_template_id_1c2343c2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TravelsRating.vue?vue&type=template&id=1c2343c2&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ratings/TravelsRating.vue?vue&type=template&id=1c2343c2&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TravelsRating_vue_vue_type_template_id_1c2343c2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TravelsRating_vue_vue_type_template_id_1c2343c2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Statistics/ArticlesStatistics.vue":
 /*!*******************************************************************!*\
   !*** ./resources/js/components/Statistics/ArticlesStatistics.vue ***!
@@ -65133,6 +65269,7 @@ var components = {
   // events
   // rating
   'points-rating': 'Ratings/PointsRating',
+  'travels-rating': 'Ratings/TravelsRating',
   'articles-rating': 'Ratings/ArticlesRating',
   // statistics
   'rating-points-statistics': 'Statistics/RatingPointsStatistics',
@@ -65249,7 +65386,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEllipsisH"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faArrowDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faLongArrowAltRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faHeart"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faHiking"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faBiking"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faArrowRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faArrowLeft"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faHeart"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faEye"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faQuestionCircle"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEllipsisH"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faArrowDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faLongArrowAltRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faHeart"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faHiking"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faBiking"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faArrowRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faArrowLeft"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faHeart"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faEye"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faQuestionCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faClock"]);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["dom"].watch(); // Vue calendar
 // import VCalendar from 'v-calendar';
 // Vue.use(VCalendar, {
@@ -65583,8 +65720,8 @@ var mutations = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Programs\PhpStormProjects\ftk-sut\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Programs\PhpStormProjects\ftk-sut\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/mihailsimakov/Documents/Programs/PhpStormProjects/ftk-sut/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/mihailsimakov/Documents/Programs/PhpStormProjects/ftk-sut/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

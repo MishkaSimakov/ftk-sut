@@ -153,8 +153,16 @@
                 </textarea>
                 </div>
 
+                <div class="form-group row">
+                    <div class="col-md-6"> {!! htmlFormSnippet() !!} </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Отправить</button>
             </form>
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    {!! htmlScriptTagJsApi() !!}
+@endpush

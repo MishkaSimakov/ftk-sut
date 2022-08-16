@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Events\StoreEventRequest;
 use App\Http\Requests\Events\UpdateEventRequest;
+use App\Imports\TravelsImport;
 use App\Models\Event;
 use App\Notifications\EventCreatedNotification;
 use App\Services\ImageUploadService;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class EventsController extends Controller
@@ -28,7 +32,7 @@ class EventsController extends Controller
 
     public function past()
     {
-        $events = Event::past()->with(['users', 'travel'])->latest('date_start')->paginate(Event::PAGINATION_LIMIT);
+        $events = Event::past()->with(['users', 'travel'])->latest('date_start')->get();
 
         return view('events.index', compact('events'));
     }
@@ -79,12 +83,12 @@ class EventsController extends Controller
         $event->update($request->except('image'));
 
         if ($request->has('is_travel')) {
-            $event->travel()->updateOrCreate([
-                'distance' => $request->get('travel_distance'),
-                'type' => $request->get('travel_type'),
-            ]);
+            $event->travel()->updateOrCreate(
+                ['type' => $request->get('travel_type')],
+                ['distance' => (int)$request->get('travel_distance')]
+            );
         } elseif ($event->isTravel()) {
-            $event->travel->delete();
+            $event->travel()->delete();
         }
 
         return redirect()->route('events.index');
@@ -97,6 +101,18 @@ class EventsController extends Controller
         $event->delete();
 
         return redirect()->back();
+    }
+
+    public function import()
+    {
+        return view('events.import');
+    }
+
+    public function storeImported(Request $request)
+    {
+        Excel::import(new TravelsImport(), $request->file('travels'));
+
+        return redirect()->route('events.index');
     }
 
     public function editUsersList(Event $event)

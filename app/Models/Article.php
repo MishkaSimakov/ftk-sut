@@ -7,6 +7,7 @@ use App\Events\Article\ArticleFirstTimeChecked;
 use App\Events\Article\ArticleLiked;
 use App\Models\Traits\Checkable;
 use App\Models\Traits\Publishable;
+use App\Notifications\NewUncheckedArticleNotification;
 use App\Scoping\Traits\CanBeScoped;
 use App\Services\ArticleBodyPrepareService;
 use BenSampo\Enum\Traits\CastsEnums;
@@ -53,6 +54,12 @@ class Article extends Model implements Viewable
 
         self::deleting(function (Article $article) {
             (new ArticleBodyPrepareService())->deleteSavedArticleImages($article);
+        });
+
+        self::saved(function (Article $article) {
+            if ($article->type->is(ArticleType::OnCheck)) {
+                (new NewUncheckedArticleNotification($article))->notify();
+            }
         });
     }
 

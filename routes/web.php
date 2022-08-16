@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// hike-quest
+Route::view('soup-recipe', 'hike-quest');
+
 // info
 Route::get('/', [\App\Http\Controllers\PageController::class, 'welcome'])->name('main');
 Route::view('/about', 'about')->name('about');
@@ -38,6 +41,8 @@ Route::prefix('articles')->name('articles.')->group(function () {
 Route::resource('articles', \App\Http\Controllers\ArticleController::class);
 
 // events
+Route::get('events/import', [\App\Http\Controllers\EventsController::class, 'import'])->name('events.import');
+Route::post('events/import', [\App\Http\Controllers\EventsController::class, 'storeImported'])->name('events.store-imported');
 Route::get('events/past', [\App\Http\Controllers\EventsController::class, 'past'])->name('events.past');
 Route::get('events/{event}/users/edit', [\App\Http\Controllers\EventsController::class, 'editUsersList'])->name('events.users.edit');
 Route::resource('events', \App\Http\Controllers\EventsController::class);

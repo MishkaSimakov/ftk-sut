@@ -38,7 +38,7 @@ class ArticleController extends Controller
             'body' => $request->get('body'),
             'date' => $request->get('delayed_publication') == 'on' ? $request->get('date') : now(),
             'author_id' => $request->user()->is_admin ? $request->get('author') : $request->user()->id,
-            'type' => $request->get('is_draft') == true ? ArticleType::Draft : ArticleType::OnCheck,
+            'type' => $request->get('is_draft') ? ArticleType::Draft : ArticleType::OnCheck,
         ]);
 
         $article->attachTagsFromString($request->get('tags'));
@@ -74,15 +74,12 @@ class ArticleController extends Controller
         $article->update([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
-            'date' => $request->get('delayed_publication') == 'on' ? $request->get('date') : $article->date,
-            'author_id' => $request->user()->is_admin ? $request->get('author') : $request->user()->id
+            'date' => $request->get('delayed_publication') == 'on' ? $request->get('date') : ($article->date->isFuture() ? now() : $article->date),
+            'author_id' => $request->user()->is_admin ? $request->get('author') : $request->user()->id,
+            'type' => $request->get('is_draft') ? ArticleType::Draft : ArticleType::OnCheck
         ]);
 
-        if (!$request->user()->is_admin) {
-            $article->update([
-                'type' => $request->get('is_draft') == true ? ArticleType::Draft : ArticleType::OnCheck
-            ]);
-        } else {
+        if ($request->user()->is_admin && $article->type->isNot(ArticleType::Draft)) {
             $article->check();
         }
 
@@ -148,7 +145,11 @@ class ArticleController extends Controller
 
     public function tags()
     {
-        $tags = ArticleTag::withCount('articles')->orderByDesc('articles_count')->get();
+        $tags = ArticleTag::whereHas('articles', function ($query) {
+            $query->checked()->published();
+        })->withCount(['articles' => function ($query) {
+            $query->checked()->published();
+        }])->orderByDesc('articles_count')->get();
 
         return view('articles.tags', compact('tags'));
     }

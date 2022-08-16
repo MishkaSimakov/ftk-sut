@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\UserNotificationSubscriptions;
 use App\Http\Requests\Users\StoreUserRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
 use App\Models\User;
@@ -88,6 +87,7 @@ class UserController extends Controller
     public function articles(User $user)
     {
         $articles = $user->articles()
+            ->checked()->published()
             ->withCount('points')->withViewsCount()
             ->latest('date')
             ->get();

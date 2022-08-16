@@ -9,7 +9,11 @@ class ArticleTagsList extends Component
 {
     public function loadTags()
     {
-        return ArticleTag::withCount('articles')->orderByDesc('articles_count')->take(4)->get();
+        return ArticleTag::whereHas('articles', function ($query) {
+            $query->checked()->published();
+        })->withCount(['articles' => function ($query) {
+            $query->checked()->published();
+        }])->orderByDesc('articles_count')->take(4)->get();
     }
 
     public function render()

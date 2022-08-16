@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ArticleType;
 use App\Enums\TravelType;
 use App\Enums\UserType;
 
@@ -14,4 +15,9 @@ return [
         UserType::TeachingGraduate => 'Преподающий выпускник клуба',
         UserType::Stranger => 'Другое',
     ],
+    ArticleType::class => [
+        ArticleType::Draft => 'Черновик',
+        ArticleType::OnCheck => 'На проверке',
+        ArticleType::Checked => 'Проверено'
+    ]
 ];

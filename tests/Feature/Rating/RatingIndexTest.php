@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Rating;
 
-use App\Imports\RatingImport;
+use App\Imports\PointsRatingImport;
 use Carbon\Carbon;
 use Database\Seeders\RatingSeeder;
 use Maatwebsite\Excel\Facades\Excel;
@@ -54,6 +54,6 @@ class RatingIndexTest extends TestCase
     {
         $rating = storage_path('app/testing/rating_many_lists.xls');
 
-        Excel::import(new RatingImport(Carbon::parse('2020-01')), $rating);
+        Excel::import(new PointsRatingImport(Carbon::parse('2020-01')), $rating);
     }
 }

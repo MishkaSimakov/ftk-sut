@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="my-2 card w-100">
-            <div class="card-body py-2" ref="rating_container">
+            <div class="card-body py-2 px-0 px-md-2" ref="rating_container">
                 <div v-if="isLoading" class="text-secondary d-flex spinner-border my-4 mx-auto" role="status"></div>
                 <div v-else class="col">
                     <div class="row">

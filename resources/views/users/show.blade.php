@@ -1,4 +1,4 @@
-@extends('layouts.app', ['includeLivewire' => false])
+@extends('layouts.app', ['includeLivewire' => true])
 
 
 @section('title', $user->name)
@@ -53,4 +53,14 @@
             </a>
         </div>
     </div>
+
+    @auth
+        @if(auth()->id() == $user->id)
+            <div>
+                <h2 class="h5 mt-5 mb-1">Дополнительно</h2>
+
+                <livewire:users.discord-invite :user="$user"/>
+            </div>
+        @endif
+    @endauth
 @endsection

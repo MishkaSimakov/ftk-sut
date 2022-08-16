@@ -12,7 +12,7 @@
         <div class="row no-gutters mt-auto text-muted align-items-center">
             <div class="mr-auto">
                 <a class="text-muted" href="{{ $article->author->url }}">{{ $article->author->name }}</a>
-                <span class="d-none d-sm-inline">• {{ $article->date->isoFormat('ll') }} {{ $article->isPublished ? '' : '(не опубликована)'}}</span>
+                <span class="d-none d-sm-inline">• {{ $article->date->isoFormat('ll') }} {{ $article->isPublished ? '' : '(отложена)'}}</span>
             </div>
 
             <livewire:articles.article-actions :article="$article"/>

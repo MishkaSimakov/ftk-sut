@@ -39,7 +39,9 @@ class ChangeUsersListForm extends Component
         }
 
         // append user to event users
-        $this->event->users()->attach($user);
+        $this->event->users()->attach($user, [
+            'distance_traveled' => $this->event->travel->distance
+        ]);
         $this->event->refresh();
 
         // remove user from users select

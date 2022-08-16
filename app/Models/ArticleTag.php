@@ -19,7 +19,7 @@ class ArticleTag extends Model
 
     public function getArticlesCountAttribute(): int
     {
-        return $this->articles()->count();
+        return $this->articles()->checked()->published()->count();
     }
 
     public function getUrlAttribute(): string

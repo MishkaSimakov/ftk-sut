@@ -61,6 +61,11 @@
                                     Создать
                                 </a>
                             @endcan
+                            @can('import', \App\Models\Event::class)
+                                <a class="dropdown-item" href="{{ route('events.import') }}">
+                                    Импортировать
+                                </a>
+                            @endcan
                         </div>
                     </li>
                     <li class="nav-item dropdown">
