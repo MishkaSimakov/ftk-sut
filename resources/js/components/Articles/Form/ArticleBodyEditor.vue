@@ -1,3 +1,4 @@
+t
 <template>
     <div>
         <editor
@@ -41,12 +42,28 @@ export default {
                         document.topLevelWindow = eventDetails.dialog; // document.tinymceEditor is where I keep track of my editor instance. You can probably accomplish this without using that
                     });
                 },
+                paste_postprocess: async (plugin, args) => {
+                    let images = args.node.getElementsByTagName('img');
 
-                relative_urls : false,
-                remove_script_host : false,
+                    for (let i = 0; i < images.length; i++) {
+                        let blob = await fetch(images[i].src).then(r => r.blob());
+
+                        let formData = new FormData();
+                        formData.append('image', blob, blob.filename);
+
+                        let response = await axios.post(route('api.articles.images.store'), formData).then((r) => {
+                            return r;
+                        });
+
+                        this.text = this.text.replace(images[i].src, response.data);
+                    }
+                },
+
+                relative_urls: false,
+                remove_script_host: false,
 
                 file_picker_types: 'image',
-                file_picker_callback: function (cb, value, meta) {
+                file_picker_callback: function (cb) {
                     let input = document.createElement('input');
                     input.setAttribute('type', 'file');
                     input.setAttribute('accept', 'image/*');
@@ -62,7 +79,7 @@ export default {
                         axios.post(route('api.articles.images.store'), formData).then((response) => {
                             document.topLevelWindow.unblock()
                             cb(response.data, {title: file.name});
-                        }).catch((e) => {
+                        }).catch(() => {
                             document.topLevelWindow.unblock()
                             alert('Что-то пошло не так во время загрузки изображения. Попробуйте ещё раз или обратитесь к администрации.')
                         });

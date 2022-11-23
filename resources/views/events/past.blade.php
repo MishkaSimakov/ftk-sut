@@ -2,11 +2,11 @@
 
 
 @section('title', 'Расписание')
-@section('description', 'Ближайшие мероприятия ФТК со списком участников и подробной информацией.')
+@section('description', 'Прошедшие мероприятия ФТК со списком участников и подробной информацией.')
 @section('robots', 'index, follow, noarchive')
 
 @section('content')
-    <h1 class="text-center mb-4">Расписание</h1>
+    <h1 class="text-center mb-4">Прошедшие мероприятия</h1>
 
     @forelse($events as $event)
         @include('events.event-card', $event)
@@ -15,6 +15,12 @@
             Нет мероприятий
         </div>
     @endforelse
+
+        <div class="row no-gutters">
+            <div class="mx-auto">
+                {{ $events->links() }}
+            </div>
+        </div>
 @endsection
 
 @push('scripts')

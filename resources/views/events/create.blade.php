@@ -48,7 +48,6 @@
                         <label for="date_start">Дата начала</label>
                         <input id="date_start" type="datetime-local"
                                class="form-control @error('date_start') is-invalid @enderror" name="date_start"
-                               min="{{ now()->isoFormat('YYYY-MM-DD[T]HH:mm') }}"
                                value="{{ old('date_start') }}" required autofocus
                         >
 
@@ -63,7 +62,6 @@
                         <label for="date_end">Дата окончания</label>
                         <input id="date_end" type="datetime-local"
                                class="form-control @error('date_end') is-invalid @enderror" name="date_end"
-                               min="{{ now()->isoFormat('YYYY-MM-DD[T]HH:mm') }}"
                                value="{{ old('date_end') }}" required autofocus
                         >
 

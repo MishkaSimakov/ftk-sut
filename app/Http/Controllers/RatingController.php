@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\RatingExport;
 use App\Http\Requests\Ratings\RatingDestroyRequest;
+use App\Http\Requests\Ratings\RatingExportRequest;
 use App\Models\RatingPoint;
 use App\Services\Rating\Rating;
 use Carbon\Carbon;
@@ -57,9 +58,14 @@ class RatingController extends Controller
         return redirect()->route('rating.index');
     }
 
-    public function export(CarbonPeriod $period)
+    public function export(RatingExportRequest $request)
     {
         $this->authorize('export', RatingPoint::class);
+
+        $start = Carbon::parse($request->get('date_start'))->startOfMonth();
+        $end = Carbon::parse($request->get('date_end'))->endOfMonth();
+
+        $period = CarbonPeriod::create($start, $end);
 
         return (new RatingExport($period))->download('rating.xlsx');
     }

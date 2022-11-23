@@ -134,6 +134,8 @@ return [
     |
     */
 
+    'recaptcha' => 'Вы не прошли проверку.',
+
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',

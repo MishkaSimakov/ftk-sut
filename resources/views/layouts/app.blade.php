@@ -26,7 +26,7 @@
     </script>
 
     <!-- Some SEO -->
-    <title>@yield('title') - {{ config('app.name') }}</title>
+    <title>@isset($title) {{ $title }} @else @yield('title') @endisset - {{ config('app.name') }}</title>
     <meta name="description" content="@yield('description', 'Сайт Фототехнического клуба СЮТ. Здесь есть всё, чтобы быть активным кружковцем и не сачковать! Новости, расписание, статьи, рейтинг - и всё это на одном сайте.')">
     <meta name="keywords" content="@yield('keywords', 'ФТК СЮТ, Фототехнический клуб, ФТК, Дополнительное образование')"/>
     <meta name="robots" content="@yield('robots', 'index, follow')"/>
@@ -46,18 +46,7 @@
 <div id="app">
     @include('partials.header.header')
 
-
-    @if(session('message'))
-        <div class="container mt-3">
-            <div class="alert alert-primary mb-2" role="alert">
-                {{ session('message') }}
-
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        </div>
-    @endif
+    @yield('messages')
 
     @yield('masthead')
 
