@@ -19,9 +19,6 @@ Route::get('/', [\App\Http\Controllers\PageController::class, 'welcome'])->name(
 Route::view('/about', 'about')->name('about');
 Route::view('/help/register', 'help.register')->name('help.register');
 
-// reviews
-Route::resource('reviews', \App\Http\Controllers\ReviewController::class)->only(['index', 'store', 'destroy']);
-
 // news
 Route::resource('news', \App\Http\Controllers\NewsController::class);
 

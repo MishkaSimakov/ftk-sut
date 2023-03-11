@@ -36,8 +36,8 @@ class NewUncheckedArticleNotification extends Notification implements ShouldQueu
             ->options([
                 'parse_mode' => 'html'
             ])
-            ->button('Сайт ФТК', 'https://ftk-sut.ru')
-            ->button('Непроверенные статьи', 'https://ftk-sut.ru/articles/unchecked');
+            ->button('Сайт ФТК', 'https://ftksut.ru')
+            ->button('Непроверенные статьи', 'https://ftksut.ru/articles/unchecked');
     }
 
     protected function getChannelId()

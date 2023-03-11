@@ -17,18 +17,6 @@
             </div>
         </div>
     @endif
-
-    @error('g-recaptcha-response')
-        <div class="container mt-3">
-            <div class="alert alert-danger mb-2" role="alert">
-                Ваш отзыв не был сохранён, так как вы робот.
-
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        </div>
-    @enderror
 @endsection
 
 @section('masthead')
@@ -165,40 +153,4 @@
             И ещё много всего интересного...
         </div>
     </section>
-
-    <section style="margin-top: 6rem;">
-        <h2 class="display-4 text-center">Хотите что-то предложить?</h2>
-
-        <div class="row justify-content-center mt-3">
-            <form class="col-md-8" method="POST" action="{{ route('reviews.store') }}">
-                @csrf
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="body">Ваши идеи и предложения</label>
-                    <textarea
-                        class="form-control" id="body" name="body" rows="10"
-                        placeholder="Опишите как можно подробнее, что вы хотели бы изменить или добавить"
-                        required
-                    >
-                </textarea>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        {!! htmlFormSnippet() !!}
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Отправить</button>
-            </form>
-        </div>
-    </section>
 @endsection
-
-@push('scripts')
-    {!! htmlScriptTagJsApi() !!}
-@endpush

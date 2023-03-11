@@ -38,10 +38,6 @@
                 <a class="list-group-item list-group-item-action" href="{{ route('users.create') }}">
                     Добавить пользователя
                 </a>
-
-                <a class="list-group-item list-group-item-action" href="{{ route('reviews.index') }}">
-                    Посмотреть отзывы
-                </a>
             </div>
         </div>
     </section>
