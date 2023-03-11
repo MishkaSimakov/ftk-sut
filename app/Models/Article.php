@@ -10,7 +10,6 @@ use App\Models\Traits\Publishable;
 use App\Notifications\NewUncheckedArticleNotification;
 use App\Scoping\Traits\CanBeScoped;
 use App\Services\ArticleBodyPrepareService;
-use BenSampo\Enum\Traits\CastsEnums;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Builder;
@@ -25,7 +24,6 @@ class Article extends Model implements Viewable
     use HasFactory;
     use InteractsWithViews;
     use Publishable;
-    use CastsEnums;
     use CanBeScoped;
     use Checkable;
 
@@ -93,7 +91,7 @@ class Article extends Model implements Viewable
     {
         $sql = '`points_count` * ' . Article::RELEVANCE_COEFFICIENTS['points'] . ' + `views_count` * ' . Article::RELEVANCE_COEFFICIENTS['views'] . ' + datediff(now(), `date`) * ' . Article::RELEVANCE_COEFFICIENTS['days'] . ' DESC';
 
-        return $builder->orderByRaw($sql, 'desc');
+        return $builder->orderByRaw($sql);
     }
 
     protected function getCheckedStateEnum()
