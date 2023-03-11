@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Scoping\Scopes\Articles\AuthorScope;
 use App\Scoping\Scopes\Articles\QueryScope;
 use App\Scoping\Scopes\Articles\TagScope;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
