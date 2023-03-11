@@ -7,7 +7,6 @@ use App\Mail\ResetPasswordNotification;
 use App\Models\Traits\HasRegisterCode;
 use Assada\Achievements\AchievementChain;
 use Assada\Achievements\Achiever;
-use BenSampo\Enum\Traits\CastsEnums;
 use BenSampo\Enum\Traits\QueriesFlaggedEnums;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -20,7 +19,6 @@ class User extends Authenticatable
 {
     use HasFactory;
     use Achiever;
-    use CastsEnums;
     use HasRegisterCode;
     use QueriesFlaggedEnums;
 

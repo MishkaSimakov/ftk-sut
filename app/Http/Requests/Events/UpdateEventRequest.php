@@ -12,7 +12,7 @@ class UpdateEventRequest extends FormRequest
             'name' => 'required|string|max:75',
             'description' => 'nullable|string|max:200',
 
-            'date_start' => 'nullable|date|after:now',
+            'date_start' => 'nullable|date',
             'date_end' => 'nullable|date|after:date_start',
 
             'image' => 'nullable|image',

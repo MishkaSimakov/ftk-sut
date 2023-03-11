@@ -29,7 +29,7 @@ class ResetPasswordNotification extends Mailable
      */
     public function build()
     {
-        return $this->subject('Ссылка для сброса пароля на сайте ftk-sut.ru')->markdown('emails.user.passwords.reset', [
+        return $this->subject('Ссылка для сброса пароля на сайте ftksut.ru')->markdown('emails.user.passwords.reset', [
             'token' => $this->token,
         ]);
     }

@@ -180,8 +180,6 @@ return [
         CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
 
         Assada\Achievements\AchievementsServiceProvider::class,
-
-        Biscolab\ReCaptcha\ReCaptchaServiceProvider::class
     ],
 
     /*

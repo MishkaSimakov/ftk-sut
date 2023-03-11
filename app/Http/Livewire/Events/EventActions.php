@@ -19,7 +19,9 @@ class EventActions extends Component
             return;
         }
 
-        $this->event->users()->attach(auth()->user());
+        $this->event->users()->attach(auth()->user(), [
+            'distance_traveled' => $this->event->isTravel() ? $this->event->travel->distance : null
+        ]);
         $this->event->refresh();
     }
 

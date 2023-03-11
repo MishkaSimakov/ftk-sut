@@ -10,7 +10,7 @@ class NewsSeeder extends Seeder
 {
     public function run()
     {
-        $news = Http::get('http://ftk-sut.ru/api/imports/news')->json();
+        $news = Http::get('http://ftksut.ru/api/imports/news')->json();
 
         foreach ($news as $n) {
             News::create([

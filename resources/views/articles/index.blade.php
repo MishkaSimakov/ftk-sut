@@ -11,7 +11,7 @@
     <articles-search></articles-search>
 
     <section class="mb-5 mt-4">
-        <h2 class="h3 text-left font-weight-bold">Лучшее на ftk-sut.ru</h2>
+        <h2 class="h3 text-left font-weight-bold">Лучшее на ftksut.ru</h2>
 
         <livewire:articles.lists.best-articles-list/>
     </section>

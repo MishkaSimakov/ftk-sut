@@ -17,7 +17,7 @@ class ArticleSeeder extends Seeder
 {
     public function run()
     {
-        $articles = Http::get('http://ftk-sut.ru/api/imports/articles')->json();
+        $articles = Http::get('http://ftksut.ru/api/imports/articles')->json();
 
         foreach ($articles as $article) {
             if (!$article['title']) {
@@ -27,7 +27,7 @@ class ArticleSeeder extends Seeder
             $storedArticle = Article::create([
                 'id' => $article['id'],
                 'title' => $article['title'],
-                'body' => str_replace('"../../', '"https://ftk-sut.ru/', $article['body']),
+                'body' => str_replace('"../../', '"https://ftksut.ru/', $article['body']),
                 'author_id' => $this->getUserId($article['user']),
                 'type' => ArticleType::Checked(),
                 'date' => $article['created_at']

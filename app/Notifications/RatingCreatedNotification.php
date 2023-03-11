@@ -31,12 +31,12 @@ class RatingCreatedNotification extends Notification implements ShouldQueue
     {
         return TelegramMessage::create()
             ->content(
-                "На сайте ftk-sut.ru опубликован рейтинг за " . $this->date->isoFormat('MMMM YYYY')
+                "На сайте ftksut.ru опубликован рейтинг за " . $this->date->isoFormat('MMMM YYYY')
             )
             ->options([
                 'parse_mode' => 'html'
             ])
-            ->button('Сайт ФТК', 'https://ftk-sut.ru')
-            ->button('Рейтинг', 'https://ftk-sut.ru/rating');
+            ->button('Сайт ФТК', 'https://ftksut.ru')
+            ->button('Рейтинг', 'https://ftksut.ru/rating');
     }
 }

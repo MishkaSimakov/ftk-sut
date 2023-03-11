@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Event;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {

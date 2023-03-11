@@ -14,16 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// hike-quest
-Route::view('soup-recipe', 'hike-quest');
-
 // info
 Route::get('/', [\App\Http\Controllers\PageController::class, 'welcome'])->name('main');
 Route::view('/about', 'about')->name('about');
 Route::view('/help/register', 'help.register')->name('help.register');
-
-// reviews
-Route::resource('reviews', \App\Http\Controllers\ReviewController::class)->only(['index', 'store', 'destroy']);
 
 // news
 Route::resource('news', \App\Http\Controllers\NewsController::class);
@@ -58,7 +52,8 @@ Route::resource('rating', \App\Http\Controllers\RatingController::class)
 Route::get('rating/destroy', [\App\Http\Controllers\RatingController::class, 'showDestroyPage'])->name('rating.destroyPage');
 Route::delete('rating/destroy', [\App\Http\Controllers\RatingController::class, 'destroy'])->name('rating.destroy');
 
-Route::get('rating/export/{period}', [\App\Http\Controllers\RatingController::class, 'export'])->name('rating.export');
+Route::view('rating/export', 'ratings.export')->name('rating.show-export-form');
+Route::post('rating/export', [\App\Http\Controllers\RatingController::class, 'export'])->name('rating.export');
 Route::get('rating/{period?}', [\App\Http\Controllers\RatingController::class, 'index'])->name('rating.index');
 
 

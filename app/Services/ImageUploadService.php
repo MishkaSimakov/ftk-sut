@@ -29,21 +29,29 @@ class ImageUploadService
         return $this;
     }
 
-    public function store($image, string $directory)
+    public function store($file, string $directory)
     {
-        $image = Image::make($image);
+        $image = Image::make($file);
 
         $name = Str::random(40);
         $extension = Arr::last(explode('/', $image->mime()));
 
-        $path = "{$directory}/{$name}.{$extension}";
+        $path = "{$directory}/{$name}.";
 
-        if (isset($this->max_width) and $image->width() > $this->max_width) {
-            $image = $image->widen($this->max_width);
-        }
+        if ($extension === 'gif') {
+            $path .= 'gif';
 
-        if (!Storage::disk($this->disk)->put($path, $image->encode())) {
-            return false;
+            Storage::disk($this->disk)->put($path, file_get_contents($file));
+        } else {
+            $path .= 'png';
+
+            if (isset($this->max_width) and $image->width() > $this->max_width) {
+                $image = $image->widen($this->max_width);
+            }
+
+            if (!Storage::disk($this->disk)->put($path, $image->encode('png'))) {
+                return false;
+            }
         }
 
         return $path;

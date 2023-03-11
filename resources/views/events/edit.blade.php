@@ -44,42 +44,36 @@
                     @enderror
                 </div>
 
-                @if($event->date_end->isFuture())
-                    <div class="form-row">
-                        @if($event->date_end->isFuture())
-                            <div class="form-group col-md">
-                                <label for="date_start">Дата начала</label>
-                                <input id="date_start" type="datetime-local"
-                                       class="form-control @error('date_start') is-invalid @enderror" name="date_start"
-                                       min="{{ ($event->date_start->isFuture() ? now() : $event->date_start)->isoFormat('YYYY-MM-DD[T]HH:mm') }}"
-                                       value="{{ old('date_start') ?? $event->date_start->isoFormat('YYYY-MM-DD[T]HH:mm') }}" required autofocus
-                                >
+                <div class="form-row">
+                    <div class="form-group col-md">
+                        <label for="date_start">Дата начала</label>
+                        <input id="date_start" type="datetime-local"
+                               class="form-control @error('date_start') is-invalid @enderror" name="date_start"
+                               value="{{ old('date_start') ?? $event->date_start->isoFormat('YYYY-MM-DD[T]HH:mm') }}" required autofocus
+                        >
 
-                                @error('date_start')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        @endif
-
-                        <div class="form-group col-md">
-                            <label for="date_end">Дата окончания</label>
-                            <input id="date_end" type="datetime-local"
-                                   class="form-control @error('date_end') is-invalid @enderror" name="date_end"
-                                   min="{{ ($event->date_end->isFuture() ? now() : $event->date_end)->isoFormat('YYYY-MM-DD[T]HH:mm') }}"
-                                   value="{{ old('date_end') ?? $event->date_end->isoFormat('YYYY-MM-DD[T]HH:mm') }}"
-                                   required autofocus
-                            >
-
-                            @error('date_end')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
+                        @error('date_start')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
-                @endif
+
+                    <div class="form-group col-md">
+                        <label for="date_end">Дата окончания</label>
+                        <input id="date_end" type="datetime-local"
+                               class="form-control @error('date_end') is-invalid @enderror" name="date_end"
+                               value="{{ old('date_end') ?? $event->date_end->isoFormat('YYYY-MM-DD[T]HH:mm') }}"
+                               required autofocus
+                        >
+
+                        @error('date_end')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="image">Изображение</label>

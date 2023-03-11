@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $users = Http::get('http://ftk-sut.ru/api/imports/users')->json();
+        $users = Http::get('http://ftksut.ru/api/imports/users')->json();
 
         $existingUsers = User::all();
 

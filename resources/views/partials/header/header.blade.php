@@ -83,6 +83,11 @@
                                         Удалить
                                     </a>
                                 @endcan
+                                @can('export', \App\Models\RatingPoint::class)
+                                    <a class="dropdown-item" href="{{ route('rating.show-export-form') }}">
+                                        Экспортировать
+                                    </a>
+                                @endcan
                             </div>
                         @endcanany
                     </li>

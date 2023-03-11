@@ -15,7 +15,7 @@ class ViewsSeeder extends Seeder
      */
     public function run()
     {
-        $views = Http::get('http://ftk-sut.ru/api/imports/views')->json();
+        $views = Http::get('http://ftksut.ru/api/imports/views')->json();
 
         foreach ($views as $view) {
             \DB::table('views')->insert($view);

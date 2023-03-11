@@ -36,14 +36,14 @@ class NewsPublishedNotification extends Notification implements ShouldQueue
             ->options([
                 'parse_mode' => 'html'
             ])
-            ->button('Сайт ФТК', 'https://ftk-sut.ru')
-            ->button('Все новости', 'https://ftk-sut.ru/news');
+            ->button('Сайт ФТК', 'https://ftksut.ru')
+            ->button('Все новости', 'https://ftksut.ru/news');
     }
 
     protected function getMessageLines(): array
     {
         return [
-            "Новая новость на сайте ftk-sut.ru:",
+            "Новая новость на сайте ftksut.ru:",
             "",
             "<b>{$this->news->title}</b>",
             $this->news->body

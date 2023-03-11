@@ -36,8 +36,8 @@ class EventCreatedNotification extends Notification implements ShouldQueue
             ->options([
                 'parse_mode' => 'html'
             ])
-            ->button('Сайт ФТК', 'https://ftk-sut.ru')
-            ->button('Все мероприятия', 'https://ftk-sut.ru/events');
+            ->button('Сайт ФТК', 'https://ftksut.ru')
+            ->button('Все мероприятия', 'https://ftksut.ru/events');
     }
 
     protected function getMessageLines(): array
@@ -49,7 +49,7 @@ class EventCreatedNotification extends Notification implements ShouldQueue
         }
 
         return [
-            "Новое мероприятие на сайте ftk-sut.ru:",
+            "Новое мероприятие на сайте ftksut.ru:",
             "",
             $event_name_string,
             "<i>{$this->event->description}</i>",

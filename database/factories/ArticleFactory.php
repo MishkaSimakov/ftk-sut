@@ -28,8 +28,8 @@ class ArticleFactory extends Factory
             'body' => $this->faker->text,
             'author_id' => User::factory()->create()->id,
 
-            'type' => ArticleType::Checked(),
-            'date' => $this->faker->date,
+            'type' => ArticleType::Checked,
+            'date' => now(),
         ];
     }
 }

@@ -97,10 +97,10 @@ class RatingExport implements FromCollection, WithHeadings, WithStyles, WithTitl
 
     protected function getCategories()
     {
-        return RatingPointCategory::with('importNames')->select('id')->get()->map(function (RatingPointCategory $category) {
+        return RatingPointCategory::select('id', 'name')->get()->map(function (RatingPointCategory $category) {
             return [
                 'id' => $category->id,
-                'name' => $category->importNames->first()->import_name,
+                'name' => $category->name,
             ];
         });
     }

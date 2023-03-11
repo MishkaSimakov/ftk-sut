@@ -5,6 +5,20 @@
 @section('description', 'Сайт Фототехнического клуба СЮТ. Здесь есть всё, чтобы быть активным кружковцем и не сачковать! Новости, расписание, статьи, рейтинг - и всё это на одном сайте.')
 @section('robots', 'index, follow')
 
+@section('messages')
+    @if(session('message'))
+        <div class="container mt-3">
+            <div class="alert alert-primary mb-2" role="alert">
+                {{ session('message') }}
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    @endif
+@endsection
+
 @section('masthead')
     <header class="masthead">
         <div class="container">
@@ -30,26 +44,34 @@
 @endsection
 
 @section('content')
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-4 border-md-right border-bottom border-md-bottom-0 d-flex flex-column text-center">
-                    <span class="h2 font-weight-bolder">{{ $statistics['users_count'] }}</span>
-                    <span class="h4 font-weight-normal">Пользователей</span>
-                </div>
+    <section class="w-100">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div
+                        class="col-md-4 border-md-right border-bottom border-md-bottom-0 d-flex flex-column text-center">
+                                        <span
+                                            class="h2 font-weight-bolder">{{ $statistics['users_count'] }}</span>
+                        <span class="h4 font-weight-normal">Пользователей</span>
+                    </div>
 
-                <div class="col-md-4 border-md-right border-bottom border-md-bottom-0 d-flex flex-column text-center">
-                    <span class="h2 font-weight-bolder">{{ $statistics['articles_count'] }}</span>
-                    <span class="h4 font-weight-normal">Статей</span>
-                </div>
+                    <div
+                        class="col-md-4 border-md-right border-bottom border-md-bottom-0 d-flex flex-column text-center">
+                                        <span
+                                            class="h2 font-weight-bolder">{{ $statistics['articles_count'] }}</span>
+                        <span class="h4 font-weight-normal">Статей</span>
+                    </div>
 
-                <div class="col-md-4 d-flex flex-column text-center">
-                    <span class="h2 font-weight-bolder">{{ $statistics['events_count'] }}</span>
-                    <span class="h4 font-weight-normal">Мероприятий</span>
+                    <div class="col-md-4 d-flex flex-column text-center">
+                                        <span
+                                            class="h2 font-weight-bolder">{{ $statistics['events_count'] }}</span>
+                        <span class="h4 font-weight-normal">Мероприятий</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
 
     <section style="margin-top: 6rem;">
         <div class="row">
@@ -131,38 +153,4 @@
             И ещё много всего интересного...
         </div>
     </section>
-
-    <section style="margin-top: 6rem;">
-        <h2 class="display-4 text-center">Хотите что-то предложить?</h2>
-
-        <div class="row justify-content-center mt-3">
-            <form class="col-md-8" method="POST" action="{{ route('reviews.store') }}">
-                @csrf
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="body">Ваши идеи и предложения</label>
-                    <textarea
-                        class="form-control" id="body" name="body" rows="10"
-                        placeholder="Опишите как можно подробнее, что вы хотели бы изменить или добавить"
-                        required
-                    >
-                </textarea>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-6"> {!! htmlFormSnippet() !!} </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Отправить</button>
-            </form>
-        </div>
-    </section>
 @endsection
-
-@push('scripts')
-    {!! htmlScriptTagJsApi() !!}
-@endpush
